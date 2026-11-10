@@ -16,6 +16,7 @@ import {BT_PATCH, LOCK_PATCH, TITLE_PATCHES, bluetoothTail, lockscreenPayload, c
 import {BT_PAYLOAD, LOCK_PAYLOAD} from "./builder-payloads.mjs";
 import {FULL_EXTRA_PATCHES, FULL_TAIL, FULL_GROWTHS, FULL_THEME_RUNS, FULL_IMAGE_SHA256} from "./builder-full.mjs";
 import {sha256} from "./theme-core.mjs";
+import {githubUrl, repoFromLocation} from "./repo.mjs";
 import {SLOTS, bandTable, parseCurve, fit, slotPatches} from "./eq-core.mjs";
 import {DAC_FILTERS, dacFilterPatches} from "./builder-dacfilter.mjs";
 import {BT_AUTO_OFF, btAutoOffPatches} from "./builder-btautooff.mjs";
@@ -73,37 +74,37 @@ function offerToInstaller(name, result) {
 // come from builder-data.mjs; the rest are this page's options.
 const FEATURES = [
   {heading: "Sound", items: [
-    {id: "vorbis", title: "Full-precision Vorbis", on: true,
+    {id: "vorbis", patch: "patches/vorbis_swap/", title: "Full-precision Vorbis", on: true,
      note: "Decodes Ogg Vorbis at full precision instead of stock's low-accuracy decoder (about 40 dB better in emulation)."},
-    {id: "g:gapless", title: "Gapless playback", on: true,
+    {id: "g:gapless", patch: "patches/gapless/", title: "Gapless playback", on: true,
      note: "Same-format tracks hand over using the decoder already loaded. The hand-over still needs a device test."},
-    {id: "opus", title: "Opus playback", tag: "replaces WMA",
+    {id: "opus", patch: "patches/opus_swap/", title: "Opus playback", tag: "replaces WMA",
      note: "Plays .opus files; WMA files stop playing. No Opus tags or cover art. Adds 277 KB of decoder data to the download when built."},
-    {id: "g:clock", title: "Lower decoder clocks", on: true,
+    {id: "g:clock", patch: "patches/clock_v1/", title: "Lower decoder clocks", on: true,
      note: "Each codec runs at a clock nearer its measured load. APE and DSD128 are unmeasured: test them first."},
-    {id: "g:dac", title: "DAC error-counter fix", on: true,
+    {id: "g:dac", patch: "patches/dac_fix/", title: "DAC error-counter fix", on: true,
      note: "Two passing I2C glitches no longer freeze volume and DAC control for the session."},
   ]},
   {heading: "Library", items: [
-    {id: "g:sort", title: "Natural sort", on: true,
+    {id: "g:sort", patch: "patches/sort_keys/", title: "Natural sort", on: true,
      note: "Ignores case, accents and a leading \u201cThe\u201d, and puts 2 before 10."},
   ]},
   {heading: "Screen", items: [
-    {id: "theater", title: "Theater mode", tag: "experimental", excludes: ["bt", "lock"],
+    {id: "theater", patch: "patches/theater/", title: "Theater mode", tag: "experimental", excludes: ["bt", "lock"],
      note: "The player background takes its colour from the album art (see section 2)."},
-    {id: "lock", title: "Lock-screen track info", tag: "experimental", excludes: ["theater"],
+    {id: "lock", patch: "patches/ui_features/lockscreen_build/lockscreen_build.md", title: "Lock-screen track info", tag: "experimental", excludes: ["theater"],
      note: "Shows the title and elapsed / total time while locked."},
-    {id: "title", title: "Safer track titles", tag: "experimental",
+    {id: "title", patch: "patches/theater/text/", title: "Safer track titles", tag: "experimental",
      note: "Bounds the player's title copy so very long or very short titles cannot overrun."},
-    {id: "cemark", title: "CE splash mark",
+    {id: "cemark", patch: "patches/theme_editor/", title: "CE splash mark",
      note: "A small CE mark on both boot screens."},
-    {id: "playlists", title: "M3U playlists", only: "all",
+    {id: "playlists", patch: "patches/m3u/", title: "M3U playlists", only: "all",
      note: "Select an .m3u file in the browser to play it. Only in All CE features, which composes it with the lock screen."},
   ]},
   {heading: "Controls and power", items: [
-    {id: "bt", title: "Bluetooth shortcut", tag: "experimental", excludes: ["theater"],
+    {id: "bt", patch: "patches/ui_features/", title: "Bluetooth shortcut", tag: "experimental", excludes: ["theater"],
      note: "Long-press Power to turn Bluetooth on or off. May pause up to 5 s if Bluetooth does not answer."},
-    {id: "g:wheel", title: "Fewer wheel wake-ups", on: true,
+    {id: "g:wheel", patch: "patches/power/", title: "Fewer wheel wake-ups", on: true,
      note: "The wheel timer runs every 1,000 µs instead of 400 µs."},
   ]},
 ];
@@ -143,6 +144,15 @@ function renderFeatures() {
       const note = document.createElement("span");
       note.className = "note";
       note.textContent = item.note;
+      if (item.patch) {
+        // The feature's source, in this site's repository (repo.mjs)
+        const source = document.createElement("a");
+        source.className = "feature-source";
+        source.href = githubUrl(repoFromLocation(window.location), item.patch);
+        source.dataset.repoPath = item.patch;
+        source.textContent = "Source";
+        head.append(source);
+      }
       const why = document.createElement("span");
       why.className = "note why";
       why.hidden = true;

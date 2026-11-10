@@ -2,7 +2,9 @@
 
 The earlier `0x03079C14` extension placement is withdrawn: it overlaps
 runtime workspace. Build the Bluetooth routine for the reserved tail using
-GNU Arm Embedded GCC 14.2.1 and binutils 2.44:
+GNU Arm Embedded GCC 14.2.1 and binutils 2.44, or the reference toolchain from
+`ci/install_reference_toolchain.sh` (GCC 13.2.1, binutils 2.44), which
+reproduces the same 436-byte payload (SHA-256 `ce6ef701…`):
 
 ```sh
 python3 patches/ui_features/build/build_bt_tail.py --output /tmp/bt-tail.bin

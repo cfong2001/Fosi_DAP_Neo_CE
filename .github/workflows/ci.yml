@@ -114,6 +114,9 @@ jobs:
           npm run build
           git diff --exit-code -- ../docs/stage
 
+      - name: Site links name real repository paths
+        run: node --test tests/site-links.test.mjs
+
       - name: Install flow pins match the release set
         run: node --test tests/install-data.test.mjs
 

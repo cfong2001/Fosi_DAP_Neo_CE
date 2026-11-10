@@ -1,5 +1,9 @@
 # Theater mode: device integration
 
+> This README describes the standalone theater variant (theater alone in the
+> gap tail). The Standard image ships theater mode composed with the other
+> tail features by the full build ([`../../full/README.md`](../../full/README.md)).
+
 Status: built as an opt-in variant and validated under emulation.
 Not in the default build, and not flashed. The remaining gate is
 hardware: first-flash observation of both draw paths (see

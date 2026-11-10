@@ -1,8 +1,9 @@
-# Gapless fast path: THE ARM PATCH. Deliberately NOT in the default
-# manifest. Stacks on top of 0020-0025. Applying it is the decision to
-# enable decoder-image retention on hardware; the Phase D observation
-# named in gapless_patch.md (resident decoder accepting the stock 0x65
-# open exchange after end-of-stream) must be on record first.
+# Gapless fast path: THE ARM PATCH. Stacks on top of 0020-0025 and is in
+# the framework manifest, so both release images ship the fast path armed.
+# It was added after the Phase D observation named in gapless_patch.md
+# (resident decoder accepting the stock 0x65 open exchange after
+# end-of-stream) was recorded in emulation (patches/harness/milestone2.md).
+# The system side of the transition is still unobserved until hardware.
 name: gapless-6-arm
 kind: module
 module: 0

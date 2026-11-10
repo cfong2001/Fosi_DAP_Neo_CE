@@ -1,5 +1,10 @@
 # M3U bridge completion pass
 
+> Current status: superseded. The bridge was completed and composed with the
+> parser and the lock-screen routine into the module 31 extension
+> ([`compose/mod31_compose.md`](compose/mod31_compose.md)), which ships in the
+> Standard image. The verdict below records the state when this was written.
+
 Scope: close blockers B1, B3, B5 and the B2 staging arena choice with instruction-level evidence, and complete the bridge build only if every pin reaches proof. Method: Capstone disassembly of the extracted modules (listings in completion/), traced from the hook site in module 31 through module 0's walker, counters, directory stack and file engine, and module 33's playback advance. Stock image verified unchanged at the end of the pass: SHA-256 fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cdfade5e9c6ea3bd71ac6deef.
 
 Verdict summary: B1 pinned with a design correction, B5 pinned, B3 pinned as a mechanism and the pin refutes the staged-record design in the current bridge source, B2 still blocked. The build was not attempted, because the brief conditions it on all pins reaching proof and two do not. No bytes were composed, the live manifest was not touched, and the bridge source was not edited.

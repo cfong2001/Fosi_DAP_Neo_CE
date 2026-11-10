@@ -45,12 +45,19 @@ function paint(ctx: CanvasRenderingContext2D, state: Display) {
     text('31 bands / ±12 dB',240,522,30,'#d4e4df','center')
   } else if(mode==='theater') {
     const [a,b]=COVERS[cover], gradient=ctx.createLinearGradient(100,85,380,345)
-    gradient.addColorStop(0,a);gradient.addColorStop(1,b);ctx.fillStyle=gradient;ctx.fillRect(103,82,274,260)
-    ctx.fillStyle='#f8dbad';ctx.beginPath();ctx.arc(288,216,47,0,Math.PI*2);ctx.fill()
-    text(['Evening light','Open water','Forest floor'][cover],240,396,39,'#f5f1e5','center')
-    text('Sample artwork',240,439,30,'#cddbd1','center')
-    ctx.fillStyle='#ffffff44';ctx.fillRect(28,472,424,5);ctx.fillStyle='#fff';ctx.fillRect(28,472,154,5)
-    text('01:24',28,526,28);text('04:13',452,526,28,'#d3dfd9','right')
+    gradient.addColorStop(0,a);gradient.addColorStop(1,b);ctx.fillStyle=gradient;ctx.fillRect(113,70,254,240)
+    ctx.fillStyle='#f8dbad';ctx.beginPath();ctx.arc(290,192,44,0,Math.PI*2);ctx.fill()
+    text(['Evening light','Open water','Forest floor'][cover],240,358,39,'#f5f1e5','center')
+    text('Sample artwork',240,396,30,'#cddbd1','center')
+    ctx.fillStyle='#ffffff44';ctx.fillRect(28,420,424,5);ctx.fillStyle='#fff';ctx.fillRect(28,420,154,5)
+    text('01:24',28,462,26);text('04:13',452,462,26,'#d3dfd9','right')
+    // The CE transport glyphs, drawn straight over the derived background
+    // (no dark tiles behind them): previous, play, next.
+    ctx.fillStyle='#f5f1e5'
+    const tri=(x:number,y:number,s:number,dir:1|-1)=>{ctx.beginPath();ctx.moveTo(x-dir*s*.5,y-s*.6);ctx.lineTo(x+dir*s*.6,y);ctx.lineTo(x-dir*s*.5,y+s*.6);ctx.closePath();ctx.fill()}
+    tri(140,515,26,-1);ctx.fillRect(116,499,6,32)
+    tri(244,515,38,1)
+    tri(340,515,26,1);ctx.fillRect(358,499,6,32)
   } else if(mode==='playlist') {
     text('Evening.m3u',28,119,43)
     ;['Evening light','Open water','Last train'].forEach((t,i)=>{
@@ -61,8 +68,9 @@ function paint(ctx: CanvasRenderingContext2D, state: Display) {
   } else if(mode==='lockscreen') {
     text('HOLD ENABLED',240,130,31,'#abc6c9','center')
     text(on?'Evening light':'Playback',240,239,43,'#eef8f5','center')
-    text(on?'01:24':'—:—',240,350,84,'#91e4d3','center')
-    text('Track time',240,430,32,'#abc6c9','center')
+    // The lock routine draws the title, then elapsed / total time
+    text(on?'01:24 / 04:13':'—:— / —:—',240,345,58,'#91e4d3','center')
+    text('Elapsed / total',240,430,32,'#abc6c9','center')
   } else if(mode==='gapless') {
     text(on?'Track 02.flac':'Track 01.flac',240,150,40,'#eef8f5','center')
     for(let i=0;i<27;i++){ctx.fillStyle='#8de5d1';const hh=24+(i*31)%116;ctx.fillRect(30+i*16,290-hh/2,9,hh)}
@@ -87,7 +95,7 @@ export default function PlayerModel({ state, onHoldStart, onHoldEnd }: { state: 
     renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));renderer.outputColorSpace=THREE.SRGBColorSpace
     const scene=new THREE.Scene(), camera=new THREE.PerspectiveCamera(32,1,.1,30)
     const closeup = ['eq','lockscreen'].includes(latest.current.mode)
-    const distance = closeup ? 4.8 : latest.current.mode === 'theater' ? 5.8 : 6.8
+    const distance = closeup ? 4.8 : latest.current.mode === 'theater' ? 6.4 : 6.8
     const focus = closeup ? .6 : .05
     camera.position.set(0,focus,distance);camera.lookAt(0,focus,0)
     scene.add(new THREE.HemisphereLight(0xf1f7ff,0x52606c,3))
