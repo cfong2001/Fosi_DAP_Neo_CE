@@ -258,3 +258,62 @@ test('without a drive picker the page offers downloads only', async t => {
   assert.ok(await page.locator('#download-update-name').isVisible());
   assert.match(await page.locator('#copy-support').textContent(), /cannot write to a drive directly/);
 });
+
+// Section 4 end to end: stock fetched from the repository, then builds
+// that must equal the release images, all without local files.
+test('builder needs no local files and reproduces the release images', async t => {
+  const {browser, url} = await serveDocs(t);
+  const context = await browser.newContext({acceptDownloads: true, viewport: {width: 1280, height: 900}});
+  t.after(() => context.close());
+  await serveRaw(context);
+  const page = await context.newPage();
+  const errors = [];
+  page.on('pageerror', error => errors.push(error.message));
+  await page.goto(url);
+  await page.locator('#advanced > summary').click();
+  await page.locator('#firmware-fetch').click();
+  await page.waitForSelector('#firmware-status.good, #firmware-status.bad', {timeout: 60000});
+  assert.match(await page.locator('#firmware-status').textContent(), /Verified stock V137/);
+  const sha = buf => require('node:crypto').createHash('sha256').update(buf).digest('hex');
+  const build = async () => {
+    const [download] = await Promise.all([
+      page.waitForEvent('download', {timeout: 120000}),
+      page.locator('#build-button').click(),
+    ]);
+    await page.waitForSelector('#build-status.good', {timeout: 120000});
+    return sha(await fs.readFile(await download.path()));
+  };
+  // Sound settings come before the feature choice.
+  const order = await page.evaluate(() => ['#opt-dac-filter', '#eq-presets', '.base-choices']
+    .map(sel => document.querySelector(sel).getBoundingClientRect().top));
+  assert.ok(order[0] < order[2] && order[1] < order[2], 'EQ and DAC filter sit above the features');
+  // All CE features: the Standard image, Opus data loaded on demand.
+  assert.ok(await page.locator('#feature-list').isHidden());
+  assert.equal(await build(), '9cc86655ddf23bddf72903b828e58f6b0a978836825e74c0f2a1a5056bdc98a3');
+  // Pick features starts as the Minimal image.
+  await page.locator('input[name=build-base][value=custom]').check();
+  assert.ok(await page.locator('#feature-list').isVisible());
+  assert.equal(await build(), '623214370755053ed69dc53f0c7ae5ec0504bcb3e9ca6f2766cc9e9049101090');
+  // Theater excludes the Bluetooth shortcut and the lock screen, and says why.
+  const box = id => page.locator(`#feature-list input[data-feature="${id}"]`);
+  await box('theater').check();
+  assert.ok(await box('bt').isDisabled());
+  assert.ok(await box('lock').isDisabled());
+  assert.match(await page.locator('#feature-list label:has(input[data-feature="bt"]) .why').textContent(), /Not with Theater mode/);
+  assert.equal(await build() !== '', true);
+  await box('theater').uncheck();
+  assert.ok(await box('bt').isEnabled());
+  // Opus, the Bluetooth shortcut and the lock screen from embedded data.
+  await box('opus').check();
+  await box('bt').check();
+  await box('lock').check();
+  assert.ok(await box('theater').isDisabled());
+  await build();
+  assert.match(await page.locator('#build-status').textContent(), /Opus playback, .*Lock-screen track info.*Bluetooth shortcut/);
+  assert.ok(await box('playlists').isDisabled());
+  for (const width of [1280, 375]) {
+    await page.setViewportSize({width, height: 900});
+    assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `no horizontal overflow at ${width}px`);
+  }
+  assert.deepEqual(errors, []);
+});

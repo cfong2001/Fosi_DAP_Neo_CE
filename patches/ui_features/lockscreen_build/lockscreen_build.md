@@ -18,7 +18,11 @@ The emulator verifies its SHA-256 and reads the three required segments
 directly, without a separate extracted directory. The linker rejects `.bss`
 and out-of-room payloads; the build checks the standalone branch bytes.
 GCC 14.2.1 produces a 408-byte blob that passes the emulator; the size
-reported below is the earlier GCC 13.2.1 build. These standalone bytes and
+reported below is the GCC 13.2.1 build. The builder page embeds the
+GCC 13.2.1 build (the reference toolchain from
+`ci/install_reference_toolchain.sh`), 406 bytes, SHA-256
+`9610d8d7995d821b4289c18e720c21c848494633d2af097e160101a23e2c92d2`,
+which passes every `emu_lock.py` gate. These standalone bytes and
 branch target differ from a module 31 composition, which must be built and
 tested with its own derived offsets. No device test is implied by emulation.
 
