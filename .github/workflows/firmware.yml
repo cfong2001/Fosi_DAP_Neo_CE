@@ -70,7 +70,8 @@ jobs:
         run: |
           cd release
           sha256sum --check --strict SHA256SUMS
-          for f in DP3_V137_CE.img DP3_V137_CE_minimal.img DP3_V137_CE_recovery.img; do
+          for f in DP3_V137_CE.img DP3_V137_CE_minimal.img DP3_V137_CE_recovery.img \
+                   DP3_V137_CE.img.report.json DP3_V137_CE_minimal.img.report.json; do
             cmp "$f" "$RUNNER_TEMP/dist/$f"
           done
 
