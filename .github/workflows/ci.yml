@@ -109,6 +109,9 @@ jobs:
       - name: Install flow pins match the release set
         run: node --test tests/install-data.test.mjs
 
+      - name: Simulator replays the emulated painter
+        run: node --test tests/sim-core.test.mjs
+
       - name: Theater preview contrast tests
         run: node --test tests/theater-core.test.mjs
 

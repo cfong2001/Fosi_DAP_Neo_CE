@@ -1,5 +1,26 @@
 # Changelog
 
+## 2026-11-10: simulator from real firmware pixels
+
+- The site's screen comparison now draws real pixels: resources come
+  from the stock image and the CE standard image (each resource section
+  fetched by byte range and checked against a pinned SHA-256), and the
+  status icon and transport row replay what each image's player painter
+  draws, recorded under emulation by `tools/gen_sim_data.py`.
+  `tests/sim-core.test.mjs` reproduces all 24 emulated framebuffers
+  (both images, both themes, four transport states, default and
+  theater grounds) word for word.
+- Theater mode uses the firmware port's integer rule (top-third average,
+  55% toward black or 75% toward paper, RGB565), checked against the
+  Python port on synthetic art. Dark and light themes, the transport
+  pages, no-media and boot-splash screens are selectable. Cover, text
+  and progress bar remain approximations.
+- Found by the simulator: in the light theme with theater on, the CE
+  status icon (resource 452) keeps its white surround, because only
+  0xF800 is keyed. The emulated painter shows the same.
+- CI: `firmware.yml` regenerates the simulator data and fails on any
+  difference; `ci.yml` runs the replay test.
+
 ## 2026-11-10: install flow on the site
 
 - The Pages site (`docs/`) now opens on a three-step install: choose
