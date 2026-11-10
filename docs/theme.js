@@ -81,16 +81,6 @@ function previewReplacements(asset, includePending) {
   }
   return replacements;
 }
-function panelPixels(asset, replacements) {
-  const out = new Uint8ClampedArray(asset.width * asset.height * 4);
-  for (let px = 0; px < asset.width * asset.height; px++) {
-    const stored = state.firmware.view.getUint16(asset.data_offset + px * 2, true);
-    const w = replacements.has(stored) ? replacements.get(stored) : stored;
-    const [r, g, b] = rgb888(((w & 0xFF) << 8) | (w >> 8));
-    out.set([r, g, b, 255], px * 4);
-  }
-  return out;
-}
 function renderAsset() {
   const selected = state.selected;
   if (!state.firmware || selected === null) return;
@@ -119,9 +109,7 @@ function renderAsset() {
   overlay.replaceChildren();
   if ($("project-asset").checked) {
     const canvas = document.createElement("canvas");
-    // The panel shows stored bytes big-endian (framework/build.py), so show
-    // each stored word byte-swapped, as the simulator beside it does.
-    pixelsToCanvas(canvas, asset, panelPixels(asset, previewReplacements(asset, false)));
+    pixelsToCanvas(canvas, asset, rgbaPixels(state.firmware, asset, previewReplacements(asset, false)));
     canvas.style.left = asset.x + "px";
     canvas.style.top = asset.y + "px";
     overlay.append(canvas);

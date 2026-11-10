@@ -65,6 +65,10 @@ test("theme recolor changes preview pixels but never input bytes",()=>{
   assert.notDeepEqual(original,recolored);
   assert.deepEqual(rgbaPixels(f,asset),original);
   assert.equal(f.view.getUint16(asset.data_offset,true),0xA210);
+  // Panel order: stored bytes 10 A2 (named 0xA210) show as RGB565 0x10A2,
+  // and a replacement shows as the palette colour itself.
+  assert.deepEqual([...original.subarray(0,3)],rgb888(0x10A2));
+  assert.deepEqual([...recolored.subarray(0,3)],rgb888(rgb565("#38BDF8")));
 });
 
 test("theme schema rejects reserved keys, duplicate selections and extra roles",()=>{

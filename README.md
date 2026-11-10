@@ -8,7 +8,7 @@
 
 | Image | What it carries | SHA-256 |
 |---|---|---|
-| [`DP3_V137_CE.img`](release/DP3_V137_CE.img) | **Standard.** Everything below. 6,962 bytes longer than stock. | `4d993e89bb3cdd22befb28efab0998f18acb2f56d7c0019c5dfa672c9f4de50d` |
+| [`DP3_V137_CE.img`](release/DP3_V137_CE.img) | **Standard.** Everything below. 6,962 bytes longer than stock. | `9cc86655ddf23bddf72903b828e58f6b0a978836825e74c0f2a1a5056bdc98a3` |
 | [`DP3_V137_CE_minimal.img`](release/DP3_V137_CE_minimal.img) | **Minimal.** Audio and library fixes only, same length as stock. | `623214370755053ed69dc53f0c7ae5ec0504bcb3e9ca6f2766cc9e9049101090` |
 | [`DP3_V137_CE_recovery.img`](release/DP3_V137_CE_recovery.img) | Stock code dated one day after CE, for going back. | `aff851b31d6eee55cbd4bb3fc0464ac79f0039ee86ae6723225ac036a157d223` |
 

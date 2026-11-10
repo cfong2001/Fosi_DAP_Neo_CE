@@ -201,7 +201,7 @@ test('install flow verifies, copies and downloads release images', async t => {
     const digest = await crypto.subtle.digest('SHA-256', await file.arrayBuffer());
     return {size: file.size, hash: Array.from(new Uint8Array(digest), b => b.toString(16).padStart(2, '0')).join('')};
   });
-  assert.deepEqual(written, {size: 13638454, hash: '4d993e89bb3cdd22befb28efab0998f18acb2f56d7c0019c5dfa672c9f4de50d'});
+  assert.deepEqual(written, {size: 13638454, hash: '9cc86655ddf23bddf72903b828e58f6b0a978836825e74c0f2a1a5056bdc98a3'});
 
   // Download the minimal image under the update name.
   await page.locator('#image-choices input[value=minimal]').check();

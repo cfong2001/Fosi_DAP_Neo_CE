@@ -103,11 +103,16 @@ export function validateTheme(config, entries) {
   }
   return config;
 }
+// Pixels as the panel shows them. Stored words are named little-endian
+// (the studio's convention, which rule sources and counts use), but the
+// panel reads the stored bytes big-endian. A replacement is a palette
+// colour, which the builders write in panel order, so it shows as is.
+export const panelWord = w => ((w & 0xFF) << 8) | (w >> 8);
 export function rgbaPixels(firmware, asset, replacements = new Map()) {
   const arr = new Uint8ClampedArray(asset.width * asset.height * 4);
   for (let px = 0; px < asset.width * asset.height; px++) {
     const w = getU16(firmware.view, asset.data_offset + px * 2);
-    const [r,g,b] = rgb888(replacements.has(w) ? replacements.get(w) : w);
+    const [r,g,b] = rgb888(replacements.has(w) ? replacements.get(w) : panelWord(w));
     const p = px * 4;
     arr[p] = r; arr[p+1] = g; arr[p+2] = b; arr[p+3] = 255;
   }

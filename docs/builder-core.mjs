@@ -289,9 +289,12 @@ function applyTheme(bytes, config, claimedRanges) {
       else { claim([start, prev + 1], "resource " + rule.id + " recolour"); start = prev = off; }
     }
     if (start !== null) claim([start, prev + 1], "resource " + rule.id + " recolour");
+    // The source is named little-endian (the studio's convention), but
+    // the panel shows stored bytes big-endian, so write the palette
+    // colour big-endian, as patches/framework/build.py does.
     for (const off of hits) {
-      bytes[off] = target & 0xFF;
-      bytes[off + 1] = (target >>> 8) & 0xFF;
+      bytes[off] = (target >>> 8) & 0xFF;
+      bytes[off + 1] = target & 0xFF;
     }
     recRules.push({asset: rule.id, role: rule.role, count: hits.length});
   }

@@ -7,9 +7,9 @@ exported theme after the manifest patches and the transplants, and
 the CE splash mark, and the refusals. The CE splash mark ships as
 `ce-mark.json` in this directory as a runs-only config. Literal
 code sites are still not themeable because the approved-site
-registry is empty, and the studio's little-endian counts versus
-the panel's big-endian display path remain a hardware-phase
-question.
+registry is empty. Rule sources keep the studio's little-endian
+naming, and replacement colours are written big-endian, the order
+the panel displays (see the word convention below).
 
 ## What is here
 
@@ -84,13 +84,15 @@ Two things remain open. Literal code sites are still not themeable:
 the APPROVED_LITERAL_SITES registry in `tools/ui_theme.py` is empty,
 and the build refuses a config whose `literal_sites` list is
 non-empty; approving the palette sites the colour census pinned is a
-separate decision. And the word convention is unsettled in one
-specific way: the studio reads resource words little-endian and its
-counts hold under that reading, while the colour census proved from
-decoded renders that the panel path displays the same stored bytes as
-big-endian. The build stays byte-faithful to the studio so its
-verified counts hold; what a recoloured pixel finally shows as on the
-panel is a hardware-phase question.
+separate decision. The word convention: the studio names resource
+words little-endian and its counts hold under that reading, while the
+colour census proved from decoded renders, and the emulated player
+painter confirms (`tools/gen_sim_data.py`), that the panel displays
+the stored bytes big-endian. So a rule's source stays in the studio's
+naming, but the build writes the replacement palette colour
+big-endian, and the studio's previews show pixels in panel order.
+Builds before this change wrote the replacement little-endian, which
+would have shown on the panel byte-swapped.
 
 Device boot and color and transparency behavior remain untested either
 way: nothing in this project has been flashed.

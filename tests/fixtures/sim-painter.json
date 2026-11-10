@@ -96,7 +96,7 @@
    "b": 0,
    "play": 1,
    "ground": 29218,
-   "sha256": "a472d65e73e8ae78e715a1e4dca29128b6ef4466dc924d2e26e5244887496259"
+   "sha256": "823354d99472651a65af8bb0c7c6db611dd672677546141207e0a71e2c0eff59"
   },
   {
    "image": "ce",
@@ -128,7 +128,7 @@
    "b": 0,
    "play": 0,
    "ground": 29218,
-   "sha256": "84d83fa6ba2bde1061cfcbd2e78ed5ab2decdd641231dcc646a9fe07612aef92"
+   "sha256": "8f5a4d71240c7af1c2a16761210b245880447112c62a72d6b3fa211405bb8739"
   },
   {
    "image": "ce",
@@ -160,7 +160,7 @@
    "b": 1,
    "play": 1,
    "ground": 29218,
-   "sha256": "f6db9b158b07a13167685fbcc04c5364be11ff61fb47dd1d2053b51aac7a5067"
+   "sha256": "4ddb91f787115bbc3545f107c3d8ca286f32dc48ee0e3fa151b9bb99f6ea6fa2"
   },
   {
    "image": "ce",
@@ -192,7 +192,7 @@
    "b": 2,
    "play": 1,
    "ground": 29218,
-   "sha256": "2bce099d5f0453415efb8f26cbf53c0592663b394acbcdd3cd559268719dc6b7"
+   "sha256": "9321d450f818ce3f381a1b876a5b6a9209255ff2fb07d58a00d99e2d2ae1780d"
   }
  ],
  "theater": [
