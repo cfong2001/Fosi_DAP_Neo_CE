@@ -9,21 +9,21 @@
 <link rel="preload" href="./fonts/BarlowCondensed-SemiBold.ttf" as="font" type="font/ttf" crossorigin>
 <link rel="stylesheet" href="./theme.css">
 </head><body>
-<nav class="masthead" aria-label="Main navigation"><a class="wordmark" href="#">DAP NEO <span>/ CE</span></a><span class="masthead-note">Independent firmware · V137</span><div class="masthead-links"><a href="#install">01 / Install</a><a href="#features">02 / Explore</a><a href="#advanced">03 / Configure</a></div></nav>
+<nav class="masthead" aria-label="Main navigation"><a class="wordmark" href="#">DAP NEO <span>/ CE</span></a><span class="masthead-note">Independent firmware · V137</span><div class="masthead-links"><a href="#install">01 / Install</a><a href="#advanced">02 / Configure</a><a href="#features">03 / Features</a></div></nav>
 <header class="top">
 <div class="hero-copy">
-<div class="eyebrow">A little player. A longer story.</div>
+<div class="eyebrow">Community firmware · Stock V137 base</div>
 <h1>Community<br>Edition<span class="hero-firmware">Firmware for the DAP Neo</span></h1>
 <p class="lede">Better Vorbis decoding, gapless playback, natural sorting, Opus, playlists and a refreshed look for the DAP Neo. Pick an image, put it on the player from this page, and run the update on the device.</p>
 <div class="button-row hero-actions"><a class="button main" href="#install">Install CE</a><a class="button" href="#firmware-features">Build your own</a></div>
 </div>
 <div class="hero-stage" id="ce-hero-stage" aria-label="Illustration: a firmware update spins the DAP Neo and lights its screen with CE"></div>
-<div class="hero-foot"><span>Fosi DAP Neo / Community Edition</span><span>Open source. Built by the community.</span></div>
+<div class="hero-foot"><span>Fosi DAP Neo / Community Edition</span><span>Browser-based installation and configuration</span></div>
 </header>
 <main class="site">
 <section class="card install" id="install" aria-labelledby="install-title">
 <div class="install-intro">
-<h2 id="install-title"><span class="section-index">01 / Get started</span>Make it yours.</h2>
+<h2 id="install-title"><span class="section-index">01 / Get started</span>Install CE firmware</h2>
 <p class="note warn"><strong>Not yet tested on hardware.</strong> No CE image has been installed on a device; every check so far is offline (emulation, host tests, image validation). You would be the first hardware test. Back up your music and read <a href="#going-back">Going back to stock</a> first. If the player stops booting, recovery needs the Rockchip USB (Rockusb) tools.</p>
 <details class="seg" id="going-back"><summary>Going back to stock</summary>
 <p class="note">If the player still boots and can run an update, install <strong>Back to stock</strong> the same way. It is stock code dated one day after CE, so the player prefers it. Plain stock <code>DP3_V137.img</code> is older than CE and the player would keep booting CE. If the player does not boot, recovery needs the Rockchip USB (Rockusb) tools; see <code>release/README.md</code> in the repository.</p>
@@ -66,32 +66,8 @@
 </ol>
 
 </section>
-<section class="features" id="features" aria-labelledby="features-title">
-<h2 id="features-title"><span class="section-index">02 / The difference</span>Small player.<br> More possibilities.</h2>
-<div class="bento">
-<article class="tile tile--hero">
-<p class="tile-copy"><b>Theater mode.</b> The player's background takes its colour from the album art.</p>
-<div class="tile-picture" data-picture="theater"></div>
-</article>
-<article class="tile tile--stat" data-dark>
-<div class="stat"><span class="stat-lead">Ogg Vorbis, about</span><span data-stat="vorbis"><span class="ft-stat-number">40<span class="ft-stat-unit"> dB</span></span></span><span class="stat-label">cleaner than stock: signal-to-noise against a reference decode, measured in emulation.</span></div>
-</article>
-<article class="tile">
-<p class="tile-copy"><b>Your headphones' EQ.</b> Fit an AutoEQ curve into any preset.</p>
-<div class="tile-picture" data-picture="eq"></div>
-</article>
-<article class="tile">
-<p class="tile-copy"><b>Natural sort.</b> Track 2 comes before Track 10.</p>
-<div class="tile-picture" data-picture="sort"></div>
-</article>
-<article class="tile">
-<p class="tile-copy"><b>Bluetooth on a button.</b> Hold Power to switch it on or off.</p>
-<div class="tile-picture" data-picture="bluetooth"></div>
-</article>
-</div>
-</section>
 <details class="advanced" id="advanced">
-<summary><span><span class="section-index">03 / The workbench</span><strong>Advanced: build your own image</strong><br><span class="note">Theme colors, EQ curves for your headphones, DAC filter, Bluetooth auto-off and per-feature choices. Needs your own stock <code>DP3_V137.img</code>; everything runs in this page and nothing is uploaded.</span></span></summary>
+<summary><span><span class="section-index">02 / Configuration</span><strong>Advanced: build your own image</strong><br><span class="note">Theme colors, EQ curves for your headphones, DAC filter, Bluetooth auto-off and per-feature choices. Needs your own stock <code>DP3_V137.img</code>; everything runs in this page and nothing is uploaded.</span></span></summary>
 <div class="page">
 <section class="card">
 <h2>1. Choose colors</h2>
@@ -220,6 +196,23 @@
 </section>
 </div>
 </details>
+<section class="features" id="features" aria-labelledby="features-title">
+<h2 id="features-title"><span class="section-index">03 / Firmware features</span>What CE changes</h2>
+<p class="features-intro">The Standard image includes the firmware features below. Custom EQ is a build option; Minimal keeps the audio and library fixes without Opus. Device animations are illustrative previews, not hardware captures.</p>
+<div class="bento">
+<article class="tile tile--hero"><div class="tile-copy"><h3>Album-derived backgrounds</h3><p>Theater mode derives the playback background from the album art. Tracks without art use the theme default; transport glyphs sit directly over the background.</p></div><div class="tile-picture" data-picture="theater"></div></article>
+<article class="tile"><div class="tile-copy"><h3>Custom EQ presets</h3><p>Build option: fit an AutoEQ GraphicEQ file or 31 dB values to any of the six presets. The curve shown is an illustrative preview of the fitted HD 600 example, rather than an on-device EQ editor.</p></div><div class="tile-picture" data-picture="eq"></div></article>
+<article class="tile"><div class="tile-copy"><h3>Bluetooth from the Power button</h3><p>Hold Power to switch Bluetooth on or off. The preview highlights the side button during the hold and updates the screen status. Custom builds can also extend unpaired auto-off to 10 minutes or disable it.</p></div><div class="tile-picture" data-picture="bluetooth"></div></article>
+<article class="tile"><div class="tile-copy"><h3>Natural library sorting</h3><p>Numbers sort by value, a leading “The” is ignored, and case and Latin-1 accents no longer split the list. Track 2 comes before Track 10.</p></div><div class="tile-picture" data-picture="sort"></div></article>
+<article class="tile"><div class="tile-copy"><h3>M3U playlist playback</h3><p>Select an .m3u file in the browser to play its entries. Next, previous and shuffle remain inside the playlist, with up to 59 tracks from up to 6 folders.</p></div><div class="tile-picture" data-picture="playlist"></div></article>
+<article class="tile"><div class="tile-copy"><h3>Track information while locked</h3><p>With hold enabled, the lock screen shows the current track title and elapsed playback time.</p></div><div class="tile-picture" data-picture="lockscreen"></div></article>
+<article class="tile"><div class="tile-copy"><h3>Gapless transitions within a format</h3><p>Same-format tracks skip the decoder reload, reset and ready poll. The decoder fast path is checked in emulation; the complete system transition still needs hardware testing.</p></div><div class="tile-picture" data-picture="gapless"></div></article>
+<article class="tile"><div class="tile-copy"><h3>Opus playback in Standard</h3><p>The Standard image replaces WMA support with Opus decoding. Choose Minimal if you need to keep WMA playback.</p></div><div class="tile-picture" data-picture="opus"></div></article>
+<article class="tile"><div class="tile-copy"><h3>Volume recovery and reduced wakeups</h3><p>Two transient DAC errors no longer freeze volume until playback stops. Decoder clocks are lower and the wheel timer wakes 1,000 rather than 2,500 times per second; battery-life gains have not been measured.</p></div><div class="tile-picture" data-picture="system"></div></article>
+<article class="tile tile--stat" data-dark><div class="stat"><span class="stat-lead">Ogg Vorbis, about</span><span data-stat="vorbis"><span class="ft-stat-number">40<span class="ft-stat-unit"> dB</span></span></span><span class="stat-label">cleaner than stock against a reference decode. CE measures about 85–97 dB signal-to-noise on the pinned corpus after rounding; all measurements are offline.</span></div></article>
+</div>
+</section>
+
 </main>
 <footer>
 The install flow downloads release images from the repository and refuses any whose SHA-256 does not match its pin. The builder parses only files you select, locally. The simulator fetches only the resource sections of the stock and CE images from the repository and checks each against a pinned SHA-256; its cover, text and progress bar are approximations. This site hosts no firmware files itself.

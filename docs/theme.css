@@ -636,3 +636,24 @@ footer { line-height: 1.7; max-width: 1000px; }
 .install-intro > .warn { margin-top: 24px; border-left: 3px solid var(--ce-accent); background: var(--ce-surface); padding: 18px; line-height: 1.6; }
 .install > .steps { grid-row: auto; }
 @media (max-width: 700px) { .install-intro { width: 100%; } }
+
+/* The optional configuration workbench now follows installation. */
+.features { display:block; }
+.features > h2 { margin-bottom:30px; }
+.features .bento { grid-template-columns:repeat(3,minmax(0,1fr)); }
+.features .tile--hero { grid-column:span 2; }
+.features .tile--stat,.features .tile:last-child { grid-column:1/-1; }
+.tile-copy h3 { margin:0 0 8px; font-size:20px; line-height:1.2; }
+.tile-copy p { margin:0; font-size:15px; line-height:1.55; }
+.tile-copy { max-width:none; }
+.advanced { margin-bottom:0; }
+@media(max-width:1050px) { .features .bento { grid-template-columns:repeat(2,minmax(0,1fr)); } .features .tile--hero { grid-column:span 2; } }
+@media(max-width:620px) { .features .bento { grid-template-columns:minmax(0,1fr); } .features .tile--hero { grid-column:auto; } }
+@media (min-width:1051px) { .features .tile:has([data-picture="system"]) { grid-column:span 3; } }
+@media (min-width:621px) and (max-width:1050px) { .features .tile:has([data-picture="system"]) { grid-column:span 2; } }
+.features-intro { max-width:780px; margin:-12px 0 28px; font-size:15px; line-height:1.6; }
+@media (min-width:1051px) {
+  .features .tile:has([data-picture="system"]) { grid-column:span 2; }
+  .features .tile--stat:last-child { grid-column:span 1; }
+  .features .tile--stat .stat { display:flex; align-items:flex-start; gap:14px; }
+}

@@ -37,7 +37,7 @@ export default function Hero({ theme }: { theme: Theme }) {
       </div></div></div></div>
       <div className="neo-file" aria-hidden="true"><div className="neo-page"><span>IMG</span></div><span>RKNANOFWIMG</span></div>
       <div className="neo-impact" aria-hidden="true" />
-      <div className="neo-caption">Same player. New possibilities.</div>
+      <div className="neo-caption">DAP Neo with Community Edition firmware</div>
       <span className="neo-description">An update file hits the player, spins it, and lights its screen with CE.</span>
     </div>}
   </Stage></div>
