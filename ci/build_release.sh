@@ -86,12 +86,22 @@ report['diff_vs_stock'] = {
     'range_count': len(diff['ranges']),
     'note': 'range list omitted; rebuild with patches/full/build/build_full.py for it',
 }
+report['input_file'] = 'DP3_V137.img'
 report['output_file'] = 'DP3_V137_CE.img'
 json.dump(report, open(sys.argv[2], 'w'), indent=1)
 EOF
 fi
 
 "$py" "$build" --output "$out/DP3_V137_CE_minimal.img" > "$work/minimal.log"
+# Keep local checkout and scratch paths out of the published report.
+"$py" - "$out/DP3_V137_CE_minimal.img.report.json" <<'EOF'
+import json, sys
+path = sys.argv[1]
+report = json.load(open(path))
+report['input_file'] = 'DP3_V137.img'
+report['output_file'] = 'DP3_V137_CE_minimal.img'
+open(path, 'w').write(json.dumps(report, indent=2) + '\n')
+EOF
 pin "$out/DP3_V137_CE_minimal.img" "$MINIMAL_SHA"
 
 "$py" "$build" --recovery --output "$out/DP3_V137_CE_recovery.img" > "$work/recovery.log"

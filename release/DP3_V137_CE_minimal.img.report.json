@@ -1,7 +1,7 @@
 {
   "mode": "custom",
-  "input_file": "/home/user/Fosi-DAP-Neo-Firmware/DP3_V137.img",
-  "output_file": "/tmp/claude-0/-home-user-Fosi-DAP-Neo-Firmware/fbcca728-84b7-54a5-919c-5c6f35a882c4/scratchpad/rel2/DP3_V137_CE_minimal.img",
+  "input_file": "DP3_V137.img",
+  "output_file": "DP3_V137_CE_minimal.img",
   "input_sha256": "fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cdfade5e9c6ea3bd71ac6deef",
   "output_sha256": "623214370755053ed69dc53f0c7ae5ec0504bcb3e9ca6f2766cc9e9049101090",
   "byte_length": 13631492,
