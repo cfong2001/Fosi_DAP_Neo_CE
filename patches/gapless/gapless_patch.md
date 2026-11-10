@@ -1,5 +1,12 @@
 # Gapless playback patch set: DP3_V137 (stock SHA fcc1cd3e…)
 
+> Current status: armed in both images. Patch 0026 (`0026-gapless-arm.patch`)
+> is in the framework manifest, after the decoder-side observation this
+> document gates it on was recorded in emulation
+> ([`../harness/milestone2.md`](../harness/milestone2.md)). The "shipped
+> DISARMED" status below describes the set as first delivered. The system side
+> of the transition is still unobserved until hardware.
+
 Status: **built and statically verified, shipped DISARMED.** The set installs
 the complete same-codec fast-path machinery (loader gate, wait cut, state)
 in a form that is behaviour-identical to stock. One further 2-byte patch

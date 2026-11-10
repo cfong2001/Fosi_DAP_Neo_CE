@@ -479,6 +479,7 @@ input[type=file] { font-size: 0.82rem; }
 .feature input { margin-top: 3px; accent-color: var(--ce-accent); flex: 0 0 auto; }
 .feature > span { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
 .feature-head { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; color: var(--ce-text-strong); }
+.feature-source { margin-left: auto; font-size: 0.76rem; font-weight: 500; text-decoration: underline; text-underline-offset: 3px; }
 .feature .note { margin: 0; font-size: 0.8rem; }
 .feature .why { color: var(--ce-warning-text); }
 .feature:has(input:disabled) { cursor: default; opacity: 0.7; }
@@ -525,6 +526,8 @@ input[type=file] { font-size: 0.82rem; }
   --ce-accent: #b74720;
   --ce-accent-ink: #a63a16;
   --ce-accent-soft: #b7472010;
+  /* Accent for links on the always-dark stat tile, in either scheme */
+  --ce-on-dark-accent: #f6a47a;
   --ce-radius-card: 3px;
   --ce-radius-md: 3px;
   --ce-radius-lg: 3px;
@@ -601,8 +604,9 @@ header.top {
 .advanced > .page { padding: 24px 0; gap: 24px; }
 .advanced .card { border: 1px solid var(--ce-line); }
 footer { line-height: 1.7; max-width: 1000px; }
+footer p { margin: 0 0 0.6em; }
 @media (prefers-color-scheme: dark) {
-  :root { --ce-canvas: #1c211e; --ce-surface: #252c27; --ce-sunken: #171c19; --ce-text-strong: #f1eee5; --ce-text: #b9c1b6; --ce-text-faint: #99a493; --ce-line: #e4eddb22; --ce-line-strong: #e4eddb45; --ce-accent: #b74720; --ce-accent-ink: #f6a47a; --ce-accent-soft: #f6a47a14; }
+  :root { --ce-canvas: #1c211e; --ce-surface: #252c27; --ce-sunken: #171c19; --ce-text-strong: #f1eee5; --ce-text: #b9c1b6; --ce-text-faint: #99a493; --ce-line: #e4eddb22; --ce-line-strong: #e4eddb45; --ce-accent: #b74720; --ce-accent-ink: #f6a47a; --ce-accent-soft: #f6a47a14; --ce-on-dark-accent: var(--ce-accent-ink); }
 }
 @media (max-width: 980px) {
   .masthead-note { display: none; }
@@ -684,7 +688,7 @@ footer { line-height: 1.7; max-width: 1000px; }
 .patch-links { display:flex; flex-wrap:wrap; gap:8px 18px; margin-top:16px; font-size:13px; line-height:1.5; }
 .patch-links a { text-decoration:underline; text-underline-offset:3px; }
 .patch-links a:hover { text-decoration-thickness:2px; }
-.tile--stat .patch-links a { color:#f6a47a; }
+.tile--stat .patch-links a { color: var(--ce-on-dark-accent); }
 @media(max-width:700px) {
   .masthead-links { width:100%; margin-left:0; justify-content:space-between; gap:12px; }
 }
