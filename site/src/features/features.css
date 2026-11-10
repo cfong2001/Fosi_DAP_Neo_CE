@@ -1,0 +1,197 @@
+/* "What CE changes" pictures. Each is a Stage at its tile slot's width,
+   pinned to the tile's bottom; the tile (page CSS) owns the crop. */
+
+.ft-stage .ss-stage {
+  overflow: hidden;
+  background: transparent;
+}
+
+/* ---- Theater: player screens running off the bottom ---- */
+
+.ft-screens {
+  position: absolute;
+  inset: 24px 0 auto;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.ft-screen {
+  flex: none;
+  width: var(--screen, 176px);
+  height: 280px;
+  padding: 18px 16px 0;
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  box-shadow: var(--ss-shadow-ground);
+  transition: background-color 0.9s cubic-bezier(0.3, 0.6, 0.3, 1);
+}
+
+.ft-cover {
+  width: var(--cover, 116px);
+  height: var(--cover, 116px);
+  border-radius: 4px;
+  box-shadow: 0 4px 10px rgb(0 0 0 / 0.35);
+}
+
+/* Graphic sleeves, not photographs: the three covers of the README's
+   theater figure (tools/render_readme.py cover()). */
+.ft-cover--ember {
+  background:
+    radial-gradient(circle at 76% 60%, #f6c88c 0 18%, transparent 18.5%),
+    linear-gradient(#f58c1e, #4b1914);
+}
+.ft-cover--tide {
+  background:
+    repeating-radial-gradient(ellipse 130% 60% at 50% 120%, transparent 0 10px, rgb(200 240 245 / 0.75) 10px 12px, transparent 12px 22px),
+    linear-gradient(#149abe, #1e3c6e);
+}
+.ft-cover--violet {
+  background:
+    conic-gradient(from 150deg at 50% 18%, transparent 0 0deg, #ffdc5a 0 60deg, transparent 60deg) 0 0 / 100% 100% no-repeat,
+    linear-gradient(#c83cd2, #503c78);
+}
+
+.ft-lines {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+}
+
+.ft-progress {
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background: rgb(255 255 255 / 0.25);
+  overflow: hidden;
+}
+.ft-progress > span {
+  display: block;
+  width: 38%;
+  height: 100%;
+  background: rgb(255 255 255 / 0.9);
+}
+
+.ft-transport {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  color: #ececee;
+}
+
+/* ---- EQ: one preset card, its curve drawn in ---- */
+
+.ft-eq {
+  position: absolute;
+  left: 24px;
+  top: 20px;
+}
+
+.ft-eq-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.ft-eq-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ss-text-strong);
+}
+
+.ft-eq-axis {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--ss-text-faint);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- Natural sort: three rows, the third moving into place ---- */
+
+.ft-sort {
+  position: absolute;
+  left: 24px;
+  top: 20px;
+}
+
+.ft-sort-rows {
+  position: relative;
+  height: 240px;
+}
+
+.ft-sort-row {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 40px;
+  padding: 0 12px;
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  border-radius: 8px;
+  transition: transform 0.7s cubic-bezier(0.3, 0.6, 0.3, 1);
+}
+
+.ft-sort-row[data-moving] {
+  background: var(--ss-accent-soft);
+}
+
+.ft-sort-no {
+  font-size: 12px;
+  color: var(--ss-text-faint);
+  font-variant-numeric: tabular-nums;
+}
+
+.ft-sort-name {
+  color: var(--ss-text-strong);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* ---- Bluetooth: the Power key, held ---- */
+
+/* A centered object: the key, with its state under it */
+.ft-bt {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding-bottom: 8px;
+}
+
+.ft-key {
+  width: 104px;
+  height: 104px;
+  border-radius: 24px;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 4px;
+  color: var(--ss-text-strong);
+  background: var(--ss-surface);
+  box-shadow: inset 0 -3px 0 var(--ss-line), 0 0 0 1px var(--ss-line), var(--ss-shadow-card);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, color 0.4s ease;
+}
+
+.ft-key[data-on] {
+  transform: translateY(2px);
+  color: var(--ss-accent);
+  box-shadow: inset 0 -1px 0 var(--ss-line), 0 0 0 1px var(--ss-line), var(--ss-shadow-card);
+}
+
+.ft-key-label {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--ss-text);
+}

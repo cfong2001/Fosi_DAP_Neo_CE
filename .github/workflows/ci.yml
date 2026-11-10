@@ -106,6 +106,14 @@ jobs:
         if: ${{ hashFiles('tests/theme-core.test.mjs') != '' }}
         run: node --test tests/theme-core.test.mjs
 
+      - name: Site stages rebuild from source (site/ -> docs/stage/)
+        run: |
+          cd site
+          npm ci --no-audit --no-fund
+          npm run typecheck
+          npm run build
+          git diff --exit-code -- ../docs/stage
+
       - name: Install flow pins match the release set
         run: node --test tests/install-data.test.mjs
 

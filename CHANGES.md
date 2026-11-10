@@ -1,5 +1,21 @@
 # Changelog
 
+## 2026-11-10: site redesign with Stageshow
+
+- The Pages site takes the look of Stageshow (github.com/benjitaylor/skills,
+  MIT): the kit's neutral surfaces, three inks, one accent, its radii and
+  shadows, in light and dark (`docs/theme.css`). Every existing function is
+  unchanged: install flow, simulator, theme studio and builder.
+- New pictures built with the Stageshow kit in `site/` (vendored in
+  `site/src/kit/`, brand marks left out) and committed as `docs/stage/`:
+  a hero demo of the install (the update file copied to the player and its
+  SHA-256 read back) and a "What CE changes" bento of theater mode, the
+  Vorbis gain, a fitted EQ curve, natural sort and the Bluetooth key. Each
+  passes Stageshow's rehearsal gate at 1280 and 390, light and dark.
+- CI rebuilds `docs/stage/` from `site/` and fails on any difference; a
+  browser test mounts every picture in both color schemes. The page no
+  longer widens when resized while scrolled away from the hero.
+
 ## 2026-11-10: builder without local scripts
 
 - The builder page no longer asks for locally generated files. The

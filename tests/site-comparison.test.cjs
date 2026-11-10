@@ -15,8 +15,9 @@ const types = {'.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript
 
 async function serveDocs(t) {
   const server = http.createServer(async (req, res) => {
-    const name = req.url === '/' ? 'index.html' : req.url.slice(1);
-    if (!/^[\w.-]+$/.test(name)) { res.writeHead(404).end(); return; }
+    const name = req.url === '/' ? 'index.html' : req.url.slice(1).split(/[?#]/)[0];
+    // Files in docs/ and one level of folders (stage/stage.js), nothing else.
+    if (!/^(?:[\w-]+\/)?[\w.-]+$/.test(name) || name.includes('..')) { res.writeHead(404).end(); return; }
     try {
       const data = await fs.readFile(path.join(docs, name));
       res.writeHead(200, {'content-type': types[path.extname(name)] || 'application/octet-stream'}).end(data);
@@ -53,6 +54,25 @@ async function serveRaw(context, onRequest = () => {}) {
 }
 
 const word = ([r, g, b]) => (r << 16) | (g << 8) | b;
+
+// No horizontal page scroll; on failure, name what sticks out.
+async function assertNoOverflow(page, width) {
+  const report = await page.evaluate(() => {
+    if (document.documentElement.scrollWidth <= innerWidth) return null;
+    const out = [];
+    for (const el of document.querySelectorAll('body *')) {
+      const r = el.getBoundingClientRect();
+      if (r.right > innerWidth + 1 && r.width > 0 && !el.parentElement?.closest('.ss-stage'))
+        out.push((el.id ? '#' + el.id : el.tagName.toLowerCase() + '.' + [...el.classList].join('.')) + ' right ' + Math.round(r.right));
+    }
+    const first = [...document.querySelectorAll('.ss-stage')].find(el => el.getBoundingClientRect().right > innerWidth + 1);
+    const chain = [];
+    for (let el = first; el && el !== document.body; el = el.parentElement)
+      chain.push((el.id ? '#' + el.id : el.tagName.toLowerCase() + '.' + [...el.classList].join('.')) + '[' + getComputedStyle(el).overflowX + ' ' + Math.round(el.getBoundingClientRect().right) + ']');
+    return document.documentElement.scrollWidth + 'px wide: ' + out.slice(0, 8).join(', ') + ' | ' + chain.join(' < ');
+  });
+  assert.equal(report, null, `no horizontal overflow at ${width}px`);
+}
 
 test('simulator draws real firmware pixels for both images', async t => {
   const core = await import('../docs/sim-core.mjs');
@@ -135,7 +155,7 @@ test('simulator draws real firmware pixels for both images', async t => {
   assert.equal(new Set(ids).size, ids.length, 'all IDs are unique');
   for (const width of [1440, 375]) {
     await page.setViewportSize({width, height: 900});
-    assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `no horizontal overflow at ${width}px`);
+    await assertNoOverflow(page, width);
   }
   assert.deepEqual(errors, []);
 });
@@ -241,7 +261,7 @@ test('install flow verifies, copies and downloads release images', async t => {
   await page.waitForSelector('#advanced[open]');
   for (const width of [1280, 375]) {
     await page.setViewportSize({width, height: 900});
-    assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `no horizontal overflow at ${width}px`);
+    await assertNoOverflow(page, width);
   }
   assert.deepEqual(errors, []);
 });
@@ -313,7 +333,31 @@ test('builder needs no local files and reproduces the release images', async t =
   assert.ok(await box('playlists').isDisabled());
   for (const width of [1280, 375]) {
     await page.setViewportSize({width, height: 900});
-    assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `no horizontal overflow at ${width}px`);
+    await assertNoOverflow(page, width);
   }
   assert.deepEqual(errors, []);
+});
+
+// The Stageshow pictures (site/, built into docs/stage/) mount in both
+// color schemes without errors: the hero demo and the four feature tiles.
+test('stage pictures mount in light and dark', async t => {
+  const {browser, url} = await serveDocs(t);
+  for (const colorScheme of ['light', 'dark']) {
+    const context = await browser.newContext({colorScheme, viewport: {width: 1280, height: 900}});
+    t.after(() => context.close());
+    const page = await context.newPage();
+    const errors = [];
+    page.on('pageerror', error => errors.push(error.message));
+    page.on('console', message => { if (message.type() === 'error') errors.push(message.text()); });
+    await page.goto(url);
+    await page.waitForSelector('#ce-hero-stage .ss-stage');
+    assert.equal(await page.locator('#ce-hero-stage .ss-stage').getAttribute('data-theme'), colorScheme);
+    await page.locator('#features').scrollIntoViewIfNeeded();
+    for (const name of ['theater', 'eq', 'sort', 'bluetooth'])
+      await page.waitForSelector(`[data-picture="${name}"] .ss-stage`);
+    // Count exposes its figure as an aria-label (its digits are rolling strips)
+    await page.waitForFunction(() => document.querySelector('[data-stat="vorbis"] .ss-count')?.getAttribute('aria-label') === '40', null, {timeout: 10000});
+    assert.equal(await page.locator('[data-stat="vorbis"] .ft-stat-number').count(), 1, 'the static fallback gave way');
+    assert.deepEqual(errors, [], colorScheme);
+  }
 });

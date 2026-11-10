@@ -1,0 +1,28 @@
+{
+  "name": "dap-neo-ce-site-stages",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Stageshow illustrations for the CE site (docs/): built into docs/stage/.",
+  "license": "GPL-3.0-only",
+  "engines": {
+    "node": ">=20.19"
+  },
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite",
+    "typecheck": "tsc --noEmit -p ."
+  },
+  "dependencies": {
+    "lucide-react": "0.468.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "18.3.31",
+    "@types/react-dom": "18.3.7",
+    "@vitejs/plugin-react": "4.7.0",
+    "typescript": "5.9.3",
+    "vite": "6.4.5"
+  }
+}
