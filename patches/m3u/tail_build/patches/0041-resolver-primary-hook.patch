@@ -1,0 +1,11 @@
+# M3U resolver hook, primary: source 6 track resolver entry.
+name: resolver-primary-hook
+kind: module
+module: 0
+region: code
+address: 0x3059dac
+gate: build refuses unless the stock bytes at the target equal `expect`;
+  the finished image must also pass firmware_patch.validate()
+rationale: Replaces the resolver entry push.w with a B.W to the tail hook. The hook tests the playlist flag, then the discriminator (out descriptor == 0x030239B4, mode == 1); any other call re-executes the displaced push and continues at 0x03059DB0 with entry state intact. Design: patches/m3u/resolver_design.md.
+expect: 2de9f047
+replace: 22f056bb

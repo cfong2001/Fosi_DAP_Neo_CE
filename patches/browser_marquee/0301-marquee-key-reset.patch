@@ -1,0 +1,11 @@
+# Browser marquee (experimental variant): marquee-key-reset.
+# Design and census: patches/browser_marquee/design.md.
+name: marquee-key-reset
+kind: module
+module: 31
+region: code
+address: 0x307e5b8
+gate: stock byte precondition; variant-only patch, never in the default manifest; validated by test_browser_marquee.py under emulation
+rationale: Hook at the browser Key callback entry (displaced push.w replicated by the stub, which resumes the stock handler at site + 4). Payload routine at 0x307f2b8 in the module 31 code growth (marquee_payload.bin).
+expect: 2de9f043
+replace: 00f07ebe

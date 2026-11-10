@@ -1,0 +1,45 @@
+0306cb2c  70 b5          push     {r4, r5, r6, lr}
+0306cb2e  05 46          mov      r5, r0
+0306cb30  2b 4c          ldr      r4, [pc, #0xac]  ; [0x306cbe0] = 0x00030d40
+0306cb32  01 21          movs     r1, #1
+0306cb34  02 20          movs     r0, #2
+0306cb36  e5 f7 39 fd    bl       #0x30525ac
+0306cb3a  01 21          movs     r1, #1
+0306cb3c  32 20          movs     r0, #0x32
+0306cb3e  e5 f7 6d fd    bl       #0x305261c
+0306cb42  07 21          movs     r1, #7
+0306cb44  28 46          mov      r0, r5
+0306cb46  fa f7 93 fe    bl       #0x3067870
+0306cb4a  05 20          movs     r0, #5
+0306cb4c  f7 f7 fa fe    bl       #0x3064944
+0306cb50  90 22          movs     r2, #0x90
+0306cb52  24 49          ldr      r1, [pc, #0x90]  ; [0x306cbe4] = 0x030064e0
+0306cb54  4f f0 81 70    mov.w    r0, #0x1020000
+0306cb58  e8 f7 6c f9    bl       #0x3054e34
+0306cb5c  1f 4d          ldr      r5, [pc, #0x7c]  ; [0x306cbdc] = 0x03004138
+0306cb5e  00 20          movs     r0, #0
+0306cb60  01 46          mov      r1, r0
+0306cb62  28 60          str      r0, [r5]
+0306cb64  32 20          movs     r0, #0x32
+0306cb66  e5 f7 59 fd    bl       #0x305261c
+0306cb6a  28 68          ldr      r0, [r5]
+0306cb6c  00 28          cmp      r0, #0
+0306cb6e  18 bf          it       ne
+0306cb70  70 bd          popne    {r4, r5, r6, pc}
+0306cb72  f4 f7 35 fb    bl       #0x30611e0
+0306cb76  e6 f7 3e fb    bl       #0x30531f6
+0306cb7a  01 20          movs     r0, #1
+0306cb7c  f7 f7 d0 fe    bl       #0x3064920
+0306cb80  64 1e          subs     r4, r4, #1
+0306cb82  08 bf          it       eq
+0306cb84  70 bd          popeq    {r4, r5, r6, pc}
+0306cb86  28 68          ldr      r0, [r5]
+0306cb88  00 28          cmp      r0, #0
+0306cb8a  f2 d0          beq      #0x306cb72
+0306cb8c  70 bd          pop      {r4, r5, r6, pc}
+0306cb8e  10 b5          push     {r4, lr}
+0306cb90  01 21          movs     r1, #1
+0306cb92  00 20          movs     r0, #0
+0306cb94  00 f0 fc f9    bl       #0x306cf90
+0306cb98  00 21          movs     r1, #0
+0306cb9a  08 46          mov      r0, r1

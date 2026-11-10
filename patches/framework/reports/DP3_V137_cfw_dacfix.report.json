@@ -1,0 +1,71 @@
+{
+  "mode": "custom",
+  "input_file": "/home/hatch/workspace/fosi-dap-neo/DP3_V137.img",
+  "output_file": "/tmp/cfw_dac.img",
+  "input_sha256": "fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cdfade5e9c6ea3bd71ac6deef",
+  "output_sha256": "66936a58f019b5e7242b30103bfc43aecfed12ffb97f1756c5326f1a325e6de4",
+  "byte_length": 13631492,
+  "header_date": "20261023",
+  "patches_applied": [
+    {
+      "patch": "noop-selftest",
+      "file": "0000-noop-selftest.patch",
+      "kind": "module",
+      "module": 0,
+      "region": "code",
+      "cpu_address": "0x3050000",
+      "file_offset": "0x296ac",
+      "old_hex": "004000038b1f0603",
+      "new_hex": "004000038b1f0603"
+    },
+    {
+      "patch": "dac-fix-1-branch",
+      "file": "0001-dac-fix-branch.patch",
+      "kind": "module",
+      "module": 0,
+      "region": "code",
+      "cpu_address": "0x3060d14",
+      "file_offset": "0x3a3c0",
+      "old_hex": "02d0",
+      "new_hex": "3bd0"
+    },
+    {
+      "patch": "dac-fix-2-cave",
+      "file": "0002-dac-fix-cave.patch",
+      "kind": "module",
+      "module": 0,
+      "region": "code",
+      "cpu_address": "0x3060d8e",
+      "file_offset": "0x3a43a",
+      "old_hex": "70477047",
+      "new_hex": "6870c4e7"
+    }
+  ],
+  "diff_vs_stock": {
+    "bytes_changed": 11,
+    "ranges": [
+      [
+        "0x2",
+        "0x2"
+      ],
+      [
+        "0x3a3c0",
+        "0x3a3c0"
+      ],
+      [
+        "0x3a43a",
+        "0x3a43d"
+      ],
+      [
+        "0xc94002",
+        "0xc94002"
+      ],
+      [
+        "0xd00000",
+        "0xd00003"
+      ]
+    ]
+  },
+  "validation": "firmware_patch.validate() passed (header mirror + trailer CRC + V137 layout)",
+  "scope": "offline package integrity only; device acceptance and boot behaviour are hardware-phase questions"
+}

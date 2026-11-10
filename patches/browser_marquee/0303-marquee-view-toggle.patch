@@ -1,0 +1,11 @@
+# Browser marquee (experimental variant): marquee-view-toggle.
+# Design and census: patches/browser_marquee/design.md.
+name: marquee-view-toggle
+kind: module
+module: 31
+region: code
+address: 0x307e5e6
+gate: stock byte precondition; variant-only patch, never in the default manifest; validated by test_browser_marquee.py under emulation
+rationale: Hook at inside the browser Key handler where r4 holds the final event word (displaced ldr.w sb, [pc, #0x400] performed by the stub); a long press of Vol+ flips the tag/file view mode byte. Payload routine at 0x307f2e0 in the module 31 code growth (marquee_payload.bin).
+expect: dff80094
+replace: 00f07bfe

@@ -1,0 +1,35 @@
+{
+  "ext_base": "0x307ee48",
+  "ext_end": "0x3080b54",
+  "room": 7436,
+  "payload_bytes": 7114,
+  "spare": 322,
+  "components": [
+    {
+      "name": "trampoline (patch 0040 target)",
+      "offset": 0,
+      "address": "0x307ee48",
+      "bytes": 64,
+      "site40_replace": "00f095bf"
+    },
+    {
+      "name": "bridge + parser (m3u_bridge_node_action first)",
+      "offset": 64,
+      "address": "0x307ee88",
+      "bytes": 6644,
+      "m3u_import": "0x307f6b0"
+    },
+    {
+      "name": "padding",
+      "offset": 6708,
+      "bytes": 0
+    },
+    {
+      "name": "lock-screen routine (ui_lockscreen_paint)",
+      "offset": 6708,
+      "address": "0x308087c",
+      "bytes": 406,
+      "site33_replace": "01f0edbf"
+    }
+  ]
+}

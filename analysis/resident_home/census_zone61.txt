@@ -1,0 +1,60 @@
+RANGE 0x0308c978..0x03094604: 34 direct-referenced addrs, 15908 direct-unreferenced
+Direct-unreferenced runs (>=16 B):
+  0x030921e2  8200 bytes
+  0x0308ceac  5964 bytes
+  0x03090cec  5364 bytes
+  0x0308f48e  3004 bytes
+  0x0308eb42  1344 bytes
+  0x0309031a  1268 bytes
+  0x03090810  1242 bytes
+  0x0308e606  1084 bytes
+  0x030941ec  1048 bytes
+  0x0308cb32  702 bytes
+  0x0308f1ce  702 bytes
+  0x0308c978  440 bytes
+  0x0309023a  222 bytes
+  0x0308ea44  188 bytes
+  0x0308cdf2  184 bytes
+  0x0309013a  182 bytes
+  0x0309004c  158 bytes
+  0x0308f10e  146 bytes
+  0x0308f084  124 bytes
+  0x030901f2  70 bytes
+  0x030900f2  54 bytes
+  0x0308eb12  46 bytes
+  0x0308f1a4  28 bytes
+Direct-referenced addresses:
+  0x0308cb30
+  0x0308cdf0
+  0x0308ceaa
+  0x0308e5f8
+  0x0308e604
+  0x0308ea42
+  0x0308eb00
+  0x0308eb10
+  0x0308eb40
+  0x0308f082
+  0x0308f100
+  0x0308f104
+  0x0308f10c
+  0x0308f1a0
+  0x0308f1a2
+  0x0308f1c0
+  0x0308f1c2
+  0x0308f1c8
+  0x0308f1ca
+  0x0308f1cc
+  0x0308f48c
+  0x0309004a
+  0x030900ea
+  0x030900f0
+  0x03090128
+  0x03090136
+  0x03090138
+  0x030901f0
+  0x03090238
+  0x03090318
+  0x0309080e
+  0x03090cea
+  0x030921e0
+  0x030941ea

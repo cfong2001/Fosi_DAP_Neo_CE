@@ -1,0 +1,135 @@
+{
+ "proposal": "Populate APPROVED_LITERAL_SITES in tools/ui_theme.py with the sites below. Stock bytes were read from the pinned image at the stated file offsets and the immediates decoded from them; one byte string in the theme census table (palette routine accent dark) reads 4f f6 20 20 there but the image holds 4f f2 20 20, which decodes to the same 0xF220; the image bytes govern.",
+ "shared_immediates_not_sites": {
+  "note": "Background and foreground are not independently patchable: the palette routine loads r3 = 0xFFFF (movw at 0x030655D0) and r0 = 0 once and swaps which cell receives which per theme; the clock painter repeats the swap. A registry entry must therefore name the shared pair, not a theme.",
+  "scheme_a": {
+   "ink": "0x0861",
+   "paper": "0xF7BE"
+  },
+  "scheme_b": {
+   "ink": "0x18A2",
+   "paper": "0xEF7C"
+  }
+ },
+ "sites": [
+  {
+   "key": "palette.accent.light",
+   "site": "palette routine 0x030655DA",
+   "file_offset": "0x3EC86",
+   "stock_bytes": "4f f6 20 30",
+   "stock_value": "0xFB20",
+   "role": "accent_light",
+   "scheme_a_value": "0xFB20",
+   "scheme_a_bytes": "4f f6 20 30",
+   "scheme_b_value": "0x79DD",
+   "scheme_b_bytes": "47 f6 dd 10",
+   "pair_rule": "accent and line sites must be patched in both routines or the clock painter reasserts the stock values"
+  },
+  {
+   "key": "palette.line.light",
+   "site": "palette routine 0x030655E2",
+   "file_offset": "0x3EC8E",
+   "stock_bytes": "4e f6 7d 70",
+   "stock_value": "0xEF7D",
+   "role": "line_light",
+   "scheme_a_value": "0xDEFB",
+   "scheme_a_bytes": "4d f6 fb 60",
+   "scheme_b_value": "0xD678",
+   "scheme_b_bytes": "4d f2 78 60",
+   "pair_rule": "accent and line sites must be patched in both routines or the clock painter reasserts the stock values"
+  },
+  {
+   "key": "palette.accent.dark",
+   "site": "palette routine 0x030655F0",
+   "file_offset": "0x3EC9C",
+   "stock_bytes": "4f f2 20 20",
+   "stock_value": "0xF220",
+   "role": "accent_dark",
+   "scheme_a_value": "0xF220",
+   "scheme_a_bytes": "4f f2 20 20",
+   "scheme_b_value": "0xA45E",
+   "scheme_b_bytes": "4a f2 5e 40",
+   "pair_rule": "accent and line sites must be patched in both routines or the clock painter reasserts the stock values"
+  },
+  {
+   "key": "palette.line.dark",
+   "site": "palette routine 0x030655F8",
+   "file_offset": "0x3ECA4",
+   "stock_bytes": "41 f2 82 00",
+   "stock_value": "0x1082",
+   "role": "line_dark",
+   "scheme_a_value": "0x2986",
+   "scheme_a_bytes": "42 f6 86 10",
+   "scheme_b_value": "0x3986",
+   "scheme_b_bytes": "43 f6 86 10",
+   "pair_rule": "accent and line sites must be patched in both routines or the clock painter reasserts the stock values"
+  },
+  {
+   "key": "clockpainter.accent.light",
+   "site": "clock/status painter 0x03065F4A",
+   "file_offset": "0x3F5F6",
+   "stock_bytes": "4f f6 20 30",
+   "stock_value": "0xFB20",
+   "role": "accent_light",
+   "scheme_a_value": "0xFB20",
+   "scheme_a_bytes": "4f f6 20 30",
+   "scheme_b_value": "0x79DD",
+   "scheme_b_bytes": "47 f6 dd 10",
+   "pair_rule": "accent and line sites must be patched in both routines or the clock painter reasserts the stock values"
+  },
+  {
+   "key": "clockpainter.line.light",
+   "site": "clock/status painter 0x03065F52",
+   "file_offset": "0x3F5FE",
+   "stock_bytes": "4e f6 7d 70",
+   "stock_value": "0xEF7D",
+   "role": "line_light",
+   "scheme_a_value": "0xDEFB",
+   "scheme_a_bytes": "4d f6 fb 60",
+   "scheme_b_value": "0xD678",
+   "scheme_b_bytes": "4d f2 78 60",
+   "pair_rule": "accent and line sites must be patched in both routines or the clock painter reasserts the stock values"
+  },
+  {
+   "key": "clockpainter.accent.dark",
+   "site": "clock/status painter 0x03065F90",
+   "file_offset": "0x3F63C",
+   "stock_bytes": "4f f2 20 20",
+   "stock_value": "0xF220",
+   "role": "accent_dark",
+   "scheme_a_value": "0xF220",
+   "scheme_a_bytes": "4f f2 20 20",
+   "scheme_b_value": "0xA45E",
+   "scheme_b_bytes": "4a f2 5e 40",
+   "pair_rule": "accent and line sites must be patched in both routines or the clock painter reasserts the stock values"
+  },
+  {
+   "key": "clockpainter.line.dark",
+   "site": "clock/status painter 0x03065F98",
+   "file_offset": "0x3F644",
+   "stock_bytes": "41 f2 82 00",
+   "stock_value": "0x1082",
+   "role": "line_dark",
+   "scheme_a_value": "0x2986",
+   "scheme_a_bytes": "42 f6 86 10",
+   "scheme_b_value": "0x3986",
+   "scheme_b_bytes": "43 f6 86 10",
+   "pair_rule": "accent and line sites must be patched in both routines or the clock painter reasserts the stock values"
+  }
+ ],
+ "extra_candidates": [
+  {
+   "key": "player.background.dark",
+   "site": "player window constructor movw at 0x0307D1C2 (store at 0x0307D1CA)",
+   "file_offset": "0x87686",
+   "stock_bytes": "41 f2 a2 00",
+   "stock_value": "0x10A2",
+   "role": "player_background_dark",
+   "scheme_a_value": "0x2104",
+   "scheme_a_bytes": "42 f2 04 10",
+   "scheme_b_value": "0x2924",
+   "scheme_b_bytes": "42 f6 24 10",
+   "pair_rule": "dark theme only; the light-theme path loads palette cell 0 and has no immediate"
+  }
+ ]
+}

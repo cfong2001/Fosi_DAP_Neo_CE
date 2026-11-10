@@ -1,0 +1,16 @@
+# Sort keys: builder B (main loop) builds the true transform prefix.
+name: sortkeys-builder-bmain-hook
+kind: module
+module: 39
+region: code
+address: 0x0307d954
+gate: build refuses unless the stock bytes at the target equal `expect`;
+  the finished image must also pass firmware_patch.validate()
+rationale: Same replacement as patch 0028 for the main fold loop of key
+  builder B (function 0x0307d8c4); the record pointer is in
+  r4 at this site and the stock loop exit is 0x0307d984. The
+  builder stored the full-string index at record+0xc before
+  this loop, as in builder A. See 0028 for the transform and
+  the cache-invalidation discipline.
+expect: 002304aa02eb430112f81300497800eb012080b204eb4301a0f1610c8880bcf1190f9cbf20388880581c83b2042be9d3
+replace: 204621f0aefb00f013b800bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf

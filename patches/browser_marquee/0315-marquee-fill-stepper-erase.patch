@@ -1,0 +1,11 @@
+# Browser marquee (experimental variant): marquee-fill-stepper-erase.
+# Design and census: patches/browser_marquee/design.md.
+name: marquee-fill-stepper-erase
+kind: module
+module: 0
+region: code
+address: 0x3063024
+gate: stock byte precondition; variant-only patch, never in the default manifest; validated by test_browser_marquee.py under emulation
+rationale: Hook at the marquee stepper text erase call (module 0); the stub substitutes the accent-tinted slice inside the browser while a background is installed, and passes through untouched elsewhere. Payload routine at 0x307fb14 in the module 31 code growth (marquee_payload.bin).
+expect: 00f069f9
+replace: 1cf076fd

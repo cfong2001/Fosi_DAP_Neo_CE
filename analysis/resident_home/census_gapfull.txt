@@ -1,0 +1,39 @@
+RANGE 0x03079c14..0x0307c7b0: 24 direct-referenced addrs, 5558 direct-unreferenced
+Direct-unreferenced runs (>=16 B):
+  0x0307ab6a  5102 bytes
+  0x0307bfb2  2046 bytes
+  0x0307a8e6  638 bytes
+  0x0307a278  608 bytes
+  0x03079dd2  594 bytes
+  0x0307a6da  514 bytes
+  0x0307a06a  510 bytes
+  0x0307a4da  510 bytes
+  0x03079c16  434 bytes
+  0x0307a032  46 bytes
+  0x0307bf5e  40 bytes
+  0x0307bf88  40 bytes
+Direct-referenced addresses:
+  0x03079c14
+  0x03079dc8
+  0x03079dcc
+  0x03079dd0
+  0x0307a024
+  0x0307a026
+  0x0307a028
+  0x0307a02c
+  0x0307a030
+  0x0307a060
+  0x0307a064
+  0x0307a068
+  0x0307a268
+  0x0307a276
+  0x0307a4d8
+  0x0307a6d8
+  0x0307a8dc
+  0x0307a8e4
+  0x0307ab64
+  0x0307ab68
+  0x0307bf58
+  0x0307bf5c
+  0x0307bf86
+  0x0307bfb0

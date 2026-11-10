@@ -1,0 +1,18 @@
+# Repoint one player transport draw to the keyed helper: id 179, drawn at (204, 275).
+name: transport-keyed-info-bare
+kind: module
+module: 27
+region: code
+address: 0x307f85a
+gate: stock byte precondition; experimental set, not in the default
+  manifest; validate with test_keyed_transport.py and use only with
+  the v4 glyph resources (v4-glyphs.json), whose surround is the
+  key colour 0xF800
+rationale: DrawImageAt (0x0306354A) is opaque, so a transparent
+  surround cannot land through it. The keyed helper 0x03063A08
+  takes the same (id, x, y) arguments, resolves the id through the
+  same descriptor path (including the light theme +166 remap) and
+  draws through the format 1 keyblit, which skips 0xF800 pixels.
+  Only the branch target changes.
+expect: e3f776fe
+replace: e4f7d5f8

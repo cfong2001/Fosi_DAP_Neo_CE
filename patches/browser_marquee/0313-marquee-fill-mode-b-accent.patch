@@ -1,0 +1,11 @@
+# Browser marquee (experimental variant): marquee-fill-mode-b-accent.
+# Design and census: patches/browser_marquee/design.md.
+name: marquee-fill-mode-b-accent
+kind: module
+module: 31
+region: code
+address: 0x307ebdc
+gate: stock byte precondition; variant-only patch, never in the default manifest; validated by test_browser_marquee.py under emulation
+rationale: Hook at the mode B selected band fill call; same substitution as 0311. Payload routine at 0x307fb14 in the module 31 code growth (marquee_payload.bin).
+expect: e4f78dfb
+replace: 00f09aff

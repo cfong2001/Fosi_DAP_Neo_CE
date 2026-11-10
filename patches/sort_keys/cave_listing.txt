@@ -1,0 +1,395 @@
+cave_cmp:
+0309f000  2d e9 f0 41  push {r4, r5, r6, r7, r8, lr}
+0309f004  04 46        mov r4, r0
+0309f006  0d 46        mov r5, r1
+0309f008  00 26        movs r6, #0
+cc_pfx:
+0309f00a  a0 5b        ldrh r0, [r4, r6]
+0309f00c  a9 5b        ldrh r1, [r5, r6]
+0309f00e  01 28        cmp r0, #1
+0309f010  09 d0        beq cc_full
+0309f012  01 29        cmp r1, #1
+0309f014  07 d0        beq cc_full
+0309f016  88 42        cmp r0, r1
+0309f018  4a d8        bhi cc_gt
+0309f01a  46 d3        bcc cc_lt
+0309f01c  00 28        cmp r0, #0
+0309f01e  41 d0        beq cc_eq
+0309f020  b6 1c        adds r6, r6, #2
+0309f022  08 2e        cmp r6, #8
+0309f024  f1 d3        bcc cc_pfx
+cc_full:
+0309f026  20 89        ldrh r0, [r4, #8]
+0309f028  00 f0 6b f8  bl sk_str_addr
+0309f02c  06 46        mov r6, r0
+0309f02e  28 89        ldrh r0, [r5, #8]
+0309f030  00 f0 67 f8  bl sk_str_addr
+0309f034  07 46        mov r7, r0
+0309f036  4e f2 ec 18  movw r8, #0xe1ec
+0309f03a  c0 f2 07 38  movt r8, #0x0307
+0309f03e  d8 f8 08 00  ldr r0, [r8, #8]
+0309f042  b0 42        cmp r0, r6
+0309f044  0e d0        beq cc_b
+0309f046  31 46        mov r1, r6
+0309f048  40 f2 01 00  movw r0, #0x0001
+0309f04c  c0 f2 03 00  movt r0, #0x0003
+0309f050  40 f2 00 12  movw r2, #0x0100
+0309f054  4f f2 8c 23  movw r3, #0xf28c
+0309f058  c0 f2 07 33  movt r3, #0x0307
+0309f05c  c8 f7 58 fa  bl 0x03067510
+0309f060  c8 f8 08 60  str r6, [r8, #8]
+cc_b:
+0309f064  d8 f8 0c 00  ldr r0, [r8, #12]
+0309f068  b8 42        cmp r0, r7
+0309f06a  0e d0        beq cc_go
+0309f06c  39 46        mov r1, r7
+0309f06e  40 f2 01 00  movw r0, #0x0001
+0309f072  c0 f2 03 00  movt r0, #0x0003
+0309f076  40 f2 00 12  movw r2, #0x0100
+0309f07a  4f f2 8c 33  movw r3, #0xf38c
+0309f07e  c0 f2 07 33  movt r3, #0x0307
+0309f082  c8 f7 45 fa  bl 0x03067510
+0309f086  c8 f8 0c 70  str r7, [r8, #12]
+cc_go:
+0309f08a  4f f2 8c 20  movw r0, #0xf28c
+0309f08e  c0 f2 07 30  movt r0, #0x0307
+0309f092  4f f2 8c 31  movw r1, #0xf38c
+0309f096  c0 f2 07 31  movt r1, #0x0307
+0309f09a  00 f0 44 f8  bl sk_tcmp
+0309f09e  00 28        cmp r0, #0
+0309f0a0  03 db        blt cc_lt
+0309f0a2  05 dc        bgt cc_gt
+cc_eq:
+0309f0a4  01 20        movs r0, #1
+0309f0a6  bd e8 f0 81  pop {r4, r5, r6, r7, r8, pc}
+cc_lt:
+0309f0aa  00 20        movs r0, #0
+0309f0ac  bd e8 f0 81  pop {r4, r5, r6, r7, r8, pc}
+cc_gt:
+0309f0b0  02 20        movs r0, #2
+0309f0b2  bd e8 f0 81  pop {r4, r5, r6, r7, r8, pc}
+cave_pfx:
+0309f0b6  2d e9 f0 4f  push {r4, r5, r6, r7, r8, r9, r10, r11, lr}
+0309f0ba  04 46        mov r4, r0
+0309f0bc  a0 89        ldrh r0, [r4, #12]
+0309f0be  00 f0 20 f8  bl sk_str_addr
+0309f0c2  01 46        mov r1, r0
+0309f0c4  40 f2 01 00  movw r0, #0x0001
+0309f0c8  c0 f2 03 00  movt r0, #0x0003
+0309f0cc  40 f2 00 12  movw r2, #0x0100
+0309f0d0  4f f2 8c 23  movw r3, #0xf28c
+0309f0d4  c0 f2 07 33  movt r3, #0x0307
+0309f0d8  c8 f7 1a fa  bl 0x03067510
+0309f0dc  4e f2 ec 18  movw r8, #0xe1ec
+0309f0e0  c0 f2 07 38  movt r8, #0x0307
+0309f0e4  6f f0 00 00  mvn r0, #0
+0309f0e8  c8 f8 08 00  str r0, [r8, #8]
+0309f0ec  c8 f8 0c 00  str r0, [r8, #12]
+0309f0f0  20 46        mov r0, r4
+0309f0f2  4f f2 8c 21  movw r1, #0xf28c
+0309f0f6  c0 f2 07 31  movt r1, #0x0307
+0309f0fa  00 f0 3f f8  bl sk_pfx4
+0309f0fe  bd e8 f0 8f  pop {r4, r5, r6, r7, r8, r9, r10, r11, pc}
+sk_str_addr:
+0309f102  43 f2 9c 21  movw r1, #0x329c
+0309f106  c0 f2 02 31  movt r1, #0x0302
+0309f10a  09 68        ldr r1, [r1]
+0309f10c  44 f2 ec 72  movw r2, #0x47ec
+0309f110  c0 f2 02 32  movt r2, #0x0302
+0309f114  d2 f8 04 c0  ldr r12, [r2, #4]
+0309f118  61 44        add r1, r1, r12
+0309f11a  49 02        lsl r1, r1, #9
+0309f11c  12 68        ldr r2, [r2]
+0309f11e  89 18        add r1, r1, r2
+0309f120  01 eb c0 20  add r0, r1, r0, lsl #11
+0309f124  70 47        bx lr
+sk_tcmp:
+0309f126  70 b5        push {r4, r5, r6, lr}
+0309f128  8e b0        sub sp, #56
+0309f12a  6c 46        mov r4, sp
+0309f12c  07 ad        add r5, sp, #28
+0309f12e  0e 46        mov r6, r1
+0309f130  01 46        mov r1, r0
+0309f132  20 46        mov r0, r4
+0309f134  00 f0 37 f8  bl gen_init
+0309f138  28 46        mov r0, r5
+0309f13a  31 46        mov r1, r6
+0309f13c  00 f0 33 f8  bl gen_init
+tc_loop:
+0309f140  20 46        mov r0, r4
+0309f142  00 f0 8a f8  bl gen_next
+0309f146  06 46        mov r6, r0
+0309f148  28 46        mov r0, r5
+0309f14a  00 f0 86 f8  bl gen_next
+0309f14e  16 f1 01 0f  cmn r6, #1
+0309f152  00 d1        bne tc_n1
+0309f154  00 26        movs r6, #0
+tc_n1:
+0309f156  10 f1 01 0f  cmn r0, #1
+0309f15a  00 d1        bne tc_n2
+0309f15c  00 20        movs r0, #0
+tc_n2:
+0309f15e  86 42        cmp r6, r0
+0309f160  05 d8        bhi tc_gt
+0309f162  07 d3        bcc tc_lt
+0309f164  00 2e        cmp r6, #0
+0309f166  eb d1        bne tc_loop
+0309f168  00 20        movs r0, #0
+0309f16a  00 f0 05 b8  b.w tc_out
+tc_gt:
+0309f16e  01 20        movs r0, #1
+0309f170  00 f0 02 b8  b.w tc_out
+tc_lt:
+0309f174  6f f0 00 00  mvn r0, #0
+tc_out:
+0309f178  0e b0        add sp, #56
+0309f17a  70 bd        pop {r4, r5, r6, pc}
+sk_pfx4:
+0309f17c  30 b5        push {r4, r5, lr}
+0309f17e  87 b0        sub sp, #28
+0309f180  04 46        mov r4, r0
+0309f182  68 46        mov r0, sp
+0309f184  00 f0 0f f8  bl gen_init
+0309f188  24 1d        adds r4, r4, #4
+0309f18a  04 25        movs r5, #4
+pf_loop:
+0309f18c  68 46        mov r0, sp
+0309f18e  00 f0 64 f8  bl gen_next
+0309f192  10 f1 01 0f  cmn r0, #1
+0309f196  00 d1        bne pf_st
+0309f198  00 20        movs r0, #0
+pf_st:
+0309f19a  20 80        strh r0, [r4]
+0309f19c  a4 1c        adds r4, r4, #2
+0309f19e  6d 1e        subs r5, r5, #1
+0309f1a0  f4 d1        bne pf_loop
+0309f1a2  07 b0        add sp, #28
+0309f1a4  30 bd        pop {r4, r5, pc}
+gen_init:
+0309f1a6  00 b5        push {lr}
+0309f1a8  01 60        str r1, [r0]
+0309f1aa  11 f5 80 72  adds r2, r1, #0x100
+0309f1ae  42 60        str r2, [r0, #4]
+0309f1b0  6f f0 00 02  mvn r2, #0
+0309f1b4  82 60        str r2, [r0, #8]
+0309f1b6  00 22        movs r2, #0
+0309f1b8  c2 60        str r2, [r0, #12]
+0309f1ba  0a 46        mov r2, r1
+0309f1bc  0b 46        mov r3, r1
+gi_trim:
+0309f1be  d0 f8 04 c0  ldr r12, [r0, #4]
+0309f1c2  62 45        cmp r2, r12
+0309f1c4  0b d2        bcs gi_trimdone
+0309f1c6  b2 f8 00 c0  ldrh r12, [r2]
+0309f1ca  bc f1 00 0f  cmp.w r12, #0
+0309f1ce  06 d0        beq gi_trimdone
+0309f1d0  92 1c        adds r2, r2, #2
+0309f1d2  bc f1 20 0f  cmp.w r12, #0x20
+0309f1d6  f2 d0        beq gi_trim
+0309f1d8  13 46        mov r3, r2
+0309f1da  ff f7 f0 bf  b.w gi_trim
+gi_trimdone:
+0309f1de  43 60        str r3, [r0, #4]
+0309f1e0  01 68        ldr r1, [r0]
+0309f1e2  42 68        ldr r2, [r0, #4]
+gi_lead:
+0309f1e4  91 42        cmp r1, r2
+0309f1e6  05 d2        bcs gi_art
+0309f1e8  0b 88        ldrh r3, [r1]
+0309f1ea  20 2b        cmp r3, #0x20
+0309f1ec  02 d1        bne gi_art
+0309f1ee  89 1c        adds r1, r1, #2
+0309f1f0  ff f7 f8 bf  b.w gi_lead
+gi_art:
+0309f1f4  01 60        str r1, [r0]
+0309f1f6  8c 46        mov r12, r1
+0309f1f8  42 68        ldr r2, [r0, #4]
+0309f1fa  52 1a        subs r2, r2, r1
+0309f1fc  0a 2a        cmp r2, #10
+0309f1fe  2b d3        bcc gi_done
+0309f200  bc f8 00 30  ldrh r3, [r12]
+0309f204  00 f0 91 f8  bl sk_fold
+0309f208  54 29        cmp r1, #0x54
+0309f20a  25 d1        bne gi_done
+0309f20c  d0 f8 00 c0  ldr r12, [r0]
+0309f210  bc f8 02 30  ldrh r3, [r12, #2]
+0309f214  00 f0 89 f8  bl sk_fold
+0309f218  48 29        cmp r1, #0x48
+0309f21a  1d d1        bne gi_done
+0309f21c  d0 f8 00 c0  ldr r12, [r0]
+0309f220  bc f8 04 30  ldrh r3, [r12, #4]
+0309f224  00 f0 81 f8  bl sk_fold
+0309f228  45 29        cmp r1, #0x45
+0309f22a  15 d1        bne gi_done
+0309f22c  d0 f8 00 c0  ldr r12, [r0]
+0309f230  bc f8 06 30  ldrh r3, [r12, #6]
+0309f234  20 2b        cmp r3, #0x20
+0309f236  0f d1        bne gi_done
+0309f238  d0 f8 00 c0  ldr r12, [r0]
+0309f23c  0c f1 08 02  add r2, r12, #8
+0309f240  43 68        ldr r3, [r0, #4]
+gi_artskip:
+0309f242  9a 42        cmp r2, r3
+0309f244  08 d2        bcs gi_done
+0309f246  b2 f8 00 c0  ldrh r12, [r2]
+0309f24a  bc f1 20 0f  cmp.w r12, #0x20
+0309f24e  02 d1        bne gi_strip
+0309f250  92 1c        adds r2, r2, #2
+0309f252  ff f7 f6 bf  b.w gi_artskip
+gi_strip:
+0309f256  02 60        str r2, [r0]
+gi_done:
+0309f258  00 bd        pop {pc}
+gen_next:
+0309f25a  00 b5        push {lr}
+0309f25c  81 68        ldr r1, [r0, #8]
+0309f25e  11 f1 01 0f  cmn r1, #1
+0309f262  05 d0        beq gn_stage
+0309f264  6f f0 00 02  mvn r2, #0
+0309f268  82 60        str r2, [r0, #8]
+0309f26a  08 46        mov r0, r1
+0309f26c  00 f0 5c b8  b.w gn_ret
+gn_stage:
+0309f270  c1 68        ldr r1, [r0, #12]
+0309f272  01 29        cmp r1, #1
+0309f274  03 d0        beq gn_count
+0309f276  02 29        cmp r1, #2
+0309f278  06 d0        beq gn_digits
+0309f27a  00 f0 13 b8  b.w gn_fetch
+gn_count:
+0309f27e  02 21        movs r1, #2
+0309f280  c1 60        str r1, [r0, #12]
+0309f282  00 69        ldr r0, [r0, #16]
+0309f284  00 f0 50 b8  b.w gn_ret
+gn_digits:
+0309f288  81 69        ldr r1, [r0, #24]
+0309f28a  00 29        cmp r1, #0
+0309f28c  08 d0        beq gn_digdone
+0309f28e  49 1e        subs r1, r1, #1
+0309f290  81 61        str r1, [r0, #24]
+0309f292  41 69        ldr r1, [r0, #20]
+0309f294  0a 88        ldrh r2, [r1]
+0309f296  89 1c        adds r1, r1, #2
+0309f298  41 61        str r1, [r0, #20]
+0309f29a  10 46        mov r0, r2
+0309f29c  00 f0 44 b8  b.w gn_ret
+gn_digdone:
+0309f2a0  00 21        movs r1, #0
+0309f2a2  c1 60        str r1, [r0, #12]
+gn_fetch:
+0309f2a4  01 68        ldr r1, [r0]
+0309f2a6  42 68        ldr r2, [r0, #4]
+0309f2a8  91 42        cmp r1, r2
+0309f2aa  16 d2        bcs gn_end
+0309f2ac  0b 88        ldrh r3, [r1]
+0309f2ae  00 2b        cmp r3, #0
+0309f2b0  13 d0        beq gn_end
+0309f2b2  b3 f1 30 02  subs r2, r3, #0x30
+0309f2b6  09 2a        cmp r2, #9
+0309f2b8  13 d9        bls gn_run
+0309f2ba  00 f0 36 f8  bl sk_fold
+0309f2be  01 2b        cmp r3, #1
+0309f2c0  06 d0        beq gn_drop
+0309f2c2  03 68        ldr r3, [r0]
+0309f2c4  9b 1c        adds r3, r3, #2
+0309f2c6  03 60        str r3, [r0]
+0309f2c8  82 60        str r2, [r0, #8]
+0309f2ca  08 46        mov r0, r1
+0309f2cc  00 f0 2c b8  b.w gn_ret
+gn_drop:
+0309f2d0  03 68        ldr r3, [r0]
+0309f2d2  9b 1c        adds r3, r3, #2
+0309f2d4  03 60        str r3, [r0]
+0309f2d6  ff f7 e5 bf  b.w gn_fetch
+gn_end:
+0309f2da  6f f0 00 00  mvn r0, #0
+0309f2de  00 f0 23 b8  b.w gn_ret
+gn_run:
+0309f2e2  0a 46        mov r2, r1
+gr_scan:
+0309f2e4  43 68        ldr r3, [r0, #4]
+0309f2e6  9a 42        cmp r2, r3
+0309f2e8  06 d2        bcs gr_scanned
+0309f2ea  13 88        ldrh r3, [r2]
+0309f2ec  30 3b        subs r3, r3, #0x30
+0309f2ee  09 2b        cmp r3, #9
+0309f2f0  02 d8        bhi gr_scanned
+0309f2f2  92 1c        adds r2, r2, #2
+0309f2f4  ff f7 f6 bf  b.w gr_scan
+gr_scanned:
+0309f2f8  0b 46        mov r3, r1
+gr_sig:
+0309f2fa  b3 f8 00 c0  ldrh r12, [r3]
+0309f2fe  bc f1 30 0f  cmp.w r12, #0x30
+0309f302  06 d1        bne gr_set
+0309f304  13 f1 02 0c  adds r12, r3, #2
+0309f308  94 45        cmp r12, r2
+0309f30a  02 d2        bcs gr_set
+0309f30c  63 46        mov r3, r12
+0309f30e  ff f7 f4 bf  b.w gr_sig
+gr_set:
+0309f312  d1 1a        subs r1, r2, r3
+0309f314  49 08        lsrs r1, r1, #1
+0309f316  01 61        str r1, [r0, #16]
+0309f318  81 61        str r1, [r0, #24]
+0309f31a  43 61        str r3, [r0, #20]
+0309f31c  02 60        str r2, [r0]
+0309f31e  01 22        movs r2, #1
+0309f320  c2 60        str r2, [r0, #12]
+0309f322  01 20        movs r0, #1
+0309f324  00 f0 00 b8  b.w gn_ret
+gn_ret:
+0309f328  00 bd        pop {pc}
+sk_fold:
+0309f32a  19 46        mov r1, r3
+0309f32c  6f f0 00 02  mvn r2, #0
+0309f330  00 23        movs r3, #0
+0309f332  b1 f1 61 0c  subs r12, r1, #0x61
+0309f336  bc f1 19 0f  cmp.w r12, #0x19
+0309f33a  01 d8        bhi sf_comb
+0309f33c  20 39        subs r1, r1, #0x20
+0309f33e  70 47        bx lr
+sf_comb:
+0309f340  b1 f5 40 7c  subs r12, r1, #0x300
+0309f344  bc f1 6f 0f  cmp.w r12, #0x6f
+0309f348  01 d8        bhi sf_oe
+0309f34a  01 23        movs r3, #1
+0309f34c  70 47        bx lr
+sf_oe:
+0309f34e  40 f2 52 1c  movw r12, #0x0152
+0309f352  61 45        cmp r1, r12
+0309f354  03 d0        beq sf_oe2
+0309f356  40 f2 53 1c  movw r12, #0x0153
+0309f35a  61 45        cmp r1, r12
+0309f35c  02 d1        bne sf_tab
+sf_oe2:
+0309f35e  4f 21        movs r1, #0x4f
+0309f360  45 22        movs r2, #0x45
+0309f362  70 47        bx lr
+sf_tab:
+0309f364  b1 f1 c0 0c  subs r12, r1, #0xc0
+0309f368  bc f1 3f 0f  cmp.w r12, #0x3f
+0309f36c  15 d8        bhi sf_ret
+0309f36e  4f f2 9c 33  movw r3, #L16(fold_table)
+0309f372  c0 f2 09 33  movt r3, #H16(fold_table)
+0309f376  5f ea 4c 0c  lsls r12, r12, #1
+0309f37a  63 44        add r3, r3, r12
+0309f37c  1a 78        ldrb r2, [r3]
+0309f37e  00 2a        cmp r2, #0
+0309f380  07 d0        beq sf_tabid
+0309f382  11 46        mov r1, r2
+0309f384  5a 78        ldrb r2, [r3, #1]
+0309f386  00 2a        cmp r2, #0
+0309f388  01 d1        bne sf_tabdone
+0309f38a  6f f0 00 02  mvn r2, #0
+sf_tabdone:
+0309f38e  00 23        movs r3, #0
+0309f390  70 47        bx lr
+sf_tabid:
+0309f392  6f f0 00 02  mvn r2, #0
+0309f396  00 23        movs r3, #0
+0309f398  70 47        bx lr
+sf_ret:
+0309f39a  70 47        bx lr
+fold_table:
+    <fold table 128 bytes>

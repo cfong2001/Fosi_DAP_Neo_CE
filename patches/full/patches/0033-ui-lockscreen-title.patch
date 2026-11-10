@@ -1,0 +1,19 @@
+# Lock-screen information: divert module 31's painter hold-icon
+# tail call to the lock-screen routine inside the full build's
+# module 31 segment extension payload. Branch bytes regenerated
+# for the routine's composed position in this build.
+name: 0033-ui-lockscreen-title
+kind: module
+module: 31
+region: code
+address: 0x307e89e
+gate: build refuses unless the 4 stock bytes at the target equal
+  `expect`. Do NOT stack without the full build's module 31
+  segment extension carrying the lock routine at the branch
+  target.
+expect: e4f72fbf
+replace: 01f071bf
+rationale: Same site and contract as the compose variant's 0033; the
+  target moved because the full build's bridge+parser blob
+  is built with reduced staging caps (6 runs / 59 entries)
+  under the local toolchain.

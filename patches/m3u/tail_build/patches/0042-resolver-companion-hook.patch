@@ -1,0 +1,11 @@
+# M3U resolver hook, companion: single-directory fetch entry.
+name: resolver-companion-hook
+kind: module
+module: 0
+region: code
+address: 0x305b2c2
+gate: build refuses unless the stock bytes at the target equal `expect`;
+  the finished image must also pass firmware_patch.validate()
+rationale: Replaces the fetch entry push.w with a B.W to the tail hook. Discriminator: flag set, mode == 1, cluster argument (r1) equals the last served run cluster; other calls re-execute the displaced push and continue at 0x0305B2C6. On a match the substitution writes the play context descriptor at 0x030239B4 directly, which is how a path B advance crosses into the next playlist directory.
+expect: 2de9f047
+replace: 21f0e8b8

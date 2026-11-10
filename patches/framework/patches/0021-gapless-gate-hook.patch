@@ -1,0 +1,22 @@
+# Gapless fast path, part 1 of 6: hook the decoder reset-and-start choke point.
+name: gapless-1-gate-hook
+kind: module
+module: 0
+region: code
+address: 0x0306cb2c
+gate: build refuses unless the 4 stock bytes at the target equal `expect`;
+  the finished image must also pass firmware_patch.validate()
+rationale: 0x0306cb2c is the reset-and-start routine for core-1 decoder
+  modules (assert reset line, image load via 0x03067870 with flags 7,
+  parameter-page copy, ready poll). A BL-target scan of all 82 modules
+  shows exactly ten call sites, all in module 33's per-codec dispatcher
+  (0x0308886e cases) -- this entry is the single choke point every
+  decoder load passes through, for every codec. The patch replaces the
+  routine's first two instructions (`push {r4,r5,r6,lr}`; `mov r5, r0`,
+  4 bytes total) with a B.W to the gate cave at 0x03051664 (0022). The
+  cave re-executes both displaced instructions before deciding, and its
+  stock path branches back to 0x0306cb30, the instruction after the
+  hook, so the stock body runs unchanged whenever the fast path does
+  not fire (which includes every build without the ARM patch 0026).
+expect: 70b50546
+replace: e4f79abd

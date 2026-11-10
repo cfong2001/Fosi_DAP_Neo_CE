@@ -1,0 +1,6 @@
+# Whole-module transplants for the full build, in order, after the
+# byte patches in manifest.txt: the default build's vorbis75 plus
+# opus72 (which requires the five classifier rename patches in the
+# manifest; build.py enforces the pairing).
+vorbis75
+opus72

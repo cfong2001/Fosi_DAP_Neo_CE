@@ -1,0 +1,11 @@
+# Bluetooth shortcut, hook (tail placement): module 0 key dispatcher return path.
+name: ui-bt-dispatcher-hook-tail
+kind: module
+module: 0
+region: code
+address: 0x3061e5e
+gate: build refuses unless the stock bytes at the target equal `expect`;
+  the finished image must also pass firmware_patch.validate()
+rationale: Identical in site and effect to patch 0032 of the UI build, with the B.W target regenerated for the Bluetooth blob relinked at the gap tail base 0x307c5f8 (ui_dispatcher_hook). The hook performs the stock epilogue for every event; only the long-press Power word diverts into the toggle.
+expect: 2046bde8f09f
+replace: 1af0cbbb00bf

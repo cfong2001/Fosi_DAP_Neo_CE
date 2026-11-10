@@ -1,0 +1,44 @@
+{
+  "ext_base": "0x307ee48",
+  "ext_end": "0x3080b54",
+  "room": 7436,
+  "payload_bytes": 6936,
+  "payload_sha256": "010197e684a8a3e3f1a0937b61fe89a7f620b48c0872e5305f781d42d9b88f05",
+  "spare": 500,
+  "site33_replace": "01f071bf",
+  "site40_replace": "00f095bf",
+  "components": [
+    {
+      "name": "trampoline (patch 0040 target, start variant)",
+      "offset": 0,
+      "address": "0x307ee48",
+      "bytes": 64
+    },
+    {
+      "name": "bridge + parser (m3u_bridge_node_action first)",
+      "offset": 64,
+      "address": "0x307ee88",
+      "bytes": 6396,
+      "m3u_import": "0x307f714"
+    },
+    {
+      "name": "lock-screen routine (ui_lockscreen_paint)",
+      "offset": 6460,
+      "address": "0x3080784",
+      "bytes": 406
+    },
+    {
+      "name": "navigation disarm stubs (folder + file)",
+      "offset": 6868,
+      "address": "0x308091c",
+      "bytes": 68,
+      "folder_start": "0x308091c",
+      "file_start": "0x3080936"
+    }
+  ],
+  "staging_caps": {
+    "max_runs": 6,
+    "max_entries": 59,
+    "staging_bytes": 552
+  }
+}

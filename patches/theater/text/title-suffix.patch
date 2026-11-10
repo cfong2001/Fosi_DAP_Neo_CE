@@ -1,0 +1,13 @@
+# Safe suffix handling for the bounded player title copy.
+name: player-title-safe-suffix
+kind: module
+module: 27
+region: code
+address: 0x0307FA3A
+gate: stock byte precondition and paired player-title-bounded-copy patch;
+  test with emu_title_copy.py and validate the resulting image
+rationale: Terminate the copied title, and inspect the fourth and fifth
+  preceding code units only if the title has at least five. This prevents
+  short or empty titles from modifying unrelated memory before the buffer.
+expect: 8ab220f8127000eb410030f8081c2e2908bf20f8087c30f80a1c2e2908bf20f80a7cc7e7
+replace: 20f8117005290ad300eb41000a3841882e2908bf478001882e2908bf0780c9e700bf00bf

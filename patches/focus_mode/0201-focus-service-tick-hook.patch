@@ -1,0 +1,11 @@
+# Focus mode (experimental, on the theater variant): focus-service-tick-hook.
+# Design and census: patches/focus_mode/design.md.
+name: focus-service-tick-hook
+kind: module
+module: 27
+region: code
+address: 0x307e20c
+gate: stock byte precondition; variant-only patch, never in the default manifest; validated by test_focus_mode.py under emulation
+rationale: The Service handler posts the progress event 0x40 on a counter cadence while the play state is playing or paused. The focus tick stub performs that post, then does the idle accounting in OS clock ticks (100 Hz, proven from the screen-off table): wheel movement restamps activity; at 500 ticks idle it sets the hidden flag and posts 0x39 and 0x3B so the painter repaints into the focus layout.
+expect: e9f716f8
+replace: fef736f8

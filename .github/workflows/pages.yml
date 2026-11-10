@@ -1,0 +1,66 @@
+name: Publish theme studio
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "docs/**"
+      - ".github/workflows/pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Publish static site
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Inspect static site
+        id: site
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ ! -f docs/index.html ]]; then
+            echo "present=false" >> "$GITHUB_OUTPUT"
+            echo "Theme editor PR not merged: Pages deployment skipped."
+            exit 0
+          fi
+          test -f docs/theme.js && test -f docs/theme-core.mjs && test -f docs/theme.css
+          # Prevent proprietary binaries from being published with the site.
+          if find docs -type f \( -iname '*.img' -o -iname '*.ecpatch' \) -print | grep -q .; then
+            echo "::error::Proprietary firmware/decoder binaries must not be published to Pages."
+            exit 1
+          fi
+          echo "present=true" >> "$GITHUB_OUTPUT"
+
+      - name: Configure Pages
+        if: ${{ steps.site.outputs.present == 'true' }}
+        uses: actions/configure-pages@v5
+
+      - name: Upload static site
+        if: ${{ steps.site.outputs.present == 'true' }}
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+
+      - name: Deploy
+        if: ${{ steps.site.outputs.present == 'true' }}
+        id: deployment
+        uses: actions/deploy-pages@v4

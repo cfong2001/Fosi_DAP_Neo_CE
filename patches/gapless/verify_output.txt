@@ -1,0 +1,46 @@
+[PASS] input is pinned stock -- fcc1cd3e35b46f1f
+[PASS] build A (DAC baseline) validates -- 66936a58f019b5e7
+[PASS] build B (gapless disarmed) validates -- 66ce046900564ca0
+[PASS] build C (gapless armed) validates -- 0e32397dc02c8a68
+[PASS] diff B-vs-A confined to the 6 named sites + trailer CRC -- 9 runs, 77 bytes (sites hold 78 patch bytes; bytes that coincidentally equal the stock stub bytes do not diff)
+[PASS] every named site changed -- 6/6 sites
+[PASS] diff C-vs-B confined to the ARM site + trailer CRC -- [(175392, 2), (13631488, 4)] vs site [(175392, 2)] + CRC [(13631488, 4)]
+[PASS] full manifest 0000-0018 + gapless (as 0020-0025) builds + validates -- 9d2d6503f5416793
+
+--- before/after disassembly (A -> B) ---
+site mod0 code @0x030515b0 (8 B):
+  before: 7047704770477047
+         bx lr; bx lr; bx lr; bx lr
+  after : 0000000000000000
+         movs r0, r0; movs r0, r0; movs r0, r0; movs r0, r0
+site mod0 code @0x0306cb2c (4 B):
+  before: 70b50546
+         push {r4, r5, r6, lr}; mov r5, r0
+  after : e4f79abd
+         b.w #0x3051664
+site mod0 code @0x03051664 (32 B):
+  before: 7047704770477047704770477047704770477047704770477047704770477047
+         bx lr; bx lr; bx lr; bx lr; bx lr; bx lr; bx lr; bx lr; bx lr; bx lr; bx lr; bx lr; bx lr; bx lr; bx lr; bx lr
+  after : 70b50546aff1bc0630684006400ea842ffe735601bf05aba80242543356070bd
+         push {r4, r5, r6, lr}; mov r5, r0; sub.w r6, pc, #0xbc; ldr r0, [r6]; lsls r0, r0, #0x19; lsrs r0, r0, #0x19; cmp r0, r5; b #0x3051676; str r5, [r6]; b.w #0x306cb30; movs r4, #0x80; orrs r5, r4; str r5, [r6]; pop {r4, r5, r6, pc}
+site mod0 code @0x030514fe (26 B):
+  before: 7047704770477047704770477047704770477047704770477047
+         bx lr; bx lr; bx lr; bx lr; bx lr; bx lr; bx lr; bx lr; bx lr; bx lr; bx lr; bx lr; bx lr
+  after : 2ca1604b9b684a684b60934203d10a68802a00d3704713f016ba
+         adr r1, #0xb0; ldr r3, [pc, #0x180]; ldr r3, [r3, #8]; ldr r2, [r1, #4]; str r3, [r1, #4]; cmp r3, r2; bne #0x3051514; ldr r2, [r1]; cmp r2, #0x80; blo #0x3051514; bx lr; b.w #0x3064944
+site mod33 code @0x03088fea (4 B):
+  before: dbf7abfc
+         bl #0x3064944
+  after : c8f788fa
+         bl #0x30514fe
+site mod0 code @0x03051684 (4 B):
+  before: 70477047
+         bx lr; bx lr
+  after : d8680303
+         ldr r0, [r3, #0xc]; lsls r3, r0, #0xc
+ARM site @0x03051674 (B -> C):
+  disarmed: ffe7  b #0x3051676
+  armed   : 02d0  beq #0x305167c
+[PASS] stock file untouched
+
+ALL CHECKS PASSED

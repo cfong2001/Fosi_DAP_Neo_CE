@@ -1,0 +1,16 @@
+# Clock table v1 (see patches/clock_v1/clock_v1.md). Row 6 of the
+# module 0 clock table at 0x03079824: fields +4..+27 only (word 0 untouched).
+name: clock-v1-row-06
+kind: module
+module: 0
+region: code
+address: 0x30798d0
+gate: build refuses unless the 24 stock bytes at the target equal `expect`;
+  the finished image must also pass firmware_patch.validate()
+rationale: MP3 high: B core/bus -> 144 MHz solver
+  target written directly into the row; A fields zeroed so the solver's
+  row-1 floor parks A outputs at 96 MHz; PLL word carried over unchanged
+  (v1 conservatism, clock_v1.md flag 2). Data-only edit; reversible by
+  rebuilding from stock without this patch.
+expect: 00c2eb0b00e1f50500e1f505c068780400c2eb0b00c2eb0b
+replace: 00c2eb0b0000000000000000000000000044950800449508

@@ -1,0 +1,6 @@
+{
+  "slots": {
+    "5": {"text": "4 4 4 4 3 3 2 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"},
+    "6": {"file": "fixtures/Sennheiser_HD_600_GraphicEQ.txt"}
+  }
+}

@@ -1,0 +1,25 @@
+# Sort keys: builder A builds the true transform prefix.
+name: sortkeys-builder-a-hook
+kind: module
+module: 39
+region: code
+address: 0x0307d87e
+gate: build refuses unless the stock bytes at the target equal `expect`;
+  the finished image must also pass firmware_patch.validate()
+rationale: Replaces the 0x30-byte inline fold loop of key builder A
+  (function 0x0307d80a) with mov r0, r5 / bl cave_pfx /
+  b.w 0x0307d8ae (the stock loop exit), NOP-padded. r5 is the
+  record pointer at this site. Stock's loop uppercased ASCII
+  a-z only, over exactly the first 4 characters: no accent
+  fold, no leading-'The ' handling, digits as raw code points
+  ('Track 10' sorted before 'Track 2'). cave_pfx reads the
+  record's full name via the string index the builder stored
+  at record+0xc immediately before this loop (same address
+  formula and module-0 read call 0x03067510 the comparator
+  uses), invalidates both comparator string-cache slots so
+  the scratch reuse cannot serve stale strings, and writes
+  the first 4 units of the full sort transform (casefold +
+  Latin-1 accent fold + 'The ' strip + natural-number tokens)
+  to record+4..+0xa, exactly where stock wrote its prefix.
+expect: 00236a4602eb430112f81300497800eb012080b205eb4301a0f1610c8880bcf1190f9cbf20388880581c83b2042be9d3
+replace: 284621f019fc00f013b800bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf

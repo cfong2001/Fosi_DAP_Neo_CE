@@ -1,0 +1,38 @@
+--- (a) magic absent: apply is a no-op ---
+    [PASS] no stock calls
+    [PASS] no writes to SAVEINFO or the clock table
+    [PASS] struct still all zero
+--- (b) three profiles, distinct entries ---
+    [PASS] b0 call order: timer, backlight, flag, saver
+    [PASS] b0 timer args (0, -, 400, 0, ns=0)
+    [PASS] b0 backlight arg is the level
+    [PASS] b0 flag post is 0xFB
+    [PASS] b0 saver arg is 1 and saver is last
+    [PASS] b0 SAVEINFO fields written
+    [PASS] b0 cap A: rows 18..22 B = 240 MHz
+    [PASS] b0 cap A: EQ rows keep base values
+    [PASS] b1 calls: timer and saver only
+    [PASS] b1 timer period 1000
+    [PASS] b1 leave bytes: +0x14 and +0x2D4 untouched
+    [PASS] b1 cap B: lossless 240 MHz, EQ capped at 72 MHz tier
+    [PASS] b2 call order: timer, backlight, flag, saver
+    [PASS] b2 restore: rows 18..22 B = 288 MHz
+    [PASS] b2 restore: EQ rows back to 36/72/140 MHz
+    [PASS] b2 ids, PLL, A fields and other rows untouched
+--- (c) selector cycle through the caves ---
+    [PASS] c select 1: active id 1, persisted once, applied (0x22)
+    [PASS] c select 1: exit via A generic post
+    [PASS] c select 2: active id 2, persisted once, applied (0x23)
+    [PASS] c select 0: active id 0, persisted once, applied (0x21)
+    [PASS] c B cave select 2: active id 2, exit via B epilogue
+    [PASS] c fall-through item 0xc4 via A:brightness
+    [PASS] c fall-through item 0xad via A:generic
+    [PASS] c fall-through item 0xc4 via B:brightness
+    [PASS] c fall-through item 0xad via B:exit
+--- (d) first selection writes the defaults exactly once ---
+    [PASS] d defaults block written with chosen id 2
+    [PASS] d every profile-area byte written exactly once
+    [PASS] d exit via A generic post, saver called once
+    [PASS] d second selection keeps user entry edits, sets active 1
+
+32 passed, 0 failed

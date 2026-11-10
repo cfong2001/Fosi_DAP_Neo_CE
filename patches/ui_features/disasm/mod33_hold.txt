@@ -1,0 +1,85 @@
+030886a0  13 20          movs     r0, #0x13
+030886a2  de f7 1d bd    b.w      #0x30670e0
+030886a6  14 20          movs     r0, #0x14
+030886a8  de f7 1a bd    b.w      #0x30670e0
+030886ac  15 20          movs     r0, #0x15
+030886ae  de f7 17 bd    b.w      #0x30670e0
+030886b2  16 20          movs     r0, #0x16
+030886b4  de f7 14 bd    b.w      #0x30670e0
+030886b8  2d e9 f0 41    push.w   {r4, r5, r6, r7, r8, lr}
+030886bc  a9 4e          ldr      r6, [pc, #0x2a4]  ; [0x3088964] = 0x030232a0
+030886be  00 27          movs     r7, #0
+030886c0  a9 4d          ldr      r5, [pc, #0x2a4]  ; [0x3088968] = 0x03023980
+030886c2  96 f8 60 00    ldrb.w   r0, [r6, #0x60]
+030886c6  a0 4c          ldr      r4, [pc, #0x280]  ; [0x3088948] = 0x0304ad70
+030886c8  01 28          cmp      r0, #1
+030886ca  04 bf          itt      eq
+030886cc  68 6c          ldreq    r0, [r5, #0x44]
+030886ce  00 28          cmpeq    r0, #0
+030886d0  40 f2 21 10    movw     r0, #0x121
+030886d4  09 d0          beq      #0x30886ea
+030886d6  de f7 d2 fd    bl       #0x306727e
+030886da  68 6c          ldr      r0, [r5, #0x44]
+030886dc  01 28          cmp      r0, #1
+030886de  18 bf          it       ne
+030886e0  bd e8 f0 81    popne.w  {r4, r5, r6, r7, r8, pc}
+030886e4  e8 6c          ldr      r0, [r5, #0x4c]
+030886e6  c8 b9          cbnz     r0, #0x308871c
+030886e8  15 e0          b        #0x3088716
+030886ea  de f7 a7 fd    bl       #0x306723c
+030886ee  f0 6d          ldr      r0, [r6, #0x5c]
+030886f0  70 b1          cbz      r0, #0x3088710
+030886f2  a1 68          ldr      r1, [r4, #8]
+030886f4  48 60          str      r0, [r1, #4]
+030886f6  00 eb 40 01    add.w    r1, r0, r0, lsl #1
+030886fa  c1 eb c0 11    rsb      r1, r1, r0, lsl #7
+030886fe  4f f4 7a 70    mov.w    r0, #0x3e8
+03088702  00 eb c1 01    add.w    r1, r0, r1, lsl #3
+03088706  b1 fb f0 f0    udiv     r0, r1, r0
+0308870a  00 21          movs     r1, #0
+0308870c  02 f0 f2 f9    bl       #0x308aaf4
+03088710  86 f8 60 70    strb.w   r7, [r6, #0x60]
+03088714  e1 e7          b        #0x30886da
+03088716  a0 68          ldr      r0, [r4, #8]
+03088718  00 68          ldr      r0, [r0]
+0308871a  e8 64          str      r0, [r5, #0x4c]
+0308871c  96 f8 60 00    ldrb.w   r0, [r6, #0x60]
+03088720  41 f2 88 31    movw     r1, #0x1388
+03088724  01 28          cmp      r0, #1
+03088726  0e d0          beq      #0x3088746
+03088728  a8 6c          ldr      r0, [r5, #0x48]
+0308872a  08 44          add      r0, r1
+0308872c  a1 68          ldr      r1, [r4, #8]
+0308872e  48 60          str      r0, [r1, #4]
+03088730  a0 68          ldr      r0, [r4, #8]
+03088732  40 68          ldr      r0, [r0, #4]
+03088734  00 28          cmp      r0, #0
+03088736  08 bf          it       eq
+03088738  bd e8 f0 81    popeq.w  {r4, r5, r6, r7, r8, pc}
+0308873c  00 21          movs     r1, #0
+0308873e  bd e8 f0 41    pop.w    {r4, r5, r6, r7, r8, lr}
+03088742  02 f0 d7 b9    b.w      #0x308aaf4
+03088746  f0 6d          ldr      r0, [r6, #0x5c]
+03088748  00 28          cmp      r0, #0
+0308874a  08 bf          it       eq
+0308874c  a8 6c          ldreq    r0, [r5, #0x48]
+0308874e  08 44          add      r0, r1
+03088750  a1 68          ldr      r1, [r4, #8]
+03088752  48 60          str      r0, [r1, #4]
+03088754  86 f8 60 70    strb.w   r7, [r6, #0x60]
+03088758  ea e7          b        #0x3088730
+0308875a  30 b5          push     {r4, r5, lr}
+0308875c  83 b0          sub      sp, #0xc
+0308875e  02 21          movs     r1, #2
+03088760  00 20          movs     r0, #0
+03088762  02 f0 a9 f9    bl       #0x308aab8
+03088766  01 28          cmp      r0, #1
+03088768  58 d1          bne      #0x308881c
+0308876a  77 4c          ldr      r4, [pc, #0x1dc]  ; [0x3088948] = 0x0304ad70
+0308876c  a0 68          ldr      r0, [r4, #8]
+0308876e  02 f0 0c fa    bl       #0x308ab8a
+03088772  a0 68          ldr      r0, [r4, #8]
+03088774  08 30          adds     r0, #8
+03088776  02 f0 ea f9    bl       #0x308ab4e
+0308877a  a0 68          ldr      r0, [r4, #8]
+0308877c  0c 30          adds     r0, #0xc

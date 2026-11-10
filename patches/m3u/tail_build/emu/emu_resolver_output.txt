@@ -1,0 +1,38 @@
+== Part (b): flag-clear / excluded-caller equivalence ==
+  [PASS] P1 primary, flag clear, disc-passing, i=0: stock == tail byte-identical (ret 0x0, log ['reset'])
+  [PASS] P2 primary, flag clear, disc-passing, i=3 (descend): stock == tail byte-identical (ret 0x1, log ['reset', 'descend->push'])
+  [PASS] P3 primary, flag SET, excluded out ptr (module 31 shape), i=1: stock == tail byte-identical (ret 0x1, log ['reset'])
+  [PASS] P4 primary, flag SET, excluded mode 3 (source 0x63), i=4: stock == tail byte-identical (ret 0x2, log ['reset', 'descend->push'])
+  [PASS] P5 primary, flag SET, excluded out ptr (module 0 internal), i=5: stock == tail byte-identical (ret 0x3, log ['reset', 'descend->push'])
+  [PASS] P6 primary, flag clear, disc-passing, i=7 (exhaustion wrap): stock == tail byte-identical (ret 0x0, log ['reset', 'descend->push', 'descend->pop', 'descend->push', 'descend->pop', 'descend->exhausted'])
+  [PASS] P7 primary, flag clear, disc-passing, i=6 (second subdir): stock == tail byte-identical (ret 0x1, log ['reset', 'descend->push', 'descend->pop', 'descend->push'])
+  [PASS] C1 companion, flag clear, cluster A, idx 1: stock == tail byte-identical (ret 0x3, log ['init', 'descend->push'])
+  [PASS] C2 companion, flag SET, excluded mode 3, cluster A, idx 1: stock == tail byte-identical (ret 0x3, log ['init', 'descend->push'])
+  [PASS] C3 companion, flag SET, staged, cluster B != last run A, idx 0: stock == tail byte-identical (ret 0x5, log ['init', 'descend->push', 'descend->pop', 'descend->push'])
+  [PASS] C4 companion, flag SET, staged, sentinel cluster arg, idx 0: stock == tail byte-identical (ret 0x0, log [])
+  [PASS] C5 companion, flag clear, cluster == root, idx 2: stock == tail byte-identical (ret 0x2, log ['init'])
+  [PASS] control: flag set + discriminator-passing call engages the substitution (served cluster 0x2001, no stock callees ran)
+  part (b): ALL PASS
+== Part (c): staged traversal, flag set ==
+  primary-hook sequence (module 33 index presentation):
+    first track: i=0 -> ret 0, cluster 0x2001, total 3, pos 0, resid 0
+    [PASS] serves entry 0: ret 0, run A cluster, run A total 3, run A context
+    next in run: i=1 -> ret 2, cluster 0x2001, pos 1, resid 2
+    [PASS] next within run: entry 1 (within 2), same cluster and context
+    next across boundary: i=3 -> ret 0, cluster 0x2002, total 3, pos 2, resid 0
+    [PASS] next across the run boundary: entry 2, run B cluster, total 1+2=3, run B context
+    previous: i=0xFFFF (resid-1) -> ret 2, cluster 0x2001, pos 1, resid 2
+    [PASS] previous back across the boundary: entry 1 in run A
+    [PASS] next again: entry 2 in run B
+    past the end: i=1 -> ret 1, cluster 0x2002, pos 3, resid 1
+    [PASS] past-the-end sentinel: last run cluster/context, residual == countA of last run (1), position == count (3)
+    [PASS] no stock callees ran during the primary traversal
+  companion-hook sequence (path B presentation):
+    path B next: idx 3, cluster arg A -> ret 0, descriptor cluster 0x2002, pos 2, resid 0
+    [PASS] companion crosses the directory boundary: descriptor now run B, ret 0
+    path B past end: idx 1, cluster arg B -> ret 1, descriptor cluster 0x2002, pos 3, resid 1
+    [PASS] companion sentinel: residual == countA of last run (1), position == count (3)
+    [PASS] no stock callees ran during the companion sequence
+  part (c): ALL PASS
+
+ALL PASS

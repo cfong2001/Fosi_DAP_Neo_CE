@@ -1,0 +1,205 @@
+name: Firmware source CI
+
+on:
+  pull_request:
+    branches: [main, 'codex/**']
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: firmware-source-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  source-tests:
+    name: Static checks and host tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Syntax-check Python source
+        run: python -m compileall -q tools patches
+
+      - name: Validate feature evidence declarations
+        run: |
+          python ci/check_feature_evidence.py
+          python -m unittest discover -s tests -p 'test_feature_evidence.py' -v
+
+      - name: Check patch manifest and patch grammar
+        run: python patches/framework/tools/check_patch_files.py
+
+      - name: Check Opus matched-set guard
+        run: python tests/test_opus_pair.py
+
+      - name: Check player title matched-set guard
+        run: python tests/test_title_pair.py
+
+      - name: Protect Opus data inputs and existing outputs
+        run: python -m unittest discover -s tests -p test_opus_output_guard.py -v
+
+      - name: Protect firmware build inputs and existing outputs
+        if: ${{ hashFiles('patches/full/build/test_output_guard.py') != '' }}
+        run: python -m unittest discover -s patches/full/build -p test_output_guard.py -v
+
+      - name: Check battery artifact audit
+        run: python patches/power/build/test_audit_artifacts.py
+
+      - name: Natural-sort host vectors and fuzz
+        run: python patches/sort_keys/test_vectors.py
+
+      - name: M3U parser host tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          cc -std=c99 -O2 -Wall -Wextra \
+            patches/m3u/src/m3u.c patches/m3u/tests/test_m3u.c \
+            -o "$RUNNER_TEMP/m3u-tests"
+          "$RUNNER_TEMP/m3u-tests"
+
+      - name: Combined-build composition geometry
+        if: ${{ hashFiles('patches/full/out/layout31.json') != '' }}
+        run: |
+          python -m unittest discover -s tests -p test_combined_layout.py
+          python ci/check_combined_layout.py
+
+      - name: Combined-build M3U parser and bridge host tests
+        if: ${{ hashFiles('patches/full/build/src/m3u.c') != '' }}
+        run: |
+          cc -std=c99 -O1 -Wall -Wextra -Werror \
+            patches/full/build/src/m3u.c patches/full/build/tests/test_m3u.c \
+            -o "$RUNNER_TEMP/full-m3u-tests"
+          "$RUNNER_TEMP/full-m3u-tests"
+          cc -std=c99 -O1 -Wall -Wextra -Werror -DHOST_TEST \
+            -Ipatches/full/build/src patches/full/build/src/m3u.c \
+            patches/full/build/src/m3u_bridge.c patches/full/build/tests/host_bridge_test.c \
+            -o "$RUNNER_TEMP/full-bridge-tests"
+          "$RUNNER_TEMP/full-bridge-tests"
+
+      - name: Verify recorded-image assembler guards
+        run: node --test tests/test_cached_full.test.mjs
+
+      - name: Check recorded layouts against embedded build artifacts
+        run: |
+          node tools/check_full_artifacts.mjs
+          node --test tests/full-artifacts.test.mjs
+
+      - name: Browser theme schema tests (when present)
+        if: ${{ hashFiles('tests/theme-core.test.mjs') != '' }}
+        run: node --test tests/theme-core.test.mjs
+
+      - name: Theater preview contrast tests
+        run: node --test tests/theater-core.test.mjs
+
+      - name: Theater RGB565 top-third averaging tests
+        run: |
+          cc -std=c99 -O2 -Wall -Wextra -Werror \
+            patches/theater/frame_average.c patches/theater/test_frame_average.c \
+            -o "$RUNNER_TEMP/theater-frame-tests"
+          "$RUNNER_TEMP/theater-frame-tests"
+
+      - name: Browser theme parser tests (when present)
+        if: ${{ hashFiles('patches/theme_editor/test_browser.mjs') != '' }}
+        run: node patches/theme_editor/test_browser.mjs
+
+      - name: Browser builder image parity (when stock image is present)
+        if: ${{ hashFiles('DP3_V137.img') != '' }}
+        run: node tests/builder.test.mjs
+
+      - name: Check local-theme Python tests (when present)
+        if: ${{ hashFiles('patches/theme_editor/test_theme.py') != '' }}
+        run: python -m unittest discover -s patches/theme_editor -p 'test_*.py' -v
+
+      - name: Playlist filename boundary regressions
+        run: |
+          cc -std=c99 -O1 -Wall -Wextra -Werror -ffunction-sections -fdata-sections -Wl,--gc-sections \
+            -o "$RUNNER_TEMP/bridge-name-tests" patches/full/build/tests/test_bridge_names.c
+          "$RUNNER_TEMP/bridge-name-tests"
+
+      - name: Explain limits of hosted validation
+        run: |
+          if [[ -f DP3_V137.img ]]; then
+            echo "Stock-image browser parity tests were run; the optional Opus case requires local range data."
+          else
+            echo "Stock image unavailable: image-dependent tests were skipped."
+          fi
+          echo "Full framework verification, decoder runtime behavior and hardware are not covered by this job."
+          echo "Run patches/framework/verify.py locally using the pinned original image and external inputs."
+
+  reference-source-build:
+    name: Reproduce module 31 from source
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install reference toolchain and build dependencies
+        if: ${{ hashFiles('DP3_V137.img') != '' }}
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y libisl23 libmpc3 libmpfr6 libgmp10
+          bash ci/install_reference_toolchain.sh "$RUNNER_TEMP/ce-arm"
+          python -m pip install capstone==5.0.7
+      - name: Rebuild and compare source payload
+        if: ${{ hashFiles('DP3_V137.img') != '' }}
+        run: |
+          echo 'fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cdfade5e9c6ea3bd71ac6deef  DP3_V137.img' | sha256sum --check
+          export PATH="$RUNNER_TEMP/ce-arm/usr/bin:$PATH"
+          cp patches/full/out/layout31.json "$RUNNER_TEMP/recorded-layout31.json"
+          python patches/full/build/build_compose.py --scratch "$RUNNER_TEMP/ce-compose" > "$RUNNER_TEMP/ce-compose.log" 2>&1 || {
+            tail -c 8000 "$RUNNER_TEMP/ce-compose.log"
+            exit 1
+          }
+          node ci/verify_composed_artifacts.mjs "$RUNNER_TEMP/recorded-layout31.json"
+          git diff --exit-code -- \
+            patches/full/patches/0033-ui-lockscreen-title.patch \
+            patches/full/patches/0040-m3u-browser-hook.patch \
+            patches/full/patches/0060-nav-folder-disarm.patch \
+            patches/full/patches/0061-nav-file-disarm.patch \
+            patches/full/out/layout31.json
+      - name: Explain source build limitation
+        run: echo 'The hosted job does not receive decoder inputs, build the full image, or validate hardware.'
+
+  site-comparison:
+    name: Comparison preview browser test
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install pinned browser test dependency
+        run: npm install --no-save --ignore-scripts playwright@1.62.1
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Exercise stock and CE previews
+        run: node --test tests/site-comparison.test.cjs
+

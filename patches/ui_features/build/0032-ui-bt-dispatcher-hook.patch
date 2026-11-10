@@ -1,0 +1,23 @@
+# Bluetooth shortcut, hook: module 0 key dispatcher return path.
+# Design: work/ui_features/ui_features.md section 4.2; build evidence:
+# work/ui_features/build/ui_build.md.
+name: ui-bt-dispatcher-hook
+kind: module
+module: 0
+region: code
+address: 0x03061e5e
+gate: build refuses unless the 6 stock bytes at the target equal `expect`;
+  the finished image must also pass firmware_patch.validate()
+rationale: The SM-merge step of the key dispatcher ends at 0x03061e5e
+  with `mov r0, r4` + `pop.w {r4-r11, ip, pc}`: every event the window
+  Key procs did not consume is returned to its caller here, including
+  the long-press Power word 0x20000001 (type 2, mask 0x1), which no
+  stock consumer handles (census in the design doc). The patch replaces
+  those 6 bytes with a B.W into the extension dispatcher hook at
+  0x03079c14 plus a NOP. The hook performs the identical epilogue for
+  every event; only 0x20000001 diverts into the Bluetooth toggle and
+  returns 0. Events consumed by the earlier dispatcher ladders
+  (0x40000800/0x40001000/0x40002000, 0x20000800/0x20001000) return
+  through separate tails and never reach this site.
+expect: 2046bde8f09f
+replace: 17f0d9be00bf

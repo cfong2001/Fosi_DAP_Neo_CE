@@ -1,0 +1,321 @@
+# The everything build
+
+One experimental firmware image that composes every built feature except
+focus mode and the browser marquee, made in a single `build.py` pass from
+the pinned stock image. Nothing here has been flashed. Every result is
+offline: host tests, Unicorn emulation of the composed image, and
+structural validation.
+
+| | |
+|---|---|
+| Input | `DP3_V137.img`, 13,631,492 bytes, SHA-256 `fcc1cd3e…` |
+| Output | 13,638,454 bytes, SHA-256 `4d993e89bb3cdd22befb28efab0998f18acb2f56d7c0019c5dfa672c9f4de50d` |
+| Composition | 64 byte patches, 2 transplants, 2 growth insertions, one merged gap tail, one merged theme config |
+| Default build | unchanged, still SHA-256 `62321437…` (verify.py checks 1 to 13 pass; check 13 pins this build) |
+
+## What changed at integration
+
+The open workstreams (#57, #63, #68) were merged and their known defects
+fixed in this build:
+
+- **Playlist filename hardening (#63).** The bridge bounds short-name
+  matching, rejects malformed long-name sequences and makes no
+  out-of-bounds reads. The module 31 payload grew from 6,800 to 6,936
+  bytes, so the lock routine and the disarm stubs moved up 136 bytes and
+  patches 0033, 0060 and 0061 were regenerated. Before repinning, the
+  previous composition (`58f19e5d…`) was rebuilt from its own branch and
+  reproduced exactly.
+- **Playlist playback.** The resolver hook is now a stateless mapping in
+  stock source 6's own 1-based terms, and three new hook sites (0043,
+  0044 and the companion's caller whitelist) make the flat play list the
+  playlist. Start, next across folders, wrap and previous all reach the
+  right file. Details: [`playlist_lifecycle_findings.md`](playlist_lifecycle_findings.md).
+- **Theater on tracks without artwork.** The player's two no-art exits
+  skipped the theater reset, so the background kept the previous track's
+  color. Patches 0045 and 0046 restore the theme default there.
+- **Theater portrait sampling (#68).** The smaller playlist hooks freed
+  enough of the gap tail to carry the 676-byte theater payload, which
+  samples only the artwork's own width.
+- **Transport ghosting.** The eight v4 transport draws now fill their
+  rectangle with the ground color before the keyed draw (local patches
+  0110 to 0117), which removes the stale ink a segment-only repaint used
+  to leave.
+
+The pinned module 31 payload and the full image have been reproduced from
+CE source with GCC 13.2.1, ARM binutils 2.44 and Keystone 0.9.2. GCC 14.2.1
+produces different bytes, and the hash check rejects them. Follow the
+[reference source-build instructions](../../ci/REFERENCE_BUILD.md) for
+package hashes and setup. This builds CE additions against the stock
+binary. It is not a build of the vendor's original source, and reproducing
+the image does not close any hardware gate.
+
+The build refuses to overwrite an existing output or report and rejects an
+output that resolves to the stock image.
+
+```sh
+python3 patches/full/build/build_full.py \
+  --ecpatch-dir /path/to/decoder-inputs --output /path/to/new.img
+```
+
+`build_full.py` regenerates every sub-artifact (the module 31 payload, the
+merged tail and its hook patches, the merged theme config, the tag stub)
+and then makes one `build.py` call with `manifest.txt`, `transplants.txt`,
+two `--grow` insertions, one `--tail` and one `--theme-config`. The builder
+page's everything selection produces the same image byte for byte
+(`tests/builder.test.mjs` case m). This image is the standard download,
+`release/DP3_V137_CE.img`; `ci/build_release.sh` builds it and checks the
+pin.
+
+## Composition map
+
+| Feature | Where its bytes live |
+|---|---|
+| Default framework set (32 patches) | Referenced in place from `patches/framework/patches/` |
+| Full-precision Vorbis | vorbis75 transplant, as in the default build; module 75 SHA-256 `dd8f772f…` |
+| Opus replacing WMA | opus72 transplant (module 72 SHA-256 `6a7d50d2…`) and the five classifier rename patches from `patches/opus_swap/` |
+| Safer track titles | Title pair from `patches/theater/text/`, module 27, same length |
+| Design refresh v4 glyphs | Local patches 0110 to 0117 (module 27, the v4 repoint sites retargeted to the ground-filling wrapper in the tail) and 189 runs in the merged theme config |
+| Browser icon extension | 244 runs in the merged theme config from `patches/design_refresh_v4/browser_icons/browser-glyphs.json` |
+| CE splash mark | 64 runs in the merged theme config from `patches/theme_editor/ce-mark.json` |
+| Theater mode | Local patches 0100 to 0104 (module 18) and the 676-byte payload in the tail at 0x0307C354. The sampler cap is 64 rows here (48 in the standalone variant), so a 190-pixel-tall cover gets a true top third |
+| Theater on no-art tracks | Local patches 0045 and 0046 (module 27) and `theater_noart_close` / `theater_noart_open` in the tail |
+| Bluetooth shortcut | Hook patch 0032-tail from `patches/m3u/tail_build/patches/` and the 436-byte blob in the tail at 0x0307C5F8 |
+| M3U playlists | Module 31 growth payload (below), local patches 0040 to 0044, staging and the playlist hooks in the tail |
+| Lock screen | The 406-byte routine in the module 31 payload at 0x03080784, reached by local patch 0033 |
+| Navigation disarm stubs | Folder and file stubs in the module 31 payload at 0x0308091C, the tag stub as the module 24 growth, local patches 0060 to 0062 |
+| Battery profiles | Not in this build; removed at the owner's direction (verdict below) |
+
+## The merged tail
+
+`build.py` accepts one `--tail` payload of at most 2,044 bytes in the
+module 0 code gap (exec 0x0307BFB4 to 0x0307C7B0). `build/build_tail.py`
+lays out four occupants:
+
+| Offset | Address | Bytes | Contents |
+|---|---|---|---|
+| 0x000 | 0x0307BFB4 | 552 | Playlist staging (zeros): header 16, 6 runs of 50, 59 entries of 4 |
+| 0x228 | 0x0307C1DC | 368 | Hooks, SHA-256 `cef74de6…`: playlist resolver, fetch, count and forward-step hooks; the two theater no-art exits; the transport ground wrapper |
+| 0x398 | 0x0307C34C | 8 | Free (zeros) |
+| 0x3A0 | 0x0307C354 | 676 | Theater payload (reset stub at the base, blit trampoline at 0x0307C3A8), SHA-256 `17a558dd…` |
+| 0x644 | 0x0307C5F8 | 436 | Bluetooth blob, SHA-256 `ce6ef701…` |
+| 0x7F8 | 0x0307C7AC | 4 | Spare zeros, not emitted |
+
+Total emitted: 2,040 of 2,044 bytes. Merged tail SHA-256
+`6d77b1102cc4a82828ed8c1670eef99de708565e95d585a58dfdeb1d01047a71`.
+
+How each occupant is placed:
+
+- **Staging** stays at offset 0. The bridge, the hooks and the disarm stubs
+  address the flag and header at 0x0307BFB4. Capacity is 6 folder runs and
+  59 entries; larger playlists decline wholesale.
+- **Hooks** are assembled from `build/src/resolver_hook.S`,
+  `theater_noart.S` and `transport_ground.S` at 0x0307C1DC. GNU ld cannot
+  branch to an absolute address, so each branch to stock code is assembled
+  as a branch to itself and re-encoded after linking. The build then
+  decodes every branch in the blob and refuses any target outside the blob
+  and its six declared stock targets. It reads hook addresses from the ELF
+  symbol table and writes patches 0041 to 0046 and 0110 to 0117.
+- **Theater** is assembled by `build/theater/build_theater.py --base
+  0x0307C354`, directly below the Bluetooth blob. The script assembles
+  against the base it is given and round-trip checks every branch. Its
+  state stays at SAVEINFO+0x1C8.
+- **Bluetooth** stays at 0x0307C5F8, the address its audited build used,
+  so patch 0032-tail is unchanged and the blob's pinned hash reproduces.
+
+## Module 31 window ledger
+
+Window: 7,436 bytes at 0x0307EE48 to 0x03080B54. Payload: 6,936 bytes,
+SHA-256 `010197e6…`. Spare: 500 bytes.
+
+| Offset | Address | Bytes | Contents |
+|---|---|---|---|
+| 0 | 0x0307EE48 | 64 | Hook trampoline (patch 0040 target), with the playback-start exit |
+| 64 | 0x0307EE88 | 6,396 | Bridge and parser (`m3u_bridge_node_action` first); import helper at 0x0307F714 |
+| 6,460 | 0x03080784 | 406 | Lock-screen routine (`ui_lockscreen_paint`), reached by patch 0033 |
+| 6,868 | 0x0308091C | 68 | Navigation disarm stubs (folder at the base, file at 0x03080936) |
+
+`build/build_compose.py` rebuilds the payload from `build/src/`. Patch
+0033's replacement bytes differ from the compose variant's because the
+lock routine sits at a different offset here (`01f071bf` against the
+reviewed `02f007b8`). Patch 0040's are unchanged (`00f095bf`).
+
+## Module 32
+
+Stock. An earlier composition carried the battery profile blob as a
+540-byte growth here; it left with the battery component.
+
+## Module 24
+
+The tag-library disarm stub is 26 bytes at 0x0307EDEC, the end of stock
+module 24 code, delivered as the second growth insertion with patch 0062.
+
+## Image length ledger
+
+| | Bytes |
+|---|---|
+| Stock | 13,631,492 |
+| Module 31 growth | +6,936 |
+| Module 24 growth | +26 |
+| Ebook offset | 0 (module 30 kept intact) |
+| Final | 13,638,454 |
+
+### Ebook verdict
+
+Module 30, the ebook reader (8,288 bytes of code at the shared window base,
+56 bytes of data, 2,492 bytes of BSS), is kept intact. Replacing it with a
+fail-safe stub would need proof from the window-dispatch contract, and
+there is none: the reader's window struct lives in its own data segment
+with Service, Key and Paint entries that the window manager calls by
+contract, and the removal checklist in
+`analysis/resident_home/resident_home.md` (menu name, window manager table
+slot, `.txt` classification, the SAVEINFO last-window index) cannot be met
+by shrinking code. The image is therefore 6,962 bytes longer than stock.
+Whether the device's update slots accept a longer image is open until a
+hardware test.
+
+## Playlist verdict
+
+The start sequence and playback lifecycle are implemented and pass
+emulation through the composed image's real source 6 code. On a successful
+import the trampoline's handled exit enters the stock folder-play sequence
+at 0x0307E052 (not 0x0307E04E, where the folder disarm stub would clear the
+flag the import just set). The sequence runs the classifier, the fetch
+(answered by the companion hook with position 1), the source 6 commit at
+play context +0xF2, the directory global update, the 0x17D and 0x17B event
+clears, the 0x14D post and the message 3 send. Module 33 then initializes
+playback at position 1, which the resolver hook maps to the first entry.
+
+| Gate | Result |
+|---|---|
+| `audit_playlist_start.py` S1 to S6: non-playlist bypass, bridge decline, modeled import through the start sequence, folder, file and tag disarm | Pass |
+| `test_playlist_lifecycle.py`: start fetch, module 33 start message, initializer, next, next, wrap, previous wrap, previous, unarmed folder play, non-whitelisted fetch | Pass; the previous image fails it |
+| `emu_resolver_full.py`: twelve declined calls byte- and register-identical to stock, position mapping | Pass |
+
+Remaining limits are in
+[`playlist_lifecycle_findings.md`](playlist_lifecycle_findings.md): repeat
+folder mode repeats the current entry's folder, capacity is 59 entries in 6
+folder runs, and nothing has run on a card.
+
+## Theater verdict
+
+| Gate | Result |
+|---|---|
+| `test_theater_full.py`: painter and sync consumers in both themes, track change, no-art setup, portrait padding, host C cross-check, the 64-row tall case | Pass |
+| `test_theater_noart.py`: both no-art exits in both themes restore the default, disarm sampling, post one repaint and return through the loader frame; no repaint when the default is already set | Pass; the previous image fails it |
+
+One interaction stays open. The reset stub sits at module 18's shared
+artwork setup, so any other caller of setup also resets the player's
+sampling and background. In this build the only static caller outside
+module 18 is the player. Two module 18 loaders that call setup are reached
+only through computed addresses, so the census cannot rule out another
+window using them. The effect, if it occurs, is the theme default
+background until the next track, not a fault.
+`patches/theater/build/audit_browser_interference.py` reproduces the
+mechanism with a modeled request.
+
+## Transport verdict
+
+`test_transport_ground.py` runs the real painter (modules 0, 18 and 27) on
+the composed image. Play to pause at the centre in state B = 0, and chevron
+to pause at the computed slot in state B = 2, each as a segment-only
+repaint, match a fresh paint of the second state exactly (0 ghost pixels).
+Every keyed transport draw follows a ground fill of its own rectangle, and
+no store carries the key color. The standalone v4 build leaves 58 and 34
+ghost pixels in the same sequences. The ground is the background cell at
+0x03004400, the color the painter's full repaint fills the screen with.
+
+## Battery verdict
+
+Battery profiles are not in this build; the owner removed the component.
+It never activated while carried. A settings item's descriptor is the first
+58 bytes of its string record, and the apply dispatch special-cases 173
+(EQ) and 196 (brightness). The working id 0xC5 turned out to be record 197,
+brightness's own "20%" label, and no orphan id can be proven unused offline
+because string fetches are table driven. Authoring a record under an
+unproven id could hijack a live string, so none was written. A hardware
+SAVEINFO and language dump, or a full cross-reference of every string
+fetch, would unblock it. The standalone `patches/power/` work is untouched.
+
+## Space decisions for the owner
+
+Two built features do not fit this composition. Each would need an
+existing feature to shrink or leave. The owner ranks the browser marquee
+above focus mode, and keeps M3U playlists and the lock screen over the
+marquee, so neither joins the standard image for now.
+
+| Feature | Needs | Available | What would make room |
+|---|---|---|---|
+| Focus mode (`patches/focus_mode/`) | 340 bytes resident whenever the player is loaded | 12 bytes in the tail (8 free, 4 spare) | Cut playlist staging to about 1 run and 25 entries, or remove the Bluetooth shortcut (436 bytes) from this build |
+| Browser marquee v5 (`patches/browser_marquee/`) | 6,992 bytes in the module 31 window | 500 bytes | Remove playlists (trampoline, bridge and disarm stubs) and the lock screen from module 31, which frees 6,934 bytes |
+
+The census behind the focus figure is below. Both features remain
+standalone variants with passing suites.
+
+### Focus mode residency census
+
+Every focus stub is called from module 27 code, so the stubs must be
+resident whenever the player window is loaded.
+
+- A grown module 27 extension has 0 bytes of headroom. Module 27's code
+  ends at 0x03080B54, the exec base of resident module 18.
+- The merged tail has 12 bytes left. The Bluetooth blob's only caller is
+  the module 0 key dispatcher, so it must be resident from every window;
+  the playlist hooks are called from module 0; the theater payload's
+  callers are in module 18, whose own segment has 3 bytes of headroom.
+- The module 31 spare (500 bytes) is the wrong residency class: loading
+  the player overwrites that span.
+- A census of append slack for all 101 load segments found 96 with none.
+  Module 0's span is the known gap. The core-1 spans of modules 72 and 75
+  are the decoder region. Module 39's span would survive, but module 39
+  loads only inside library scan and sort, so the player can run without
+  it, and the player's Init calls the focus reset stub before any path
+  that could load module 39.
+
+Full tables and method: `patches/focus_mode/design.md`.
+
+## Configurator coverage
+
+The builder page's everything selection composes this build and matches
+it byte for byte (case m, gated on locally generated Opus range data). The
+standalone theater, Bluetooth, lock-screen and playlist options keep their
+own guards. The standalone playlist file inputs stay disabled; playlists
+are available through the everything selection.
+
+## Tests
+
+All offline, against the composed image unless noted. `firmware.yml` runs
+the image suites on every pull request.
+
+- `patches/framework/verify.py`: 13 of 13, including check 13 (this
+  build's pin, confinement to the union of its parts, the default build's
+  pin).
+- `tests/builder.test.mjs`: every case, including case m.
+- `build/tests/test_playlist_lifecycle.py`, `emu_resolver_full.py`,
+  `audit_playlist_start.py`: as in the playlist verdict.
+- `build/tests/test_theater_full.py`, `test_theater_noart.py`: as in the
+  theater verdict.
+- `build/tests/test_transport_ground.py`: as in the transport verdict.
+- `build/tests/emu_bt_tail_full.py`: the Bluetooth shortcut at its audited
+  address.
+- Host tests in `build/tests/`: the M3U parser suite (26 checks), the host
+  bridge test (four scenarios, staging layout field by field, also under
+  ASan and UBSan), and the filename boundary tests.
+- The standalone suites (keyed transport gates, navigation exit tests,
+  theater lifecycle including the portrait case, focus mode) still pass.
+
+## Remaining gates
+
+All remaining gates need hardware:
+
+- whether the update slots accept the 13,638,454-byte image;
+- theater mode on both artwork draw paths, BMP covers and the event-bit
+  posting context, and whether another window ever calls artwork setup;
+- playlist playback from a real card, including the FS type 3 decline and
+  the window residency of the module 24, 27 and 31 overlays the stubs run
+  in;
+- transport draw timing with the extra fill;
+- the Opus underrun gate;
+- the theme endianness question (resource words are big-endian in the
+  file, the studio counts little-endian);
+- the stock behaviors the default build already carries (gapless
+  observation, the clock gates).

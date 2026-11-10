@@ -1,0 +1,17 @@
+# Framework self-test fixture. NOT a functional change.
+name: noop-selftest
+kind: module
+module: 0
+region: code
+address: 0x03050000
+gate: build refuses unless the 8 stock bytes at the target equal `expect`;
+  the finished image must also pass firmware_patch.validate()
+rationale: End-to-end proof of the apply path that changes no behaviour:
+  the replacement bytes are identical to the originals (module 0's
+  Cortex-M vector-table head: initial SP 0x03004000, reset 0x03061f8b).
+  A build with only this patch enabled must differ from stock only in
+  the header date and the mirror/CRC fields the date change implies.
+  verify.py asserts exactly that. Keep this patch enabled: it costs
+  nothing and smoke-tests every build.
+expect: 004000038b1f0603
+replace: 004000038b1f0603

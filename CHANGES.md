@@ -1,0 +1,429 @@
+# Changelog
+
+## 2026-11-08: research record and README pass
+
+- `research/external_sources_2026-11.md`: the second source survey with
+  difficulty and reward scores, and an outcome table recording what each
+  item became (#73 to #78) and why the rest were not done.
+- README: the new build options in Building and the documentation index,
+  quick device checks under Hardware status, and the open-items list
+  brought up to date (the Bluetooth UART baud and the EQ machinery are
+  closed).
+
+## 2026-11-08: EQ presets (AutoEQ and custom)
+
+- Decoded the stock EQ: a 31-band ISO third-octave graphic EQ, ±12 dB in
+  1 dB steps, coefficients in module 35 for five sample rates, set up by
+  module 36, presets in module 33. Stock presets use five bands, and the
+  selector gives Classical, Bass Boost and Heavy Metal the Pop, Jazz and
+  flat arrays.
+- New `--eq-presets CONFIG.json` (`patches/eq_presets/`) fixes the
+  selector and loads AutoEQ `GraphicEQ` files or custom curves into any
+  of the six presets, fitted to the firmware's own band responses.
+  Unconfigured presets keep exactly the curve stock applied. Published
+  images are unchanged.
+- The browser builder takes the same curves and gives byte-identical
+  images. Not tested on a device.
+## 2026-11-08: Bluetooth auto-off option
+
+- Found why Bluetooth does not stay on: module 0's supervisor turns it
+  off after 30,000 ticks (5 minutes at the 10 ms tick) with no device
+  connected, and clears the saved setting. New `--bt-auto-off 10min`
+  and `--bt-auto-off never` (`patches/bt_auto_off/`) lengthen or remove
+  the limit; four bytes each. Published images are unchanged.
+- The browser builder offers the choice, for the everything build too.
+- `emu_supervisor.py` and `test_bt_auto_off.py` run the supervisor under
+  Unicorn on every build; `verify.py` gains check 15. Not tested on a
+  device.
+
+## 2026-11-08: headphone unplug in stock
+
+- `analysis/ui_controls.md` §1.7: GPIO0.13 is the headphone-jack sense
+  line. Module 0 debounces it (0.5 s) and sets event flag `0x2B` on
+  unplug; module 33 consumes the flag, sends playback command `0xE6` and
+  redraws the play/pause glyph. So stock very likely pauses on unplug
+  already, and the "pause on unplug" patch candidate is shelved until a
+  device test says otherwise. Whether `0xE6` is pause is not decoded.
+## 2026-11-08: Bluetooth UART settings verified in stock
+
+- Closed the open "Bluetooth UART baud" item. Stock's Bluetooth power-on
+  path configures UART1 (`0x400B0000`, pin group A, GPIO2.16/2.17) at
+  115200 baud with divisor 13, the same controller and register sequence
+  NeoPod v1.7.0 uses for Bluetooth audio on the Neo.
+- New `tools/emu_bt_uart.py` runs the stock configure routine under
+  Unicorn and checks the divisor latch and pin-group writes; CI runs it.
+## 2026-11-08: RKNanoD reference manual
+
+- New `analysis/rknanod_trm.md` records what Rockchip's public RKNanoD
+  Technical Reference Manual (rev 1.0) settles for CE, with chapter
+  references: the decoder core, HIFIACC and HIGHRAM share a power domain
+  that only software turns off; SRAM clocks gate per 32 KB; the decoder
+  code's low-address alias; the HIFIACC feature list, including a 300 MHz
+  vendor figure for 192/24 APE; CRU divider, UART and I2C formulas; and
+  the SAR-ADC's limits. Figure `media/rknanod_power_domains.png`.
+- Cross-references added to the platform, power, clock-table, clock v1
+  and harness documents. No code or image changes.
+## 2026-11-08: DAC filter option
+
+- New build option `--dac-filter` (`patches/dac_filter/`) selects one of
+  the CS43198's four non-default interpolation filters. Stock's DAC init
+  already chooses between all five from a settings byte that no menu
+  sets; the option changes the default branch's immediate at
+  `0x03051814`. One byte. Published images are unchanged.
+- The browser builder offers the same choice as a menu, for the
+  everything build too, and matches `build.py` byte for byte.
+- `test_dac_filter.py` runs the firmware's filter selection under
+  Unicorn for every build and settings value; `verify.py` gains check
+  14. Not tested on a device.
+
+## 2026-11-06: README lead and figures
+
+- The README opens with what CE is, its hardware status and the three
+  downloads, then shows each feature against stock before explaining it.
+  A patch table marks which image carries each patch.
+- `tools/render_readme.py` renders the figures in `media/` from the stock
+  and standard images. Resource pixels are decoded from the images, the
+  transport row and status icon come from the real player painter run
+  under emulation, and theater grounds come from the ported firmware
+  algorithm. Cover art and text are drawn and labelled as such.
+- The outdated "Built but not enabled", "Design refresh" and "The CE
+  interface" sections are replaced by "Variants and prototypes" and
+  "Design history".
+
+## 2026-11-06: everything build as the standard download
+
+- `release/DP3_V137_CE.img` is now the everything build (`4d993e89…`).
+  The former default ships as `release/DP3_V137_CE_minimal.img`
+  (`62321437…`), the stock-length option. The recovery image is unchanged.
+- `ci/build_release.sh` builds all three images by default
+  (`--minimal-only` skips the compiler-dependent standard image), and
+  `firmware.yml` checks all three against `release/` and attaches them to
+  tagged releases. The standard image's published report summarises its
+  byte ranges instead of listing about 11 MB of them.
+- Repaired 48 Markdown files damaged by the curly-quote step of the unslop
+  pass: a byte-level `sed` in a non-UTF-8 locale had broken characters such
+  as "…", "→", "–" and "×", and turned each curly quote into three straight
+  quotes. Each repaired file was checked against its pre-pass version.
+- Space priorities recorded: the browser marquee ranks above focus mode,
+  and playlists and the lock screen stay in the standard image.
+
+## 2026-11-06: playlist, theater and transport fixes
+
+Closed the defects the #57 review left open in the everything image, which
+is now SHA-256 `4d993e89…` (64 patches).
+
+- **Playlists.** The resolver hook now maps stock source 6's 1-based
+  position to staged entry `position - 1` and returns a 1-based ordinal,
+  with no hidden state. New hook sites make the count the playlist length
+  (0043), route forward steps through stock's resolve-reset-advance path
+  (0044), and keep the start and play-mode fetches in playlist positions
+  (companion hook, whitelisted by return address). The five documented
+  defects are fixed. `test_playlist_lifecycle.py` replaces the two audits
+  that reproduced them.
+- **Theater.** The player's two no-art exits restore the theme background
+  (0045, 0046, `test_theater_noart.py`). The 676-byte portrait-sampling
+  payload from #68 now fits in the tail at 0x0307C354.
+- **Transport.** The eight v4 transport draws fill their rectangle with the
+  ground before the keyed draw (0110 to 0117). Segment-only repaints leave
+  no ghost pixels (`test_transport_ground.py`).
+- **Focus mode** moved after the 676-byte standalone theater payload, to
+  0x0307C258; its four gates pass.
+- `firmware.yml` runs the new suites and rebuilds the standalone theater and
+  focus variants. `tests/builder.test.mjs` derives the everything build's
+  patch list from its manifest.
+- `ci/feature-evidence.json`, `patches/full/README.md`, the release guide
+  and the top-level README describe the new state. Focus mode and the
+  browser marquee still need space a shipped feature would give up; the
+  options are in `patches/full/README.md`.
+
+No image has been tested on hardware.
+
+## 2026-11-06: integration and release workflow
+
+Merged the three open pull requests into one tree and made the release
+images reproducible from CI.
+
+- **#57** (CE player, navigation and theater workstream), with the stacked
+  work already merged into it (#60 to #62, #64 to #67): merged unchanged.
+- **#63** (playlist filename hardening): the hardened bridge is now built
+  into the everything image. The module 31 payload grew from 6,800 to 6,936
+  bytes (`010197e6…`); patches 0033, 0060 and 0061 were regenerated, and the
+  image pin moved from `58f19e5d…` to `c7b8c490…`. The old pin was rebuilt
+  from its own branch first and reproduced exactly. The lifecycle defects
+  #63 documents are still open.
+- **#68** (theater portrait sampling): landed in the standalone theater
+  variant (payload 642 to 676 bytes, `96931a93…`). Focus mode, which sits
+  after theater in the tail, was rebased to 0x0307C258 and passes its four
+  gates. The everything build keeps the 642-byte payload because its tail
+  has 4 bytes spare; see `patches/full/README.md`.
+- The committed `patches/full/out/theme-full*.json` were stale (241 runs);
+  they now match the build (497 runs).
+- New `release/` directory with the recommended image (`62321437…`), the
+  recovery image (`aff851b3…`), the build report, checksums and an install
+  and recovery guide.
+- New `ci/fetch_decoder_inputs.sh` and `ci/build_release.sh`, and the
+  `firmware.yml` workflow: full `verify.py` (13 of 13), pinned release
+  builds, a byte comparison against `release/`, the everything build's
+  emulation suites, artifacts, and prereleases on `v*` tags.
+- Added `.gitignore` for bytecode and generated build outputs.
+
+No image has been tested on hardware.
+
+## 2026-10-31: CE documentation redraft
+
+Prepared 2026-10-31 against main at 9d810e90. Files written as complete
+replacements; nothing in the live tree was modified and nothing was
+pushed. Sources read at that revision: `README.md`,
+`patches/framework/README.md`, `patches/framework/patches/manifest.txt`,
+`patches/framework/patches/transplants.txt` (via the patches directory
+listing and the framework README), `patches/framework/space_budget.md`,
+`patches/theme_editor/README.md`, `patches/power/power.md`, the
+`patches/` and `research/` directory listings, and the feature build
+documents under `patches/m3u/`, `patches/ui_features/`, and
+`patches/power/build/` as staged for their merge PRs.
+
+### README.md (repository root)
+
+- Title and opening rewritten around the name CE (Community Edition):
+  what CE is (the stock image plus a defined patch set, produced by the
+  framework), what it is not (not a from-scratch firmware), the base
+  image name, size, and SHA-256, and the not-affiliated line, all in
+  the first screen.
+- New **Hardware status** section near the top: no image has been
+  flashed, all results are offline, and the five hardware-phase checks
+  are named in queue order (Rockusb slot read-back, the APE and DSD128
+  clock gate, the gap tail canary, the module 31 window-cycle soak,
+  system-side gapless observation).
+- "What is in the build" became **What CE changes**: the same table,
+  updated to current evidence. The Vorbis row now carries the corpus
+  numbers (stock 38.1 to 42.1 dB; transplant 79.1 to 91.4 dB, median
+  81.2 dB; arithmetic 102 to 123 dB; the 16-bit ceiling 85.1 to 97.4 dB)
+  alongside the single-file figures (45.1 and 85.5 dB), and the
+  rounding fix has its own row. The gapless row states that patch 0026
+  arms the path and gives the fixed saving (85 ms per transition plus
+  the unmeasured copy and reset time). The default image's SHA-256,
+  length, and diff accounting are stated above the table, and the
+  manifest count (32, including the no-op fixture 0000) is stated
+  plainly.
+- "Built but not in the image yet" became **Built but not enabled** and
+  was rewritten to current status: the Bluetooth shortcut, M3U support,
+  the lock-screen routine, and battery profiles are built and
+  offline-tested, held out of the default build by named gates (tail
+  canary, window-cycle soak, the unauthored settings item record with
+  item id 0xC5 as a working value). The previous text described the
+  M3U bridge and both UI features as design-stage, which later merges
+  superseded. Theme configuration and the CE splash mark are listed
+  here as in progress, with the theme's build-time-only decision and
+  its space reason stated.
+- **Safety and recovery** kept, with the validator rule, the slot
+  layout, the stock update flow prohibition, and the recovery image
+  behaviour each stated in one place and cited to `analysis/boot_slots.md`
+  and `analysis/flash_security_and_port.md` and the framework README's
+  date discipline section.
+- **Building** shortened to the framework's mechanics (SHA gate,
+  manifest order, transplant disjointness, date stamp, report, the
+  `--grow` and `--tail` steps, `--recovery`, the nine verify checks)
+  with the pointer to `patches/framework/README.md` for commands. The
+  withdrawn gap-base warning is kept, shortened.
+- **Documentation** index kept with the same structure; entries added
+  for `analysis/resident_home/resident_home.md`, the M3U bridge
+  completion document, `patches/power/power.md` and its build folder,
+  `patches/ui_features/ui_features.md`, `patches/theme_editor/README.md`,
+  the harness milestone 2 document, and `tools/ui_theme.py` in the
+  Tools paragraph. One-line descriptions for the M3U and UI entries
+  were updated to built status.
+- **Project status and open questions** rewritten to match: armed
+  gapless instead of disarmed, the built-but-not-enabled set named,
+  theme and splash listed as open items, and the documentation damage
+  paragraph retained unchanged in substance.
+- The not-affiliated line also appears under **Credits and licenses**.
+  License content is unchanged: Tremor BSD-style, the transplant
+  surgery BSD-3-Clause, nanitecfw MIT as the technique source, the
+  SDK proprietary and reference-only.
+
+### patches__framework__README.md (for patches/framework/README.md)
+
+- Opening now names CE once ("every Fosi DAP Neo CE (Community
+  Edition) patch"). The rest of the document was already a technical
+  build manual and is carried over with two factual corrections:
+  the unified-build paragraph called the gapless fast path "disarmed"
+  and omitted the wheel timer patch; it now says armed and lists all
+  six components including the 0000 fixture, with the manifest count
+  stated as 32.
+- Typographic normalizations inside carried-over text: an em dash
+  in the patch-format example became a colon, an en dash in a CRC
+  offset range became "to", and a Unicode minus sign in the diff
+  accounting was spelled out. No technical content changed by these.
+
+### patches__theme_editor__README.md (for patches/theme_editor/README.md)
+
+- Rewritten around the verified state. The editor page (`docs/`),
+  the catalog tool (`tools/ui_theme.py`), the export format, the
+  456-record resource census, the blocked color values, and the
+  empty `APPROVED_LITERAL_SITES` registry are all stated as before.
+- The build section was replaced: the previous text presented
+  `build.py --theme-config` and a verify.py theme check as existing.
+  They do not exist at this revision (see disagreements). The new
+  section states what the missing build step has to do and that, until
+  it lands, the exported theme JSON has no consumer in the framework.
+- The Pages hosting paragraph was rewritten to what the tree proves:
+  `.github/workflows/pages.yml` is a real `Publish theme studio`
+  workflow that deploys `docs/` on pushes to main and skips if the
+  page is absent (contents read in this pass). Whether it has ever
+  completed a deployment is not recorded in the tree, and the
+  paragraph no longer claims a live site.
+- The original's line that the theme stage runs after the "disarmed
+  gapless hooks" was removed with the rest of that paragraph; the
+  gapless path is armed in the current manifest.
+
+### Checked and left untouched
+
+- `research/README.md`: its first screen describes the research folder
+  and its method, not the project as a whole. No CE framing change
+  needed.
+- All deep analysis and feature documents: out of scope per the brief.
+  Several carry stale status lines of their own (for example
+  `patches/power/power.md` still says the battery apply routine is
+  "designed here, not built" and that patch 0050 "is not stacked";
+  the PR 31 build document and the manifest supersede both). Flagged
+  here rather than edited.
+
+### Disagreements found between sources
+
+1. **Theme build integration.** `patches/theme_editor/README.md`
+   describes `build.py --theme-config`, overlap refusal for theme
+   rules, and an extra color-patch check in `verify.py`. The shipped
+   `patches/framework/build.py` at 9d810e90 contains no theme code at
+   all (full-text read), and `verify.py` contains no theme or color
+   check. The framework README is also silent on any theme step. The
+   redrafts follow `build.py` and `verify.py`: the editor exists, the
+   build integration does not. This is also the gap behind the user's
+   "you removed the theme generator" report; from the documents alone
+   it cannot be determined whether the integration was removed or
+   never landed.
+2. **Gapless arming.** `patches/framework/README.md` ("the disarmed
+   gapless fast path") and `patches/theme_editor/README.md`
+   ("disarmed gapless hooks") disagree with `manifest.txt`, which
+   lists `0026-gapless-arm.patch`, and with the root README's table.
+   The redrafts follow the manifest: armed.
+3. **Default build contents.** The framework README's component list
+   omitted patch 0050 (wheel timer period), which the manifest lists.
+   The redraft lists it.
+4. **Stock image distribution.** The previous root README said "The
+   stock image is not distributed here." The repository root at
+   9d810e90 contains `DP3_V137.img` at 13,631,492 bytes. The redraft
+   states that a copy is in the repository root.
+5. **Built-but-not-enabled status in the previous root README.** It
+   described the M3U bridge as "designed, not built", the lock-screen
+   and Bluetooth work as "fully designed, neither built yet", and the
+   M3U placement question as open. The later merge documents
+   (`space_budget.md`, the module 31 composition document, the tail
+   build document, the power build document) show all four built.
+   The redraft follows the later documents.
+6. **Two live copies of patch 0040.** `patches/framework/patches/0040-m3u-browser-hook.patch`
+   is the earlier variant: its gate text targets the module 0
+   extension at exec 0x03079C14 (the placement the census withdrew)
+   and its replace bytes are `fbf77bbe`. The current variant, in
+   `patches/m3u/compose/patches/`, targets the module 31 extension
+   trampoline at 0x0307EE48. Same patch name and site, different
+   bytes and gate. The root README redraft warns about the stale copy
+   in one sentence. Which copy a future stacking should use is a
+   coordinator decision; this note flags it and does not resolve it.
+7. **Battery profiles design vs build.** `patches/power/power.md`
+   (the design document) says the apply routine is not built and
+   recommends stacking 0050 with the feature; 0050 is already in the
+   manifest, and the build document records the blob built and
+   emulation at 32 of 32. The redraft follows the build document.
+
+### Facts not verified in this pass
+
+- `.github/workflows/pages.yml` contents were read in this pass: it
+  deploys `docs/` to GitHub Pages on pushes to main touching `docs/`
+  and skips cleanly when `docs/index.html` is absent. Whether it has
+  ever completed a deployment is not recorded in the tree, and the
+  redrafts do not claim a live Pages site. `ci.yml` was not read.
+- The theme editor page's runtime behaviour (SHA check in the browser,
+  record reading, mock screens) is stated from
+  `patches/theme_editor/README.md` and the presence of `docs/index.html`,
+  `docs/theme.js`, `docs/theme.css`, `docs/theme-core.mjs`,
+  `tools/ui_theme.py`, `patches/theme_editor/test_theme.py`, and
+  `patches/theme_editor/test_browser.mjs`. The page was not executed.
+- The example theme counts in `theme.example.json` (6,060, 4,668,
+  3,276, 1,884, 492) are carried from the theme editor README; they
+  were not recomputed against the image in this pass.
+- Rockusb read-back sector numbers appear in project working notes
+  but were not re-verified against a repository document in this
+  pass, so the redrafts name the read-back task without sector
+  numbers.
+- No `research/feature_matrix.md` or other roadmap file exists in the
+  tree (the `research/` folder holds five documents, listed in the
+  README index). Status and roadmap statements were taken from the
+  root README, the framework documents, and the feature build
+  documents instead.
+- The CE splash mark's target resource and byte cost are not stated
+  anywhere in the tree yet (the census is in progress in a parallel
+  workstream), so the redrafts describe the mark only as in progress,
+  with no format or size claims.
+
+### Addendum at merge (2026-11-01)
+
+This redraft was merged after three further changes landed, and the
+merged files were reconciled against them:
+
+- The theme build step the redraft recorded as missing has landed
+  (the `--theme-config` consumer and verify check 10), and the CE
+  splash mark ships as `patches/theme_editor/ce-mark.json`. The
+  theme sections of the merged READMEs describe the landed state;
+  the colour census is complete, and its open endianness question
+  is recorded in the theme editor README.
+- The opt-in Opus variant build has merged (verify check 11); the
+  root README names it as merged but not in the default build.
+- verify.py runs eleven checks; the counts in the merged READMEs
+  say so.
+
+The sections above remain the record of the redraft as prepared
+against 9d810e90.
+
+### Addendum: documentation sync (2026-11-01)
+
+This sync reconciles the README set with the merges that landed
+after the redraft:
+
+- The CE builder page has merged: the `docs/` theme studio now
+  carries feature toggles, theme application, a CE mark toggle,
+  and a gated-features list, and patches a user's own stock image
+  client-side under the SHA gate. The root README's Building
+  section names it as a browser front end to the same build, with
+  the byte-equality proof in `tests/builder.test.mjs` and the
+  unverified Pages deployment stated plainly. Project status
+  moves the builder from the open list to the merged list; the
+  theme follow-through item keeps only the literal-site registry
+  decision.
+- The stale framework copy of patch 0040 has been deleted. The
+  root README's M3U note no longer warns about two copies; it
+  states that the current variant lives in
+  `patches/m3u/compose/patches/`.
+- The design refresh v2 and v3 document sets have merged and are
+  now in the root README's Documentation index, with the
+  opus_swap README indexed beside them. Project status records
+  both design sets as merged; the open list records theater mode
+  as designed but not built, with its two named pre-build steps
+  (the module 19 cover-handler emulation and the RAM census for
+  the 3-byte placement), and records that the v2 and v3 icon
+  binaries are local-only with the release-zip route.
+- The CE splash mark wording is reconciled: the mark is landed
+  as a theme-config runs config, applied on request, and is not
+  part of the default build.
+- The root README gains a short bullet list of the main patches
+  in What CE changes, and a Design refresh section embedding the
+  four design sheets (stock against v2, v2 against v3, theater
+  mode, the v3 set at native size). The images are hosted on the
+  design-refresh-v3 release, which also carries the v3 icon
+  binaries; the repository push path cannot carry binaries.
+- The theme editor README's opening Status paragraph is
+  corrected to the landed state: the `--theme-config` consumer
+  and verify check 10 exist, the CE mark ships as a runs config,
+  literal sites remain refused, and the endianness question
+  stays open for the hardware phase. The paragraph previously
+  said the build step was not landed, contradicting the same
+  file's build consumer section.

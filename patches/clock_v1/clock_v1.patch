@@ -1,0 +1,18 @@
+# clock_v1 in nanitecfw patch grammar (module:execaddr:hexbytes),
+# generated from clock_v1.patch.json; fields +4..+27 of each row.
+0:0x30798b4:00d8b8050000000000000000000000000044950800449508  # row  5 MP3 <=128k, <=44.1k: B core/bus -> 144 MHz, A fields 0 (floor), PLL kept
+0:0x30798d0:00c2eb0b0000000000000000000000000044950800449508  # row  6 MP3 high: B core/bus -> 144 MHz, A fields 0 (floor), PLL kept
+0:0x30798ec:00c2eb0b0000000000000000000000000044950800449508  # row  7 WMA tier A: B core/bus -> 144 MHz, A fields 0 (floor), PLL kept
+0:0x3079908:00c2eb0b0000000000000000000000000044950800449508  # row  8 WMA tier B: B core/bus -> 144 MHz, A fields 0 (floor), PLL kept
+0:0x3079924:8074d21a0000000000000000000000000044950800449508  # row  9 WAV: B core/bus -> 144 MHz, A fields 0 (floor), PLL kept
+0:0x3079940:00c2eb0b0000000000000000000000000044950800449508  # row 10 AAC high: B core/bus -> 144 MHz, A fields 0 (floor), PLL kept
+0:0x307995c:00c2eb0b0000000000000000000000000044950800449508  # row 11 AAC low: B core/bus -> 144 MHz, A fields 0 (floor), PLL kept
+0:0x30799b0:00a3e111000000000000000000000000001c4e0e001c4e0e  # row 14 OGG tier 1: B core/bus -> 240 MHz, A fields 0 (floor), PLL kept
+0:0x30799cc:00a3e111000000000000000000000000001c4e0e001c4e0e  # row 15 OGG tier 2: B core/bus -> 240 MHz, A fields 0 (floor), PLL kept
+0:0x30799e8:00a3e111000000000000000000000000001c4e0e001c4e0e  # row 16 OGG tier 3: B core/bus -> 240 MHz, A fields 0 (floor), PLL kept
+0:0x3079a04:00389c1c000000000000000000000000001c4e0e001c4e0e  # row 17 OGG top tier: B core/bus -> 240 MHz, A fields 0 (floor), PLL kept
+0:0x3079a20:00389c1c00000000000000000000000000882a1100882a11  # row 18 FLAC: B core/bus -> 288 MHz, A fields 0 (floor), PLL kept
+0:0x3079a3c:00389c1c00000000000000000000000000882a1100882a11  # row 19 ALAC: B core/bus -> 288 MHz, A fields 0 (floor), PLL kept
+0:0x3079a58:00389c1c00000000000000000000000000882a1100882a11  # row 20 APE: B core/bus -> 288 MHz, A fields 0 (floor), PLL kept
+0:0x3079a74:00389c1c00000000000000000000000000882a1100882a11  # row 21 DSD-DFF: B core/bus -> 288 MHz, A fields 0 (floor), PLL kept
+0:0x3079a90:00389c1c00000000000000000000000000882a1100882a11  # row 22 DSD-DSF: B core/bus -> 288 MHz, A fields 0 (floor), PLL kept

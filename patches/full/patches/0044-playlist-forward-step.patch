@@ -1,0 +1,18 @@
+# Hook site: BL to resolver_hook_advance at 0x0307c240
+# in the full build's merged tail.
+name: 0044-playlist-forward-step
+kind: module
+module: 0
+region: code
+address: 0x305d598
+gate: build refuses unless the stock bytes at the target equal
+  `expect`; the finished image must also pass the grown
+  build validator. Requires the full build's merged tail.
+expect: a0890128
+replace: 1ef052fe
+rationale: Replaces "ldrh r0, [r4, #0xc]; cmp r0, #1" in the source 6
+  step with a BL to a helper that runs both instructions and
+  forces the shuffle-path condition while a playlist is
+  armed. A forward step then resolves the new position and
+  advances to its ordinal instead of taking the folder
+  iterator's next file. r1 and lr are dead at this site.

@@ -1,0 +1,519 @@
+{
+  "mode": "custom",
+  "input_file": "/home/hatch/workspace/fosi-dap-neo/DP3_V137.img",
+  "output_file": "/tmp/cfw_full.img",
+  "input_sha256": "fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cdfade5e9c6ea3bd71ac6deef",
+  "output_sha256": "9ff6863ea827f1acc6de5aa6ed0f41775b48fe45badaddccb84ae84a71667190",
+  "byte_length": 13631492,
+  "header_date": "20261023",
+  "patches_applied": [
+    {
+      "patch": "noop-selftest",
+      "file": "0000-noop-selftest.patch",
+      "kind": "module",
+      "module": 0,
+      "region": "code",
+      "cpu_address": "0x3050000",
+      "file_offset": "0x296ac",
+      "old_hex": "004000038b1f0603",
+      "new_hex": "004000038b1f0603"
+    },
+    {
+      "patch": "dac-fix-1-branch",
+      "file": "0001-dac-fix-branch.patch",
+      "kind": "module",
+      "module": 0,
+      "region": "code",
+      "cpu_address": "0x3060d14",
+      "file_offset": "0x3a3c0",
+      "old_hex": "02d0",
+      "new_hex": "3bd0"
+    },
+    {
+      "patch": "dac-fix-2-cave",
+      "file": "0002-dac-fix-cave.patch",
+      "kind": "module",
+      "module": 0,
+      "region": "code",
+      "cpu_address": "0x3060d8e",
+      "file_offset": "0x3a43a",
+      "old_hex": "70477047",
+      "new_hex": "6870c4e7"
+    },
+    {
+      "patch": "clock-v1-row-05",
+      "file": "0003-clock-v1-row-05.patch",
+      "kind": "module",
+      "module": 0,
+      "region": "code",
+      "cpu_address": "0x30798b4",
+      "file_offset": "0x52f60",
+      "old_hex": "00d8b805006cdc02006cdc02006cdc0200d8b80500d8b805",
+      "new_hex": "00d8b8050000000000000000000000000044950800449508"
+    },
+    {
+      "patch": "clock-v1-row-06",
+      "file": "0004-clock-v1-row-06.patch",
+      "kind": "module",
+      "module": 0,
+      "region": "code",
+      "cpu_address": "0x30798d0",
+      "file_offset": "0x52f7c",
+      "old_hex": "00c2eb0b00e1f50500e1f505c068780400c2eb0b00c2eb0b",
+      "new_hex": "00c2eb0b0000000000000000000000000044950800449508"
+    },
+    {
+      "patch": "clock-v1-row-07",
+      "file": "0005-clock-v1-row-07.patch",
+      "kind": "module",
+      "module": 0,
+      "region": "code",
+      "cpu_address": "0x30798ec",
+      "file_offset": "0x52f98",
+      "old_hex": "00c2eb0b80d1f00880d1f008c068780400a3e11100a3e111",
+      "new_hex": "00c2eb0b0000000000000000000000000044950800449508"
+    },
+    {
+      "patch": "clock-v1-row-08",
+      "file": "0006-clock-v1-row-08.patch",
+      "kind": "module",
+      "module": 0,
+      "region": "code",
+      "cpu_address": "0x3079908",
+      "file_offset": "0x52fb4",
+      "old_hex": "00c2eb0b80d1f00880d1f008c068780400a3e11100a3e111",
+      "new_hex": "00c2eb0b0000000000000000000000000044950800449508"
+    },
+    {
+      "patch": "clock-v1-row-09",
+      "file": "0007-clock-v1-row-09.patch",
+      "kind": "module",
+      "module": 0,
+      "region": "code",
+      "cpu_address": "0x3079924",
+      "file_offset": "0x52fd0",
+      "old_hex": "8074d21a00c2eb0b00c2eb0bc06878048074d21a8074d21a",
+      "new_hex": "8074d21a0000000000000000000000000044950800449508"
+    },
+    {
+      "patch": "clock-v1-row-10",
+      "file": "0008-clock-v1-row-10.patch",
+      "kind": "module",
+      "module": 0,
+      "region": "code",
+      "cpu_address": "0x3079940",
+      "file_offset": "0x52fec",
+      "old_hex": "00c2eb0b80d1f00880d1f008c068780400a3e11100a3e111",
+      "new_hex": "00c2eb0b0000000000000000000000000044950800449508"
+    },
+    {
+      "patch": "clock-v1-row-11",
+      "file": "0009-clock-v1-row-11.patch",
+      "kind": "module",
+      "module": 0,
+      "region": "code",
+      "cpu_address": "0x307995c",
+      "file_offset": "0x53008",
+      "old_hex": "00c2eb0b80d1f00880d1f008c068780400a3e11100a3e111",
+      "new_hex": "00c2eb0b0000000000000000000000000044950800449508"
+    },
+    {
+      "patch": "clock-v1-row-14",
+      "file": "0010-clock-v1-row-14.patch",
+      "kind": "module",
+      "module": 0,
+      "region": "code",
+      "cpu_address": "0x30799b0",
+      "file_offset": "0x5305c",
+      "old_hex": "00a3e11100b4c40400b4c40400b4c4040084d7170084d717",
+      "new_hex": "00a3e111000000000000000000000000001c4e0e001c4e0e"
+    },
+    {
+      "patch": "clock-v1-row-15",
+      "file": "0011-clock-v1-row-15.patch",
+      "kind": "module",
+      "module": 0,
+      "region": "code",
+      "cpu_address": "0x30799cc",
+      "file_offset": "0x53078",
+      "old_hex": "00a3e11100b4c40400b4c40400b4c4040084d7170084d717",
+      "new_hex": "00a3e111000000000000000000000000001c4e0e001c4e0e"
+    },
+    {
+      "patch": "clock-v1-row-16",
+      "file": "0012-clock-v1-row-16.patch",
+      "kind": "module",
+      "module": 0,
+      "region": "code",
+      "cpu_address": "0x30799e8",
+      "file_offset": "0x53094",
+      "old_hex": "00a3e11100b4c40400b4c40400b4c4040084d7170084d717",
+      "new_hex": "00a3e111000000000000000000000000001c4e0e001c4e0e"
+    },
+    {
+      "patch": "clock-v1-row-17",
+      "file": "0013-clock-v1-row-17.patch",
+      "kind": "module",
+      "module": 0,
+      "region": "code",
+      "cpu_address": "0x3079a04",
+      "file_offset": "0x530b0",
+      "old_hex": "00389c1c00c2eb0b00c2eb0b00b4c40400389c1c00389c1c",
+      "new_hex": "00389c1c000000000000000000000000001c4e0e001c4e0e"
+    },
+    {
+      "patch": "clock-v1-row-18",
+      "file": "0014-clock-v1-row-18.patch",
+      "kind": "module",
+      "module": 0,
+      "region": "code",
+      "cpu_address": "0x3079a20",
+      "file_offset": "0x530cc",
+      "old_hex": "00389c1c00c2eb0b00c2eb0b00b4c40400389c1c00389c1c",
+      "new_hex": "00389c1c00000000000000000000000000882a1100882a11"
+    },
+    {
+      "patch": "clock-v1-row-19",
+      "file": "0015-clock-v1-row-19.patch",
+      "kind": "module",
+      "module": 0,
+      "region": "code",
+      "cpu_address": "0x3079a3c",
+      "file_offset": "0x530e8",
+      "old_hex": "00389c1c00c2eb0b00c2eb0b00b4c40400389c1c00389c1c",
+      "new_hex": "00389c1c00000000000000000000000000882a1100882a11"
+    },
+    {
+      "patch": "clock-v1-row-20",
+      "file": "0016-clock-v1-row-20.patch",
+      "kind": "module",
+      "module": 0,
+      "region": "code",
+      "cpu_address": "0x3079a58",
+      "file_offset": "0x53104",
+      "old_hex": "00389c1c00c2eb0b00c2eb0b00b4c40400389c1c00389c1c",
+      "new_hex": "00389c1c00000000000000000000000000882a1100882a11"
+    },
+    {
+      "patch": "clock-v1-row-21",
+      "file": "0017-clock-v1-row-21.patch",
+      "kind": "module",
+      "module": 0,
+      "region": "code",
+      "cpu_address": "0x3079a74",
+      "file_offset": "0x53120",
+      "old_hex": "00389c1c00c2eb0b00c2eb0b00b4c40400389c1c00389c1c",
+      "new_hex": "00389c1c00000000000000000000000000882a1100882a11"
+    },
+    {
+      "patch": "clock-v1-row-22",
+      "file": "0018-clock-v1-row-22.patch",
+      "kind": "module",
+      "module": 0,
+      "region": "code",
+      "cpu_address": "0x3079a90",
+      "file_offset": "0x5313c",
+      "old_hex": "00389c1c00c2eb0b00c2eb0b00b4c40400389c1c00389c1c",
+      "new_hex": "00389c1c00000000000000000000000000882a1100882a11"
+    }
+  ],
+  "diff_vs_stock": {
+    "bytes_changed": 267,
+    "ranges": [
+      [
+        "0x2",
+        "0x2"
+      ],
+      [
+        "0x3a3c0",
+        "0x3a3c0"
+      ],
+      [
+        "0x3a43a",
+        "0x3a43d"
+      ],
+      [
+        "0x52f65",
+        "0x52f67"
+      ],
+      [
+        "0x52f69",
+        "0x52f6b"
+      ],
+      [
+        "0x52f6d",
+        "0x52f6f"
+      ],
+      [
+        "0x52f71",
+        "0x52f73"
+      ],
+      [
+        "0x52f75",
+        "0x52f77"
+      ],
+      [
+        "0x52f81",
+        "0x52f83"
+      ],
+      [
+        "0x52f85",
+        "0x52f8b"
+      ],
+      [
+        "0x52f8d",
+        "0x52f8f"
+      ],
+      [
+        "0x52f91",
+        "0x52f93"
+      ],
+      [
+        "0x52f9c",
+        "0x52fa7"
+      ],
+      [
+        "0x52fa9",
+        "0x52fab"
+      ],
+      [
+        "0x52fad",
+        "0x52faf"
+      ],
+      [
+        "0x52fb8",
+        "0x52fc3"
+      ],
+      [
+        "0x52fc5",
+        "0x52fc7"
+      ],
+      [
+        "0x52fc9",
+        "0x52fcb"
+      ],
+      [
+        "0x52fd5",
+        "0x52fd7"
+      ],
+      [
+        "0x52fd9",
+        "0x52fe7"
+      ],
+      [
+        "0x52ff0",
+        "0x52ffb"
+      ],
+      [
+        "0x52ffd",
+        "0x52fff"
+      ],
+      [
+        "0x53001",
+        "0x53003"
+      ],
+      [
+        "0x5300c",
+        "0x53017"
+      ],
+      [
+        "0x53019",
+        "0x5301b"
+      ],
+      [
+        "0x5301d",
+        "0x5301f"
+      ],
+      [
+        "0x53061",
+        "0x53063"
+      ],
+      [
+        "0x53065",
+        "0x53067"
+      ],
+      [
+        "0x53069",
+        "0x5306b"
+      ],
+      [
+        "0x5306d",
+        "0x5306f"
+      ],
+      [
+        "0x53071",
+        "0x53073"
+      ],
+      [
+        "0x5307d",
+        "0x5307f"
+      ],
+      [
+        "0x53081",
+        "0x53083"
+      ],
+      [
+        "0x53085",
+        "0x53087"
+      ],
+      [
+        "0x53089",
+        "0x5308b"
+      ],
+      [
+        "0x5308d",
+        "0x5308f"
+      ],
+      [
+        "0x53099",
+        "0x5309b"
+      ],
+      [
+        "0x5309d",
+        "0x5309f"
+      ],
+      [
+        "0x530a1",
+        "0x530a3"
+      ],
+      [
+        "0x530a5",
+        "0x530a7"
+      ],
+      [
+        "0x530a9",
+        "0x530ab"
+      ],
+      [
+        "0x530b5",
+        "0x530b7"
+      ],
+      [
+        "0x530b9",
+        "0x530bb"
+      ],
+      [
+        "0x530bd",
+        "0x530bf"
+      ],
+      [
+        "0x530c1",
+        "0x530c3"
+      ],
+      [
+        "0x530c5",
+        "0x530c7"
+      ],
+      [
+        "0x530d1",
+        "0x530d3"
+      ],
+      [
+        "0x530d5",
+        "0x530d7"
+      ],
+      [
+        "0x530d9",
+        "0x530db"
+      ],
+      [
+        "0x530dd",
+        "0x530df"
+      ],
+      [
+        "0x530e1",
+        "0x530e3"
+      ],
+      [
+        "0x530ed",
+        "0x530ef"
+      ],
+      [
+        "0x530f1",
+        "0x530f3"
+      ],
+      [
+        "0x530f5",
+        "0x530f7"
+      ],
+      [
+        "0x530f9",
+        "0x530fb"
+      ],
+      [
+        "0x530fd",
+        "0x530ff"
+      ],
+      [
+        "0x53109",
+        "0x5310b"
+      ],
+      [
+        "0x5310d",
+        "0x5310f"
+      ],
+      [
+        "0x53111",
+        "0x53113"
+      ],
+      [
+        "0x53115",
+        "0x53117"
+      ],
+      [
+        "0x53119",
+        "0x5311b"
+      ],
+      [
+        "0x53125",
+        "0x53127"
+      ],
+      [
+        "0x53129",
+        "0x5312b"
+      ],
+      [
+        "0x5312d",
+        "0x5312f"
+      ],
+      [
+        "0x53131",
+        "0x53133"
+      ],
+      [
+        "0x53135",
+        "0x53137"
+      ],
+      [
+        "0x53141",
+        "0x53143"
+      ],
+      [
+        "0x53145",
+        "0x53147"
+      ],
+      [
+        "0x53149",
+        "0x5314b"
+      ],
+      [
+        "0x5314d",
+        "0x5314f"
+      ],
+      [
+        "0x53151",
+        "0x53153"
+      ],
+      [
+        "0xc94002",
+        "0xc94002"
+      ],
+      [
+        "0xd00000",
+        "0xd00003"
+      ]
+    ]
+  },
+  "validation": "firmware_patch.validate() passed (header mirror + trailer CRC + V137 layout)",
+  "scope": "offline package integrity only; device acceptance and boot behaviour are hardware-phase questions"
+}

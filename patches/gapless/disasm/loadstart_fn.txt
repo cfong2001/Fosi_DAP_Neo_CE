@@ -1,0 +1,38 @@
+03088d9c  2d e9 f0 4f    push.w   {r4, r5, r6, r7, r8, sb, sl, fp, lr}
+03088da0  15 49          ldr      r1, [pc, #0x54]  ; [0x3088df8] = 0x03023151
+03088da2  83 b0          sub      sp, #0xc
+03088da4  ff 20          movs     r0, #0xff
+03088da6  08 70          strb     r0, [r1]
+03088da8  c8 24          movs     r4, #0xc8
+03088daa  04 20          movs     r0, #4
+03088dac  de f7 98 f9    bl       #0x30670e0
+03088db0  07 21          movs     r1, #7
+03088db2  22 20          movs     r0, #0x22
+03088db4  de f7 5c fd    bl       #0x3067870
+03088db8  03 f0 64 fa    bl       #0x308c284
+03088dbc  0e 20          movs     r0, #0xe
+03088dbe  1d e0          b        #0x3088dfc
+03088dc0  68 ab          add      r3, sp, #0x1a0
+03088dc2  07 03          lsls     r7, r0, #0xc
+03088dc4  70 b1          cbz      r0, #0x3088de4
+03088dc6  04 03          lsls     r4, r0, #0xc
+03088dc8  58 44          add      r0, fp
+03088dca  00 03          lsls     r0, r0, #0xc
+03088dcc  ac b4          push     {r2, r3, r5, r7}
+03088dce  04 03          lsls     r4, r0, #0xc
+03088dd0  4c 44          add      r4, sb
+03088dd2  00 03          lsls     r0, r0, #0xc
+03088dd4  60 44          add      r0, ip
+03088dd6  00 03          lsls     r0, r0, #0xc
+03088dd8  64 44          add      r4, ip
+03088dda  00 03          lsls     r0, r0, #0xc
+03088ddc  68 44          add      r0, sp, r0
+03088dde  00 03          lsls     r0, r0, #0xc
+03088de0  6c 44          add      r4, sp, r4
+03088de2  00 03          lsls     r0, r0, #0xc
+03088de4  24 af          add      r7, sp, #0x90
+03088de6  04 03          lsls     r4, r0, #0xc
+03088de8  80 39          subs     r1, #0x80
+03088dea  02 03          lsls     r2, r0, #0xc
+03088dec  d6 37          adds     r7, #0xd6
+03088dee  02 03          lsls     r2, r0, #0xc

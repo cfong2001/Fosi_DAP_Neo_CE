@@ -1,0 +1,11 @@
+# Theater mode device integration: theater-setup-reset-hook.
+# Design and census: patches/theater/build/README.md.
+name: theater-setup-reset-hook
+kind: module
+module: 18
+region: code
+address: 0x308389e
+gate: stock byte precondition; variant-only patch, never in the default manifest; validated by test_theater_lifecycle.py under emulation
+rationale: Module 18 artwork setup entry: the first two instructions (push {r4, r5, r6, lr}; mov r6, r1) are replaced by a branch (not a call, so lr keeps setup's own return address) to the theater reset stub in the gap tail, which re-executes both, clears the accumulator state at SAVEINFO+0x1C8, arms sampling, restores the player background cell to the theme default and branches back to the third setup instruction.
+expect: 70b50e46
+replace: f8f759bd

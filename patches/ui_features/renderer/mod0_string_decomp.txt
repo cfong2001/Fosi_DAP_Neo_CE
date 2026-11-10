@@ -1,0 +1,160 @@
+INFO  DecompileIn.java> === FUNCTION FUN_03062cee @ 03062cee === (GhidraScript)  
+INFO  DecompileIn.java> 
+void FUN_03062cee(undefined4 *param_1,short *param_2,short *param_3,uint param_4)
+
+{
+  undefined2 uVar1;
+  undefined4 *puVar2;
+  int iVar3;
+  short sVar4;
+  short sVar5;
+  int iVar6;
+  undefined4 uVar7;
+  uint uVar8;
+  uint uVar9;
+  short *psVar10;
+  int iVar11;
+  short local_190 [174];
+  uint local_34;
+  undefined4 local_30;
+  undefined4 uStack_2c;
+  
+  iVar3 = DAT_03062ff0;
+  puVar2 = DAT_03062fe8;
+  local_30 = DAT_03062fe8[5];
+  uStack_2c = DAT_03062fe8[6];
+  uVar7 = param_1[1];
+  DAT_03062fe8[5] = *param_1;
+  puVar2[6] = uVar7;
+  *(short *)(iVar3 + 0x16) = param_2[1];
+  sVar4 = FUN_03056910(param_3);
+  if (sVar4 == 1) {
+    if (*DAT_03062fec == '\0') {
+      FUN_030569f0(param_3,local_190);
+      param_3 = local_190;
+    }
+    else {
+      *DAT_03062fec = '\0';
+    }
+  }
+  local_34 = param_4 & 3;
+  if (local_34 == 1) {
+    sVar4 = param_2[2];
+  }
+  else {
+    if (local_34 != 2) {
+      *(short *)(iVar3 + 0x14) = *param_2;
+      goto LAB_03062d52;
+    }
+    sVar4 = *param_2 + (short)(((int)param_2[2] - (int)*param_2) / 2);
+  }
+  *(short *)(iVar3 + 0x14) = sVar4;
+LAB_03062d52:
+  uVar1 = *(undefined2 *)(iVar3 + 0x14);
+  sVar4 = *param_3;
+  while (sVar4 != 0) {
+    sVar5 = 0;
+    iVar11 = 0;
+    psVar10 = param_3;
+    while (sVar4 != 0) {
+      iVar6 = FUN_030627be(sVar4);
+      iVar11 = iVar6 + iVar11 + (int)*(short *)(iVar3 + 0x18);
+      sVar4 = *psVar10;
+      if (((sVar4 == 10 || sVar4 == 0xd) || sVar4 == 0) ||
+         ((int)param_2[2] - (int)*param_2 < iVar11)) break;
+      psVar10 = psVar10 + 1;
+      sVar5 = sVar5 + 1;
+      sVar4 = *psVar10;
+    }
+    sVar4 = 0;
+    uVar8 = (uint)sVar5;
+    psVar10 = param_3;
+    for (uVar9 = uVar8; uVar9 != 0; uVar9 = uVar9 - 1) {
+      sVar5 = FUN_030627be(*psVar10);
+      sVar4 = sVar5 + sVar4 + *(short *)(iVar3 + 0x18);
+      psVar10 = psVar10 + 1;
+    }
+    if (local_34 != 1) {
+      if (local_34 == 2) {
+        sVar4 = sVar4 / 2;
+      }
+      else {
+        sVar4 = 0;
+      }
+    }
+    *(short *)(iVar3 + 0x14) = *(short *)(iVar3 + 0x14) - sVar4;
+    puVar2 = DAT_03062fe8;
+    uVar9 = 0;
+    if (*(char *)(DAT_03062ff4 + 0x10) == '\n') {
+      psVar10 = param_3;
+      if (uVar8 != 0) {
+        do {
+          iVar11 = FUN_03056b52(*psVar10);
+          if (iVar11 == 0) {
+            uVar7 = FUN_03056b52(psVar10[1]);
+            *puVar2 = uVar7;
+            uVar7 = FUN_03056b52(psVar10[2]);
+            puVar2[1] = uVar7;
+            FUN_03062582(*psVar10);
+          }
+          uVar9 = uVar9 + 1;
+          psVar10 = psVar10 + 1;
+        } while (uVar9 < uVar8);
+      }
+    }
+    else {
+      psVar10 = param_3;
+      if (uVar8 != 0) {
+        do {
+          FUN_03062582(*psVar10);
+          psVar10 = psVar10 + 1;
+          uVar9 = uVar9 + 1;
+        } while (uVar9 < uVar8);
+      }
+    }
+    param_3 = param_3 + uVar8;
+    if (*param_3 == 10) {
+      param_3 = param_3 + 1;
+    }
+    *(undefined2 *)(iVar3 + 0x14) = uVar1;
+    sVar4 = *(short *)(iVar3 + 0x16) + *(short *)(iVar3 + 0x1a);
+    if (*(short *)(iVar3 + 0x24) == 1) {
+      sVar4 = sVar4 + 0xc;
+    }
+    else {
+      sVar4 = sVar4 + 0x10;
+    }
+    *(short *)(iVar3 + 0x16) = sVar4;
+    if (*(short *)(iVar3 + 0x12) < sVar4) break;
+    sVar4 = *param_3;
+  }
+  FUN_0306d910(DAT_03062ff8,&local_30);
+  return;
+}
+
+ (GhidraScript)  
+INFO  DecompileIn.java> NO_FUNCTION 0x0306302A (GhidraScript)  
+INFO  DecompileIn.java> === FUNCTION FUN_0306295a @ 0306295a === (GhidraScript)  
+INFO  DecompileIn.java> 
+int FUN_0306295a(short *param_1)
+
+{
+  short sVar1;
+  int iVar2;
+  int iVar3;
+  int iVar4;
+  
+  iVar2 = DAT_03062bc0;
+  iVar4 = 0;
+  *(undefined2 *)(DAT_03062bc0 + 0x18) = 0;
+  sVar1 = *param_1;
+  while (sVar1 != 0) {
+    param_1 = param_1 + 1;
+    iVar3 = FUN_030627be(sVar1);
+    iVar4 = iVar3 + iVar4 + (int)*(short *)(iVar2 + 0x18);
+    sVar1 = *param_1;
+  }
+  return iVar4;
+}
+
+ (GhidraScript)  

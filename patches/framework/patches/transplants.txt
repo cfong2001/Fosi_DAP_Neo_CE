@@ -1,0 +1,5 @@
+# Whole-module transplants applied by the unified build, in order,
+# after the byte patches in manifest.txt. Each transplant claims its
+# file ranges and the build refuses on any overlap with a byte patch,
+# so every byte of the combined image is attributable to one change.
+vorbis75

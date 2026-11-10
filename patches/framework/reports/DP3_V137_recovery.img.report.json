@@ -1,0 +1,29 @@
+{
+  "mode": "recovery",
+  "input_file": "/home/hatch/workspace/fosi-dap-neo/DP3_V137.img",
+  "output_file": "out/recovery/DP3_V137_recovery.img",
+  "input_sha256": "fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cdfade5e9c6ea3bd71ac6deef",
+  "output_sha256": "aff851b31d6eee55cbd4bb3fc0464ac79f0039ee86ae6723225ac036a157d223",
+  "byte_length": 13631492,
+  "header_date": "20261024",
+  "patches_applied": [],
+  "diff_vs_stock": {
+    "bytes_changed": 6,
+    "ranges": [
+      [
+        "0x2",
+        "0x2"
+      ],
+      [
+        "0xc94002",
+        "0xc94002"
+      ],
+      [
+        "0xd00000",
+        "0xd00003"
+      ]
+    ]
+  },
+  "validation": "firmware_patch.validate() passed (header mirror + trailer CRC + V137 layout)",
+  "scope": "offline package integrity only; device acceptance and boot behaviour are hardware-phase questions"
+}

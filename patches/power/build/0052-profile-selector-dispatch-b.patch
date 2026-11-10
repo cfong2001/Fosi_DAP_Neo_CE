@@ -1,0 +1,30 @@
+# Battery profiles: special-case the profile selector item in module
+# 32's settings apply dispatch, increment path. Companion to
+# 0051-profile-selector-dispatch-a. NOT in the manifest: unstacked,
+# same conditions as 0051.
+name: profile-selector-dispatch-b
+kind: module
+module: 32
+region: code
+address: 0x0307dfe8
+gate: build refuses unless the 6 stock bytes at the target equal
+  `expect`; the finished image must also pass
+  firmware_patch.validate(). Do NOT stack without the module 32
+  segment extension carrying the battery-profile blob
+  (work/power_build, linked at 0x030804ac); the cave target
+  0x0308067a is inside that blob. If the blob's link base or layout
+  changes, regenerate the branch bytes from src/sites.S.
+rationale: Module 32 runs a second copy of its apply dispatch after
+  the value editor's increment path, at exec 0x0307dfe0: 173 takes
+  the EQ path at 0x0307dff8, 196 the brightness path at 0x0307e010,
+  everything else exits at the function epilogue 0x0307e198. The 6
+  bytes at this site are the second compare (cmp r0, #0xc4), its
+  branch to 0x0307e010, and the exit branch. The replacement
+  branches to the cave stub hook_dispatch_b at 0x0308067a, which
+  re-executes the displaced compare and branch, tests the profile
+  item id (0xc5), and on a match calls profile_select with the
+  record's value byte, then exits through 0x0307e198, the same exit
+  this copy's own special cases take. Non-profile items are
+  behaviour-identical to stock.
+expect: c42811d0d4e0
+replace: 02f047bb00bf

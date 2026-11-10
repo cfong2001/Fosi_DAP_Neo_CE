@@ -1,0 +1,11 @@
+# Focus mode (experimental, on the theater variant): focus-init-reset-hook.
+# Design and census: patches/focus_mode/design.md.
+name: focus-init-reset-hook
+kind: module
+module: 27
+region: code
+address: 0x307d1a2
+gate: stock byte precondition; variant-only patch, never in the default manifest; validated by test_focus_mode.py under emulation
+rationale: Player Init posts the first full repaint at this site; the focus reset stub performs that post, then initialises the focus state at SAVEINFO+0x1E4 (hidden clear, activity stamp = OS clock now, wheel snapshot = key-task total-steps word), so every player-window entry starts visible with a fresh idle budget.
+expect: eaf74bf8
+replace: fff759f8

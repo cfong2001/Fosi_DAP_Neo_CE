@@ -1,0 +1,39 @@
+name: Browser marquee emulator
+
+on:
+  pull_request:
+    branches: [main, 'codex/**']
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  marquee:
+    name: Standalone stock-decoder marquee
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned emulator tools
+        run: python -m pip install keystone-engine==0.9.2 capstone==5.0.7 unicorn==2.1.4 pillow==11.3.0
+      - name: Build and verify pinned marquee payload
+        run: |
+          python patches/browser_marquee/build_marquee.py
+          printf '%s  %s\n' 513b3844a9a705312f0087758cceec7d07cf579e6574929b2e52528740d27ab7 patches/browser_marquee/marquee_payload.bin | sha256sum -c -
+          git diff --exit-code -- patches/browser_marquee/manifest.txt 'patches/browser_marquee/03*.patch'
+      - name: Exercise marquee v1 through v5
+        env:
+          FOSI_MARQUEE_NO_TRANSPLANTS: '1'
+        run: |
+          python patches/browser_marquee/test_browser_marquee.py
+          python patches/browser_marquee/test_browser_marquee_tags.py
+          python patches/browser_marquee/test_browser_marquee_v3.py
+          python patches/browser_marquee/test_browser_marquee_v5.py

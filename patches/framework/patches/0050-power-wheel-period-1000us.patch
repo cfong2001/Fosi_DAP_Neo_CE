@@ -1,0 +1,25 @@
+# Power workstream (work/power/power.md job 1a). Raises the wheel/input
+# timer period from 400 us to 1000 us, the Neo equivalent of nanitecfw's
+# wheel-poll change in power_idle.patch. Module 1 key init is the ONLY
+# caller of TimerPeriodSet 0x030510A2 in the whole image (callsites sweep
+# over all 82 modules), so this one immediate is the single funnel for
+# the wheel sampling rate: IRQ 19 (exception 0x23) -> handler 0x03061ACC
+# -> ack Timer0 -> tail-call wheel quadrature decoder 0x03061936.
+# Keys are NOT sampled by this timer (the input task 0x03061AB2 is a
+# SysTick callback, Reload=2 ticks), so key latency is unchanged; the
+# cost is wheel-step detection latency, worst case +1.2 ms (power.md).
+name: power-wheel-period-1000us
+kind: module
+module: 1
+region: code
+address: 0x307d2d6
+gate: build refuses unless the 4 stock bytes at the target equal `expect`;
+  the finished image must also pass firmware_patch.validate()
+rationale: TimerPeriodSet(0, usTick=400, nsTick) at module 1 exec
+  0x0307D2DE; the usTick low word is loaded by the mov.w at 0x0307D2D6
+  (r3 = 0 is the high word, set at 0x0307D2D4). Changing only the low
+  word 400 -> 1000 raises the Timer0 period to 1000 us. Cuts wheel IRQ
+  wakes from 2500/s to 1000/s. Data-only edit (one immediate); reversible
+  by rebuilding from stock without this patch.
+expect: 4ff4c872
+replace: 4ff47a72

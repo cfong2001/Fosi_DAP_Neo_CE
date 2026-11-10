@@ -1,0 +1,77 @@
+=== FUNCTION FUN_03089da6 @ 03089da6 === (GhidraScript)  
+
+undefined4 FUN_03089da6(undefined4 param_1)
+
+{
+  int iVar1;
+  undefined2 *puVar2;
+  int iVar3;
+  undefined4 uVar4;
+  
+  uVar4 = 0;
+  iVar3 = func_0x03059d58(DAT_03089f9c,param_1);
+  puVar2 = DAT_03089f8c;
+  *DAT_03089f8c = (short)iVar3;
+  iVar1 = DAT_03089f80;
+  if (iVar3 == 0) {
+    if (*(char *)(DAT_03089f80 + 0xe) == '\x02') {
+      if ((*(char *)(DAT_03089f80 + 0x1e) != '\0') && (iVar3 = func_0x030535b0(), iVar3 == 1)) {
+        *(undefined1 *)(iVar1 + 0xe) = 4;
+        func_0x03065332();
+        func_0x0305791a(*(undefined1 *)(iVar1 + 0xe));
+      }
+      iVar3 = func_0x03059d58(DAT_03089f9c,param_1);
+      *puVar2 = (short)iVar3;
+    }
+    else {
+      if (*(char *)(DAT_03089f80 + 0xe) != '\x04') {
+        return 0;
+      }
+      if (*(char *)(DAT_03089f80 + 0x1e) == '\0') {
+        return 0;
+      }
+      *(undefined1 *)(DAT_03089f80 + 0xe) = 2;
+      func_0x0305791a(2);
+      func_0x03065336();
+      iVar3 = func_0x03059d58(DAT_03089f9c,param_1);
+      *puVar2 = (short)iVar3;
+    }
+    if (iVar3 == 0) {
+      *(undefined1 *)(iVar1 + 0xe) = 2;
+      func_0x0305791a(2);
+      func_0x03065336();
+      uVar4 = 1;
+      func_0x0306723c(0xee);
+    }
+  }
+  return uVar4;
+}
+
+ (GhidraScript)  
+=== FUNCTION FUN_030890ae @ 030890ae === (GhidraScript)  
+
+undefined4 FUN_030890ae(undefined4 param_1)
+
+{
+  undefined2 *puVar1;
+  int iVar2;
+  undefined4 uVar3;
+  uint uVar4;
+  
+  iVar2 = DAT_0308929c;
+  puVar1 = DAT_03089208;
+  *(uint *)(DAT_0308929c + 0x30) =
+       *DAT_030892a0 + (uint)((ulonglong)DAT_030892a4 * (ulonglong)*DAT_030892a0 >> 0x23) * -10;
+  uVar4 = *(uint *)(*(int *)(iVar2 + 8) + 0x1c);
+  if (uVar4 < 9) {
+                    /* WARNING: Could not recover jumptable at 0x03089102. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+    uVar3 = (*(code *)(&switchD_03089102::switchdataD_03089106 +
+                      (uint)(&switchD_03089102::switchdataD_03089106)[uVar4] * 2))();
+    return uVar3;
+  }
+  FUN_03088d9c(*(undefined4 *)(iVar2 + 4),puVar1[1],*puVar1,param_1);
+  return 0;
+}
+
+ (GhidraScript)  

@@ -1,0 +1,55 @@
+{
+  "schema": 1,
+  "scope": "V137 CE firmware and the configuration-site simulation",
+  "levels": ["source_review", "emulation", "combined_build", "hardware"],
+  "features": [
+    {
+      "id": "theater",
+      "name": "Artwork-derived theater background",
+      "status": {"source_review": "incomplete", "emulation": "verified", "combined_build": "verified", "hardware": "not_run"},
+      "evidence": "The everything build carries the 676-byte payload that samples only the artwork's width (portrait padding excluded) and patches 0045/0046, which restore the theme default on both player no-art exits. test_theater_full.py and test_theater_noart.py pass on the composed image; the previous image fails the no-art test. Source review is incomplete: two module 18 loaders that call artwork setup are reached only through computed addresses, so another window resetting the player background cannot be ruled out (audit_browser_interference.py models it)."
+    },
+    {
+      "id": "playlists",
+      "name": "M3U playlist playback",
+      "status": {"source_review": "incomplete", "emulation": "verified", "combined_build": "verified", "hardware": "not_run"},
+      "evidence": "The five lifecycle defects are fixed with a stateless 1-based resolver hook and hooks 0043/0044 plus the companion whitelist. test_playlist_lifecycle.py runs the composed image's initializer, step function and module 33 start message through start, next across folders, wrap and previous; the previous image fails it. Declined calls are byte- and register-identical to stock. Filename hardening passes host tests under ASan and UBSan. Source review is incomplete for repeat-folder mode, which repeats the current entry's folder. No card playback."
+    },
+    {
+      "id": "transparent_transport",
+      "name": "Transparent transport controls",
+      "status": {"source_review": "verified", "emulation": "verified", "combined_build": "verified", "hardware": "not_run"},
+      "evidence": "In the everything build the eight keyed transport draws fill their rectangle with the ground cell before drawing (patches 0110-0117). test_transport_ground.py shows 0 ghost pixels after segment-only repaints at the centre (B=0) and the computed slot (B=2); the standalone v4 build leaves 58 and 34. The standalone v4 variant keeps the direct repoints and their documented ghosting."
+    },
+    {
+      "id": "focus",
+      "name": "Focus mode",
+      "status": {"source_review": "incomplete", "emulation": "verified", "combined_build": "not_run", "hardware": "not_run"},
+      "evidence": "Standalone variant on the theater variant, rebased after the 676-byte theater payload to 0x0307C258; test_focus_mode.py passes all four gates. Excluded from the everything build: it needs 340 player-resident bytes and the tail has 12. The slide animation is not built and wake behavior is limited to the stock cadence."
+    },
+    {
+      "id": "combined_firmware",
+      "name": "Combined CE firmware",
+      "status": {"source_review": "incomplete", "emulation": "incomplete", "combined_build": "verified", "hardware": "not_run"},
+      "evidence": "The everything image (4d993e89) rebuilds from source in CI, matches the browser builder byte for byte, and passes verify.py check 13 and every feature suite. Emulation covers each feature's paths, not whole-system runs. The image is 6,962 bytes longer than stock and slot acceptance of a longer image is unverified on hardware."
+    },
+    {
+      "id": "eq_presets",
+      "name": "EQ presets from AutoEQ or custom curves",
+      "status": {"source_review": "verified", "emulation": "verified", "combined_build": "verified", "hardware": "not_run"},
+      "evidence": "The stock EQ is a 31-band ISO third-octave graphic EQ (module 36 setup, module 35 coefficients for five rates, module 33 presets); every band's response was computed from the table. Stock's selector, run under Unicorn, gives Classical, Bass Boost and Heavy Metal the Pop, Jazz and flat arrays. test_eq_presets.py shows the fixed selector reads one array per item, unconfigured items keep stock's gains, and the example AutoEQ curve fits at 0.92 dB rms. builder.test.mjs shows the browser fit and image equal build.py's. In the everything image the option changes 47 bytes (the selector, the preset arrays and the CRC) and the pinned image is otherwise intact. No device has played through a changed preset."
+    },
+    {
+      "id": "dac_filter",
+      "name": "DAC digital filter option",
+      "status": {"source_review": "verified", "emulation": "verified", "combined_build": "verified", "hardware": "not_run"},
+      "evidence": "The DAC init reads the settings byte at 0x030232A0+0x2E3 only in its filter selection (0x0305180E..0x03051866) and writes one of the CS43198's five PCM filter values; the patches change the mode-0 immediate at 0x03051814. test_dac_filter.py runs that code under Unicorn for stock and all four builds with the byte at 0..5 and checks every dac_write value. verify.py check 14 and builder.test.mjs confirm each build differs from the default by that byte and the CRC, also inside the everything build. No device has played through a changed filter, and no store to the settings byte was found, though a store through another base register would not show."
+    },
+    {
+      "id": "bt_auto_off",
+      "name": "Bluetooth auto-off option",
+      "status": {"source_review": "verified", "emulation": "verified", "combined_build": "verified", "hardware": "not_run"},
+      "evidence": "Module 0's Bluetooth supervisor (0x03065FD4) switches Bluetooth off and clears SAVEINFO +0x2D4 after 30,000 ticks without a connection; the tick is 10 ms (the screen-off timer scales seconds by 100 on the same counter) and +0x2D3 is the link state set by the module's CQ replies. emu_supervisor.py runs the whole function under Unicorn; test_bt_auto_off.py shows stock off after 30,001 ticks, the 10min build after 60,001, the never build never, and all builds on while connected. verify.py check 15 and builder.test.mjs confirm the byte changes, also in the everything build. Not observed on a device; event 0x1CB's consumer is untraced and the idle current with never is unmeasured."
+    }
+  ]
+}

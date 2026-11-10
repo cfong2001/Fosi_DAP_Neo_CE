@@ -1,0 +1,11 @@
+# Focus mode (experimental, on the theater variant): focus-geometry-hook.
+# Design and census: patches/focus_mode/design.md.
+name: focus-geometry-hook
+kind: module
+module: 27
+region: code
+address: 0x307e8de
+gate: stock byte precondition; variant-only patch, never in the default manifest; validated by test_focus_mode.py under emulation
+rationale: The artwork request function writes the box and destination globals on every call; this hook runs just before the displaced set-source-0 call and, while hidden, overwrites the four globals with the focus geometry (box 190x190, destination (25, 8)). Setup then scales and the picture context persists the new geometry until the next request.
+expect: 05f0d7f8
+replace: fdf727fd

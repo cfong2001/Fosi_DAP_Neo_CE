@@ -1,0 +1,11 @@
+# Browser marquee (experimental variant): marquee-fill-window-ground.
+# Design and census: patches/browser_marquee/design.md.
+name: marquee-fill-window-ground
+kind: module
+module: 0
+region: code
+address: 0x306358c
+gate: stock byte precondition; variant-only patch, never in the default manifest; validated by test_browser_marquee.py under emulation
+rationale: Hook at the paint framework window ground fill call (module 0); the stub substitutes the full background slice while a background is installed, and passes through untouched for every other window. Payload routine at 0x307fb14 in the module 31 code growth (marquee_payload.bin).
+expect: fff7b5fe
+replace: 1cf0c2fa

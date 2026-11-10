@@ -1,0 +1,58 @@
+{
+  "tail_base": "0x307bfb4",
+  "tail_bytes": 2040,
+  "tail_sha256": "6d77b1102cc4a82828ed8c1670eef99de708565e95d585a58dfdeb1d01047a71",
+  "budget": 2044,
+  "pieces": [
+    {
+      "name": "M3U staging (zeros)",
+      "offset": 0,
+      "address": "0x307bfb4",
+      "bytes": 552,
+      "layout": "header 16 + 6 runs x 50 + 59 entries x 4"
+    },
+    {
+      "name": "playlist and theater hooks",
+      "offset": 552,
+      "address": "0x307c1dc",
+      "bytes": 368,
+      "sha256": "cef74de61098517aaa3d951486bc41d14fd5be1a3fb030b5b709dec7cc4d9245",
+      "entries": {
+        "resolver_hook_primary": "0x307c1dc",
+        "resolver_hook_companion": "0x307c1fc",
+        "resolver_hook_count": "0x307c222",
+        "resolver_hook_advance": "0x307c240",
+        "theater_noart_close": "0x307c2b4",
+        "theater_noart_open": "0x307c2c8",
+        "transport_keyed_draw": "0x307c318"
+      }
+    },
+    {
+      "name": "free (zeros)",
+      "offset": 920,
+      "address": "0x307c34c",
+      "bytes": 8
+    },
+    {
+      "name": "theater payload (reset stub + trampoline)",
+      "offset": 928,
+      "address": "0x307c354",
+      "bytes": 676,
+      "sha256": "17a558dde5b96ef305236b436e7ec593d7fbf5a3ff56d8437c168e5dd0399d69",
+      "trampoline": "0x307c3a8"
+    },
+    {
+      "name": "bluetooth blob (audited placement)",
+      "offset": 1604,
+      "address": "0x307c5f8",
+      "bytes": 436,
+      "sha256": "ce6ef701285885efb17b072df128602c3ee5da8359b7b267cd7e1ca92457cf06"
+    },
+    {
+      "name": "spare (zeros, not emitted)",
+      "offset": 2040,
+      "address": "0x307c7ac",
+      "bytes": 4
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+# Hook site: B.W to resolver_hook_companion at 0x0307c1fc
+# in the full build's merged tail.
+name: 0042-resolver-companion-hook
+kind: module
+module: 0
+region: code
+address: 0x305b2c2
+gate: build refuses unless the stock bytes at the target equal
+  `expect`; the finished image must also pass the grown
+  build validator. Requires the full build's merged tail.
+expect: 2de9f047
+replace: 20f09bbf
+rationale: Replaces the fetch entry push.w with a B.W to the tail hook.
+  While a playlist is armed, a mode 1 call returning to the
+  playlist start (0x0307E065) or the play-mode switch
+  (0x0308A6CB) returns its index unchanged, so positions stay
+  playlist positions. Other calls run the stock fetch.

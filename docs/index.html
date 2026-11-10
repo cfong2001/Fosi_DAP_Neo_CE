@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>DAP Neo | CE builder and theme studio</title>
+<link rel="stylesheet" href="./theme.css">
+</head><body>
+<header class="top">
+<div class="eyebrow">Fosi DAP Neo · V137</div>
+<h1>CE builder and theme studio <span class="pill">Browser-only</span></h1>
+<p class="lede">Preview a color scheme on a 240 × 320 simulated player. If you have your own stock V137 firmware, open it locally to inspect all 456 RGB565 assets, export precise color patches, and, in section 4, build a complete CE firmware image with the feature patches you choose. The file stays in your browser; nothing is uploaded, and nothing here flashes a device.</p>
+<p><a href="#firmware-features">Choose playback and firmware features</a></p>
+</header>
+<main class="page">
+<section class="card">
+<h2>1. Choose colors</h2>
+<p class="note">These colors update the simulated playback screen immediately. Actual firmware pixels change only when you add verified resource rules below.</p>
+<div class="palette" id="palette"></div>
+<div class="hint">
+<h3>Firmware file</h3>
+<div class="control"><label for="firmware-input">Select your original DP3_V137.img (not the unified image)</label>
+<input id="firmware-input" type="file" accept=".img,.IMG,application/octet-stream"></div>
+<div id="firmware-status" class="status" role="status">No firmware loaded. You can still try palettes and export a config.</div>
+</div>
+<div class="hint">
+<h3>Import or export</h3>
+<div class="button-row">
+<button class="button main" id="download-theme">Download theme.json</button>
+<button class="button ghost" id="upload-theme">Load theme.json</button>
+<input type="file" id="theme-input" accept=".json,application/json" hidden>
+</div>
+<p class="note">The downloaded JSON is an input to <code>patches/framework/build.py --theme-config theme.json</code>, or to the builder in section 4 below. No flashing occurs here.</p>
+</div>
+<details class="seg"><summary>Safety and limitations</summary>
+<p class="note">The player preview recreates a representative layout, not a captured stock screen. Its colors are illustrative until actual image resources or UI-only drawing constants are verified. Black and 0x00F8 are blocked as possible transparency/key colors. Every resource patch pins its original RGB565 word and pixel count. The theme export on its own does not modify a binary; the builder in section 4 applies the same patches and finalisation as the Python framework, in this page and locally, and an offline test in the repository (tests/builder.test.mjs) checks its output byte for byte against the framework's.</p>
+</details>
+</section>
+<section class="card preview-card">
+<h2>2. Compare simulated screens <small>240 × 320</small></h2>
+<p class="note">Both screens are browser simulations, not firmware emulation or captures. The stock side is a fixed illustrative baseline; the CE side previews your colors and theater setting. Controls affect both. Firmware builds and device behavior may differ.</p>
+<div class="hint theater-controls">
+<label class="checkbox"><input type="checkbox" id="theater-preview"> <span><strong>Theater mode preview</strong><br><span class="note">Preview a color averaged from the top third of the artwork, outlined text and transparent text backgrounds. Preview only; the firmware feature itself is an experimental option in section 4.</span></span></label>
+<div class="control"><label for="theater-art">Choose cover artwork (optional, stays on this device)</label><input type="file" id="theater-art" accept="image/*"></div>
+<div id="theater-status" class="status" role="status">Turn on theater mode to preview the sample artwork.</div>
+</div>
+<div class="simulator">
+<div class="tabbar" aria-label="Simulated screen">
+<button class="button" type="button" data-show="playing" aria-pressed="true">Now playing</button>
+<button class="button" type="button" data-show="library" aria-pressed="false">Library</button>
+<button class="button" type="button" data-show="settings" aria-pressed="false">Settings</button>
+</div>
+<div class="device-comparison">
+<div class="device-column"><h3>Stock baseline</h3><div class="device"><div id="stock-screen" class="screen stock-screen" aria-label="Simulated stock baseline screen"></div></div></div>
+<div class="device-column"><h3>CE preview</h3><div class="device" aria-label="Simulated CE screen">
+<div class="screen" id="screen">
+<section class="screen-panel active" data-panel="playing">
+<div class="statusbar"><span>♫ &nbsp;44.1 kHz · FLAC</span><span>▰▰▰ 92%</span></div>
+<div class="screen-heading"><span>Now playing</span><span class="tiny-badge">HQ</span></div>
+<div class="song-art"><img id="cover-art" alt="" hidden><span class="art-icon">♪</span></div>
+<div class="track-title" id="track-title">Track 02</div>
+<div class="track-artist" id="track-artist">Library / Sample album</div>
+<div class="progressbar"><div id="track-progress"></div></div>
+<div class="timing"><span id="elapsed">1:16</span><span>3:31</span></div>
+<div class="play-actions" aria-hidden="true">
+<span class="transport-icon"><svg viewBox="0 0 24 24"><path d="M5 8a8 8 0 1 1-1 8M5 8V4M5 8h4"/></svg></span>
+<span class="transport-icon"><svg viewBox="0 0 24 24"><path d="M6 5v14M19 5 8 12l11 7z"/></svg></span>
+<strong id="play-indicator" class="is-playing"><svg viewBox="0 0 24 24" class="pause-icon"><path d="M8 5v14M16 5v14"/></svg><svg viewBox="0 0 24 24" class="play-icon"><path d="M8 5v14l11-7z"/></svg></strong>
+<span class="transport-icon"><svg viewBox="0 0 24 24"><path d="M18 5v14M5 5l11 7-11 7z"/></svg></span>
+<span class="transport-icon"><svg viewBox="0 0 24 24"><path d="M19 8a8 8 0 1 0 1 8M19 8V4M19 8h-4"/></svg></span>
+</div>
+</section>
+<section class="screen-panel" data-panel="library">
+<div class="statusbar"><span>Music library</span><span>▰▰▰ 92%</span></div>
+<div class="screen-heading"><span>All tracks</span><span class="tiny-badge">● 128</span></div>
+<div class="list-row"><span class="glyph">♫</span><span>01 Intro</span></div>
+<div class="list-row selected"><span class="glyph">♫</span><span>02 Blue Room</span></div>
+<div class="list-row"><span class="glyph">♫</span><span>03 Night Drive</span></div>
+<div class="list-row"><span class="glyph">♫</span><span>04 Afterglow</span></div>
+<div class="list-row"><span class="glyph">♫</span><span>05 Coming Home</span></div>
+<div class="list-row"><span class="glyph">♫</span><span>06 Outro</span></div>
+<div class="bottom-hint">Hold to return · Scroll to select</div>
+</section>
+<section class="screen-panel" data-panel="settings">
+<div class="statusbar"><span>Settings</span><span>▰▰▰ 92%</span></div>
+<div class="screen-heading"><span>Playback options</span><span class="tiny-badge">OPTIONS</span></div>
+<div class="list-row selected"><span class="glyph">●</span>Theme color</div>
+<div class="list-row"><span class="glyph">◍</span>Display brightness</div>
+<div class="list-row"><span class="glyph">≋</span>Equalizer</div>
+<div class="list-row"><span class="glyph">↻</span>Repeat mode</div>
+<div class="detail-line">Theme changes shown here are a browser preview.</div>
+<div class="bottom-hint">This is a mockup, not stock firmware UI.</div>
+</section>
+<div class="asset-overlay" id="asset-overlay" aria-hidden="true"></div>
+</div>
+</div></div>
+</div>
+<div class="device-buttons" role="group" aria-label="Shared simulated playback controls">
+<button type="button" id="prev-track" aria-label="Previous sample track">◀</button>
+<button type="button" id="toggle-play" aria-label="Toggle simulated playback">Ⅱ</button>
+<button type="button" id="next-track" aria-label="Next sample track">▶</button>
+</div>
+<label class="checkbox"><input type="checkbox" id="project-asset"> Overlay selected firmware resource on simulated screen</label>
+<p class="note">An overlaid bitmap uses its stored dimensions and x/y. Its transparency is not interpreted, since stock RGB565 resources have no alpha channel.</p>
+</div>
+</section>
+<section class="card editor-column">
+<h2>3. Exact firmware resource edits <small id="asset-count">0 / 456</small></h2>
+<p class="note">Load the original firmware to examine its resource table. Select an asset, choose a source RGB565 color and assign a theme role. No global color search-and-replace.</p>
+<div class="control"><label for="filter-assets">Find asset ID or description</label>
+<input id="filter-assets" type="text" autocomplete="off" placeholder="e.g. 6, battery, 240x320"></div>
+<div class="gallery" id="gallery" aria-label="Firmware resource catalog"><p class="note">Choose the firmware file to load the resource catalog.</p></div>
+<div id="asset-detail" hidden>
+<div class="hint">
+<h3 id="asset-title">Resource</h3>
+<p id="asset-metadata" class="note"></p>
+<div class="compare">
+<figure><figcaption>Original</figcaption><canvas id="original-resource" width="1" height="1"></canvas></figure>
+<figure><figcaption>Themed</figcaption><canvas id="modified-resource" width="1" height="1"></canvas></figure>
+</div>
+<div class="control"><label for="swatch-source">Frequent colors (exact RGB565)</label><select id="swatch-source"></select></div>
+<div class="control"><label for="source-word">Source RGB565 value (also accepts a less frequent color)</label><input id="source-word" type="text" value="0xA210" pattern="0x[0-9A-Fa-f]{4}" spellcheck="false"></div>
+<div class="control"><label for="resource-role">Recolor source pixels with</label><select id="resource-role"><option value="background">Background</option><option value="text">Text</option><option value="highlight">Highlight</option><option value="icons">Icons</option><option value="progress_bar">Progress bar</option></select></div>
+<p id="word-count" class="note"></p>
+<div class="button-row"><button class="button main" type="button" id="add-rule">Add exact color rule</button></div>
+</div>
+</div>
+<div class="hint">
+<h3>Selected color rules <span class="count" id="rule-count">0</span></h3>
+<div id="rules" class="rules"><p class="note">No resource changes selected.</p></div>
+</div>
+<div id="editor-status" class="status" role="status">No firmware bytes will change until you add a resource rule.</div>
+</section>
+<section class="card" id="firmware-features">
+<h2>4. Configure and build a CE image</h2>
+<p class="note">Builds from the verified stock image loaded in section 1. Patch preconditions are checked, the header date is stamped 2026-10-23, the duplicate header is re-synced, and the trailer CRC is recomputed and validated. For module extensions, stock-relative theme runs are applied before insertion so they move with their original content. Patch data comes from the repository's patch files.</p>
+<div class="hint">
+<h3>Playback and device features</h3>
+<p class="note">These options are enabled in the default CE build. Clear any option to leave that feature out of the image. Selections apply when you build; they do not change the preview or an existing device.</p>
+<div id="feature-toggles" class="toggle-list"></div>
+<label class="checkbox"><input type="checkbox" id="opt-everything"> <span><strong>Everything build (experimental)</strong><br><span class="note">Composes every feature in one image, as in the repository's <code>patches/full/</code>: all feature patches, both decoder transplants, safer track titles, the design refresh v4 transport glyphs, the browser icon extension and the CE splash mark, theater mode, the Bluetooth shortcut, M3U playlists with playback start and the exit disarm, the lock screen. The tail features share one merged gap tail, so the standalone exclusivity below does not apply to this selection. Requires the Opus data file below. The result is 6,826 bytes longer than stock because the ebook reader is kept intact; whether the update slots accept the longer image is unverified. When this is selected, the other options in this section are ignored. Validated under emulation; hardware pending.</span></span></label>
+<label class="checkbox"><input type="checkbox" id="opt-title-fix"> <span><strong>Safer track titles (experimental)</strong><br><span class="note">Bounds the player title copy and protects short titles from out-of-bounds suffix checks. Tested in emulation; not yet tested on a device.</span></span></label>
+<label class="checkbox"><input type="checkbox" id="opt-theater"> <span><strong>Theater mode (experimental)</strong><br><span class="note">Derived player background from cover art: the player background color is mixed from the top third of the artwork. Not in the default build. Validated under emulation; hardware pending. Cannot be combined with the Bluetooth shortcut, lock-screen or playlist features in this standalone selection; the everything build above combines them through a merged tail (see <code>patches/full/</code>).</span></span></label>
+<label class="checkbox"><input type="checkbox" id="opt-vorbis" checked> <span><strong>Full-precision Vorbis (vorbis75 transplant)</strong><br><span class="note">Replaces the low-accuracy stock Vorbis decoder module with the full-precision build. Applied as the 70,133 changed bytes in 1,275 ranges (about 198 KB of data in this page) and pinned by a SHA-256 of the transplanted module. On by default, as in the framework's unified build.</span></span></label>
+<div class="control" id="eq-presets"><strong>EQ presets (AutoEQ or custom)</strong>
+<p class="note">The player's EQ is a 31-band graphic EQ (20 Hz to 20 kHz, ±12 dB in 1 dB steps), but stock presets use five bands, and Classical, Bass Boost and Heavy Metal apply Pop's curve, Jazz's curve and no EQ. Building with any curve below gives every preset its own curve. Paste or load an AutoEQ <code>GraphicEQ.txt</code> for your headphones (from autoeq.app), or type 31 dB values for a custom curve. Each curve is fitted to the firmware's own band filters; the build status reports the fit error and the peak boost, and a peak above 0 dB can clip. Presets you leave empty keep stock's curve. Menu names stay the same. Checked in emulation, not yet on a device.</p>
+<div id="eq-slots"></div></div>
+<div class="control"><label for="opt-dac-filter"><strong>DAC digital filter</strong></label>
+<p class="note">The CS43198 has five interpolation filters. Stock code can select each of them but no menu offers the choice, so every unit uses the first. Linear phase delays the signal about 0.9 ms at 44.1 kHz, against 0.14 ms for low latency. Slow roll-off starts falling at 18.4 kHz instead of 20 kHz and rejects 64 dB above the band instead of 110. NOS has almost no delay but is up to 3.2 dB down at 20 kHz and has no interpolation filter to remove images above the band. None of these is claimed to sound better. Also applies to the everything build. Checked in emulation, not yet on a device.</p>
+<select id="opt-dac-filter"></select></div>
+<div class="control"><label for="opt-bt-auto-off"><strong>Bluetooth auto-off</strong></label>
+<p class="note">Stock switches Bluetooth off after 5 minutes with no device connected, and the setting then reads Off, so it does not come back by itself. Choose a longer limit, or never. While a device is connected nothing changes. Never leaves the Bluetooth module powered while unpaired; its idle current is not measured. Also applies to the everything build. Checked in emulation, not yet on a device.</p>
+<select id="opt-bt-auto-off"></select></div>
+<label for="opt-opus-data"><strong>Opus playback (replaces WMA)</strong></label>
+<p class="note">Optional: select locally generated Opus range data. Run <code>python3 docs/generate_builder_data.py --ecpatch-dir /path/to/patches --opus-data /path/to/opus.json --opus-data-only</code> with your pinned stock image and decoder inputs and a new output path, then select that JSON below. The file stays on your device. The builder applies the decoder and five matching classifier patches together. WMA playback is removed; Opus tags and cover art are not supported. Decoder validation and device checks remain open.</p>
+<input type="file" id="opt-opus-data" accept=".json,application/json">
+<div class="control"><label for="opt-bt-data"><strong>Bluetooth shortcut (experimental)</strong></label>
+<p class="note">Optional: long-press Power to toggle Bluetooth. Build the local payload with <code>python3 patches/ui_features/build/build_bt_tail.py --output bt-tail.bin</code> using ARM GCC 14.2.1 and binutils 2.44, then select it here. The payload stays local and is checked against the verified build. The dispatcher may pause up to five seconds if Bluetooth does not respond. Emulated; tail loading and shortcut behavior have not been tested on a device.</p>
+<input type="file" id="opt-bt-data" accept=".bin,application/octet-stream"></div>
+<div class="control"><label for="opt-lock-data"><strong>Lock-screen track information (experimental)</strong></label>
+<p class="note">Display track title and elapsed/total time while locked. Run <code>sh patches/ui_features/lockscreen_build/build.sh</code> with ARM GCC 14.2.1 and binutils 2.44, then select <code>patches/ui_features/lockscreen_build/scratch/lockscreen.bin</code>. The file is checked locally. Time updates on display events; window cycling and display placement need device testing.</p>
+<input type="file" id="opt-lock-data" accept=".bin,application/octet-stream"></div>
+<div class="control"><strong>M3U playlists and lock-screen information</strong>
+<p class="note">Available as part of the everything build above: its composed extension implements the playback-start transition and disarms the playlist state on folder, file and tag-library exits, all validated in emulation (see <code>patches/full/</code>). The standalone payload option here remains unavailable; the separate lock-screen option above does not install playlist hooks.</p>
+<label for="opt-playlist-overlay">Module 31 payload</label><input type="file" id="opt-playlist-overlay" accept=".bin,application/octet-stream" disabled>
+<label for="opt-playlist-resolver">Resolver tail payload</label><input type="file" id="opt-playlist-resolver" accept=".bin,application/octet-stream" disabled></div>
+</div>
+<div class="hint">
+<h3>Theme</h3>
+<label class="checkbox"><input type="checkbox" id="opt-theme"> <span><strong>Apply the theme from the editor above</strong><br><span class="note">Uses the palette and the exact color rules currently selected in sections 1 and 3, with the same expected-count and guard-word checks as <code>build.py --theme-config</code>. With no rules selected, this changes nothing.</span></span></label>
+<label class="checkbox"><input type="checkbox" id="opt-ce-mark"> <span><strong>CE splash mark</strong><br><span class="note">Adds the small CE mark to both boot splashes (496 bytes, from <code>patches/theme_editor/ce-mark.json</code>). It is not part of the framework's default build.</span></span></label>
+<h3>Preset schemes</h3>
+<p class="note">Loads a scheme into the editor above and enables the theme option. The v1 schemes are converted from their provisional format; every pixel count is rechecked against the stock image by the generator.</p>
+<div class="button-row" id="preset-buttons"></div>
+</div>
+<div class="button-row"><button class="button main" type="button" id="build-button">Build CE image</button></div>
+<div id="build-status" class="status" role="status">Load your stock DP3_V137.img in section 1 first; the build refuses any other image.</div>
+</section>
+<section class="card">
+<h2>5. Not offered here</h2>
+<p class="note">These features are not complete enough to build from this page. Hardware status overall: nothing has ever been flashed; every result so far is offline.</p>
+<ul class="gated-list">
+<li><strong>Battery profiles</strong>. Removed from the everything build at the owner's direction; no working selector ever existed (see <code>patches/full/README.md</code>).</li>
+</ul>
+</section>
+</main>
+<footer>
+Both simulated screens are illustrative interfaces for comparing colors, not captured device screens or firmware emulators. The site contains generated Vorbis transplant byte ranges, but no complete stock firmware image or exported stock image assets. Only user-selected files are parsed locally. Enable GitHub Pages from the repository's <code>docs/</code> directory to host this page.
+</footer>
+<script type="module" src="./theme.js"></script>
+<script type="module" src="./builder.js"></script>
+</body></html>

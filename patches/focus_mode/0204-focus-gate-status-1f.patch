@@ -1,0 +1,11 @@
+# Focus mode (experimental, on the theater variant): focus-gate-status-1f.
+# Design and census: patches/focus_mode/design.md.
+name: focus-gate-status-1f
+kind: module
+module: 27
+region: code
+address: 0x307f510
+gate: stock byte precondition; variant-only patch, never in the default manifest; validated by test_focus_mode.py under emulation
+rationale: Segment gate: while hidden, the shared focus gate answers the segment event test with 0 without consuming the bit, so the status icons are not drawn over the focus layout and redraw fresh on the wake paint. While visible it tail calls the real test-and-clear.
+expect: e7f7a2fe
+replace: fcf702ff

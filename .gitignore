@@ -1,0 +1,15 @@
+# Python bytecode
+__pycache__/
+*.pyc
+
+# Generated build outputs (rebuilt by the build scripts; pins live in the sources)
+patches/full/out/*.bin
+patches/full/out/*.img
+patches/full/out/*.report.json
+patches/full/build/theater/theater_tail.bin
+patches/theater/build/theater_tail.bin
+patches/framework/out/
+dist/
+patches/focus_mode/focus_tail.bin
+patches/browser_marquee/marquee_payload.bin
+patches/browser_marquee/marquee_tail.bin

@@ -1,0 +1,11 @@
+# Focus mode (experimental, on the theater variant): focus-key-hook.
+# Design and census: patches/focus_mode/design.md.
+name: focus-key-hook
+kind: module
+module: 27
+region: code
+address: 0x3080af6
+gate: stock byte precondition; variant-only patch, never in the default manifest; validated by test_focus_mode.py under emulation
+rationale: The Key wrapper call to the per-key function is the one point every key event for this window passes, before the sleep-state fork to the main or alternate handler. The focus key stub runs the displaced function for its side effects, restamps activity, and returns its result unchanged while visible. While hidden it wakes (posts 0x39 and 0x3B) and swallows the key by unwinding both frames, so neither handler performs the key action.
+expect: e1f70ef8
+replace: fbf7ebfb

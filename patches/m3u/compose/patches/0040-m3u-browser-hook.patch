@@ -1,0 +1,48 @@
+# M3U bridge: divert module 31's node-action classification call to
+# the hook trampoline at the base of the module 31 segment extension
+# payload (composition: work/mod31_compose/mod31_compose.md). This
+# scratch copy re-pins the branch target from the withdrawn module 0
+# extension placement (0x03079C14, live runtime workspace) to the
+# module 31 extension; the site, the displaced instruction and the
+# trampoline contract are unchanged from the original 0040.
+name: m3u-browser-hook
+kind: module
+module: 31
+region: code
+address: 0x0307DF1A
+gate: Do NOT stack alone. Requires the module 31 segment extension
+  build (--grow 31:code: with the composed payload at
+  work/mod31_compose/payload.bin): trampoline at exec 0x0307EE48,
+  bridge entry m3u_bridge_node_action at 0x0307EE88. If the payload
+  layout changes, regenerate the replacement bytes by assembling
+  B.W to the trampoline base at the site address (the composition
+  build emits them as build/site40.bin). With the bridge declining
+  (non-M3U node, FS type 3 volume, unresolvable or over-cap
+  playlist), the patched firmware is behaviour-identical to stock:
+  the trampoline's no-match path reproduces the displaced call
+  exactly.
+expect: fff76df9
+replace: 00f095bf
+rationale: The site is the single BL inside module 31's node-action
+  function 0x0307DEB8 that dispatches on the selected node's class
+  byte: stock bytes fff76df9 = BL 0x0307D1F8, executed with
+  r0 = r5 = class byte (read from node +0x4E at 0x0307DF06),
+  r4 = node pointer, r7 = browser state, r8 = play context
+  0x03023980. No BL precedes it in the function, so lr still holds
+  the function caller's return address. The replacement 00f095bf =
+  B.W 0x0307EE48 enters the payload trampoline, which (1) tests the
+  node's 8.3 extension at node +0x57..+0x59 for "M3U", (2) on no
+  match calls 0x0307D1F8 with the original argument and resumes
+  stock flow at 0x0307DF1E (the instruction after the displaced BL)
+  with every register the stock continuation reads in its stock
+  state, and (3) on match calls the bridge entry at 0x0307EE88 and,
+  if the bridge reports the node handled, leaves through the
+  function's own common exit at 0x0307E0C8 (add sp, #0x4C; pop.w)
+  with r0 = 1, the same value the stock folder-play success path
+  sets at 0x0307E0C6. The trampoline (64 bytes, filling its slot
+  exactly at this placement, assembled with rz-asm and audited
+  instruction by instruction against its Capstone decode in the
+  composition build) preserves
+  all callee-saved registers and balances its own push/pop on both
+  paths. .m3u8 long-name files are not matched by the SFN test; they
+  fall through to stock until the LFN field is pinned.

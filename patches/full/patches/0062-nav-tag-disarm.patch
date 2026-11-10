@@ -1,0 +1,24 @@
+# Navigation disarm, tag library context commit: clear the M3U
+# staging flag when module 24 commits a new library play context.
+name: nav-tag-disarm
+kind: module
+module: 24
+region: code
+address: 0x0307ec72
+gate: build refuses unless the 4 stock bytes at the target equal
+  `expect`. Do NOT stack without the module 24 segment extension
+  (--grow 24:code: with tag24.bin) carrying the stub at the branch
+  target 0x0307EDEC, the first byte past module 24's stock code.
+expect: a5f8f2c0
+replace: 00f0bbb8
+rationale: Module 24 constructs the play context for a selected
+  library list; at this site it stores the category from
+  0x030235C0 into the play context at +0xF2 (strh.w ip, [r5, #0xF2]).
+  The stub clears the staging flag byte at 0x0307BFB4, reproduces
+  the displaced store and returns to 0x0307EC76. A same-track
+  branch returns earlier and never reaches the site, so resuming
+  the same track does not disarm. Source:
+  patches/navigation/tag_exit.S, proven by
+  patches/navigation/test_tag_exit.py (ten category values, both
+  flag states) and re-proven at this placement by the full build's
+  lifecycle audit.

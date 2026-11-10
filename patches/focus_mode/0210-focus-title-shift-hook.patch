@@ -1,0 +1,11 @@
+# Focus mode (experimental, on the theater variant): focus-title-shift-hook.
+# Design and census: patches/focus_mode/design.md.
+name: focus-title-shift-hook
+kind: module
+module: 27
+region: code
+address: 0x307f9f0
+gate: stock byte precondition; variant-only patch, never in the default manifest; validated by test_focus_mode.py under emulation
+rationale: The title rect is built on the painter stack and consumed by the measure call replaced here and by the draw and marquee code after it. While hidden the stub sets the rect top and bottom to the focus values 232 and 247 before tail calling the measure function, moving the title (and any marquee) into the space the progress bar and transport row vacated. Set, not add: the stock suffix-trim path can loop back and measure the same rect twice in one paint.
+expect: e2f7b3ff
+replace: fcf7b4fc

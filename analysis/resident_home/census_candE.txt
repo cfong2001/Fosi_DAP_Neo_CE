@@ -1,0 +1,5 @@
+RANGE 0x0307bfb0..0x0307c7b0: 1 direct-referenced addrs, 1023 direct-unreferenced
+Direct-unreferenced runs (>=16 B):
+  0x0307bfb2  2046 bytes
+Direct-referenced addresses:
+  0x0307bfb0

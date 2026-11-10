@@ -1,0 +1,12 @@
+# Whole-module transplants for the Opus variant build, in order,
+# after the byte patches in this directory's manifest.txt: the
+# default build's transplant (vorbis75) PLUS opus72, the module
+# 72 WMA-to-Opus transplant.
+#
+# Matched-set rule: use ONLY together with
+# patches/opus_swap/manifest.txt, which carries the five
+# classifier rename patches the transplant needs. The default
+# build's own list (patches/framework/patches/transplants.txt)
+# is unchanged and does not include opus72.
+vorbis75
+opus72

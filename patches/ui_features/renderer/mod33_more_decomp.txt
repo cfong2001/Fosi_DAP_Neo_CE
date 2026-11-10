@@ -1,0 +1,410 @@
+=== FUNCTION FUN_03089e2e @ 03089e2e === (GhidraScript)  
+
+/* WARNING: Control flow encountered bad instruction data */
+/* WARNING: Possible PIC construction at 0x0308a12c: Changing call to branch */
+/* WARNING: Possible PIC construction at 0x0308a07a: Changing call to branch */
+/* WARNING: Removing unreachable block (ram,0x0308a130) */
+/* WARNING: Removing unreachable block (ram,0x0308a1a2) */
+/* WARNING: Removing unreachable block (ram,0x0308a1a4) */
+/* WARNING: Removing unreachable block (ram,0x0308a1a8) */
+
+void FUN_03089e2e(short *param_1)
+
+{
+  int iVar1;
+  int iVar2;
+  short sVar3;
+  int iVar4;
+  int iVar5;
+  ushort *puVar6;
+  undefined2 *puVar7;
+  int iVar8;
+  uint *puVar9;
+  int iVar10;
+  uint uVar11;
+  int iVar12;
+  
+  func_0x030670e0(0x23);
+  func_0x0306727e(0x2b);
+  *DAT_03089fa0 = 0xff;
+  if (*DAT_03089fa4 == '\0') {
+    *DAT_03089fa4 = '\x01';
+    func_0x030526f8(2,1,0);
+    func_0x03056098(2,1);
+    func_0x030560d2(2,1);
+    func_0x030526f8(1,4,0);
+    func_0x03056098(1,4);
+    func_0x030560d2(1,4,0);
+    func_0x030526f8(2,2,0);
+    func_0x03056098(2,2,1);
+    func_0x030560d2(2,2,1);
+    func_0x03064944(2);
+    func_0x03064944(1);
+    func_0x03064944(8);
+    func_0x030526f8(2,1,0);
+    func_0x03056098(2,1);
+    func_0x030560d2(2,1,0);
+    *DAT_03089fa8 = 1;
+    func_0x030611e0();
+    func_0x03051a46();
+    func_0x03055dcc(1,2,1,48000,0,0x17,0);
+    func_0x0305094e(1,4);
+    func_0x03064944(100);
+    func_0x03050a00(1,4);
+    func_0x0305261c(4,1);
+  }
+  func_0x0306727e(0x2b);
+  puVar7 = DAT_03089f98;
+  iVar5 = DAT_03089f88;
+  *(undefined2 *)(DAT_03089f88 + 2) = 0;
+  *puVar7 = 4;
+  func_0x0306727e(0x10a);
+  iVar4 = DAT_03089f80;
+  *(undefined4 *)(iVar5 + 0x30) = 0;
+  if (param_1 == (short *)0x0) {
+LAB_03089fba:
+    *(undefined2 *)(iVar4 + 0x5a) = 1;
+  }
+  else {
+    sVar3 = *param_1;
+    *(short *)(iVar4 + 0x5a) = sVar3;
+    if (sVar3 == -1 || sVar3 == 0) goto LAB_03089fba;
+  }
+  puVar6 = DAT_03089f8c;
+  *(uint *)(iVar5 + 0x10) = *(ushort *)(iVar4 + 0x5a) - 1;
+  if (puVar6[0x79] == 99) {
+    iVar12 = FUN_03089da6(3);
+    if (iVar12 != 0) {
+      halt_baddata();
+    }
+  }
+  else if (puVar6[0x79] == 6) {
+    iVar12 = func_0x03059d58(DAT_0308a3c8,1);
+    *puVar6 = (ushort)iVar12;
+    if (iVar12 == 0) {
+                    /* WARNING: Bad instruction - Truncating control flow here */
+      halt_baddata();
+    }
+  }
+  puVar7 = DAT_0308a3d0;
+  iVar12 = DAT_0308a3cc;
+  *(int *)(iVar5 + 8) = DAT_0308a3cc;
+  *puVar7 = 0;
+  *(uint *)(iVar12 + 0x1c) = (uint)*(byte *)(iVar4 + 0x61);
+  *(uint *)(iVar12 + 0x20) = (uint)*(byte *)(iVar4 + 99);
+  iVar8 = DAT_0308a3d4;
+  *(undefined1 *)(iVar12 + 0x28) = *(undefined1 *)(iVar12 + -8 + (uint)*(byte *)(iVar4 + 0x68));
+  *(undefined1 *)(iVar8 + 0xc) = *(undefined1 *)(iVar12 + -8 + (uint)*(byte *)(iVar4 + 0x68));
+  iVar10 = 0;
+  do {
+    iVar1 = iVar10 * 2;
+    iVar2 = iVar10 * 2;
+    iVar10 = iVar10 + 1;
+    *(undefined2 *)(iVar12 + iVar2 + 0x2b) =
+         *(undefined2 *)(iVar12 + 0xa0 + *(short *)(iVar4 + iVar1 + 0x6b) * 2);
+  } while (iVar10 < 5);
+  func_0x03054e34(iVar8 + 0xc,iVar12 + 0x28,0xd);
+  if (*(uint *)(iVar12 + 0x1c) < 3) {
+    *(undefined4 *)(iVar12 + 0x24) = 2;
+  }
+  if (puVar6[0x79] == 99 || puVar6[0x79] == 6) {
+    func_0x0305d048(DAT_0308a3ec,*(undefined2 *)(iVar4 + 0x5a),*(undefined2 *)(iVar12 + 0x24),
+                    *(undefined2 *)(iVar12 + 0x20),DAT_0308a3c8);
+    if (puVar6[0x79] != 99) goto LAB_0308a0a8;
+  }
+  else {
+    puVar6[6] = (ushort)*(byte *)(iVar4 + 99);
+    *(undefined4 *)(puVar6 + 8) = DAT_0308a3d8;
+    puVar9 = DAT_0308a3e8;
+    *DAT_0308a3dc = 1;
+    *DAT_0308a3e0 = 1;
+    *DAT_0308a3e4 = 1;
+    *puVar9 = (uint)puVar6[1];
+LAB_0308a0a8:
+    if (0x2000 < *puVar6) {
+      *puVar6 = 0x2000;
+      if (0x2000 < puVar6[1]) {
+        puVar6[1] = 0x1fff;
+      }
+    }
+  }
+  if (*(int *)(*(int *)(iVar5 + 8) + 0x20) != 1) {
+    halt_baddata();
+  }
+  *(undefined4 *)(iVar5 + 0xc) = 1;
+  puVar9 = DAT_0308a3f0;
+  uVar11 = (uint)*puVar6;
+  if (uVar11 != 1) {
+    if (uVar11 != 2) {
+      iVar12 = 0;
+      *(uint *)(iVar5 + 0x44) = *DAT_0308a3f0 - uVar11 * (*DAT_0308a3f0 / uVar11);
+      do {
+        if ((*(int *)(iVar4 + 100) != *(int *)(iVar5 + 0x44)) &&
+           (puVar6[1] - 1 != *(int *)(iVar5 + 0x44))) break;
+        *(uint *)(iVar5 + 0x44) = *puVar9 - (uint)*puVar6 * (*puVar9 / (uint)*puVar6);
+        func_0x03064944(0xf);
+        iVar12 = iVar12 + 1;
+      } while (iVar12 < 200);
+      goto LAB_0308a11a;
+    }
+    if (puVar6[1] == 1) {
+      *(undefined4 *)(iVar5 + 0x44) = 1;
+      goto LAB_0308a11a;
+    }
+  }
+  *(undefined4 *)(iVar5 + 0x44) = 0;
+LAB_0308a11a:
+  FUN_03088416(*puVar6,*(undefined4 *)(iVar5 + 0x44));
+  *(undefined4 *)(iVar4 + 100) = *(undefined4 *)(iVar5 + 0x44);
+  *(undefined4 *)(iVar5 + 0x48) = 1;
+                    /* WARNING: Bad instruction - Truncating control flow here */
+  halt_baddata();
+}
+
+ (GhidraScript)  
+WARN  Decompiling 0308a926, pcode error at 0306cbe8: Could not follow disassembly flow into non-existing memory at 0306cbe8 (DecompileCallback)  
+=== FUNCTION FUN_0308a926 @ 0308a926 === (GhidraScript)  
+
+/* WARNING: Control flow encountered bad instruction data */
+
+void FUN_0308a926(void)
+
+{
+  char cVar1;
+  char *pcVar2;
+  char *pcVar3;
+  short *psVar4;
+  bool bVar5;
+  
+  *DAT_0308aa68 = 0;
+  pcVar3 = DAT_0308aa74;
+  pcVar2 = DAT_0308aa70;
+  if (*DAT_0308aa6c == 0) {
+    return;
+  }
+  cVar1 = *DAT_0308aa70;
+  bVar5 = cVar1 == '\x01';
+  if (bVar5) {
+    cVar1 = *DAT_0308aa74;
+  }
+  if (bVar5 && cVar1 == '\0') {
+    *DAT_0308aa70 = '\0';
+    func_0x030526f8(2,8,0);
+    func_0x03056098(2,8,1);
+    func_0x030560d2(2,8,1);
+    func_0x030526f8(1,4,0);
+    func_0x03056098(1,4);
+    func_0x030560d2(1,4,0);
+    func_0x03051736();
+    func_0x030526f8(2,1,0);
+    func_0x03056098(2,1);
+    func_0x030560d2(2,1);
+    *DAT_0308aa78 = 0;
+    func_0x030526f8(2,2,0);
+    func_0x03056098(2,2,1);
+    func_0x030560d2(2,2,0);
+  }
+  FUN_03089c86(0xea,1);
+  psVar4 = DAT_0308aa7c;
+  if (*DAT_0308aa7c != 3) {
+    func_0x03065188();
+  }
+  *psVar4 = 4;
+  if (*pcVar2 == '\0') {
+    func_0x030526f8(2,2,0);
+    func_0x03056098(2,2,1);
+    func_0x030560d2(2,2,0);
+  }
+  *pcVar3 = '\0';
+  func_0x03066538(0x1a);
+  func_0x03056d8e(0x1a);
+  func_0x03056ce4(0x1a);
+  func_0x0306cf3e(0,2);
+  func_0x03066538(0x1b);
+  func_0x03056d8e(0x1b);
+  func_0x03056ce4(0x1b);
+  func_0x0306cf3e(0,4);
+                    /* WARNING: Bad instruction - Truncating control flow here */
+  halt_baddata();
+}
+
+ (GhidraScript)  
+WARN  Decompiling 03089416, pcode error at 0306d0ac: Could not follow disassembly flow into non-existing memory at 0306d0ac (DecompileCallback)  
+=== FUNCTION FUN_03089416 @ 03089416 === (GhidraScript)  
+
+/* WARNING: Control flow encountered bad instruction data */
+
+void FUN_03089416(void)
+
+{
+  int iVar1;
+  int iVar2;
+  int *piVar3;
+  undefined4 uVar4;
+  undefined4 *puVar5;
+  int iVar6;
+  undefined4 *puVar7;
+  undefined4 uVar8;
+  undefined4 uVar9;
+  
+  uVar4 = func_0x0306cfa0(0,1);
+  puVar5 = (undefined4 *)func_0x0306cfcc(0,1);
+  iVar6 = DAT_030896f0;
+  *(undefined4 *)(DAT_030896f0 + 0x4c) = uVar4;
+  *(undefined4 **)(iVar6 + 0x50) = puVar5;
+  func_0x0306cf90(0,2);
+  piVar3 = DAT_03089710;
+  iVar2 = DAT_0308970c;
+  iVar1 = DAT_03089708;
+  iVar6 = DAT_030896f0;
+  switch(uVar4) {
+  case 2:
+    *(undefined4 *)(DAT_030896f0 + 0x6c) = 1;
+    *(undefined4 *)(iVar6 + 0x5c) = 1;
+    return;
+  case 3:
+    uVar4 = puVar5[1];
+    uVar8 = puVar5[2];
+    uVar9 = puVar5[3];
+    *(undefined4 *)(DAT_03089708 + 0x30c) = *puVar5;
+    *(undefined4 *)(iVar1 + 0x310) = uVar4;
+    *(undefined4 *)(iVar1 + 0x314) = uVar8;
+    *(undefined4 *)(iVar1 + 0x318) = uVar9;
+    uVar4 = puVar5[5];
+    uVar8 = puVar5[6];
+    uVar9 = puVar5[7];
+    *(undefined4 *)(iVar1 + 0x31c) = puVar5[4];
+    *(undefined4 *)(iVar1 + 800) = uVar4;
+    *(undefined4 *)(iVar1 + 0x324) = uVar8;
+    *(undefined4 *)(iVar1 + 0x328) = uVar9;
+    uVar4 = puVar5[10];
+    uVar8 = puVar5[0xb];
+    *(undefined4 *)(iVar1 + 0x32c) = puVar5[8];
+    iVar6 = DAT_0308970c;
+    *(undefined4 *)(iVar1 + 0x334) = uVar4;
+    *(undefined4 *)(iVar1 + 0x338) = uVar8;
+    *(undefined4 *)(iVar6 + 0x24) = 1;
+    *(undefined4 *)(iVar6 + -0x6a0) = 0;
+    *(undefined4 *)(iVar6 + -0x6b0) = 1;
+    return;
+  case 4:
+  case 7:
+  case 9:
+  case 0xb:
+  case 0xd:
+  case 0x10:
+    return;
+  case 5:
+    uVar4 = puVar5[1];
+    uVar8 = puVar5[2];
+    uVar9 = puVar5[3];
+    *(undefined4 *)(DAT_03089708 + 0x30c) = *puVar5;
+    *(undefined4 *)(iVar1 + 0x310) = uVar4;
+    *(undefined4 *)(iVar1 + 0x314) = uVar8;
+    *(undefined4 *)(iVar1 + 0x318) = uVar9;
+    uVar4 = puVar5[5];
+    uVar8 = puVar5[6];
+    uVar9 = puVar5[7];
+    *(undefined4 *)(iVar1 + 0x31c) = puVar5[4];
+    *(undefined4 *)(iVar1 + 800) = uVar4;
+    *(undefined4 *)(iVar1 + 0x324) = uVar8;
+    *(undefined4 *)(iVar1 + 0x328) = uVar9;
+    uVar4 = puVar5[8];
+    *(undefined4 *)(iVar1 + 0x338) = puVar5[0xb];
+    *(undefined4 *)(iVar1 + 0x32c) = uVar4;
+    *(undefined4 *)(iVar1 + 0x330) = 1;
+    *(undefined4 *)(iVar1 + 0x334) = 0;
+    if (*piVar3 == 1) {
+      func_0x030666ba();
+    }
+    iVar6 = DAT_030896f0;
+    *piVar3 = 0;
+    *(undefined4 *)(iVar6 + 0x54) = 1;
+    return;
+  case 6:
+    *(undefined4 *)(DAT_0308970c + 0x24) = 1;
+    *(undefined4 *)(iVar2 + 0x2c) = 1;
+    if (*piVar3 == 1) {
+      func_0x030666ba();
+    }
+    *piVar3 = 0;
+    *(undefined4 *)(DAT_030896f0 + 0x54) = 1;
+    return;
+  case 8:
+    uVar4 = puVar5[1];
+    uVar8 = puVar5[2];
+    uVar9 = puVar5[3];
+    puVar7 = (undefined4 *)(DAT_03089708 + 0x32c);
+    *(undefined4 *)(DAT_03089708 + 0x30c) = *puVar5;
+    *(undefined4 *)(iVar1 + 0x310) = uVar4;
+    *(undefined4 *)(iVar1 + 0x314) = uVar8;
+    *(undefined4 *)(iVar1 + 0x318) = uVar9;
+    uVar4 = puVar5[5];
+    uVar8 = puVar5[6];
+    uVar9 = puVar5[7];
+    *(undefined4 *)(iVar1 + 0x31c) = puVar5[4];
+    *(undefined4 *)(iVar1 + 800) = uVar4;
+    *(undefined4 *)(iVar1 + 0x324) = uVar8;
+    *(undefined4 *)(iVar1 + 0x328) = uVar9;
+    uVar4 = puVar5[9];
+    uVar8 = puVar5[10];
+    uVar9 = puVar5[0xb];
+    *puVar7 = puVar5[8];
+    *(undefined4 *)(iVar1 + 0x330) = uVar4;
+    *(undefined4 *)(iVar1 + 0x334) = uVar8;
+    *(undefined4 *)(iVar1 + 0x338) = uVar9;
+    *(undefined4 *)(DAT_030896f0 + 0x60) = 1;
+    return;
+  case 10:
+    uVar4 = puVar5[1];
+    uVar8 = puVar5[2];
+    uVar9 = puVar5[3];
+    puVar7 = (undefined4 *)(DAT_03089708 + 0x32c);
+    *(undefined4 *)(DAT_03089708 + 0x30c) = *puVar5;
+    *(undefined4 *)(iVar1 + 0x310) = uVar4;
+    *(undefined4 *)(iVar1 + 0x314) = uVar8;
+    *(undefined4 *)(iVar1 + 0x318) = uVar9;
+    uVar4 = puVar5[5];
+    uVar8 = puVar5[6];
+    uVar9 = puVar5[7];
+    *(undefined4 *)(iVar1 + 0x31c) = puVar5[4];
+    *(undefined4 *)(iVar1 + 800) = uVar4;
+    *(undefined4 *)(iVar1 + 0x324) = uVar8;
+    *(undefined4 *)(iVar1 + 0x328) = uVar9;
+    uVar4 = puVar5[9];
+    uVar8 = puVar5[10];
+    uVar9 = puVar5[0xb];
+    *puVar7 = puVar5[8];
+    *(undefined4 *)(iVar1 + 0x330) = uVar4;
+    *(undefined4 *)(iVar1 + 0x334) = uVar8;
+    *(undefined4 *)(iVar1 + 0x338) = uVar9;
+    *(undefined4 *)(DAT_030896f0 + 100) = 1;
+    return;
+  case 0xc:
+    *(undefined4 *)(DAT_030896f0 + 0x58) = 1;
+    return;
+  case 0xe:
+    *(undefined4 *)(DAT_030896f0 + 0x68) = 1;
+    return;
+  case 0xf:
+    *(undefined4 **)(DAT_030896f0 + 0x80) = puVar5;
+    iVar6 = DAT_03089714 + puVar5[2] * 0x27e;
+    *(undefined4 *)(iVar6 + 0x20) = *puVar5;
+    *(undefined4 *)(iVar6 + 0x18) = puVar5[1];
+    func_0x0306d0d8(0x10,0,2);
+    break;
+  case 0x11:
+    iVar6 = DAT_03089714 + (int)puVar5 * 0x27e;
+    puVar5 = *(undefined4 **)(DAT_030896f0 + 0x80);
+    puVar5[1] = *(undefined4 *)(iVar6 + 0x18);
+    *puVar5 = *(undefined4 *)(iVar6 + 0x20);
+    func_0x0306d0d8(0x12,0,2);
+    break;
+  default:
+    return;
+  }
+                    /* WARNING: Bad instruction - Truncating control flow here */
+  halt_baddata();
+}
+
+ (GhidraScript)  

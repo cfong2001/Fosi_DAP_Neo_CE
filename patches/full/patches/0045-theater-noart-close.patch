@@ -1,0 +1,19 @@
+# Hook site: B.W to theater_noart_close at 0x0307c2b4
+# in the full build's merged tail.
+name: 0045-theater-noart-close
+kind: module
+module: 27
+region: code
+address: 0x307e972
+gate: build refuses unless the stock bytes at the target equal
+  `expect`; the finished image must also pass the grown
+  build validator. Requires the full build's merged tail.
+expect: 346098f8
+replace: fdf79fbc
+rationale: The player's artwork loader skips artwork setup when the
+  locator finds no picture, so the theater reset never ran and
+  the background kept the previous track's color. Replaces
+  "str r4, [r6]" and the first half of "ldrb.w r0, [r8]" with a
+  B.W to a stub that runs both, restores the theme background,
+  disarms sampling and resumes at 0x0307E978. Nothing branches
+  to 0x0307E976.

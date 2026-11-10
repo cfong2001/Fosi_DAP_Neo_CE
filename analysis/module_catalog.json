@@ -1,0 +1,6548 @@
+{
+ "source_image": "/home/hatch/workspace/fosi-dap-neo/DP3_V137.img",
+ "source_sha256": "fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cdfade5e9c6ea3bd71ac6deef",
+ "source_size": 13631492,
+ "module_load_base": 50659328,
+ "module_count": 82,
+ "confidence_counts": {
+  "proven": 32,
+  "unknown": 28,
+  "likely": 22
+ },
+ "identical_code_groups": [
+  [
+   54,
+   56,
+   57
+  ]
+ ],
+ "pairwise_code_identity": {
+  "79_vs_80": 0.5028,
+  "73_vs_77": 0.0346
+ },
+ "sanity_checks": [
+  {
+   "check": "module_count == 82",
+   "pass": true,
+   "detail": "82"
+  },
+  {
+   "check": "sha256 matches known stock image",
+   "pass": true,
+   "detail": "fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cdfade5e9c6ea3bd71ac6deef"
+  },
+  {
+   "check": "module 0 vector SP/reset",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "module 1 has fw1/fw2 validator strings",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "module 8 has RKnanoFW constant",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "module 11 USB VID/PID 0x071a:0x3289",
+   "pass": true,
+   "detail": "071a:3289"
+  },
+  {
+   "check": "module 12 MSC descriptor + inquiry",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "module 22 anchor geometry",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "module 39 casefold head + zero tail",
+   "pass": true,
+   "detail": "zero_fraction=0.9795"
+  },
+  {
+   "check": "modules 71-80 all HiFi + vector SP 0x01022000",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "modules 71/72/73 Lib: self-names",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "module 76 FLAC log density >= 10",
+   "pass": true,
+   "detail": "22"
+  },
+  {
+   "check": "modules 54/56/57 code byte-identical",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "empty records (no code/data payload) == 19",
+   "pass": true,
+   "detail": "19"
+  }
+ ],
+ "modules": [
+  {
+   "index": 0,
+   "code_load": 50828460,
+   "code_exec": 50659328,
+   "code_len": 171028,
+   "data_load": 51015872,
+   "data_exec": 50348032,
+   "data_len": 6569,
+   "bss_exec": 50354604,
+   "bss_len": 126484,
+   "code_file_offset": 169644,
+   "data_file_offset": 357056,
+   "code_sha256": "2d33a8965643ed7da76c1a73b8d9356a157781a593472549f3c12f4f89526250",
+   "data_sha256": "5bc12264cbff5099eeb9350fe5f4dc3f7a588717bcb0391bdbb2ca6d55843656",
+   "has_cortexm_vector_table": true,
+   "vector": {
+    "initial_sp": "0x3004000",
+    "reset_vector": "0x3061f8b",
+    "reset_address": "0x3061f8a",
+    "default_handler": "0x305fcc5",
+    "reset_within_exec_window": true,
+    "reset_is_core_local_offset": false
+   },
+   "code_entropy": 5.754,
+   "data_entropy": 3.768,
+   "code_zero_fraction": 0.3187,
+   "code_nonzero_span": {
+    "first": 1,
+    "end": 171028
+   },
+   "ascii_string_count": 1553,
+   "distinctive_string_count": 46,
+   "distinctive_strings": [
+    {
+     "text": "Dma Channel error: ch = %d!",
+     "region": "code",
+     "offset_in_region": 65976,
+     "file_offset": 235620,
+     "score": 11
+    },
+    {
+     "text": " file open err: clus = %d, index =%d",
+     "region": "code",
+     "offset_in_region": 36257,
+     "file_offset": 205901,
+     "score": 10
+    },
+    {
+     "text": "..\\..\\Common\\System\\Os\\interrupt.c",
+     "region": "code",
+     "offset_in_region": 91872,
+     "file_offset": 261516,
+     "score": 8
+    },
+    {
+     "text": "i2c_write: buf == NULL ,error return",
+     "region": "code",
+     "offset_in_region": 1324,
+     "file_offset": 170968,
+     "score": 7
+    },
+    {
+     "text": "i2c_write: len = 0 ,error return",
+     "region": "code",
+     "offset_in_region": 1540,
+     "file_offset": 171184,
+     "score": 7
+    },
+    {
+     "text": "i2c write error happen (noACK)! ",
+     "region": "code",
+     "offset_in_region": 12052,
+     "file_offset": 181696,
+     "score": 7
+    },
+    {
+     "text": "Dma Ch%d size so large!",
+     "region": "code",
+     "offset_in_region": 66008,
+     "file_offset": 235652,
+     "score": 7
+    },
+    {
+     "text": "Dma Channel Busy: ch = %d!",
+     "region": "code",
+     "offset_in_region": 66036,
+     "file_offset": 235680,
+     "score": 7
+    },
+    {
+     "text": "i2c_write: buf == NULL ,error return",
+     "region": "code",
+     "offset_in_region": 68304,
+     "file_offset": 237948,
+     "score": 7
+    },
+    {
+     "text": "i2c_write: len = 0 ,error return",
+     "region": "code",
+     "offset_in_region": 68344,
+     "file_offset": 237988,
+     "score": 7
+    },
+    {
+     "text": "USB:wrm Reset",
+     "region": "code",
+     "offset_in_region": 92969,
+     "file_offset": 262613,
+     "score": 7
+    },
+    {
+     "text": "USB:Detect Start",
+     "region": "code",
+     "offset_in_region": 93001,
+     "file_offset": 262645,
+     "score": 7
+    },
+    {
+     "text": "USB:Detect TimeOut",
+     "region": "code",
+     "offset_in_region": 93021,
+     "file_offset": 262665,
+     "score": 7
+    },
+    {
+     "text": "USB:Detect Ok",
+     "region": "code",
+     "offset_in_region": 93041,
+     "file_offset": 262685,
+     "score": 7
+    },
+    {
+     "text": "======Check FIDv2.3 Error",
+     "region": "code",
+     "offset_in_region": 112401,
+     "file_offset": 282045,
+     "score": 7
+    },
+    {
+     "text": " 00 CheckMbr Error",
+     "region": "code",
+     "offset_in_region": 123813,
+     "file_offset": 293457,
+     "score": 7
+    },
+    {
+     "text": "Error loading operating system",
+     "region": "data",
+     "offset_in_region": 832,
+     "file_offset": 357888,
+     "score": 7
+    },
+    {
+     "text": "total clk = %u",
+     "region": "code",
+     "offset_in_region": 16996,
+     "file_offset": 186640,
+     "score": 6
+    },
+    {
+     "text": "     irq0 = 0x%08x, irq1 = 0x%08x",
+     "region": "code",
+     "offset_in_region": 28297,
+     "file_offset": 197941,
+     "score": 6
+    },
+    {
+     "text": "SDOAM_GetEvent(TIMEOOUT): event=%d",
+     "region": "code",
+     "offset_in_region": 59785,
+     "file_offset": 229429,
+     "score": 6
+    },
+    {
+     "text": "dac66_Right 0x%x=0x%x",
+     "region": "code",
+     "offset_in_region": 69552,
+     "file_offset": 239196,
+     "score": 6
+    },
+    {
+     "text": " MDRead ERR:LBA=0x%x, nSec=0x%x",
+     "region": "code",
+     "offset_in_region": 97109,
+     "file_offset": 266753,
+     "score": 6
+    },
+    {
+     "text": " MDWrite ERR:LBA=0x%x, nSec=0x%x",
+     "region": "code",
+     "offset_in_region": 97145,
+     "file_offset": 266789,
+     "score": 6
+    },
+    {
+     "text": "bps = %d s = %d bitrate = %d",
+     "region": "code",
+     "offset_in_region": 124936,
+     "file_offset": 294580,
+     "score": 6
+    },
+    {
+     "text": "RECORD      ",
+     "region": "code",
+     "offset_in_region": 40608,
+     "file_offset": 210252,
+     "score": 5
+    },
+    {
+     "text": "USB:Reset->Suspend",
+     "region": "code",
+     "offset_in_region": 92933,
+     "file_offset": 262577,
+     "score": 5
+    },
+    {
+     "text": "USB:SPEED_HIGH",
+     "region": "code",
+     "offset_in_region": 124873,
+     "file_offset": 294517,
+     "score": 5
+    },
+    {
+     "text": "USB:SPEED_FULL",
+     "region": "code",
+     "offset_in_region": 124889,
+     "file_offset": 294533,
+     "score": 5
+    },
+    {
+     "text": "USB:SPEED_LOW",
+     "region": "code",
+     "offset_in_region": 124905,
+     "file_offset": 294549,
+     "score": 5
+    },
+    {
+     "text": "MP1MP2MP3WMAWAVAPEFLAAACM4AOGGMP43GPDFFDSF",
+     "region": "data",
+     "offset_in_region": 5822,
+     "file_offset": 362878,
+     "score": 5
+    },
+    {
+     "text": "MP1MP2MP3WMAWAVAPEFLAAACM4AOGGMP43GPDFFDSF",
+     "region": "data",
+     "offset_in_region": 5865,
+     "file_offset": 362921,
+     "score": 5
+    },
+    {
+     "text": "MP1MP2MP3WMAWAVAPEFLAAACM4AOGGMP43GPDFFDSF",
+     "region": "data",
+     "offset_in_region": 5908,
+     "file_offset": 362964,
+     "score": 5
+    },
+    {
+     "text": " iF*\\!",
+     "region": "code",
+     "offset_in_region": 36191,
+     "file_offset": 205835,
+     "score": 4
+    },
+    {
+     "text": "RECORD     ",
+     "region": "code",
+     "offset_in_region": 39540,
+     "file_offset": 209184,
+     "score": 4
+    },
+    {
+     "text": "RECORD     ",
+     "region": "code",
+     "offset_in_region": 43432,
+     "file_offset": 213076,
+     "score": 4
+    },
+    {
+     "text": "I2CW00_NAKRCVIPD------%d",
+     "region": "code",
+     "offset_in_region": 67488,
+     "file_offset": 237132,
+     "score": 4
+    },
+    {
+     "text": "I2CW_NAKRCVIPD------%d",
+     "region": "code",
+     "offset_in_region": 68384,
+     "file_offset": 238028,
+     "score": 4
+    },
+    {
+     "text": "USB:Suspend",
+     "region": "code",
+     "offset_in_region": 92953,
+     "file_offset": 262597,
+     "score": 4
+    },
+    {
+     "text": "USB:resume",
+     "region": "code",
+     "offset_in_region": 92985,
+     "file_offset": 262629,
+     "score": 4
+    },
+    {
+     "text": " system powerdown!",
+     "region": "code",
+     "offset_in_region": 97565,
+     "file_offset": 267209,
+     "score": 4
+    }
+   ],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "resident system image (system-core kernel, drivers, filesystem, USB logs, ID3 genre table)",
+   "confidence": "proven",
+   "evidence": [
+    "Cortex-M vector table: SP=0x03004000, reset=0x03061f8b, default handler 0x0305fcc5 repeated",
+    "largest system-core code region (0x29c14 bytes)",
+    "code strings: i2c_write/i2c_read error logs, 'Dma Channel error: ch = %d!', 'UART not SUPPORT this port.', source path '..\\..\\Common\\System\\Os\\interrupt.c'",
+    "data contains the full ID3v1 genre name table ('Blues' ... 'Psybient'), MBR-style strings 'Invalid partition table' / 'Missing operating system', firmware name templates DP3_V100IMG and RKNANOFWIMG, and the extension list MP1MP2MP3WMAWAVAPEFLAAACM4AOGGMP43GPDFFDSF"
+   ]
+  },
+  {
+   "index": 1,
+   "code_load": 51025308,
+   "code_exec": 50844004,
+   "code_len": 5276,
+   "data_load": 51030584,
+   "data_exec": 50481092,
+   "data_len": 126,
+   "bss_exec": 50481220,
+   "bss_len": 0,
+   "code_file_offset": 366492,
+   "data_file_offset": 371768,
+   "code_sha256": "29a675cec4d9b0a0b5f89a95021f2c2e8a64113cfb2f296c95a9e0d634161c10",
+   "data_sha256": "bc670cd8c0bc4b2b94ec2d20e2029d98641ce9d8f443b1f78819cbf42ee6987f",
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": 6.875,
+   "data_entropy": 4.043,
+   "code_zero_fraction": 0.0861,
+   "code_nonzero_span": {
+    "first": 0,
+    "end": 5274
+   },
+   "ascii_string_count": 41,
+   "distinctive_string_count": 10,
+   "distinctive_strings": [
+    {
+     "text": " fw2 compare error! 0x%x",
+     "region": "code",
+     "offset_in_region": 4865,
+     "file_offset": 371357,
+     "score": 10
+    },
+    {
+     "text": "fw1 Sign error!",
+     "region": "code",
+     "offset_in_region": 4824,
+     "file_offset": 371316,
+     "score": 8
+    },
+    {
+     "text": "fw1 compare error!",
+     "region": "code",
+     "offset_in_region": 4844,
+     "file_offset": 371336,
+     "score": 8
+    },
+    {
+     "text": "fw1 && fw2 error!",
+     "region": "code",
+     "offset_in_region": 4912,
+     "file_offset": 371404,
+     "score": 8
+    },
+    {
+     "text": "fw2 error!",
+     "region": "code",
+     "offset_in_region": 4932,
+     "file_offset": 371424,
+     "score": 7
+    },
+    {
+     "text": "fw1valid = %d fw2valid = %d ",
+     "region": "code",
+     "offset_in_region": 4944,
+     "file_offset": 371436,
+     "score": 6
+    },
+    {
+     "text": "RKnanoFWTC",
+     "region": "code",
+     "offset_in_region": 4804,
+     "file_offset": 371296,
+     "score": 4
+    },
+    {
+     "text": "No find fw2!",
+     "region": "code",
+     "offset_in_region": 4892,
+     "file_offset": 371384,
+     "score": 4
+    },
+    {
+     "text": "RKNANOFWIMG",
+     "region": "data",
+     "offset_in_region": 102,
+     "file_offset": 371870,
+     "score": 4
+    },
+    {
+     "text": "DP3_V100IMG",
+     "region": "data",
+     "offset_in_region": 114,
+     "file_offset": 371882,
+     "score": 4
+    }
+   ],
+   "utf16le_data_strings": [
+    {
+     "text": "Media Init...",
+     "offset_in_region": 0,
+     "file_offset": 371768
+    },
+    {
+     "text": "LowForma...",
+     "offset_in_region": 28,
+     "file_offset": 371796
+    },
+    {
+     "text": "SysAreaCopy...",
+     "offset_in_region": 52,
+     "file_offset": 371820
+    }
+   ],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "installed-firmware slot validator (dual-slot header check) with media-init stage strings",
+   "confidence": "proven",
+   "evidence": [
+    "code log strings 'fw1 Sign error!', 'fw1 compare error!', 'fw2 compare error! 0x%x', 'No find fw2!', 'fw2 error!' and the 'RKnanoFW' compare constant (prior work traced the dual-slot header/mirror validation and BCD-date precedence in this module's instructions)",
+    "data holds UTF-16LE stage names 'Media Init...', 'LowFormat...', 'SysAreaCopy...', the ASCII name 'DAP Sys' and templates RKNANOFWIMG / DP3_V100IMG"
+   ]
+  },
+  {
+   "index": 2,
+   "code_load": 51025308,
+   "code_exec": 50844004,
+   "code_len": 0,
+   "data_load": 51025308,
+   "data_exec": 50481092,
+   "data_len": 0,
+   "bss_exec": 50481092,
+   "bss_len": 0,
+   "code_file_offset": null,
+   "data_file_offset": null,
+   "code_sha256": null,
+   "data_sha256": null,
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": null,
+   "data_entropy": null,
+   "code_zero_fraction": null,
+   "code_nonzero_span": null,
+   "ascii_string_count": 0,
+   "distinctive_string_count": 0,
+   "distinctive_strings": [],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "empty module record (code_len = data_len = 0)",
+   "confidence": "proven",
+   "evidence": [
+    "record present in the module table with no payload bytes in the image"
+   ]
+  },
+  {
+   "index": 3,
+   "code_load": 51022444,
+   "code_exec": 50841520,
+   "code_len": 380,
+   "data_load": 51022824,
+   "data_exec": 50481088,
+   "data_len": 0,
+   "bss_exec": 50481088,
+   "bss_len": 2,
+   "code_file_offset": 363628,
+   "data_file_offset": null,
+   "code_sha256": "78ce1d0b4159e9d0a6055b45931d012696a9d592d6d895349f7388563086c6e6",
+   "data_sha256": null,
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": 6.109,
+   "data_entropy": null,
+   "code_zero_fraction": 0.0658,
+   "code_nonzero_span": {
+    "first": 0,
+    "end": 380
+   },
+   "ascii_string_count": 4,
+   "distinctive_string_count": 0,
+   "distinctive_strings": [],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "unidentified overlay",
+   "confidence": "unknown",
+   "evidence": [
+    "no format-, protocol- or library-identifying strings or constants found by this catalog's checks"
+   ]
+  },
+  {
+   "index": 4,
+   "code_load": 51022824,
+   "code_exec": 50841520,
+   "code_len": 2484,
+   "data_load": 51025308,
+   "data_exec": 50481088,
+   "data_len": 0,
+   "bss_exec": 50481088,
+   "bss_len": 2,
+   "code_file_offset": 364008,
+   "data_file_offset": null,
+   "code_sha256": "2f90c1c828ec82d55fe806fd02ea320556bf929051d303d57c4178cce1432358",
+   "data_sha256": null,
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": 5.722,
+   "data_entropy": null,
+   "code_zero_fraction": 0.095,
+   "code_nonzero_span": {
+    "first": 0,
+    "end": 2484
+   },
+   "ascii_string_count": 3,
+   "distinctive_string_count": 0,
+   "distinctive_strings": [],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "unidentified overlay",
+   "confidence": "unknown",
+   "evidence": [
+    "no format-, protocol- or library-identifying strings or constants found by this catalog's checks"
+   ]
+  },
+  {
+   "index": 5,
+   "code_load": 51030712,
+   "code_exec": 50844004,
+   "code_len": 1176,
+   "data_load": 51031888,
+   "data_exec": 50481092,
+   "data_len": 28,
+   "bss_exec": 50481120,
+   "bss_len": 12,
+   "code_file_offset": 371896,
+   "data_file_offset": 373072,
+   "code_sha256": "8a16d5f952788bb726a64dea03aa02ff3c5b5b15739f956aeeffd31d62007380",
+   "data_sha256": "62cbd2a3c73b07e3bfc82b0112c21b998326c3fe5e03b61d04c6aabb04e5b48c",
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": 6.492,
+   "data_entropy": 2.808,
+   "code_zero_fraction": 0.0561,
+   "code_nonzero_span": {
+    "first": 0,
+    "end": 1176
+   },
+   "ascii_string_count": 9,
+   "distinctive_string_count": 0,
+   "distinctive_strings": [],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "unidentified overlay (settings-save lead only)",
+   "confidence": "unknown",
+   "evidence": [
+    "single distinctive string 'save ok'; insufficient for an identification"
+   ]
+  },
+  {
+   "index": 6,
+   "code_load": 51194456,
+   "code_exec": 50844004,
+   "code_len": 380,
+   "data_load": 51194836,
+   "data_exec": 50481092,
+   "data_len": 28,
+   "bss_exec": 50481120,
+   "bss_len": 0,
+   "code_file_offset": 535640,
+   "data_file_offset": 536020,
+   "code_sha256": "84ad2e919e05021f8e428504e5a75b4824cd02523f5828f2291f5b8959226bfc",
+   "data_sha256": "45fe903d37efacff8feeb83cc631998d702e53097b54a9cb0546cba9abe55e21",
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": 6.294,
+   "data_entropy": 2.835,
+   "code_zero_fraction": 0.0474,
+   "code_nonzero_span": {
+    "first": 0,
+    "end": 380
+   },
+   "ascii_string_count": 0,
+   "distinctive_string_count": 0,
+   "distinctive_strings": [],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "unidentified overlay",
+   "confidence": "unknown",
+   "evidence": [
+    "no format-, protocol- or library-identifying strings or constants found by this catalog's checks"
+   ]
+  },
+  {
+   "index": 7,
+   "code_load": 51170852,
+   "code_exec": 50845180,
+   "code_len": 664,
+   "data_load": 51171516,
+   "data_exec": 50481132,
+   "data_len": 0,
+   "bss_exec": 50481132,
+   "bss_len": 65536,
+   "code_file_offset": 512036,
+   "data_file_offset": null,
+   "code_sha256": "c236221d7dbe3e75a56b0b5caba8c9d843fc1ff1950656492903af9f6f3ee0d4",
+   "data_sha256": null,
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": 6.513,
+   "data_entropy": null,
+   "code_zero_fraction": 0.0783,
+   "code_nonzero_span": {
+    "first": 0,
+    "end": 664
+   },
+   "ascii_string_count": 3,
+   "distinctive_string_count": 0,
+   "distinctive_strings": [],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "unidentified overlay",
+   "confidence": "unknown",
+   "evidence": [
+    "no format-, protocol- or library-identifying strings or constants found by this catalog's checks"
+   ]
+  },
+  {
+   "index": 8,
+   "code_load": 51200100,
+   "code_exec": 50849084,
+   "code_len": 1048,
+   "data_load": 51201148,
+   "data_exec": 50481616,
+   "data_len": 0,
+   "bss_exec": 50481616,
+   "bss_len": 16384,
+   "code_file_offset": 541284,
+   "data_file_offset": null,
+   "code_sha256": "9f61a0fdfb7d56df02d6ae200f44248a1edc61c94a0ecdce059a63351948eb3c",
+   "data_sha256": null,
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": 6.769,
+   "data_entropy": null,
+   "code_zero_fraction": 0.0553,
+   "code_nonzero_span": {
+    "first": 0,
+    "end": 1045
+   },
+   "ascii_string_count": 9,
+   "distinctive_string_count": 1,
+   "distinctive_strings": [
+    {
+     "text": "RKnanoFW",
+     "region": "code",
+     "offset_in_region": 1032,
+     "file_offset": 542316,
+     "score": 4
+    }
+   ],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "firmware updater / installer (writes update image with read-back verification)",
+   "confidence": "proven",
+   "evidence": [
+    "code contains the 8-byte 'RKnanoFW' compare constant",
+    "prior work traced this module's instructions: opens the update file, checks magic + 512-byte header mirror, copies in 16-sector chunks via device-3 write/read/compare (repo/analysis/DP3_V137.md)"
+   ]
+  },
+  {
+   "index": 9,
+   "code_load": 51192100,
+   "code_exec": 50855900,
+   "code_len": 2314,
+   "data_load": 51194416,
+   "data_exec": 50623952,
+   "data_len": 40,
+   "bss_exec": 50623992,
+   "bss_len": 0,
+   "code_file_offset": 533284,
+   "data_file_offset": 535600,
+   "code_sha256": "3bb4bdf47d87ea73d8e81563b5a6a731df16d019bca858e39d949cec80468390",
+   "data_sha256": "dd187e5314f47432d1e29d3cdde10705a5dc13e827a36117ca3400362bd15e33",
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": 6.581,
+   "data_entropy": 2.576,
+   "code_zero_fraction": 0.0817,
+   "code_nonzero_span": {
+    "first": 0,
+    "end": 2314
+   },
+   "ascii_string_count": 1,
+   "distinctive_string_count": 0,
+   "distinctive_strings": [],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "unidentified overlay",
+   "confidence": "unknown",
+   "evidence": [
+    "no format-, protocol- or library-identifying strings or constants found by this catalog's checks"
+   ]
+  },
+  {
+   "index": 10,
+   "code_load": 51179464,
+   "code_exec": 50844004,
+   "code_len": 4708,
+   "data_load": 51184172,
+   "data_exec": 50481092,
+   "data_len": 184,
+   "bss_exec": 50481276,
+   "bss_len": 578,
+   "code_file_offset": 520648,
+   "data_file_offset": 525356,
+   "code_sha256": "73a62fe6b64ad17410eb0644a806867b3f3e51f3c8089fd7046cf69145552a58",
+   "data_sha256": "d81a8f1375db9f5023107dab6cb0ce2d125dd9477aac3792a172c6d562a24833",
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": 6.798,
+   "data_entropy": 3.932,
+   "code_zero_fraction": 0.0814,
+   "code_nonzero_span": {
+    "first": 0,
+    "end": 4708
+   },
+   "ascii_string_count": 63,
+   "distinctive_string_count": 19,
+   "distinctive_strings": [
+    {
+     "text": "USB:SET ADDR = %d",
+     "region": "code",
+     "offset_in_region": 2573,
+     "file_offset": 523221,
+     "score": 10
+    },
+    {
+     "text": "USB:GET DES = %d",
+     "region": "code",
+     "offset_in_region": 4521,
+     "file_offset": 525169,
+     "score": 10
+    },
+    {
+     "text": "USB:GET QUALIFIER = %d",
+     "region": "code",
+     "offset_in_region": 4545,
+     "file_offset": 525193,
+     "score": 10
+    },
+    {
+     "text": "USB:GET CONFIG = %d",
+     "region": "code",
+     "offset_in_region": 4569,
+     "file_offset": 525217,
+     "score": 10
+    },
+    {
+     "text": "USB:GET STRING = %d",
+     "region": "code",
+     "offset_in_region": 4645,
+     "file_offset": 525293,
+     "score": 10
+    },
+    {
+     "text": "USB:USB MODULE EXIT",
+     "region": "code",
+     "offset_in_region": 593,
+     "file_offset": 521241,
+     "score": 7
+    },
+    {
+     "text": "`Write EP0 fail",
+     "region": "code",
+     "offset_in_region": 1667,
+     "file_offset": 522315,
+     "score": 7
+    },
+    {
+     "text": "USB:WRITE EP FAIL",
+     "region": "code",
+     "offset_in_region": 1701,
+     "file_offset": 522349,
+     "score": 7
+    },
+    {
+     "text": "USB:GET STATUS",
+     "region": "code",
+     "offset_in_region": 2537,
+     "file_offset": 523185,
+     "score": 7
+    },
+    {
+     "text": "USB:SET FEATURE",
+     "region": "code",
+     "offset_in_region": 2553,
+     "file_offset": 523201,
+     "score": 7
+    },
+    {
+     "text": "USB:early suspend",
+     "region": "code",
+     "offset_in_region": 3805,
+     "file_offset": 524453,
+     "score": 7
+    },
+    {
+     "text": "USB:VBUS INT",
+     "region": "code",
+     "offset_in_region": 4105,
+     "file_offset": 524753,
+     "score": 7
+    },
+    {
+     "text": "USB:Reconnect",
+     "region": "code",
+     "offset_in_region": 569,
+     "file_offset": 521217,
+     "score": 5
+    },
+    {
+     "text": "USB:Disconnect",
+     "region": "code",
+     "offset_in_region": 3853,
+     "file_offset": 524501,
+     "score": 5
+    },
+    {
+     "text": "i%F!",
+     "region": "code",
+     "offset_in_region": 3303,
+     "file_offset": 523951,
+     "score": 4
+    },
+    {
+     "text": "USB:Suspend",
+     "region": "code",
+     "offset_in_region": 3825,
+     "file_offset": 524473,
+     "score": 4
+    },
+    {
+     "text": "USB:RESET",
+     "region": "code",
+     "offset_in_region": 3841,
+     "file_offset": 524489,
+     "score": 4
+    },
+    {
+     "text": "USB:TIMEOUT",
+     "region": "code",
+     "offset_in_region": 3881,
+     "file_offset": 524529,
+     "score": 4
+    },
+    {
+     "text": "USB:resume",
+     "region": "code",
+     "offset_in_region": 4121,
+     "file_offset": 524769,
+     "score": 4
+    }
+   ],
+   "utf16le_data_strings": [
+    {
+     "text": "Fosi Audio DAP Neo DAC",
+     "offset_in_region": 66,
+     "file_offset": 525422
+    },
+    {
+     "text": "Fosi Audio DAP Neo DAC",
+     "offset_in_region": 112,
+     "file_offset": 525468
+    }
+   ],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "USB device core / control-endpoint overlay",
+   "confidence": "likely",
+   "evidence": [
+    "18 'USB:' log strings incl. 'USB:GET STATUS', 'USB:SET FEATURE', 'USB:SET ADDR = %d', 'USB:GET DES = %d', 'USB:GET STRING = %d', 'Microsoft OS string Descriptor', 'Write EP0 fail', 'USB:Disconnect' -- the generic USB stack, distinct from the MSC (12) and audio (11) personalities"
+   ]
+  },
+  {
+   "index": 11,
+   "code_load": 51184356,
+   "code_exec": 50848712,
+   "code_len": 3152,
+   "data_load": 51187508,
+   "data_exec": 50481856,
+   "data_len": 279,
+   "bss_exec": 50482136,
+   "bss_len": 75792,
+   "code_file_offset": 525540,
+   "data_file_offset": 528692,
+   "code_sha256": "a65e825ad0915a19c247c5bb7aa40a818bc0f624baf31a4f3d99c455d5055008",
+   "data_sha256": "514c2faa9a62a0031b69adf2e3194d88cb34576fae91f2ecc7aa8ef1a9868e05",
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": 6.79,
+   "data_entropy": 4.115,
+   "code_zero_fraction": 0.0482,
+   "code_nonzero_span": {
+    "first": 0,
+    "end": 3152
+   },
+   "ascii_string_count": 21,
+   "distinctive_string_count": 0,
+   "distinctive_strings": [],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "USB Audio Class 1.0 function + HID consumer control",
+   "confidence": "proven",
+   "evidence": [
+    "data device descriptor at data+0x104: VID 0x071a, PID 0x3289 (verified bytes 12 01 ... 1a 07 89 32)",
+    "prior descriptor + instruction analysis (repo/analysis/usb_audio.md): UAC1.0 stereo 16-bit 48 kHz isochronous OUT EP 0x02, 0x9000-byte PCM ring, HID media keys, MMIO base 0x60080800"
+   ]
+  },
+  {
+   "index": 12,
+   "code_load": 51187788,
+   "code_exec": 50851864,
+   "code_len": 4036,
+   "data_load": 51191824,
+   "data_exec": 50557928,
+   "data_len": 276,
+   "bss_exec": 50558204,
+   "bss_len": 65748,
+   "code_file_offset": 528972,
+   "data_file_offset": 533008,
+   "code_sha256": "135038ae23ce2955a917b9d150e44791dc7e7d2dae2341934ff94246ff6e45da",
+   "data_sha256": "9dd61952cecfce71b0e2932009b999d63e7d294f70417b3e4ea2e9fb81a05d07",
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": 6.901,
+   "data_entropy": 4.256,
+   "code_zero_fraction": 0.0505,
+   "code_nonzero_span": {
+    "first": 0,
+    "end": 4036
+   },
+   "ascii_string_count": 54,
+   "distinctive_string_count": 12,
+   "distinctive_strings": [
+    {
+     "text": "USB:error cbw = %d",
+     "region": "code",
+     "offset_in_region": 1265,
+     "file_offset": 530237,
+     "score": 10
+    },
+    {
+     "text": "USB:Set Config = %d",
+     "region": "code",
+     "offset_in_region": 2365,
+     "file_offset": 531337,
+     "score": 10
+    },
+    {
+     "text": "USB:get Config = %d",
+     "region": "code",
+     "offset_in_region": 2397,
+     "file_offset": 531369,
+     "score": 10
+    },
+    {
+     "text": "USB:set Interface = %d",
+     "region": "code",
+     "offset_in_region": 2421,
+     "file_offset": 531393,
+     "score": 10
+    },
+    {
+     "text": "USB:get Interface = %d",
+     "region": "code",
+     "offset_in_region": 2445,
+     "file_offset": 531417,
+     "score": 10
+    },
+    {
+     "text": "USB:GET LUN = %d",
+     "region": "code",
+     "offset_in_region": 3477,
+     "file_offset": 532449,
+     "score": 10
+    },
+    {
+     "text": "USB:Ep%d timeout",
+     "region": "code",
+     "offset_in_region": 3517,
+     "file_offset": 532489,
+     "score": 10
+    },
+    {
+     "text": "USB:BULK RESET",
+     "region": "code",
+     "offset_in_region": 3497,
+     "file_offset": 532469,
+     "score": 7
+    },
+    {
+     "text": "USB:USB REDO",
+     "region": "code",
+     "offset_in_region": 3541,
+     "file_offset": 532513,
+     "score": 7
+    },
+    {
+     "text": "RockChip    CD-ROM      1.00",
+     "region": "code",
+     "offset_in_region": 4008,
+     "file_offset": 532980,
+     "score": 7
+    },
+    {
+     "text": "Fosi    Audio DSP Neo   1.00",
+     "region": "data",
+     "offset_in_region": 114,
+     "file_offset": 533122,
+     "score": 7
+    },
+    {
+     "text": "Fosi    Audio DSP Neo   1.00",
+     "region": "data",
+     "offset_in_region": 150,
+     "file_offset": 533158,
+     "score": 7
+    }
+   ],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "USB Mass Storage Class (SCSI transparent, bulk-only)",
+   "confidence": "proven",
+   "evidence": [
+    "data config descriptor at data+0x0c declares interface class/subclass/protocol 08 06 50 with bulk EP 0x81/0x01",
+    "data+0x72 SCSI inquiry identity 'Fosi    Audio DSP Neo   1.00' (stored twice, at data+0x72 and data+0x96); code log 'USB:error cbw = %d' (CBW = command block wrapper)",
+    "the final 28 bytes of the code region (code+0xfa8, file 0x821f4) are a second ASCII inquiry identity 'RockChip    CD-ROM      1.00' -- a CD-ROM personality identity alongside the Fosi disk identity; consistent with a virtual CD-ROM mode (inference), not mentioned in the prior descriptor analysis"
+   ]
+  },
+  {
+   "index": 13,
+   "code_load": 51269496,
+   "code_exec": 50844004,
+   "code_len": 0,
+   "data_load": 51269496,
+   "data_exec": 50481092,
+   "data_len": 0,
+   "bss_exec": 50481092,
+   "bss_len": 0,
+   "code_file_offset": null,
+   "data_file_offset": null,
+   "code_sha256": null,
+   "data_sha256": null,
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": null,
+   "data_entropy": null,
+   "code_zero_fraction": null,
+   "code_nonzero_span": null,
+   "ascii_string_count": 0,
+   "distinctive_string_count": 0,
+   "distinctive_strings": [],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "empty module record (code_len = data_len = 0)",
+   "confidence": "proven",
+   "evidence": [
+    "record present in the module table with no payload bytes in the image"
+   ]
+  },
+  {
+   "index": 14,
+   "code_load": 51269496,
+   "code_exec": 50844004,
+   "code_len": 0,
+   "data_load": 51269496,
+   "data_exec": 50481092,
+   "data_len": 0,
+   "bss_exec": 50481092,
+   "bss_len": 0,
+   "code_file_offset": null,
+   "data_file_offset": null,
+   "code_sha256": null,
+   "data_sha256": null,
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": null,
+   "data_entropy": null,
+   "code_zero_fraction": null,
+   "code_nonzero_span": null,
+   "ascii_string_count": 0,
+   "distinctive_string_count": 0,
+   "distinctive_strings": [],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "empty module record (code_len = data_len = 0)",
+   "confidence": "proven",
+   "evidence": [
+    "record present in the module table with no payload bytes in the image"
+   ]
+  },
+  {
+   "index": 15,
+   "code_load": 51269496,
+   "code_exec": 50844004,
+   "code_len": 0,
+   "data_load": 51269496,
+   "data_exec": 50481092,
+   "data_len": 0,
+   "bss_exec": 50481092,
+   "bss_len": 0,
+   "code_file_offset": null,
+   "data_file_offset": null,
+   "code_sha256": null,
+   "data_sha256": null,
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": null,
+   "data_entropy": null,
+   "code_zero_fraction": null,
+   "code_nonzero_span": null,
+   "ascii_string_count": 0,
+   "distinctive_string_count": 0,
+   "distinctive_strings": [],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "empty module record (code_len = data_len = 0)",
+   "confidence": "proven",
+   "evidence": [
+    "record present in the module table with no payload bytes in the image"
+   ]
+  },
+  {
+   "index": 16,
+   "code_load": 51269496,
+   "code_exec": 50844004,
+   "code_len": 0,
+   "data_load": 51269496,
+   "data_exec": 50481092,
+   "data_len": 0,
+   "bss_exec": 50481092,
+   "bss_len": 0,
+   "code_file_offset": null,
+   "data_file_offset": null,
+   "code_sha256": null,
+   "data_sha256": null,
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": null,
+   "data_entropy": null,
+   "code_zero_fraction": null,
+   "code_nonzero_span": null,
+   "ascii_string_count": 0,
+   "distinctive_string_count": 0,
+   "distinctive_strings": [],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "empty module record (code_len = data_len = 0)",
+   "confidence": "proven",
+   "evidence": [
+    "record present in the module table with no payload bytes in the image"
+   ]
+  },
+  {
+   "index": 17,
+   "code_load": 51268140,
+   "code_exec": 50844004,
+   "code_len": 1324,
+   "data_load": 51269464,
+   "data_exec": 50481092,
+   "data_len": 32,
+   "bss_exec": 50481124,
+   "bss_len": 409,
+   "code_file_offset": 609324,
+   "data_file_offset": 610648,
+   "code_sha256": "81772c30e802182f5e526255fe77647e20f2a9565fd7fe8fcea356ed83666979",
+   "data_sha256": "0175203a3f3d6be72ef7c10f5dbfe6f3b825acbd89d05bbda47c2dd357be2b37",
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": 6.664,
+   "data_entropy": 2.719,
+   "code_zero_fraction": 0.0476,
+   "code_nonzero_span": {
+    "first": 0,
+    "end": 1324
+   },
+   "ascii_string_count": 5,
+   "distinctive_string_count": 0,
+   "distinctive_strings": [],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "unidentified overlay",
+   "confidence": "unknown",
+   "evidence": [
+    "no format-, protocol- or library-identifying strings or constants found by this catalog's checks"
+   ]
+  },
+  {
+   "index": 18,
+   "code_load": 51269496,
+   "code_exec": 50858836,
+   "code_len": 20213,
+   "data_load": 51289712,
+   "data_exec": 50485572,
+   "data_len": 180,
+   "bss_exec": 50485752,
+   "bss_len": 4845,
+   "code_file_offset": 610680,
+   "data_file_offset": 630896,
+   "code_sha256": "26ff795d0c33dea0688ed411c33ce60b8d9c0fa9dfcde2bb231d343d16ff47fe",
+   "data_sha256": "88adffb910cf89f1380fce648de69e868343657d7d500bc5f0728cc6dce23c5e",
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": 6.769,
+   "data_entropy": 1.231,
+   "code_zero_fraction": 0.1104,
+   "code_nonzero_span": {
+    "first": 0,
+    "end": 20212
+   },
+   "ascii_string_count": 316,
+   "distinctive_string_count": 11,
+   "distinctive_strings": [
+    {
+     "text": " base64_decode error, ret: %d",
+     "region": "code",
+     "offset_in_region": 10457,
+     "file_offset": 621137,
+     "score": 10
+    },
+    {
+     "text": " FileWrite error",
+     "region": "code",
+     "offset_in_region": 10493,
+     "file_offset": 621173,
+     "score": 7
+    },
+    {
+     "text": " MetaBlockPicHandle Read Error",
+     "region": "code",
+     "offset_in_region": 10521,
+     "file_offset": 621201,
+     "score": 7
+    },
+    {
+     "text": "======Check APIC Error",
+     "region": "code",
+     "offset_in_region": 16405,
+     "file_offset": 627085,
+     "score": 7
+    },
+    {
+     "text": "=====Check PIC Error=====",
+     "region": "code",
+     "offset_in_region": 19829,
+     "file_offset": 630509,
+     "score": 7
+    },
+    {
+     "text": "METADATA_BLOCK_PICTURE",
+     "region": "code",
+     "offset_in_region": 9384,
+     "file_offset": 620064,
+     "score": 5
+    },
+    {
+     "text": "=====ChunkSize==0x%x===",
+     "region": "code",
+     "offset_in_region": 10568,
+     "file_offset": 621248,
+     "score": 4
+    },
+    {
+     "text": "APETAGEX",
+     "region": "code",
+     "offset_in_region": 11692,
+     "file_offset": 622372,
+     "score": 4
+    },
+    {
+     "text": "vorbis",
+     "region": "code",
+     "offset_in_region": 11756,
+     "file_offset": 622436,
+     "score": 4
+    },
+    {
+     "text": "ID32",
+     "region": "code",
+     "offset_in_region": 19904,
+     "file_offset": 630584,
+     "score": 4
+    },
+    {
+     "text": " !\"#$%&'()*+,-./0123",
+     "region": "code",
+     "offset_in_region": 20041,
+     "file_offset": 630721,
+     "score": 4
+    }
+   ],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "metadata / cover-art parser (ID3, APE, Vorbis comment, embedded pictures)",
+   "confidence": "likely",
+   "evidence": [
+    "code strings 'METADATA_BLOCK_PICTURE', 'PICTURE OGG', 'Cover Art (front)', 'APETAGEX', 'vorbis', 'base64_decode error, ret: %d', 'MetaBlockPicHandle Read Error', '======Check APIC Error', 'image/jpeg', 'image/jpg', 'image/bmp' -- APIC/cover handling for multiple tag formats"
+   ]
+  },
+  {
+   "index": 19,
+   "code_load": 51289892,
+   "code_exec": 50879052,
+   "code_len": 10544,
+   "data_load": 51300436,
+   "data_exec": 50490600,
+   "data_len": 192,
+   "bss_exec": 50490792,
+   "bss_len": 64288,
+   "code_file_offset": 631076,
+   "data_file_offset": 641620,
+   "code_sha256": "efd92494487a2a295ec3f54956dd38541fa32e4ec5b1daa5931c8246c6898351",
+   "data_sha256": "cb4fc0e29e9ab020d344158b3da306727281058b975f9e2a072b0c1629ac70dc",
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": 7.033,
+   "data_entropy": 0.047,
+   "code_zero_fraction": 0.0639,
+   "code_nonzero_span": {
+    "first": 0,
+    "end": 10544
+   },
+   "ascii_string_count": 61,
+   "distinctive_string_count": 0,
+   "distinctive_strings": [],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "unidentified overlay",
+   "confidence": "unknown",
+   "evidence": [
+    "no format-, protocol- or library-identifying strings or constants found by this catalog's checks"
+   ]
+  },
+  {
+   "index": 20,
+   "code_load": 51300628,
+   "code_exec": 50879052,
+   "code_len": 2712,
+   "data_load": 51303340,
+   "data_exec": 50490600,
+   "data_len": 20,
+   "bss_exec": 50490620,
+   "bss_len": 33860,
+   "code_file_offset": 641812,
+   "data_file_offset": 644524,
+   "code_sha256": "91b2b423eab88eea4936e46c9a8e59f3eb00f9d3406a6cfb68dc1fa6b3dbe686",
+   "data_sha256": "de47c9b27eb8d300dbb5f2c353e632c393262cf06340c4fa7f1b40c4cbd36f90",
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": 6.793,
+   "data_entropy": -0.0,
+   "code_zero_fraction": 0.0649,
+   "code_nonzero_span": {
+    "first": 0,
+    "end": 2712
+   },
+   "ascii_string_count": 24,
+   "distinctive_string_count": 0,
+   "distinctive_strings": [],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "unidentified overlay",
+   "confidence": "unknown",
+   "evidence": [
+    "no format-, protocol- or library-identifying strings or constants found by this catalog's checks"
+   ]
+  },
+  {
+   "index": 21,
+   "code_load": 51194864,
+   "code_exec": 50844004,
+   "code_len": 5080,
+   "data_load": 51199944,
+   "data_exec": 50481092,
+   "data_len": 156,
+   "bss_exec": 50481248,
+   "bss_len": 366,
+   "code_file_offset": 536048,
+   "data_file_offset": 541128,
+   "code_sha256": "89c973219b7be9e26ce19b05685d2b4c231ce546f1b91f3d1dd8dcb077fa8392",
+   "data_sha256": "dbd02ba9885afae086786c13b902c7029306ae09116bea0565496c4795f0231b",
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": 6.831,
+   "data_entropy": 2.918,
+   "code_zero_fraction": 0.0695,
+   "code_nonzero_span": {
+    "first": 0,
+    "end": 5080
+   },
+   "ascii_string_count": 17,
+   "distinctive_string_count": 1,
+   "distinctive_strings": [
+    {
+     "text": "  FileNum = %d   ",
+     "region": "code",
+     "offset_in_region": 1421,
+     "file_offset": 537469,
+     "score": 4
+    }
+   ],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "unidentified overlay",
+   "confidence": "unknown",
+   "evidence": [
+    "no format-, protocol- or library-identifying strings or constants found by this catalog's checks"
+   ]
+  },
+  {
+   "index": 22,
+   "code_load": 51201148,
+   "code_exec": 50844004,
+   "code_len": 2972,
+   "data_load": 51204120,
+   "data_exec": 50481092,
+   "data_len": 72,
+   "bss_exec": 50481164,
+   "bss_len": 6,
+   "code_file_offset": 542332,
+   "data_file_offset": 545304,
+   "code_sha256": "2a6148fa787cd90e9b8fe92dd04367db48a20097c9cfab5803df270e9a1c1733",
+   "data_sha256": "083788752517776cbf806a5467645ad09d7379c7231f1d7eed5399236bf9f96e",
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": 6.802,
+   "data_entropy": 3.461,
+   "code_zero_fraction": 0.0629,
+   "code_nonzero_span": {
+    "first": 0,
+    "end": 2972
+   },
+   "ascii_string_count": 22,
+   "distinctive_string_count": 1,
+   "distinctive_strings": [
+    {
+     "text": "U:\\RECORD     \\VOICE",
+     "region": "code",
+     "offset_in_region": 1416,
+     "file_offset": 543748,
+     "score": 10
+    }
+   ],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "small selector overlay: TBB jump-table value mapper (inputs 0-12 verified by emulation)",
+   "confidence": "proven",
+   "evidence": [
+    "prior work executed the original Thumb routine at 0x0307d1a2 in Ghidra's emulator: inputs 0..12 return 0,1,1,2,3,0,5,6,7,0,0,0,0 (repo/analysis/module22_selector.md); its semantic role (what the values select) is not established",
+    "also contains the path string 'U:\\RECORD     \\VOICE' (SDK folder-name string; not proof of a recording feature)"
+   ]
+  },
+  {
+   "index": 23,
+   "code_load": 51204192,
+   "code_exec": 50844004,
+   "code_len": 6236,
+   "data_load": 51210428,
+   "data_exec": 50481092,
+   "data_len": 52,
+   "bss_exec": 50481144,
+   "bss_len": 4194,
+   "code_file_offset": 545376,
+   "data_file_offset": 551612,
+   "code_sha256": "25f3265f24275f009df64dca07c057cb6bc36750c42314c83d501df08c7b0a2b",
+   "data_sha256": "197ae16b5c30963f6c1406a41bd6e0cdc63f7223047777aeec5d2e7bc9c00162",
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": 6.963,
+   "data_entropy": 3.75,
+   "code_zero_fraction": 0.0632,
+   "code_nonzero_span": {
+    "first": 0,
+    "end": 6236
+   },
+   "ascii_string_count": 28,
+   "distinctive_string_count": 4,
+   "distinctive_strings": [
+    {
+     "text": "U:\\RECORD     \\FM",
+     "region": "data",
+     "offset_in_region": 0,
+     "file_offset": 551612,
+     "score": 10
+    },
+    {
+     "text": " TotalFiles is --- %d ---",
+     "region": "code",
+     "offset_in_region": 5898,
+     "file_offset": 551274,
+     "score": 6
+    },
+    {
+     "text": " totalFmfile = %d",
+     "region": "code",
+     "offset_in_region": 1041,
+     "file_offset": 546417,
+     "score": 4
+    },
+    {
+     "text": "SortInfoAddr.ulFileSortInfoSectorAddr = %d",
+     "region": "code",
+     "offset_in_region": 3656,
+     "file_offset": 549032,
+     "score": 4
+    }
+   ],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "file scan / sort overlay (media library bookkeeping)",
+   "confidence": "likely",
+   "evidence": [
+    "code log strings ' totalFmfile = %d' and 'SortInfoAddr.ulFileSortInfoSectorAddr = %d'; path string 'U:\\RECORD     \\FM' (folder-name string only; not evidence of an FM tuner)"
+   ]
+  },
+  {
+   "index": 24,
+   "code_load": 51210480,
+   "code_exec": 50850240,
+   "code_len": 1068,
+   "data_load": 51211548,
+   "data_exec": 50485340,
+   "data_len": 0,
+   "bss_exec": 50485340,
+   "bss_len": 0,
+   "code_file_offset": 551664,
+   "data_file_offset": null,
+   "code_sha256": "ba2acdde3ccac6161d67647eff589ce730112a49b4773cba8679a1084098db2b",
+   "data_sha256": null,
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": 6.661,
+   "data_entropy": null,
+   "code_zero_fraction": 0.0646,
+   "code_nonzero_span": {
+    "first": 0,
+    "end": 1068
+   },
+   "ascii_string_count": 6,
+   "distinctive_string_count": 2,
+   "distinctive_strings": [
+    {
+     "text": "All Album TotalNum = %d",
+     "region": "code",
+     "offset_in_region": 984,
+     "file_offset": 552648,
+     "score": 6
+    },
+    {
+     "text": "st.clus = %d, st.index = %d",
+     "region": "code",
+     "offset_in_region": 1012,
+     "file_offset": 552676,
+     "score": 6
+    }
+   ],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "album list/count helper",
+   "confidence": "likely",
+   "evidence": [
+    "single distinctive code log string 'All Album TotalNum = %d'; shares the 0x0307e9c0 overlay window with modules 25 and 26"
+   ]
+  },
+  {
+   "index": 25,
+   "code_load": 51211548,
+   "code_exec": 50850240,
+   "code_len": 880,
+   "data_load": 51212428,
+   "data_exec": 50485340,
+   "data_len": 32,
+   "bss_exec": 50485372,
+   "bss_len": 0,
+   "code_file_offset": 552732,
+   "data_file_offset": 553612,
+   "code_sha256": "fa0c246f80049457e01270aaebdc1277994adac6d929e726a91ad8f1c79db85e",
+   "data_sha256": "46f38a779cb5cf1fd6f5029882e377f99865c6131ce0a5d40eba32d809cb25d4",
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": 6.694,
+   "data_entropy": 2.986,
+   "code_zero_fraction": 0.075,
+   "code_nonzero_span": {
+    "first": 0,
+    "end": 880
+   },
+   "ascii_string_count": 3,
+   "distinctive_string_count": 0,
+   "distinctive_strings": [],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "unidentified overlay",
+   "confidence": "unknown",
+   "evidence": [
+    "no format-, protocol- or library-identifying strings or constants found by this catalog's checks"
+   ]
+  },
+  {
+   "index": 26,
+   "code_load": 51212460,
+   "code_exec": 50850240,
+   "code_len": 854,
+   "data_load": 51213316,
+   "data_exec": 50485340,
+   "data_len": 36,
+   "bss_exec": 50485376,
+   "bss_len": 0,
+   "code_file_offset": 553644,
+   "data_file_offset": 554500,
+   "code_sha256": "409dcf272986c4b63209ff79d3183dd0d19ff2773b7c7281429e20cc22085c17",
+   "data_sha256": "426cd1d2dede8be701ee51207d5a87635b49e86ca78bbf76306f9be2cd922b43",
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": 6.614,
+   "data_entropy": 2.966,
+   "code_zero_fraction": 0.0632,
+   "code_nonzero_span": {
+    "first": 0,
+    "end": 854
+   },
+   "ascii_string_count": 3,
+   "distinctive_string_count": 0,
+   "distinctive_strings": [],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "unidentified overlay",
+   "confidence": "unknown",
+   "evidence": [
+    "no format-, protocol- or library-identifying strings or constants found by this catalog's checks"
+   ]
+  },
+  {
+   "index": 27,
+   "code_load": 51213352,
+   "code_exec": 50844004,
+   "code_len": 14832,
+   "data_load": 51228184,
+   "data_exec": 50481092,
+   "data_len": 29,
+   "bss_exec": 50481124,
+   "bss_len": 2978,
+   "code_file_offset": 554536,
+   "data_file_offset": 569368,
+   "code_sha256": "c2bed14f48e430925969c56beea32995e268ad064f71b9c5d7c0d7d576ce442b",
+   "data_sha256": "f8809e2ef29bcfc743082e9bec61e5a51a572e1efcbe32e60c731c8cf62ca241",
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": 6.949,
+   "data_entropy": 3.241,
+   "code_zero_fraction": 0.0659,
+   "code_nonzero_span": {
+    "first": 0,
+    "end": 14832
+   },
+   "ascii_string_count": 73,
+   "distinctive_string_count": 2,
+   "distinctive_strings": [
+    {
+     "text": " TotalFiles is --- %d ---",
+     "region": "code",
+     "offset_in_region": 238,
+     "file_offset": 554774,
+     "score": 6
+    },
+    {
+     "text": "  CurrentFileNum == %d   ",
+     "region": "code",
+     "offset_in_region": 14025,
+     "file_offset": 568561,
+     "score": 4
+    }
+   ],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "file-browser overlay with lyrics (.LRC) reference",
+   "confidence": "likely",
+   "evidence": [
+    "code contains a standalone NUL-terminated 'LRC' extension string among 0x0302xxxx data literals and the log '  CurrentFileNum == %d   '"
+   ]
+  },
+  {
+   "index": 28,
+   "code_load": 51228216,
+   "code_exec": 50844004,
+   "code_len": 0,
+   "data_load": 51228216,
+   "data_exec": 50481092,
+   "data_len": 0,
+   "bss_exec": 50481092,
+   "bss_len": 0,
+   "code_file_offset": null,
+   "data_file_offset": null,
+   "code_sha256": null,
+   "data_sha256": null,
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": null,
+   "data_entropy": null,
+   "code_zero_fraction": null,
+   "code_nonzero_span": null,
+   "ascii_string_count": 0,
+   "distinctive_string_count": 0,
+   "distinctive_strings": [],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "empty module record (code_len = data_len = 0)",
+   "confidence": "proven",
+   "evidence": [
+    "record present in the module table with no payload bytes in the image"
+   ]
+  },
+  {
+   "index": 29,
+   "code_load": 51228216,
+   "code_exec": 50844004,
+   "code_len": 4272,
+   "data_load": 51232488,
+   "data_exec": 50481092,
+   "data_len": 28,
+   "bss_exec": 50481120,
+   "bss_len": 16,
+   "code_file_offset": 569400,
+   "data_file_offset": 573672,
+   "code_sha256": "008b556a28706d507a46b055d54c66b7e0fad404c6367fea1f8c4a73c6a3d948",
+   "data_sha256": "593728cec6099730bab78e1123c295a4d7ffc849649af8fc40eac47b9fb3eb3c",
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": 4.5,
+   "data_entropy": 2.91,
+   "code_zero_fraction": 0.4841,
+   "code_nonzero_span": {
+    "first": 0,
+    "end": 2328
+   },
+   "ascii_string_count": 13,
+   "distinctive_string_count": 0,
+   "distinctive_strings": [],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "unidentified sparse overlay",
+   "confidence": "unknown",
+   "evidence": [
+    "only the first 0x918 of 0x10b0 code bytes are nonzero (51.6%); no distinctive strings"
+   ]
+  },
+  {
+   "index": 30,
+   "code_load": 51232516,
+   "code_exec": 50844004,
+   "code_len": 8288,
+   "data_load": 51240804,
+   "data_exec": 50481092,
+   "data_len": 56,
+   "bss_exec": 50481148,
+   "bss_len": 2492,
+   "code_file_offset": 573700,
+   "data_file_offset": 581988,
+   "code_sha256": "ee0c5b21b696bf6e476699fca6591a9dc2f121382b5398741003184aa8308076",
+   "data_sha256": "15a1ed066c5cfcf538539629c64d35b2bb82afab6de54ce7429acff05e4ed213",
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": 6.833,
+   "data_entropy": 3.322,
+   "code_zero_fraction": 0.105,
+   "code_nonzero_span": {
+    "first": 0,
+    "end": 7908
+   },
+   "ascii_string_count": 48,
+   "distinctive_string_count": 0,
+   "distinctive_strings": [],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "unidentified overlay",
+   "confidence": "unknown",
+   "evidence": [
+    "no format-, protocol- or library-identifying strings or constants found by this catalog's checks"
+   ]
+  },
+  {
+   "index": 31,
+   "code_load": 51247424,
+   "code_exec": 50844004,
+   "code_len": 7396,
+   "data_load": 51254820,
+   "data_exec": 50481092,
+   "data_len": 80,
+   "bss_exec": 50481172,
+   "bss_len": 4400,
+   "code_file_offset": 588608,
+   "data_file_offset": 596004,
+   "code_sha256": "4f3f8794c0056e05b163f18d0629fa6ed4af2282eba864cc998a1bab2149a666",
+   "data_sha256": "06e8319e4bf488730e9882af124417006dfae64113cc38752f534597bfad2549",
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": 6.815,
+   "data_entropy": 3.302,
+   "code_zero_fraction": 0.0684,
+   "code_nonzero_span": {
+    "first": 0,
+    "end": 7396
+   },
+   "ascii_string_count": 32,
+   "distinctive_string_count": 3,
+   "distinctive_strings": [
+    {
+     "text": "xxxxxxxxxx From File: AudioFileNum = %d",
+     "region": "code",
+     "offset_in_region": 5140,
+     "file_offset": 593748,
+     "score": 10
+    },
+    {
+     "text": "MP1MP2MP3WMAWAVAPEFLAAACM4AOGGMP43GPDFFDSF",
+     "region": "code",
+     "offset_in_region": 4012,
+     "file_offset": 592620,
+     "score": 5
+    },
+    {
+     "text": "HoldOnplay : %d",
+     "region": "code",
+     "offset_in_region": 2941,
+     "file_offset": 591549,
+     "score": 4
+    }
+   ],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "audio file filter / browser overlay",
+   "confidence": "likely",
+   "evidence": [
+    "code strings: the supported-format extension list 'MP1MP2MP3WMAWAVAPEFLAAACM4AOGGMP43GPDFFDSF', 'xxxxxxxxxx From File: AudioFileNum = %d', 'HoldOnplay : %d'"
+   ]
+  },
+  {
+   "index": 32,
+   "code_load": 51254900,
+   "code_exec": 50844004,
+   "code_len": 13128,
+   "data_load": 51268028,
+   "data_exec": 50481092,
+   "data_len": 112,
+   "bss_exec": 50481204,
+   "bss_len": 681,
+   "code_file_offset": 596084,
+   "data_file_offset": 609212,
+   "code_sha256": "b2acb73b34176769e4a20612fc880906f15b8e13099938e2126d63ef00a5959e",
+   "data_sha256": "4573d7e15762effd6cee9f7261620d8954177d227ba7b9e90eaf1c84f1becf89",
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": 6.984,
+   "data_entropy": 3.639,
+   "code_zero_fraction": 0.0716,
+   "code_nonzero_span": {
+    "first": 0,
+    "end": 13128
+   },
+   "ascii_string_count": 67,
+   "distinctive_string_count": 1,
+   "distinctive_strings": [
+    {
+     "text": "MenuKeyPro - SelItemID=%d, SetEqType=%d",
+     "region": "code",
+     "offset_in_region": 3500,
+     "file_offset": 599584,
+     "score": 10
+    }
+   ],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "UI menu-key handler with EQ settings",
+   "confidence": "likely",
+   "evidence": [
+    "code log string 'MenuKeyPro - SelItemID=%d, SetEqType=%d' ties this overlay to menu key handling and EQ-type selection"
+   ]
+  },
+  {
+   "index": 33,
+   "code_load": 51303360,
+   "code_exec": 50889596,
+   "code_len": 15192,
+   "data_load": 51318552,
+   "data_exec": 50555080,
+   "data_len": 74912,
+   "bss_exec": 50629992,
+   "bss_len": 10396,
+   "code_file_offset": 644544,
+   "data_file_offset": 659736,
+   "code_sha256": "22b0fabd7c9fcc4b1cc65379eb7f179184839dc408cd0fd5226e25ed76fe232d",
+   "data_sha256": "b5911da443a9149debe171878b1870fb3258bf977a68f21528d75e6e2cce9cb1",
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": 7.007,
+   "data_entropy": 0.084,
+   "code_zero_fraction": 0.059,
+   "code_nonzero_span": {
+    "first": 0,
+    "end": 15192
+   },
+   "ascii_string_count": 120,
+   "distinctive_string_count": 5,
+   "distinctive_strings": [
+    {
+     "text": "audio codec open success.",
+     "region": "code",
+     "offset_in_region": 3768,
+     "file_offset": 648312,
+     "score": 8
+    },
+    {
+     "text": "file open totally over",
+     "region": "code",
+     "offset_in_region": 3736,
+     "file_offset": 648280,
+     "score": 7
+    },
+    {
+     "text": "Codec Open Error1",
+     "region": "code",
+     "offset_in_region": 3828,
+     "file_offset": 648372,
+     "score": 7
+    },
+    {
+     "text": " ######## AudioCodec Open Error ########",
+     "region": "code",
+     "offset_in_region": 4933,
+     "file_offset": 649477,
+     "score": 7
+    },
+    {
+     "text": "bps = %d fs = %d bitrate = %d time=%dm:%ds %d ms",
+     "region": "code",
+     "offset_in_region": 1524,
+     "file_offset": 646068,
+     "score": 6
+    }
+   ],
+   "utf16le_data_strings": [
+    {
+     "text": "WM/AlbumTitle",
+     "offset_in_region": 74600,
+     "file_offset": 734336
+    },
+    {
+     "text": "WM/Genre",
+     "offset_in_region": 74628,
+     "file_offset": 734364
+    },
+    {
+     "text": "WM/TrackNumber",
+     "offset_in_region": 74646,
+     "file_offset": 734382
+    },
+    {
+     "text": "WM/TitleSortOrder",
+     "offset_in_region": 74676,
+     "file_offset": 734412
+    },
+    {
+     "text": "WM/ArtistSortOrder",
+     "offset_in_region": 74712,
+     "file_offset": 734448
+    },
+    {
+     "text": "WM/AlbumSortOrder",
+     "offset_in_region": 74750,
+     "file_offset": 734486
+    },
+    {
+     "text": "WM/Title",
+     "offset_in_region": 74786,
+     "file_offset": 734522
+    },
+    {
+     "text": "WM/Author",
+     "offset_in_region": 74804,
+     "file_offset": 734540
+    },
+    {
+     "text": "WM/PartOfSet",
+     "offset_in_region": 74824,
+     "file_offset": 734560
+    },
+    {
+     "text": "WM/Track",
+     "offset_in_region": 74850,
+     "file_offset": 734586
+    }
+   ],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "system-side codec open / dispatch overlay",
+   "confidence": "likely",
+   "evidence": [
+    "code log strings 'file open totally over', 'audio codec open success.', 'Codec Open Error1'",
+    "data tail contains a pointer table into the 0x308c694 stub window (repeated 0x0308c695/0x0308c69d/0x0308c6a1) and the ASF header-object GUID constant 75B22630-668E-11CF-A6D9-00AA0062CE6C (WMA container), plus a second ASF-family GUID D2D0A440-E307-11D2-97F0-00A0C95EA850",
+    "the same data tail holds UTF-16LE ASF/WM metadata field names ('WM/Title', 'WM/Author', 'WM/Genre', 'WM/AlbumTitle', 'WM/TrackNumber', sort-order variants) -- the dispatcher also knows WMA metadata attributes",
+    "data region is 0x124a0 bytes but only 497 bytes are nonzero (five small islands) -- mostly reserved/zero state"
+   ]
+  },
+  {
+   "index": 34,
+   "code_load": 51393464,
+   "code_exec": 50904788,
+   "code_len": 1984,
+   "data_load": 51395448,
+   "data_exec": 50640388,
+   "data_len": 0,
+   "bss_exec": 50640388,
+   "bss_len": 0,
+   "code_file_offset": 734648,
+   "data_file_offset": null,
+   "code_sha256": "749a81155396d2ddc79498136e5e63036f3bd48f3c91de986bfcb4c7a41d4784",
+   "data_sha256": null,
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": 6.84,
+   "data_entropy": null,
+   "code_zero_fraction": 0.0716,
+   "code_nonzero_span": {
+    "first": 0,
+    "end": 1983
+   },
+   "ascii_string_count": 35,
+   "distinctive_string_count": 2,
+   "distinctive_strings": [
+    {
+     "text": "ERROR!!! CurrentCodec == 0x%02x ",
+     "region": "code",
+     "offset_in_region": 1136,
+     "file_offset": 735784,
+     "score": 10
+    },
+    {
+     "text": " SysFileInfo->CurrentFileNum == %d   ",
+     "region": "code",
+     "offset_in_region": 1945,
+     "file_offset": 736593,
+     "score": 8
+    }
+   ],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "file-browser overlay (SysFileInfo)",
+   "confidence": "likely",
+   "evidence": [
+    "code log string ' SysFileInfo->CurrentFileNum == %d   '; shares exec window 0x308bed4 with modules 35 (data) and 36"
+   ]
+  },
+  {
+   "index": 35,
+   "code_load": 51395448,
+   "code_exec": 50904788,
+   "code_len": 0,
+   "data_load": 51395448,
+   "data_exec": 50640388,
+   "data_len": 51252,
+   "bss_exec": 50691640,
+   "bss_len": 0,
+   "code_file_offset": null,
+   "data_file_offset": 736632,
+   "code_sha256": null,
+   "data_sha256": "6e0172bb81717572c70255a9f57de19c294c5eb68e20f714e00e1844f022350d",
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": null,
+   "data_entropy": 7.227,
+   "code_zero_fraction": null,
+   "code_nonzero_span": null,
+   "ascii_string_count": 231,
+   "distinctive_string_count": 0,
+   "distinctive_strings": [],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "unidentified dense numeric data payload (data-only)",
+   "confidence": "unknown",
+   "evidence": [
+    "51252 data bytes, 91.6% nonzero, entropy 7.23; head is a sequence of 32-bit word pairs (e.g. 001f7dcf / fff081ab) consistent with fixed-point coefficient tables; shares its load slot with code modules 34 and 36 at exec 0x308bed4. No strings; purpose not established"
+   ]
+  },
+  {
+   "index": 36,
+   "code_load": 51446700,
+   "code_exec": 50904788,
+   "code_len": 1220,
+   "data_load": 51447920,
+   "data_exec": 50640388,
+   "data_len": 0,
+   "bss_exec": 50640388,
+   "bss_len": 10286,
+   "code_file_offset": 787884,
+   "data_file_offset": null,
+   "code_sha256": "1f75754ca88f7569bcc18709e94a1de65e7a345af15e8f0ee56e846ff4baada3",
+   "data_sha256": null,
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": 6.841,
+   "data_entropy": null,
+   "code_zero_fraction": 0.0443,
+   "code_nonzero_span": {
+    "first": 0,
+    "end": 1220
+   },
+   "ascii_string_count": 15,
+   "distinctive_string_count": 0,
+   "distinctive_strings": [],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "unidentified overlay",
+   "confidence": "unknown",
+   "evidence": [
+    "no format-, protocol- or library-identifying strings or constants found by this catalog's checks"
+   ]
+  },
+  {
+   "index": 37,
+   "code_load": 51171516,
+   "code_exec": 50845180,
+   "code_len": 3220,
+   "data_load": 51174736,
+   "data_exec": 50481132,
+   "data_len": 320,
+   "bss_exec": 50481452,
+   "bss_len": 1288,
+   "code_file_offset": 512700,
+   "data_file_offset": 515920,
+   "code_sha256": "2e3dcff520e23a2a8b0c903845a0d86e84d457b50224781c6aa7a83cbbc0d877",
+   "data_sha256": "8a9b45c72d86f3f6ae62263d300e04130757a7de5556e8397c0dc194b225a438",
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": 6.829,
+   "data_entropy": 3.661,
+   "code_zero_fraction": 0.0699,
+   "code_nonzero_span": {
+    "first": 0,
+    "end": 3220
+   },
+   "ascii_string_count": 46,
+   "distinctive_string_count": 3,
+   "distinctive_strings": [
+    {
+     "text": "CUE end i = %d ",
+     "region": "code",
+     "offset_in_region": 1332,
+     "file_offset": 514032,
+     "score": 10
+    },
+    {
+     "text": "CUE Can't read content",
+     "region": "code",
+     "offset_in_region": 1308,
+     "file_offset": 514008,
+     "score": 7
+    },
+    {
+     "text": "cue_info->m_total_Song == %d",
+     "region": "code",
+     "offset_in_region": 1356,
+     "file_offset": 514056,
+     "score": 4
+    }
+   ],
+   "utf16le_data_strings": [
+    {
+     "text": "WM/AlbumTitle",
+     "offset_in_region": 52,
+     "file_offset": 515972
+    },
+    {
+     "text": "WM/Genre",
+     "offset_in_region": 80,
+     "file_offset": 516000
+    },
+    {
+     "text": "WM/TrackNumber",
+     "offset_in_region": 98,
+     "file_offset": 516018
+    },
+    {
+     "text": "WM/TitleSortOrder",
+     "offset_in_region": 128,
+     "file_offset": 516048
+    },
+    {
+     "text": "WM/ArtistSortOrder",
+     "offset_in_region": 164,
+     "file_offset": 516084
+    },
+    {
+     "text": "WM/AlbumSortOrder",
+     "offset_in_region": 202,
+     "file_offset": 516122
+    },
+    {
+     "text": "WM/Title",
+     "offset_in_region": 238,
+     "file_offset": 516158
+    },
+    {
+     "text": "WM/Author",
+     "offset_in_region": 256,
+     "file_offset": 516176
+    },
+    {
+     "text": "WM/PartOfSet",
+     "offset_in_region": 276,
+     "file_offset": 516196
+    },
+    {
+     "text": "WM/Track",
+     "offset_in_region": 302,
+     "file_offset": 516222
+    }
+   ],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "CUE sheet parser",
+   "confidence": "likely",
+   "evidence": [
+    "code strings \"CUE Can't read content\" and 'cue_info->m_total_Song == %d'"
+   ]
+  },
+  {
+   "index": 38,
+   "code_load": 51175056,
+   "code_exec": 50848400,
+   "code_len": 4408,
+   "data_load": 51179464,
+   "data_exec": 50482740,
+   "data_len": 0,
+   "bss_exec": 50482740,
+   "bss_len": 135082,
+   "code_file_offset": 516240,
+   "data_file_offset": null,
+   "code_sha256": "941b6c782a518bab1e611ab6836da27e34a6dce93318e3372bf06804591ccae5",
+   "data_sha256": null,
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": 6.912,
+   "data_entropy": null,
+   "code_zero_fraction": 0.0565,
+   "code_nonzero_span": {
+    "first": 1,
+    "end": 4408
+   },
+   "ascii_string_count": 23,
+   "distinctive_string_count": 3,
+   "distinctive_strings": [
+    {
+     "text": "U:\\RECORD     \\VOICE",
+     "region": "code",
+     "offset_in_region": 4336,
+     "file_offset": 520576,
+     "score": 10
+    },
+    {
+     "text": "U:\\RECORD     ",
+     "region": "code",
+     "offset_in_region": 4368,
+     "file_offset": 520608,
+     "score": 8
+    },
+    {
+     "text": "MP1MP2MP3WMAWAVAPEFLAAACM4AOGGMP43GPDFFDSFCUE",
+     "region": "code",
+     "offset_in_region": 1084,
+     "file_offset": 517324,
+     "score": 5
+    }
+   ],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "media file enumeration overlay",
+   "confidence": "likely",
+   "evidence": [
+    "code contains the extension list 'MP1MP2MP3WMAWAVAPEFLAAACM4AOGGMP43GPDFFDSFCUE' (module 31's list plus CUE) and path strings 'U:\\RECORD     \\VOICE' / 'U:\\RECORD     ' (folder-name strings only)"
+   ]
+  },
+  {
+   "index": 39,
+   "code_load": 51031916,
+   "code_exec": 50845180,
+   "code_len": 138928,
+   "data_load": 51170844,
+   "data_exec": 50481132,
+   "data_len": 8,
+   "bss_exec": 50481140,
+   "bss_len": 148756,
+   "code_file_offset": 373100,
+   "data_file_offset": 512028,
+   "code_sha256": "a6f32db73e328c7b129e5865ef13427048724ed96aa5c802ddbfb5bedf393f3b",
+   "data_sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc",
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": 0.288,
+   "data_entropy": -0.0,
+   "code_zero_fraction": 0.9795,
+   "code_nonzero_span": {
+    "first": 0,
+    "end": 3056
+   },
+   "ascii_string_count": 25,
+   "distinctive_string_count": 0,
+   "distinctive_strings": [],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "ASCII uppercase / case-insensitive compare leaf functions (rest of region is zero padding)",
+   "confidence": "proven",
+   "evidence": [
+    "prior work executed the original routines at 0x0307d5fc/0x0307d608 with a Thumb-2 interpreter (16,512 verified calls; repo/analysis/DP3_V137.md)",
+    "structural fact from this catalog: of 0x21eb0 code bytes only the first 0xbf0 are nonzero (2.1%); the remaining 97.9% are 0x00 -- a max-size overlay window, not 139 KB of code"
+   ]
+  },
+  {
+   "index": 40,
+   "code_load": 51447920,
+   "code_exec": 50906772,
+   "code_len": 0,
+   "data_load": 51447920,
+   "data_exec": 50650676,
+   "data_len": 0,
+   "bss_exec": 50650676,
+   "bss_len": 8192,
+   "code_file_offset": null,
+   "data_file_offset": null,
+   "code_sha256": null,
+   "data_sha256": null,
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": null,
+   "data_entropy": null,
+   "code_zero_fraction": null,
+   "code_nonzero_span": null,
+   "ascii_string_count": 0,
+   "distinctive_string_count": 0,
+   "distinctive_strings": [],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "empty module record (code_len = data_len = 0; bss_len = 0x2000 -- BSS-only reservation)",
+   "confidence": "proven",
+   "evidence": [
+    "record present in the module table with no payload bytes in the image"
+   ]
+  },
+  {
+   "index": 41,
+   "code_load": 51447920,
+   "code_exec": 50906772,
+   "code_len": 672,
+   "data_load": 51448592,
+   "data_exec": 50650676,
+   "data_len": 0,
+   "bss_exec": 50650676,
+   "bss_len": 0,
+   "code_file_offset": 789104,
+   "data_file_offset": null,
+   "code_sha256": "d75237e3cd43a42a9142c336db9cbbd41003ce705fffee396f60ea3697309c4a",
+   "data_sha256": null,
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": 6.289,
+   "data_entropy": null,
+   "code_zero_fraction": 0.061,
+   "code_nonzero_span": {
+    "first": 0,
+    "end": 671
+   },
+   "ascii_string_count": 10,
+   "distinctive_string_count": 0,
+   "distinctive_strings": [],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "unidentified overlay",
+   "confidence": "unknown",
+   "evidence": [
+    "no format-, protocol- or library-identifying strings or constants found by this catalog's checks"
+   ]
+  },
+  {
+   "index": 42,
+   "code_load": 51448592,
+   "code_exec": 50906772,
+   "code_len": 740,
+   "data_load": 51449332,
+   "data_exec": 50650676,
+   "data_len": 2,
+   "bss_exec": 50650680,
+   "bss_len": 0,
+   "code_file_offset": 789776,
+   "data_file_offset": 790516,
+   "code_sha256": "1f12722e6aad118f2e4f68eff1f21c09044fbb7484ac25fd2b45587319b42a02",
+   "data_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": 6.296,
+   "data_entropy": -0.0,
+   "code_zero_fraction": 0.0797,
+   "code_nonzero_span": {
+    "first": 0,
+    "end": 733
+   },
+   "ascii_string_count": 10,
+   "distinctive_string_count": 0,
+   "distinctive_strings": [],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "unidentified overlay",
+   "confidence": "unknown",
+   "evidence": [
+    "no format-, protocol- or library-identifying strings or constants found by this catalog's checks"
+   ]
+  },
+  {
+   "index": 43,
+   "code_load": 51449336,
+   "code_exec": 50907512,
+   "code_len": 0,
+   "data_load": 51449336,
+   "data_exec": 50650680,
+   "data_len": 0,
+   "bss_exec": 50650680,
+   "bss_len": 0,
+   "code_file_offset": null,
+   "data_file_offset": null,
+   "code_sha256": null,
+   "data_sha256": null,
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": null,
+   "data_entropy": null,
+   "code_zero_fraction": null,
+   "code_nonzero_span": null,
+   "ascii_string_count": 0,
+   "distinctive_string_count": 0,
+   "distinctive_strings": [],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "empty module record (code_len = data_len = 0)",
+   "confidence": "proven",
+   "evidence": [
+    "record present in the module table with no payload bytes in the image"
+   ]
+  },
+  {
+   "index": 44,
+   "code_load": 51449336,
+   "code_exec": 50907512,
+   "code_len": 0,
+   "data_load": 51449336,
+   "data_exec": 50650680,
+   "data_len": 0,
+   "bss_exec": 50650680,
+   "bss_len": 0,
+   "code_file_offset": null,
+   "data_file_offset": null,
+   "code_sha256": null,
+   "data_sha256": null,
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": null,
+   "data_entropy": null,
+   "code_zero_fraction": null,
+   "code_nonzero_span": null,
+   "ascii_string_count": 0,
+   "distinctive_string_count": 0,
+   "distinctive_strings": [],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "empty module record (code_len = data_len = 0)",
+   "confidence": "proven",
+   "evidence": [
+    "record present in the module table with no payload bytes in the image"
+   ]
+  },
+  {
+   "index": 45,
+   "code_load": 51449336,
+   "code_exec": 50907512,
+   "code_len": 0,
+   "data_load": 51449336,
+   "data_exec": 50650680,
+   "data_len": 0,
+   "bss_exec": 50650680,
+   "bss_len": 0,
+   "code_file_offset": null,
+   "data_file_offset": null,
+   "code_sha256": null,
+   "data_sha256": null,
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": null,
+   "data_entropy": null,
+   "code_zero_fraction": null,
+   "code_nonzero_span": null,
+   "ascii_string_count": 0,
+   "distinctive_string_count": 0,
+   "distinctive_strings": [],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "empty module record (code_len = data_len = 0)",
+   "confidence": "proven",
+   "evidence": [
+    "record present in the module table with no payload bytes in the image"
+   ]
+  },
+  {
+   "index": 46,
+   "code_load": 51449336,
+   "code_exec": 50907512,
+   "code_len": 0,
+   "data_load": 51449336,
+   "data_exec": 50650680,
+   "data_len": 0,
+   "bss_exec": 50650680,
+   "bss_len": 0,
+   "code_file_offset": null,
+   "data_file_offset": null,
+   "code_sha256": null,
+   "data_sha256": null,
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": null,
+   "data_entropy": null,
+   "code_zero_fraction": null,
+   "code_nonzero_span": null,
+   "ascii_string_count": 0,
+   "distinctive_string_count": 0,
+   "distinctive_strings": [],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "empty module record (code_len = data_len = 0)",
+   "confidence": "proven",
+   "evidence": [
+    "record present in the module table with no payload bytes in the image"
+   ]
+  },
+  {
+   "index": 47,
+   "code_load": 51449336,
+   "code_exec": 50907512,
+   "code_len": 0,
+   "data_load": 51449336,
+   "data_exec": 50650680,
+   "data_len": 0,
+   "bss_exec": 50650680,
+   "bss_len": 0,
+   "code_file_offset": null,
+   "data_file_offset": null,
+   "code_sha256": null,
+   "data_sha256": null,
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": null,
+   "data_entropy": null,
+   "code_zero_fraction": null,
+   "code_nonzero_span": null,
+   "ascii_string_count": 0,
+   "distinctive_string_count": 0,
+   "distinctive_strings": [],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "empty module record (code_len = data_len = 0)",
+   "confidence": "proven",
+   "evidence": [
+    "record present in the module table with no payload bytes in the image"
+   ]
+  },
+  {
+   "index": 48,
+   "code_load": 51449336,
+   "code_exec": 50907512,
+   "code_len": 0,
+   "data_load": 51449336,
+   "data_exec": 50650680,
+   "data_len": 0,
+   "bss_exec": 50650680,
+   "bss_len": 0,
+   "code_file_offset": null,
+   "data_file_offset": null,
+   "code_sha256": null,
+   "data_sha256": null,
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": null,
+   "data_entropy": null,
+   "code_zero_fraction": null,
+   "code_nonzero_span": null,
+   "ascii_string_count": 0,
+   "distinctive_string_count": 0,
+   "distinctive_strings": [],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "empty module record (code_len = data_len = 0)",
+   "confidence": "proven",
+   "evidence": [
+    "record present in the module table with no payload bytes in the image"
+   ]
+  },
+  {
+   "index": 49,
+   "code_load": 51449336,
+   "code_exec": 50907512,
+   "code_len": 0,
+   "data_load": 51449336,
+   "data_exec": 50650680,
+   "data_len": 0,
+   "bss_exec": 50650680,
+   "bss_len": 0,
+   "code_file_offset": null,
+   "data_file_offset": null,
+   "code_sha256": null,
+   "data_sha256": null,
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": null,
+   "data_entropy": null,
+   "code_zero_fraction": null,
+   "code_nonzero_span": null,
+   "ascii_string_count": 0,
+   "distinctive_string_count": 0,
+   "distinctive_strings": [],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "empty module record (code_len = data_len = 0)",
+   "confidence": "proven",
+   "evidence": [
+    "record present in the module table with no payload bytes in the image"
+   ]
+  },
+  {
+   "index": 50,
+   "code_load": 51450016,
+   "code_exec": 50906772,
+   "code_len": 720,
+   "data_load": 51450736,
+   "data_exec": 50650676,
+   "data_len": 2,
+   "bss_exec": 50650680,
+   "bss_len": 0,
+   "code_file_offset": 791200,
+   "data_file_offset": 791920,
+   "code_sha256": "9abe48efbf8d37b603cdcfc6cc2735046189fd6d60fe1d2e7124735a94a69190",
+   "data_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": 6.299,
+   "data_entropy": -0.0,
+   "code_zero_fraction": 0.0875,
+   "code_nonzero_span": {
+    "first": 0,
+    "end": 713
+   },
+   "ascii_string_count": 8,
+   "distinctive_string_count": 0,
+   "distinctive_strings": [],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "unidentified overlay",
+   "confidence": "unknown",
+   "evidence": [
+    "no format-, protocol- or library-identifying strings or constants found by this catalog's checks"
+   ]
+  },
+  {
+   "index": 51,
+   "code_load": 51449336,
+   "code_exec": 50906772,
+   "code_len": 680,
+   "data_load": 51450016,
+   "data_exec": 50650676,
+   "data_len": 0,
+   "bss_exec": 50650676,
+   "bss_len": 0,
+   "code_file_offset": 790520,
+   "data_file_offset": null,
+   "code_sha256": "3bdfd674c2729db60e3dc561d433127985f2adb7c7f12e06af66ef95989e903f",
+   "data_sha256": null,
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": 6.298,
+   "data_entropy": null,
+   "code_zero_fraction": 0.0588,
+   "code_nonzero_span": {
+    "first": 0,
+    "end": 679
+   },
+   "ascii_string_count": 11,
+   "distinctive_string_count": 0,
+   "distinctive_strings": [],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "unidentified overlay",
+   "confidence": "unknown",
+   "evidence": [
+    "no format-, protocol- or library-identifying strings or constants found by this catalog's checks"
+   ]
+  },
+  {
+   "index": 52,
+   "code_load": 51450740,
+   "code_exec": 50906772,
+   "code_len": 712,
+   "data_load": 51451452,
+   "data_exec": 50650676,
+   "data_len": 2,
+   "bss_exec": 50650680,
+   "bss_len": 0,
+   "code_file_offset": 791924,
+   "data_file_offset": 792636,
+   "code_sha256": "efd2812c4cab4a859b9c5f0b3bb60ce9181a58cd9beb221adf1d8da430649196",
+   "data_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": 6.26,
+   "data_entropy": -0.0,
+   "code_zero_fraction": 0.0871,
+   "code_nonzero_span": {
+    "first": 0,
+    "end": 705
+   },
+   "ascii_string_count": 10,
+   "distinctive_string_count": 0,
+   "distinctive_strings": [],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "unidentified overlay",
+   "confidence": "unknown",
+   "evidence": [
+    "no format-, protocol- or library-identifying strings or constants found by this catalog's checks"
+   ]
+  },
+  {
+   "index": 53,
+   "code_load": 51451456,
+   "code_exec": 50906772,
+   "code_len": 700,
+   "data_load": 51452156,
+   "data_exec": 50650676,
+   "data_len": 12,
+   "bss_exec": 50650688,
+   "bss_len": 0,
+   "code_file_offset": 792640,
+   "data_file_offset": 793340,
+   "code_sha256": "14a5fe84233e4c06cd87111322e436df31f1be37b2a2688cc1dbb8da7c83d037",
+   "data_sha256": "15ec7bf0b50732b49f8228e07d24365338f9e3ab994b00af08e5a3bffe55fd8b",
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": 6.264,
+   "data_entropy": -0.0,
+   "code_zero_fraction": 0.09,
+   "code_nonzero_span": {
+    "first": 0,
+    "end": 693
+   },
+   "ascii_string_count": 7,
+   "distinctive_string_count": 0,
+   "distinctive_strings": [],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [
+    {
+     "of_module": 54,
+     "differing_bytes": 1
+    },
+    {
+     "of_module": 55,
+     "differing_bytes": 1
+    },
+    {
+     "of_module": 56,
+     "differing_bytes": 1
+    },
+    {
+     "of_module": 57,
+     "differing_bytes": 1
+    }
+   ],
+   "identification": "unidentified template overlay family (53-57)",
+   "confidence": "unknown",
+   "evidence": [
+    "modules 54, 56 and 57 have byte-identical 700-byte code regions; 53 and 55 each differ from that code by exactly one byte (verified by direct comparison in this catalog). The five differ in their small data records (2-22 bytes). All execute at 0x308c694. Purpose not established"
+   ]
+  },
+  {
+   "index": 54,
+   "code_load": 51452168,
+   "code_exec": 50906772,
+   "code_len": 700,
+   "data_load": 51452868,
+   "data_exec": 50650676,
+   "data_len": 12,
+   "bss_exec": 50650688,
+   "bss_len": 0,
+   "code_file_offset": 793352,
+   "data_file_offset": 794052,
+   "code_sha256": "c1f48ee57650a5d3c2ab3ca17d0e21c953650c121c9f3341cf5f1b58b3421f06",
+   "data_sha256": "15ec7bf0b50732b49f8228e07d24365338f9e3ab994b00af08e5a3bffe55fd8b",
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": 6.264,
+   "data_entropy": -0.0,
+   "code_zero_fraction": 0.09,
+   "code_nonzero_span": {
+    "first": 0,
+    "end": 693
+   },
+   "ascii_string_count": 7,
+   "distinctive_string_count": 0,
+   "distinctive_strings": [],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": [
+    54,
+    56,
+    57
+   ],
+   "near_duplicate_code": [
+    {
+     "of_module": 53,
+     "differing_bytes": 1
+    }
+   ],
+   "identification": "unidentified template overlay family (53-57)",
+   "confidence": "unknown",
+   "evidence": [
+    "modules 54, 56 and 57 have byte-identical 700-byte code regions; 53 and 55 each differ from that code by exactly one byte (verified by direct comparison in this catalog). The five differ in their small data records (2-22 bytes). All execute at 0x308c694. Purpose not established"
+   ]
+  },
+  {
+   "index": 55,
+   "code_load": 51452880,
+   "code_exec": 50906772,
+   "code_len": 700,
+   "data_load": 51453580,
+   "data_exec": 50650676,
+   "data_len": 22,
+   "bss_exec": 50650700,
+   "bss_len": 128,
+   "code_file_offset": 794064,
+   "data_file_offset": 794764,
+   "code_sha256": "a6fa509a0e5b5fb93722b9eb94285aafdab7b8ed2efb91074be4f90f0d425218",
+   "data_sha256": "43520d77a88011cb7299aceecfeb13f919aea96794c91715c9688672afcd105f",
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": 6.257,
+   "data_entropy": 0.267,
+   "code_zero_fraction": 0.09,
+   "code_nonzero_span": {
+    "first": 0,
+    "end": 693
+   },
+   "ascii_string_count": 7,
+   "distinctive_string_count": 0,
+   "distinctive_strings": [],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [
+    {
+     "of_module": 53,
+     "differing_bytes": 1
+    }
+   ],
+   "identification": "unidentified template overlay family (53-57)",
+   "confidence": "unknown",
+   "evidence": [
+    "modules 54, 56 and 57 have byte-identical 700-byte code regions; 53 and 55 each differ from that code by exactly one byte (verified by direct comparison in this catalog). The five differ in their small data records (2-22 bytes). All execute at 0x308c694. Purpose not established"
+   ]
+  },
+  {
+   "index": 56,
+   "code_load": 51453604,
+   "code_exec": 50906772,
+   "code_len": 700,
+   "data_load": 51454304,
+   "data_exec": 50650676,
+   "data_len": 8,
+   "bss_exec": 50650684,
+   "bss_len": 0,
+   "code_file_offset": 794788,
+   "data_file_offset": 795488,
+   "code_sha256": "c1f48ee57650a5d3c2ab3ca17d0e21c953650c121c9f3341cf5f1b58b3421f06",
+   "data_sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc",
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": 6.264,
+   "data_entropy": -0.0,
+   "code_zero_fraction": 0.09,
+   "code_nonzero_span": {
+    "first": 0,
+    "end": 693
+   },
+   "ascii_string_count": 7,
+   "distinctive_string_count": 0,
+   "distinctive_strings": [],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": [
+    54,
+    56,
+    57
+   ],
+   "near_duplicate_code": [
+    {
+     "of_module": 53,
+     "differing_bytes": 1
+    }
+   ],
+   "identification": "unidentified template overlay family (53-57)",
+   "confidence": "unknown",
+   "evidence": [
+    "modules 54, 56 and 57 have byte-identical 700-byte code regions; 53 and 55 each differ from that code by exactly one byte (verified by direct comparison in this catalog). The five differ in their small data records (2-22 bytes). All execute at 0x308c694. Purpose not established"
+   ]
+  },
+  {
+   "index": 57,
+   "code_load": 51454312,
+   "code_exec": 50906772,
+   "code_len": 700,
+   "data_load": 51455012,
+   "data_exec": 50650676,
+   "data_len": 2,
+   "bss_exec": 50650680,
+   "bss_len": 0,
+   "code_file_offset": 795496,
+   "data_file_offset": 796196,
+   "code_sha256": "c1f48ee57650a5d3c2ab3ca17d0e21c953650c121c9f3341cf5f1b58b3421f06",
+   "data_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": 6.264,
+   "data_entropy": -0.0,
+   "code_zero_fraction": 0.09,
+   "code_nonzero_span": {
+    "first": 0,
+    "end": 693
+   },
+   "ascii_string_count": 7,
+   "distinctive_string_count": 0,
+   "distinctive_strings": [],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": [
+    54,
+    56,
+    57
+   ],
+   "near_duplicate_code": [
+    {
+     "of_module": 53,
+     "differing_bytes": 1
+    }
+   ],
+   "identification": "unidentified template overlay family (53-57)",
+   "confidence": "unknown",
+   "evidence": [
+    "modules 54, 56 and 57 have byte-identical 700-byte code regions; 53 and 55 each differ from that code by exactly one byte (verified by direct comparison in this catalog). The five differ in their small data records (2-22 bytes). All execute at 0x308c694. Purpose not established"
+   ]
+  },
+  {
+   "index": 58,
+   "code_load": 51535656,
+   "code_exec": 50939396,
+   "code_len": 0,
+   "data_load": 51535656,
+   "data_exec": 50555080,
+   "data_len": 0,
+   "bss_exec": 50555080,
+   "bss_len": 0,
+   "code_file_offset": null,
+   "data_file_offset": null,
+   "code_sha256": null,
+   "data_sha256": null,
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": null,
+   "data_entropy": null,
+   "code_zero_fraction": null,
+   "code_nonzero_span": null,
+   "ascii_string_count": 0,
+   "distinctive_string_count": 0,
+   "distinctive_strings": [],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "empty module record (code_len = data_len = 0)",
+   "confidence": "proven",
+   "evidence": [
+    "record present in the module table with no payload bytes in the image"
+   ]
+  },
+  {
+   "index": 59,
+   "code_load": 51535656,
+   "code_exec": 50939396,
+   "code_len": 0,
+   "data_load": 51535656,
+   "data_exec": 50555080,
+   "data_len": 0,
+   "bss_exec": 50555080,
+   "bss_len": 0,
+   "code_file_offset": null,
+   "data_file_offset": null,
+   "code_sha256": null,
+   "data_sha256": null,
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": null,
+   "data_entropy": null,
+   "code_zero_fraction": null,
+   "code_nonzero_span": null,
+   "ascii_string_count": 0,
+   "distinctive_string_count": 0,
+   "distinctive_strings": [],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "empty module record (code_len = data_len = 0)",
+   "confidence": "proven",
+   "evidence": [
+    "record present in the module table with no payload bytes in the image"
+   ]
+  },
+  {
+   "index": 60,
+   "code_load": 51535656,
+   "code_exec": 50939396,
+   "code_len": 0,
+   "data_load": 51535656,
+   "data_exec": 50555080,
+   "data_len": 0,
+   "bss_exec": 50555080,
+   "bss_len": 0,
+   "code_file_offset": null,
+   "data_file_offset": null,
+   "code_sha256": null,
+   "data_sha256": null,
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": null,
+   "data_entropy": null,
+   "code_zero_fraction": null,
+   "code_nonzero_span": null,
+   "ascii_string_count": 0,
+   "distinctive_string_count": 0,
+   "distinctive_strings": [],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "empty module record (code_len = data_len = 0)",
+   "confidence": "proven",
+   "evidence": [
+    "record present in the module table with no payload bytes in the image"
+   ]
+  },
+  {
+   "index": 61,
+   "code_load": 51455016,
+   "code_exec": 50858836,
+   "code_len": 80560,
+   "data_load": 51535576,
+   "data_exec": 50485572,
+   "data_len": 79,
+   "bss_exec": 50485652,
+   "bss_len": 15668,
+   "code_file_offset": 796200,
+   "data_file_offset": 876760,
+   "code_sha256": "9a8f337590abdd858c1073446eed90871d826c607d1641de42e6a2405fb936a3",
+   "data_sha256": "2f230972867faa9023db1705f5e3dac33ae82cf4877ee274cb974815c296dcc1",
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": 0.972,
+   "data_entropy": 3.777,
+   "code_zero_fraction": 0.92,
+   "code_nonzero_span": {
+    "first": 0,
+    "end": 6820
+   },
+   "ascii_string_count": 51,
+   "distinctive_string_count": 2,
+   "distinctive_strings": [
+    {
+     "text": "U:\\RECORD     ",
+     "region": "data",
+     "offset_in_region": 40,
+     "file_offset": 876800,
+     "score": 8
+    },
+    {
+     "text": "RECORD",
+     "region": "code",
+     "offset_in_region": 1028,
+     "file_offset": 797228,
+     "score": 4
+    }
+   ],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "unidentified large sparse overlay",
+   "confidence": "unknown",
+   "evidence": [
+    "code_len 0x13ab0 but only the first 0x1aa4 bytes are nonzero (8.0%); the rest is 0x00 padding. Nonzero head contains a 'RECORD' name string surrounded by 0x0302xxxx/0x0308xxxx literals. Shares exec window 0x3080b54 with module 18"
+   ]
+  },
+  {
+   "index": 62,
+   "code_load": 51535656,
+   "code_exec": 50939396,
+   "code_len": 0,
+   "data_load": 51535656,
+   "data_exec": 50501320,
+   "data_len": 0,
+   "bss_exec": 50501320,
+   "bss_len": 0,
+   "code_file_offset": null,
+   "data_file_offset": null,
+   "code_sha256": null,
+   "data_sha256": null,
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": null,
+   "data_entropy": null,
+   "code_zero_fraction": null,
+   "code_nonzero_span": null,
+   "ascii_string_count": 0,
+   "distinctive_string_count": 0,
+   "distinctive_strings": [],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "empty module record (code_len = data_len = 0)",
+   "confidence": "proven",
+   "evidence": [
+    "record present in the module table with no payload bytes in the image"
+   ]
+  },
+  {
+   "index": 63,
+   "code_load": 50662508,
+   "code_exec": 0,
+   "code_len": 256,
+   "data_load": 0,
+   "data_exec": 0,
+   "data_len": 0,
+   "bss_exec": 0,
+   "bss_len": 0,
+   "code_file_offset": 3692,
+   "data_file_offset": null,
+   "code_sha256": "265aae06336916d48c9de6f0cb6d3eec97e71da8243e0e5b635a6c6375cd0e5c",
+   "data_sha256": null,
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": 4.838,
+   "data_entropy": null,
+   "code_zero_fraction": 0.0664,
+   "code_nonzero_span": {
+    "first": 0,
+    "end": 256
+   },
+   "ascii_string_count": 1,
+   "distinctive_string_count": 0,
+   "distinctive_strings": [],
+   "utf16le_data_strings": [],
+   "u16_table_stats": {
+    "entries": 128,
+    "value_min": 0,
+    "value_max": 8482,
+    "monotonic_nondecreasing_pairs": 104,
+    "monotonic_fraction": 0.819,
+    "top_unicode_blocks": [
+     [
+      "punctuation/symbols",
+      18
+     ],
+     [
+      "Latin-1/basic",
+      16
+     ]
+    ]
+   },
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "data-only 256-byte lookup table (no code; purpose unknown)",
+   "confidence": "likely",
+   "evidence": [
+    "code_exec is 0 and the payload sits in the 'code' field: exactly 256 bytes, entropy 4.84, first bytes 02 04 03 04 1a 20 53 04 -- a byte-indexed table"
+   ]
+  },
+  {
+   "index": 64,
+   "code_load": 50662764,
+   "code_exec": 0,
+   "code_len": 256,
+   "data_load": 0,
+   "data_exec": 0,
+   "data_len": 0,
+   "bss_exec": 0,
+   "bss_len": 0,
+   "code_file_offset": 3948,
+   "data_file_offset": null,
+   "code_sha256": "840f05b67170845622c444377f41d2f2abdc15cd81757f9e29b9cd94e232ba78",
+   "data_sha256": null,
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": 2.963,
+   "data_entropy": null,
+   "code_zero_fraction": 0.5078,
+   "code_nonzero_span": {
+    "first": 66,
+    "end": 192
+   },
+   "ascii_string_count": 0,
+   "distinctive_string_count": 0,
+   "distinctive_strings": [],
+   "utf16le_data_strings": [],
+   "u16_table_stats": {
+    "entries": 128,
+    "value_min": 0,
+    "value_max": 65439,
+    "monotonic_nondecreasing_pairs": 126,
+    "monotonic_fraction": 0.992,
+    "top_unicode_blocks": [
+     [
+      "Latin-1/basic",
+      65
+     ],
+     [
+      "fullwidth/halfwidth forms",
+      63
+     ]
+    ]
+   },
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "character conversion table (uint16, halfwidth/fullwidth forms)",
+   "confidence": "likely",
+   "evidence": [
+    "code_exec is 0; payload is a uint16 table in the 'code' field (see u16_table_stats in JSON)",
+    "uint16 value distribution by Unicode block: Latin-1/basic x65, fullwidth/halfwidth forms x63",
+    "128 entries split between Latin-1 (65) and U+FF00-FF9F fullwidth/halfwidth forms (63) -- shape of a halfwidth/fullwidth or JIS X 0201 conversion table (inference)"
+   ]
+  },
+  {
+   "index": 65,
+   "code_load": 50663020,
+   "code_exec": 0,
+   "code_len": 56186,
+   "data_load": 0,
+   "data_exec": 0,
+   "data_len": 0,
+   "bss_exec": 0,
+   "bss_len": 0,
+   "code_file_offset": 4204,
+   "data_file_offset": null,
+   "code_sha256": "2d62eec8218918b5463ce8022b75b75d5652e232c6239a69b1fc791453c890e6",
+   "data_sha256": null,
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": 2.821,
+   "data_entropy": null,
+   "code_zero_fraction": 0.7398,
+   "code_nonzero_span": {
+    "first": 1,
+    "end": 56186
+   },
+   "ascii_string_count": 317,
+   "distinctive_string_count": 6,
+   "distinctive_strings": [
+    {
+     "text": "v'v v!v\"v$v4v0v;vGvHvFv\\vXvavbvhvivjvgvlvpvrvvvxv|v",
+     "region": "code",
+     "offset_in_region": 49299,
+     "file_offset": 53503,
+     "score": 6
+    },
+    {
+     "text": "A0B0C0D0E0F0G0H0I0J0K0L0M0N0O0P0Q0R0S0T0U0V0W0X0Y0Z0[0\\0]0^0_0`0a0b0c0d0e0f0g0h0i0j0k0l0m0n0o0p0q0r0s0t0u0v0w0x0y0z0{0|0}0~0",
+     "region": "code",
+     "offset_in_region": 702,
+     "file_offset": 4906,
+     "score": 4
+    },
+    {
+     "text": "%#%3%+%;%K% %/%(%7%?%",
+     "region": "code",
+     "offset_in_region": 1759,
+     "file_offset": 5963,
+     "score": 4
+    },
+    {
+     "text": "T9U@UcULU.U\\UEUVUWU8U3U]U",
+     "region": "code",
+     "offset_in_region": 12829,
+     "file_offset": 17033,
+     "score": 4
+    },
+    {
+     "text": "\\ \\\"\\(\\8\\9\\A\\F\\N\\S\\P\\O\\q[l\\n\\bNv\\y\\",
+     "region": "code",
+     "offset_in_region": 13483,
+     "file_offset": 17687,
+     "score": 4
+    },
+    {
+     "text": "hyiwi\\ixikiTi~ini9iti=iYi0iai^i]i",
+     "region": "code",
+     "offset_in_region": 15073,
+     "file_offset": 19277,
+     "score": 4
+    }
+   ],
+   "utf16le_data_strings": [],
+   "u16_table_stats": {
+    "entries": 28093,
+    "value_min": 0,
+    "value_max": 65509,
+    "monotonic_nondecreasing_pairs": 26120,
+    "monotonic_fraction": 0.93,
+    "top_unicode_blocks": [
+     [
+      "Latin-1/basic",
+      20774
+     ],
+     [
+      "CJK unified",
+      6682
+     ],
+     [
+      "CJK punctuation/kana",
+      200
+     ]
+    ]
+   },
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "character conversion table (uint16, CJK-heavy)",
+   "confidence": "likely",
+   "evidence": [
+    "code_exec is 0; payload is a uint16 table in the 'code' field (see u16_table_stats in JSON)",
+    "uint16 value distribution by Unicode block: Latin-1/basic x20774, CJK unified x6682, CJK punctuation/kana x200",
+    "CJK-unified values dominate -- a CJK codepage-to-Unicode conversion table; the exact source encoding (GBK/Big5/Shift_JIS family) is not established by the bytes alone (inference)"
+   ]
+  },
+  {
+   "index": 66,
+   "code_load": 50719208,
+   "code_exec": 0,
+   "code_len": 780,
+   "data_load": 0,
+   "data_exec": 0,
+   "data_len": 0,
+   "bss_exec": 0,
+   "bss_len": 0,
+   "code_file_offset": 60392,
+   "data_file_offset": null,
+   "code_sha256": "0f66d2d0b27ab82b571621d62347729b24c647e4061559af4c62a1d2ad5019f0",
+   "data_sha256": null,
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": 7.151,
+   "data_entropy": null,
+   "code_zero_fraction": 0.0103,
+   "code_nonzero_span": {
+    "first": 0,
+    "end": 780
+   },
+   "ascii_string_count": 22,
+   "distinctive_string_count": 0,
+   "distinctive_strings": [],
+   "utf16le_data_strings": [],
+   "u16_table_stats": {
+    "entries": 390,
+    "value_min": 0,
+    "value_max": 65508,
+    "monotonic_nondecreasing_pairs": 302,
+    "monotonic_fraction": 0.776,
+    "top_unicode_blocks": [
+     [
+      "CJK unified",
+      326
+     ],
+     [
+      "CJK compat ideographs",
+      34
+     ],
+     [
+      "punctuation/symbols",
+      23
+     ]
+    ]
+   },
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "character conversion table (uint16, CJK-heavy)",
+   "confidence": "likely",
+   "evidence": [
+    "code_exec is 0; payload is a uint16 table in the 'code' field (see u16_table_stats in JSON)",
+    "uint16 value distribution by Unicode block: CJK unified x326, CJK compat ideographs x34, punctuation/symbols x23",
+    "CJK-unified values dominate -- a CJK codepage-to-Unicode conversion table; the exact source encoding (GBK/Big5/Shift_JIS family) is not established by the bytes alone (inference)"
+   ]
+  },
+  {
+   "index": 67,
+   "code_load": 50719988,
+   "code_exec": 0,
+   "code_len": 45438,
+   "data_load": 0,
+   "data_exec": 0,
+   "data_len": 0,
+   "bss_exec": 0,
+   "bss_len": 0,
+   "code_file_offset": 61172,
+   "data_file_offset": null,
+   "code_sha256": "48264fc6df3de003c139299244ef289a3e78bc0559121460652419666fbfbb5b",
+   "data_sha256": null,
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": 5.592,
+   "data_entropy": null,
+   "code_zero_fraction": 0.397,
+   "code_nonzero_span": {
+    "first": 1,
+    "end": 45438
+   },
+   "ascii_string_count": 509,
+   "distinctive_string_count": 21,
+   "distinctive_strings": [
+    {
+     "text": "ZT%f%W%`%l%c%Z%i%]%R%d%U%^%j%a%X%g%[%S%e%V%_%k%b%Y%h%\\%Q%P%m%n%p%o%",
+     "region": "code",
+     "offset_in_region": 45369,
+     "file_offset": 106541,
+     "score": 7
+    },
+    {
+     "text": "k.l/l,l/n8nTn!n2ngnJn n%n#n",
+     "region": "code",
+     "offset_in_region": 10049,
+     "file_offset": 71221,
+     "score": 6
+    },
+    {
+     "text": "h&h(h.hMh:h%h h,k/k-k1k4kmk",
+     "region": "code",
+     "offset_in_region": 24923,
+     "file_offset": 86095,
+     "score": 6
+    },
+    {
+     "text": "&Q%Q\"Q$Q Q)Q",
+     "region": "code",
+     "offset_in_region": 38642,
+     "file_offset": 99814,
+     "score": 6
+    },
+    {
+     "text": "`!a!b!c!d!e!f!g!h!i!!0\"0#0$0%0&0'0(0)0ASDSES!",
+     "region": "code",
+     "offset_in_region": 754,
+     "file_offset": 61926,
+     "score": 5
+    },
+    {
+     "text": "e%f-f f'f/f",
+     "region": "code",
+     "offset_in_region": 5653,
+     "file_offset": 66825,
+     "score": 5
+    },
+    {
+     "text": "n%p%o%P%^%j%a%",
+     "region": "code",
+     "offset_in_region": 706,
+     "file_offset": 61878,
+     "score": 4
+    },
+    {
+     "text": "1 1!1\"1#1$1%1&1'1(1)1",
+     "region": "code",
+     "offset_in_region": 1249,
+     "file_offset": 62421,
+     "score": 4
+    },
+    {
+     "text": "\\O`O/ONO6OYO]OHOZOLQKQMQuQ",
+     "region": "code",
+     "offset_in_region": 3072,
+     "file_offset": 64244,
+     "score": 4
+    },
+    {
+     "text": "~NzP}P\\PGPCPLPZPIPePvPNPUPuPtPwPOP",
+     "region": "code",
+     "offset_in_region": 7900,
+     "file_offset": 69072,
+     "score": 4
+    },
+    {
+     "text": "fFUjUfUDU^UaUCUJU1UVUOUUU/UdU8U.U\\U,UcU3UAUWU",
+     "region": "code",
+     "offset_in_region": 7973,
+     "file_offset": 69145,
+     "score": 4
+    },
+    {
+     "text": "t&t(t%u&ukuju",
+     "region": "code",
+     "offset_in_region": 10305,
+     "file_offset": 71477,
+     "score": 4
+    },
+    {
+     "text": "nNqYqiqdqIqgq\\qlqfqLqeq^qFqhqVq:rRr7sEs?s>sotZtUt_t^tAt?tYt[t\\tvuxu",
+     "region": "code",
+     "offset_in_region": 11547,
+     "file_offset": 72719,
+     "score": 4
+    },
+    {
+     "text": "0A0B0C0D0E0F0G0H0I0J0K0L0M0N0O0P0Q0R0S0T0U0V0W0X0Y0Z0[0\\0]0^0_0`0a0b0c0d0e0f0g0h0i0j0k0l0m0n0o0p0q0r0s0t0u0v0w0x0y0z0{0|0}0~0",
+     "region": "code",
+     "offset_in_region": 19145,
+     "file_offset": 80317,
+     "score": 4
+    },
+    {
+     "text": "eefaf[fYf\\fbf",
+     "region": "code",
+     "offset_in_region": 26833,
+     "file_offset": 88005,
+     "score": 4
+    },
+    {
+     "text": "\\0\\7]C]k]A]K]?]5]Q]N]U]3]:]R]=]1]Y]B]9]I]8]<]2]6]@]E]D^A^X_",
+     "region": "code",
+     "offset_in_region": 28463,
+     "file_offset": 89635,
+     "score": 4
+    },
+    {
+     "text": "c2egejede\\eheee",
+     "region": "code",
+     "offset_in_region": 28771,
+     "file_offset": 89943,
+     "score": 4
+    },
+    {
+     "text": "hn\\nan1n(n`nqnkn9n\"n0nSnen'nxndnwnUnynRnfn5n6nZn q",
+     "region": "code",
+     "offset_in_region": 29184,
+     "file_offset": 90356,
+     "score": 4
+    },
+    {
+     "text": "|X}o}c}S}V}g}j}O}m}\\}k}R}T}i}Q}_}N}>",
+     "region": "code",
+     "offset_in_region": 29525,
+     "file_offset": 90697,
+     "score": 4
+    },
+    {
+     "text": "hxi4iii@ioiDiviXiAitiLi;iKi7i\\iOiQi2iRi/i{i<iFkEkCkBkHkAk",
+     "region": "code",
+     "offset_in_region": 31037,
+     "file_offset": 92209,
+     "score": 4
+    },
+    {
+     "text": "|&|(|\"|%|0|\\~P~V~c~X~b~_~Q~`~W~S~",
+     "region": "code",
+     "offset_in_region": 40527,
+     "file_offset": 101699,
+     "score": 4
+    }
+   ],
+   "utf16le_data_strings": [],
+   "u16_table_stats": {
+    "entries": 22719,
+    "value_min": 0,
+    "value_max": 65509,
+    "monotonic_nondecreasing_pairs": 17492,
+    "monotonic_fraction": 0.77,
+    "top_unicode_blocks": [
+     [
+      "CJK unified",
+      13050
+     ],
+     [
+      "Latin-1/basic",
+      8994
+     ],
+     [
+      "CJK punctuation/kana",
+      201
+     ]
+    ]
+   },
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "character conversion table (uint16, CJK-heavy)",
+   "confidence": "likely",
+   "evidence": [
+    "code_exec is 0; payload is a uint16 table in the 'code' field (see u16_table_stats in JSON)",
+    "uint16 value distribution by Unicode block: CJK unified x13050, Latin-1/basic x8994, CJK punctuation/kana x201",
+    "CJK-unified values dominate -- a CJK codepage-to-Unicode conversion table; the exact source encoding (GBK/Big5/Shift_JIS family) is not established by the bytes alone (inference)"
+   ]
+  },
+  {
+   "index": 68,
+   "code_load": 50765428,
+   "code_exec": 0,
+   "code_len": 36732,
+   "data_load": 0,
+   "data_exec": 0,
+   "data_len": 0,
+   "bss_exec": 0,
+   "bss_len": 0,
+   "code_file_offset": 106612,
+   "data_file_offset": null,
+   "code_sha256": "cb1fdd8079b0e24ceb0fb074e7f353401183105179bd27fbb67a787f18919bad",
+   "data_sha256": null,
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": 5.84,
+   "data_entropy": null,
+   "code_zero_fraction": 0.3401,
+   "code_nonzero_span": {
+    "first": 0,
+    "end": 36732
+   },
+   "ascii_string_count": 25,
+   "distinctive_string_count": 5,
+   "distinctive_strings": [
+    {
+     "text": "%d&`&a&e&g&c&",
+     "region": "code",
+     "offset_in_region": 17139,
+     "file_offset": 123751,
+     "score": 4
+    },
+    {
+     "text": "112131415161718191:1;1<1=1>1?1@1A1B1C1D1E1F1G1H1I1J1K1L1M1N1O1P1Q1R1S1T1U1V1W1X1Y1Z1[1\\1]1^1_1`1a1b1c1d1e1f1g1h1i1j1k1l1m1n1o1p1q1r1s1t1u1v1w1x1y1z1{1|1}1~1",
+     "region": "code",
+     "offset_in_region": 18112,
+     "file_offset": 124724,
+     "score": 4
+    },
+    {
+     "text": "%#%3%+%;%K% %/%(%7%?%",
+     "region": "code",
+     "offset_in_region": 19169,
+     "file_offset": 125781,
+     "score": 4
+    },
+    {
+     "text": "%!%\"%&%'%)%*%-%.%1%2%5%6%9%:%=%>%@%A%C%D%E%F%G%H%I%J%",
+     "region": "code",
+     "offset_in_region": 19219,
+     "file_offset": 125831,
+     "score": 4
+    },
+    {
+     "text": "A0B0C0D0E0F0G0H0I0J0K0L0M0N0O0P0Q0R0S0T0U0V0W0X0Y0Z0[0\\0]0^0_0`0a0b0c0d0e0f0g0h0i0j0k0l0m0n0o0p0q0r0s0t0u0v0w0x0y0z0{0|0}0~0",
+     "region": "code",
+     "offset_in_region": 21184,
+     "file_offset": 127796,
+     "score": 4
+    }
+   ],
+   "utf16le_data_strings": [],
+   "u16_table_stats": {
+    "entries": 18366,
+    "value_min": 0,
+    "value_max": 65510,
+    "monotonic_nondecreasing_pairs": 17997,
+    "monotonic_fraction": 0.98,
+    "top_unicode_blocks": [
+     [
+      "Hangul syllables",
+      11172
+     ],
+     [
+      "Latin-1/basic",
+      6238
+     ],
+     [
+      "punctuation/symbols",
+      299
+     ]
+    ]
+   },
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "character conversion table (uint16, Hangul-heavy; Korean codepage candidate)",
+   "confidence": "likely",
+   "evidence": [
+    "code_exec is 0; payload is a uint16 table in the 'code' field (see u16_table_stats in JSON)",
+    "uint16 value distribution by Unicode block: Hangul syllables x11172, Latin-1/basic x6238, punctuation/symbols x299",
+    "11172 of 18366 values lie in Hangul syllables U+AC00-D7A3 -- Korean-leaning conversion table (inference)"
+   ]
+  },
+  {
+   "index": 69,
+   "code_load": 50802160,
+   "code_exec": 0,
+   "code_len": 26300,
+   "data_load": 0,
+   "data_exec": 0,
+   "data_len": 0,
+   "bss_exec": 0,
+   "bss_len": 0,
+   "code_file_offset": 143344,
+   "data_file_offset": null,
+   "code_sha256": "acb3dc471c9d3d37bd6e819762606b5d75829bbbd267f11bd25a04d58e12eae3",
+   "data_sha256": null,
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": 3.765,
+   "data_entropy": null,
+   "code_zero_fraction": 0.6291,
+   "code_nonzero_span": {
+    "first": 0,
+    "end": 26300
+   },
+   "ascii_string_count": 296,
+   "distinctive_string_count": 0,
+   "distinctive_strings": [],
+   "utf16le_data_strings": [],
+   "u16_table_stats": {
+    "entries": 13150,
+    "value_min": 0,
+    "value_max": 64011,
+    "monotonic_nondecreasing_pairs": 12511,
+    "monotonic_fraction": 0.951,
+    "top_unicode_blocks": [
+     [
+      "Latin-1/basic",
+      8262
+     ],
+     [
+      "CJK unified",
+      4620
+     ],
+     [
+      "CJK compat ideographs",
+      268
+     ]
+    ]
+   },
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "character conversion table (uint16, CJK-heavy)",
+   "confidence": "likely",
+   "evidence": [
+    "code_exec is 0; payload is a uint16 table in the 'code' field (see u16_table_stats in JSON)",
+    "uint16 value distribution by Unicode block: Latin-1/basic x8262, CJK unified x4620, CJK compat ideographs x268",
+    "CJK-unified values dominate -- a CJK codepage-to-Unicode conversion table; the exact source encoding (GBK/Big5/Shift_JIS family) is not established by the bytes alone (inference)"
+   ]
+  },
+  {
+   "index": 70,
+   "code_load": 51535656,
+   "code_exec": 16777216,
+   "code_len": 0,
+   "data_load": 51535656,
+   "data_exec": 16908288,
+   "data_len": 0,
+   "bss_exec": 16908288,
+   "bss_len": 0,
+   "code_file_offset": null,
+   "data_file_offset": null,
+   "code_sha256": null,
+   "data_sha256": null,
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": null,
+   "data_entropy": null,
+   "code_zero_fraction": null,
+   "code_nonzero_span": null,
+   "ascii_string_count": 0,
+   "distinctive_string_count": 0,
+   "distinctive_strings": [],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "empty placeholder for the second-core window (all lengths zero)",
+   "confidence": "proven",
+   "evidence": [
+    "code_len = data_len = bss_len = 0 while code_exec = 0x01000000 like modules 71-80"
+   ]
+  },
+  {
+   "index": 71,
+   "code_load": 51535656,
+   "code_exec": 16777216,
+   "code_len": 36700,
+   "data_load": 51572356,
+   "data_exec": 16908288,
+   "data_len": 50760,
+   "bss_exec": 16959048,
+   "bss_len": 0,
+   "code_file_offset": 876840,
+   "data_file_offset": 913540,
+   "code_sha256": "db13d8445f217673ad9749e40710c885f495f029568b1aea997cfabd6fb7f945",
+   "data_sha256": "aca3248dc505308f1a61f705c4201fc6371adcb1adae67b8a126411a85c026f6",
+   "has_cortexm_vector_table": true,
+   "vector": {
+    "initial_sp": "0x1022000",
+    "reset_vector": "0x298d",
+    "reset_address": "0x298c",
+    "default_handler": "0x2a1d",
+    "reset_within_exec_window": false,
+    "reset_is_core_local_offset": true
+   },
+   "code_entropy": 7.016,
+   "data_entropy": 6.776,
+   "code_zero_fraction": 0.0718,
+   "code_nonzero_span": {
+    "first": 1,
+    "end": 36696
+   },
+   "ascii_string_count": 507,
+   "distinctive_string_count": 29,
+   "distinctive_strings": [
+    {
+     "text": "HifiFileOpen: timeout!!",
+     "region": "code",
+     "offset_in_region": 1204,
+     "file_offset": 878044,
+     "score": 8
+    },
+    {
+     "text": "HifiFileSeek: timeout!!",
+     "region": "code",
+     "offset_in_region": 1240,
+     "file_offset": 878080,
+     "score": 8
+    },
+    {
+     "text": "HifiFileRead: timeout!!",
+     "region": "code",
+     "offset_in_region": 1268,
+     "file_offset": 878108,
+     "score": 8
+    },
+    {
+     "text": "HifiFileWrite: timeout!!",
+     "region": "code",
+     "offset_in_region": 1296,
+     "file_offset": 878136,
+     "score": 8
+    },
+    {
+     "text": "HifiFileClose: timeout!!",
+     "region": "code",
+     "offset_in_region": 1324,
+     "file_offset": 878164,
+     "score": 8
+    },
+    {
+     "text": "FreqChange timeout!!!",
+     "region": "code",
+     "offset_in_region": 6068,
+     "file_offset": 882908,
+     "score": 8
+    },
+    {
+     "text": "AudioFileInput2: timeout!!",
+     "region": "code",
+     "offset_in_region": 10024,
+     "file_offset": 886864,
+     "score": 8
+    },
+    {
+     "text": "AudioFileMhRead2: timeout!!",
+     "region": "code",
+     "offset_in_region": 10052,
+     "file_offset": 886892,
+     "score": 8
+    },
+    {
+     "text": "AudioFileSeek2: timeout!!",
+     "region": "code",
+     "offset_in_region": 10084,
+     "file_offset": 886924,
+     "score": 8
+    },
+    {
+     "text": "AudioFileMhSeek2: timeout!!",
+     "region": "code",
+     "offset_in_region": 10544,
+     "file_offset": 887384,
+     "score": 8
+    },
+    {
+     "text": "AudioFileChangeBuf2: timeout!!",
+     "region": "code",
+     "offset_in_region": 10604,
+     "file_offset": 887444,
+     "score": 8
+    },
+    {
+     "text": "FLAC_FileSeekFast: timeout!!",
+     "region": "code",
+     "offset_in_region": 11212,
+     "file_offset": 888052,
+     "score": 8
+    },
+    {
+     "text": "FLAC_FileGetSeekInfo: timeout!!",
+     "region": "code",
+     "offset_in_region": 11252,
+     "file_offset": 888092,
+     "score": 8
+    },
+    {
+     "text": "..\\..\\Common\\Codec\\Audio\\Mp3\\libMad\\mp3_decinternal.c",
+     "region": "code",
+     "offset_in_region": 12804,
+     "file_offset": 889644,
+     "score": 8
+    },
+    {
+     "text": "..\\..\\Common\\Codec\\Audio\\Mp3\\libMad\\mp3_preparse.c",
+     "region": "code",
+     "offset_in_region": 20296,
+     "file_offset": 897136,
+     "score": 8
+    },
+    {
+     "text": "###AUDIO_DECODE_OPEN error!###",
+     "region": "code",
+     "offset_in_region": 6092,
+     "file_offset": 882932,
+     "score": 7
+    },
+    {
+     "text": "### channels bigger than 2!###",
+     "region": "code",
+     "offset_in_region": 6728,
+     "file_offset": 883568,
+     "score": 7
+    },
+    {
+     "text": "id3 contain half VBR frame",
+     "region": "code",
+     "offset_in_region": 19184,
+     "file_offset": 896024,
+     "score": 7
+    },
+    {
+     "text": "CRC check failed",
+     "region": "code",
+     "offset_in_region": 21128,
+     "file_offset": 897968,
+     "score": 7
+    },
+    {
+     "text": "bad frame length",
+     "region": "code",
+     "offset_in_region": 21264,
+     "file_offset": 898104,
+     "score": 7
+    },
+    {
+     "text": "mp3 start pos =%d",
+     "region": "code",
+     "offset_in_region": 12764,
+     "file_offset": 889604,
+     "score": 6
+    },
+    {
+     "text": "FILE: %s, LINE: %d: ",
+     "region": "code",
+     "offset_in_region": 12860,
+     "file_offset": 889700,
+     "score": 6
+    },
+    {
+     "text": "length:%d, fileLen:%d ,bitraate:%d",
+     "region": "code",
+     "offset_in_region": 12892,
+     "file_offset": 889732,
+     "score": 6
+    },
+    {
+     "text": "FILE: %s, LINE: %d: ",
+     "region": "code",
+     "offset_in_region": 20348,
+     "file_offset": 897188,
+     "score": 6
+    },
+    {
+     "text": "no error",
+     "region": "code",
+     "offset_in_region": 20960,
+     "file_offset": 897800,
+     "score": 6
+    },
+    {
+     "text": "Quy~Tu \\Wu*:Zu",
+     "region": "data",
+     "offset_in_region": 22246,
+     "file_offset": 935786,
+     "score": 6
+    },
+    {
+     "text": "dec_error_cnt > 128",
+     "region": "code",
+     "offset_in_region": 13880,
+     "file_offset": 890720,
+     "score": 5
+    },
+    {
+     "text": "Lib:mp3_dec_lib",
+     "region": "data",
+     "offset_in_region": 17127,
+     "file_offset": 930667,
+     "score": 5
+    },
+    {
+     "text": "APETAGEX",
+     "region": "code",
+     "offset_in_region": 36688,
+     "file_offset": 913528,
+     "score": 4
+    }
+   ],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "second-core audio decoder: MP3 (libMad)",
+   "confidence": "proven",
+   "evidence": [
+    "Cortex-M vector table at 0x01000000: SP=0x01022000, reset is a core-local offset (see JSON vector field)",
+    "contains the shared HiFi file-RPC log strings 'HifiFileOpen/Seek/Read/Write/Close: timeout!!', '###AUDIO_DECODE_OPEN error!###' and the shared FLAC_FileSeekFast/FileGetSeekInfo helper strings (linked into every 71-80 image; not evidence that every module is a FLAC decoder)",
+    "data contains the library self-name 'Lib:mp3_dec_lib'",
+    "code contains source paths '..\\..\\Common\\Codec\\Audio\\Mp3\\libMad\\mp3_decinternal.c' and 'mp3_preparse.c' plus the libMad error-string set ('bad scalefactor index', 'lost synchronization', 'Huffman data overrun', ...) and 'mp3 start pos =%d'"
+   ]
+  },
+  {
+   "index": 72,
+   "code_load": 51623116,
+   "code_exec": 16777216,
+   "code_len": 90816,
+   "data_load": 51713932,
+   "data_exec": 16908288,
+   "data_len": 26560,
+   "bss_exec": 16934848,
+   "bss_len": 0,
+   "code_file_offset": 964300,
+   "data_file_offset": 1055116,
+   "code_sha256": "e0eac54f97f38c490d9ed051042382560e88f31ba662953ff7675114501ec183",
+   "data_sha256": "8b7fbfd7752fd3592a048460abcd4310fe85c98738b858c6dfd896c4fe945e5b",
+   "has_cortexm_vector_table": true,
+   "vector": {
+    "initial_sp": "0x1022000",
+    "reset_vector": "0x2aa9",
+    "reset_address": "0x2aa8",
+    "default_handler": "0x2b39",
+    "reset_within_exec_window": false,
+    "reset_is_core_local_offset": true
+   },
+   "code_entropy": 7.122,
+   "data_entropy": 4.139,
+   "code_zero_fraction": 0.0772,
+   "code_nonzero_span": {
+    "first": 1,
+    "end": 90791
+   },
+   "ascii_string_count": 671,
+   "distinctive_string_count": 53,
+   "distinctive_strings": [
+    {
+     "text": "HifiFileOpen: timeout!!",
+     "region": "code",
+     "offset_in_region": 1060,
+     "file_offset": 965360,
+     "score": 8
+    },
+    {
+     "text": "HifiFileSeek: timeout!!",
+     "region": "code",
+     "offset_in_region": 1096,
+     "file_offset": 965396,
+     "score": 8
+    },
+    {
+     "text": "HifiFileRead: timeout!!",
+     "region": "code",
+     "offset_in_region": 1124,
+     "file_offset": 965424,
+     "score": 8
+    },
+    {
+     "text": "HifiFileWrite: timeout!!",
+     "region": "code",
+     "offset_in_region": 1152,
+     "file_offset": 965452,
+     "score": 8
+    },
+    {
+     "text": "HifiFileClose: timeout!!",
+     "region": "code",
+     "offset_in_region": 1180,
+     "file_offset": 965480,
+     "score": 8
+    },
+    {
+     "text": "FreqChange timeout!!!",
+     "region": "code",
+     "offset_in_region": 5912,
+     "file_offset": 970212,
+     "score": 8
+    },
+    {
+     "text": "AudioFileInput2: timeout!!",
+     "region": "code",
+     "offset_in_region": 10308,
+     "file_offset": 974608,
+     "score": 8
+    },
+    {
+     "text": "AudioFileMhRead2: timeout!!",
+     "region": "code",
+     "offset_in_region": 10336,
+     "file_offset": 974636,
+     "score": 8
+    },
+    {
+     "text": "AudioFileSeek2: timeout!!",
+     "region": "code",
+     "offset_in_region": 10368,
+     "file_offset": 974668,
+     "score": 8
+    },
+    {
+     "text": "AudioFileMhSeek2: timeout!!",
+     "region": "code",
+     "offset_in_region": 10828,
+     "file_offset": 975128,
+     "score": 8
+    },
+    {
+     "text": "AudioFileChangeBuf2: timeout!!",
+     "region": "code",
+     "offset_in_region": 10888,
+     "file_offset": 975188,
+     "score": 8
+    },
+    {
+     "text": "FLAC_FileSeekFast: timeout!!",
+     "region": "code",
+     "offset_in_region": 11496,
+     "file_offset": 975796,
+     "score": 8
+    },
+    {
+     "text": "FLAC_FileGetSeekInfo: timeout!!",
+     "region": "code",
+     "offset_in_region": 11536,
+     "file_offset": 975836,
+     "score": 8
+    },
+    {
+     "text": "..\\..\\Common\\Codec\\Audio\\Wma\\wmalib\\wmaudio_parse.c",
+     "region": "code",
+     "offset_in_region": 50940,
+     "file_offset": 1015240,
+     "score": 8
+    },
+    {
+     "text": "AudioFileBufferSwitch2: timeout!!",
+     "region": "code",
+     "offset_in_region": 69760,
+     "file_offset": 1034060,
+     "score": 8
+    },
+    {
+     "text": "###AUDIO_DECODE_OPEN error!###",
+     "region": "code",
+     "offset_in_region": 5936,
+     "file_offset": 970236,
+     "score": 7
+    },
+    {
+     "text": "### channels bigger than 2!###",
+     "region": "code",
+     "offset_in_region": 6540,
+     "file_offset": 970840,
+     "score": 7
+    },
+    {
+     "text": " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~",
+     "region": "code",
+     "offset_in_region": 77296,
+     "file_offset": 1041596,
+     "score": 7
+    },
+    {
+     "text": " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~",
+     "region": "code",
+     "offset_in_region": 78168,
+     "file_offset": 1042468,
+     "score": 7
+    },
+    {
+     "text": " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklm",
+     "region": "code",
+     "offset_in_region": 78349,
+     "file_offset": 1042649,
+     "score": 7
+    },
+    {
+     "text": "     !!!\"\"\"\"###$$$%%%&&&'''((())**++++,,---..///0001122334455667788999::;;<<==>>??@@AABBCCDEEFGGHHIIJJKLLMNOPPQQRSSTUUVVWWXXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~",
+     "region": "code",
+     "offset_in_region": 80430,
+     "file_offset": 1044730,
+     "score": 7
+    },
+    {
+     "text": " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~",
+     "region": "code",
+     "offset_in_region": 80840,
+     "file_offset": 1045140,
+     "score": 7
+    },
+    {
+     "text": " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^",
+     "region": "code",
+     "offset_in_region": 81096,
+     "file_offset": 1045396,
+     "score": 7
+    },
+    {
+     "text": " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxy",
+     "region": "code",
+     "offset_in_region": 81191,
+     "file_offset": 1045491,
+     "score": 7
+    },
+    {
+     "text": "  !!!\"\"\"##$$%%&&&''(())**++,,--..//001122334455667899::;<<=>>??@@AABBCCDEEFGHIJKLMNOPPQQRSSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~",
+     "region": "code",
+     "offset_in_region": 82762,
+     "file_offset": 1047062,
+     "score": 7
+    },
+    {
+     "text": " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~",
+     "region": "code",
+     "offset_in_region": 82984,
+     "file_offset": 1047284,
+     "score": 7
+    },
+    {
+     "text": " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~",
+     "region": "code",
+     "offset_in_region": 84312,
+     "file_offset": 1048612,
+     "score": 7
+    },
+    {
+     "text": " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnop",
+     "region": "data",
+     "offset_in_region": 16944,
+     "file_offset": 1072060,
+     "score": 7
+    },
+    {
+     "text": "FILE: %s, LINE: %d: WMV",
+     "region": "code",
+     "offset_in_region": 50992,
+     "file_offset": 1015292,
+     "score": 6
+    },
+    {
+     "text": " !\"#$%&'()*+,-./0123456789:;",
+     "region": "code",
+     "offset_in_region": 78723,
+     "file_offset": 1043023,
+     "score": 5
+    },
+    {
+     "text": " !\"#$%&'()*+,-./0123456789:;",
+     "region": "code",
+     "offset_in_region": 83455,
+     "file_offset": 1047755,
+     "score": 5
+    },
+    {
+     "text": "Lib:wma_dec_lib",
+     "region": "data",
+     "offset_in_region": 12565,
+     "file_offset": 1067681,
+     "score": 5
+    },
+    {
+     "text": " b= 0x%x b>>6 = %d ",
+     "region": "code",
+     "offset_in_region": 20477,
+     "file_offset": 984777,
+     "score": 4
+    },
+    {
+     "text": " !x*\\(DQ@!paxBxQ@ap",
+     "region": "code",
+     "offset_in_region": 54689,
+     "file_offset": 1018989,
+     "score": 4
+    },
+    {
+     "text": " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFG",
+     "region": "code",
+     "offset_in_region": 77510,
+     "file_offset": 1041810,
+     "score": 4
+    },
+    {
+     "text": " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLM",
+     "region": "code",
+     "offset_in_region": 78459,
+     "file_offset": 1042759,
+     "score": 4
+    },
+    {
+     "text": " !\"#$%&'()*+,-./0123456789:;<=>",
+     "region": "code",
+     "offset_in_region": 78537,
+     "file_offset": 1042837,
+     "score": 4
+    },
+    {
+     "text": " !\"#$%&'()*+,-./0123456789:;<",
+     "region": "code",
+     "offset_in_region": 78600,
+     "file_offset": 1042900,
+     "score": 4
+    },
+    {
+     "text": " !\"#$%&'()*+,-./0123456789:;<=",
+     "region": "code",
+     "offset_in_region": 78661,
+     "file_offset": 1042961,
+     "score": 4
+    },
+    {
+     "text": " !\"#$%&'()*+,-./0123456789:;<",
+     "region": "code",
+     "offset_in_region": 78783,
+     "file_offset": 1043083,
+     "score": 4
+    }
+   ],
+   "utf16le_data_strings": [
+    {
+     "text": "BE<K",
+     "offset_in_region": 15420,
+     "file_offset": 1070536
+    }
+   ],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "second-core audio decoder: WMA",
+   "confidence": "proven",
+   "evidence": [
+    "Cortex-M vector table at 0x01000000: SP=0x01022000, reset is a core-local offset (see JSON vector field)",
+    "contains the shared HiFi file-RPC log strings 'HifiFileOpen/Seek/Read/Write/Close: timeout!!', '###AUDIO_DECODE_OPEN error!###' and the shared FLAC_FileSeekFast/FileGetSeekInfo helper strings (linked into every 71-80 image; not evidence that every module is a FLAC decoder)",
+    "data contains the library self-name 'Lib:wma_dec_lib'",
+    "code contains source path '..\\..\\Common\\Codec\\Audio\\Wma\\wmalib\\wmaudio_parse.c' and the string 'WMA Windows Media(tm) Audio'",
+    "largest second-core code region (0x162c0 bytes); data region holds sorted-character histogram tables"
+   ]
+  },
+  {
+   "index": 73,
+   "code_load": 51795528,
+   "code_exec": 16777216,
+   "code_len": 74328,
+   "data_load": 51869856,
+   "data_exec": 16908288,
+   "data_len": 9456,
+   "bss_exec": 16917744,
+   "bss_len": 0,
+   "code_file_offset": 1136712,
+   "data_file_offset": 1211040,
+   "code_sha256": "7af44453b991e22c5cfb2244d8b1cffec8e07ef51a687a951e0325f0664cf1ad",
+   "data_sha256": "3ae43a5b00f1cde831aa9b69fc54cc063321d28ee6238363f5084b4b915f5c51",
+   "has_cortexm_vector_table": true,
+   "vector": {
+    "initial_sp": "0x1022000",
+    "reset_vector": "0xa4b1",
+    "reset_address": "0xa4b0",
+    "default_handler": "0xa541",
+    "reset_within_exec_window": false,
+    "reset_is_core_local_offset": true
+   },
+   "code_entropy": 7.436,
+   "data_entropy": 0.481,
+   "code_zero_fraction": 0.0644,
+   "code_nonzero_span": {
+    "first": 1,
+    "end": 74316
+   },
+   "ascii_string_count": 712,
+   "distinctive_string_count": 33,
+   "distinctive_strings": [
+    {
+     "text": "HifiFileOpen: timeout!!",
+     "region": "code",
+     "offset_in_region": 1060,
+     "file_offset": 1137772,
+     "score": 8
+    },
+    {
+     "text": "HifiFileSeek: timeout!!",
+     "region": "code",
+     "offset_in_region": 1096,
+     "file_offset": 1137808,
+     "score": 8
+    },
+    {
+     "text": "HifiFileRead: timeout!!",
+     "region": "code",
+     "offset_in_region": 1124,
+     "file_offset": 1137836,
+     "score": 8
+    },
+    {
+     "text": "HifiFileWrite: timeout!!",
+     "region": "code",
+     "offset_in_region": 1152,
+     "file_offset": 1137864,
+     "score": 8
+    },
+    {
+     "text": "HifiFileClose: timeout!!",
+     "region": "code",
+     "offset_in_region": 1180,
+     "file_offset": 1137892,
+     "score": 8
+    },
+    {
+     "text": "FreqChange timeout!!!",
+     "region": "code",
+     "offset_in_region": 5912,
+     "file_offset": 1142624,
+     "score": 8
+    },
+    {
+     "text": "..\\..\\Common\\Codec\\Audio\\AAC\\lib\\aac_aacdec.c",
+     "region": "code",
+     "offset_in_region": 11800,
+     "file_offset": 1148512,
+     "score": 8
+    },
+    {
+     "text": "..\\..\\Common\\Codec\\Audio\\AAC\\lib\\aac_MovFile.c",
+     "region": "code",
+     "offset_in_region": 16484,
+     "file_offset": 1153196,
+     "score": 8
+    },
+    {
+     "text": "AudioFileInput2: timeout!!",
+     "region": "code",
+     "offset_in_region": 41548,
+     "file_offset": 1178260,
+     "score": 8
+    },
+    {
+     "text": "AudioFileMhRead2: timeout!!",
+     "region": "code",
+     "offset_in_region": 41576,
+     "file_offset": 1178288,
+     "score": 8
+    },
+    {
+     "text": "AudioFileSeek2: timeout!!",
+     "region": "code",
+     "offset_in_region": 41608,
+     "file_offset": 1178320,
+     "score": 8
+    },
+    {
+     "text": "AudioFileMhSeek2: timeout!!",
+     "region": "code",
+     "offset_in_region": 42068,
+     "file_offset": 1178780,
+     "score": 8
+    },
+    {
+     "text": "AudioFileChangeBuf2: timeout!!",
+     "region": "code",
+     "offset_in_region": 42128,
+     "file_offset": 1178840,
+     "score": 8
+    },
+    {
+     "text": "FLAC_FileSeekFast: timeout!!",
+     "region": "code",
+     "offset_in_region": 42736,
+     "file_offset": 1179448,
+     "score": 8
+    },
+    {
+     "text": "FLAC_FileGetSeekInfo: timeout!!",
+     "region": "code",
+     "offset_in_region": 42776,
+     "file_offset": 1179488,
+     "score": 8
+    },
+    {
+     "text": "..\\..\\Common\\Codec\\Audio\\AAC\\lib\\aac_MovFile.c",
+     "region": "code",
+     "offset_in_region": 46460,
+     "file_offset": 1183172,
+     "score": 8
+    },
+    {
+     "text": "###AUDIO_DECODE_OPEN error!###",
+     "region": "code",
+     "offset_in_region": 5936,
+     "file_offset": 1142648,
+     "score": 7
+    },
+    {
+     "text": "### channels bigger than 2!###",
+     "region": "code",
+     "offset_in_region": 6540,
+     "file_offset": 1143252,
+     "score": 7
+    },
+    {
+     "text": "@less bits may be error ",
+     "region": "code",
+     "offset_in_region": 10763,
+     "file_offset": 1147475,
+     "score": 7
+    },
+    {
+     "text": "seek position is not correct  ,i will seek to next frame",
+     "region": "code",
+     "offset_in_region": 11904,
+     "file_offset": 1148616,
+     "score": 7
+    },
+    {
+     "text": "~~~~~err = %d dec_err_count=%d",
+     "region": "code",
+     "offset_in_region": 9596,
+     "file_offset": 1146308,
+     "score": 6
+    },
+    {
+     "text": "FILE: %s, LINE: %d:  rkfile read ret < 0",
+     "region": "code",
+     "offset_in_region": 11848,
+     "file_offset": 1148560,
+     "score": 6
+    },
+    {
+     "text": "FILE: %s, LINE: %d: flag == 0",
+     "region": "code",
+     "offset_in_region": 11964,
+     "file_offset": 1148676,
+     "score": 6
+    },
+    {
+     "text": "@FILE: %s, LINE: %d: curFrame = %d,curTime = %d",
+     "region": "code",
+     "offset_in_region": 11999,
+     "file_offset": 1148711,
+     "score": 6
+    },
+    {
+     "text": "aac_frofile = %d return ",
+     "region": "code",
+     "offset_in_region": 13840,
+     "file_offset": 1150552,
+     "score": 6
+    },
+    {
+     "text": "FILE: %s, LINE: %d: ",
+     "region": "code",
+     "offset_in_region": 16532,
+     "file_offset": 1153244,
+     "score": 6
+    },
+    {
+     "text": "MALLOC SIZE TOO little size = %d, left = %d",
+     "region": "code",
+     "offset_in_region": 46388,
+     "file_offset": 1183100,
+     "score": 6
+    },
+    {
+     "text": "FILE: %s, LINE: %d: ",
+     "region": "code",
+     "offset_in_region": 46436,
+     "file_offset": 1183148,
+     "score": 6
+    },
+    {
+     "text": "z\\^O$%",
+     "region": "code",
+     "offset_in_region": 55287,
+     "file_offset": 1191999,
+     "score": 6
+    },
+    {
+     "text": "Lib:aac_dec_lib",
+     "region": "data",
+     "offset_in_region": 8855,
+     "file_offset": 1219895,
+     "score": 5
+    },
+    {
+     "text": "sameheader=0x%x",
+     "region": "code",
+     "offset_in_region": 13816,
+     "file_offset": 1150528,
+     "score": 4
+    },
+    {
+     "text": "vidiosamplesum = %d",
+     "region": "code",
+     "offset_in_region": 18788,
+     "file_offset": 1155500,
+     "score": 4
+    },
+    {
+     "text": "|!B#b%R&2'r)J+j-Z.:/z1F3f5V7v9N;n=^?~CaEQGqKiMYOySeWu[m_}gso{",
+     "region": "code",
+     "offset_in_region": 62580,
+     "file_offset": 1199292,
+     "score": 4
+    }
+   ],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "second-core audio decoder: AAC with MP4/MOV container",
+   "confidence": "proven",
+   "evidence": [
+    "Cortex-M vector table at 0x01000000: SP=0x01022000, reset is a core-local offset (see JSON vector field)",
+    "contains the shared HiFi file-RPC log strings 'HifiFileOpen/Seek/Read/Write/Close: timeout!!', '###AUDIO_DECODE_OPEN error!###' and the shared FLAC_FileSeekFast/FileGetSeekInfo helper strings (linked into every 71-80 image; not evidence that every module is a FLAC decoder)",
+    "data contains the library self-name 'Lib:aac_dec_lib'",
+    "code contains source paths '..\\..\\Common\\Codec\\Audio\\AAC\\lib\\aac_aacdec.c' and 'aac_MovFile.c', log 'aac_frofile = %d return ' and an MP4 box-name table ('moofmfrafreeskipmetawideudtauuid', 'ftyppdin')"
+   ]
+  },
+  {
+   "index": 74,
+   "code_load": 51740492,
+   "code_exec": 16777216,
+   "code_len": 35020,
+   "data_load": 51775512,
+   "data_exec": 16908288,
+   "data_len": 20016,
+   "bss_exec": 16928304,
+   "bss_len": 0,
+   "code_file_offset": 1081676,
+   "data_file_offset": 1116696,
+   "code_sha256": "5ff66294fb3c8405cad39a8029e5b3c22c6f3fabf64c7236f11f1eb8a9ba2d76",
+   "data_sha256": "fa15db2cc9d8e55210fb4b79ba51f8657f3e2dc280bd77ffa75221b622b56047",
+   "has_cortexm_vector_table": true,
+   "vector": {
+    "initial_sp": "0x1022000",
+    "reset_vector": "0x2b39",
+    "reset_address": "0x2b38",
+    "default_handler": "0x2bc9",
+    "reset_within_exec_window": false,
+    "reset_is_core_local_offset": true
+   },
+   "code_entropy": 7.056,
+   "data_entropy": 0.281,
+   "code_zero_fraction": 0.0662,
+   "code_nonzero_span": {
+    "first": 1,
+    "end": 35020
+   },
+   "ascii_string_count": 304,
+   "distinctive_string_count": 20,
+   "distinctive_strings": [
+    {
+     "text": "HifiFileOpen: timeout!!",
+     "region": "code",
+     "offset_in_region": 1180,
+     "file_offset": 1082856,
+     "score": 8
+    },
+    {
+     "text": "HifiFileSeek: timeout!!",
+     "region": "code",
+     "offset_in_region": 1216,
+     "file_offset": 1082892,
+     "score": 8
+    },
+    {
+     "text": "HifiFileRead: timeout!!",
+     "region": "code",
+     "offset_in_region": 1244,
+     "file_offset": 1082920,
+     "score": 8
+    },
+    {
+     "text": "HifiFileWrite: timeout!!",
+     "region": "code",
+     "offset_in_region": 1272,
+     "file_offset": 1082948,
+     "score": 8
+    },
+    {
+     "text": "HifiFileClose: timeout!!",
+     "region": "code",
+     "offset_in_region": 1300,
+     "file_offset": 1082976,
+     "score": 8
+    },
+    {
+     "text": "FreqChange timeout!!!",
+     "region": "code",
+     "offset_in_region": 6372,
+     "file_offset": 1088048,
+     "score": 8
+    },
+    {
+     "text": "AudioFileInput2: timeout!!",
+     "region": "code",
+     "offset_in_region": 10452,
+     "file_offset": 1092128,
+     "score": 8
+    },
+    {
+     "text": "AudioFileMhRead2: timeout!!",
+     "region": "code",
+     "offset_in_region": 10480,
+     "file_offset": 1092156,
+     "score": 8
+    },
+    {
+     "text": "AudioFileSeek2: timeout!!",
+     "region": "code",
+     "offset_in_region": 10512,
+     "file_offset": 1092188,
+     "score": 8
+    },
+    {
+     "text": "AudioFileMhSeek2: timeout!!",
+     "region": "code",
+     "offset_in_region": 10972,
+     "file_offset": 1092648,
+     "score": 8
+    },
+    {
+     "text": "AudioFileChangeBuf2: timeout!!",
+     "region": "code",
+     "offset_in_region": 11032,
+     "file_offset": 1092708,
+     "score": 8
+    },
+    {
+     "text": "FLAC_FileSeekFast: timeout!!",
+     "region": "code",
+     "offset_in_region": 13084,
+     "file_offset": 1094760,
+     "score": 8
+    },
+    {
+     "text": "FLAC_FileGetSeekInfo: timeout!!",
+     "region": "code",
+     "offset_in_region": 13124,
+     "file_offset": 1094800,
+     "score": 8
+    },
+    {
+     "text": "..\\..\\Common\\Codec\\Audio\\Wav\\WAV_LIB\\pWAV_lib.c",
+     "region": "code",
+     "offset_in_region": 28212,
+     "file_offset": 1109888,
+     "score": 8
+    },
+    {
+     "text": "### channels bigger than 2!###",
+     "region": "code",
+     "offset_in_region": 7408,
+     "file_offset": 1089084,
+     "score": 7
+    },
+    {
+     "text": "###AUDIO_DECODE_OPEN error!###",
+     "region": "code",
+     "offset_in_region": 7440,
+     "file_offset": 1089116,
+     "score": 7
+    },
+    {
+     "text": "FILE: %s, LINE: %d: ",
+     "region": "code",
+     "offset_in_region": 28260,
+     "file_offset": 1109936,
+     "score": 6
+    },
+    {
+     "text": "FILE: %s, LINE: %d: wav_formatTagID =%d ",
+     "region": "code",
+     "offset_in_region": 28284,
+     "file_offset": 1109960,
+     "score": 6
+    },
+    {
+     "text": "FILE: %s, LINE: %d: nBlockAlign =%d ",
+     "region": "code",
+     "offset_in_region": 28328,
+     "file_offset": 1110004,
+     "score": 6
+    },
+    {
+     "text": "FILE: %s, LINE: %d: ",
+     "region": "code",
+     "offset_in_region": 29432,
+     "file_offset": 1111108,
+     "score": 6
+    }
+   ],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "second-core audio decoder: WAV/PCM",
+   "confidence": "proven",
+   "evidence": [
+    "Cortex-M vector table at 0x01000000: SP=0x01022000, reset is a core-local offset (see JSON vector field)",
+    "contains the shared HiFi file-RPC log strings 'HifiFileOpen/Seek/Read/Write/Close: timeout!!', '###AUDIO_DECODE_OPEN error!###' and the shared FLAC_FileSeekFast/FileGetSeekInfo helper strings (linked into every 71-80 image; not evidence that every module is a FLAC decoder)",
+    "code contains source path '..\\..\\Common\\Codec\\Audio\\Wav\\WAV_LIB\\pWAV_lib.c' and assertions 'wav_formatTagID =%d', 'nBlockAlign =%d'",
+    "data holds RIFF INFO tag fragments 'fmt dataLISTIARTINAMIPRDIGNR'"
+   ]
+  },
+  {
+   "index": 75,
+   "code_load": 51879312,
+   "code_exec": 16777216,
+   "code_len": 62936,
+   "data_load": 51942248,
+   "data_exec": 16908288,
+   "data_len": 53636,
+   "bss_exec": 16961924,
+   "bss_len": 0,
+   "code_file_offset": 1220496,
+   "data_file_offset": 1283432,
+   "code_sha256": "4ec93d972cbdd25e20d88f0125136d563ea028849bb6554161c57f01c9b5707a",
+   "data_sha256": "32db67e0e8fd7825c545fdac310015b94370820d03602ed6905cb4a3401e87b2",
+   "has_cortexm_vector_table": true,
+   "vector": {
+    "initial_sp": "0x1022000",
+    "reset_vector": "0x2749",
+    "reset_address": "0x2748",
+    "default_handler": "0x27d9",
+    "reset_within_exec_window": false,
+    "reset_is_core_local_offset": true
+   },
+   "code_entropy": 6.996,
+   "data_entropy": 2.561,
+   "code_zero_fraction": 0.0664,
+   "code_nonzero_span": {
+    "first": 1,
+    "end": 62933
+   },
+   "ascii_string_count": 532,
+   "distinctive_string_count": 27,
+   "distinctive_strings": [
+    {
+     "text": "HifiFileOpen: timeout!!",
+     "region": "code",
+     "offset_in_region": 1060,
+     "file_offset": 1221556,
+     "score": 8
+    },
+    {
+     "text": "HifiFileSeek: timeout!!",
+     "region": "code",
+     "offset_in_region": 1096,
+     "file_offset": 1221592,
+     "score": 8
+    },
+    {
+     "text": "HifiFileRead: timeout!!",
+     "region": "code",
+     "offset_in_region": 1124,
+     "file_offset": 1221620,
+     "score": 8
+    },
+    {
+     "text": "HifiFileWrite: timeout!!",
+     "region": "code",
+     "offset_in_region": 1152,
+     "file_offset": 1221648,
+     "score": 8
+    },
+    {
+     "text": "HifiFileClose: timeout!!",
+     "region": "code",
+     "offset_in_region": 1180,
+     "file_offset": 1221676,
+     "score": 8
+    },
+    {
+     "text": "FreqChange timeout!!!",
+     "region": "code",
+     "offset_in_region": 5912,
+     "file_offset": 1226408,
+     "score": 8
+    },
+    {
+     "text": "AudioFileInput2: timeout!!",
+     "region": "code",
+     "offset_in_region": 9444,
+     "file_offset": 1229940,
+     "score": 8
+    },
+    {
+     "text": "AudioFileMhRead2: timeout!!",
+     "region": "code",
+     "offset_in_region": 9472,
+     "file_offset": 1229968,
+     "score": 8
+    },
+    {
+     "text": "AudioFileSeek2: timeout!!",
+     "region": "code",
+     "offset_in_region": 9504,
+     "file_offset": 1230000,
+     "score": 8
+    },
+    {
+     "text": "AudioFileMhSeek2: timeout!!",
+     "region": "code",
+     "offset_in_region": 9964,
+     "file_offset": 1230460,
+     "score": 8
+    },
+    {
+     "text": "AudioFileChangeBuf2: timeout!!",
+     "region": "code",
+     "offset_in_region": 10024,
+     "file_offset": 1230520,
+     "score": 8
+    },
+    {
+     "text": "FLAC_FileSeekFast: timeout!!",
+     "region": "code",
+     "offset_in_region": 10632,
+     "file_offset": 1231128,
+     "score": 8
+    },
+    {
+     "text": "FLAC_FileGetSeekInfo: timeout!!",
+     "region": "code",
+     "offset_in_region": 10672,
+     "file_offset": 1231168,
+     "score": 8
+    },
+    {
+     "text": "AudioFileBufferSwitch2: timeout!!",
+     "region": "code",
+     "offset_in_region": 62900,
+     "file_offset": 1283396,
+     "score": 8
+    },
+    {
+     "text": "###AUDIO_DECODE_OPEN error!###",
+     "region": "code",
+     "offset_in_region": 5936,
+     "file_offset": 1226432,
+     "score": 7
+    },
+    {
+     "text": "### channels bigger than 2!###",
+     "region": "code",
+     "offset_in_region": 6540,
+     "file_offset": 1227036,
+     "score": 7
+    },
+    {
+     "text": " !\"$%'(*+-.013568:;=?@BDFHIKMOQSUWYZ\\^`bdfhjlnprtvxz|~",
+     "region": "data",
+     "offset_in_region": 39502,
+     "file_offset": 1322934,
+     "score": 7
+    },
+    {
+     "text": " !!\"#$$%&&'())*++,-.//012334567789:;<==>?@ABCDDEFGHIJKLMNOOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~",
+     "region": "data",
+     "offset_in_region": 39805,
+     "file_offset": 1323237,
+     "score": 7
+    },
+    {
+     "text": "   !!!\"\"\"###$$$%%%&&'''((()))**+++,,,--...//0001122233444556667788899::;;;<<==>>>??@@AABBBCCDDEEFFFGGHHIIJJKKKLLMMNNOOPPQQRRSSSTTUUVVWWXXYYZZ[[\\\\]]^^__``aabbccddeeffgghhiiijjkkllmnnooppqqrrssttuuvvwwxxyyzz{{||}}~~",
+     "region": "data",
+     "offset_in_region": 40409,
+     "file_offset": 1323841,
+     "score": 7
+    },
+    {
+     "text": "      !!!!!!\"\"\"\"\"\"######$$$$$$%%%%%&&&&&&'''''(((((()))))******+++++,,,,,------...../////0000011111222223333344444555556666677778888899999:::::;;;;<<<<<=====>>>>?????@@@@AAAAABBBBCCCCCDDDDEEEEEFFFFGGGGGHHHHIIIIJJJJJKKKKLLLLMMMMMNNNNOOOOPPPPQQQQQRRRRSSSSTTTTUUUUVVVVVWWWWXXXXYYYYZZZZ[[[[\\\\\\\\]]]]^^^^^____````aaaabbbbccccddddeeeeffffgggghhhhiiiijjjjkkkkllllmmmmnnnnooooppppqqqqrrrrssssttttuuuuvvvvwwwwxxxxyyyyzzzz{{{{||||}}}}~~~~",
+     "region": "data",
+     "offset_in_region": 41618,
+     "file_offset": 1325050,
+     "score": 7
+    },
+    {
+     "text": "            !!!!!!!!!!!!\"\"\"\"\"\"\"\"\"\"\"############$$$$$$$$$$$%%%%%%%%%%%%&&&&&&&&&&&'''''''''''((((((((((()))))))))))**********+++++++++++,,,,,,,,,,,----------..........///////////00000000001111111111222222222233333333334444444444555555555666666666677777777778888888889999999999:::::::::;;;;;;;;;;<<<<<<<<<=========>>>>>>>>>??????????@@@@@@@@@AAAAAAAAABBBBBBBBBCCCCCCCCCDDDDDDDDDEEEEEEEEEFFFFFFFFGGGGGGGGGHHHHHHHHHIIIIIIIIIJJJJJJJJKKKKKKKKKLLLLLLLLLMMMMMMMMNNNNNNNNNOOOOOOOOPPPPPPPPPQQQQQQQQRRRRRRRRRSSSSSSSSTTTTTTTTTUUUUUUUUVVVVVVVVWWWWWWWWWXXXXXXXXYYYYYYYYZZZZZZZZ[[[[[[[[[\\\\\\\\\\\\\\\\]]]]]]]]^^^^^^^^________````````aaaaaaaaabbbbbbbbccccccccddddddddeeeeeeeeffffffffgggggggghhhhhhhhiiiiiiiijjjjjjjjkkkkkkkkllllllllmmmmmmmmnnnnnnnnooooooooppppppppqqqqqqqqrrrrrrrrssssssssttttttttuuuuuuuuvvvvvvvvwwwwwwwxxxxxxxxyyyyyyyyzzzzzzzz{{{{{{{{||||||||}}}}}}}}~~~~~~~~",
+     "region": "data",
+     "offset_in_region": 44037,
+     "file_offset": 1327469,
+     "score": 7
+    },
+    {
+     "text": "floormemo need %d ",
+     "region": "code",
+     "offset_in_region": 41064,
+     "file_offset": 1261560,
+     "score": 6
+    },
+    {
+     "text": " partword_used size %d",
+     "region": "code",
+     "offset_in_region": 48361,
+     "file_offset": 1268857,
+     "score": 6
+    },
+    {
+     "text": "4]<oE%Ps\\/j",
+     "region": "data",
+     "offset_in_region": 49827,
+     "file_offset": 1333259,
+     "score": 6
+    },
+    {
+     "text": "F%F8h `xh",
+     "region": "code",
+     "offset_in_region": 29173,
+     "file_offset": 1249669,
+     "score": 5
+    },
+    {
+     "text": "vorbis",
+     "region": "code",
+     "offset_in_region": 39320,
+     "file_offset": 1259816,
+     "score": 4
+    },
+    {
+     "text": "%*17>ELT[cks{",
+     "region": "data",
+     "offset_in_region": 39276,
+     "file_offset": 1322708,
+     "score": 4
+    }
+   ],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "second-core audio decoder: OGG Vorbis",
+   "confidence": "likely",
+   "evidence": [
+    "Cortex-M vector table at 0x01000000: SP=0x01022000, reset is a core-local offset (see JSON vector field)",
+    "contains the shared HiFi file-RPC log strings 'HifiFileOpen/Seek/Read/Write/Close: timeout!!', '###AUDIO_DECODE_OPEN error!###' and the shared FLAC_FileSeekFast/FileGetSeekInfo helper strings (linked into every 71-80 image; not evidence that every module is a FLAC decoder)",
+    "code contains the string 'vorbis' and Vorbis-decoder-internal log strings 'floormemo need %d ' (floor curve allocation) and ' partword_used size %d' (residue partition accounting)",
+    "largest second-core data region (0xd184 bytes) of quantisation/histogram tables, consistent with bundled Vorbis codebook data (inference)",
+    "no source path or 'Lib:' self-name is present, unlike 71-73, so this stays 'likely'"
+   ]
+  },
+  {
+   "index": 76,
+   "code_load": 51995884,
+   "code_exec": 16777216,
+   "code_len": 24288,
+   "data_load": 52020172,
+   "data_exec": 16908288,
+   "data_len": 9404,
+   "bss_exec": 16917692,
+   "bss_len": 0,
+   "code_file_offset": 1337068,
+   "data_file_offset": 1361356,
+   "code_sha256": "ba2a0fd788a0d016693738da1c58d4eb336e5148a1c973c56fdf15b453dc23cf",
+   "data_sha256": "6db9bb025a022f210a061ec35ee58121a617daf94c8fd408c0f7e46ab95234aa",
+   "has_cortexm_vector_table": true,
+   "vector": {
+    "initial_sp": "0x1022000",
+    "reset_vector": "0x2849",
+    "reset_address": "0x2848",
+    "default_handler": "0x28d9",
+    "reset_within_exec_window": false,
+    "reset_is_core_local_offset": true
+   },
+   "code_entropy": 6.977,
+   "data_entropy": 0.624,
+   "code_zero_fraction": 0.0756,
+   "code_nonzero_span": {
+    "first": 1,
+    "end": 24286
+   },
+   "ascii_string_count": 306,
+   "distinctive_string_count": 53,
+   "distinctive_strings": [
+    {
+     "text": "channels %d > 2.Unsupport CHN",
+     "region": "code",
+     "offset_in_region": 12492,
+     "file_offset": 1349560,
+     "score": 10
+    },
+    {
+     "text": "FLAC_frame_decode: flac_decode_frame returned %d",
+     "region": "code",
+     "offset_in_region": 12560,
+     "file_offset": 1349628,
+     "score": 10
+    },
+    {
+     "text": "FLAC seek: frame not found after %d retries",
+     "region": "code",
+     "offset_in_region": 14796,
+     "file_offset": 1351864,
+     "score": 10
+    },
+    {
+     "text": "FLAC seek: iteration=%d, same delta=%d for 3 times, breaking",
+     "region": "code",
+     "offset_in_region": 14848,
+     "file_offset": 1351916,
+     "score": 10
+    },
+    {
+     "text": "FLAC seek: iteration=%d, delta=%d <= 15, breaking",
+     "region": "code",
+     "offset_in_region": 14912,
+     "file_offset": 1351980,
+     "score": 10
+    },
+    {
+     "text": "FLAC seek: iteration=%d, exact match, breaking",
+     "region": "code",
+     "offset_in_region": 15180,
+     "file_offset": 1352248,
+     "score": 10
+    },
+    {
+     "text": "FLAC seek: final buffer bytes: 0x%02x 0x%02x 0x%02x 0x%02x",
+     "region": "code",
+     "offset_in_region": 15288,
+     "file_offset": 1352356,
+     "score": 10
+    },
+    {
+     "text": "FLAC frame CRC mismatch (stored=%d, computed=%d)",
+     "region": "code",
+     "offset_in_region": 18940,
+     "file_offset": 1356008,
+     "score": 10
+    },
+    {
+     "text": "decode_frame: blocksize %d > FLAC_MAX_BLOCKSIZE %d",
+     "region": "code",
+     "offset_in_region": 19012,
+     "file_offset": 1356080,
+     "score": 10
+    },
+    {
+     "text": "decode_frame: decode_subframe failed for channel %d",
+     "region": "code",
+     "offset_in_region": 19064,
+     "file_offset": 1356132,
+     "score": 10
+    },
+    {
+     "text": "flac_decode_frame: output_size %d > alloc_data_size %d",
+     "region": "code",
+     "offset_in_region": 19256,
+     "file_offset": 1356324,
+     "score": 10
+    },
+    {
+     "text": "FLAC init: samplerate=%d, channels=%d, bps=%d, max_blocksize=%d, max_framesize=%d, min_framesize=%d",
+     "region": "code",
+     "offset_in_region": 23688,
+     "file_offset": 1360756,
+     "score": 10
+    },
+    {
+     "text": "FLAC seek: seconds=%d, target_sample=%lu, samplerate=%d, blocksize=%d, approx_bytes_per_frame=%d, FileSize=%lu",
+     "region": "code",
+     "offset_in_region": 23792,
+     "file_offset": 1360860,
+     "score": 10
+    },
+    {
+     "text": "FLAC seek: initial - frame=%lld, sample=%lld, delta=%d, frame_start_pos=%lu",
+     "region": "code",
+     "offset_in_region": 23904,
+     "file_offset": 1360972,
+     "score": 10
+    },
+    {
+     "text": "FLAC seek: iteration=%d, forward - frame=%lld, sample=%lld, delta=%d, frame_start_pos=%lu",
+     "region": "code",
+     "offset_in_region": 23984,
+     "file_offset": 1361052,
+     "score": 10
+    },
+    {
+     "text": "FLAC seek: iteration=%d, backward - frame=%lld, sample=%lld, delta=%d, frame_start_pos=%lu",
+     "region": "code",
+     "offset_in_region": 24076,
+     "file_offset": 1361144,
+     "score": 10
+    },
+    {
+     "text": "HifiFileOpen: timeout!!",
+     "region": "code",
+     "offset_in_region": 1260,
+     "file_offset": 1338328,
+     "score": 8
+    },
+    {
+     "text": "HifiFileSeek: timeout!!",
+     "region": "code",
+     "offset_in_region": 1296,
+     "file_offset": 1338364,
+     "score": 8
+    },
+    {
+     "text": "HifiFileRead: timeout!!",
+     "region": "code",
+     "offset_in_region": 1324,
+     "file_offset": 1338392,
+     "score": 8
+    },
+    {
+     "text": "HifiFileWrite: timeout!!",
+     "region": "code",
+     "offset_in_region": 1352,
+     "file_offset": 1338420,
+     "score": 8
+    },
+    {
+     "text": "HifiFileClose: timeout!!",
+     "region": "code",
+     "offset_in_region": 1380,
+     "file_offset": 1338448,
+     "score": 8
+    },
+    {
+     "text": "FreqChange timeout!!!",
+     "region": "code",
+     "offset_in_region": 5776,
+     "file_offset": 1342844,
+     "score": 8
+    },
+    {
+     "text": "AudioFileBufferSwitch2: timeout!!",
+     "region": "code",
+     "offset_in_region": 9880,
+     "file_offset": 1346948,
+     "score": 8
+    },
+    {
+     "text": "AudioFileInput2: timeout!!",
+     "region": "code",
+     "offset_in_region": 9916,
+     "file_offset": 1346984,
+     "score": 8
+    },
+    {
+     "text": "AudioFileMhRead2: timeout!!",
+     "region": "code",
+     "offset_in_region": 9944,
+     "file_offset": 1347012,
+     "score": 8
+    },
+    {
+     "text": "AudioFileSeek2: timeout!!",
+     "region": "code",
+     "offset_in_region": 9976,
+     "file_offset": 1347044,
+     "score": 8
+    },
+    {
+     "text": "AudioFileMhSeek2: timeout!!",
+     "region": "code",
+     "offset_in_region": 10004,
+     "file_offset": 1347072,
+     "score": 8
+    },
+    {
+     "text": "AudioFileChangeBuf2: timeout!!",
+     "region": "code",
+     "offset_in_region": 10280,
+     "file_offset": 1347348,
+     "score": 8
+    },
+    {
+     "text": "FLAC_FileSeekFast: timeout!!",
+     "region": "code",
+     "offset_in_region": 10876,
+     "file_offset": 1347944,
+     "score": 8
+    },
+    {
+     "text": "FLAC_FileGetSeekInfo: timeout!!",
+     "region": "code",
+     "offset_in_region": 10916,
+     "file_offset": 1347984,
+     "score": 8
+    },
+    {
+     "text": "###AUDIO_DECODE_OPEN error!###",
+     "region": "code",
+     "offset_in_region": 5800,
+     "file_offset": 1342868,
+     "score": 7
+    },
+    {
+     "text": "### channels bigger than 2!###",
+     "region": "code",
+     "offset_in_region": 5832,
+     "file_offset": 1342900,
+     "score": 7
+    },
+    {
+     "text": "FLAC seek: initial seek fail",
+     "region": "code",
+     "offset_in_region": 14752,
+     "file_offset": 1351820,
+     "score": 7
+    },
+    {
+     "text": "FLAC seek: forward seek fail",
+     "region": "code",
+     "offset_in_region": 14964,
+     "file_offset": 1352032,
+     "score": 7
+    },
+    {
+     "text": "FLAC seek: forward frame not found after retries",
+     "region": "code",
+     "offset_in_region": 14996,
+     "file_offset": 1352064,
+     "score": 7
+    },
+    {
+     "text": "#######FLAC seek fail#######",
+     "region": "code",
+     "offset_in_region": 15048,
+     "file_offset": 1352116,
+     "score": 7
+    },
+    {
+     "text": "FLAC seek: backward seek fail",
+     "region": "code",
+     "offset_in_region": 15092,
+     "file_offset": 1352160,
+     "score": 7
+    },
+    {
+     "text": "FLAC seek: backward frame not found after retries",
+     "region": "code",
+     "offset_in_region": 15124,
+     "file_offset": 1352192,
+     "score": 7
+    },
+    {
+     "text": "FLAC seek: reached max iterations, using current position",
+     "region": "code",
+     "offset_in_region": 15228,
+     "file_offset": 1352296,
+     "score": 7
+    },
+    {
+     "text": "invalid subframe padding",
+     "region": "code",
+     "offset_in_region": 18016,
+     "file_offset": 1355084,
+     "score": 7
+    }
+   ],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "second-core audio decoder: FLAC",
+   "confidence": "proven",
+   "evidence": [
+    "Cortex-M vector table at 0x01000000: SP=0x01022000, reset is a core-local offset (see JSON vector field)",
+    "contains the shared HiFi file-RPC log strings 'HifiFileOpen/Seek/Read/Write/Close: timeout!!', '###AUDIO_DECODE_OPEN error!###' and the shared FLAC_FileSeekFast/FileGetSeekInfo helper strings (linked into every 71-80 image; not evidence that every module is a FLAC decoder)",
+    "26 FLAC-specific log strings, incl. 'FLAC_frame_decode: flac_decode_frame returned %d', 'FLAC frame CRC mismatch (stored=%d, computed=%d)', 'decode_frame: blocksize %d > FLAC_MAX_BLOCKSIZE %d' and a detailed FLAC seek log family -- far beyond the two FLAC_File* helper strings shared by all of 71-80"
+   ]
+  },
+  {
+   "index": 77,
+   "code_load": 52029576,
+   "code_exec": 16777216,
+   "code_len": 27460,
+   "data_load": 52057036,
+   "data_exec": 16908288,
+   "data_len": 9124,
+   "bss_exec": 16917412,
+   "bss_len": 0,
+   "code_file_offset": 1370760,
+   "data_file_offset": 1398220,
+   "code_sha256": "e8c811539bc7f5d48212de6112dda458e38a88410b591df4b68f380c8ff9bb1e",
+   "data_sha256": "cfc9fcb936df459c6d32e50fcda8a67e59dd40f75b96a074532ec0ecb7904974",
+   "has_cortexm_vector_table": true,
+   "vector": {
+    "initial_sp": "0x1022000",
+    "reset_vector": "0x567d",
+    "reset_address": "0x567c",
+    "default_handler": "0x570d",
+    "reset_within_exec_window": false,
+    "reset_is_core_local_offset": true
+   },
+   "code_entropy": 6.916,
+   "data_entropy": 0.23,
+   "code_zero_fraction": 0.0783,
+   "code_nonzero_span": {
+    "first": 1,
+    "end": 27457
+   },
+   "ascii_string_count": 348,
+   "distinctive_string_count": 21,
+   "distinctive_strings": [
+    {
+     "text": "HifiFileOpen: timeout!!",
+     "region": "code",
+     "offset_in_region": 1308,
+     "file_offset": 1372068,
+     "score": 8
+    },
+    {
+     "text": "HifiFileSeek: timeout!!",
+     "region": "code",
+     "offset_in_region": 1344,
+     "file_offset": 1372104,
+     "score": 8
+    },
+    {
+     "text": "HifiFileRead: timeout!!",
+     "region": "code",
+     "offset_in_region": 1372,
+     "file_offset": 1372132,
+     "score": 8
+    },
+    {
+     "text": "HifiFileWrite: timeout!!",
+     "region": "code",
+     "offset_in_region": 1400,
+     "file_offset": 1372160,
+     "score": 8
+    },
+    {
+     "text": "HifiFileClose: timeout!!",
+     "region": "code",
+     "offset_in_region": 1428,
+     "file_offset": 1372188,
+     "score": 8
+    },
+    {
+     "text": "FreqChange timeout!!!",
+     "region": "code",
+     "offset_in_region": 6160,
+     "file_offset": 1376920,
+     "score": 8
+    },
+    {
+     "text": "AudioFileInput2: timeout!!",
+     "region": "code",
+     "offset_in_region": 21528,
+     "file_offset": 1392288,
+     "score": 8
+    },
+    {
+     "text": "AudioFileMhRead2: timeout!!",
+     "region": "code",
+     "offset_in_region": 21556,
+     "file_offset": 1392316,
+     "score": 8
+    },
+    {
+     "text": "AudioFileSeek2: timeout!!",
+     "region": "code",
+     "offset_in_region": 21588,
+     "file_offset": 1392348,
+     "score": 8
+    },
+    {
+     "text": "AudioFileMhSeek2: timeout!!",
+     "region": "code",
+     "offset_in_region": 22048,
+     "file_offset": 1392808,
+     "score": 8
+    },
+    {
+     "text": "AudioFileChangeBuf2: timeout!!",
+     "region": "code",
+     "offset_in_region": 22108,
+     "file_offset": 1392868,
+     "score": 8
+    },
+    {
+     "text": "FLAC_FileSeekFast: timeout!!",
+     "region": "code",
+     "offset_in_region": 22716,
+     "file_offset": 1393476,
+     "score": 8
+    },
+    {
+     "text": "FLAC_FileGetSeekInfo: timeout!!",
+     "region": "code",
+     "offset_in_region": 22756,
+     "file_offset": 1393516,
+     "score": 8
+    },
+    {
+     "text": "AudioFileBufferSwitch2: timeout!!",
+     "region": "code",
+     "offset_in_region": 27152,
+     "file_offset": 1397912,
+     "score": 8
+    },
+    {
+     "text": "rice_limit = %d ",
+     "region": "code",
+     "offset_in_region": 27204,
+     "file_offset": 1397964,
+     "score": 8
+    },
+    {
+     "text": "rice_initial_history =%d",
+     "region": "code",
+     "offset_in_region": 27224,
+     "file_offset": 1397984,
+     "score": 8
+    },
+    {
+     "text": "rice_history_mult = %d",
+     "region": "code",
+     "offset_in_region": 27252,
+     "file_offset": 1398012,
+     "score": 8
+    },
+    {
+     "text": "###AUDIO_DECODE_OPEN error!###",
+     "region": "code",
+     "offset_in_region": 6184,
+     "file_offset": 1376944,
+     "score": 7
+    },
+    {
+     "text": "### channels bigger than 2!###",
+     "region": "code",
+     "offset_in_region": 6788,
+     "file_offset": 1377548,
+     "score": 7
+    },
+    {
+     "text": "0x%x pos unkown box",
+     "region": "code",
+     "offset_in_region": 17320,
+     "file_offset": 1388080,
+     "score": 6
+    },
+    {
+     "text": "ALAC ",
+     "region": "code",
+     "offset_in_region": 27356,
+     "file_offset": 1398116,
+     "score": 4
+    }
+   ],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "second-core audio decoder: ALAC in MP4 container",
+   "confidence": "likely",
+   "evidence": [
+    "Cortex-M vector table at 0x01000000: SP=0x01022000, reset is a core-local offset (see JSON vector field)",
+    "contains the shared HiFi file-RPC log strings 'HifiFileOpen/Seek/Read/Write/Close: timeout!!', '###AUDIO_DECODE_OPEN error!###' and the shared FLAC_FileSeekFast/FileGetSeekInfo helper strings (linked into every 71-80 image; not evidence that every module is a FLAC decoder)",
+    "code log strings 'ALAC ' (with a size print) and the ALAC entropy-coding parameter logs 'rice_limit = %d', 'rice_initial_history =%d', 'rice_history_mult = %d', 'maxRun = %d' -- Rice parameters are specific to ALAC",
+    "data contains an 'alac' MP4 atom byte sequence and the module shares the MP4 box-name table with module 73 ('ftyppdinmoofmfra...') but has no AAC strings and no 'Lib:' self-name, so this stays 'likely'"
+   ]
+  },
+  {
+   "index": 78,
+   "code_load": 52066160,
+   "code_exec": 16777216,
+   "code_len": 22820,
+   "data_load": 52088980,
+   "data_exec": 16908288,
+   "data_len": 9316,
+   "bss_exec": 16917604,
+   "bss_len": 0,
+   "code_file_offset": 1407344,
+   "data_file_offset": 1430164,
+   "code_sha256": "eccc0ef3e760fbe8ddfe13f8e232e6907882fef630c31843d4ab38f9c0fca414",
+   "data_sha256": "72482d3c254c38310b4716328da1eb2afefe2757ff6364706f95935fd007069f",
+   "has_cortexm_vector_table": true,
+   "vector": {
+    "initial_sp": "0x1022000",
+    "reset_vector": "0x453d",
+    "reset_address": "0x453c",
+    "default_handler": "0x45cd",
+    "reset_within_exec_window": false,
+    "reset_is_core_local_offset": true
+   },
+   "code_entropy": 6.917,
+   "data_entropy": 0.436,
+   "code_zero_fraction": 0.0762,
+   "code_nonzero_span": {
+    "first": 1,
+    "end": 22817
+   },
+   "ascii_string_count": 313,
+   "distinctive_string_count": 24,
+   "distinctive_strings": [
+    {
+     "text": " file version error!!! Max_version 4120,fileVersion = %d",
+     "region": "code",
+     "offset_in_region": 11209,
+     "file_offset": 1418553,
+     "score": 10
+    },
+    {
+     "text": " malloc buf error %d %d",
+     "region": "code",
+     "offset_in_region": 16052,
+     "file_offset": 1423396,
+     "score": 10
+    },
+    {
+     "text": " decode error!!! s->error = %d",
+     "region": "code",
+     "offset_in_region": 22772,
+     "file_offset": 1430116,
+     "score": 10
+    },
+    {
+     "text": "HifiFileOpen: timeout!!",
+     "region": "code",
+     "offset_in_region": 1308,
+     "file_offset": 1408652,
+     "score": 8
+    },
+    {
+     "text": "HifiFileSeek: timeout!!",
+     "region": "code",
+     "offset_in_region": 1344,
+     "file_offset": 1408688,
+     "score": 8
+    },
+    {
+     "text": "HifiFileRead: timeout!!",
+     "region": "code",
+     "offset_in_region": 1372,
+     "file_offset": 1408716,
+     "score": 8
+    },
+    {
+     "text": "HifiFileWrite: timeout!!",
+     "region": "code",
+     "offset_in_region": 1400,
+     "file_offset": 1408744,
+     "score": 8
+    },
+    {
+     "text": "HifiFileClose: timeout!!",
+     "region": "code",
+     "offset_in_region": 1428,
+     "file_offset": 1408772,
+     "score": 8
+    },
+    {
+     "text": "FreqChange timeout!!!",
+     "region": "code",
+     "offset_in_region": 6160,
+     "file_offset": 1413504,
+     "score": 8
+    },
+    {
+     "text": "ape open FAIL!",
+     "region": "code",
+     "offset_in_region": 10088,
+     "file_offset": 1417432,
+     "score": 8
+    },
+    {
+     "text": " tag error!!!",
+     "region": "code",
+     "offset_in_region": 11193,
+     "file_offset": 1418537,
+     "score": 8
+    },
+    {
+     "text": "AudioFileInput2: timeout!!",
+     "region": "code",
+     "offset_in_region": 17112,
+     "file_offset": 1424456,
+     "score": 8
+    },
+    {
+     "text": "AudioFileMhRead2: timeout!!",
+     "region": "code",
+     "offset_in_region": 17140,
+     "file_offset": 1424484,
+     "score": 8
+    },
+    {
+     "text": "AudioFileSeek2: timeout!!",
+     "region": "code",
+     "offset_in_region": 17172,
+     "file_offset": 1424516,
+     "score": 8
+    },
+    {
+     "text": "AudioFileMhSeek2: timeout!!",
+     "region": "code",
+     "offset_in_region": 17632,
+     "file_offset": 1424976,
+     "score": 8
+    },
+    {
+     "text": "AudioFileChangeBuf2: timeout!!",
+     "region": "code",
+     "offset_in_region": 17692,
+     "file_offset": 1425036,
+     "score": 8
+    },
+    {
+     "text": "FLAC_FileSeekFast: timeout!!",
+     "region": "code",
+     "offset_in_region": 18300,
+     "file_offset": 1425644,
+     "score": 8
+    },
+    {
+     "text": "FLAC_FileGetSeekInfo: timeout!!",
+     "region": "code",
+     "offset_in_region": 18340,
+     "file_offset": 1425684,
+     "score": 8
+    },
+    {
+     "text": "AudioFileBufferSwitch2: timeout!!",
+     "region": "code",
+     "offset_in_region": 22736,
+     "file_offset": 1430080,
+     "score": 8
+    },
+    {
+     "text": "###AUDIO_DECODE_OPEN error!###",
+     "region": "code",
+     "offset_in_region": 6184,
+     "file_offset": 1413528,
+     "score": 7
+    },
+    {
+     "text": "### channels bigger than 2!###",
+     "region": "code",
+     "offset_in_region": 6788,
+     "file_offset": 1414132,
+     "score": 7
+    },
+    {
+     "text": "ape open OK ",
+     "region": "code",
+     "offset_in_region": 10104,
+     "file_offset": 1417448,
+     "score": 7
+    },
+    {
+     "text": "ape_tag_len =%d ",
+     "region": "code",
+     "offset_in_region": 11168,
+     "file_offset": 1418512,
+     "score": 4
+    },
+    {
+     "text": "APETAGEX",
+     "region": "code",
+     "offset_in_region": 15124,
+     "file_offset": 1422468,
+     "score": 4
+    }
+   ],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "second-core audio decoder: APE (Monkey's Audio)",
+   "confidence": "proven",
+   "evidence": [
+    "Cortex-M vector table at 0x01000000: SP=0x01022000, reset is a core-local offset (see JSON vector field)",
+    "contains the shared HiFi file-RPC log strings 'HifiFileOpen/Seek/Read/Write/Close: timeout!!', '###AUDIO_DECODE_OPEN error!###' and the shared FLAC_FileSeekFast/FileGetSeekInfo helper strings (linked into every 71-80 image; not evidence that every module is a FLAC decoder)",
+    "code log strings 'ape open FAIL!', 'ape open OK ', 'ape_tag_len =%d ', ' file version error!!! Max_version 4120,fileVersion = %d' (4120 is the APE file-version constant) and 'APETAGEX'"
+   ]
+  },
+  {
+   "index": 79,
+   "code_load": 52098296,
+   "code_exec": 16777216,
+   "code_len": 24744,
+   "data_load": 52123040,
+   "data_exec": 16908288,
+   "data_len": 8968,
+   "bss_exec": 16917256,
+   "bss_len": 0,
+   "code_file_offset": 1439480,
+   "data_file_offset": 1464224,
+   "code_sha256": "23dc1057b1d4ea3d0525cbea8b0722e8641363f390e565018b65bda31ed0c39f",
+   "data_sha256": "1256df949a2ff7b635a5fdc427102454acea8e735bcaa612966bf4f16f73edb0",
+   "has_cortexm_vector_table": true,
+   "vector": {
+    "initial_sp": "0x1022000",
+    "reset_vector": "0x2cf5",
+    "reset_address": "0x2cf4",
+    "default_handler": "0x2d85",
+    "reset_within_exec_window": false,
+    "reset_is_core_local_offset": true
+   },
+   "code_entropy": 6.967,
+   "data_entropy": 0.19,
+   "code_zero_fraction": 0.0824,
+   "code_nonzero_span": {
+    "first": 1,
+    "end": 24742
+   },
+   "ascii_string_count": 335,
+   "distinctive_string_count": 25,
+   "distinctive_strings": [
+    {
+     "text": "NO.%d frame dsdiff read frame err!",
+     "region": "code",
+     "offset_in_region": 13600,
+     "file_offset": 1453080,
+     "score": 11
+    },
+    {
+     "text": "HifiFileOpen: timeout!!",
+     "region": "code",
+     "offset_in_region": 1308,
+     "file_offset": 1440788,
+     "score": 8
+    },
+    {
+     "text": "HifiFileSeek: timeout!!",
+     "region": "code",
+     "offset_in_region": 1344,
+     "file_offset": 1440824,
+     "score": 8
+    },
+    {
+     "text": "HifiFileRead: timeout!!",
+     "region": "code",
+     "offset_in_region": 1372,
+     "file_offset": 1440852,
+     "score": 8
+    },
+    {
+     "text": "HifiFileWrite: timeout!!",
+     "region": "code",
+     "offset_in_region": 1400,
+     "file_offset": 1440880,
+     "score": 8
+    },
+    {
+     "text": "HifiFileClose: timeout!!",
+     "region": "code",
+     "offset_in_region": 1428,
+     "file_offset": 1440908,
+     "score": 8
+    },
+    {
+     "text": "FreqChange timeout!!!",
+     "region": "code",
+     "offset_in_region": 6160,
+     "file_offset": 1445640,
+     "score": 8
+    },
+    {
+     "text": "AudioFileInput2: timeout!!",
+     "region": "code",
+     "offset_in_region": 10896,
+     "file_offset": 1450376,
+     "score": 8
+    },
+    {
+     "text": "AudioFileMhRead2: timeout!!",
+     "region": "code",
+     "offset_in_region": 10924,
+     "file_offset": 1450404,
+     "score": 8
+    },
+    {
+     "text": "AudioFileSeek2: timeout!!",
+     "region": "code",
+     "offset_in_region": 10956,
+     "file_offset": 1450436,
+     "score": 8
+    },
+    {
+     "text": "AudioFileMhSeek2: timeout!!",
+     "region": "code",
+     "offset_in_region": 11416,
+     "file_offset": 1450896,
+     "score": 8
+    },
+    {
+     "text": "AudioFileChangeBuf2: timeout!!",
+     "region": "code",
+     "offset_in_region": 11476,
+     "file_offset": 1450956,
+     "score": 8
+    },
+    {
+     "text": "dstf read frame!",
+     "region": "code",
+     "offset_in_region": 13556,
+     "file_offset": 1453036,
+     "score": 8
+    },
+    {
+     "text": "dst read frame err!",
+     "region": "code",
+     "offset_in_region": 13580,
+     "file_offset": 1453060,
+     "score": 8
+    },
+    {
+     "text": "m_samplerate:%d",
+     "region": "code",
+     "offset_in_region": 15172,
+     "file_offset": 1454652,
+     "score": 8
+    },
+    {
+     "text": "m_frame_count:%d",
+     "region": "code",
+     "offset_in_region": 15208,
+     "file_offset": 1454688,
+     "score": 8
+    },
+    {
+     "text": "m_frame_size:%d",
+     "region": "code",
+     "offset_in_region": 15228,
+     "file_offset": 1454708,
+     "score": 8
+    },
+    {
+     "text": "FLAC_FileSeekFast: timeout!!",
+     "region": "code",
+     "offset_in_region": 15480,
+     "file_offset": 1454960,
+     "score": 8
+    },
+    {
+     "text": "FLAC_FileGetSeekInfo: timeout!!",
+     "region": "code",
+     "offset_in_region": 15520,
+     "file_offset": 1455000,
+     "score": 8
+    },
+    {
+     "text": "AudioFileBufferSwitch2: timeout!!",
+     "region": "code",
+     "offset_in_region": 22780,
+     "file_offset": 1462260,
+     "score": 8
+    },
+    {
+     "text": "###AUDIO_DECODE_OPEN error!###",
+     "region": "code",
+     "offset_in_region": 6184,
+     "file_offset": 1445664,
+     "score": 7
+    },
+    {
+     "text": "### channels bigger than 2!###",
+     "region": "code",
+     "offset_in_region": 6788,
+     "file_offset": 1446268,
+     "score": 7
+    },
+    {
+     "text": "dff seek_fail",
+     "region": "code",
+     "offset_in_region": 13640,
+     "file_offset": 1453120,
+     "score": 7
+    },
+    {
+     "text": "channels:%d",
+     "region": "code",
+     "offset_in_region": 15192,
+     "file_offset": 1454672,
+     "score": 7
+    },
+    {
+     "text": "DSD IFF OPEN err!",
+     "region": "code",
+     "offset_in_region": 15252,
+     "file_offset": 1454732,
+     "score": 4
+    }
+   ],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "second-core audio decoder: DSD -- DFF (DSDIFF) with DST frames",
+   "confidence": "likely",
+   "evidence": [
+    "Cortex-M vector table at 0x01000000: SP=0x01022000, reset is a core-local offset (see JSON vector field)",
+    "contains the shared HiFi file-RPC log strings 'HifiFileOpen/Seek/Read/Write/Close: timeout!!', '###AUDIO_DECODE_OPEN error!###' and the shared FLAC_FileSeekFast/FileGetSeekInfo helper strings (linked into every 71-80 image; not evidence that every module is a FLAC decoder)",
+    "code log strings 'FRM8 err ' (FRM8 is the DFF chunk holding DST-compressed frames), 'dst read frame err!', 'dstf read frame!', 'NO.%d frame dsdiff read frame err!', 'dff seek_fail', 'DSD IFF OPEN err!'",
+    "shares 50.3% identical code bytes with module 80 (common DSD skeleton); the DFF/DST-specific strings above are absent from 80"
+   ]
+  },
+  {
+   "index": 80,
+   "code_load": 52132008,
+   "code_exec": 16777216,
+   "code_len": 23920,
+   "data_load": 52155928,
+   "data_exec": 16908288,
+   "data_len": 8968,
+   "bss_exec": 16917256,
+   "bss_len": 0,
+   "code_file_offset": 1473192,
+   "data_file_offset": 1497112,
+   "code_sha256": "313082daacec1e95da0f052444aee6ff9b3cce21a383f72b8f0b0ec4e13acc8c",
+   "data_sha256": "7f5fb1eddc948c3c088857eeeb99ae7d07975e67617e9489a86b0b28f6270a69",
+   "has_cortexm_vector_table": true,
+   "vector": {
+    "initial_sp": "0x1022000",
+    "reset_vector": "0x2cf5",
+    "reset_address": "0x2cf4",
+    "default_handler": "0x2d85",
+    "reset_within_exec_window": false,
+    "reset_is_core_local_offset": true
+   },
+   "code_entropy": 6.974,
+   "data_entropy": 0.19,
+   "code_zero_fraction": 0.0835,
+   "code_nonzero_span": {
+    "first": 1,
+    "end": 23920
+   },
+   "ascii_string_count": 339,
+   "distinctive_string_count": 27,
+   "distinctive_strings": [
+    {
+     "text": "NO.%d frame dsf read frame err!",
+     "region": "code",
+     "offset_in_region": 21968,
+     "file_offset": 1495160,
+     "score": 11
+    },
+    {
+     "text": "ID3V2 start:%d",
+     "region": "code",
+     "offset_in_region": 12932,
+     "file_offset": 1486124,
+     "score": 10
+    },
+    {
+     "text": "HifiFileOpen: timeout!!",
+     "region": "code",
+     "offset_in_region": 1308,
+     "file_offset": 1474500,
+     "score": 8
+    },
+    {
+     "text": "HifiFileSeek: timeout!!",
+     "region": "code",
+     "offset_in_region": 1344,
+     "file_offset": 1474536,
+     "score": 8
+    },
+    {
+     "text": "HifiFileRead: timeout!!",
+     "region": "code",
+     "offset_in_region": 1372,
+     "file_offset": 1474564,
+     "score": 8
+    },
+    {
+     "text": "HifiFileWrite: timeout!!",
+     "region": "code",
+     "offset_in_region": 1400,
+     "file_offset": 1474592,
+     "score": 8
+    },
+    {
+     "text": "HifiFileClose: timeout!!",
+     "region": "code",
+     "offset_in_region": 1428,
+     "file_offset": 1474620,
+     "score": 8
+    },
+    {
+     "text": "FreqChange timeout!!!",
+     "region": "code",
+     "offset_in_region": 6160,
+     "file_offset": 1479352,
+     "score": 8
+    },
+    {
+     "text": "AudioFileInput2: timeout!!",
+     "region": "code",
+     "offset_in_region": 10896,
+     "file_offset": 1484088,
+     "score": 8
+    },
+    {
+     "text": "AudioFileMhRead2: timeout!!",
+     "region": "code",
+     "offset_in_region": 10924,
+     "file_offset": 1484116,
+     "score": 8
+    },
+    {
+     "text": "AudioFileSeek2: timeout!!",
+     "region": "code",
+     "offset_in_region": 10956,
+     "file_offset": 1484148,
+     "score": 8
+    },
+    {
+     "text": "AudioFileMhSeek2: timeout!!",
+     "region": "code",
+     "offset_in_region": 11416,
+     "file_offset": 1484608,
+     "score": 8
+    },
+    {
+     "text": "AudioFileChangeBuf2: timeout!!",
+     "region": "code",
+     "offset_in_region": 11476,
+     "file_offset": 1484668,
+     "score": 8
+    },
+    {
+     "text": "m_samplerate:%d",
+     "region": "code",
+     "offset_in_region": 13076,
+     "file_offset": 1486268,
+     "score": 8
+    },
+    {
+     "text": "m_frame_count:%d",
+     "region": "code",
+     "offset_in_region": 13112,
+     "file_offset": 1486304,
+     "score": 8
+    },
+    {
+     "text": "m_frame_size:%d",
+     "region": "code",
+     "offset_in_region": 13132,
+     "file_offset": 1486324,
+     "score": 8
+    },
+    {
+     "text": "FLAC_FileSeekFast: timeout!!",
+     "region": "code",
+     "offset_in_region": 14632,
+     "file_offset": 1487824,
+     "score": 8
+    },
+    {
+     "text": "FLAC_FileGetSeekInfo: timeout!!",
+     "region": "code",
+     "offset_in_region": 14672,
+     "file_offset": 1487864,
+     "score": 8
+    },
+    {
+     "text": "AudioFileBufferSwitch2: timeout!!",
+     "region": "code",
+     "offset_in_region": 21932,
+     "file_offset": 1495124,
+     "score": 8
+    },
+    {
+     "text": "###AUDIO_DECODE_OPEN error!###",
+     "region": "code",
+     "offset_in_region": 6184,
+     "file_offset": 1479376,
+     "score": 7
+    },
+    {
+     "text": "### channels bigger than 2!###",
+     "region": "code",
+     "offset_in_region": 6788,
+     "file_offset": 1479980,
+     "score": 7
+    },
+    {
+     "text": "dsf read ckid err",
+     "region": "code",
+     "offset_in_region": 13032,
+     "file_offset": 1486224,
+     "score": 7
+    },
+    {
+     "text": "channels:%d",
+     "region": "code",
+     "offset_in_region": 13096,
+     "file_offset": 1486288,
+     "score": 7
+    },
+    {
+     "text": "bit_per_sample not support!",
+     "region": "code",
+     "offset_in_region": 12976,
+     "file_offset": 1486168,
+     "score": 4
+    },
+    {
+     "text": "sampleCount:%lu",
+     "region": "code",
+     "offset_in_region": 13008,
+     "file_offset": 1486200,
+     "score": 4
+    },
+    {
+     "text": "data_size = %d",
+     "region": "code",
+     "offset_in_region": 13056,
+     "file_offset": 1486248,
+     "score": 4
+    },
+    {
+     "text": "DSD IFF OPEN err!",
+     "region": "code",
+     "offset_in_region": 13156,
+     "file_offset": 1486348,
+     "score": 4
+    }
+   ],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "second-core audio decoder: DSD -- DSF",
+   "confidence": "likely",
+   "evidence": [
+    "Cortex-M vector table at 0x01000000: SP=0x01022000, reset is a core-local offset (see JSON vector field)",
+    "contains the shared HiFi file-RPC log strings 'HifiFileOpen/Seek/Read/Write/Close: timeout!!', '###AUDIO_DECODE_OPEN error!###' and the shared FLAC_FileSeekFast/FileGetSeekInfo helper strings (linked into every 71-80 image; not evidence that every module is a FLAC decoder)",
+    "code log strings 'dsf read ckid err', 'NO.%d frame dsf read frame err!', 'ID3V2 start:%d' (DSF files carry a trailing ID3v2 tag), 'fmt err ', 'formatid err', 'bit_per_sample not support!', 'sampleCount:%lu' -- DSF fmt/data chunk parsing",
+    "shares 50.3% identical code bytes with module 79 (common DSD skeleton); the DSF-specific strings above are absent from 79"
+   ]
+  },
+  {
+   "index": 81,
+   "code_load": 51240860,
+   "code_exec": 50844004,
+   "code_len": 5768,
+   "data_load": 51246628,
+   "data_exec": 50481092,
+   "data_len": 796,
+   "bss_exec": 50481888,
+   "bss_len": 0,
+   "code_file_offset": 582044,
+   "data_file_offset": 587812,
+   "code_sha256": "67adbb09d6eae65ab7cafcf125f13956dc3507d0db66d8ae30c4c1e22a29350a",
+   "data_sha256": "7fc47f1bdeca23600f5963a77d06e2c7ccbf27a38fa469fc68edba12e6e285be",
+   "has_cortexm_vector_table": false,
+   "vector": null,
+   "code_entropy": 6.827,
+   "data_entropy": 0.239,
+   "code_zero_fraction": 0.068,
+   "code_nonzero_span": {
+    "first": 0,
+    "end": 5768
+   },
+   "ascii_string_count": 27,
+   "distinctive_string_count": 0,
+   "distinctive_strings": [],
+   "utf16le_data_strings": [],
+   "u16_table_stats": null,
+   "identical_code_group": null,
+   "near_duplicate_code": [],
+   "identification": "unidentified small overlay with function-pointer table",
+   "confidence": "unknown",
+   "evidence": [
+    "data region (796 bytes) is zero except five Thumb pointers at data+0x18: 0x0307de3f, 0x0307d91f, 0x0307d8ab, 0x0307dd03, 0x0307ddd9 -- all into the shared 0x0307d164 overlay window; no strings"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,27 @@
+# Bluetooth auto-off option (patches/bt_auto_off/README.md): turn
+# Bluetooth off after 10 minutes without a connection instead of 5.
+name: bt-auto-off-10min
+kind: module
+module: 0
+region: code
+address: 0x030661e0
+gate: build refuses unless the stock bytes at the target equal
+  `expect`; at most one bt-auto-off patch per build (build.py
+  --bt-auto-off); the finished image must pass firmware_patch.validate()
+rationale:
+  Module 0's Bluetooth supervisor (0x03065FD4) checks, while
+  Bluetooth is on (SAVEINFO +0x2D4) and no device is connected (+0x2D3,
+  set to 1 by the module's 'CQ..O' link reply and to 0 by 'S', 'L', 'I'
+  or a 'CT' frame), whether the 10 ms tick at 0x03023298 has passed the
+  last-connected timestamp by more than 30,000 ticks (movw r1, #0x7530
+  at 0x030661E0; bls.w at 0x030661E6). If so it clears event flag 0x1CB,
+  clears +0x2D3 and +0x2D4, and powers the module down, so Bluetooth
+  turns itself off after 5 minutes without a connection and the saved
+  setting reads Off. The tick unit is pinned by the screen-off timer at
+  0x03064A1E, which scales its table of seconds by 100 against the
+  same counter.
+  This patch raises the limit to 60,000 ticks (10 minutes), the largest
+  movw immediate that is a whole number of minutes. Nothing else in the
+  supervisor changes.
+expect: 47f23051
+replace: 4ef66021

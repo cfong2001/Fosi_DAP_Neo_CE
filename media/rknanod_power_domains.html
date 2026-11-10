@@ -1,0 +1,36 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+body{margin:0;background:#fcfcfb;font:14px/1.35 Inter,system-ui,sans-serif;color:#0b0b0b}
+.wrap{padding:20px;width:920px}
+h1{font-size:16px;margin:0 0 4px}.sub{color:#52514e;font-size:12px;margin:0 0 14px}
+.vd{border:1.5px solid #c3c2b7;border-radius:10px;padding:10px 12px 12px;margin-bottom:12px}
+.vdl{font-size:12px;color:#52514e;margin-bottom:8px}
+.row{display:flex;gap:12px}
+.pd{flex:1;border-radius:8px;padding:10px 12px;background:#fff;border:1.5px solid #2a78d6}
+.pd.high{border-color:#eb6834}.pd.pmu{border-color:#1baf7a}
+.pdn{font-weight:600;margin-bottom:6px}
+.pdn small{font-weight:400;color:#52514e}
+ul{margin:0;padding-left:18px}li{margin:2px 0}
+.ce{color:#52514e;font-size:12.5px}
+code{font:12px ui-monospace,Menlo,monospace}
+.foot{font-size:12px;color:#52514e;margin-top:6px}
+</style></head><body><div class="wrap">
+<h1>RKNanoD power domains, and where the Neo's firmware lives</h1>
+<p class="sub">Domain contents from the TRM (Table 5-1, Table 12-1). Grey notes are CE's own findings about the Neo.</p>
+<div class="vd"><div class="vdl">VD_PMU</div><div class="row">
+<div class="pd pmu"><div class="pdn">PD_PMU <small>stays on in sleep</small></div><ul>
+<li>PMU, GRF</li><li>GPIO2 <span class="ce">: Bluetooth power 2.7, Bluetooth UART 2.16/2.17, DAC reset 2.1, DAC mute 2.8</span></li></ul></div>
+</div></div>
+<div class="vd"><div class="vdl">VD_LOGIC</div><div class="row">
+<div class="pd"><div class="pdn">PD_LOGIC</div><ul>
+<li>System core <span class="ce">(inferred): UI, library, playback control</span></li>
+<li>SYSRAM0 320 KB <code>0x03000000</code> <span class="ce">: data, SAVEINFO at <code>0x030232A0</code></span></li>
+<li>SYSRAM1 256 KB <code>0x03050000</code> <span class="ce">: module 0 resident, overlays at <code>0x0307xxxx</code></span></li>
+<li>CRU, I2C, I2S, UARTs, SAR-ADC, timers</li></ul></div>
+<div class="pd high"><div class="pdn">PD_HIGH <small>software power-down only</small></div><ul>
+<li>Core 1 <span class="ce">: decoder modules 71 to 80</span></li>
+<li>HIGHRAM0 128 KB <code>0x01000000</code> <span class="ce">: decoder code (core 1 likely also sees it at <code>0x0</code>)</span></li>
+<li>HIGHRAM1 256 KB <code>0x01020000</code> <span class="ce">: decoder data</span></li>
+<li>HIFIACC <span class="ce">: FLAC/ALAC/APE filters, FFT; stock FLAC uses it</span></li></ul>
+<div class="foot">Off switch: <code>PMU_PWRDN_CON</code> (+0x0C) bit 1. Whether stock uses it when paused is open.</div></div>
+</div></div>
+</div></body></html>

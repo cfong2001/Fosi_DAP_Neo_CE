@@ -1,0 +1,108 @@
+#!/usr/bin/env python3
+"""Check recorded composition geometry and report static module overlaps.
+
+The address census does not prove runtime overlay load order or coexistence.
+It examines the pinned stock image and recorded plans, not a generated image.
+"""
+import hashlib
+import json
+from pathlib import Path
+import sys
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / 'tools'))
+from rknano_image import Image
+
+STOCK_SHA = 'fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cdfade5e9c6ea3bd71ac6deef'
+
+
+def validate_parts(base, limit, parts):
+    """Enforce bounds, address/offset agreement, and pairwise non-overlap."""
+    if base < 0 or limit < 0:
+        raise ValueError('negative base or budget')
+    spans = []
+    for p in parts:
+        offset, size = p['offset'], p['bytes']
+        if not isinstance(offset, int) or not isinstance(size, int) or offset < 0 or size <= 0:
+            raise ValueError('invalid piece extent')
+        if int(p['address'], 0) != base + offset or offset + size > limit:
+            raise ValueError(f"piece outside or inconsistent: {p['name']}")
+        spans.append((offset, offset + size, p['name']))
+    spans.sort()
+    for left, right in zip(spans, spans[1:]):
+        if right[0] < left[1]:
+            raise ValueError(f'piece collision: {left[2]} / {right[2]}')
+    return spans
+
+
+def intersections(modules, lo, hi):
+    """All table-declared code, data and BSS ranges crossing [lo, hi)."""
+    return [(m['index'], k, start, end)
+            for m in modules for k in ('code', 'data', 'bss')
+            for start, end in [(m[k + '_exec'], m[k + '_exec'] + m[k + '_len'])]
+            if start < end and start < hi and lo < end]
+
+
+def validate_recorded(layout, tail):
+    """Validate recorded allocations without needing the stock image."""
+    base = int(layout['ext_base'], 0)
+    end = int(layout['ext_end'], 0)
+    room, payload = layout['room'], layout['payload_bytes']
+    if end - base != room or layout['spare'] != room - payload or not 0 < payload <= room:
+        raise ValueError('module 31 budget inconsistent')
+    spans = validate_parts(base, payload, layout['components'])
+    if not spans or spans[-1][1] != payload:
+        raise ValueError('module 31 payload length mismatch')
+    tb = int(tail['tail_base'], 0)
+    budget = tail['budget']
+    if tb != 0x0307bfb4 or tb + budget != 0x0307c7b0:
+        raise ValueError('resident tail boundary drift')
+    if not 0 < tail['tail_bytes'] <= budget:
+        raise ValueError('tail budget exceeded')
+    tspans = validate_parts(tb, budget, tail['pieces'])
+    if max((b for a, b, n in tspans if not n.startswith('spare')), default=0) != tail['tail_bytes']:
+        raise ValueError('tail emitted length mismatch')
+    caps = layout['staging_caps']
+    if caps['staging_bytes'] != 16 + 50 * caps['max_runs'] + 4 * caps['max_entries']:
+        raise ValueError('staging cap arithmetic mismatch')
+    if tail['pieces'][0]['bytes'] != caps['staging_bytes'] or tail['pieces'][0]['offset'] != 0:
+        raise ValueError('staging allocation mismatch')
+    print(f'module 31 recorded: {payload}/{room} bytes, {room-payload} spare')
+    print(f'resident tail recorded: {tail["tail_bytes"]}/{budget} bytes, {budget-tail["tail_bytes"]} spare')
+    return base, end, payload, tb
+
+
+def audit(raw, layout, tail):
+    if hashlib.sha256(raw).hexdigest() != STOCK_SHA:
+        raise ValueError('unexpected stock image SHA-256')
+    image = Image(raw)
+    base, end, payload, tb = validate_recorded(layout, tail)
+    if base != image.modules[31]['code_exec'] + image.modules[31]['code_len']:
+        raise ValueError('module 31 append base drift')
+    if end != image.modules[18]['code_exec']:
+        raise ValueError('module 31 boundary drift')
+    regions = [('module 31 extension', base, base + payload),
+               ('module 24 extension', image.modules[24]['code_exec'] + image.modules[24]['code_len'],
+                image.modules[24]['code_exec'] + image.modules[24]['code_len'] + 26),
+               ('resident tail', tb, tb + tail['tail_bytes'])]
+    for name, lo, hi in regions:
+        print(f'{name}: {lo:#010x}..{hi:#010x} (end exclusive)')
+        for idx, kind, start, end in intersections(image.modules, lo, hi):
+            print(f'  intersects stock module {idx:02d} {kind}: {start:#010x}..{end:#010x}')
+    print('STATIC ADDRESS CENSUS ONLY: overlaps require runtime residency and loader review.')
+
+
+def main():
+    layout = json.loads((ROOT / 'patches/full/out/layout31.json').read_text())
+    tail = json.loads((ROOT / 'patches/full/out/layout_tail.json').read_text())
+    stock = ROOT / 'DP3_V137.img'
+    if stock.exists():
+        audit(stock.read_bytes(), layout, tail)
+    else:
+        validate_recorded(layout, tail)
+        print('Stock image absent: module boundary and overlap census skipped.')
+        print('Recorded plans are not proof of generated bytes or runtime coexistence.')
+
+
+if __name__ == '__main__':
+    main()

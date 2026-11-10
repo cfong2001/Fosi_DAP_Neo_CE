@@ -1,0 +1,19 @@
+# Player transport draw: BL to transport_keyed_draw at
+# 0x0307c318, which fills the glyph rectangle with the
+# ground colour and then draws through the keyed helper.
+# Same site and stock bytes as design_refresh_v4/transport-keyed-repeat-state.
+name: 0115-transport-keyed-repeat-state-ground
+kind: module
+module: 27
+region: code
+address: 0x307f884
+gate: build refuses unless the stock bytes at the target equal
+  `expect`; the finished image must also pass the grown
+  build validator. Requires the full build's merged tail.
+expect: e3f761fe
+replace: fcf748fd
+rationale: The v4 repoint to the keyed helper leaves the previous
+  glyph's ink behind on a segment-only repaint. The wrapper
+  restores the opaque draw's whole-rectangle replacement
+  with the surround in the ground colour, then draws the
+  glyph keyed.

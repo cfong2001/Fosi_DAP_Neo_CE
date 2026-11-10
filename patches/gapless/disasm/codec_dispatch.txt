@@ -1,0 +1,10 @@
+0308886e  35 48          ldr      r0, [pc, #0xd4]  ; [0x3088944] = 0x0304b4d4
+03088870  10 b5          push     {r4, lr}
+03088872  00 68          ldr      r0, [r0]
+03088874  0a 28          cmp      r0, #0xa
+03088876  28 bf          it       hs
+03088878  10 bd          pophs    {r4, pc}
+0308887a  df e8 00 f0    tbb      [pc, r0]
+0308887e  05 3f          subs     r7, #5
+03088880  d6 ac          add      r4, sp, #0x358
+03088882  fe fd fc fb    ldc2l    p11, c15, [lr, #0x3f0]!

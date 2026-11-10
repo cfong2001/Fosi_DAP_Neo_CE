@@ -1,0 +1,70 @@
+== solver replica self-check against clock_table.md S6 (stock) ==
+PASS  solver replica reproduces all 16 published stock outputs
+
+== solver outputs, codec row alone (MHz) ==
+row format                            pll Acor Astk Apck Bcor Bbus
+  5 MP3 <=128k, <=44.1k    stock       96   96   96   96   96   96
+                           v1          96   96   96   96  144  144
+  6 MP3 high               stock      200  100  100   96  200  200
+                           v1         200   96   96   96  144  144
+  7 WMA tier A             stock      200  150  150   96  300  300
+                           v1         200   96   96   96  144  144
+  8 WMA tier B             stock      200  150  150   96  300  300
+                           v1         200   96   96   96  144  144
+  9 WAV                    stock      450  200  200   96  450  450
+                           v1         450   96   96   96  144  144
+ 10 AAC high               stock      200  150  150   96  300  300
+                           v1         200   96   96   96  144  144
+ 11 AAC low                stock      200  150  150   96  300  300
+                           v1         200   96   96   96  144  144
+ 14 OGG tier 1             stock      300   96   96   96  400  400
+                           v1         300   96   96   96  240  240
+ 15 OGG tier 2             stock      300   96   96   96  400  400
+                           v1         300   96   96   96  240  240
+ 16 OGG tier 3             stock      300   96   96   96  400  400
+                           v1         300   96   96   96  240  240
+ 17 OGG top tier           stock      480  200  200   96  480  480
+                           v1         480   96   96   96  240  240
+ 18 FLAC                   stock      480  200  200   96  480  480
+                           v1         480   96   96   96  288  288
+ 19 ALAC                   stock      480  200  200   96  480  480
+                           v1         480   96   96   96  288  288
+ 20 APE                    stock      480  200  200   96  480  480
+                           v1         480   96   96   96  288  288
+ 21 DSD-DFF                stock      480  200  200   96  480  480
+                           v1         480   96   96   96  288  288
+ 22 DSD-DSF                stock      480  200  200   96  480  480
+                           v1         480   96   96   96  288  288
+
+== assertions ==
+PASS  (a) all 16 in-scope codec states hit target B core/B bus (violations: [])
+PASS  (b) A core/stclk/pclk at 96 MHz floor for all codec-alone states (violations: [])
+PASS  (c) no byte outside the table differs except trailer CRC (outside diffs: [])
+PASS  (c) trailer CRC equals rk_crc32 of patched body
+PASS  (c) header mirror region byte-identical to stock
+      (260 bytes differ in total, 256 inside the table)
+PASS  (d) word 0 of all 36 rows untouched (violations: [])
+PASS  (d) all 20 out-of-scope rows byte-identical (violations: [])
+PASS  (e) firmware_patch.validate() passes on patched image
+PASS  (e) verify-rebuilt image byte-identical to build output
+      patched sha256 = f5a312742fed19bb035ddc5736683b0dce834956887acfb1624a72fa97cbcac3
+
+== sensitivity: solver B core if row 4 (audio init, +48) is also held ==
+  row  5 MP3 <=128k, <=44.1k    B core 192 MHz (target 144 codec-alone)
+  row  6 MP3 high               B core 192 MHz (target 144 codec-alone)
+  row  7 WMA tier A             B core 192 MHz (target 144 codec-alone)
+  row  8 WMA tier B             B core 192 MHz (target 144 codec-alone)
+  row  9 WAV                    B core 192 MHz (target 144 codec-alone)
+  row 10 AAC high               B core 192 MHz (target 144 codec-alone)
+  row 11 AAC low                B core 192 MHz (target 144 codec-alone)
+  row 14 OGG tier 1             B core 288 MHz (target 240 codec-alone)
+  row 15 OGG tier 2             B core 288 MHz (target 240 codec-alone)
+  row 16 OGG tier 3             B core 288 MHz (target 240 codec-alone)
+  row 17 OGG top tier           B core 288 MHz (target 240 codec-alone)
+  row 18 FLAC                   B core 336 MHz (target 288 codec-alone)
+  row 19 ALAC                   B core 336 MHz (target 288 codec-alone)
+  row 20 APE                    B core 336 MHz (target 288 codec-alone)
+  row 21 DSD-DFF                B core 336 MHz (target 288 codec-alone)
+  row 22 DSD-DSF                B core 336 MHz (target 288 codec-alone)
+
+RESULT: ALL CHECKS PASSED

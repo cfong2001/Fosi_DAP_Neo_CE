@@ -1,0 +1,10 @@
+ok: windows-style (CRLF, backslashes, drive letter, .., EXTINF)
+ok: utf-8 with BOM, .m3u8, root-relative entry
+ok: windows-1252 playlist resolves utf-8 library name
+ok: missing skipped, url skipped, directory skipped, duplicates kept
+ok: suffix match (tie unresolved, deeper suffix wins, accent fold)
+ok: EXTINF association (survives comments/blanks, title-only form)
+ok: 500-entry playlist, order and (clus,index) verified
+ok: output-cap overflow accounting, unreadable playlist is -1
+---
+26 checks, 0 failures

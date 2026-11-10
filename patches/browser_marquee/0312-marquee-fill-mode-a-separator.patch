@@ -1,0 +1,11 @@
+# Browser marquee (experimental variant): marquee-fill-mode-a-separator.
+# Design and census: patches/browser_marquee/design.md.
+name: marquee-fill-mode-a-separator
+kind: module
+module: 31
+region: code
+address: 0x307ea94
+gate: stock byte precondition; variant-only patch, never in the default manifest; validated by test_browser_marquee.py under emulation
+rationale: Hook at the mode A separator fill call; the stub substitutes the background slice while a background is installed. Payload routine at 0x307fb14 in the module 31 code growth (marquee_payload.bin).
+expect: e4f731fc
+replace: 01f03ef8

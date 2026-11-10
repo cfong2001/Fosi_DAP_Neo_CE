@@ -1,0 +1,33 @@
+# Gapless fast path, part 2 of 6: the loader gate cave.
+name: gapless-2-gate-cave
+kind: module
+module: 0
+region: code
+address: 0x03051664
+gate: build refuses unless the 32 stock bytes at the target equal `expect`;
+  the finished image must also pass firmware_patch.validate()
+rationale: The gate, entered from the hook at 0x0306cb2c (0021) with
+  r0 = decoder module id. It re-executes the two displaced instructions
+  (push {r4,r5,r6,lr}; mov r5, r0), loads the retained-module word from
+  the state pair at 0x030515b0 (0020) via a PC-relative SUB.W, masks off
+  the fast-path flag (lsls/lsrs #25), and compares against the requested
+  module. On the stock path it records the requested module as retained
+  and branches to 0x0306cb30, running the stock reset-and-start body
+  unchanged. On a match (reachable only with the ARM patch 0026, which
+  turns the compare's following branch into `beq` to the skip block) it
+  records module|0x80 as retained -- the flag the delay cut (0023)
+  tests -- and returns to the calling codec case, skipping the image
+  re-copy, the core-1 reset, the parameter-page re-copy and the ready
+  poll entirely; the rest of the stock load-start (the 0x65 info
+  exchange in 0x03088824 and everything after) still runs. As shipped
+  (no 0026) the compare result is ignored by an unconditional branch
+  to the stock path, so behaviour is byte-equivalent to stock plus two
+  writes to patch-owned state. The cave occupies 16 `bx lr` stub slots
+  at 0x03051664..0x03051683 in the module-0 stub farm: the exhaustive
+  reference scan (BL/B.W targets, literal words, MOVW/MOVT pairs, all
+  82 modules) shows zero references to the whole range, the function
+  before it ends in `pop {r4,r5,r6,pc}` at 0x03051662 so nothing falls
+  through into it, and the referenced stub at 0x0305168a and the slot
+  at 0x03051688 are deliberately left byte-identical.
+expect: 7047704770477047704770477047704770477047704770477047704770477047
+replace: 70b50546aff1bc0630684006400ea842ffe735601bf05aba80242543356070bd

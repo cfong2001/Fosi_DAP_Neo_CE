@@ -1,0 +1,409 @@
+{
+ "generator": "gen_corpus.py",
+ "ffmpeg": "ffmpeg version 8.1.2 Copyright (c) 2000-2026 the FFmpeg developers",
+ "duration_s": 6.0,
+ "peak_normalised": 0.92,
+ "master_seed": 20261031,
+ "files": [
+  {
+   "file": "sweep_q0_44100.ogg",
+   "source": "sweep",
+   "quality": 0,
+   "rate": 44100,
+   "source_raw": "src_sweep_44100.f32",
+   "source_sha256": "c31d75614d7f927f2017bc257369d0ee7ec217e98963e9fa3666c67bbc00f765",
+   "ogg_sha256": "6c9f5e35d5b6933abdaa7ac06ae49cd5a2310c2f06de1941b532b99e8afd4e96",
+   "ogg_bytes": 19677
+  },
+  {
+   "file": "sweep_q3_44100.ogg",
+   "source": "sweep",
+   "quality": 3,
+   "rate": 44100,
+   "source_raw": "src_sweep_44100.f32",
+   "source_sha256": "c31d75614d7f927f2017bc257369d0ee7ec217e98963e9fa3666c67bbc00f765",
+   "ogg_sha256": "e0f1ce7276758c62dcdecca06677e1139c9c5211dbe41722370ab7e355dd5071",
+   "ogg_bytes": 24120
+  },
+  {
+   "file": "sweep_q5_44100.ogg",
+   "source": "sweep",
+   "quality": 5,
+   "rate": 44100,
+   "source_raw": "src_sweep_44100.f32",
+   "source_sha256": "c31d75614d7f927f2017bc257369d0ee7ec217e98963e9fa3666c67bbc00f765",
+   "ogg_sha256": "18324e9b4f232b7b8ca2671b8ca29c86b35397ef487978f282b0e910d96bcf6a",
+   "ogg_bytes": 26598
+  },
+  {
+   "file": "sweep_q7_44100.ogg",
+   "source": "sweep",
+   "quality": 7,
+   "rate": 44100,
+   "source_raw": "src_sweep_44100.f32",
+   "source_sha256": "c31d75614d7f927f2017bc257369d0ee7ec217e98963e9fa3666c67bbc00f765",
+   "ogg_sha256": "823079fc2186630bdbfa87f3db0f5fe84252584703d296787076f494f833304f",
+   "ogg_bytes": 29004
+  },
+  {
+   "file": "sweep_q9_44100.ogg",
+   "source": "sweep",
+   "quality": 9,
+   "rate": 44100,
+   "source_raw": "src_sweep_44100.f32",
+   "source_sha256": "c31d75614d7f927f2017bc257369d0ee7ec217e98963e9fa3666c67bbc00f765",
+   "ogg_sha256": "a401ded84364d8492b2e74924894b31b758c86533a289b7796ae1ec542087226",
+   "ogg_bytes": 35637
+  },
+  {
+   "file": "sweep_q0_48000.ogg",
+   "source": "sweep",
+   "quality": 0,
+   "rate": 48000,
+   "source_raw": "src_sweep_48000.f32",
+   "source_sha256": "b5b29fccc6a7b9af056b7de81ee6a02cd61616b853e0434a0f20b7bec8182761",
+   "ogg_sha256": "e046db256cde5ecfe8a94e007ea56cf5a335c495f937ea316e3fbe7efe653fc2",
+   "ogg_bytes": 21623
+  },
+  {
+   "file": "sweep_q3_48000.ogg",
+   "source": "sweep",
+   "quality": 3,
+   "rate": 48000,
+   "source_raw": "src_sweep_48000.f32",
+   "source_sha256": "b5b29fccc6a7b9af056b7de81ee6a02cd61616b853e0434a0f20b7bec8182761",
+   "ogg_sha256": "49829119d7a9c7186d17d95a2b8b1f731e3d51b061a460700026a2d4070c4ab4",
+   "ogg_bytes": 26167
+  },
+  {
+   "file": "sweep_q5_48000.ogg",
+   "source": "sweep",
+   "quality": 5,
+   "rate": 48000,
+   "source_raw": "src_sweep_48000.f32",
+   "source_sha256": "b5b29fccc6a7b9af056b7de81ee6a02cd61616b853e0434a0f20b7bec8182761",
+   "ogg_sha256": "3786dffb351747a7cabd198c323164dedacd565f2bd860d6cc8e56014a4c1977",
+   "ogg_bytes": 28906
+  },
+  {
+   "file": "sweep_q7_48000.ogg",
+   "source": "sweep",
+   "quality": 7,
+   "rate": 48000,
+   "source_raw": "src_sweep_48000.f32",
+   "source_sha256": "b5b29fccc6a7b9af056b7de81ee6a02cd61616b853e0434a0f20b7bec8182761",
+   "ogg_sha256": "9117d19cc0f1a44656b2fc3e956e01b99705c08d3792dcf8b55d42f74170d2b2",
+   "ogg_bytes": 32443
+  },
+  {
+   "file": "sweep_q9_48000.ogg",
+   "source": "sweep",
+   "quality": 9,
+   "rate": 48000,
+   "source_raw": "src_sweep_48000.f32",
+   "source_sha256": "b5b29fccc6a7b9af056b7de81ee6a02cd61616b853e0434a0f20b7bec8182761",
+   "ogg_sha256": "96da6b604d845ea9a812c307547735beb3696289d67c46946acd35ec0576fea9",
+   "ogg_bytes": 42086
+  },
+  {
+   "file": "tones_q0_44100.ogg",
+   "source": "tones",
+   "quality": 0,
+   "rate": 44100,
+   "source_raw": "src_tones_44100.f32",
+   "source_sha256": "5f387c15558326ff792dc5f21d2691b8bde6f7330af126b4427ab2b7903d9f3a",
+   "ogg_sha256": "c9e397cbaa8d4c68e31840b8b1fc1ba8e20cb1404b32a1171ebe7fe13223ef0d",
+   "ogg_bytes": 42182
+  },
+  {
+   "file": "tones_q3_44100.ogg",
+   "source": "tones",
+   "quality": 3,
+   "rate": 44100,
+   "source_raw": "src_tones_44100.f32",
+   "source_sha256": "5f387c15558326ff792dc5f21d2691b8bde6f7330af126b4427ab2b7903d9f3a",
+   "ogg_sha256": "d7e6a73a3b76b3b2320a89db98d2de3852ecdcc8d64942feff6305e27a682362",
+   "ogg_bytes": 59335
+  },
+  {
+   "file": "tones_q5_44100.ogg",
+   "source": "tones",
+   "quality": 5,
+   "rate": 44100,
+   "source_raw": "src_tones_44100.f32",
+   "source_sha256": "5f387c15558326ff792dc5f21d2691b8bde6f7330af126b4427ab2b7903d9f3a",
+   "ogg_sha256": "f97914f743a396aabd2139c9a1ff0e0a598894d89e56259d74591f4eb6b9c61c",
+   "ogg_bytes": 70229
+  },
+  {
+   "file": "tones_q7_44100.ogg",
+   "source": "tones",
+   "quality": 7,
+   "rate": 44100,
+   "source_raw": "src_tones_44100.f32",
+   "source_sha256": "5f387c15558326ff792dc5f21d2691b8bde6f7330af126b4427ab2b7903d9f3a",
+   "ogg_sha256": "a45addda2c82bcaa94815ccce57f10b69d91cbf7075572eef1d006f57d9ea647",
+   "ogg_bytes": 74774
+  },
+  {
+   "file": "tones_q9_44100.ogg",
+   "source": "tones",
+   "quality": 9,
+   "rate": 44100,
+   "source_raw": "src_tones_44100.f32",
+   "source_sha256": "5f387c15558326ff792dc5f21d2691b8bde6f7330af126b4427ab2b7903d9f3a",
+   "ogg_sha256": "3507d55ea1dddfdb37d492707f629c72ae2243c8c4174b89c7eedadf628fefce",
+   "ogg_bytes": 86652
+  },
+  {
+   "file": "tones_q0_48000.ogg",
+   "source": "tones",
+   "quality": 0,
+   "rate": 48000,
+   "source_raw": "src_tones_48000.f32",
+   "source_sha256": "f3a62ab4cc5b2bf31a57cd6fc672ba07c5c92cba5788f3ef33e99bd30d7ac143",
+   "ogg_sha256": "20f6afa54edcb16f526ffac9795a22229b771659ef7804703dd187ae6c2c9956",
+   "ogg_bytes": 44613
+  },
+  {
+   "file": "tones_q3_48000.ogg",
+   "source": "tones",
+   "quality": 3,
+   "rate": 48000,
+   "source_raw": "src_tones_48000.f32",
+   "source_sha256": "f3a62ab4cc5b2bf31a57cd6fc672ba07c5c92cba5788f3ef33e99bd30d7ac143",
+   "ogg_sha256": "21d95b191663239edd19dd73697eaabf3708be91d2507073e90c11e06a9af6af",
+   "ogg_bytes": 63223
+  },
+  {
+   "file": "tones_q5_48000.ogg",
+   "source": "tones",
+   "quality": 5,
+   "rate": 48000,
+   "source_raw": "src_tones_48000.f32",
+   "source_sha256": "f3a62ab4cc5b2bf31a57cd6fc672ba07c5c92cba5788f3ef33e99bd30d7ac143",
+   "ogg_sha256": "f0cd70c76b9c84373d4c00a6ff436f76e49323cf396eb7fdab01d555c9676003",
+   "ogg_bytes": 73979
+  },
+  {
+   "file": "tones_q7_48000.ogg",
+   "source": "tones",
+   "quality": 7,
+   "rate": 48000,
+   "source_raw": "src_tones_48000.f32",
+   "source_sha256": "f3a62ab4cc5b2bf31a57cd6fc672ba07c5c92cba5788f3ef33e99bd30d7ac143",
+   "ogg_sha256": "f61e477af3eac19b10ba8f8cb2d98985b0459bfc23a7a601fa06ada014dcb1ec",
+   "ogg_bytes": 81910
+  },
+  {
+   "file": "tones_q9_48000.ogg",
+   "source": "tones",
+   "quality": 9,
+   "rate": 48000,
+   "source_raw": "src_tones_48000.f32",
+   "source_sha256": "f3a62ab4cc5b2bf31a57cd6fc672ba07c5c92cba5788f3ef33e99bd30d7ac143",
+   "ogg_sha256": "ec6e88f2918237df860aaadc73ade20363f381a2c36d31198f05092d06724e62",
+   "ogg_bytes": 92606
+  },
+  {
+   "file": "pink_q0_44100.ogg",
+   "source": "pink",
+   "quality": 0,
+   "rate": 44100,
+   "source_raw": "src_pink_44100.f32",
+   "source_sha256": "37c07c4ed5e8661b152cc8940e5095a2082a584a6c01575e1efd0a3d341ed0d3",
+   "ogg_sha256": "47493fe1dc26c49914fa5ac2e9a204202857be4045f7354ff8103ba9efd67876",
+   "ogg_bytes": 52958
+  },
+  {
+   "file": "pink_q3_44100.ogg",
+   "source": "pink",
+   "quality": 3,
+   "rate": 44100,
+   "source_raw": "src_pink_44100.f32",
+   "source_sha256": "37c07c4ed5e8661b152cc8940e5095a2082a584a6c01575e1efd0a3d341ed0d3",
+   "ogg_sha256": "7605d1a01376cc174aa208abc13bdff1ca1903c7ab6515b004181f0590bfb53f",
+   "ogg_bytes": 85738
+  },
+  {
+   "file": "pink_q5_44100.ogg",
+   "source": "pink",
+   "quality": 5,
+   "rate": 44100,
+   "source_raw": "src_pink_44100.f32",
+   "source_sha256": "37c07c4ed5e8661b152cc8940e5095a2082a584a6c01575e1efd0a3d341ed0d3",
+   "ogg_sha256": "46893d868c5f91439c1baa762629031e943821789a9509168e0e5c06704d580e",
+   "ogg_bytes": 124817
+  },
+  {
+   "file": "pink_q7_44100.ogg",
+   "source": "pink",
+   "quality": 7,
+   "rate": 44100,
+   "source_raw": "src_pink_44100.f32",
+   "source_sha256": "37c07c4ed5e8661b152cc8940e5095a2082a584a6c01575e1efd0a3d341ed0d3",
+   "ogg_sha256": "63f7ceb9a8f454d397eeb8a1a4496548274b39ae7d38d256075db0066e39cf82",
+   "ogg_bytes": 169464
+  },
+  {
+   "file": "pink_q9_44100.ogg",
+   "source": "pink",
+   "quality": 9,
+   "rate": 44100,
+   "source_raw": "src_pink_44100.f32",
+   "source_sha256": "37c07c4ed5e8661b152cc8940e5095a2082a584a6c01575e1efd0a3d341ed0d3",
+   "ogg_sha256": "9751175022dbeec860d3e36ada696b5293fb9945675f31a2381825eee8345999",
+   "ogg_bytes": 251307
+  },
+  {
+   "file": "pink_q0_48000.ogg",
+   "source": "pink",
+   "quality": 0,
+   "rate": 48000,
+   "source_raw": "src_pink_48000.f32",
+   "source_sha256": "0d3d1875fcf670b54cdc13d929aded890188c98a3cb3ccd2c0867f368bb3647b",
+   "ogg_sha256": "e1dec207acb2a9d94b82780ca462afe6ca6d562e59c8ca5fb1bc64beeca756c5",
+   "ogg_bytes": 52415
+  },
+  {
+   "file": "pink_q3_48000.ogg",
+   "source": "pink",
+   "quality": 3,
+   "rate": 48000,
+   "source_raw": "src_pink_48000.f32",
+   "source_sha256": "0d3d1875fcf670b54cdc13d929aded890188c98a3cb3ccd2c0867f368bb3647b",
+   "ogg_sha256": "c46d16ea5b84ed75bed50e33a468771f9d6682273a36ab00b9cb16f0cf7d1c09",
+   "ogg_bytes": 85736
+  },
+  {
+   "file": "pink_q5_48000.ogg",
+   "source": "pink",
+   "quality": 5,
+   "rate": 48000,
+   "source_raw": "src_pink_48000.f32",
+   "source_sha256": "0d3d1875fcf670b54cdc13d929aded890188c98a3cb3ccd2c0867f368bb3647b",
+   "ogg_sha256": "70088048ab8b00507bac91619834758db3f100a5c9ea53f7ca73502ae0256df9",
+   "ogg_bytes": 123150
+  },
+  {
+   "file": "pink_q7_48000.ogg",
+   "source": "pink",
+   "quality": 7,
+   "rate": 48000,
+   "source_raw": "src_pink_48000.f32",
+   "source_sha256": "0d3d1875fcf670b54cdc13d929aded890188c98a3cb3ccd2c0867f368bb3647b",
+   "ogg_sha256": "2b8c7393e2d677838835d56738f50cf486d01c31c72da3cd056e873cf4938e0e",
+   "ogg_bytes": 174950
+  },
+  {
+   "file": "pink_q9_48000.ogg",
+   "source": "pink",
+   "quality": 9,
+   "rate": 48000,
+   "source_raw": "src_pink_48000.f32",
+   "source_sha256": "0d3d1875fcf670b54cdc13d929aded890188c98a3cb3ccd2c0867f368bb3647b",
+   "ogg_sha256": "7800926a099079b1c9ca4ee35e3964badcfc0e1c544bc61f0a8cab5f13c51a2e",
+   "ogg_bytes": 264440
+  },
+  {
+   "file": "music_q0_44100.ogg",
+   "source": "music",
+   "quality": 0,
+   "rate": 44100,
+   "source_raw": "src_music_44100.f32",
+   "source_sha256": "3bf03adec3f0d7b794a603bf9968814f78937d1d7c0fd39dbe888f39b18fdd01",
+   "ogg_sha256": "f695bc1b68be4c6a5b6b59c017b6dc4e0342061212d12497e8e5691d6fb119b1",
+   "ogg_bytes": 38395
+  },
+  {
+   "file": "music_q3_44100.ogg",
+   "source": "music",
+   "quality": 3,
+   "rate": 44100,
+   "source_raw": "src_music_44100.f32",
+   "source_sha256": "3bf03adec3f0d7b794a603bf9968814f78937d1d7c0fd39dbe888f39b18fdd01",
+   "ogg_sha256": "8cf8414867e8dc2fad9ec9b76b083d5dbc50c81d87464cde09cc581c82cb3379",
+   "ogg_bytes": 55466
+  },
+  {
+   "file": "music_q5_44100.ogg",
+   "source": "music",
+   "quality": 5,
+   "rate": 44100,
+   "source_raw": "src_music_44100.f32",
+   "source_sha256": "3bf03adec3f0d7b794a603bf9968814f78937d1d7c0fd39dbe888f39b18fdd01",
+   "ogg_sha256": "f846231cd7d8a2dff9266569f8213d598b6dfbde274c941ddfc0046da39aba2e",
+   "ogg_bytes": 67732
+  },
+  {
+   "file": "music_q7_44100.ogg",
+   "source": "music",
+   "quality": 7,
+   "rate": 44100,
+   "source_raw": "src_music_44100.f32",
+   "source_sha256": "3bf03adec3f0d7b794a603bf9968814f78937d1d7c0fd39dbe888f39b18fdd01",
+   "ogg_sha256": "69cecadab89dee7c99d5f4250233ff8a97766fc67a5a31f6c668660f8ba001ce",
+   "ogg_bytes": 95672
+  },
+  {
+   "file": "music_q9_44100.ogg",
+   "source": "music",
+   "quality": 9,
+   "rate": 44100,
+   "source_raw": "src_music_44100.f32",
+   "source_sha256": "3bf03adec3f0d7b794a603bf9968814f78937d1d7c0fd39dbe888f39b18fdd01",
+   "ogg_sha256": "c815db8a6def97d0310965b210194db2a879e4964551c712a829df7ba06e39c4",
+   "ogg_bytes": 113932
+  },
+  {
+   "file": "music_q0_48000.ogg",
+   "source": "music",
+   "quality": 0,
+   "rate": 48000,
+   "source_raw": "src_music_48000.f32",
+   "source_sha256": "7c2aea4d24f65e8f04becb457b5a52f2c27d33d8c84b15ee5850529344ccef17",
+   "ogg_sha256": "ac899fe3a56ac3c4480c70e394c76bb52d90e9bf82fdd450701f062439011c6d",
+   "ogg_bytes": 38625
+  },
+  {
+   "file": "music_q3_48000.ogg",
+   "source": "music",
+   "quality": 3,
+   "rate": 48000,
+   "source_raw": "src_music_48000.f32",
+   "source_sha256": "7c2aea4d24f65e8f04becb457b5a52f2c27d33d8c84b15ee5850529344ccef17",
+   "ogg_sha256": "24fa782cf96baf8b9c6f1ea87796aab1668f96e87d2b693e5ea935946ca61b7d",
+   "ogg_bytes": 53595
+  },
+  {
+   "file": "music_q5_48000.ogg",
+   "source": "music",
+   "quality": 5,
+   "rate": 48000,
+   "source_raw": "src_music_48000.f32",
+   "source_sha256": "7c2aea4d24f65e8f04becb457b5a52f2c27d33d8c84b15ee5850529344ccef17",
+   "ogg_sha256": "ee52817d1da73ab91c35904c7ca2f89bc53ddcce5c2d57b6fdb00f05c26c0161",
+   "ogg_bytes": 64027
+  },
+  {
+   "file": "music_q7_48000.ogg",
+   "source": "music",
+   "quality": 7,
+   "rate": 48000,
+   "source_raw": "src_music_48000.f32",
+   "source_sha256": "7c2aea4d24f65e8f04becb457b5a52f2c27d33d8c84b15ee5850529344ccef17",
+   "ogg_sha256": "34b28135d4fa16296e54f4a78423383c714ddefd51f304df130d2ae0b106af71",
+   "ogg_bytes": 89857
+  },
+  {
+   "file": "music_q9_48000.ogg",
+   "source": "music",
+   "quality": 9,
+   "rate": 48000,
+   "source_raw": "src_music_48000.f32",
+   "source_sha256": "7c2aea4d24f65e8f04becb457b5a52f2c27d33d8c84b15ee5850529344ccef17",
+   "ogg_sha256": "e3d4e5cc6626101b14ca3ba726ef8ee36cbe0ae8df1b998b0dbd944d3a398f85",
+   "ogg_bytes": 110004
+  }
+ ]
+}

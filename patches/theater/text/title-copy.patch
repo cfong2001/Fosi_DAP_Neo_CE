@@ -1,0 +1,14 @@
+# Bounded player title copy: module 27 flag 0x4A redraw.
+name: player-title-bounded-copy
+kind: module
+module: 27
+region: code
+address: 0x0307F9D0
+gate: stock byte precondition and paired player-title-safe-suffix patch;
+  test with emu_title_copy.py and validate the resulting image
+rationale: Copy at most 127 UTF-16 code units and terminate at slot 127.
+  A shorter NUL-terminated input branches to the paired suffix handler;
+  a truncated input bypasses suffix removal. The original loop could
+  leave the 128-code-unit destination without a terminating zero.
+expect: adf80c70bdf80c1033f811206ab320f81120491c89b2adf80c108029f2d3
+replace: 002133f8112042b17f2903d220f811200131f6e720f8117001e026e000bf

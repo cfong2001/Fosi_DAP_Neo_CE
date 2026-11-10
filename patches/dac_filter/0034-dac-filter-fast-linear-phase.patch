@@ -1,0 +1,23 @@
+# DAC filter option (patches/dac_filter/README.md): play every PCM
+# session through the CS43198's fast roll-off, linear phase (PHCOMP_LOWLATB = 1)
+# instead of stock's fast roll-off, low latency default.
+name: dac-filter-fast-linear-phase
+kind: module
+module: 0
+region: code
+address: 0x03051814
+gate: build refuses unless the 2 stock bytes at the target equal
+  `expect`; at most one dac-filter patch per build (build.py
+  --dac-filter); the finished image must pass firmware_patch.validate()
+rationale: The DAC init at 0x0305175E writes CS43198 register 0x090000
+  (PCM Filter Option) from the settings byte at 0x030232A0+0x2E3:
+  0x02 when the byte is 0, else 0x42/0x82/0xC2/0x22 for 1..4
+  (0x0305180E..0x03051866). No code stores the byte and no settings
+  string exposes it, so units play through mode 0. This patch changes
+  the mode-0 immediate at 0x03051814 (movs r1, #0x02) to 0x42,
+  the mode 1 value, which stock code already writes in its own branch.
+  Datasheet DS1156F2 section 7.5.2 defines the bits; the init runs once
+  per playback session with the outputs muted, so no pop sequence is
+  needed. Bits 1 (high-pass on) and 0 (de-emphasis off) are unchanged.
+expect: 0221
+replace: 4221

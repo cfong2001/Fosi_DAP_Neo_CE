@@ -1,0 +1,34 @@
+# Lock-screen information: divert module 31's painter hold-icon tail
+# call to the lock-screen routine in the module 31 segment extension.
+# Design: work/ui_features/ui_features.md; renderer contract and the
+# build-ready specification: work/ui_features/renderer/renderer.md;
+# build evidence: work/ui_features/lockscreen_build/lockscreen_build.md.
+name: ui-lockscreen-title
+kind: module
+module: 31
+region: code
+address: 0x0307e89e
+gate: build refuses unless the 4 stock bytes at the target equal `expect`;
+  the finished image must also pass firmware_patch.validate().
+  Do NOT stack without the module 31 segment extension build carrying
+  the lock-screen blob at the branch target (scratch link base
+  0x0307ee48, the first byte past module 31's stock code segment; the
+  resident-home census gives the extension room as
+  0x0307ee48..0x03080b54). If the extension base moves, regenerate the
+  branch bytes from src/site33.S with the new base; the routine is
+  position-dependent only on its link base.
+rationale: The site is the last instruction of the module 31 painter's
+  flag-0x2E segment: flag test-cleared, the byte at 0x030230ec loaded,
+  {r4, lr} popped, r0 = 0x26 + bit 2 of that byte, and the stock bytes
+  are the tail call B.W DrawImage (0x03063700). The patch redirects
+  that one branch to the lock-screen routine, which performs the
+  displaced DrawImage call first with r0 unchanged, then, only when
+  SAVEINFO +0x60 == 1, draws the track title from the UTF-16 name
+  buffer 0x030235ce through the stock text routine 0x03062cee under
+  the display-mode bracket 0x0306316e and Display's pen colours, plus a
+  separately gated elapsed/total line from the pinned file-info
+  position fields. With +0x60 != 1 the patched firmware is
+  behaviour-identical to stock at this site: one DrawImage call, no
+  other observable state touched.
+expect: e4f72fbf
+replace: 00f0d3ba

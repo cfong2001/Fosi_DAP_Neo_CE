@@ -1,0 +1,391 @@
+{
+ "D_efficiency": {
+  "opus48_variant": {
+   "insns": 341072921,
+   "blocks": 49834382,
+   "pcm_seconds": 10.0,
+   "insn_per_audio_s": 34107292.1,
+   "wall_s": 67.1
+  },
+  "wma48_stock": {
+   "insns": 174958503,
+   "blocks": 19379939,
+   "pcm_seconds": 10.0,
+   "insn_per_audio_s": 17495850.3,
+   "wall_s": 26.7
+  },
+  "ratio_opus_per_wma": 1.9494503848149638
+ },
+ "A_shipped_candidate": {
+  "boot": true,
+  "open_notified": true,
+  "open_info": null,
+  "open_failed": false,
+  "console_dump": "PC:00002E77\r\nLR:0000009B\r\nMSP:01022024\r\nPSP:00000000\r\n",
+  "hang": true
+ },
+ "B_stock_control": {
+  "wma_small": {
+   "open": {
+    "time_ms": 0,
+    "length_ms": 3000,
+    "bitrate": 96000,
+    "bps": 16,
+    "rate": 48000,
+    "channels": 2,
+    "pcm_ptr": 16993048,
+    "pcm_frames": 2048
+   },
+   "polls": 71,
+   "eos": true,
+   "closed": true,
+   "pcm_bytes": 581632,
+   "compare": {
+    "lag_frames": -4096,
+    "harness_frames": 145408,
+    "ref_frames": 143360,
+    "compared_frames": 141312,
+    "bit_identical": false,
+    "max_abs_err": 1,
+    "rms_err": 0.745086942329843,
+    "snr_db": 80.00282192398959,
+    "first_diff_frame": 1
+   },
+   "wall_s": 1.2
+  },
+  "stock_on_opus": {
+   "open_info": null,
+   "open_failed": true,
+   "eos": false
+  }
+ },
+ "C_variant_control_build": {
+  "decode_matrix": {
+   "opus_b": {
+    "open": {
+     "time_ms": 0,
+     "length_ms": 3000,
+     "bitrate": 121000,
+     "bps": 16,
+     "rate": 48000,
+     "channels": 2,
+     "pcm_ptr": 17096256,
+     "pcm_frames": 2568
+    },
+    "polls": 75,
+    "eos": true,
+    "closed": true,
+    "pcm_bytes": 576000,
+    "blocks": [
+     [
+      2568,
+      2,
+      17096256
+     ],
+     [
+      1920,
+      2,
+      17126976
+     ],
+     [
+      1920,
+      2,
+      17096256
+     ]
+    ],
+    "compare": {
+     "lag_frames": 0,
+     "harness_frames": 144000,
+     "ref_frames": 144000,
+     "compared_frames": 144000,
+     "bit_identical": false,
+     "max_abs_err": 13,
+     "rms_err": 1.9644717624734531,
+     "snr_db": 71.58468926056034,
+     "first_diff_frame": 0
+    },
+    "wall_s": 2.0
+   },
+   "opus48": {
+    "open": {
+     "time_ms": 0,
+     "length_ms": 10000,
+     "bitrate": 154000,
+     "bps": 16,
+     "rate": 48000,
+     "channels": 2,
+     "pcm_ptr": 17096256,
+     "pcm_frames": 2568
+    },
+    "polls": 250,
+    "eos": true,
+    "closed": true,
+    "pcm_bytes": 1920000,
+    "blocks": [
+     [
+      2568,
+      2,
+      17096256
+     ],
+     [
+      1920,
+      2,
+      17126976
+     ],
+     [
+      1920,
+      2,
+      17096256
+     ]
+    ],
+    "compare": {
+     "lag_frames": 0,
+     "harness_frames": 480000,
+     "ref_frames": 480000,
+     "compared_frames": 480000,
+     "bit_identical": false,
+     "max_abs_err": 15,
+     "rms_err": 2.0541596517797736,
+     "snr_db": 70.8989344080038,
+     "first_diff_frame": 0
+    },
+    "wall_s": 6.9
+   },
+   "opus44": {
+    "open": {
+     "time_ms": 0,
+     "length_ms": 5000,
+     "bitrate": 154000,
+     "bps": 16,
+     "rate": 48000,
+     "channels": 2,
+     "pcm_ptr": 17096256,
+     "pcm_frames": 2568
+    },
+    "polls": 125,
+    "eos": true,
+    "closed": true,
+    "pcm_bytes": 960000,
+    "blocks": [
+     [
+      2568,
+      2,
+      17096256
+     ],
+     [
+      1920,
+      2,
+      17126976
+     ],
+     [
+      1920,
+      2,
+      17096256
+     ]
+    ],
+    "compare": {
+     "lag_frames": 0,
+     "harness_frames": 240000,
+     "ref_frames": 240000,
+     "compared_frames": 240000,
+     "bit_identical": false,
+     "max_abs_err": 13,
+     "rms_err": 2.0100290213493603,
+     "snr_db": 71.19341629598078,
+     "first_diff_frame": 0
+    },
+    "wall_s": 3.5
+   },
+   "opus_tags": {
+    "open": {
+     "time_ms": 0,
+     "length_ms": 5000,
+     "bitrate": 120000,
+     "bps": 16,
+     "rate": 48000,
+     "channels": 2,
+     "pcm_ptr": 17096256,
+     "pcm_frames": 2568
+    },
+    "polls": 125,
+    "eos": true,
+    "closed": true,
+    "pcm_bytes": 960000,
+    "blocks": [
+     [
+      2568,
+      2,
+      17096256
+     ],
+     [
+      1920,
+      2,
+      17126976
+     ],
+     [
+      1920,
+      2,
+      17096256
+     ]
+    ],
+    "compare": {
+     "lag_frames": 0,
+     "harness_frames": 240000,
+     "ref_frames": 240000,
+     "compared_frames": 240000,
+     "bit_identical": false,
+     "max_abs_err": 18,
+     "rms_err": 2.0630428578518027,
+     "snr_db": 70.96631662673377,
+     "first_diff_frame": 0
+    },
+    "wall_s": 3.3
+   },
+   "opus_worst": {
+    "open": {
+     "time_ms": 0,
+     "length_ms": 4000,
+     "bitrate": 312000,
+     "bps": 16,
+     "rate": 48000,
+     "channels": 2,
+     "pcm_ptr": 17096256,
+     "pcm_frames": 1920
+    },
+    "polls": 100,
+    "eos": true,
+    "closed": true,
+    "pcm_bytes": 768000,
+    "blocks": [
+     [
+      1920,
+      2,
+      17096256
+     ],
+     [
+      1920,
+      2,
+      17126976
+     ],
+     [
+      1920,
+      2,
+      17096256
+     ]
+    ],
+    "compare": {
+     "lag_frames": 0,
+     "harness_frames": 192000,
+     "ref_frames": 192000,
+     "compared_frames": 192000,
+     "bit_identical": false,
+     "max_abs_err": 17,
+     "rms_err": 2.782966698656909,
+     "snr_db": 68.2961504823083,
+     "first_diff_frame": 0
+    },
+    "wall_s": 5.3
+   }
+  },
+  "vorbis_negative": {
+   "open_info": null,
+   "open_failed": true
+  },
+  "seek": {
+   "open": {
+    "time_ms": 0,
+    "length_ms": 90000,
+    "bitrate": 93000,
+    "bps": 16,
+    "rate": 48000,
+    "channels": 2,
+    "pcm_ptr": 17096256,
+    "pcm_frames": 2568
+   },
+   "seek_reply_param": 0,
+   "time_ms_after": 65013,
+   "seg_bytes": 962592,
+   "compare_vs_ref_at_60s": {
+    "lag_frames": 0,
+    "harness_frames": 240648,
+    "ref_frames": 1440000,
+    "compared_frames": 240648,
+    "bit_identical": false,
+    "max_abs_err": 10,
+    "rms_err": 2.034193751165314,
+    "snr_db": 73.1749374779207,
+    "first_diff_frame": 1
+   }
+  },
+  "gapless": {
+   "a_open": {
+    "time_ms": 0,
+    "length_ms": 3000,
+    "bitrate": 121000,
+    "bps": 16,
+    "rate": 48000,
+    "channels": 2,
+    "pcm_ptr": 17096256,
+    "pcm_frames": 2568
+   },
+   "a_eos": true,
+   "a_compare": {
+    "lag_frames": 0,
+    "harness_frames": 144000,
+    "ref_frames": 144000,
+    "compared_frames": 144000,
+    "bit_identical": false,
+    "max_abs_err": 13,
+    "rms_err": 1.9644717624734531,
+    "snr_db": 71.58468926056034,
+    "first_diff_frame": 0
+   },
+   "b_open": {
+    "time_ms": 3000,
+    "length_ms": 5000,
+    "bitrate": 154000,
+    "bps": 16,
+    "rate": 48000,
+    "channels": 2,
+    "pcm_ptr": 17096256,
+    "pcm_frames": 2568
+   },
+   "b_eos": true,
+   "b_compare": {
+    "lag_frames": 0,
+    "harness_frames": 240000,
+    "ref_frames": 240000,
+    "compared_frames": 240000,
+    "bit_identical": false,
+    "max_abs_err": 13,
+    "rms_err": 2.0100290213493603,
+    "snr_db": 71.19341629598078,
+    "first_diff_frame": 0
+   }
+  },
+  "canaries": {
+   "param_page_identical_after_session": true,
+   "stack_watermark_bytes_used": 3748,
+   "stack_window": 8048,
+   "event_flags_after_boot_nonzero": [],
+   "event_flags_after_decode": [
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0"
+   ]
+  }
+ }
+}

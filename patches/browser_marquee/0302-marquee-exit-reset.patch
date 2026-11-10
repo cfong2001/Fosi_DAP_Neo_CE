@@ -1,0 +1,11 @@
+# Browser marquee (experimental variant): marquee-exit-reset.
+# Design and census: patches/browser_marquee/design.md.
+name: marquee-exit-reset
+kind: module
+module: 31
+region: code
+address: 0x307d776
+gate: stock byte precondition; variant-only patch, never in the default manifest; validated by test_browser_marquee.py under emulation
+rationale: Hook at the browser exit callback (displaced mov.w r0, #0x148 performed by the stub before its tail branch to the stock clear helper). Payload routine at 0x307f30c in the module 31 code growth (marquee_payload.bin).
+expect: 4ff4a470
+replace: 01f0c9bd

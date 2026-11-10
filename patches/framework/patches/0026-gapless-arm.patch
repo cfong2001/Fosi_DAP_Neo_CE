@@ -1,0 +1,26 @@
+# Gapless fast path: THE ARM PATCH. Deliberately NOT in the default
+# manifest. Stacks on top of 0020-0025. Applying it is the decision to
+# enable decoder-image retention on hardware; the Phase D observation
+# named in gapless_patch.md (resident decoder accepting the stock 0x65
+# open exchange after end-of-stream) must be on record first.
+name: gapless-6-arm
+kind: module
+module: 0
+region: code
+address: 0x03051674
+gate: build refuses unless the 2 bytes at the target equal `expect`
+  (the gate cave as installed by 0022); the finished image must also
+  pass firmware_patch.validate()
+rationale: One branch inside the gate cave at 0x03051664 (0022). As
+  shipped by 0022 the instruction at cave+0x10 is an unconditional
+  branch to the stock path (ffe7), so the same-module comparison the
+  cave performs is ignored and every decoder load runs the stock
+  reset-and-start body. This patch replaces those 2 bytes with
+  `beq` to the cave's skip block (02d0): when the retained module word
+  (masked) equals the requested decoder module, the gate records
+  module|0x80 and returns to the codec case without running the
+  reset-and-start body -- no image re-copy, no core-1 reset, no
+  parameter-page re-copy, no ready poll -- and the delay cut (0023)
+  becomes live for same-rate transitions. Nothing else changes.
+expect: ffe7
+replace: 02d0

@@ -1,0 +1,217 @@
+{
+ "version": 1,
+ "palette": {
+  "background": "#171310",
+  "text": "#F2EDE6",
+  "highlight": "#A78BFA",
+  "icons": "#F2EDE6",
+  "progress_bar": "#A78BFA"
+ },
+ "resources": [
+  {
+   "id": 6,
+   "role": "highlight",
+   "source": "0xA210",
+   "expected_count": 6060
+  },
+  {
+   "id": 7,
+   "role": "highlight",
+   "source": "0xA210",
+   "expected_count": 4668
+  },
+  {
+   "id": 8,
+   "role": "highlight",
+   "source": "0xA210",
+   "expected_count": 3276
+  },
+  {
+   "id": 9,
+   "role": "highlight",
+   "source": "0xA210",
+   "expected_count": 1884
+  },
+  {
+   "id": 10,
+   "role": "highlight",
+   "source": "0xA210",
+   "expected_count": 492
+  },
+  {
+   "id": 127,
+   "role": "highlight",
+   "source": "0x20F2",
+   "expected_count": 229
+  },
+  {
+   "id": 136,
+   "role": "highlight",
+   "source": "0x20F2",
+   "expected_count": 5668
+  },
+  {
+   "id": 302,
+   "role": "highlight",
+   "source": "0x20FB",
+   "expected_count": 5664
+  },
+  {
+   "id": 138,
+   "role": "background",
+   "source": "0xA210",
+   "expected_count": 50184
+  },
+  {
+   "id": 155,
+   "role": "background",
+   "source": "0xA210",
+   "expected_count": 7110
+  },
+  {
+   "id": 99,
+   "role": "background",
+   "source": "0xA210",
+   "expected_count": 1
+  },
+  {
+   "id": 102,
+   "role": "background",
+   "source": "0xA210",
+   "expected_count": 1
+  },
+  {
+   "id": 103,
+   "role": "background",
+   "source": "0xA210",
+   "expected_count": 1
+  },
+  {
+   "id": 104,
+   "role": "background",
+   "source": "0xA210",
+   "expected_count": 1
+  },
+  {
+   "id": 105,
+   "role": "background",
+   "source": "0xA210",
+   "expected_count": 1
+  },
+  {
+   "id": 106,
+   "role": "background",
+   "source": "0xA210",
+   "expected_count": 1
+  },
+  {
+   "id": 107,
+   "role": "background",
+   "source": "0xA210",
+   "expected_count": 1
+  },
+  {
+   "id": 108,
+   "role": "background",
+   "source": "0xA210",
+   "expected_count": 1
+  },
+  {
+   "id": 109,
+   "role": "background",
+   "source": "0xA210",
+   "expected_count": 1
+  },
+  {
+   "id": 110,
+   "role": "background",
+   "source": "0xA210",
+   "expected_count": 1
+  },
+  {
+   "id": 147,
+   "role": "highlight",
+   "source": "0x8B36",
+   "expected_count": 64
+  },
+  {
+   "id": 148,
+   "role": "highlight",
+   "source": "0x8B36",
+   "expected_count": 96
+  },
+  {
+   "id": 149,
+   "role": "highlight",
+   "source": "0x8B36",
+   "expected_count": 128
+  },
+  {
+   "id": 152,
+   "role": "highlight",
+   "source": "0x8B36",
+   "expected_count": 64
+  },
+  {
+   "id": 153,
+   "role": "highlight",
+   "source": "0x8B36",
+   "expected_count": 96
+  },
+  {
+   "id": 154,
+   "role": "highlight",
+   "source": "0x8B36",
+   "expected_count": 128
+  },
+  {
+   "id": 312,
+   "role": "highlight",
+   "source": "0x8B36",
+   "expected_count": 32
+  },
+  {
+   "id": 313,
+   "role": "highlight",
+   "source": "0x8B36",
+   "expected_count": 64
+  },
+  {
+   "id": 314,
+   "role": "highlight",
+   "source": "0x8B36",
+   "expected_count": 96
+  },
+  {
+   "id": 315,
+   "role": "highlight",
+   "source": "0x8B36",
+   "expected_count": 128
+  },
+  {
+   "id": 317,
+   "role": "highlight",
+   "source": "0x8B36",
+   "expected_count": 32
+  },
+  {
+   "id": 318,
+   "role": "highlight",
+   "source": "0x8B36",
+   "expected_count": 64
+  },
+  {
+   "id": 319,
+   "role": "highlight",
+   "source": "0x8B36",
+   "expected_count": 96
+  },
+  {
+   "id": 320,
+   "role": "highlight",
+   "source": "0x8B36",
+   "expected_count": 128
+  }
+ ],
+ "literal_sites": []
+}

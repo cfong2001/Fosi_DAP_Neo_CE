@@ -1,0 +1,23 @@
+# Opus variant, classifier rename 4 of 5 (see README.md in this
+# directory). Part of a matched set with the opus72 transplant in
+# transplants.txt here: never apply the renames without it.
+name: opus-rename-classifier-mod31
+kind: module
+module: 31
+region: code
+address: 0x0307E119
+gate: Never apply without the opus72 transplant (patches/opus_swap/
+  transplants.txt): the rename routes extension OPU to decoder
+  module 72, which holds the WMA library until the transplant
+  replaces it. Build refuses unless the 3 stock bytes at the target
+  equal expect; the finished image must also pass
+  firmware_patch.validate().
+rationale: The browser window's own copy of the audio extension
+  classifier string MP1MP2MP3WMAWAVAPEFLAAACM4AOGGMP43GPDFFDSF,
+  at module 31 code 0x0307E110; the WMA entry sits at string
+  offset +9. Renaming it to OPU makes slot 3 match the extension
+  the FAT layer's 8.3 alias carries for .opus files, so the
+  browser lists and routes Opus files to decoder module 72, and
+  .wma files stop matching.
+expect: 574d41
+replace: 4f5055

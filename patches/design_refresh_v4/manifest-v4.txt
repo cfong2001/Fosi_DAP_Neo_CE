@@ -1,0 +1,43 @@
+# Design refresh v4 validation manifest: the default patch set
+# plus the eight experimental transport repoint patches.
+# The v4 art is applied separately with --theme-config.
+../framework/patches/0000-noop-selftest.patch
+../framework/patches/0001-dac-fix-branch.patch
+../framework/patches/0002-dac-fix-cave.patch
+../framework/patches/0003-clock-v1-row-05.patch
+../framework/patches/0004-clock-v1-row-06.patch
+../framework/patches/0005-clock-v1-row-07.patch
+../framework/patches/0006-clock-v1-row-08.patch
+../framework/patches/0007-clock-v1-row-09.patch
+../framework/patches/0008-clock-v1-row-10.patch
+../framework/patches/0009-clock-v1-row-11.patch
+../framework/patches/0010-clock-v1-row-14.patch
+../framework/patches/0011-clock-v1-row-15.patch
+../framework/patches/0012-clock-v1-row-16.patch
+../framework/patches/0013-clock-v1-row-17.patch
+../framework/patches/0014-clock-v1-row-18.patch
+../framework/patches/0015-clock-v1-row-19.patch
+../framework/patches/0016-clock-v1-row-20.patch
+../framework/patches/0017-clock-v1-row-21.patch
+../framework/patches/0018-clock-v1-row-22.patch
+../framework/patches/0020-gapless-state-pair.patch
+../framework/patches/0021-gapless-gate-hook.patch
+../framework/patches/0022-gapless-gate-cave.patch
+../framework/patches/0023-gapless-delay-cave.patch
+../framework/patches/0024-gapless-delay-hook.patch
+../framework/patches/0025-gapless-delay-pool.patch
+../framework/patches/0026-gapless-arm.patch
+../framework/patches/0027-sortkeys-comparator-hook.patch
+../framework/patches/0028-sortkeys-builder-a-hook.patch
+../framework/patches/0029-sortkeys-builder-bmain-hook.patch
+../framework/patches/0030-sortkeys-builder-balt-hook.patch
+../framework/patches/0031-sortkeys-cave.patch
+../framework/patches/0050-power-wheel-period-1000us.patch
+patches/transport-keyed-info-bare.patch
+patches/transport-keyed-playpause-bare.patch
+patches/transport-keyed-plus-bare.patch
+patches/transport-keyed-quote-bare.patch
+patches/transport-keyed-repeat-state.patch
+patches/transport-keyed-right-state.patch
+patches/transport-keyed-right-variants.patch
+patches/transport-keyed-slot0-state.patch

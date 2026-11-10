@@ -1,0 +1,11 @@
+# Focus mode (experimental, on the theater variant): focus-gate-volume-19a.
+# Design and census: patches/focus_mode/design.md.
+name: focus-gate-volume-19a
+kind: module
+module: 27
+region: code
+address: 0x307f8f8
+gate: stock byte precondition; variant-only patch, never in the default manifest; validated by test_focus_mode.py under emulation
+rationale: Segment gate for the volume readout segment: see focus-gate-status-1f for the gate contract. Volume keys wake through the key hook first, so the readout still appears on the wake paint.
+expect: e7f7aefc
+replace: fcf70efd

@@ -1,0 +1,17 @@
+# Navigation disarm, music file play start: clear the M3U
+# staging flag before stock file playback proceeds.
+name: 0061-nav-file-disarm
+kind: module
+module: 31
+region: code
+address: 0x307e1cc
+gate: Do NOT stack alone. Requires the full build's module 31
+  segment extension carrying the disarm stubs at the branch
+  target.
+expect: e648d8f769ff
+replace: 02f0b3bb00bf
+rationale: The validated music-file action reaches this site. The stub
+  clears the staging flag byte at 0x0307BFB4, reproduces the
+  displaced PC-relative load and call, restores the original
+  return address and resumes at 0x0307E1D2. Source and proof:
+  as 0060.

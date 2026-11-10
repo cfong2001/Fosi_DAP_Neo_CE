@@ -1,0 +1,73 @@
+--- (a) SAVEINFO +0x60 == 0: DrawImage only, stock-identical ---
+    [PASS] patched run reaches the return pad
+    [PASS] stock baseline reaches the return pad
+    [PASS] DrawImage called exactly once, r0 = 0x26
+    [PASS] text routine never called
+    [PASS] mode function never called
+    [PASS] pen colours untouched (0xAAAA / 0xBBBB)
+    [PASS] stored mode untouched (5)
+    [PASS] callee-saved registers as stock
+    [PASS] stack pointer as stock
+    => PASS
+--- (b1) +0x60 == 1, bit 2 clear: title call contract ---
+    [PASS] reaches the return pad
+    [PASS] DrawImage called once with r0 = 0x26
+    [PASS] text routine called once (stage 2 gated off)
+    [PASS] r0 == r1 == descriptor pointer
+    [PASS] descriptor == {11, 24, 231, 39}
+    [PASS] r2 == name buffer 0x030235CE
+    [PASS] r3 == 0 (left aligned)
+    [PASS] string at r2 is the seeded title
+    [PASS] pen colours are Display values during the call (0x1111 / 0x2222)
+    [PASS] mode stored == 1 during the call
+    [PASS] mode bracket: set(1) then set(saved=5)
+    [PASS] stored mode restored to 5
+    [PASS] pen colours restored (0xAAAA / 0xBBBB)
+    [PASS] callee-saved registers restored
+    [PASS] stack pointer restored
+    => PASS
+--- (b2) +0x60 == 1, bit 2 set: image 0x27, same contract ---
+    [PASS] reaches the return pad
+    [PASS] DrawImage called once with r0 = 0x27
+    [PASS] text routine called once (stage 2 gated off)
+    [PASS] r0 == r1 == descriptor pointer
+    [PASS] descriptor == {11, 24, 231, 39}
+    [PASS] r2 == name buffer 0x030235CE
+    [PASS] r3 == 0 (left aligned)
+    [PASS] string at r2 is the seeded title
+    [PASS] pen colours are Display values during the call (0x1111 / 0x2222)
+    [PASS] mode stored == 1 during the call
+    [PASS] mode bracket: set(1) then set(saved=5)
+    [PASS] stored mode restored to 5
+    [PASS] pen colours restored (0xAAAA / 0xBBBB)
+    [PASS] callee-saved registers restored
+    [PASS] stack pointer restored
+    => PASS
+--- (d) stage 2: elapsed/total formatted from seeded position words ---
+    [PASS] reaches the return pad
+    [PASS] text routine called twice
+    [PASS] stage 2 descriptor == {11, 40, 231, 55}
+    [PASS] stage 2 r0 == r1, r3 == 0
+    [PASS] stage 2 r2 == the routine time buffer in the blob
+    [PASS] formatted text == "12:34 / 56:07"
+    => PASS
+--- (d2) stage 2 gates: inactive state, null codec object, negative elapsed ---
+    [PASS] state +0x44 == 0: text calls = 1
+    [PASS] codec object pointer null: text calls = 1
+    [PASS] live behind latch clamps to 0:00: text calls = 2, stage 2 text = '0:00 / 56:07'
+    => PASS
+--- (c) tier 2: real renderer consumes and plots the seeded title ---
+    [PASS] reaches the return pad with no memory fault
+    [PASS] DrawImage called once with r0 = 0x26
+    [PASS] mode bracket ran (set 1, restore 5)
+    [PASS] glyph routine entered once per character, in order "Ab3"
+    [PASS] glyph record copies read exactly the three seeded records
+    [PASS] one mode-1 blit per glyph
+    [PASS] blits at y = 24 (descriptor y_top), heights 16
+    [PASS] blit x starts at 11 and advances by the measured widths
+    [PASS] blit widths: 11, 11 (ink width of the letters), 8 (width code)
+    [PASS] framebuffer store plotted every set bit in the blit boxes: 128 + 128 + 112 = 368 points
+        glyph chars: ['0x41', '0x62', '0x33'], memcpy(0x22) calls: 9, blits: [(11, 24, 11, 16), (22, 24, 11, 16), (33, 24, 8, 16)], fb points: 368
+    => PASS
+
+ALL PASS

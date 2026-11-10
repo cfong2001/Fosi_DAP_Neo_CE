@@ -1,0 +1,22 @@
+# Navigation disarm, folder play start: clear the M3U staging
+# flag before stock folder playback proceeds.
+name: 0060-nav-folder-disarm
+kind: module
+module: 31
+region: code
+address: 0x307e04e
+gate: Do NOT stack alone. Requires the full build's module 31
+  segment extension carrying the disarm stubs at the branch
+  target.
+expect: 01252846
+replace: 02f065bc
+rationale: Stock folder play begins here (movs r5, #1; mov r0, r5,
+  then the classifier call at 0x0307E052). The stub clears
+  the staging flag byte at 0x0307BFB4, reproduces both
+  displaced instructions and resumes at 0x0307E052. The M3U
+  import path never passes through this site (its trampoline
+  enters at 0x0307E052), so an armed playlist survives its
+  own start. Source: patches/navigation/playlist_exit.S,
+  proven by patches/navigation/test_exit.py at its audited
+  placement and re-proven at this placement by the full
+  build's lifecycle audit.

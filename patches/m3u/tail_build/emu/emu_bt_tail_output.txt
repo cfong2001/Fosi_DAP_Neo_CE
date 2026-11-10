@@ -1,0 +1,60 @@
+--- long-press Power, BT off -> on (banner CV15) (event 0x20000001) ---
+    reached return pad: True, r0 = 0x0, frame restored: True
+    delay total 111 ms in 3 calls; MMIO writes: 27; port2 level reg @0x50030000 = 0x00000080
+    [PASS] return value 0 (event swallowed)
+    [PASS] SAVEINFO +0x2D4 == 1 (on)
+    [PASS] result byte 0x03023124 == 5
+    [PASS] status byte == 0
+    [PASS] port2 level bit 7 set
+    [PASS] 0x0300416C == 1, 0x0300416E/6F == 0
+    [PASS] tick copy == tick source
+    [PASS] flag 0x123 posted
+    [PASS] flag 0x1B8 posted (cmd send)
+    [PASS] delay: 100 settle + 10 success (+1 inside stock UART init)
+    => PASS
+--- long-press Power, BT on -> off (event 0x20000001) ---
+    reached return pad: True, r0 = 0x0, frame restored: True
+    delay total 200 ms in 1 calls; MMIO writes: 9; port2 level reg @0x50030000 = 0x00000000
+    [PASS] return value 0 (event swallowed)
+    [PASS] SAVEINFO +0x2D4 == 0 (off)
+    [PASS] SAVEINFO +0x2D3 == 0
+    [PASS] port2 level bits 7/17/16 all 0
+    [PASS] delay total == 200
+    [PASS] no flag 0x123 post
+    => PASS
+--- long-press Power, BT off -> on, banner never arrives (event 0x20000001) ---
+    reached return pad: True, r0 = 0x0, frame restored: True
+    delay total 5111 ms in 5003 calls; MMIO writes: 5035; port2 level reg @0x50030000 = 0x00000000
+    [PASS] return value 0 (event swallowed)
+    [PASS] SAVEINFO +0x2D4 back to 0 (timeout)
+    [PASS] status byte == 7 (timeout)
+    [PASS] port2 level bit 7 back to 0
+    [PASS] delay: 100 + 5000x1 poll + 10 (+1 inside stock UART init)
+    [PASS] no post-on writes (0x0300416C untouched 0)
+    => PASS
+--- non-target event passes through: T1 Power (short press) (event 0x10000001) ---
+    reached return pad: True, r0 = 0x10000001, frame restored: True
+    delay total 0 ms in 0 calls; MMIO writes: 0; port2 level reg @0x50030000 = 0x00000000
+    [PASS] return value == event word (not swallowed)
+    [PASS] no MMIO writes
+    [PASS] no delays
+    [PASS] SAVEINFO +0x2D4 still 0
+    => PASS
+--- non-target event passes through: T2 other key (event 0x20000010) ---
+    reached return pad: True, r0 = 0x20000010, frame restored: True
+    delay total 0 ms in 0 calls; MMIO writes: 0; port2 level reg @0x50030000 = 0x00000000
+    [PASS] return value == event word (not swallowed)
+    [PASS] no MMIO writes
+    [PASS] no delays
+    [PASS] SAVEINFO +0x2D4 still 0
+    => PASS
+--- non-target event passes through: T4 OK-release (event 0x40004000) ---
+    reached return pad: True, r0 = 0x40004000, frame restored: True
+    delay total 0 ms in 0 calls; MMIO writes: 0; port2 level reg @0x50030000 = 0x00000000
+    [PASS] return value == event word (not swallowed)
+    [PASS] no MMIO writes
+    [PASS] no delays
+    [PASS] SAVEINFO +0x2D4 still 0
+    => PASS
+
+ALL PASS

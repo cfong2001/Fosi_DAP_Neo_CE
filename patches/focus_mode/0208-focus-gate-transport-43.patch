@@ -1,0 +1,11 @@
+# Focus mode (experimental, on the theater variant): focus-gate-transport-43.
+# Design and census: patches/focus_mode/design.md.
+name: focus-gate-transport-43
+kind: module
+module: 27
+region: code
+address: 0x307f7b6
+gate: stock byte precondition; variant-only patch, never in the default manifest; validated by test_focus_mode.py under emulation
+rationale: Segment gate for the transport row segment: while hidden the row (and its mode indicator erase) is not drawn; the 0x43 bit stays pending and the row redraws on the wake paint. Gate sits at the segment test, not at the draw sites, so it composes with design refresh v4 either way.
+expect: e7f74ffd
+replace: fcf7affd

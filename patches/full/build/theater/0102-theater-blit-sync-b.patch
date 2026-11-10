@@ -1,0 +1,11 @@
+# Theater mode device integration: theater-blit-sync-b.
+# Design and census: patches/theater/build/README.md.
+name: theater-blit-sync-b
+kind: module
+module: 18
+region: code
+address: 0x3083a7e
+gate: stock byte precondition; variant-only patch, never in the default manifest; validated by test_theater_lifecycle.py under emulation
+rationale: Bitmap call in the artwork row consumer repointed to the theater trampoline in the gap tail. The trampoline calls the stock bitmap function with the original arguments and stack layout, then samples the rendered row into the top-third average when armed.
+expect: dff75efc
+replace: f8f793fc

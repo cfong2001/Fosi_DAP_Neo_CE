@@ -1,0 +1,1371 @@
+[s00000] BOOT SP=0x01022000 reset=0x00002849 (VA 0x01002848)
+[s00003] MU-SEND cmd unit=0 ch=0 cmd=0x0001
+[s00003] MILESTONE decoder READY (ch0 cmd 1)
+[s00003] MU-SEND param unit=0 ch=0 param=0x00000000
+[s00003] SYS ch2 0x65 info push: handle=3 size=33072 fmt=6 (struct @0x103f000)
+[s00004] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00004] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00004] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 0
+[s00004] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00004] MU-SEND cmd unit=0 ch=2 cmd=0x0066
+[s00004] MILESTONE open accepted by decoder (ch2 0x66 notify)
+[s00004] MU-SEND param unit=0 ch=2 param=0x00000000
+[s00004] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00004] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00004] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 512
+[s00004] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00004] SYS ch1 cmd 0x0001 -> command word 1
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 1024
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 1536
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 2048
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 2560
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 3072
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 3584
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 4096
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 4608
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 5120
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 5632
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 6144
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 6656
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 7168
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 7680
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 8192
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 8704
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 9216
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 9728
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 10240
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 10752
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 11264
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 11776
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 12288
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 12800
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 13312
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 13824
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 14336
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 14848
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 15360
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 15872
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 16384
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 16896
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] PRINTF 'Max Blocksize: %d\n'
+[s00005] PRINTF 'Min Framesize: %d\n'
+[s00005] PRINTF 'Max Framesize: %d\n'
+[s00005] PRINTF 'samples: %lld\n'
+[s00005] PRINTF 'Samplerate: %d\n'
+[s00005] PRINTF 'Channels: %d\n'
+[s00005] PRINTF 'Bits: %d\n'
+[s00005] PRINTF 'FLAC init: samplerate=%d, channels=%d, bps=%d, max_blocksize=%d, max_framesize=%d, min_framesize=%d\n'
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x0069
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022254
+[s00005] HIFIFILE Seek(h=3, off=8192, whence=0) -> pos=8192; blk+0 := pos 8192
+[s00005] MU-RECV ch2 reply cmd=0x006a param=0x00000000 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 8192
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 8704
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 9216
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 9728
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 10240
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 10752
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 11264
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 11776
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 12288
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 12800
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 13312
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 13824
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 14336
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 14848
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 15360
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 15872
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 16384
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 16896
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 17408
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 17920
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 18432
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 18944
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 19456
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 19968
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 20480
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 20992
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 21504
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 22016
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 22528
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 23040
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 23552
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 24064
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 24576
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x0069
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022254
+[s00005] HIFIFILE Seek(h=3, off=24576, whence=0) -> pos=24576; blk+0 := pos 24576
+[s00005] MU-RECV ch2 reply cmd=0x006a param=0x00000000 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 8192 bytes from pos 24576
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00002000 delivered (flag set)
+[s00005] MU-SEND cmd unit=0 ch=1 cmd=0x0003
+[s00005] MU-SEND param unit=0 ch=1 param=0x010227f4
+[s00005] MILESTONE stream info reported (ch1 cmd 3, param=0x010227f4)
+[s00005] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s00005] MU-SEND param unit=0 ch=2 param=0x01022260
+[s00005] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 304 bytes from pos 32768
+[s00005] MU-RECV ch2 reply cmd=0x006c param=0x00000130 delivered (flag set)
+[s00005] SNAP open: total=88072 decoded=0 fmt=6 size=33072 flac30=0x0 out_idx=1 out_cell=0x1200
+[s00005] SYS ch1 cmd 0x0004 -> command word 2
+[s00007] DMA out524a r0=0x103c9a0 r1=0x1060040 r2=0x1200 r3=0x10600a0 stk=(0x103c9a0,0x9e9)
+[s00007] DMA captured frame planes: 4608 samples x2ch (s32)
+[s00007] DMA LPC offload: plane=0x103c9a0 order=8 shift=13 coefs=[2394, 48, -2239, -2641, -2211, -178, 3722, 9286]
+[s00007] DMA dma_d5e r0=0x1 r1=0x103c9a0 r2=0x1060040 r3=0x1200 stk=(0x1021e38,0x10224ec)
+[s00007] DMA dma_d5e r0=0x0 r1=0x10600a0 r2=0x103c9a0 r3=0x1200 stk=(0x1021e48,0x10224bc)
+[s00007] DMA completion modelled: [0x10220e8] := 1
+[s00008] PCM captured 4608 samples from double buffer 0x102f94c (total 4608)
+[s00008] MU-SEND cmd unit=0 ch=1 cmd=0x0005
+[s00008] MU-SEND param unit=0 ch=1 param=0x010227f4
+[s04005] SYS ch1 cmd 0x0004 -> command word 2
+[s04007] DMA out524a r0=0x103c9a0 r1=0x1060040 r2=0x1200 r3=0x10600a0 stk=(0x103c9a0,0x9e9)
+[s04007] DMA captured frame planes: 4608 samples x2ch (s32)
+[s04007] DMA LPC offload: plane=0x103c9a0 order=8 shift=13 coefs=[2444, -64, -2263, -2495, -2222, -199, 3657, 9323]
+[s04007] DMA dma_d5e r0=0x1 r1=0x103c9a0 r2=0x1060040 r3=0x1200 stk=(0x1021e38,0x10224ec)
+[s04007] DMA dma_d5e r0=0x0 r1=0x10600a0 r2=0x103c9a0 r3=0x1200 stk=(0x1021e48,0x10224bc)
+[s04007] DMA completion modelled: [0x10220e8] := 1
+[s04008] PCM captured 4608 samples from double buffer 0x102694c (total 9216)
+[s04008] MU-SEND cmd unit=0 ch=1 cmd=0x0005
+[s04008] MU-SEND param unit=0 ch=1 param=0x010227f4
+[s08005] SYS ch1 cmd 0x0004 -> command word 2
+[s08007] DMA out524a r0=0x103c9a0 r1=0x1060040 r2=0x1200 r3=0x10600a0 stk=(0x103c9a0,0x9e9)
+[s08007] DMA captured frame planes: 4608 samples x2ch (s32)
+[s08007] DMA LPC offload: plane=0x103c9a0 order=8 shift=13 coefs=[2411, -107, -2174, -2367, -2301, -277, 3580, 9416]
+[s08007] DMA dma_d5e r0=0x1 r1=0x103c9a0 r2=0x1060040 r3=0x1200 stk=(0x1021e38,0x10224ec)
+[s08007] DMA dma_d5e r0=0x0 r1=0x10600a0 r2=0x103c9a0 r3=0x1200 stk=(0x1021e48,0x10224bc)
+[s08007] DMA completion modelled: [0x10220e8] := 1
+[s08008] PCM captured 4608 samples from double buffer 0x102f94c (total 13824)
+[s08008] MU-SEND cmd unit=0 ch=1 cmd=0x0005
+[s08008] MU-SEND param unit=0 ch=1 param=0x010227f4
+[s12005] SYS ch1 cmd 0x000d -> command word 6 arg=0x0
+[s12006] MU-SEND cmd unit=0 ch=1 cmd=0x000e
+[s12006] MU-SEND param unit=0 ch=1 param=0x00000000
+[s14005] SNAP R:after-stop: total=88072 decoded=13824 fmt=6 size=33072 flac30=0x1200 out_idx=0 out_cell=0x1200
+[s14005] SYS ch2 0x65 info push: handle=3 size=33072 fmt=6 (struct @0x103f000)
+[s14006] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14006] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14006] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 0 bytes from pos 33072
+[s14006] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s14006] MU-SEND cmd unit=0 ch=2 cmd=0x0066
+[s14006] MILESTONE open accepted by decoder (ch2 0x66 notify)
+[s14006] MU-SEND param unit=0 ch=2 param=0x00000000
+[s14006] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14006] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14006] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 0 bytes from pos 33072
+[s14006] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s14006] SYS ch1 cmd 0x0001 -> command word 1
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x0069
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022254
+[s14007] HIFIFILE Seek(h=3, off=0, whence=0) -> pos=0; blk+0 := pos 0
+[s14007] MU-RECV ch2 reply cmd=0x006a param=0x00000000 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 0
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 512
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 1024
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 1536
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 2048
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 2560
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 3072
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 3584
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 4096
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 4608
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 5120
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 5632
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 6144
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 6656
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 7168
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 7680
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 8192
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 8704
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 9216
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 9728
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 10240
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 10752
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 11264
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 11776
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 12288
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 12800
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 13312
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 13824
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 14336
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 14848
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 15360
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 15872
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 16384
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] PRINTF 'Max Blocksize: %d\n'
+[s14007] PRINTF 'Min Framesize: %d\n'
+[s14007] PRINTF 'Max Framesize: %d\n'
+[s14007] PRINTF 'samples: %lld\n'
+[s14007] PRINTF 'Samplerate: %d\n'
+[s14007] PRINTF 'Channels: %d\n'
+[s14007] PRINTF 'Bits: %d\n'
+[s14007] PRINTF 'FLAC init: samplerate=%d, channels=%d, bps=%d, max_blocksize=%d, max_framesize=%d, min_framesize=%d\n'
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x0069
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022254
+[s14007] HIFIFILE Seek(h=3, off=8192, whence=0) -> pos=8192; blk+0 := pos 8192
+[s14007] MU-RECV ch2 reply cmd=0x006a param=0x00000000 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 8192
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 8704
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 9216
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 9728
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 10240
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 10752
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 11264
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 11776
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 12288
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 12800
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 13312
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 13824
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 14336
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 14848
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 15360
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 15872
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 16384
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 16896
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 17408
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 17920
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 18432
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 18944
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 19456
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 19968
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 20480
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 20992
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 21504
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 22016
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 22528
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 23040
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 23552
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x01022b4c, n=512) -> 512 bytes from pos 24064
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x0102294c, n=512) -> 512 bytes from pos 24576
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000200 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x0069
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022254
+[s14007] HIFIFILE Seek(h=3, off=24576, whence=0) -> pos=24576; blk+0 := pos 24576
+[s14007] MU-RECV ch2 reply cmd=0x006a param=0x00000000 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 8192 bytes from pos 24576
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00002000 delivered (flag set)
+[s14007] MU-SEND cmd unit=0 ch=1 cmd=0x0003
+[s14007] MU-SEND param unit=0 ch=1 param=0x010227f4
+[s14007] MILESTONE stream info reported (ch1 cmd 3, param=0x010227f4)
+[s14007] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s14007] MU-SEND param unit=0 ch=2 param=0x01022260
+[s14007] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 304 bytes from pos 32768
+[s14007] MU-RECV ch2 reply cmd=0x006c param=0x00000130 delivered (flag set)
+[s14007] SNAP open: total=88072 decoded=0 fmt=6 size=33072 flac30=0x0 out_idx=1 out_cell=0x1200
+[s14007] SYS ch1 cmd 0x0004 -> command word 2
+[s14009] DMA out524a r0=0x103c9a0 r1=0x1060040 r2=0x1200 r3=0x10600a0 stk=(0x103c9a0,0x9e9)
+[s14009] DMA captured frame planes: 4608 samples x2ch (s32)
+[s14009] DMA LPC offload: plane=0x103c9a0 order=8 shift=13 coefs=[2394, 48, -2239, -2641, -2211, -178, 3722, 9286]
+[s14009] DMA dma_d5e r0=0x1 r1=0x103c9a0 r2=0x1060040 r3=0x1200 stk=(0x1021e38,0x10224ec)
+[s14009] DMA dma_d5e r0=0x0 r1=0x10600a0 r2=0x103c9a0 r3=0x1200 stk=(0x1021e48,0x10224bc)
+[s14009] DMA completion modelled: [0x10220e8] := 1
+[s14010] PCM captured 4608 samples from double buffer 0x102f94c (total 18432)
+[s14010] MU-SEND cmd unit=0 ch=1 cmd=0x0005
+[s14010] MU-SEND param unit=0 ch=1 param=0x010227f4
+[s18007] SYS ch1 cmd 0x0004 -> command word 2
+[s18009] DMA out524a r0=0x103c9a0 r1=0x1060040 r2=0x1200 r3=0x10600a0 stk=(0x103c9a0,0x9e9)
+[s18009] DMA captured frame planes: 4608 samples x2ch (s32)
+[s18009] DMA LPC offload: plane=0x103c9a0 order=8 shift=13 coefs=[2444, -64, -2263, -2495, -2222, -199, 3657, 9323]
+[s18009] DMA dma_d5e r0=0x1 r1=0x103c9a0 r2=0x1060040 r3=0x1200 stk=(0x1021e38,0x10224ec)
+[s18009] DMA dma_d5e r0=0x0 r1=0x10600a0 r2=0x103c9a0 r3=0x1200 stk=(0x1021e48,0x10224bc)
+[s18009] DMA completion modelled: [0x10220e8] := 1
+[s18010] PCM captured 4608 samples from double buffer 0x102694c (total 23040)
+[s18010] MU-SEND cmd unit=0 ch=1 cmd=0x0005
+[s18010] MU-SEND param unit=0 ch=1 param=0x010227f4
+[s22007] SYS ch1 cmd 0x0004 -> command word 2
+[s22009] DMA out524a r0=0x103c9a0 r1=0x1060040 r2=0x1200 r3=0x10600a0 stk=(0x103c9a0,0x9e9)
+[s22009] DMA captured frame planes: 4608 samples x2ch (s32)
+[s22009] DMA LPC offload: plane=0x103c9a0 order=8 shift=13 coefs=[2411, -107, -2174, -2367, -2301, -277, 3580, 9416]
+[s22009] DMA dma_d5e r0=0x1 r1=0x103c9a0 r2=0x1060040 r3=0x1200 stk=(0x1021e38,0x10224ec)
+[s22009] DMA dma_d5e r0=0x0 r1=0x10600a0 r2=0x103c9a0 r3=0x1200 stk=(0x1021e48,0x10224bc)
+[s22009] DMA completion modelled: [0x10220e8] := 1
+[s22010] PCM captured 4608 samples from double buffer 0x102f94c (total 27648)
+[s22010] MU-SEND cmd unit=0 ch=1 cmd=0x0005
+[s22010] MU-SEND param unit=0 ch=1 param=0x010227f4
+[s26007] SYS ch1 cmd 0x0004 -> command word 2
+[s26009] DMA out524a r0=0x103c9a0 r1=0x1060040 r2=0x1200 r3=0x10600a0 stk=(0x103c9a0,0x9e9)
+[s26009] DMA captured frame planes: 4608 samples x2ch (s32)
+[s26009] DMA LPC offload: plane=0x103c9a0 order=8 shift=13 coefs=[2393, -338, -1996, -2017, -2274, -550, 3260, 9703]
+[s26009] DMA dma_d5e r0=0x1 r1=0x103c9a0 r2=0x1060040 r3=0x1200 stk=(0x1021e38,0x10224ec)
+[s26009] DMA dma_d5e r0=0x0 r1=0x10600a0 r2=0x103c9a0 r3=0x1200 stk=(0x1021e48,0x10224bc)
+[s26009] DMA completion modelled: [0x10220e8] := 1
+[s26010] PCM captured 4608 samples from double buffer 0x102694c (total 32256)
+[s26010] MU-SEND cmd unit=0 ch=1 cmd=0x0005
+[s26010] MU-SEND param unit=0 ch=1 param=0x010227f4
+[s30007] SYS ch1 cmd 0x0004 -> command word 2
+[s30009] DMA out524a r0=0x103c9a0 r1=0x1060040 r2=0x1200 r3=0x10600a0 stk=(0x103c9a0,0x9e9)
+[s30009] DMA captured frame planes: 4608 samples x2ch (s32)
+[s30009] DMA LPC offload: plane=0x103c9a0 order=8 shift=13 coefs=[2213, -78, -1926, -2118, -2366, -525, 3237, 9744]
+[s30009] DMA dma_d5e r0=0x1 r1=0x103c9a0 r2=0x1060040 r3=0x1200 stk=(0x1021e38,0x10224ec)
+[s30009] DMA dma_d5e r0=0x0 r1=0x10600a0 r2=0x103c9a0 r3=0x1200 stk=(0x1021e48,0x10224bc)
+[s30009] DMA completion modelled: [0x10220e8] := 1
+[s30010] PCM captured 4608 samples from double buffer 0x102f94c (total 36864)
+[s30010] MU-SEND cmd unit=0 ch=1 cmd=0x0005
+[s30010] MU-SEND param unit=0 ch=1 param=0x010227f4
+[s34007] SYS ch1 cmd 0x0004 -> command word 2
+[s34009] DMA out524a r0=0x103c9a0 r1=0x1060040 r2=0x1200 r3=0x10600a0 stk=(0x103c9a0,0x9e9)
+[s34009] DMA captured frame planes: 4608 samples x2ch (s32)
+[s34009] DMA LPC offload: plane=0x103c9a0 order=8 shift=13 coefs=[2069, -119, -1555, -2188, -2302, -606, 2875, 10006]
+[s34009] DMA dma_d5e r0=0x1 r1=0x103c9a0 r2=0x1060040 r3=0x1200 stk=(0x1021e38,0x10224ec)
+[s34009] DMA dma_d5e r0=0x0 r1=0x10600a0 r2=0x103c9a0 r3=0x1200 stk=(0x1021e48,0x10224bc)
+[s34009] DMA completion modelled: [0x10220e8] := 1
+[s34010] PCM captured 4608 samples from double buffer 0x102694c (total 41472)
+[s34010] MU-SEND cmd unit=0 ch=1 cmd=0x0005
+[s34010] MU-SEND param unit=0 ch=1 param=0x010227f4
+[s38007] SYS ch1 cmd 0x0004 -> command word 2
+[s38009] DMA out524a r0=0x103c9a0 r1=0x1060040 r2=0x1200 r3=0x10600a0 stk=(0x103c9a0,0x9e9)
+[s38009] DMA captured frame planes: 4608 samples x2ch (s32)
+[s38009] DMA LPC offload: plane=0x103c9a0 order=8 shift=13 coefs=[2098, -208, -1465, -2342, -2042, -684, 2747, 10076]
+[s38009] DMA dma_d5e r0=0x1 r1=0x103c9a0 r2=0x1060040 r3=0x1200 stk=(0x1021e38,0x10224ec)
+[s38009] DMA dma_d5e r0=0x0 r1=0x10600a0 r2=0x103c9a0 r3=0x1200 stk=(0x1021e48,0x10224bc)
+[s38009] DMA completion modelled: [0x10220e8] := 1
+[s38010] PCM captured 4608 samples from double buffer 0x102f94c (total 46080)
+[s38010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s38010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s38010] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s38010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s38010] MU-SEND cmd unit=0 ch=1 cmd=0x0005
+[s38010] MU-SEND param unit=0 ch=1 param=0x010227f4
+[s38010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s38010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s38010] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s38010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s42007] SYS ch1 cmd 0x0004 -> command word 2
+[s42009] DMA out524a r0=0x103c9a0 r1=0x1060040 r2=0x1200 r3=0x10600a0 stk=(0x103c9a0,0x9e9)
+[s42009] DMA captured frame planes: 4608 samples x2ch (s32)
+[s42009] DMA LPC offload: plane=0x103c9a0 order=8 shift=13 coefs=[1805, 238, -1316, -2554, -2252, -759, 3001, 10017]
+[s42009] DMA dma_d5e r0=0x1 r1=0x103c9a0 r2=0x1060040 r3=0x1200 stk=(0x1021e38,0x10224ec)
+[s42009] DMA dma_d5e r0=0x0 r1=0x10600a0 r2=0x103c9a0 r3=0x1200 stk=(0x1021e48,0x10224bc)
+[s42009] DMA completion modelled: [0x10220e8] := 1
+[s42010] PCM captured 4608 samples from double buffer 0x102694c (total 50688)
+[s42010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s42010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s42010] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s42010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s42010] MU-SEND cmd unit=0 ch=1 cmd=0x0005
+[s42010] MU-SEND param unit=0 ch=1 param=0x010227f4
+[s42010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s42010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s42010] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s42010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s46007] SYS ch1 cmd 0x0004 -> command word 2
+[s46009] DMA out524a r0=0x103c9a0 r1=0x1060040 r2=0x1200 r3=0x10600a0 stk=(0x103c9a0,0x9e9)
+[s46009] DMA captured frame planes: 4608 samples x2ch (s32)
+[s46009] DMA LPC offload: plane=0x103c9a0 order=8 shift=13 coefs=[1739, 427, -1540, -2426, -2241, -812, 3010, 10023]
+[s46009] DMA dma_d5e r0=0x1 r1=0x103c9a0 r2=0x1060040 r3=0x1200 stk=(0x1021e38,0x10224ec)
+[s46009] DMA dma_d5e r0=0x0 r1=0x10600a0 r2=0x103c9a0 r3=0x1200 stk=(0x1021e48,0x10224bc)
+[s46009] DMA completion modelled: [0x10220e8] := 1
+[s46010] PCM captured 4608 samples from double buffer 0x102f94c (total 55296)
+[s46010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s46010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s46010] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s46010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s46010] MU-SEND cmd unit=0 ch=1 cmd=0x0005
+[s46010] MU-SEND param unit=0 ch=1 param=0x010227f4
+[s46010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s46010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s46010] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s46010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s50007] SYS ch1 cmd 0x0004 -> command word 2
+[s50009] DMA out524a r0=0x103c9a0 r1=0x1060040 r2=0x1200 r3=0x10600a0 stk=(0x103c9a0,0x9e9)
+[s50009] DMA captured frame planes: 4608 samples x2ch (s32)
+[s50009] DMA LPC offload: plane=0x103c9a0 order=8 shift=13 coefs=[1795, 250, -1587, -2186, -2050, -1025, 2800, 10182]
+[s50009] DMA dma_d5e r0=0x1 r1=0x103c9a0 r2=0x1060040 r3=0x1200 stk=(0x1021e38,0x10224ec)
+[s50009] DMA dma_d5e r0=0x0 r1=0x10600a0 r2=0x103c9a0 r3=0x1200 stk=(0x1021e48,0x10224bc)
+[s50009] DMA completion modelled: [0x10220e8] := 1
+[s50010] PCM captured 4608 samples from double buffer 0x102694c (total 59904)
+[s50010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s50010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s50010] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s50010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s50010] MU-SEND cmd unit=0 ch=1 cmd=0x0005
+[s50010] MU-SEND param unit=0 ch=1 param=0x010227f4
+[s50010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s50010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s50010] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s50010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s54007] SYS ch1 cmd 0x0004 -> command word 2
+[s54009] DMA out524a r0=0x103c9a0 r1=0x1060040 r2=0x1200 r3=0x10600a0 stk=(0x103c9a0,0x9e9)
+[s54009] DMA captured frame planes: 4608 samples x2ch (s32)
+[s54009] DMA LPC offload: plane=0x103c9a0 order=8 shift=13 coefs=[1904, 258, -1760, -2288, -2083, -848, 3020, 9977]
+[s54009] DMA dma_d5e r0=0x1 r1=0x103c9a0 r2=0x1060040 r3=0x1200 stk=(0x1021e38,0x10224ec)
+[s54009] DMA dma_d5e r0=0x0 r1=0x10600a0 r2=0x103c9a0 r3=0x1200 stk=(0x1021e48,0x10224bc)
+[s54009] DMA completion modelled: [0x10220e8] := 1
+[s54010] PCM captured 4608 samples from double buffer 0x102f94c (total 64512)
+[s54010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s54010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s54010] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s54010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s54010] MU-SEND cmd unit=0 ch=1 cmd=0x0005
+[s54010] MU-SEND param unit=0 ch=1 param=0x010227f4
+[s54010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s54010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s54010] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s54010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s58007] SYS ch1 cmd 0x0004 -> command word 2
+[s58009] DMA out524a r0=0x103c9a0 r1=0x1060040 r2=0x1200 r3=0x10600a0 stk=(0x103c9a0,0x9e9)
+[s58009] DMA captured frame planes: 4608 samples x2ch (s32)
+[s58009] DMA LPC offload: plane=0x103c9a0 order=8 shift=13 coefs=[2030, 277, -1940, -2424, -2204, -584, 3306, 9719]
+[s58009] DMA dma_d5e r0=0x1 r1=0x103c9a0 r2=0x1060040 r3=0x1200 stk=(0x1021e38,0x10224ec)
+[s58009] DMA dma_d5e r0=0x0 r1=0x10600a0 r2=0x103c9a0 r3=0x1200 stk=(0x1021e48,0x10224bc)
+[s58009] DMA completion modelled: [0x10220e8] := 1
+[s58010] PCM captured 4608 samples from double buffer 0x102694c (total 69120)
+[s58010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s58010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s58010] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s58010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s58010] MU-SEND cmd unit=0 ch=1 cmd=0x0005
+[s58010] MU-SEND param unit=0 ch=1 param=0x010227f4
+[s58010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s58010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s58010] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s58010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s62007] SYS ch1 cmd 0x0004 -> command word 2
+[s62009] DMA out524a r0=0x103c9a0 r1=0x1060040 r2=0x1200 r3=0x10600a0 stk=(0x103c9a0,0x9e9)
+[s62009] DMA captured frame planes: 4608 samples x2ch (s32)
+[s62009] DMA LPC offload: plane=0x103c9a0 order=8 shift=13 coefs=[2171, 80, -1983, -2327, -2267, -516, 3384, 9638]
+[s62009] DMA dma_d5e r0=0x1 r1=0x103c9a0 r2=0x1060040 r3=0x1200 stk=(0x1021e38,0x10224ec)
+[s62009] DMA dma_d5e r0=0x0 r1=0x10600a0 r2=0x103c9a0 r3=0x1200 stk=(0x1021e48,0x10224bc)
+[s62009] DMA completion modelled: [0x10220e8] := 1
+[s62010] PCM captured 4608 samples from double buffer 0x102f94c (total 73728)
+[s62010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s62010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s62010] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s62010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s62010] MU-SEND cmd unit=0 ch=1 cmd=0x0005
+[s62010] MU-SEND param unit=0 ch=1 param=0x010227f4
+[s62010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s62010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s62010] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s62010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s66007] SYS ch1 cmd 0x0004 -> command word 2
+[s66009] DMA out524a r0=0x103c9a0 r1=0x1060040 r2=0x1200 r3=0x10600a0 stk=(0x103c9a0,0x9e9)
+[s66009] DMA captured frame planes: 4608 samples x2ch (s32)
+[s66009] DMA LPC offload: plane=0x103c9a0 order=8 shift=13 coefs=[2107, 14, -1832, -2141, -2373, -603, 3218, 9790]
+[s66009] DMA dma_d5e r0=0x1 r1=0x103c9a0 r2=0x1060040 r3=0x1200 stk=(0x1021e38,0x10224ec)
+[s66009] DMA dma_d5e r0=0x0 r1=0x10600a0 r2=0x103c9a0 r3=0x1200 stk=(0x1021e48,0x10224bc)
+[s66009] DMA completion modelled: [0x10220e8] := 1
+[s66010] PCM captured 4608 samples from double buffer 0x102694c (total 78336)
+[s66010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s66010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s66010] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s66010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s66010] MU-SEND cmd unit=0 ch=1 cmd=0x0005
+[s66010] MU-SEND param unit=0 ch=1 param=0x010227f4
+[s66010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s66010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s66010] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s66010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s70007] SYS ch1 cmd 0x0004 -> command word 2
+[s70009] DMA out524a r0=0x103c9a0 r1=0x1060040 r2=0x1200 r3=0x10600a0 stk=(0x103c9a0,0x9e9)
+[s70009] DMA captured frame planes: 4608 samples x2ch (s32)
+[s70009] DMA LPC offload: plane=0x103c9a0 order=8 shift=13 coefs=[2266, -282, -1945, -1839, -2171, -795, 3016, 9930]
+[s70009] DMA dma_d5e r0=0x1 r1=0x103c9a0 r2=0x1060040 r3=0x1200 stk=(0x1021e38,0x10224ec)
+[s70009] DMA dma_d5e r0=0x0 r1=0x10600a0 r2=0x103c9a0 r3=0x1200 stk=(0x1021e48,0x10224bc)
+[s70009] DMA completion modelled: [0x10220e8] := 1
+[s70010] PCM captured 4608 samples from double buffer 0x102f94c (total 82944)
+[s70010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s70010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s70010] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s70010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s70010] MU-SEND cmd unit=0 ch=1 cmd=0x0005
+[s70010] MU-SEND param unit=0 ch=1 param=0x010227f4
+[s70010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s70010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s70010] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s70010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s74007] SYS ch1 cmd 0x0004 -> command word 2
+[s74009] DMA out524a r0=0x103c9a0 r1=0x1060040 r2=0x1200 r3=0x10600a0 stk=(0x103c9a0,0x9e9)
+[s74009] DMA captured frame planes: 4608 samples x2ch (s32)
+[s74009] DMA LPC offload: plane=0x103c9a0 order=8 shift=13 coefs=[2294, -250, -1955, -1971, -2261, -612, 3112, 9823]
+[s74009] DMA dma_d5e r0=0x1 r1=0x103c9a0 r2=0x1060040 r3=0x1200 stk=(0x1021e38,0x10224ec)
+[s74009] DMA dma_d5e r0=0x0 r1=0x10600a0 r2=0x103c9a0 r3=0x1200 stk=(0x1021e48,0x10224bc)
+[s74009] DMA completion modelled: [0x10220e8] := 1
+[s74010] PCM captured 4608 samples from double buffer 0x102694c (total 87552)
+[s74010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s74010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s74010] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s74010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s74010] MU-SEND cmd unit=0 ch=1 cmd=0x0005
+[s74010] MU-SEND param unit=0 ch=1 param=0x010227f4
+[s74010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s74010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s74010] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s74010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s78007] SYS ch1 cmd 0x0004 -> command word 2
+[s78009] DMA out524a r0=0x103c9a0 r1=0x1060040 r2=0x1200 r3=0x10600a0 stk=(0x103c9a0,0x9e9)
+[s78009] DMA captured frame planes: 4608 samples x2ch (s32)
+[s78009] DMA LPC offload: plane=0x103c9a0 order=8 shift=13 coefs=[2327, -177, -1877, -2407, -2291, -303, 3280, 9629]
+[s78009] DMA dma_d5e r0=0x1 r1=0x103c9a0 r2=0x1060040 r3=0x1200 stk=(0x1021e38,0x10224ec)
+[s78009] DMA dma_d5e r0=0x0 r1=0x10600a0 r2=0x103c9a0 r3=0x1200 stk=(0x1021e48,0x10224bc)
+[s78009] DMA completion modelled: [0x10220e8] := 1
+[s78010] PCM captured 4608 samples from double buffer 0x102f94c (total 92160)
+[s78010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s78010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s78010] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s78010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s78010] MU-SEND cmd unit=0 ch=1 cmd=0x0005
+[s78010] MU-SEND param unit=0 ch=1 param=0x010227f4
+[s78010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s78010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s78010] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s78010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s82007] SYS ch1 cmd 0x0004 -> command word 2
+[s82009] DMA out524a r0=0x103c9a0 r1=0x1060040 r2=0x1200 r3=0x10600a0 stk=(0x103c9a0,0x9e9)
+[s82009] DMA captured frame planes: 4608 samples x2ch (s32)
+[s82009] DMA LPC offload: plane=0x103c9a0 order=8 shift=13 coefs=[2268, -53, -1712, -2819, -2257, -169, 3401, 9522]
+[s82009] DMA dma_d5e r0=0x1 r1=0x103c9a0 r2=0x1060040 r3=0x1200 stk=(0x1021e38,0x10224ec)
+[s82009] DMA dma_d5e r0=0x0 r1=0x10600a0 r2=0x103c9a0 r3=0x1200 stk=(0x1021e48,0x10224bc)
+[s82009] DMA completion modelled: [0x10220e8] := 1
+[s82010] PCM captured 4608 samples from double buffer 0x102694c (total 96768)
+[s82010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s82010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s82010] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s82010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s82010] MU-SEND cmd unit=0 ch=1 cmd=0x0005
+[s82010] MU-SEND param unit=0 ch=1 param=0x010227f4
+[s82010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s82010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s82010] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s82010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86007] SYS ch1 cmd 0x0004 -> command word 2
+[s86009] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86009] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86009] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s86009] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86009] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86009] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86009] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s86009] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86009] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86009] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86009] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s86009] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86009] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86009] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86009] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s86009] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86009] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86009] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86009] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s86009] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86009] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86009] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86009] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s86009] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86009] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86009] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86009] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s86009] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86009] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86009] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86009] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s86009] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86009] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86009] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86009] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s86009] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86009] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86009] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86009] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s86009] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86009] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86009] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86009] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s86009] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86009] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86009] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86009] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s86009] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86009] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86009] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86009] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s86009] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86009] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86009] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86009] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s86009] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86009] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86009] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86009] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s86009] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86009] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86009] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86009] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s86009] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86009] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86009] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86009] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s86009] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86009] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86009] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86009] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s86009] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86009] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86009] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86009] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s86009] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86009] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86009] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86009] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s86009] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86009] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86009] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86009] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s86009] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86009] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86009] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86009] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s86009] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86009] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86009] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86009] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s86009] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86009] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86009] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86009] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s86009] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86009] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86009] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86009] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s86009] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86009] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86009] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86009] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s86009] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86009] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86009] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86009] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s86009] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86009] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86009] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86009] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s86009] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86009] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86009] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86009] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s86009] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86009] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86009] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86009] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s86009] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86010] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86010] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s86010] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86010] DMA out524a r0=0x103c9a0 r1=0x1060040 r2=0x1200 r3=0x10600a0 stk=(0x103c9a0,0x9e9)
+[s86010] DMA captured frame planes: 4608 samples x2ch (s32)
+[s86010] DMA LPC offload: plane=0x103c9a0 order=8 shift=13 coefs=[2313, 53, -1880, -2990, -2175, -94, 3588, 9367]
+[s86010] DMA dma_d5e r0=0x1 r1=0x103c9a0 r2=0x1060040 r3=0x1200 stk=(0x1021e38,0x10224ec)
+[s86010] DMA dma_d5e r0=0x0 r1=0x10600a0 r2=0x103c9a0 r3=0x1200 stk=(0x1021e48,0x10224bc)
+[s86010] DMA completion modelled: [0x10220e8] := 1
+[s86011] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86011] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86011] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s86011] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86011] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86011] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86011] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s86011] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86011] PCM captured 4608 samples from double buffer 0x102f94c (total 101376)
+[s86011] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86011] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86011] HIFIFILE Read(h=3, buf=0x0102494c, n=8192) -> 0 bytes from pos 33072
+[s86011] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s86011] MU-SEND cmd unit=0 ch=1 cmd=0x0005
+[s86011] MU-SEND param unit=0 ch=1 param=0x010227f4
+[s86011] MU-SEND cmd unit=0 ch=2 cmd=0x006b
+[s86011] MU-SEND param unit=0 ch=2 param=0x01022260
+[s86011] HIFIFILE Read(h=3, buf=0x0102294c, n=8192) -> 0 bytes from pos 33072
+[s86011] MU-RECV ch2 reply cmd=0x006c param=0x00000000 delivered (flag set)
+[s90007] SYS ch1 cmd 0x0004 -> command word 2
+[s90008] MU-SEND cmd unit=0 ch=1 cmd=0x0006
+[s90008] MU-SEND param unit=0 ch=1 param=0x00000000
+
+[RESULT] stop at decoded=13824; replay on resident decoder: frames=19 decoded=87552 PCM={'bytes': 350208, 'ref_bytes': 352800, 'prefix_bitexact': False, 'L_exact': 87552, 'R_exact': 82944, 'pairs': 87552}; fresh-boot baseline PCM={'bytes': 350208, 'ref_bytes': 352800, 'prefix_bitexact': False, 'L_exact': 87552, 'R_exact': 82944, 'pairs': 87552}; replay == baseline: True

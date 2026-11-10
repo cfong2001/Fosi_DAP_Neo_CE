@@ -1,0 +1,16 @@
+# Clock table v1 (see patches/clock_v1/clock_v1.md). Row 22 of the
+# module 0 clock table at 0x03079824: fields +4..+27 only (word 0 untouched).
+name: clock-v1-row-22
+kind: module
+module: 0
+region: code
+address: 0x3079a90
+gate: build refuses unless the 24 stock bytes at the target equal `expect`;
+  the finished image must also pass firmware_patch.validate()
+rationale: DSD-DSF: B core/bus -> 288 MHz solver
+  target written directly into the row; A fields zeroed so the solver's
+  row-1 floor parks A outputs at 96 MHz; PLL word carried over unchanged
+  (v1 conservatism, clock_v1.md flag 2). Data-only edit; reversible by
+  rebuilding from stock without this patch.
+expect: 00389c1c00c2eb0b00c2eb0b00b4c40400389c1c00389c1c
+replace: 00389c1c00000000000000000000000000882a1100882a11

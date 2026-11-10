@@ -1,0 +1,24 @@
+# Sort keys: redirect the library comparator into the cave.
+name: sortkeys-comparator-hook
+kind: module
+module: 39
+region: code
+address: 0x0307d620
+gate: build refuses unless the stock bytes at the target equal `expect`;
+  the finished image must also pass firmware_patch.validate()
+rationale: Replaces the 4-byte entry of module 39's sort comparator
+  (push.w prologue) with b.w cave_cmp (0x0309f000, patch 0031).
+  The comparator is called only from the sorted-insert routine
+  (BL sites 0x0307d6fe/0x0307d720/0x0307d738), always with
+  record_pointer + 4, and returns 0 (less) / 1 (equal) / 2
+  (greater); cave_cmp preserves that exact contract, so no
+  caller changes. Stock compared 4 inline key units (record
+  offsets +0x0..+0x6 relative to the +4 pointer) and then fell
+  back to a raw, unfoldled full-string compare; cave_cmp keeps
+  a token-aware fast path over the same 4 inline units (now
+  built by patches 0028-0030) and defers to a full transform
+  compare (sk_tcmp) whenever a digit-run marker or a 4-unit
+  tie is involved, which is what makes the on-device order
+  identical to the pure transform order (host-fuzz proven).
+expect: 2de9f047
+replace: 21f0eebc

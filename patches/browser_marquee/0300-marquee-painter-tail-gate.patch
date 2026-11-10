@@ -1,0 +1,11 @@
+# Browser marquee (experimental variant): marquee-painter-tail-gate.
+# Design and census: patches/browser_marquee/design.md.
+name: marquee-painter-tail-gate
+kind: module
+module: 31
+region: code
+address: 0x307eca0
+gate: stock byte precondition; variant-only patch, never in the default manifest; validated by test_browser_marquee.py under emulation
+rationale: Hook at the painter tail marquee test site (bl test-noclear 0x148); the gate decides per paint whether the stock stepper may advance. Payload routine at 0x307ee48 in the module 31 code growth (marquee_payload.bin).
+expect: e8f7fcfa
+replace: 00f0d2f8

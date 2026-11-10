@@ -1,0 +1,23 @@
+RANGE 0x03094604..0x0309f4ac: 11 direct-referenced addrs, 22345 direct-unreferenced
+Direct-unreferenced runs (>=16 B):
+  0x03094604  14964 bytes
+  0x03099208  11804 bytes
+  0x0309caec  8022 bytes
+  0x0309807a  4492 bytes
+  0x0309c026  2756 bytes
+  0x0309eba8  2074 bytes
+  0x0309ea44  252 bytes
+  0x0309f3c4  200 bytes
+  0x0309eb42  98 bytes
+Direct-referenced addresses:
+  0x03098078
+  0x03099206
+  0x0309c024
+  0x0309caea
+  0x0309ea42
+  0x0309eb40
+  0x0309eba4
+  0x0309eba6
+  0x0309f3c2
+  0x0309f48c
+  0x0309f49c

@@ -1,0 +1,42 @@
+# Battery profiles: special-case the profile selector item in module
+# 32's settings apply dispatch, decrement path. Companion to
+# 0052-profile-selector-dispatch-b (the increment path runs a second
+# copy of the dispatch; both copies need the special case). NOT in
+# the manifest: unstacked until the module 32 segment extension build
+# carries the profile blob at the branch target and the selector
+# item record is authored (see gate).
+name: profile-selector-dispatch-a
+kind: module
+module: 32
+region: code
+address: 0x0307deec
+gate: build refuses unless the 6 stock bytes at the target equal
+  `expect`; the finished image must also pass
+  firmware_patch.validate(). Do NOT stack without the module 32
+  segment extension carrying the battery-profile blob
+  (work/power_build, linked at 0x030804ac, the first byte past
+  module 32's stock code segment; the blob is appended with the
+  framework --grow step, module 32 code). The cave target
+  0x03080664 is inside that blob; if the blob's link base or layout
+  changes, regenerate the branch bytes from src/sites.S.
+rationale: Module 32's apply dispatch (disassembly in
+  work/power_build/power_build.md) tests the item id, the descriptor
+  halfword at [record + 8], at exec 0x0307dee4: 173 (0xad) takes the
+  EQ path, 196 (0xc4) the brightness path, everything else the
+  generic settings-changed post. The 6 bytes at this site are the
+  second compare (cmp r0, #0xc4), its branch to the brightness path
+  at 0x0307df84, and the fall-through branch to the generic exit at
+  0x0307df8c. The replacement branches to the cave stub
+  hook_dispatch_a at 0x03080664 in the module 32 extension. The stub
+  re-executes the displaced compare and branch first, then tests
+  the profile item id (0xc5; see the caveat in src/hooks.S: the id
+  is a working value to confirm against the string table when the
+  selector item record is authored), and on a match loads the
+  record's value byte (the chosen profile, already updated by the
+  stock value editor, exactly as items 173 and 196 consume it) and
+  calls profile_select, which writes the profile area on first use
+  and applies the profile. The stub exits through 0x0307df8c, the
+  same generic post the site's own special cases fall into, so
+  non-profile items are behaviour-identical to stock.
+expect: c42849d04ce0
+replace: 02f0babb00bf

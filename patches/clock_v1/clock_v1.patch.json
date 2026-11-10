@@ -1,0 +1,275 @@
+{
+  "name": "clock_v1",
+  "target": "Fosi Audio DAP Neo DP3_V137",
+  "stock_sha256": "fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cdfade5e9c6ea3bd71ac6deef",
+  "patched_sha256": "f5a312742fed19bb035ddc5736683b0dce834956887acfb1624a72fa97cbcac3",
+  "table": {
+    "module": 0,
+    "region": "code",
+    "exec": "0x3079824",
+    "file_offset": "0x52ed0",
+    "rows": 36,
+    "row_bytes": 28
+  },
+  "policy": "per spec: 24 bytes over row fields +4..+27; PLL word carried over unchanged; A fields zeroed (solver floor row 1 applies); B core/B bus set to the class target; word 0 never edited; no header date change",
+  "patches": [
+    {
+      "module": 0,
+      "region": "code",
+      "address": "0x30798b4",
+      "address_int": 50829492,
+      "row": 5,
+      "format": "MP3 <=128k, <=44.1k",
+      "target_b_core_mhz": 144,
+      "expect_hex": "00d8b805006cdc02006cdc02006cdc0200d8b80500d8b805",
+      "replace_hex": "00d8b8050000000000000000000000000044950800449508"
+    },
+    {
+      "module": 0,
+      "region": "code",
+      "address": "0x30798d0",
+      "address_int": 50829520,
+      "row": 6,
+      "format": "MP3 high",
+      "target_b_core_mhz": 144,
+      "expect_hex": "00c2eb0b00e1f50500e1f505c068780400c2eb0b00c2eb0b",
+      "replace_hex": "00c2eb0b0000000000000000000000000044950800449508"
+    },
+    {
+      "module": 0,
+      "region": "code",
+      "address": "0x30798ec",
+      "address_int": 50829548,
+      "row": 7,
+      "format": "WMA tier A",
+      "target_b_core_mhz": 144,
+      "expect_hex": "00c2eb0b80d1f00880d1f008c068780400a3e11100a3e111",
+      "replace_hex": "00c2eb0b0000000000000000000000000044950800449508"
+    },
+    {
+      "module": 0,
+      "region": "code",
+      "address": "0x3079908",
+      "address_int": 50829576,
+      "row": 8,
+      "format": "WMA tier B",
+      "target_b_core_mhz": 144,
+      "expect_hex": "00c2eb0b80d1f00880d1f008c068780400a3e11100a3e111",
+      "replace_hex": "00c2eb0b0000000000000000000000000044950800449508"
+    },
+    {
+      "module": 0,
+      "region": "code",
+      "address": "0x3079924",
+      "address_int": 50829604,
+      "row": 9,
+      "format": "WAV",
+      "target_b_core_mhz": 144,
+      "expect_hex": "8074d21a00c2eb0b00c2eb0bc06878048074d21a8074d21a",
+      "replace_hex": "8074d21a0000000000000000000000000044950800449508"
+    },
+    {
+      "module": 0,
+      "region": "code",
+      "address": "0x3079940",
+      "address_int": 50829632,
+      "row": 10,
+      "format": "AAC high",
+      "target_b_core_mhz": 144,
+      "expect_hex": "00c2eb0b80d1f00880d1f008c068780400a3e11100a3e111",
+      "replace_hex": "00c2eb0b0000000000000000000000000044950800449508"
+    },
+    {
+      "module": 0,
+      "region": "code",
+      "address": "0x307995c",
+      "address_int": 50829660,
+      "row": 11,
+      "format": "AAC low",
+      "target_b_core_mhz": 144,
+      "expect_hex": "00c2eb0b80d1f00880d1f008c068780400a3e11100a3e111",
+      "replace_hex": "00c2eb0b0000000000000000000000000044950800449508"
+    },
+    {
+      "module": 0,
+      "region": "code",
+      "address": "0x30799b0",
+      "address_int": 50829744,
+      "row": 14,
+      "format": "OGG tier 1",
+      "target_b_core_mhz": 240,
+      "expect_hex": "00a3e11100b4c40400b4c40400b4c4040084d7170084d717",
+      "replace_hex": "00a3e111000000000000000000000000001c4e0e001c4e0e"
+    },
+    {
+      "module": 0,
+      "region": "code",
+      "address": "0x30799cc",
+      "address_int": 50829772,
+      "row": 15,
+      "format": "OGG tier 2",
+      "target_b_core_mhz": 240,
+      "expect_hex": "00a3e11100b4c40400b4c40400b4c4040084d7170084d717",
+      "replace_hex": "00a3e111000000000000000000000000001c4e0e001c4e0e"
+    },
+    {
+      "module": 0,
+      "region": "code",
+      "address": "0x30799e8",
+      "address_int": 50829800,
+      "row": 16,
+      "format": "OGG tier 3",
+      "target_b_core_mhz": 240,
+      "expect_hex": "00a3e11100b4c40400b4c40400b4c4040084d7170084d717",
+      "replace_hex": "00a3e111000000000000000000000000001c4e0e001c4e0e"
+    },
+    {
+      "module": 0,
+      "region": "code",
+      "address": "0x3079a04",
+      "address_int": 50829828,
+      "row": 17,
+      "format": "OGG top tier",
+      "target_b_core_mhz": 240,
+      "expect_hex": "00389c1c00c2eb0b00c2eb0b00b4c40400389c1c00389c1c",
+      "replace_hex": "00389c1c000000000000000000000000001c4e0e001c4e0e"
+    },
+    {
+      "module": 0,
+      "region": "code",
+      "address": "0x3079a20",
+      "address_int": 50829856,
+      "row": 18,
+      "format": "FLAC",
+      "target_b_core_mhz": 288,
+      "expect_hex": "00389c1c00c2eb0b00c2eb0b00b4c40400389c1c00389c1c",
+      "replace_hex": "00389c1c00000000000000000000000000882a1100882a11"
+    },
+    {
+      "module": 0,
+      "region": "code",
+      "address": "0x3079a3c",
+      "address_int": 50829884,
+      "row": 19,
+      "format": "ALAC",
+      "target_b_core_mhz": 288,
+      "expect_hex": "00389c1c00c2eb0b00c2eb0b00b4c40400389c1c00389c1c",
+      "replace_hex": "00389c1c00000000000000000000000000882a1100882a11"
+    },
+    {
+      "module": 0,
+      "region": "code",
+      "address": "0x3079a58",
+      "address_int": 50829912,
+      "row": 20,
+      "format": "APE",
+      "target_b_core_mhz": 288,
+      "expect_hex": "00389c1c00c2eb0b00c2eb0b00b4c40400389c1c00389c1c",
+      "replace_hex": "00389c1c00000000000000000000000000882a1100882a11"
+    },
+    {
+      "module": 0,
+      "region": "code",
+      "address": "0x3079a74",
+      "address_int": 50829940,
+      "row": 21,
+      "format": "DSD-DFF",
+      "target_b_core_mhz": 288,
+      "expect_hex": "00389c1c00c2eb0b00c2eb0b00b4c40400389c1c00389c1c",
+      "replace_hex": "00389c1c00000000000000000000000000882a1100882a11"
+    },
+    {
+      "module": 0,
+      "region": "code",
+      "address": "0x3079a90",
+      "address_int": 50829968,
+      "row": 22,
+      "format": "DSD-DSF",
+      "target_b_core_mhz": 288,
+      "expect_hex": "00389c1c00c2eb0b00c2eb0b00b4c40400389c1c00389c1c",
+      "replace_hex": "00389c1c00000000000000000000000000882a1100882a11"
+    }
+  ],
+  "single_patch_proofs": [
+    {
+      "row": 5,
+      "format": "MP3 <=128k, <=44.1k",
+      "single_patch_output_sha256": "b7997ea76e44a42db98df6437fce2604c886ebbda8e8a29416168424b2a501aa"
+    },
+    {
+      "row": 6,
+      "format": "MP3 high",
+      "single_patch_output_sha256": "bdd64a7fb92c68ff08fec70e165ad191ff7cc05713c70dae07798e1cd0c3c6c3"
+    },
+    {
+      "row": 7,
+      "format": "WMA tier A",
+      "single_patch_output_sha256": "355d96f32cd19889257e7a8d90f3922bc09065726cf42dbc90851c3ff96ee403"
+    },
+    {
+      "row": 8,
+      "format": "WMA tier B",
+      "single_patch_output_sha256": "d5eb53871f5979c76923d2514e5f213e7192aecc690c8163ab524628c3ec3c1a"
+    },
+    {
+      "row": 9,
+      "format": "WAV",
+      "single_patch_output_sha256": "e0b5f1b13d942c3a46f0054e35bd4b5cec807521c1c7a1a91f0253667e668618"
+    },
+    {
+      "row": 10,
+      "format": "AAC high",
+      "single_patch_output_sha256": "05bf8bd2e8b7bd6c9da7c76348ef19086cdb8f5d5ee84d4f366309783b88ce7c"
+    },
+    {
+      "row": 11,
+      "format": "AAC low",
+      "single_patch_output_sha256": "819bd8ef8ab55bbc4d391e5b614146f6f9beb42ceba522e1fb9ed906d8e7a6ab"
+    },
+    {
+      "row": 14,
+      "format": "OGG tier 1",
+      "single_patch_output_sha256": "6b4fe1d80b596a8dc8a62dbd8f6a25038ab24f512c1b704ed4f3551503f5df57"
+    },
+    {
+      "row": 15,
+      "format": "OGG tier 2",
+      "single_patch_output_sha256": "4713ca3cfe31c89c11eb7ba2b297b6761fb84eb48f8932b8b63b677bebd6e6bc"
+    },
+    {
+      "row": 16,
+      "format": "OGG tier 3",
+      "single_patch_output_sha256": "eb1eba12118a0a65cde09275acc61aaf08465be4b773568de41af3c9e5ae8898"
+    },
+    {
+      "row": 17,
+      "format": "OGG top tier",
+      "single_patch_output_sha256": "5033ff4ba5654ed40bc0017f519c44d78354d3a53af1584b4f8917f03309035f"
+    },
+    {
+      "row": 18,
+      "format": "FLAC",
+      "single_patch_output_sha256": "3300da03438a1fe210cbab06f39ad3d108d6a751ca3c12f48b29a4f352fbf01f"
+    },
+    {
+      "row": 19,
+      "format": "ALAC",
+      "single_patch_output_sha256": "ff00e8dc31bad01cf734561c5ebcc67500330f85ff04a67b2ba381c48b0fade1"
+    },
+    {
+      "row": 20,
+      "format": "APE",
+      "single_patch_output_sha256": "b7780dfa12cd78fd866885c5bd336778a59c861975a89659577630f77e47b08e"
+    },
+    {
+      "row": 21,
+      "format": "DSD-DFF",
+      "single_patch_output_sha256": "41f19ce719e6c7e69b62df4cfa191fedc71c60b798daef18880f6f26d0a4752d"
+    },
+    {
+      "row": 22,
+      "format": "DSD-DSF",
+      "single_patch_output_sha256": "3f434991bc04edc2dcd8bbf52d2a0f82c7dbd51f680d2115bb95724f6541490d"
+    }
+  ]
+}

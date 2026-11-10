@@ -1,0 +1,18 @@
+# DAC error-counter fix, part 1 of 2 (see dac_fix.md in this directory).
+# Order vs part 2 is irrelevant (disjoint sites, stock-byte expects either way).
+name: dac-fix-1-branch
+kind: module
+module: 0
+region: code
+address: 0x03060d14
+gate: build refuses unless the 2 stock bytes at the target equal `expect`;
+  the finished image must also pass firmware_patch.validate()
+rationale: dac_write's success branch. Stock branches on a zero transfer
+  result straight to the shared tail at 0x03060d1c, skipping the failure
+  increment at 0x03060d16. The patch keeps the same condition and register
+  state but detours through the reset trampoline at 0x03060d8e (part 2),
+  which zeroes the DAC error counter (0x0300411e) so it counts
+  consecutive failures instead of session-lifetime failures. Only the
+  branch target changes; the second byte (0xd0) is identical.
+expect: 02d0
+replace: 3bd0

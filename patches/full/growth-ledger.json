@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "modules": [
+    {
+      "module": 31,
+      "length": 6936,
+      "sha256": "010197e684a8a3e3f1a0937b61fe89a7f620b48c0872e5305f781d42d9b88f05"
+    },
+    {
+      "module": 24,
+      "length": 26,
+      "sha256": "7b80afb308d276a4d0012cd4302f7a5f2a1c5192a1f2e70d3f23867e195a942a"
+    }
+  ]
+}

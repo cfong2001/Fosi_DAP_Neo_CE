@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "palette": {
+    "background": "#141821",
+    "text": "#F5F7FA",
+    "highlight": "#38BDF8",
+    "icons": "#DCECF8",
+    "progress_bar": "#38BDF8"
+  },
+  "resources": [
+    {
+      "id": 6,
+      "role": "highlight",
+      "source": "0xA210",
+      "expected_count": 6060
+    },
+    {
+      "id": 7,
+      "role": "highlight",
+      "source": "0xA210",
+      "expected_count": 4668
+    },
+    {
+      "id": 8,
+      "role": "highlight",
+      "source": "0xA210",
+      "expected_count": 3276
+    },
+    {
+      "id": 9,
+      "role": "highlight",
+      "source": "0xA210",
+      "expected_count": 1884
+    },
+    {
+      "id": 10,
+      "role": "highlight",
+      "source": "0xA210",
+      "expected_count": 492
+    }
+  ],
+  "literal_sites": []
+}

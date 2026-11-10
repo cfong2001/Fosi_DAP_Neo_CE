@@ -1,0 +1,18 @@
+# Repoint one player transport draw to the keyed helper: id 159 or 167 by the halfword at 0x03023924, SAVEINFO+0x61 + 0xAA, or 181, drawn at (computed, 275).
+name: transport-keyed-right-variants
+kind: module
+module: 27
+region: code
+address: 0x307f8f0
+gate: stock byte precondition; experimental set, not in the default
+  manifest; validate with test_keyed_transport.py and use only with
+  the v4 glyph resources (v4-glyphs.json), whose surround is the
+  key colour 0xF800
+rationale: DrawImageAt (0x0306354A) is opaque, so a transparent
+  surround cannot land through it. The keyed helper 0x03063A08
+  takes the same (id, x, y) arguments, resolves the id through the
+  same descriptor path (including the light theme +166 remap) and
+  draws through the format 1 keyblit, which skips 0xF800 pixels.
+  Only the branch target changes.
+expect: e3f72bfe
+replace: e4f78af8

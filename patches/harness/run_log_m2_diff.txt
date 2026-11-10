@@ -1,0 +1,81 @@
+PARAMETER-PAGE / STATE DIFF (gapless R3)
+A = load-skipped instance, B = fresh stock-reload instance; both at post-open of file B (test48.flac).
+
+--- snapshot diff: open (A) vs open (B) ---
+   fmt_word: A=6 B=6
+   file_size: A=21934 B=21934
+   handle_tab3: A=21934 B=21934
+   freq_flag: A=0 B=0
+** dma_flags: A=0000000001000000 B=0000000000000000
+   total_samples: A=47872 B=47872
+   decoded_samples: A=0 B=0
+   event_bitmap: A=0 B=0
+   flac_30: A=0 B=0
+   flac_34: A=0 B=0
+   flac_40: A=0 B=0
+   out_idx: A=1 B=1
+   out_cell: A=4608 B=4608
+   ctrl_block: equal
+   fs_struct: equal
+   fill_table: equal
+** stream_state: A=5089030100400000f800000001000000 B=5089030100400000f800000000000000
+   param_page (144 B): identical
+data window differing 4 KiB regions: 27 of 64 (29012 bytes differ)
+    0x01021000: 50 bytes differ
+    0x01022000: 757 bytes differ
+    0x01023000: 4080 bytes differ
+    0x01024000: 2671 bytes differ
+    0x01026000: 556 bytes differ
+    0x01027000: 1228 bytes differ
+    0x01028000: 1300 bytes differ
+    0x01029000: 1198 bytes differ
+    0x0102a000: 1314 bytes differ
+    0x0102b000: 102 bytes differ
+    0x0102f000: 741 bytes differ
+    0x01030000: 1702 bytes differ
+    0x01031000: 1741 bytes differ
+    0x01032000: 1726 bytes differ
+    0x01033000: 1722 bytes differ
+    0x01034000: 143 bytes differ
+    0x0103c000: 310 bytes differ
+    0x0103d000: 726 bytes differ
+    0x0103e000: 777 bytes differ
+    0x0103f000: 716 bytes differ
+    0x01040000: 763 bytes differ
+    0x01041000: 999 bytes differ
+    0x01042000: 1024 bytes differ
+    0x01043000: 1024 bytes differ
+    0x01044000: 1024 bytes differ
+    0x01045000: 616 bytes differ
+    0x0105f000: 2 bytes differ
+
+Within the load-skipped instance (page stability across the session):
+--- snapshot diff: L:A-eos (A) vs open (B) ---
+   fmt_word: A=6 B=6
+** file_size: A=33072 B=21934
+** handle_tab3: A=33072 B=21934
+   freq_flag: A=0 B=0
+   dma_flags: A=0000000001000000 B=0000000001000000
+** total_samples: A=88072 B=47872
+** decoded_samples: A=87552 B=0
+   event_bitmap: A=0 B=0
+** flac_30: A=4608 B=0
+** flac_34: A=17 B=0
+** flac_40: A=8 B=0
+** out_idx: A=0 B=1
+** out_cell: A=0 B=4608
+   ctrl_block: equal
+** fs_struct: A=4c2902014c6902010020010000200000000000000000000001000000000000000000000000000000e5213e64f92a73ce65864e92698733e4e1cc924c92649426 B=4c2902014c6902010020010000200000000000000000000001000000000000000000000000000000492a10f87250c948590f933ccca727c84f21c8699270d087
+   fill_table: equal
+** stream_state: A=5089030100000000f800000001000000 B=5089030100400000f800000001000000
+   param_page (144 B): identical
+data window differing 4 KiB regions: 9 of 64 (17403 bytes differ)
+    0x01021000: 257 bytes differ
+    0x01022000: 1039 bytes differ
+    0x01038000: 1675 bytes differ
+    0x01039000: 4019 bytes differ
+    0x0103a000: 4025 bytes differ
+    0x0103b000: 4016 bytes differ
+    0x0103c000: 2351 bytes differ
+    0x0103f000: 9 bytes differ
+    0x01045000: 12 bytes differ

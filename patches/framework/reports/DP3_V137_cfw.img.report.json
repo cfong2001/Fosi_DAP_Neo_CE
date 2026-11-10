@@ -1,0 +1,41 @@
+{
+  "mode": "custom",
+  "input_file": "/home/hatch/workspace/fosi-dap-neo/DP3_V137.img",
+  "output_file": "out/DP3_V137_cfw.img",
+  "input_sha256": "fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cdfade5e9c6ea3bd71ac6deef",
+  "output_sha256": "161bbf30e8d3cb1b0164bd2a4d344c5e95c0be2cd16e3fbbc90997e487831e8a",
+  "byte_length": 13631492,
+  "header_date": "20261023",
+  "patches_applied": [
+    {
+      "patch": "noop-selftest",
+      "file": "0000-noop-selftest.patch",
+      "kind": "module",
+      "module": 0,
+      "region": "code",
+      "cpu_address": "0x3050000",
+      "file_offset": "0x296ac",
+      "old_hex": "004000038b1f0603",
+      "new_hex": "004000038b1f0603"
+    }
+  ],
+  "diff_vs_stock": {
+    "bytes_changed": 6,
+    "ranges": [
+      [
+        "0x2",
+        "0x2"
+      ],
+      [
+        "0xc94002",
+        "0xc94002"
+      ],
+      [
+        "0xd00000",
+        "0xd00003"
+      ]
+    ]
+  },
+  "validation": "firmware_patch.validate() passed (header mirror + trailer CRC + V137 layout)",
+  "scope": "offline package integrity only; device acceptance and boot behaviour are hardware-phase questions"
+}

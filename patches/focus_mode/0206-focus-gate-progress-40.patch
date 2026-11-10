@@ -1,0 +1,11 @@
+# Focus mode (experimental, on the theater variant): focus-gate-progress-40.
+# Design and census: patches/focus_mode/design.md.
+name: focus-gate-progress-40
+kind: module
+module: 27
+region: code
+address: 0x307f598
+gate: stock byte precondition; variant-only patch, never in the default manifest; validated by test_focus_mode.py under emulation
+rationale: Segment gate for the progress update segment: see focus-gate-status-1f for the gate contract.
+expect: e7f75efe
+replace: fcf7befe

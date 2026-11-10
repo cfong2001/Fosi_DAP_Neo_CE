@@ -1,0 +1,326 @@
+{
+  "version": 1,
+  "literal_sites": [],
+  "runs": [
+    {
+      "offset": "0xacc158",
+      "expect": "000000000000000000000000",
+      "replace": "f220f220f220f220f220f220"
+    },
+    {
+      "offset": "0xacc170",
+      "expect": "0000000000000000000000000000000000000000",
+      "replace": "f220f220f220f220f220f220f220f220f220f220"
+    },
+    {
+      "offset": "0xacc338",
+      "expect": "000000000000000000000000",
+      "replace": "f220f220f220f220f220f220"
+    },
+    {
+      "offset": "0xacc350",
+      "expect": "0000000000000000000000000000000000000000",
+      "replace": "f220f220f220f220f220f220f220f220f220f220"
+    },
+    {
+      "offset": "0xacc514",
+      "expect": "00000000",
+      "replace": "f220f220"
+    },
+    {
+      "offset": "0xacc524",
+      "expect": "00000000",
+      "replace": "f220f220"
+    },
+    {
+      "offset": "0xacc530",
+      "expect": "00000000",
+      "replace": "f220f220"
+    },
+    {
+      "offset": "0xacc6f4",
+      "expect": "00000000",
+      "replace": "f220f220"
+    },
+    {
+      "offset": "0xacc704",
+      "expect": "00000000",
+      "replace": "f220f220"
+    },
+    {
+      "offset": "0xacc710",
+      "expect": "00000000",
+      "replace": "f220f220"
+    },
+    {
+      "offset": "0xacc8d4",
+      "expect": "00000000",
+      "replace": "f220f220"
+    },
+    {
+      "offset": "0xacc8f0",
+      "expect": "00000000",
+      "replace": "f220f220"
+    },
+    {
+      "offset": "0xaccab4",
+      "expect": "00000000",
+      "replace": "f220f220"
+    },
+    {
+      "offset": "0xaccad0",
+      "expect": "00000000",
+      "replace": "f220f220"
+    },
+    {
+      "offset": "0xaccc94",
+      "expect": "00000000",
+      "replace": "f220f220"
+    },
+    {
+      "offset": "0xacccb0",
+      "expect": "00000000000000000000000000000000",
+      "replace": "f220f220f220f220f220f220f220f220"
+    },
+    {
+      "offset": "0xacce74",
+      "expect": "00000000",
+      "replace": "f220f220"
+    },
+    {
+      "offset": "0xacce90",
+      "expect": "00000000000000000000000000000000",
+      "replace": "f220f220f220f220f220f220f220f220"
+    },
+    {
+      "offset": "0xacd054",
+      "expect": "00000000",
+      "replace": "f220f220"
+    },
+    {
+      "offset": "0xacd070",
+      "expect": "00000000",
+      "replace": "f220f220"
+    },
+    {
+      "offset": "0xacd234",
+      "expect": "00000000",
+      "replace": "f220f220"
+    },
+    {
+      "offset": "0xacd250",
+      "expect": "00000000",
+      "replace": "f220f220"
+    },
+    {
+      "offset": "0xacd414",
+      "expect": "00000000",
+      "replace": "f220f220"
+    },
+    {
+      "offset": "0xacd424",
+      "expect": "00000000",
+      "replace": "f220f220"
+    },
+    {
+      "offset": "0xacd430",
+      "expect": "00000000",
+      "replace": "f220f220"
+    },
+    {
+      "offset": "0xacd5f4",
+      "expect": "00000000",
+      "replace": "f220f220"
+    },
+    {
+      "offset": "0xacd604",
+      "expect": "00000000",
+      "replace": "f220f220"
+    },
+    {
+      "offset": "0xacd610",
+      "expect": "00000000",
+      "replace": "f220f220"
+    },
+    {
+      "offset": "0xacd7d8",
+      "expect": "000000000000000000000000",
+      "replace": "f220f220f220f220f220f220"
+    },
+    {
+      "offset": "0xacd7f0",
+      "expect": "0000000000000000000000000000000000000000",
+      "replace": "f220f220f220f220f220f220f220f220f220f220"
+    },
+    {
+      "offset": "0xacd9b8",
+      "expect": "000000000000000000000000",
+      "replace": "f220f220f220f220f220f220"
+    },
+    {
+      "offset": "0xacd9d0",
+      "expect": "0000000000000000000000000000000000000000",
+      "replace": "f220f220f220f220f220f220f220f220f220f220"
+    },
+    {
+      "offset": "0xbbafaa",
+      "expect": "ffffffffffffffffffffffff",
+      "replace": "f220f220f220f220f220f220"
+    },
+    {
+      "offset": "0xbbafc2",
+      "expect": "ffffffffffffffffffffffffffffffffffffffff",
+      "replace": "f220f220f220f220f220f220f220f220f220f220"
+    },
+    {
+      "offset": "0xbbb18a",
+      "expect": "ffffffffffffffffffffffff",
+      "replace": "f220f220f220f220f220f220"
+    },
+    {
+      "offset": "0xbbb1a2",
+      "expect": "ffffffffffffffffffffffffffffffffffffffff",
+      "replace": "f220f220f220f220f220f220f220f220f220f220"
+    },
+    {
+      "offset": "0xbbb366",
+      "expect": "ffffffff",
+      "replace": "f220f220"
+    },
+    {
+      "offset": "0xbbb376",
+      "expect": "ffffffff",
+      "replace": "f220f220"
+    },
+    {
+      "offset": "0xbbb382",
+      "expect": "ffffffff",
+      "replace": "f220f220"
+    },
+    {
+      "offset": "0xbbb546",
+      "expect": "ffffffff",
+      "replace": "f220f220"
+    },
+    {
+      "offset": "0xbbb556",
+      "expect": "ffffffff",
+      "replace": "f220f220"
+    },
+    {
+      "offset": "0xbbb562",
+      "expect": "ffffffff",
+      "replace": "f220f220"
+    },
+    {
+      "offset": "0xbbb726",
+      "expect": "ffffffff",
+      "replace": "f220f220"
+    },
+    {
+      "offset": "0xbbb742",
+      "expect": "ffffffff",
+      "replace": "f220f220"
+    },
+    {
+      "offset": "0xbbb906",
+      "expect": "ffffffff",
+      "replace": "f220f220"
+    },
+    {
+      "offset": "0xbbb922",
+      "expect": "ffffffff",
+      "replace": "f220f220"
+    },
+    {
+      "offset": "0xbbbae6",
+      "expect": "ffffffff",
+      "replace": "f220f220"
+    },
+    {
+      "offset": "0xbbbb02",
+      "expect": "ffffffffffffffffffffffffffffffff",
+      "replace": "f220f220f220f220f220f220f220f220"
+    },
+    {
+      "offset": "0xbbbcc6",
+      "expect": "ffffffff",
+      "replace": "f220f220"
+    },
+    {
+      "offset": "0xbbbce2",
+      "expect": "ffffffffffffffffffffffffffffffff",
+      "replace": "f220f220f220f220f220f220f220f220"
+    },
+    {
+      "offset": "0xbbbea6",
+      "expect": "ffffffff",
+      "replace": "f220f220"
+    },
+    {
+      "offset": "0xbbbec2",
+      "expect": "ffffffff",
+      "replace": "f220f220"
+    },
+    {
+      "offset": "0xbbc086",
+      "expect": "ffffffff",
+      "replace": "f220f220"
+    },
+    {
+      "offset": "0xbbc0a2",
+      "expect": "ffffffff",
+      "replace": "f220f220"
+    },
+    {
+      "offset": "0xbbc266",
+      "expect": "ffffffff",
+      "replace": "f220f220"
+    },
+    {
+      "offset": "0xbbc276",
+      "expect": "ffffffff",
+      "replace": "f220f220"
+    },
+    {
+      "offset": "0xbbc282",
+      "expect": "ffffffff",
+      "replace": "f220f220"
+    },
+    {
+      "offset": "0xbbc446",
+      "expect": "ffffffff",
+      "replace": "f220f220"
+    },
+    {
+      "offset": "0xbbc456",
+      "expect": "ffffffff",
+      "replace": "f220f220"
+    },
+    {
+      "offset": "0xbbc462",
+      "expect": "ffffffff",
+      "replace": "f220f220"
+    },
+    {
+      "offset": "0xbbc62a",
+      "expect": "ffffffffffffffffffffffff",
+      "replace": "f220f220f220f220f220f220"
+    },
+    {
+      "offset": "0xbbc642",
+      "expect": "ffffffffffffffffffffffffffffffffffffffff",
+      "replace": "f220f220f220f220f220f220f220f220f220f220"
+    },
+    {
+      "offset": "0xbbc80a",
+      "expect": "ffffffffffffffffffffffff",
+      "replace": "f220f220f220f220f220f220"
+    },
+    {
+      "offset": "0xbbc822",
+      "expect": "ffffffffffffffffffffffffffffffffffffffff",
+      "replace": "f220f220f220f220f220f220f220f220f220f220"
+    }
+  ]
+}

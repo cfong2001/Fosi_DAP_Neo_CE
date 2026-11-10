@@ -1,0 +1,58 @@
+03089da6  2d e9 f0 41    push.w   {r4, r5, r6, r7, r8, lr}
+03089daa  80 46          mov      r8, r0
+03089dac  01 46          mov      r1, r0
+03089dae  00 24          movs     r4, #0
+03089db0  7a 48          ldr      r0, [pc, #0x1e8]  ; [0x3089f9c] = 0x03005714
+03089db2  cf f7 d1 ff    bl       #0x3059d58
+03089db6  75 4e          ldr      r6, [pc, #0x1d4]  ; [0x3089f8c] = 0x03023980
+03089db8  00 28          cmp      r0, #0
+03089dba  30 80          strh     r0, [r6]
+03089dbc  34 d1          bne      #0x3089e28
+03089dbe  70 4d          ldr      r5, [pc, #0x1c0]  ; [0x3089f80] = 0x030232a0
+03089dc0  02 27          movs     r7, #2
+03089dc2  a8 7b          ldrb     r0, [r5, #0xe]
+03089dc4  02 28          cmp      r0, #2
+03089dc6  02 d0          beq      #0x3089dce
+03089dc8  04 28          cmp      r0, #4
+03089dca  1e d0          beq      #0x3089e0a
+03089dcc  2c e0          b        #0x3089e28
+03089dce  a8 7f          ldrb     r0, [r5, #0x1e]
+03089dd0  50 b1          cbz      r0, #0x3089de8
+03089dd2  c9 f7 ed fb    bl       #0x30535b0
+03089dd6  01 28          cmp      r0, #1
+03089dd8  06 d1          bne      #0x3089de8
+03089dda  04 20          movs     r0, #4
+03089ddc  a8 73          strb     r0, [r5, #0xe]
+03089dde  db f7 a8 fa    bl       #0x3065332
+03089de2  a8 7b          ldrb     r0, [r5, #0xe]
+03089de4  cd f7 99 fd    bl       #0x305791a
+03089de8  41 46          mov      r1, r8
+03089dea  6c 48          ldr      r0, [pc, #0x1b0]  ; [0x3089f9c] = 0x03005714
+03089dec  cf f7 b4 ff    bl       #0x3059d58
+03089df0  30 80          strh     r0, [r6]
+03089df2  c8 b9          cbnz     r0, #0x3089e28
+03089df4  38 46          mov      r0, r7
+03089df6  af 73          strb     r7, [r5, #0xe]
+03089df8  cd f7 8f fd    bl       #0x305791a
+03089dfc  db f7 9b fa    bl       #0x3065336
+03089e00  01 24          movs     r4, #1
+03089e02  ee 20          movs     r0, #0xee
+03089e04  dd f7 1a fa    bl       #0x306723c
+03089e08  0e e0          b        #0x3089e28
+03089e0a  a8 7f          ldrb     r0, [r5, #0x1e]
+03089e0c  60 b1          cbz      r0, #0x3089e28
+03089e0e  38 46          mov      r0, r7
+03089e10  af 73          strb     r7, [r5, #0xe]
+03089e12  cd f7 82 fd    bl       #0x305791a
+03089e16  db f7 8e fa    bl       #0x3065336
+03089e1a  41 46          mov      r1, r8
+03089e1c  5f 48          ldr      r0, [pc, #0x17c]  ; [0x3089f9c] = 0x03005714
+03089e1e  cf f7 9b ff    bl       #0x3059d58
+03089e22  30 80          strh     r0, [r6]
+03089e24  00 28          cmp      r0, #0
+03089e26  e5 d0          beq      #0x3089df4
+03089e28  20 46          mov      r0, r4
+03089e2a  bd e8 f0 81    pop.w    {r4, r5, r6, r7, r8, pc}
+03089e2e  2d e9 f0 43    push.w   {r4, r5, r6, r7, r8, sb, lr}
+03089e32  04 46          mov      r4, r0
+03089e34  83 b0          sub      sp, #0xc

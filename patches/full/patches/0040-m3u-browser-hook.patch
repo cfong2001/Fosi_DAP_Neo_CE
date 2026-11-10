@@ -1,0 +1,25 @@
+# M3U bridge: divert module 31's node-action classification call
+# to the hook trampoline at the base of the full build's module 31
+# segment extension payload (patches/full). Same site and contract
+# as the compose variant's 0040; the trampoline differs only in
+# its handled exit (folder-play start, see build/src/
+# asm_trampoline_ext.py).
+name: 0040-m3u-browser-hook
+kind: module
+module: 31
+region: code
+address: 0x307df1a
+gate: Do NOT stack alone. Requires the full build's module 31
+  segment extension (--grow 31:code: with payload31.bin):
+  trampoline at exec 0x0307EE48, bridge entry at 0x0307EE88.
+expect: fff76df9
+replace: 00f095bf
+rationale: The site is the single BL inside module 31's node-action
+  function that dispatches on the selected node's class byte;
+  see the compose variant's 0040 for the full register
+  contract. On a bridge decline the trampoline reproduces the
+  displaced call exactly. On a successful import it leaves
+  into the stock folder-play sequence at 0x0307E052 with
+  r0 = 1, so the stock start sequence (classifier, directory
+  fetch, source 6 commit, event clears, 0x14D post, message
+  3) runs with the staging flag armed.
