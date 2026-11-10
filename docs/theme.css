@@ -679,3 +679,12 @@ footer { line-height: 1.7; max-width: 1000px; }
   .features .tile--hero .tile-copy h3 { font-size:32px; }
   .features .tile--hero .tile-picture { margin-top:0; }
 }
+
+/* Source links stay with the feature they document. */
+.patch-links { display:flex; flex-wrap:wrap; gap:8px 18px; margin-top:16px; font-size:13px; line-height:1.5; }
+.patch-links a { text-decoration:underline; text-underline-offset:3px; }
+.patch-links a:hover { text-decoration-thickness:2px; }
+.tile--stat .patch-links a { color:#f6a47a; }
+@media(max-width:700px) {
+  .masthead-links { width:100%; margin-left:0; justify-content:space-between; gap:12px; }
+}
