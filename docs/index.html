@@ -58,7 +58,7 @@
 <div class="page">
 <section class="card">
 <h2>1. Choose colors</h2>
-<p class="note">These colors update the simulated playback screen immediately. Actual firmware pixels change only when you add verified resource rules below.</p>
+<p class="note">Colors reach the firmware only through the exact resource rules in section 3. The screens in section 2 show real firmware pixels, not this palette.</p>
 <div class="palette" id="palette"></div>
 <div class="hint">
 <h3>Firmware file</h3>
@@ -76,75 +76,39 @@
 <p class="note">The downloaded JSON is an input to <code>patches/framework/build.py --theme-config theme.json</code>, or to the builder in section 4 below. No flashing occurs here.</p>
 </div>
 <details class="seg"><summary>Safety and limitations</summary>
-<p class="note">The player preview recreates a representative layout, not a captured stock screen. Its colors are illustrative until actual image resources or UI-only drawing constants are verified. Black and 0x00F8 are blocked as possible transparency/key colors. Every resource patch pins its original RGB565 word and pixel count. The theme export on its own does not modify a binary; the builder in section 4 applies the same patches and finalisation as the Python framework, in this page and locally, and an offline test in the repository (tests/builder.test.mjs) checks its output byte for byte against the framework's.</p>
+<p class="note">The screens in section 2 use real resource pixels and replay the player's own drawing of the status icon and transport row; the cover, text and progress bar there are approximations. Black and 0x00F8 are blocked as possible transparency/key colors. Every resource patch pins its original RGB565 word and pixel count. The theme export on its own does not modify a binary; the builder in section 4 applies the same patches and finalisation as the Python framework, in this page and locally, and an offline test in the repository (tests/builder.test.mjs) checks its output byte for byte against the framework's.</p>
 </details>
 </section>
-<section class="card preview-card">
-<h2>2. Compare simulated screens <small>240 × 320</small></h2>
-<p class="note">Both screens are browser simulations, not firmware emulation or captures. The stock side is a fixed illustrative baseline; the CE side previews your colors and theater setting. Controls affect both. Firmware builds and device behavior may differ.</p>
-<div class="hint theater-controls">
-<label class="checkbox"><input type="checkbox" id="theater-preview"> <span><strong>Theater mode preview</strong><br><span class="note">Preview a color averaged from the top third of the artwork, outlined text and transparent text backgrounds. Preview only; the firmware feature itself is an experimental option in section 4.</span></span></label>
-<div class="control"><label for="theater-art">Choose cover artwork (optional, stays on this device)</label><input type="file" id="theater-art" accept="image/*"></div>
-<div id="theater-status" class="status" role="status">Turn on theater mode to preview the sample artwork.</div>
+<section class="card preview-card" id="simulator">
+<h2>2. Compare screens <small>240 × 320</small></h2>
+<p class="note">Real firmware pixels: every icon and background is decoded from the stock image and the CE standard image, and the status icon and transport row are drawn exactly as each image's player code draws them (recorded under emulation and checked word for word). The cover, title, artist, times and progress bar are drawn by this page at approximate positions in an approximate font.</p>
+<div class="sim-controls">
+<div class="control"><label for="sim-theme">Theme</label><select id="sim-theme"><option value="dark">Dark</option><option value="light">Light</option></select></div>
+<div class="control"><label for="sim-page">Transport row</label><select id="sim-page"><option value="0">Playing controls</option><option value="1">Second page</option><option value="2">Selection</option></select></div>
+<label class="checkbox"><input type="checkbox" id="theater-preview" checked> <span><strong>Theater mode (CE)</strong><br><span class="note">The CE background is the average of the cover's top third, mixed 55% toward black (dark) or 75% toward paper (light), as the firmware computes it. Stock has no theater mode.</span></span></label>
+<div class="control"><label for="theater-art">Cover artwork (optional, stays on this device)</label><input type="file" id="theater-art" accept="image/*"></div>
+<label class="checkbox"><input type="checkbox" id="sim-no-art"> No cover (theater falls back to the theme background)</label>
 </div>
 <div class="simulator">
 <div class="tabbar" aria-label="Simulated screen">
 <button class="button" type="button" data-show="playing" aria-pressed="true">Now playing</button>
-<button class="button" type="button" data-show="library" aria-pressed="false">Library</button>
-<button class="button" type="button" data-show="settings" aria-pressed="false">Settings</button>
+<button class="button" type="button" data-show="nomedia" aria-pressed="false">No media</button>
+<button class="button" type="button" data-show="splash" aria-pressed="false">Boot splash</button>
 </div>
 <div class="device-comparison">
-<div class="device-column"><h3>Stock baseline</h3><div class="device"><div id="stock-screen" class="screen stock-screen" aria-label="Simulated stock baseline screen"></div></div></div>
-<div class="device-column"><h3>CE preview</h3><div class="device" aria-label="Simulated CE screen">
-<div class="screen" id="screen">
-<section class="screen-panel active" data-panel="playing">
-<div class="statusbar"><span>♫ &nbsp;44.1 kHz · FLAC</span><span>▰▰▰ 92%</span></div>
-<div class="screen-heading"><span>Now playing</span><span class="tiny-badge">HQ</span></div>
-<div class="song-art"><img id="cover-art" alt="" hidden><span class="art-icon">♪</span></div>
-<div class="track-title" id="track-title">Track 02</div>
-<div class="track-artist" id="track-artist">Library / Sample album</div>
-<div class="progressbar"><div id="track-progress"></div></div>
-<div class="timing"><span id="elapsed">1:16</span><span>3:31</span></div>
-<div class="play-actions" aria-hidden="true">
-<span class="transport-icon"><svg viewBox="0 0 24 24"><path d="M5 8a8 8 0 1 1-1 8M5 8V4M5 8h4"/></svg></span>
-<span class="transport-icon"><svg viewBox="0 0 24 24"><path d="M6 5v14M19 5 8 12l11 7z"/></svg></span>
-<strong id="play-indicator" class="is-playing"><svg viewBox="0 0 24 24" class="pause-icon"><path d="M8 5v14M16 5v14"/></svg><svg viewBox="0 0 24 24" class="play-icon"><path d="M8 5v14l11-7z"/></svg></strong>
-<span class="transport-icon"><svg viewBox="0 0 24 24"><path d="M18 5v14M5 5l11 7-11 7z"/></svg></span>
-<span class="transport-icon"><svg viewBox="0 0 24 24"><path d="M19 8a8 8 0 1 0 1 8M19 8V4M19 8h-4"/></svg></span>
-</div>
-</section>
-<section class="screen-panel" data-panel="library">
-<div class="statusbar"><span>Music library</span><span>▰▰▰ 92%</span></div>
-<div class="screen-heading"><span>All tracks</span><span class="tiny-badge">● 128</span></div>
-<div class="list-row"><span class="glyph">♫</span><span>01 Intro</span></div>
-<div class="list-row selected"><span class="glyph">♫</span><span>02 Blue Room</span></div>
-<div class="list-row"><span class="glyph">♫</span><span>03 Night Drive</span></div>
-<div class="list-row"><span class="glyph">♫</span><span>04 Afterglow</span></div>
-<div class="list-row"><span class="glyph">♫</span><span>05 Coming Home</span></div>
-<div class="list-row"><span class="glyph">♫</span><span>06 Outro</span></div>
-<div class="bottom-hint">Hold to return · Scroll to select</div>
-</section>
-<section class="screen-panel" data-panel="settings">
-<div class="statusbar"><span>Settings</span><span>▰▰▰ 92%</span></div>
-<div class="screen-heading"><span>Playback options</span><span class="tiny-badge">OPTIONS</span></div>
-<div class="list-row selected"><span class="glyph">●</span>Theme color</div>
-<div class="list-row"><span class="glyph">◍</span>Display brightness</div>
-<div class="list-row"><span class="glyph">≋</span>Equalizer</div>
-<div class="list-row"><span class="glyph">↻</span>Repeat mode</div>
-<div class="detail-line">Theme changes shown here are a browser preview.</div>
-<div class="bottom-hint">This is a mockup, not stock firmware UI.</div>
-</section>
-<div class="asset-overlay" id="asset-overlay" aria-hidden="true"></div>
-</div>
-</div></div>
+<div class="device-column"><h3>Stock V137</h3><div class="device"><div class="screen"><canvas id="stock-canvas" width="240" height="320" aria-label="Stock V137 screen"></canvas></div></div></div>
+<div class="device-column"><h3>CE standard</h3><div class="device"><div class="screen" id="screen"><canvas id="ce-canvas" width="240" height="320" aria-label="CE standard screen"></canvas><div class="asset-overlay" id="asset-overlay" aria-hidden="true"></div></div></div></div>
 </div>
 <div class="device-buttons" role="group" aria-label="Shared simulated playback controls">
 <button type="button" id="prev-track" aria-label="Previous sample track">◀</button>
-<button type="button" id="toggle-play" aria-label="Toggle simulated playback">Ⅱ</button>
+<button type="button" id="toggle-play" aria-label="Pause simulated playback">Ⅱ</button>
 <button type="button" id="next-track" aria-label="Next sample track">▶</button>
 </div>
-<label class="checkbox"><input type="checkbox" id="project-asset"> Overlay selected firmware resource on simulated screen</label>
-<p class="note">An overlaid bitmap uses its stored dimensions and x/y. Its transparency is not interpreted, since stock RGB565 resources have no alpha channel.</p>
+<div id="sim-status" class="status" role="status">Open this section to load the firmware screens.</div>
+<button class="button" type="button" id="sim-retry" hidden>Try again</button>
+<div id="theater-status" class="status" role="status" hidden></div>
+<label class="checkbox"><input type="checkbox" id="project-asset"> Overlay the resource selected in section 3 on the CE screen</label>
+<p class="note">An overlaid resource is drawn at its stored x/y, with every pixel opaque.</p>
 </div>
 </section>
 <section class="card editor-column">
@@ -230,9 +194,10 @@
 </details>
 </main>
 <footer>
-The install flow downloads release images from the repository and refuses any whose SHA-256 does not match its pin. The builder parses only files you select, locally. Both simulated screens are illustrative, not captured device screens or firmware emulators. This site hosts no stock firmware image.
+The install flow downloads release images from the repository and refuses any whose SHA-256 does not match its pin. The builder parses only files you select, locally. The simulator fetches only the resource sections of the stock and CE images from the repository and checks each against a pinned SHA-256; its cover, text and progress bar are approximations. This site hosts no firmware files itself.
 </footer>
 <script type="module" src="./install.mjs"></script>
 <script type="module" src="./theme.js"></script>
+<script type="module" src="./simulator.js"></script>
 <script type="module" src="./builder.js"></script>
 </body></html>

@@ -3,7 +3,6 @@ import {
   frequencies, rgbaPixels, rgb565, rgb888, asWord, wordHex,
   validateTheme, exportConfig
 } from "./theme-core.mjs";
-import {theaterFromSums, luminance, topThirdRegions, fallbackTheater} from "./theater-core.mjs";
 
 const $ = id => document.getElementById(id);
 const defaults = Object.freeze({
@@ -19,12 +18,9 @@ const roleLabels = {
 };
 const state = {
   palette: {...defaults}, firmware: null, selected: null,
-  rules: new Map(), page: 0, filter: "", active: "playing",
-  sample: 2, playing: true, position: 76,
-  theaterSums: [57, 67, 72], theaterWeight: 1, artUrl: null, artRequest: 0
+  rules: new Map(), page: 0, filter: ""
 };
 const perPage = 36;
-const tracks = ["Intro", "Blue Room", "Night Drive", "Afterglow", "Coming Home", "Outro"];
 function status(target, message, kind = "") {
   const node = $(target);
   node.textContent = message;
@@ -62,125 +58,7 @@ function populatePalette() {
   applyPalette();
 }
 function applyPalette() {
-  const screen = $("screen");
-  for (const [role, value] of Object.entries(state.palette)) {
-    screen.style.setProperty("--theme-" + role.replaceAll("_", "-"), value);
-  }
-  renderTheater();
-  updateTrack();
-}
-function renderTheater() {
-  const screen = $("screen");
-  const enabled = $("theater-preview").checked;
-  screen.classList.toggle("theater", enabled);
-  if (!enabled) {
-    status("theater-status", "Theater preview is off. Firmware builds are unchanged.");
-    return;
-  }
-  const bg = state.palette.background;
-  const paletteRgb = [1, 3, 5].map(i => parseInt(bg.slice(i, i + 2), 16));
-  const visible = state.theaterWeight > 0;
-  const result = visible ? theaterFromSums(state.theaterSums, state.theaterWeight, luminance(paletteRgb) > 0.5)
-                         : fallbackTheater(bg);
-  screen.style.setProperty("--theater-ground", result.background);
-  screen.style.setProperty("--theater-text", result.text);
-  screen.style.setProperty("--theater-stroke", result.stroke);
-  status("theater-status", (visible ? "Preview: " : "Top third is transparent; using the theme background. ") + result.contrast.toFixed(1) +
-    ":1 text contrast on the quantized background. This does not change firmware.", "good");
-}
-async function loadCover(file) {
-  const request = ++state.artRequest;
-  if (!file) return;
-  const url = URL.createObjectURL(file);
-  try {
-    const image = new Image();
-    image.src = url;
-    await image.decode();
-    const regions = topThirdRegions(image.naturalWidth, image.naturalHeight);
-    const totals = [0, 0, 0];
-    let weight = 0;
-    for (const region of regions) {
-      for (let y = 0; y < region.height; y += 512) for (let x = 0; x < region.width; x += 512) {
-        const w = Math.min(512, region.width - x), h = Math.min(512, region.height - y);
-        const canvas = document.createElement("canvas");
-        canvas.width = w; canvas.height = h;
-        const ctx = canvas.getContext("2d", {willReadFrequently: true});
-        ctx.drawImage(image, region.x + x, region.y + y, w, h, 0, 0, w, h);
-        const data = ctx.getImageData(0, 0, w, h).data;
-        for (let i = 0; i < data.length; i += 4) {
-          const a = data[i + 3]; weight += a;
-          totals[0] += data[i] * a; totals[1] += data[i + 1] * a; totals[2] += data[i + 2] * a;
-        }
-      }
-    }
-    if (request !== state.artRequest) return;
-    const previousUrl = state.artUrl;
-    state.artUrl = url;
-    state.theaterSums = totals; state.theaterWeight = weight;
-    $("cover-art").src = url;
-    $("cover-art").hidden = false;
-    const stockCover = $("stock-screen").querySelector("[data-stock-id=cover-art]");
-    stockCover.src = url; stockCover.hidden = false;
-    $("stock-screen").classList.add("has-cover");
-    $("screen").classList.add("has-cover");
-    if (previousUrl) URL.revokeObjectURL(previousUrl);
-    renderTheater();
-  } catch (err) {
-    if (request === state.artRequest)
-      status("theater-status", "Artwork could not be previewed: " + err.message, "bad");
-  } finally {
-    if (state.artUrl !== url) URL.revokeObjectURL(url);
-  }
-}
-function updateTrack() {
-  $("track-title").textContent = String(state.sample).padStart(2, "0") + " " + tracks[state.sample - 1];
-  $("track-artist").textContent = "Library / Sample album";
-  $("track-progress").style.width = Math.min(100, state.position / 211 * 100) + "%";
-  const m = Math.floor(state.position / 60), s = state.position % 60;
-  $("elapsed").textContent = m + ":" + String(s).padStart(2, "0");
-  $("play-indicator").classList.toggle("is-playing", state.playing);
-  $("toggle-play").textContent = state.playing ? "Ⅱ" : "▶";
-  $("toggle-play").setAttribute("aria-label", state.playing ? "Pause simulated playback" : "Resume simulated playback");
-  // Keep the baseline in step without copying CE palette or theater styling.
-  const stock = $("stock-screen");
-  for (const id of ["track-title", "track-artist", "elapsed"])
-    stock.querySelector(`[data-stock-id="${id}"]`).textContent = $(id).textContent;
-  stock.querySelector("[data-stock-id=track-progress]").style.width = $("track-progress").style.width;
-  stock.querySelector("[data-stock-id=play-indicator]").classList.toggle("is-playing", state.playing);
-}
-function showTab(name) {
-  state.active = name;
-  document.querySelectorAll("[data-panel]").forEach(panel => {
-    panel.classList.toggle("active", panel.dataset.panel === name);
-  });
-  document.querySelectorAll("[data-show]").forEach(button => {
-    button.setAttribute("aria-pressed", String(button.dataset.show === name));
-  });
-}
-function installSimulator() {
-  for (const button of document.querySelectorAll("[data-show]"))
-    button.addEventListener("click", () => showTab(button.dataset.show));
-  $("toggle-play").addEventListener("click", () => {
-    state.playing = !state.playing; updateTrack();
-  });
-  $("prev-track").addEventListener("click", () => {
-    state.sample = state.sample === 1 ? tracks.length : state.sample - 1;
-    state.position = 0; updateTrack(); showTab("playing");
-  });
-  $("next-track").addEventListener("click", () => {
-    state.sample = state.sample === tracks.length ? 1 : state.sample + 1;
-    state.position = 0; updateTrack(); showTab("playing");
-  });
-  setInterval(() => {
-    if (state.playing) {
-      state.position++;
-      if (state.position > 211) {
-        state.position = 0;
-        state.sample = state.sample === tracks.length ? 1 : state.sample + 1;
-      }
-      updateTrack();
-    }
-  }, 1000);
+  renderAsset();
 }
 function pixelsToCanvas(canvas, asset, pixels) {
   canvas.width = asset.width; canvas.height = asset.height;
@@ -423,29 +301,15 @@ async function openFirmware(file) {
     status("firmware-status", "Verified stock V137 SHA-256. " +
       state.firmware.entries.length + " RGB565 assets mapped locally.", "good");
     state.page = 0; renderGallery(); selectAsset(6);
+    window.dispatchEvent(new CustomEvent("stock-firmware"));
     status("editor-status", "Choose a source word and a theme role to define a binary patch.", "good");
   } catch (err) {
     state.firmware = null; $("asset-count").textContent = "0 / 456";
     status("firmware-status", "Firmware rejected: " + err.message, "bad");
   }
 }
-function initStockPreview() {
-  const stock = $("stock-screen");
-  // Clone the representative layout, removing IDs so the editor targets CE only.
-  for (const child of $("screen").children) {
-    if (child.id === "asset-overlay") continue;
-    const copy = child.cloneNode(true);
-    for (const node of [copy, ...copy.querySelectorAll("[id]")]) {
-      if (node.id) { node.dataset.stockId = node.id; node.removeAttribute("id"); }
-    }
-    stock.append(copy);
-  }
-}
 function init() {
-  initStockPreview();
-  $("theater-preview").addEventListener("change", renderTheater);
-  $("theater-art").addEventListener("change", ev => loadCover(ev.target.files[0]));
-  populatePalette(); installSimulator(); summarizeRules(); renderGallery();
+  populatePalette(); summarizeRules(); renderGallery();
   $("firmware-input").addEventListener("change", ev => openFirmware(ev.target.files[0]));
   $("upload-theme").addEventListener("click", () => $("theme-input").click());
   $("theme-input").addEventListener("change", ev => importTheme(ev.target.files[0]));

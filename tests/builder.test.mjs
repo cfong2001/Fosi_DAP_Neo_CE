@@ -11,7 +11,7 @@
 //   (b) framework-only plus the example theme:
 //         build.py --no-transplants \
 //           --theme-config patches/theme_editor/theme.example.json
-//         6dabd7e0f7e1523d36fad99eb9d7d940cda3e22c99a5debd393ffdc880502fec
+//         5786e0db52ecd4b120f0035ed31c8454bae42b563c23d77418add6999591e17c
 //   (c) framework-only plus the CE splash mark:
 //         build.py --no-transplants \
 //           --theme-config patches/theme_editor/ce-mark.json
@@ -53,7 +53,7 @@
 //       the merged theme runs), gated on DAP_NEO_OPUS_DATA like
 //       the Opus case it includes:
 //         build_full.py (one build.py pass)
-//         4d993e89bb3cdd22befb28efab0998f18acb2f56d7c0019c5dfa672c9f4de50d
+//         9cc86655ddf23bddf72903b828e58f6b0a978836825e74c0f2a1a5056bdc98a3
 //
 // Run:  node tests/builder.test.mjs
 // The stock image defaults to the repo-root DP3_V137.img; override
@@ -140,9 +140,9 @@ assert.deepEqual(FULL_GROWTHS.map(g => [g.module, g.length, g.sha256]), [
   [31, 6936, "010197e684a8a3e3f1a0937b61fe89a7f620b48c0872e5305f781d42d9b88f05"],
   [24, 26, "7b80afb308d276a4d0012cd4302f7a5f2a1c5192a1f2e70d3f23867e195a942a"],
 ]);
-assert.equal(FULL_THEME_RUNS.length, 497);
+assert.equal(FULL_THEME_RUNS.length, 501);
 assert.equal(FULL_IMAGE_SHA256,
-  "4d993e89bb3cdd22befb28efab0998f18acb2f56d7c0019c5dfa672c9f4de50d");
+  "9cc86655ddf23bddf72903b828e58f6b0a978836825e74c0f2a1a5056bdc98a3");
 for (const g of FULL_GROWTHS)
   assert.equal(await sha256Hex(hexToBytes(g.hex)), g.sha256);
 assert.equal(await sha256Hex(hexToBytes(FULL_TAIL.hex)), FULL_TAIL.sha256);
@@ -161,7 +161,7 @@ const cases = [
    "797a8d7af02fe9a7c789e63077f44a00701e2e03fa274880e42f41b8dd2176b8"],
   ["(b) toggles on plus the example theme",
    {groups: allGroups, patchGroups: PATCH_GROUPS, themeConfig: exampleTheme},
-   "6dabd7e0f7e1523d36fad99eb9d7d940cda3e22c99a5debd393ffdc880502fec"],
+   "5786e0db52ecd4b120f0035ed31c8454bae42b563c23d77418add6999591e17c"],
   ["(c) toggles on plus the CE splash mark",
    {groups: allGroups, patchGroups: PATCH_GROUPS, ceMarkRuns: CE_MARK_RUNS},
    "7121fbb913914dc104f9fc22cd3d3e030285cd0f869df8bcbec7602ae234f6b1"],

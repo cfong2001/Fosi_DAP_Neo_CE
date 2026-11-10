@@ -265,12 +265,14 @@ def apply_transplants(raw, names, ecpatch_dir, patch_ranges):
 # matches the studio exactly, byte for byte. The theme census
 # proved from decoded renders that the panel path displays the
 # same stored bytes as big-endian RGB565 (natural colours
-# big-endian, inverted colours little-endian). The two statements
-# are about different layers: the studio's word is a naming
-# convention over the stored bytes, and this consumer stays
-# byte-faithful to the studio so its verified counts hold. What a
-# recoloured pixel finally shows as on the panel is a
-# hardware-phase question; nothing here has been flashed.
+# big-endian, inverted colours little-endian), and the emulated
+# player painter copies resource bytes to the framebuffer in that
+# order (tools/gen_sim_data.py). So the two layers differ: a rule's
+# source keeps the studio's little-endian naming, so its verified
+# counts hold, but the replacement is written big-endian, so the
+# panel shows the palette colour the user picked. (Before this,
+# replacements were written little-endian and would have shown
+# byte-swapped.) Nothing here has been flashed.
 #
 # Extension beyond the studio format: a top-level "runs" list of
 # {offset, expect, replace} hex-string edits, for changes that are
@@ -479,7 +481,7 @@ def apply_theme(raw, config, claimed_ranges):
         ent = entries[rule['id']]
         base, size = ent['data_offset'], ent['size']
         src = struct.pack('<H', rule['source'])
-        tgt = struct.pack('<H', cfg['palette_words'][rule['role']])
+        tgt = struct.pack('>H', cfg['palette_words'][rule['role']])  # panel order
         hits = [base + 2 * i for i in range(size // 2)
                 if raw[base + 2 * i:base + 2 * i + 2] == src]
         if len(hits) != rule['expected_count']:

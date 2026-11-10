@@ -1,0 +1,91 @@
+// The simulator's renderer (docs/sim-core.mjs) must reproduce the
+// emulated painter framebuffers recorded by tools/gen_sim_data.py, and
+// its pins must match the committed images.
+//   node --test tests/sim-core.test.mjs
+import {test} from "node:test";
+import assert from "node:assert/strict";
+import {readFile} from "node:fs/promises";
+import {createHash} from "node:crypto";
+import {fileURLToPath} from "node:url";
+import path from "node:path";
+import {SECTIONS, PAINTER} from "../docs/sim-data.mjs";
+import {
+  WIDTH, HEIGHT, parseResourceSection, resourceSectionOf, fill, paintPlayer,
+  theaterGround, sampleCover, rgb565, framebufferBytes, rgbaToWords
+} from "../docs/sim-core.mjs";
+
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const sha = bytes => createHash("sha256").update(bytes).digest("hex");
+const fixture = JSON.parse(await readFile(path.join(root, "tests/fixtures/sim-painter.json"), "utf8"));
+
+const images = {};
+for (const [name, pin] of Object.entries(SECTIONS)) {
+  const image = new Uint8Array(await readFile(path.join(root, pin.file)));
+  images[name] = {image, pin};
+}
+
+test("section pins match the committed images", () => {
+  for (const {image, pin} of Object.values(images)) {
+    assert.equal(sha(image), pin.image_sha256, pin.file);
+    const section = image.subarray(pin.offset, pin.offset + pin.length);
+    assert.equal(sha(section), pin.sha256, pin.file + " section");
+    assert.deepEqual(resourceSectionOf(image), section);
+  }
+});
+
+test("painter replay equals every emulated framebuffer", () => {
+  assert.equal(fixture.cases.length, 24);
+  for (const c of fixture.cases) {
+    const {image, pin} = images[c.image];
+    const res = parseResourceSection(image.subarray(pin.offset, pin.offset + pin.length));
+    const fb = new Uint16Array(WIDTH * HEIGHT);
+    fill(fb, 0, 0, WIDTH - 1, HEIGHT - 1, c.ground);
+    paintPlayer(fb, res, c.image, {page: c.b, playing: c.play === 1, light: c.theme === 1, ground: c.ground});
+    assert.equal(sha(framebufferBytes(fb)), c.sha256,
+      `${c.image} theme ${c.theme} B=${c.b} play=${c.play} ground 0x${c.ground.toString(16)}`);
+  }
+});
+
+test("every state has painter data for both images", () => {
+  for (const name of ["stock", "ce"])
+    for (const key of ["0:1", "0:0", "1:1", "2:1"]) assert.ok(PAINTER[name][key].length > 0);
+});
+
+// Same arithmetic as port_derived in patches/full/build/tests/test_theater_full.py.
+function portDerived(words, width, height, light) {
+  const rows = Math.ceil(height / 3), sums = [0, 0, 0];
+  for (let i = 0; i < rows * width; i++) {
+    const w = words[i];
+    sums[0] += Math.floor(((w >> 11) & 31) * 255 / 31);
+    sums[1] += Math.floor(((w >> 5) & 63) * 255 / 63);
+    sums[2] += Math.floor((w & 31) * 255 / 31);
+  }
+  const n = rows * width, avg = sums.map(s => Math.floor((s + Math.floor(n / 2)) / n));
+  const mixed = light ? avg.map((a, i) => Math.floor((a * 25 + [242, 237, 230][i] * 75 + 50) / 100))
+                      : avg.map(a => Math.floor((a * 45 + 50) / 100));
+  return rgb565(...mixed);
+}
+
+test("theater ground equals the Python port on synthetic art", () => {
+  assert.equal(fixture.theater.length, 8);
+  for (const t of fixture.theater) {
+    const words = new Uint16Array(t.width * t.height);
+    for (let y = 0; y < t.height; y++)
+      for (let x = 0; x < t.width; x++) words[y * t.width + x] = (x * t.mx + y * t.my + t.c) & 0xFFFF;
+    assert.equal(theaterGround(words, t.width, t.height, t.light), t.ground, JSON.stringify(t));
+  }
+});
+
+test("theater ground follows the firmware port", () => {
+  const art = sampleCover();
+  assert.equal(theaterGround(art, 144, 144, false), portDerived(art, 144, 144, false));
+  assert.equal(theaterGround(art, 144, 144, true), portDerived(art, 144, 144, true));
+  // A flat cover averages to itself before the theme mix.
+  const flat = new Uint16Array(144 * 144).fill(rgb565(200, 100, 50));
+  assert.equal(theaterGround(flat, 144, 144, false), portDerived(flat, 144, 144, false));
+  // Only the top third counts.
+  const split = new Uint16Array(144 * 144).fill(0xFFFF);
+  split.fill(0, 0, 48 * 144);
+  assert.equal(theaterGround(split, 144, 144, false), 0);
+  assert.equal(rgbaToWords(new Uint8ClampedArray([255, 255, 255, 0]))[0], 0);
+});

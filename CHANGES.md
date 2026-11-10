@@ -1,5 +1,49 @@
 # Changelog
 
+## 2026-11-10: light play-mode icons keyed; theme colours in panel order
+
+- Fixed: on CE with theater mode in the light theme, the play-mode
+  icon showed as a white box. The light icons (resources 452 to 455)
+  carried a white surround where the dark ones (286 to 289) carry the
+  0xF800 key. `patches/design_refresh_v4/play_mode_light/` keys the
+  border-connected white of each light icon (1,172 pixels; every white
+  pixel in these icons is surround, so no glyph pixel changes). Both
+  draw sites use the keyed helper, as the dark icons already require.
+  The merged theme grows from 497 to 501 runs.
+- New standard image `DP3_V137_CE.img`, SHA-256
+  `9cc86655ddf23bddf72903b828e58f6b0a978836825e74c0f2a1a5056bdc98a3`
+  (2,348 bytes differ from the previous one: the four icons and the
+  CRC). The minimal and recovery images are unchanged. The browser
+  everything build reproduces it byte for byte.
+- Fixed: theme colours were written little-endian, so the panel, which
+  shows stored bytes big-endian, would have shown them byte-swapped.
+  `build.py` and the builder page now write the replacement colour
+  big-endian; rule sources keep the studio's little-endian naming, so
+  saved themes and presets keep their counts. The studio's previews
+  now show pixels in panel order. Example-theme reference build:
+  `5786e0db52ecd4b120f0035ed31c8454bae42b563c23d77418add6999591e17c`.
+
+## 2026-11-10: simulator from real firmware pixels
+
+- The site's screen comparison now draws real pixels: resources come
+  from the stock image and the CE standard image (each resource section
+  fetched by byte range and checked against a pinned SHA-256), and the
+  status icon and transport row replay what each image's player painter
+  draws, recorded under emulation by `tools/gen_sim_data.py`.
+  `tests/sim-core.test.mjs` reproduces all 24 emulated framebuffers
+  (both images, both themes, four transport states, default and
+  theater grounds) word for word.
+- Theater mode uses the firmware port's integer rule (top-third average,
+  55% toward black or 75% toward paper, RGB565), checked against the
+  Python port on synthetic art. Dark and light themes, the transport
+  pages, no-media and boot-splash screens are selectable. Cover, text
+  and progress bar remain approximations.
+- Found by the simulator: in the light theme with theater on, the CE
+  status icon (resource 452) keeps its white surround, because only
+  0xF800 is keyed. The emulated painter shows the same.
+- CI: `firmware.yml` regenerates the simulator data and fails on any
+  difference; `ci.yml` runs the replay test.
+
 ## 2026-11-10: install flow on the site
 
 - The Pages site (`docs/`) now opens on a three-step install: choose

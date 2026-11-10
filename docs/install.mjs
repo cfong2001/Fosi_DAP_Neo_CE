@@ -5,26 +5,14 @@
 // Nothing here writes to the player's flash. The browser only places the
 // update file on the player's USB storage; the player's own installer
 // flashes it when the user runs the update on the device.
-import {DEFAULT_REPO, RELEASE_REF, RELEASE_DIR, UPDATE_NAME, IMAGES} from "./install-data.mjs";
+import {RELEASE_DIR, UPDATE_NAME, IMAGES} from "./install-data.mjs";
+import {repoFromLocation, rawUrl as repoUrl} from "./repo.mjs";
 import {sha256} from "./theme-core.mjs";
 
 const $ = id => document.getElementById(id);
 const fmt = n => n.toLocaleString("en-US");
 
-// Served from <owner>.github.io/<repo>/, fetch from that repository, so a
-// fork's page offers the fork's images. Otherwise use the default.
-export function repoFromLocation(loc) {
-  const host = loc.hostname.toLowerCase();
-  if (!host.endsWith(".github.io")) return DEFAULT_REPO;
-  const owner = host.slice(0, -".github.io".length);
-  const first = loc.pathname.split("/").filter(Boolean)[0];
-  return owner + "/" + (first || owner + ".github.io");
-}
-
-export function rawUrl(repo, file) {
-  return "https://raw.githubusercontent.com/" + repo + "/" + RELEASE_REF +
-    "/" + RELEASE_DIR + "/" + file;
-}
+const rawUrl = (repo, file) => repoUrl(repo, RELEASE_DIR + "/" + file);
 
 const repo = repoFromLocation(window.location);
 const verified = new Map();   // image id -> verified bytes

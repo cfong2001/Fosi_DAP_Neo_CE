@@ -63,6 +63,11 @@ jobs:
       - name: EQ preset selector and fit under emulation
         run: python patches/eq_presets/test_eq_presets.py
 
+      - name: Simulator data matches the emulated painter
+        run: |
+          python tools/gen_sim_data.py
+          git diff --exit-code -- docs/sim-data.mjs tests/fixtures/sim-painter.json
+
       - name: Build the release set
         run: bash ci/build_release.sh "$RUNNER_TEMP/dist"
 
