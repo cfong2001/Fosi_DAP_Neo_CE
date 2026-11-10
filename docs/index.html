@@ -5,21 +5,30 @@
 <title>DAP Neo CE | Install and build</title>
 <link rel="icon" href="data:,">
 <link rel="stylesheet" href="./stage/stage.css">
+<link rel="preload" href="./fonts/Barlow-Regular.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="./fonts/BarlowCondensed-SemiBold.ttf" as="font" type="font/ttf" crossorigin>
 <link rel="stylesheet" href="./theme.css">
 </head><body>
+<nav class="masthead" aria-label="Main navigation"><a class="wordmark" href="#">DAP NEO <span>/ CE</span></a><span class="masthead-note">Independent firmware · V137</span><div class="masthead-links"><a href="#install">01 / Install</a><a href="#features">02 / Explore</a><a href="#advanced">03 / Configure</a></div></nav>
 <header class="top">
 <div class="hero-copy">
-<div class="eyebrow">Fosi DAP Neo · V137</div>
-<h1>Community Edition firmware</h1>
+<div class="eyebrow">A little player. A longer story.</div>
+<h1>Community<br>Edition<span class="hero-firmware">Firmware for the DAP Neo</span></h1>
 <p class="lede">Better Vorbis decoding, gapless playback, natural sorting, Opus, playlists and a refreshed look for the DAP Neo. Pick an image, put it on the player from this page, and run the update on the device.</p>
 <div class="button-row hero-actions"><a class="button main" href="#install">Install CE</a><a class="button" href="#firmware-features">Build your own</a></div>
 </div>
 <div class="hero-stage" id="ce-hero-stage" aria-label="Illustration: a firmware update spins the DAP Neo and lights its screen with CE"></div>
+<div class="hero-foot"><span>Fosi DAP Neo / Community Edition</span><span>Open source. Built by the community.</span></div>
 </header>
 <main class="site">
 <section class="card install" id="install" aria-labelledby="install-title">
-<h2 id="install-title">Install CE</h2>
+<div class="install-intro">
+<h2 id="install-title"><span class="section-index">01 / Get started</span>Make it yours.</h2>
 <p class="note warn"><strong>Not yet tested on hardware.</strong> No CE image has been installed on a device; every check so far is offline (emulation, host tests, image validation). You would be the first hardware test. Back up your music and read <a href="#going-back">Going back to stock</a> first. If the player stops booting, recovery needs the Rockchip USB (Rockusb) tools.</p>
+<details class="seg" id="going-back"><summary>Going back to stock</summary>
+<p class="note">If the player still boots and can run an update, install <strong>Back to stock</strong> the same way. It is stock code dated one day after CE, so the player prefers it. Plain stock <code>DP3_V137.img</code> is older than CE and the player would keep booting CE. If the player does not boot, recovery needs the Rockchip USB (Rockusb) tools; see <code>release/README.md</code> in the repository.</p>
+</details>
+</div>
 <ol class="steps">
 <li class="step">
 <h3><span class="step-num">1</span> Choose an image</h3>
@@ -55,12 +64,10 @@
 <p class="note">The stock installer writes both firmware slots, so no stock copy stays on the player after an install. Please report results, good or bad, as a GitHub issue with the image hash and what you tested.</p>
 </li>
 </ol>
-<details class="seg" id="going-back"><summary>Going back to stock</summary>
-<p class="note">If the player still boots and can run an update, install <strong>Back to stock</strong> the same way. It is stock code dated one day after CE, so the player prefers it. Plain stock <code>DP3_V137.img</code> is older than CE and the player would keep booting CE. If the player does not boot, recovery needs the Rockchip USB (Rockusb) tools; see <code>release/README.md</code> in the repository.</p>
-</details>
+
 </section>
 <section class="features" id="features" aria-labelledby="features-title">
-<h2 id="features-title">What CE changes</h2>
+<h2 id="features-title"><span class="section-index">02 / The difference</span>Small player.<br> More possibilities.</h2>
 <div class="bento">
 <article class="tile tile--hero">
 <p class="tile-copy"><b>Theater mode.</b> The player's background takes its colour from the album art.</p>
@@ -84,7 +91,7 @@
 </div>
 </section>
 <details class="advanced" id="advanced">
-<summary><span><strong>Advanced: build your own image</strong><br><span class="note">Theme colors, EQ curves for your headphones, DAC filter, Bluetooth auto-off and per-feature choices. Needs your own stock <code>DP3_V137.img</code>; everything runs in this page and nothing is uploaded.</span></span></summary>
+<summary><span><span class="section-index">03 / The workbench</span><strong>Advanced: build your own image</strong><br><span class="note">Theme colors, EQ curves for your headphones, DAC filter, Bluetooth auto-off and per-feature choices. Needs your own stock <code>DP3_V137.img</code>; everything runs in this page and nothing is uploaded.</span></span></summary>
 <div class="page">
 <section class="card">
 <h2>1. Choose colors</h2>
