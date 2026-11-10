@@ -9,6 +9,7 @@ import { useReducedMotion } from '../kit/reduced-motion'
 import type { Act } from '../kit/act'
 import './features.css'
 import DevicePicture from './DevicePicture'
+import DetailPicture from './DetailPictures'
 
 // Each feature picture mounts into its HTML slot at the slot's actual width.
 // Physical-player previews share DevicePicture; sorting retains its original
@@ -87,11 +88,13 @@ function SortPicture({ theme, width }: { theme: Theme; width: number }) {
 
 const device = (mode: Parameters<typeof DevicePicture>[0]['mode']) =>
   (props: { theme: Theme; width: number }) => <DevicePicture {...props} mode={mode} />
+const detail = (mode: Parameters<typeof DetailPicture>[0]['mode']) =>
+  (props: { theme: Theme; width: number }) => <DetailPicture {...props} mode={mode} />
 const PICTURES = {
   theater: device('theater'), eq: device('eq'), sort: SortPicture,
-  bluetooth: device('bluetooth'), playlist: device('playlist'),
-  lockscreen: device('lockscreen'), gapless: device('gapless'),
-  opus: device('opus'), system: device('system'),
+  bluetooth: device('bluetooth'), playlist: detail('playlist'),
+  lockscreen: device('lockscreen'), gapless: detail('gapless'),
+  opus: detail('opus'), system: detail('system'),
 } as const
 
 // One picture per [data-picture] slot, drawn at the slot's own width so the

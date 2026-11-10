@@ -26,7 +26,7 @@ async function serveDocs(t) {
   await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
   t.after(() => server.close());
   const executablePath = process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH || undefined;
-  const browser = await chromium.launch({executablePath, headless: true});
+  const browser = await chromium.launch({executablePath, headless: true, args: ['--enable-unsafe-swiftshader']});
   t.after(() => browser.close());
   return {browser, url: `http://127.0.0.1:${server.address().port}/`};
 }
@@ -355,9 +355,47 @@ test('stage pictures mount in light and dark', async t => {
     await page.locator('#features').scrollIntoViewIfNeeded();
     for (const name of ['theater', 'eq', 'sort', 'bluetooth'])
       await page.waitForSelector(`[data-picture="${name}"] .ss-stage`);
+    await page.locator('[data-stat="vorbis"]').scrollIntoViewIfNeeded();
     // Count exposes its figure as an aria-label (its digits are rolling strips)
     await page.waitForFunction(() => document.querySelector('[data-stat="vorbis"] .ss-count')?.getAttribute('aria-label') === '40', null, {timeout: 10000});
     assert.equal(await page.locator('[data-stat="vorbis"] .ft-stat-number').count(), 1, 'the static fallback gave way');
     assert.deepEqual(errors, [], colorScheme);
+  }
+});
+
+test('device previews require a sustained hold and update their visible screens', async t => {
+  const {browser, url} = await serveDocs(t);
+  for (const width of [1280, 390]) {
+    const context = await browser.newContext({viewport: {width, height: 950}, reducedMotion: 'reduce'});
+    t.after(() => context.close());
+    const page = await context.newPage();
+    await page.goto(url);
+    const bt = page.locator('[data-mode="bluetooth"]');
+    await bt.scrollIntoViewIfNeeded();
+    const power = bt.getByRole('button', {name: /Hold Power/});
+    const box = await power.boundingBox();
+    await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+    await page.mouse.down();
+    await page.waitForTimeout(150);
+    await page.mouse.up();
+    assert.equal(await bt.getAttribute('data-on'), 'true', 'an early release must not toggle Bluetooth');
+    await page.mouse.down();
+    await page.waitForFunction(() => document.querySelector('[data-mode="bluetooth"]')?.dataset.on === 'false');
+    await page.mouse.up();
+    await power.focus();
+    await page.keyboard.down('Space');
+    await page.waitForFunction(() => document.querySelector('[data-mode="bluetooth"]')?.dataset.on === 'true');
+    await page.keyboard.up('Space');
+    const eq = page.locator('[data-mode="eq"]');
+    await eq.getByRole('button', {name: 'Stock preset', exact: true}).click();
+    await page.waitForTimeout(750);
+    const stock = await eq.locator('canvas').evaluate(el => el.toDataURL());
+    await eq.getByRole('button', {name: 'HD 600 curve', exact: true}).click();
+    await page.waitForTimeout(750);
+    const fitted = await eq.locator('canvas').evaluate(el => el.toDataURL());
+    assert.notEqual(stock, fitted, 'changing the preset must change the rendered screen');
+    assert.equal(await page.locator('.player-model[data-unavailable]').count(), 0, '3D previews render successfully');
+    await assertNoOverflow(page, width);
+    await context.close();
   }
 });
