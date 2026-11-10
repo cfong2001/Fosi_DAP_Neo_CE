@@ -62,7 +62,8 @@
 <div class="palette" id="palette"></div>
 <div class="hint">
 <h3>Firmware file</h3>
-<div class="control"><label for="firmware-input">Select your original DP3_V137.img (not the unified image)</label>
+<div class="button-row"><button class="button main" type="button" id="firmware-fetch">Load stock V137 from the repository (13.6 MB)</button></div>
+<div class="control"><label for="firmware-input">Or select your own original DP3_V137.img</label>
 <input id="firmware-input" type="file" accept=".img,.IMG,application/octet-stream"></div>
 <div id="firmware-status" class="status" role="status">No firmware loaded. You can still try palettes and export a config.</div>
 </div>
@@ -139,49 +140,39 @@
 <div id="editor-status" class="status" role="status">No firmware bytes will change until you add a resource rule.</div>
 </section>
 <section class="card" id="firmware-features">
-<h2>4. Configure and build a CE image</h2>
-<p class="note">Builds from the verified stock image loaded in section 1. Patch preconditions are checked, the header date is stamped 2026-10-23, the duplicate header is re-synced, and the trailer CRC is recomputed and validated. For module extensions, stock-relative theme runs are applied before insertion so they move with their original content. Patch data comes from the repository's patch files.</p>
+<h2>4. Build a custom image</h2>
+<p class="note">Everything below runs in this page, from the stock image in section 1: no scripts, no uploads. Every patch checks its expected bytes, every payload its pinned SHA-256, and the result gets the 2026-10-23 header date and a recomputed checksum. Built in emulation only; nothing has been tested on a device.</p>
 <div class="hint">
-<h3>Playback and device features</h3>
-<p class="note">These options are enabled in the default CE build. Clear any option to leave that feature out of the image. Selections apply when you build; they do not change the preview or an existing device.</p>
-<div id="feature-toggles" class="toggle-list"></div>
-<label class="checkbox"><input type="checkbox" id="opt-everything"> <span><strong>Everything build (experimental)</strong><br><span class="note">Composes every feature in one image, as in the repository's <code>patches/full/</code>: all feature patches, both decoder transplants, safer track titles, the design refresh v4 transport glyphs, the browser icon extension and the CE splash mark, theater mode, the Bluetooth shortcut, M3U playlists with playback start and the exit disarm, the lock screen. The tail features share one merged gap tail, so the standalone exclusivity below does not apply to this selection. Requires the Opus data file below. The result is 6,826 bytes longer than stock because the ebook reader is kept intact; whether the update slots accept the longer image is unverified. When this is selected, the other options in this section are ignored. Validated under emulation; hardware pending.</span></span></label>
-<label class="checkbox"><input type="checkbox" id="opt-title-fix"> <span><strong>Safer track titles (experimental)</strong><br><span class="note">Bounds the player title copy and protects short titles from out-of-bounds suffix checks. Tested in emulation; not yet tested on a device.</span></span></label>
-<label class="checkbox"><input type="checkbox" id="opt-theater"> <span><strong>Theater mode (experimental)</strong><br><span class="note">Derived player background from cover art: the player background color is mixed from the top third of the artwork. Not in the default build. Validated under emulation; hardware pending. Cannot be combined with the Bluetooth shortcut, lock-screen or playlist features in this standalone selection; the everything build above combines them through a merged tail (see <code>patches/full/</code>).</span></span></label>
-<label class="checkbox"><input type="checkbox" id="opt-vorbis" checked> <span><strong>Full-precision Vorbis (vorbis75 transplant)</strong><br><span class="note">Replaces the low-accuracy stock Vorbis decoder module with the full-precision build. Applied as the 70,133 changed bytes in 1,275 ranges (about 198 KB of data in this page) and pinned by a SHA-256 of the transplanted module. On by default, as in the framework's unified build.</span></span></label>
-<div class="control" id="eq-presets"><strong>EQ presets (AutoEQ or custom)</strong>
-<p class="note">The player's EQ is a 31-band graphic EQ (20 Hz to 20 kHz, ±12 dB in 1 dB steps), but stock presets use five bands, and Classical, Bass Boost and Heavy Metal apply Pop's curve, Jazz's curve and no EQ. Building with any curve below gives every preset its own curve. Paste or load an AutoEQ <code>GraphicEQ.txt</code> for your headphones (from autoeq.app), or type 31 dB values for a custom curve. Each curve is fitted to the firmware's own band filters; the build status reports the fit error and the peak boost, and a peak above 0 dB can clip. Presets you leave empty keep stock's curve. Menu names stay the same. Checked in emulation, not yet on a device.</p>
-<div id="eq-slots"></div></div>
+<h3>Sound and settings <small>apply to every build</small></h3>
 <div class="control"><label for="opt-dac-filter"><strong>DAC digital filter</strong></label>
-<p class="note">The CS43198 has five interpolation filters. Stock code can select each of them but no menu offers the choice, so every unit uses the first. Linear phase delays the signal about 0.9 ms at 44.1 kHz, against 0.14 ms for low latency. Slow roll-off starts falling at 18.4 kHz instead of 20 kHz and rejects 64 dB above the band instead of 110. NOS has almost no delay but is up to 3.2 dB down at 20 kHz and has no interpolation filter to remove images above the band. None of these is claimed to sound better. Also applies to the everything build. Checked in emulation, not yet on a device.</p>
-<select id="opt-dac-filter"></select></div>
+<select id="opt-dac-filter"></select>
+<details class="more"><summary>About the filters</summary><p class="note">The CS43198 has five interpolation filters. Stock code can select each of them but no menu offers the choice, so every unit uses the first. Linear phase delays the signal about 0.9 ms at 44.1 kHz, against 0.14 ms for low latency. Slow roll-off starts falling at 18.4 kHz instead of 20 kHz and rejects 64 dB above the band instead of 110. NOS has almost no delay but is up to 3.2 dB down at 20 kHz and has no interpolation filter to remove images above the band. None of these is claimed to sound better.</p></details></div>
+<div class="control" id="eq-presets"><strong>EQ presets (AutoEQ or custom)</strong>
+<p class="note">Give any of the six presets your own curve: paste an AutoEQ <code>GraphicEQ</code> file for your headphones (from autoeq.app) or 31 dB values. Empty presets keep stock's curve.</p>
+<details class="more"><summary>Edit preset curves</summary>
+<p class="note">The player's EQ is a 31-band graphic EQ (20 Hz to 20 kHz, ±12 dB in 1 dB steps), but stock presets use five bands, and Classical, Bass Boost and Heavy Metal apply Pop's curve, Jazz's curve and no EQ. Each curve is fitted to the firmware's own band filters; the build status reports the fit error and the peak boost, and a peak above 0 dB can clip. Menu names stay the same.</p>
+<div id="eq-slots"></div></details></div>
 <div class="control"><label for="opt-bt-auto-off"><strong>Bluetooth auto-off</strong></label>
-<p class="note">Stock switches Bluetooth off after 5 minutes with no device connected, and the setting then reads Off, so it does not come back by itself. Choose a longer limit, or never. While a device is connected nothing changes. Never leaves the Bluetooth module powered while unpaired; its idle current is not measured. Also applies to the everything build. Checked in emulation, not yet on a device.</p>
-<select id="opt-bt-auto-off"></select></div>
-<label for="opt-opus-data"><strong>Opus playback (replaces WMA)</strong></label>
-<p class="note">Optional: select locally generated Opus range data. Run <code>python3 docs/generate_builder_data.py --ecpatch-dir /path/to/patches --opus-data /path/to/opus.json --opus-data-only</code> with your pinned stock image and decoder inputs and a new output path, then select that JSON below. The file stays on your device. The builder applies the decoder and five matching classifier patches together. WMA playback is removed; Opus tags and cover art are not supported. Decoder validation and device checks remain open.</p>
-<input type="file" id="opt-opus-data" accept=".json,application/json">
-<div class="control"><label for="opt-bt-data"><strong>Bluetooth shortcut (experimental)</strong></label>
-<p class="note">Optional: long-press Power to toggle Bluetooth. Build the local payload with <code>python3 patches/ui_features/build/build_bt_tail.py --output bt-tail.bin</code> using ARM GCC 14.2.1 and binutils 2.44, then select it here. The payload stays local and is checked against the verified build. The dispatcher may pause up to five seconds if Bluetooth does not respond. Emulated; tail loading and shortcut behavior have not been tested on a device.</p>
-<input type="file" id="opt-bt-data" accept=".bin,application/octet-stream"></div>
-<div class="control"><label for="opt-lock-data"><strong>Lock-screen track information (experimental)</strong></label>
-<p class="note">Display track title and elapsed/total time while locked. Run <code>sh patches/ui_features/lockscreen_build/build.sh</code> with ARM GCC 14.2.1 and binutils 2.44, then select <code>patches/ui_features/lockscreen_build/scratch/lockscreen.bin</code>. The file is checked locally. Time updates on display events; window cycling and display placement need device testing.</p>
-<input type="file" id="opt-lock-data" accept=".bin,application/octet-stream"></div>
-<div class="control"><strong>M3U playlists and lock-screen information</strong>
-<p class="note">Available as part of the everything build above: its composed extension implements the playback-start transition and disarms the playlist state on folder, file and tag-library exits, all validated in emulation (see <code>patches/full/</code>). The standalone payload option here remains unavailable; the separate lock-screen option above does not install playlist hooks.</p>
-<label for="opt-playlist-overlay">Module 31 payload</label><input type="file" id="opt-playlist-overlay" accept=".bin,application/octet-stream" disabled>
-<label for="opt-playlist-resolver">Resolver tail payload</label><input type="file" id="opt-playlist-resolver" accept=".bin,application/octet-stream" disabled></div>
+<select id="opt-bt-auto-off"></select>
+<p class="note">Stock turns Bluetooth off after 5 minutes with nothing connected, and it stays off. Nothing changes while a device is connected; "never" keeps the module powered while unpaired (idle current not measured).</p></div>
 </div>
 <div class="hint">
-<h3>Theme</h3>
-<label class="checkbox"><input type="checkbox" id="opt-theme"> <span><strong>Apply the theme from the editor above</strong><br><span class="note">Uses the palette and the exact color rules currently selected in sections 1 and 3, with the same expected-count and guard-word checks as <code>build.py --theme-config</code>. With no rules selected, this changes nothing.</span></span></label>
-<label class="checkbox"><input type="checkbox" id="opt-ce-mark"> <span><strong>CE splash mark</strong><br><span class="note">Adds the small CE mark to both boot splashes (496 bytes, from <code>patches/theme_editor/ce-mark.json</code>). It is not part of the framework's default build.</span></span></label>
+<h3>Features</h3>
+<div class="base-choices" role="radiogroup" aria-label="Feature set">
+<label class="image-choice"><input type="radio" name="build-base" value="all" checked><span class="image-body"><span class="image-head"><strong>All CE features</strong><span class="badge accent">Same as Standard</span></span><span class="note">Everything in the Standard download, including playlists and lock-screen info, plus your sound settings above.</span></span></label>
+<label class="image-choice"><input type="radio" name="build-base" value="custom"><span class="image-body"><span class="image-head"><strong>Pick features</strong><span class="badge">Custom</span></span><span class="note">Starts as the Minimal image; tick what to add. A few screen features exclude each other here.</span></span></label>
+</div>
+<div id="feature-list" class="feature-groups"></div>
+</div>
+<div class="hint" id="look-options">
+<h3>Look</h3>
+<label class="checkbox"><input type="checkbox" id="opt-theme"> <span><strong>Apply the theme from the editor above</strong><br><span class="note">The palette and exact color rules from sections 1 and 3, with the same checks as <code>build.py --theme-config</code>. With no rules, this changes nothing. Picked builds only.</span></span></label>
 <h3>Preset schemes</h3>
-<p class="note">Loads a scheme into the editor above and enables the theme option. The v1 schemes are converted from their provisional format; every pixel count is rechecked against the stock image by the generator.</p>
+<p class="note">Loads a scheme into the editor above and turns on the theme option.</p>
 <div class="button-row" id="preset-buttons"></div>
 </div>
-<div class="button-row"><button class="button main" type="button" id="build-button">Build CE image</button></div>
-<div id="build-status" class="status" role="status">Load your stock DP3_V137.img in section 1 first; the build refuses any other image.</div>
+<div class="button-row build-row"><button class="button main" type="button" id="build-button">Build CE image</button></div>
+<div id="build-status" class="status" role="status">Load the stock DP3_V137.img in section 1 first (from the repository or your own copy).</div>
 </section>
 <section class="card">
 <h2>5. Not offered here</h2>

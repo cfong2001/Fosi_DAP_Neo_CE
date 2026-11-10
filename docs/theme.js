@@ -3,6 +3,7 @@ import {
   frequencies, rgbaPixels, rgb565, rgb888, asWord, wordHex,
   validateTheme, exportConfig
 } from "./theme-core.mjs";
+import {repoFromLocation, rawUrl} from "./repo.mjs";
 
 const $ = id => document.getElementById(id);
 const defaults = Object.freeze({
@@ -308,9 +309,27 @@ async function openFirmware(file) {
     status("firmware-status", "Firmware rejected: " + err.message, "bad");
   }
 }
+// The stock image is public in the repository; fetch it instead of
+// asking for a local file. openFirmware still checks its SHA-256.
+async function fetchStock() {
+  const button = $("firmware-fetch");
+  button.disabled = true;
+  status("firmware-status", "Downloading DP3_V137.img from the repository…");
+  try {
+    const response = await fetch(rawUrl(repoFromLocation(window.location), "DP3_V137.img"));
+    if (!response.ok) throw new Error("GitHub returned " + response.status);
+    await openFirmware(new Blob([await response.arrayBuffer()]));
+  } catch (err) {
+    status("firmware-status", "Could not download the stock image: " + err.message +
+      ". Select your own copy instead.", "bad");
+  } finally {
+    button.disabled = false;
+  }
+}
 function init() {
   populatePalette(); summarizeRules(); renderGallery();
   $("firmware-input").addEventListener("change", ev => openFirmware(ev.target.files[0]));
+  $("firmware-fetch").addEventListener("click", fetchStock);
   $("upload-theme").addEventListener("click", () => $("theme-input").click());
   $("theme-input").addEventListener("change", ev => importTheme(ev.target.files[0]));
   $("download-theme").addEventListener("click", exportTheme);

@@ -54,3 +54,23 @@ header.top{border-bottom:1px solid var(--edge);padding:23px clamp(16px,3vw,44px)
 .sim-controls .checkbox{align-items:flex-start;grid-column:1/-1;margin:4px 0}
 .sim-controls .checkbox input{margin-top:3px}
 #sim-status,#theater-status{width:100%}
+
+/* Section 4: feature set choice and grouped checklist (builder.js). */
+.base-choices{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-bottom:12px}
+.feature-groups{display:grid;gap:12px}
+.feature-group{border:1px solid #2d3b51;border-radius:12px;padding:8px 12px 10px;margin:0;min-width:0}
+.feature-group legend{padding:0 6px;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:#75cfff;font-weight:700}
+.feature{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-top:1px solid #1f2b3d;font-size:.86rem;color:#d7e3f1;cursor:pointer}
+.feature:first-of-type{border-top:0}
+.feature input{margin-top:3px;accent-color:#4bb8e8;flex:0 0 auto}
+.feature>span{display:flex;flex-direction:column;gap:2px;min-width:0}
+.feature-head{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.feature .note{margin:0;font-size:.8rem}
+.feature .why{color:#f0d6a0}
+.feature:has(input:disabled){cursor:default;opacity:.7}
+.feature.only-all{opacity:.6}
+details.more{margin:6px 0 2px}
+details.more>summary{cursor:pointer;font-size:.82rem;color:#8fd6ff}
+#eq-slots label{display:block;font-size:.82rem;color:#b6c9df;margin:10px 0 4px}
+#eq-slots textarea{width:100%;min-width:0;background:#0a1220;color:var(--ink);border:1px solid #43536b;border-radius:9px;padding:8px;font:12px ui-monospace,monospace}
+.build-row{border-top:1px solid var(--edge);margin-top:18px;padding-top:16px}

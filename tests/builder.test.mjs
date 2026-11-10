@@ -50,10 +50,16 @@
 //           8691c5bbba257bb488bea9dde17376a500a424e24a173300bdcb819734254027
 //   (m) the everything build (patches/full/: 64 patches, both
 //       transplants, two growth insertions, the merged tail and
-//       the merged theme runs), gated on DAP_NEO_OPUS_DATA like
-//       the Opus case it includes:
+//       the merged theme runs), with the page's embedded Opus data
+//       (docs/builder-opus-data.mjs; DAP_NEO_OPUS_DATA overrides it):
 //         build_full.py (one build.py pass)
 //         9cc86655ddf23bddf72903b828e58f6b0a978836825e74c0f2a1a5056bdc98a3
+//   standalone lock screen (the embedded 406-byte reference-toolchain
+//   routine in a module 31 extension, plus patch 0033):
+//         build.py --no-transplants --manifest <framework manifest plus
+//           patches/ui_features/lockscreen_build/0033-ui-lockscreen-title.patch>
+//           --grow 31:code:lockscreen.bin
+//         53905b2ed15657b4ac0ab202cf517303b0a8a75b25731b7f92ca0fd3f2213b48
 //
 // Run:  node tests/builder.test.mjs
 // The stock image defaults to the repo-root DP3_V137.img; override
@@ -67,6 +73,8 @@ import {OPUS_PATCHES} from "../docs/builder-opus.mjs";
 import {CE_MARK_RUNS} from "../docs/builder-cemark.mjs";
 import {THEATER_PATCHES, THEATER_TAIL} from "../docs/builder-theater.mjs";
 import {BT_PATCH, LOCK_PATCH, PLAYLIST_PATCHES, TITLE_PATCHES, bluetoothTail, lockscreenPayload, playlistPayloads, combineTails, theaterTail, combineWithTheater} from "../docs/builder-experimental.mjs";
+import {OPUS_DATA} from "../docs/builder-opus-data.mjs";
+import {BT_PAYLOAD, LOCK_PAYLOAD} from "../docs/builder-payloads.mjs";
 import {FULL_EXTRA_PATCHES, FULL_TAIL, FULL_GROWTHS, FULL_THEME_RUNS, FULL_IMAGE_SHA256} from "../docs/builder-full.mjs";
 import {bandTable, parseCurve, fit, slotPatches} from "../docs/eq-core.mjs";
 import {DAC_FILTERS, dacFilterPatches} from "../docs/builder-dacfilter.mjs";
@@ -221,8 +229,11 @@ assert.deepEqual(btAutoOffPatches("stock"), []);
 assert.throws(() => btAutoOffPatches("bogus"), /unknown Bluetooth auto-off/);
 assert.deepEqual(dacFilterPatches("stock"), []);
 assert.throws(() => dacFilterPatches("bogus"), /unknown DAC filter/);
-if (process.env.DAP_NEO_OPUS_DATA) {
-  const opus = JSON.parse(await readFile(process.env.DAP_NEO_OPUS_DATA, "utf8"));
+// The page embeds the Opus data and both payloads; DAP_NEO_*_DATA still
+// override them with local files.
+{
+  const opus = process.env.DAP_NEO_OPUS_DATA
+    ? JSON.parse(await readFile(process.env.DAP_NEO_OPUS_DATA, "utf8")) : OPUS_DATA;
   cases.push(["(g) unified build plus the Opus variant",
     {groups: allGroups, patchGroups: PATCH_GROUPS, vorbis: VORBIS75, opus, opusPatches: OPUS_PATCHES},
     "fc5f12e95388d517ba3f16326df13a38a132f670d78b0d7df5b584255f93bb66"]);
@@ -236,18 +247,20 @@ if (process.env.DAP_NEO_OPUS_DATA) {
                                       payload: hexToBytes(g.hex)}))},
     FULL_IMAGE_SHA256]);
 }
-if (process.env.DAP_NEO_BT_DATA) {
-  const bt = new Uint8Array(await readFile(process.env.DAP_NEO_BT_DATA));
+{
+  const bt = process.env.DAP_NEO_BT_DATA
+    ? new Uint8Array(await readFile(process.env.DAP_NEO_BT_DATA)) : hexToBytes(BT_PAYLOAD.hex);
   const tailPayload = await bluetoothTail(bt, sha256Hex);
   cases.push(["(h) Bluetooth tail and hook, framework reference",
     {groups: allGroups, patchGroups: PATCH_GROUPS, tailPayload, extraPatches: [BT_PATCH]},
     "0cf1d41d3add4f8e162836faafd9febcfb0b5e300d5c86ba1496b6470be10eca"]);
 }
-if (process.env.DAP_NEO_LOCK_DATA) {
-  const payload = await lockscreenPayload(new Uint8Array(await readFile(process.env.DAP_NEO_LOCK_DATA)), sha256Hex);
+{
+  const payload = await lockscreenPayload(process.env.DAP_NEO_LOCK_DATA
+    ? new Uint8Array(await readFile(process.env.DAP_NEO_LOCK_DATA)) : hexToBytes(LOCK_PAYLOAD.hex), sha256Hex);
   cases.push(["standalone lock-screen extension, framework reference",
     {groups: allGroups, patchGroups: PATCH_GROUPS, module31Payload: payload, extraPatches: [LOCK_PATCH]},
-    "e8f36b7cfc9515bc864236d8e3bcbc457aed72871f384d928418bf42b1a7e0fd"]);
+    "53905b2ed15657b4ac0ab202cf517303b0a8a75b25731b7f92ca0fd3f2213b48"]);
 }
 if (process.env.DAP_NEO_PLAYLIST_OVERLAY && process.env.DAP_NEO_PLAYLIST_RESOLVER) {
   const overlay = new Uint8Array(await readFile(process.env.DAP_NEO_PLAYLIST_OVERLAY));
@@ -298,7 +311,7 @@ await assert.rejects(buildFirmware(stock, {
 }, sha256Hex), /range outside module 72/);
 console.log("PASS Opus data cannot write outside its module");
 await assert.rejects(bluetoothTail(new Uint8Array(436), sha256Hex), /does not match/);
-await assert.rejects(lockscreenPayload(new Uint8Array(408), sha256Hex), /does not match/);
+await assert.rejects(lockscreenPayload(new Uint8Array(406), sha256Hex), /does not match/);
 await assert.rejects(playlistPayloads(new Uint8Array(7168), new Uint8Array(1602), sha256Hex), /does not match/);
 await assert.rejects(theaterTail(new Uint8Array(676), sha256Hex), /does not match/);
 console.log("PASS experimental payload hashes reject altered data");
