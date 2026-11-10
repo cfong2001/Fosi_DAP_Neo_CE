@@ -1,396 +1,370 @@
-/* A file storage app, list view. Corner bleed: the window sits one gutter in from the
-   top and runs off the right and bottom; the desktop shows to its left. */
-
-.up .ss-stage {
-  overflow: hidden;
-  border-radius: 14px;
-  background: var(--ss-well);
+.neo-hero {
+  --hit-x:260px;
+  --rx:-9deg;
+  --ry:-19deg
+}
+.neo-stage .ss-stage {
+  background:transparent;
+  overflow:hidden
+}
+.neo-scene {
+  position:absolute;
+  inset:0;
+  perspective:1000px
+}
+.neo-position {
+  position:absolute;
+  left:58%;
+  top:46%;
+  width:166px;
+  height:300px;
+  transform:translate(-50%,-50%) rotate(-13deg);
+  perspective:950px
+}
+.neo-scale,.neo-gaze,.neo-player {
+  width:166px;
+  height:300px;
+  transform-style:preserve-3d
+}
+.neo-gaze {
+  transform:rotateX(var(--rx)) rotateY(var(--ry));
+  transition:transform 450ms cubic-bezier(.2,.7,.2,1)
+}
+.neo-player {
+  position:relative
+}
+.neo-slice {
+  position:absolute;
+  inset:0;
+  border-radius:25px;
+  background:linear-gradient(120deg,#eaf0f4,#8c969f 38%,#b5bec5 65%,#59616b);
+  border:1px solid #a6b0b9
+}
+.neo-front {
+  position:absolute;
+  inset:0;
+  transform:translateZ(8px);
+  border-radius:25px;
+  background:linear-gradient(125deg,#f3f5f5,#cbd2d8 30%,#aab5be 73%,#d9e0e5);
+  box-shadow:inset 0 0 0 1px #f3f6f8,inset 0 0 0 3px #c5cdd3;
+  backface-visibility:hidden
+}
+.neo-glass {
+  position:absolute;
+  left:12px;
+  right:12px;
+  top:13px;
+  height:154px;
+  padding:15px 10px;
+  border-radius:17px;
+  background:linear-gradient(135deg,#22282b,#050709 45%,#161a1c);
+  box-shadow:inset 0 0 0 1px #51585b,0 1px 1px #fff8
+}
+.neo-display {
+  height:100%;
+  border-radius:3px;
+  background:#080e12;
+  overflow:hidden;
+  position:relative
+}
+.neo-display:after {
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(125deg,#ffffff0e,transparent 48%)
+}
+.neo-boot {
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  color:#d0f9ff;
+  opacity:0;
+  transform:scale(.94);
+  will-change:transform;
+  transition:opacity 650ms,transform 900ms;
+  background:radial-gradient(ellipse at 50% 60%,#164753,#071820 75%)
+}
+.neo-boot strong {
+  font:600 47px/1.1 system-ui,sans-serif;
+  letter-spacing:-3px;
+  padding-right:3px;
+  text-shadow:0 0 20px #64dbf57a
+}
+.neo-boot span {
+  font:8px/1.5 system-ui,sans-serif;
+  letter-spacing:.6px;
+  margin-top:8px
+}
+.neo-boot i {
+  width:21px;
+  height:2px;
+  background:#8de6ee;
+  border-radius:2px;
+  margin-top:15px;
+  box-shadow:0 0 8px #8de6ee
+}
+.neo-wheel {
+  position:absolute;
+  top:177px;
+  left:28px;
+  width:110px;
+  height:110px;
+  border-radius:50%;
+  background:radial-gradient(circle at 30% 20%,#333a3f,#15191d 80%);
+  box-shadow:0 0 0 1px #101518,inset 0 1px 2px #ffffff30,0 1px 1px #ffffff80
+}
+.neo-center {
+  position:absolute;
+  width:43px;
+  height:43px;
+  top:34px;
+  left:34px;
+  border-radius:50%;
+  background:linear-gradient(130deg,#384047,#252b30);
+  box-shadow:0 0 0 1px #080c0e,inset 0 1px 1px #6a737b80
+}
+.neo-back {
+  position:absolute;
+  inset:0;
+  transform:translateZ(-8px) rotateY(180deg);
+  backface-visibility:hidden;
+  border-radius:25px;
+  background:linear-gradient(125deg,#e0e5e8,#9eabb5);
+  box-shadow:inset 0 0 0 2px #dce2e6,inset 0 0 0 4px #9ea9b2;
+  color:#59656f;
+  text-align:center;
+  font:11px/1.5 system-ui,sans-serif;
+  padding:29px 12px
+}
+.neo-back div {
+  position:absolute;
+  bottom:35px;
+  left:0;
+  right:0
+}
+.neo-back small {
+  display:block;
+  font-size:7px
+}
+.neo-side {
+  position:absolute;
+  left:-3px;
+  width:7px;
+  background:#36414a;
+  border:1px solid #87929b;
+  border-radius:4px;
+  transform:rotateY(90deg)
+}
+.neo-power {
+  top:40px;
+  height:18px;
+  background:#eb8a1e
+}
+.neo-volume {
+  top:80px;
+  height:32px
+}
+.neo-next {
+  top:124px;
+  height:32px
+}
+.neo-ports {
+  position:absolute;
+  bottom:-1px;
+  left:37px;
+  display:flex;
+  gap:16px;
+  align-items:center;
+  transform:rotateX(-65deg)
+}
+.neo-ports i {
+  width:13px;
+  height:5px;
+  border-radius:50%;
+  background:#11181e
+}
+.neo-ports b {
+  width:24px;
+  height:4px;
+  background:#26323b;
+  border-radius:2px
+}
+.neo-shadow {
+  position:absolute;
+  left:58%;
+  top:86%;
+  width:175px;
+  height:17px;
+  transform:translateX(-50%) rotate(-10deg);
+  border-radius:50%;
+  background:#20303d24;
+  filter:blur(12px)
+}
+.neo-file {
+  position:absolute;
+  left:12%;
+  top:36%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:9px;
+  opacity:0;
+  font:11px/1.4 ui-monospace,monospace;
+  color:var(--ss-text);
+  white-space:nowrap
+}
+.neo-page {
+  position:relative;
+  width:51px;
+  height:65px;
+  background:linear-gradient(125deg,#fff,#e5eaf0);
+  border-radius:5px;
+  clip-path:polygon(0 0,70% 0,100% 24%,100% 100%,0 100%);
+  box-shadow:inset 0 0 0 1px #cad1d8
+}
+.neo-page:before {
+  content:'';
+  position:absolute;
+  right:0;
+  top:0;
+  width:30%;
+  height:24%;
+  background:#bdc8d1
+}
+.neo-page span {
+  position:absolute;
+  bottom:12px;
+  width:100%;
+  text-align:center;
+  background:#43566a;
+  color:#fff;
+  font:600 11px/19px system-ui,sans-serif;
+  letter-spacing:1px
+}
+.neo-impact {
+  position:absolute;
+  left:51%;
+  top:40%;
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  border:2px solid #82d5e9;
+  opacity:0;
+  pointer-events:none
+}
+.neo-caption {
+  position:absolute;
+  bottom:13px;
+  left:0;
+  right:0;
+  height:20px;
+  text-align:center;
+  font:12px/20px system-ui,sans-serif;
+  color:var(--ss-text)
+}
+.neo-caption span {
+  position:absolute;
+  inset:0;
+  transition:opacity 500ms
+}
+.neo-after {
+  opacity:0
+}
+.neo-description {
+  position:absolute;
+  width:1px;
+  height:1px;
+  overflow:hidden;
+  clip-path:inset(50%)
+}
+[data-phase=flight] .neo-file {
+  animation:neo-arrive 1000ms cubic-bezier(.6,0,.9,.5) both
+}
+[data-phase=impact] .neo-player {
+  animation:neo-spin 1500ms cubic-bezier(.16,.65,.24,1) both
+}
+[data-phase=impact] .neo-impact {
+  animation:neo-ripple 650ms ease-out both
+}
+[data-phase=ready] .neo-boot {
+  opacity:1;
+  transform:scale(1)
+}
+[data-phase=ready] .neo-before {
+  opacity:0
+}
+[data-phase=ready] .neo-after {
+  opacity:1
+}
+@keyframes neo-arrive {
+  0% {
+  opacity:0;
+  transform:translate(-180px,-80px) rotate(-35deg) scale(.75)
+}
+18%,65% {
+  opacity:1
+}
+100% {
+  opacity:0;
+  transform:translate(var(--hit-x),10px) rotate(24deg) scale(.3)
 }
 
-.up-window {
-  position: absolute;
-  background: var(--ss-surface);
-  box-shadow: var(--ss-shadow-hero);
+}
+@keyframes neo-spin {
+  0% {
+  transform:translateX(0) rotateY(0) rotateZ(0)
+}
+12% {
+  transform:translateX(28px) rotateY(68deg) rotateZ(9deg)
+}
+74% {
+  transform:translateX(-4px) rotateY(368deg) rotateZ(-2deg)
+}
+100% {
+  transform:translateX(0) rotateY(360deg) rotateZ(0)
 }
 
-/* ---- Toolbar ---- */
-
-.up-lead {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+}
+@keyframes neo-ripple {
+  0% {
+  opacity:.8;
+  transform:scale(.3)
+}
+100% {
+  opacity:0;
+  transform:scale(3.5)
 }
 
-.up-nav {
-  display: flex;
-  gap: 2px;
-  color: var(--ss-icon);
+}
+.neo-stage [data-layout=compact] .neo-position {
+  top:48%;
+  width:145px;
+  height:262px
+}
+.neo-stage [data-layout=compact] .neo-scale {
+  transform:scale(.87);
+  transform-origin:top left
+}
+.neo-stage [data-layout=compact] .neo-file {
+  left:2%;
+  top:26%
+}
+@media(prefers-reduced-motion:reduce) {
+  .neo-gaze {
+  transform:rotateX(-9deg) rotateY(-19deg);
+  transition:none
+}
+.neo-scene * {
+  animation:none!important;
+  transition:none!important
 }
 
-.up-nav-off {
-  color: var(--ss-icon-faint);
 }
 
-.up-heading {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--ss-text-strong);
-}
 
-.up-tools {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  color: var(--ss-icon);
-}
+.neo-stage [data-layout=compact] .neo-scene  {
+   --hit-x: 130px;
 
-.up-views {
-  display: flex;
-  gap: 2px;
-}
-
-.up-view {
-  display: grid;
-  place-items: center;
-  width: 28px;
-  height: 24px;
-  border-radius: 6px;
-}
-
-.up-view[data-on] {
-  background: var(--ss-ink-2);
-  color: var(--ss-text-strong);
-}
-
-/* ---- List ---- */
-
-.up-body {
-  overflow: hidden;
-}
-
-.up-list {
-  padding: 4px 10px 0;
-  font-size: 14px;
-}
-
-.up-head,
-.up-row {
-  display: grid;
-  grid-template-columns: var(--cols);
-  align-items: center;
-}
-
-.up-head {
-  height: 30px;
-  white-space: nowrap;
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--ss-text);
-}
-
-.up-head > span,
-.up-row > * {
-  padding-left: 12px;
-}
-
-.up-head > span + span {
-  border-left: 1px solid var(--ss-line);
-  line-height: 15px;
-}
-
-.up-row > .ss-bar {
-  margin-left: 12px;
-  padding: 0;
-}
-
-.up-rows {
-  position: relative;
-  min-height: 600px;
-  border-radius: 8px;
-  transition: box-shadow 0.15s ease, background-color 0.15s ease;
-}
-
-/* The list lights up while a file is carried over it */
-.up-rows[data-over] {
-  background: color-mix(in srgb, var(--ss-accent) 5%, transparent);
-  box-shadow: inset 0 0 0 2px var(--ss-accent);
-}
-
-.up-row {
-  position: relative;
-  height: 38px;
-  border-radius: 7px;
-  color: var(--ss-text-strong);
-}
-
-.up-name {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  min-width: 0;
-}
-
-.up-name__text {
-  white-space: nowrap;
-  font-weight: 500;
-}
-
-.up-folder {
-  flex-shrink: 0;
-  color: #4fa6ea;
-  fill: #8ccaf6;
-}
-
-.up-doc {
-  flex-shrink: 0;
-  color: #a9a9ae;
-  fill: #fff;
-}
-
-/* ---- The upload row: tinted while it uploads, plain once it lands ---- */
-
-.up-new {
-  background: color-mix(in srgb, var(--ss-accent) 7%, #fff);
-  transition: background-color 0.6s ease;
-}
-
-.up-new[data-done] {
-  background: transparent;
-}
-
-.up-new > .ss-states {
-  padding-left: 12px;
-}
-
-.up-track {
-  width: 110px;
-  background: color-mix(in srgb, var(--ss-accent) 18%, #fff);
-}
-
-.up-list[data-compact] .up-track {
-  width: 64px;
-}
-
-/* The kit Meter, flat accent, eased to keep pace with the size counting up */
-.up-track .ss-meter__fill {
-  background: var(--ss-accent);
-  transition-duration: 0.6s;
-  transition-timing-function: cubic-bezier(0.3, 0.6, 0.3, 1);
-}
-
-.up-size {
-  white-space: nowrap;
-  font-variant-numeric: tabular-nums;
-}
-
-/* ---- The file on the desktop: icon over its name, as macOS draws it ---- */
-
-.up-desk {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 7px;
-  width: 104px;
-  font-size: 12px;
-  transition: opacity 0.2s ease;
-}
-
-.up-desk[data-lifted] {
-  opacity: 0.45;
-}
-
-.up-desk__name {
-  padding: 1px 5px;
-  line-height: 1.35;
-  font-weight: 500;
-  color: var(--ss-text-strong);
-  white-space: nowrap;
-}
-
-.up-pdf {
-  position: relative;
-  display: block;
-  width: 44px;
-  height: 56px;
-  border-radius: 3px;
-  background: #fff;
-  box-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.16), 0 2px 6px -2px rgba(0, 0, 0, 0.22);
-  clip-path: polygon(0 0, 70% 0, 100% 23%, 100% 100%, 0 100%);
-}
-
-.up-pdf::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 30%;
-  height: 23%;
-  background: linear-gradient(225deg, transparent 50%, #e4e4e7 50%);
-}
-
-.up-pdf__band {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 10px;
-  padding: 2px 0;
-  background: #e5484d;
-  color: #fff;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  line-height: 13px;
-  text-align: center;
-}
-
-.up-pdf[data-small] {
-  flex-shrink: 0;
-  width: 15px;
-  height: 19px;
-  border-radius: 2px;
-  box-shadow: inset 0 0 0 1px #c9c9ce;
-  clip-path: none;
-}
-
-.up-pdf[data-small]::before {
-  display: none;
-}
-
-.up-pdf[data-small] .up-pdf__band {
-  bottom: 4px;
-  height: 5px;
-  padding: 0;
-}
-
-/* ---- The drag image: the icon and its name on a selection pill ---- */
-
-.up-drag {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 30;
-  pointer-events: none;
-  opacity: 0;
-  will-change: transform;
-}
-
-.up-drag[data-show] {
-  opacity: 0.85;
-}
-
-.up-drag__inner {
-  /* Laid out exactly as the desktop icon, so the pickup never doubles it */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 7px;
-  width: 104px;
-  font-size: 12px;
-  will-change: transform;
-}
-
-.up-drag[data-dropped] {
-  opacity: 0;
-  transition: opacity 0.22s ease-in;
-}
-
-.up-drag[data-dropped] .up-drag__inner {
-  transform: scale(0.5);
-  transition: transform 0.24s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.up-drag__name {
-  padding: 1px 5px;
-  border-radius: 4px;
-  background: var(--ss-accent);
-  color: #fff;
-  white-space: nowrap;
-  line-height: 1.35;
-}
-
-/* ---- CE: the firmware image instead of a PDF, and Verified as the payoff ---- */
-
-.up-img .up-pdf__band {
-  background: #3f4652;
-  letter-spacing: 0.04em;
-}
-
-.up .ss-stage[data-theme="dark"] .up-img .up-pdf__band {
-  background: #5b6472;
-}
-
-.up-verified {
-  flex: none;
-}
-
-/* Dark: the gold mixes its tints with white; mix with the surface instead */
-.up .ss-stage[data-theme="dark"] .up-new {
-  background: color-mix(in srgb, var(--ss-accent) 14%, var(--ss-surface));
-}
-.up .ss-stage[data-theme="dark"] .up-new[data-done] {
-  background: transparent;
-}
-.up .ss-stage[data-theme="dark"] .up-track {
-  background: color-mix(in srgb, var(--ss-accent) 28%, var(--ss-surface));
-}
-.up .ss-stage[data-theme="dark"] .up-doc {
-  color: #8d8d93;
-  fill: var(--ss-surface);
-}
-
-/* ---- The payoff: a satellite straddling the window's left edge ---- */
-
-.up-check {
-  position: absolute;
-  left: 72px;
-  top: 262px;
-  width: 232px;
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  padding: 14px;
-  border-radius: 12px;
-  background: var(--ss-surface);
-  box-shadow: var(--ss-shadow-satellite);
-  opacity: 0;
-  transform: translateY(10px) scale(0.98);
-  transition: opacity 0.35s ease, transform 0.45s cubic-bezier(0.3, 0.6, 0.3, 1);
-  will-change: transform;
-}
-
-.up-check[data-on] {
-  opacity: 1;
-  transform: none;
-}
-
-.up-check__icon {
-  flex: none;
-  color: var(--ss-success);
-  margin-top: 1px;
-}
-
-.up-check__text {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  min-width: 0;
-}
-
-.up-check__title {
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 1.3;
-  color: var(--ss-text-strong);
-}
-
-.up-check__hash {
-  font: 12px/1.3 var(--ss-mono);
-  color: var(--ss-text);
-  white-space: nowrap;
-}
-
-.up-check__gap {
-  color: var(--ss-text-faint);
-  margin: 0 1px;
 }
