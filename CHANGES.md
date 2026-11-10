@@ -1,5 +1,20 @@
 # Changelog
 
+## 2026-11-10: install flow on the site
+
+- The Pages site (`docs/`) now opens on a three-step install: choose
+  Standard, Minimal or Back to stock; copy it to the player or download
+  it; run the update on the device. Copy to player (Chrome and Edge)
+  writes the image to the player's USB storage as `RKNANOFWIMG` and reads
+  it back. Every image is fetched from `release/` and refused unless its
+  length and SHA-256 match the pins in `docs/install-data.mjs`. Nothing
+  writes to the player's flash; the player's own installer does that.
+- The theme studio and builder moved, unchanged, into a collapsed
+  Advanced section. A build made there becomes a fourth install choice.
+- `tests/install-data.test.mjs` (in CI) checks the pins against
+  `release/SHA256SUMS` and the images. `tests/site-comparison.test.cjs`
+  covers copy, download, a tampered image and the no-picker fallback.
+
 ## 2026-11-08: research record and README pass
 
 - `research/external_sources_2026-11.md`: the second source survey with

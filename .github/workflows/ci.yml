@@ -106,6 +106,9 @@ jobs:
         if: ${{ hashFiles('tests/theme-core.test.mjs') != '' }}
         run: node --test tests/theme-core.test.mjs
 
+      - name: Install flow pins match the release set
+        run: node --test tests/install-data.test.mjs
+
       - name: Theater preview contrast tests
         run: node --test tests/theater-core.test.mjs
 

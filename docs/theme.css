@@ -45,3 +45,34 @@ header.top{border-bottom:1px solid var(--edge);padding:23px clamp(16px,3vw,44px)
 @media(max-width:1180px){.preview-card{grid-column:1/-1}}
 @media(max-width:720px){.preview-card{grid-column:auto}}
 @media(max-width:480px){.palette{grid-template-columns:1fr}code{overflow-wrap:anywhere}}
+
+/* Install flow (install.mjs) and the collapsed builder. */
+.site{padding:20px clamp(16px,3vw,44px) 80px;display:grid;gap:16px;max-width:1500px;margin:0 auto}
+.install{max-width:980px;width:100%;justify-self:center}
+.install>h2{font-size:1.35rem}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.step{border-top:1px solid var(--edge);padding:16px 0 6px}
+.step h3{display:flex;align-items:center;gap:10px;font-size:1.02rem;margin-bottom:12px}
+.step-num{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:#1379b1;color:#fff;font-size:.85rem;flex:0 0 26px}
+.image-choices{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px}
+.image-choice{display:flex;gap:10px;align-items:flex-start;border:1px solid #31445d;border-radius:12px;padding:12px;background:#0e1624;cursor:pointer;min-width:0}
+.image-choice:hover{border-color:#4a6c8d}
+.image-choice:has(input:checked){border-color:#4ab5e8;background:#132538;box-shadow:0 0 0 1px #4ab5e8 inset}
+.image-choice input{margin-top:4px;accent-color:#4bb8e8;flex:0 0 auto}
+.image-body{display:flex;flex-direction:column;gap:6px;min-width:0}
+.image-body .note{margin:0}
+.image-head{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.badge{font-size:.7rem;border:1px solid #3e5670;border-radius:999px;padding:2px 8px;color:#b9cde2;white-space:nowrap}
+.badge.accent{border-color:#2b95ce;color:#bfe9ff;background:#123049}
+.image-meta{font-size:.7rem;color:#8ea1b8;overflow-wrap:anywhere}
+.install .button-row{margin:4px 0 8px}
+.install progress{width:100%;height:8px;margin-top:8px;accent-color:#38bdf8}
+.plain{margin:6px 0 10px;padding-left:20px;display:grid;gap:6px;font-size:.88rem;color:#c8d5e5}
+.advanced{border:1px solid var(--edge);border-radius:15px;background:#0f1724;padding:0}
+.advanced>summary{cursor:pointer;padding:16px 18px;list-style-position:inside;font-size:1rem}
+.advanced>summary>span{display:inline-block;vertical-align:top;max-width:calc(100% - 24px)}
+.advanced>summary .note{display:inline-block;margin:4px 0 0}
+.advanced[open]>summary{border-bottom:1px solid var(--edge)}
+.advanced>.page{padding:16px}
+@media(max-width:480px){.advanced>.page{padding:10px}.step h3{font-size:.96rem}}
+[hidden]{display:none!important}

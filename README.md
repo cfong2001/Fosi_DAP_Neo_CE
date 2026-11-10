@@ -12,6 +12,8 @@
 | [`DP3_V137_CE_minimal.img`](release/DP3_V137_CE_minimal.img) | **Minimal.** Audio and library fixes only, same length as stock. | `623214370755053ed69dc53f0c7ae5ec0504bcb3e9ca6f2766cc9e9049101090` |
 | [`DP3_V137_CE_recovery.img`](release/DP3_V137_CE_recovery.img) | Stock code dated one day after CE, for going back. | `aff851b31d6eee55cbd4bb3fc0464ac79f0039ee86ae6723225ac036a157d223` |
 
+The easiest way to install is the [install page](https://cfong2001.github.io/Fosi_DAP_Neo_CE/): it checks the image's SHA-256 and copies it to the player for you.
+
 Start with the standard image. Use the minimal one if the standard image does not install (no image longer than stock has been installed yet), or if you need WMA playback. [`release/README.md`](release/README.md) has the install steps, a testing order and recovery.
 
 ## Contents

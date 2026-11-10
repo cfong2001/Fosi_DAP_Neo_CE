@@ -61,6 +61,13 @@ function download(name, bytes) {
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
+// Offer the build to the install flow at the top of the page
+// (install.mjs), which can copy it to the player as RKNANOFWIMG.
+function offerToInstaller(name, result) {
+  window.dispatchEvent(new CustomEvent("ce-build",
+    {detail: {name, bytes: result.bytes, sha256: result.sha256}}));
+}
+
 function renderToggles() {
   const root = $("feature-toggles");
   // Put playback first and keep the framework's mandatory no-op fixture
@@ -217,6 +224,7 @@ async function build() {
          growths: await fullGrowthPayloads()},
         sha256);
       download("DP3_V137_CE_full.img", result.bytes);
+      offerToInstaller("DP3_V137_CE_full.img", result);
       setStatus("Built DP3_V137_CE_full.img (the everything build). " +
         "SHA-256 " + result.sha256 + (filterPatches.length
           ? " (the pinned " + FULL_IMAGE_SHA256.slice(0, 12) + "… plus" + filterNote.slice(1) + "). "
@@ -225,8 +233,8 @@ async function build() {
         "the merged tail, two module extensions and the merged theme " +
         "runs. The image is 6,962 bytes longer than stock because the " +
         "ebook reader is kept; whether the update slots accept the " +
-        "longer image is unverified. Nothing was flashed; install " +
-        "through the usual update flow at your own risk.", "good");
+        "longer image is unverified. It is now selected in Install CE " +
+        "at the top of the page; installing it is at your own risk.", "good");
       return;
     }
     if (!!overlayFile !== !!resolverFile)
@@ -250,6 +258,7 @@ async function build() {
        themeConfig, ceMarkRuns, tailPayload, extraPatches, module31Payload: playlist?.overlay ?? lock},
       sha256);
     download("DP3_V137_CE_builder.img", result.bytes);
+    offerToInstaller("DP3_V137_CE_builder.img", result);
     setStatus("Built DP3_V137_CE_builder.img. SHA-256 " + result.sha256 +
       ". " + result.patchesApplied + " byte patches" +
       (result.vorbis ? ", vorbis75 transplant" : "") +
@@ -263,8 +272,8 @@ async function build() {
         " bytes)" : "") +
       (result.bytesChanged === null ? ". Image contains a module extension. " :
         ". " + result.bytesChanged + " bytes differ from stock. ") +
-      "Nothing was flashed; install through the usual update flow " +
-      "at your own risk.", "good");
+      "It is now selected in Install CE at the top of the page; " +
+      "installing it is at your own risk.", "good");
   } catch (err) {
     setStatus("Build refused: " + err.message, "bad");
   } finally {

@@ -2,16 +2,60 @@
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="color-scheme" content="dark">
-<title>DAP Neo | CE builder and theme studio</title>
+<title>DAP Neo CE | Install and build</title>
 <link rel="stylesheet" href="./theme.css">
 </head><body>
 <header class="top">
 <div class="eyebrow">Fosi DAP Neo · V137</div>
-<h1>CE builder and theme studio <span class="pill">Browser-only</span></h1>
-<p class="lede">Preview a color scheme on a 240 × 320 simulated player. If you have your own stock V137 firmware, open it locally to inspect all 456 RGB565 assets, export precise color patches, and, in section 4, build a complete CE firmware image with the feature patches you choose. The file stays in your browser; nothing is uploaded, and nothing here flashes a device.</p>
-<p><a href="#firmware-features">Choose playback and firmware features</a></p>
+<h1>Community Edition firmware</h1>
+<p class="lede">Better Vorbis decoding, gapless playback, natural sorting, Opus, playlists and a refreshed look for the DAP Neo. Pick an image, put it on the player from this page, and run the update on the device.</p>
 </header>
-<main class="page">
+<main class="site">
+<section class="card install" id="install" aria-labelledby="install-title">
+<h2 id="install-title">Install CE</h2>
+<p class="note warn"><strong>Not yet tested on hardware.</strong> No CE image has been installed on a device; every check so far is offline (emulation, host tests, image validation). You would be the first hardware test. Back up your music and read <a href="#going-back">Going back to stock</a> first. If the player stops booting, recovery needs the Rockchip USB (Rockusb) tools.</p>
+<ol class="steps">
+<li class="step">
+<h3><span class="step-num">1</span> Choose an image</h3>
+<div class="image-choices" id="image-choices" role="radiogroup" aria-label="Firmware image"></div>
+</li>
+<li class="step">
+<h3><span class="step-num">2</span> Put it on the player</h3>
+<p class="note">Connect the player to this computer with USB so its storage shows up as a drive.</p>
+<div class="button-row">
+<button class="button main" type="button" id="copy-to-player">Copy to player…</button>
+<button class="button" type="button" id="download-update-name">Download as <span id="update-name">RKNANOFWIMG</span></button>
+<button class="button ghost" type="button" id="download-image">Download .img</button>
+</div>
+<p class="note" id="copy-support"></p>
+<progress id="install-progress" hidden></progress>
+<div id="install-status" class="status" role="status" hidden></div>
+<details class="seg"><summary>Manual install and direct links</summary>
+<ol class="plain">
+<li>Download an image and check it: <code>sha256sum -c SHA256SUMS</code>. Never install an image whose hash does not match.</li>
+<li>Rename it to <code>RKNANOFWIMG</code>, with no dot and no extension.</li>
+<li>Copy it to the top level of the storage the player updates from.</li>
+</ol>
+<ul class="plain" id="direct-links"></ul>
+</details>
+</li>
+<li class="step">
+<h3><span class="step-num">3</span> Run the update on the player</h3>
+<ol class="plain">
+<li>Eject the player safely, then start the update the way you would for an official Fosi update.</li>
+<li>After it restarts, connect it again and <strong>delete <code>RKNANOFWIMG</code></strong>. A leftover update file can run the installer again.</li>
+<li>Test in this order: boot to the menu, play an MP3, then a FLAC. Then APE and DSD128 if you have them, an Ogg Vorbis file, two same-format tracks in a row (gapless) and a library rescan. On Standard also try an Opus file, a track with and without album art, an <code>.m3u</code> playlist, the hold switch and a long press of Power.</li>
+</ol>
+<p class="note">The stock installer writes both firmware slots, so no stock copy stays on the player after an install. Please report results, good or bad, as a GitHub issue with the image hash and what you tested.</p>
+</li>
+</ol>
+<details class="seg" id="going-back"><summary>Going back to stock</summary>
+<p class="note">If the player still boots and can run an update, install <strong>Back to stock</strong> the same way. It is stock code dated one day after CE, so the player prefers it. Plain stock <code>DP3_V137.img</code> is older than CE and the player would keep booting CE. If the player does not boot, recovery needs the Rockchip USB (Rockusb) tools; see <code>release/README.md</code> in the repository.</p>
+</details>
+</section>
+<details class="advanced" id="advanced">
+<summary><span><strong>Advanced: build your own image</strong><br><span class="note">Theme colors, EQ curves for your headphones, DAC filter, Bluetooth auto-off and per-feature choices. Needs your own stock <code>DP3_V137.img</code>; everything runs in this page and nothing is uploaded.</span></span></summary>
+<div class="page">
 <section class="card">
 <h2>1. Choose colors</h2>
 <p class="note">These colors update the simulated playback screen immediately. Actual firmware pixels change only when you add verified resource rules below.</p>
@@ -182,10 +226,13 @@
 <li><strong>Battery profiles</strong>. Removed from the everything build at the owner's direction; no working selector ever existed (see <code>patches/full/README.md</code>).</li>
 </ul>
 </section>
+</div>
+</details>
 </main>
 <footer>
-Both simulated screens are illustrative interfaces for comparing colors, not captured device screens or firmware emulators. The site contains generated Vorbis transplant byte ranges, but no complete stock firmware image or exported stock image assets. Only user-selected files are parsed locally. Enable GitHub Pages from the repository's <code>docs/</code> directory to host this page.
+The install flow downloads release images from the repository and refuses any whose SHA-256 does not match its pin. The builder parses only files you select, locally. Both simulated screens are illustrative, not captured device screens or firmware emulators. This site hosts no stock firmware image.
 </footer>
+<script type="module" src="./install.mjs"></script>
 <script type="module" src="./theme.js"></script>
 <script type="module" src="./builder.js"></script>
 </body></html>
