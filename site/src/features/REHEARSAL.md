@@ -55,3 +55,16 @@ screen closeups. Re-captured after these fixes.
 Not checked: physical mobile hardware, Safari/Firefox, real-device firmware
 behavior, every GPU/driver, and complete fine-interval coverage under software
 WebGL. Shader literals in the generated Three.js bundle retain upstream whitespace.
+
+## Context review (follow-up)
+
+Each picture was reviewed in place after it had time to play, at 1440 and
+390 CSS pixels. Fixed: the theater screen now draws the previous, play and
+next glyphs directly over the derived background, which is what its copy
+and the firmware change describe, and its camera pulls back so the player
+clears the tile's top edge; the lock screen shows elapsed / total time, as
+the lock routine draws it, and its copy says so; the Vorbis stat reads
+"more than 40 dB" (stock measures 38.1 to 42.1 dB and CE at least 84.9 dB on
+the corpus) and spans the last row as one statement instead of sitting alone
+beside an empty cell. The hero, EQ, Bluetooth, playlist, sort, gapless, Opus
+and wheel-timer pictures were checked and left as they were.
