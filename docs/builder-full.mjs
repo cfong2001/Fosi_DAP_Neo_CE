@@ -5081,4 +5081,4 @@ export const FULL_THEME_RUNS = [
   "replace": "fb20dd72f800f800f800f800f800d637eccdf3c4fb20fb20f3c4eccdd637f800f800f800"
  }
 ];
-export const FULL_IMAGE_SHA256 = "db0a11d27a00295f18e4a07b9745af1564e06f66af872ec43129aa738b4fa362";
+export const FULL_IMAGE_SHA256 = "e72449d73db1afb85b9c801fd24812ecdf6b6580a0763b1056f41e9c8ff7b833";

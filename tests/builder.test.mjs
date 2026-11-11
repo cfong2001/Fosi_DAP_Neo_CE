@@ -53,13 +53,13 @@
 //       the merged theme runs), with the page's embedded Opus data
 //       (docs/builder-opus-data.mjs; DAP_NEO_OPUS_DATA overrides it):
 //         build_full.py (one build.py pass)
-//         db0a11d27a00295f18e4a07b9745af1564e06f66af872ec43129aa738b4fa362
+//         e72449d73db1afb85b9c801fd24812ecdf6b6580a0763b1056f41e9c8ff7b833
 //   standalone lock screen (the embedded 406-byte reference-toolchain
 //   routine in a module 31 extension, plus patch 0033):
 //         build.py --no-transplants --manifest <framework manifest plus
 //           patches/ui_features/lockscreen_build/0033-ui-lockscreen-title.patch>
 //           --grow 31:code:lockscreen.bin
-//         674bb1e9c7ea30b410bd9eb15d57fc79dcae232d7a9e64d2615bd1f25dabdafe
+//         5513e217a63a8ef56c8c515e7a4e480c29232097664318e06234d90960dfde66
 //
 // Run:  node tests/builder.test.mjs
 // The stock image defaults to the repo-root DP3_V137.img; override
@@ -150,7 +150,7 @@ assert.deepEqual(FULL_GROWTHS.map(g => [g.module, g.length, g.sha256]), [
 ]);
 assert.equal(FULL_THEME_RUNS.length, 955);
 assert.equal(FULL_IMAGE_SHA256,
-  "db0a11d27a00295f18e4a07b9745af1564e06f66af872ec43129aa738b4fa362");
+  "e72449d73db1afb85b9c801fd24812ecdf6b6580a0763b1056f41e9c8ff7b833");
 for (const g of FULL_GROWTHS)
   assert.equal(await sha256Hex(hexToBytes(g.hex)), g.sha256);
 assert.equal(await sha256Hex(hexToBytes(FULL_TAIL.hex)), FULL_TAIL.sha256);
@@ -182,7 +182,7 @@ const cases = [
   ["(f) module 31 insertion, framework reference",
    {groups: allGroups, patchGroups: PATCH_GROUPS,
     module31Payload: Uint8Array.from({length: 1000}, (_, i) => i % 251)},
-   "fb754a9bbea5ba26dd218daa5e9f945c0c979ad9f630d0889712719d9065a0e4"],
+   "99f7e9589c2b8a7d68297655a7d6c8a6881c64511690ce76ecd38aed7d54eb79"],
   ["(g) paired player title repair, framework reference",
    {groups: allGroups, patchGroups: PATCH_GROUPS, extraPatches: TITLE_PATCHES},
    "98de2192663800f29b6484001db9c88188d1bb33bf667a877b79c8fb45329c98"],
@@ -260,7 +260,7 @@ assert.throws(() => dacFilterPatches("bogus"), /unknown DAC filter/);
     ? new Uint8Array(await readFile(process.env.DAP_NEO_LOCK_DATA)) : hexToBytes(LOCK_PAYLOAD.hex), sha256Hex);
   cases.push(["standalone lock-screen extension, framework reference",
     {groups: allGroups, patchGroups: PATCH_GROUPS, module31Payload: payload, extraPatches: [LOCK_PATCH]},
-    "674bb1e9c7ea30b410bd9eb15d57fc79dcae232d7a9e64d2615bd1f25dabdafe"]);
+    "5513e217a63a8ef56c8c515e7a4e480c29232097664318e06234d90960dfde66"]);
 }
 if (process.env.DAP_NEO_PLAYLIST_OVERLAY && process.env.DAP_NEO_PLAYLIST_RESOLVER) {
   const overlay = new Uint8Array(await readFile(process.env.DAP_NEO_PLAYLIST_OVERLAY));

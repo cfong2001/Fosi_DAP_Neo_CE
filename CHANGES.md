@@ -1,5 +1,23 @@
 # Changelog
 
+## 2026-11-11: sector-aligned header mirror (Standard image)
+
+- Fixes a likely boot failure in the Standard image. The boot validator
+  (module 1, `0x0307E2CA`) reads the header mirror at sector
+  `(u32 @ 0x1F4) >> 9` and compares the whole sector with the primary
+  header. The module 31 and 24 growths (6,962 bytes) had left the mirror
+  at `0xC95B32`, 0x132 bytes into a sector, so that compare would fail
+  on both slots. Byte-offset checks, ours and the updater's file read,
+  passed, which is why nothing caught it.
+- The insertion step (`insert_rebuild.align_mirror`, and `alignMirror`
+  in the browser builder) now pads zeros before the mirror up to the
+  next sector. The Standard image gains 206 bytes and its mirror moves
+  to `0xC95C00`. The rounded transfer stays 13 MiB.
+- `validate_grown` and the browser validator refuse an unaligned mirror
+  or one past `0xCFBE00`, the last offset that keeps the 13 MiB transfer.
+- New Standard pin `e72449d7…` (13,638,660 bytes). Minimal and recovery
+  are stock length and were never affected.
+
 ## 2026-11-11: antialiased screens, dialogs and progress bar
 
 - Baked antialiasing extends to the stored screen art

@@ -45,6 +45,12 @@ def validate_grown(raw):
     fw_len = im.u32(0x1F4)
     if fw_len + 0x200 > len(raw) - 4:
         raise ValueError('duplicate header offset outside image')
+    if fw_len % 0x200:
+        raise ValueError(f'duplicate header offset {fw_len:#x} is not sector aligned '
+                         '(the boot validator reads it at sector len >> 9)')
+    if fw_len > 0xCFBE00:
+        raise ValueError(f'duplicate header offset {fw_len:#x} past 0xCFBE00: '
+                         'the rounded transfer would exceed 13 MiB')
     if len(im.modules) != 82:
         raise ValueError('module count is not 82')
     for m in im.modules:
