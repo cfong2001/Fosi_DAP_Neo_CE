@@ -43,6 +43,7 @@ Everything here is in the standard image; the minimal image has the sound and li
 - Selecting an `.m3u` file in the browser plays it as a playlist; next, previous and shuffle stay inside it (up to 59 tracks from up to 6 folders).
 - With hold on, the lock screen shows the track title and elapsed time.
 - A long press of Power turns Bluetooth on or off. The status icons are redrawn, and the boot splash carries a CE mark.
+- Icons are antialiased. The transport, status, battery and browser icons carry smoothed edges in their pixels, so curves and diagonals no longer step. Icons on a solid strip blend exactly into it. The transport glyphs sit on album-derived backgrounds, so their edges blend toward a neutral grey. The 7×9 digits stay pixel-sharp. Before and after: [`icons_before_after.png`](patches/antialias/mock/icons_before_after.png).
 - Volume no longer freezes after two DAC errors, decoder clocks are lower, and the wheel timer wakes less often.
 
 ![Vorbis signal-to-noise per file, stock against CE](media/vorbis.png)
@@ -61,7 +62,7 @@ Every change is a patch file or a module transplant that [`patches/framework/bui
 | `vorbis75` transplant | Full-precision Tremor in place of the stock low-precision build, with output rounded to nearest | ✓ | ✓ | [`vorbis_swap.md`](patches/vorbis_swap/vorbis_swap.md), [`vorbis_rounding.md`](patches/vorbis_swap/vorbis_rounding.md) |
 | `opus72` transplant, 5 renames | Opus in place of WMA | ✓ | | [`opus_swap/`](patches/opus_swap/README.md) |
 | title-copy, title-suffix | Track titles copied with a bound and always terminated | ✓ | | [`full/`](patches/full/README.md) |
-| 0110 to 0117, 182 theme runs | Design refresh v4 transport glyphs, drawn keyed over the background | ✓ | | [`design_v4.md`](patches/design_refresh_v4/design_v4.md) |
+| 0110 to 0117, 182 theme runs | Design refresh v4 transport glyphs, drawn keyed over the background, with baked antialiasing | ✓ | | [`design_v4.md`](patches/design_refresh_v4/design_v4.md) |
 | 300 theme runs | Browser and status icons (antialiased) | ✓ | | [`design_browser.md`](patches/design_refresh_v4/browser_icons/design_browser.md) |
 | 4 theme runs | Light-theme play-mode icons keyed, so they sit on the theater background | ✓ | | [`play_mode_light/`](patches/design_refresh_v4/play_mode_light/generate.py) |
 | 64 theme runs | CE splash mark | ✓ | | [`theme_editor/`](patches/theme_editor/README.md) |

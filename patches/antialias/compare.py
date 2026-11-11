@@ -89,5 +89,36 @@ def main():
     print(path)
 
 
+def tile_strip():
+    """The site's feature tile: a few icons, stock row over CE row, 4x,
+    on the dark status ground. Writes docs/img/icons-aa.png."""
+    stock = (ROOT / 'DP3_V137.img').read_bytes()
+    ce = (ROOT / 'release' / 'DP3_V137_CE.img').read_bytes()
+    S = {e['id']: e for e in FW(stock).images()}
+    C = {e['id']: e for e in FW(ce).images()}
+    picks = ((173, 0x7222), (171, 0x7222), (159, 0x7222), (39, None), (266, None),
+             (148, None))
+    z, gap, pad = 4, 14, 16
+    lf = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf', 15)
+    W = pad * 2 + 70 + sum(S[i]['width'] * z + gap for i, _ in picks)
+    H = pad * 2 + 2 * 32 * z + 16
+    out = Image.new('RGB', (W, H), (16, 18, 22))
+    d = ImageDraw.Draw(out)
+    for r, (raw, E, label) in enumerate(((stock, S, 'Stock'), (ce, C, 'CE'))):
+        y = pad + r * (32 * z + 16)
+        d.text((pad, y + 32 * z // 2 - 9), label, fill=(225, 225, 225), font=lf)
+        x = pad + 70
+        for i, g in picks:
+            t = tile(raw, E[i], g if g is not None else 0x7BEF)
+            out.paste(t.resize((t.width * z, t.height * z), Image.NEAREST),
+                      (x, y + (32 - t.height) * z // 2))
+            x += t.width * z + gap
+    path = ROOT / 'docs' / 'img' / 'icons-aa.png'
+    path.parent.mkdir(exist_ok=True)
+    out.save(path, optimize=True)
+    print(path)
+
+
 if __name__ == '__main__':
     main()
+    tile_strip()
