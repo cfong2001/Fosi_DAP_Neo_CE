@@ -122,7 +122,10 @@ test('simulator draws real firmware pixels for both images', async t => {
   const check = async (opts, label) => {
     for (const side of ['stock', 'ce']) {
       const fb = expected(side, opts);
-      const [y0, y1] = opts.tab === 'splash' ? [0, 319] : [266, 319];
+      // Below the progress area (rows 254..268): the knob moves with
+      // simulated playback time; paintProgress has its own exact test in
+      // tests/sim-core.test.mjs.
+      const [y0, y1] = opts.tab === 'splash' ? [0, 319] : [269, 319];
       assert.deepEqual(await rows(side, y0, y1), want(fb, y0, y1), `${label}: ${side} pixels`);
       // A pixel beside the cover shows the ground (or the splash).
       assert.equal((await rows(side, 100, 100))[2], word(core.rgb888(fb[100 * 240 + 2])), `${label}: ${side} ground`);
@@ -221,7 +224,7 @@ test('install flow verifies, copies and downloads release images', async t => {
     const digest = await crypto.subtle.digest('SHA-256', await file.arrayBuffer());
     return {size: file.size, hash: Array.from(new Uint8Array(digest), b => b.toString(16).padStart(2, '0')).join('')};
   });
-  assert.deepEqual(written, {size: 13638454, hash: '7f496fae397b7b9fea4ab4b9bf4131c3e35b2cded19f1722b94cfeb9cd786aa6'});
+  assert.deepEqual(written, {size: 13638454, hash: 'db0a11d27a00295f18e4a07b9745af1564e06f66af872ec43129aa738b4fa362'});
 
   // Download the minimal image under the update name.
   await page.locator('#image-choices input[value=minimal]').check();
@@ -309,7 +312,7 @@ test('builder needs no local files and reproduces the release images', async t =
   assert.ok(order[0] < order[2] && order[1] < order[2], 'EQ and DAC filter sit above the features');
   // All CE features: the Standard image, Opus data loaded on demand.
   assert.ok(await page.locator('#feature-list').isHidden());
-  assert.equal(await build(), '7f496fae397b7b9fea4ab4b9bf4131c3e35b2cded19f1722b94cfeb9cd786aa6');
+  assert.equal(await build(), 'db0a11d27a00295f18e4a07b9745af1564e06f66af872ec43129aa738b4fa362');
   // Pick features starts as the Minimal image.
   await page.locator('input[name=build-base][value=custom]').check();
   assert.ok(await page.locator('#feature-list').isVisible());

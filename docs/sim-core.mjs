@@ -94,6 +94,20 @@ export function paintPlayer(fb, res, image, {page = 0, playing = true, light = f
   }
 }
 
+// The player's progress bar as module 27 draws it: a ground fill over
+// (40, 254)..(201, 268), one 1x6 column per position at (46 + i, 258) for
+// 148 positions (resource 187 up to the filled fraction of 147, then 188),
+// and the knob (220) at (min(filled + 42, 196), 254). Light: ids + 166.
+export function paintProgress(fb, res, {fraction = 0, light = false, ground}) {
+  const off = light ? LIGHT_OFFSET : 0;
+  fill(fb, 40, 254, 201, 268, ground ?? groundFor(light));
+  const filled = Math.round(Math.min(1, Math.max(0, fraction)) * 147);
+  for (let i = 0; i < 148; i++) draw(fb, res, (i < filled ? 187 : 188) + off, 46 + i, 258);
+  // keyed: CE draws the knob through the keyed helper (patch 0118); the
+  // stock knob has no 0xF800 pixels, so this is exact for both images
+  draw(fb, res, 220 + off, Math.min(filled + 42, 196), 254, true);
+}
+
 // Theater mode: the port tested against the firmware's own trampoline
 // (patches/full/build/tests/test_theater_full.py port_average and
 // port_derived), over the first ceil(height / 3) rows of the art.

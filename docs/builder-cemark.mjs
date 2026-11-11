@@ -2,323 +2,203 @@
 // Do not edit by hand.
 export const CE_MARK_RUNS = [
  {
-  "offset": 11321688,
-  "expect": "000000000000000000000000",
-  "replace": "f220f220f220f220f220f220"
+  "offset": 11321216,
+  "expect": "000000000000",
+  "replace": "182018400800"
  },
  {
-  "offset": 11321712,
-  "expect": "0000000000000000000000000000000000000000",
-  "replace": "f220f220f220f220f220f220f220f220f220f220"
+  "offset": 11321690,
+  "expect": "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  "replace": "08208120d9e0f220f220f220a160204000000000000060e0f220f220f220f220f220f220f220f220f2201020"
  },
  {
   "offset": 11322168,
-  "expect": "000000000000000000000000",
-  "replace": "f220f220f220f220f220f220"
+  "expect": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  "replace": "0800c1a0f220f220f220d9e0f220f220f22028600000000060e0f220f220f220f220f220f220f220f220f2201020"
  },
  {
-  "offset": 11322192,
-  "expect": "0000000000000000000000000000000000000000",
-  "replace": "f220f220f220f220f220f220f220f220f220f220"
+  "offset": 11322648,
+  "expect": "000000000000000000000000000000000000000000000000000000000000",
+  "replace": "7100f220f22058c0000000003060d1e0f220b9a00000000060e0f220d9e0"
  },
  {
-  "offset": 11322644,
-  "expect": "00000000",
-  "replace": "f220f220"
+  "offset": 11323128,
+  "expect": "000000000000000000000000000000000000000000000000000000000000",
+  "replace": "b9a0f2209140000000000000000050c0f220f2201020000060e0f220d9e0"
  },
  {
-  "offset": 11322660,
-  "expect": "00000000",
-  "replace": "f220f220"
+  "offset": 11323608,
+  "expect": "000000000000000000000000000000000000000000000000000000000000",
+  "replace": "d1e0f22068e000000000000000001840996099601020000060e0f220d9e0"
  },
  {
-  "offset": 11322672,
-  "expect": "00000000",
-  "replace": "f220f220"
- },
- {
-  "offset": 11323124,
-  "expect": "00000000",
-  "replace": "f220f220"
- },
- {
-  "offset": 11323140,
-  "expect": "00000000",
-  "replace": "f220f220"
- },
- {
-  "offset": 11323152,
-  "expect": "00000000",
-  "replace": "f220f220"
- },
- {
-  "offset": 11323604,
-  "expect": "00000000",
-  "replace": "f220f220"
- },
- {
-  "offset": 11323632,
-  "expect": "00000000",
-  "replace": "f220f220"
- },
- {
-  "offset": 11324084,
-  "expect": "00000000",
-  "replace": "f220f220"
+  "offset": 11324088,
+  "expect": "000000000000",
+  "replace": "d1e0f22068e0"
  },
  {
   "offset": 11324112,
-  "expect": "00000000",
-  "replace": "f220f220"
+  "expect": "000000000000",
+  "replace": "60e0f220d9e0"
  },
  {
-  "offset": 11324564,
-  "expect": "00000000",
-  "replace": "f220f220"
+  "offset": 11324568,
+  "expect": "000000000000",
+  "replace": "d1e0f22068e0"
  },
  {
   "offset": 11324592,
   "expect": "00000000000000000000000000000000",
-  "replace": "f220f220f220f220f220f220f220f220"
+  "replace": "60e0f220f220f220f220f220f220c1c0"
  },
  {
-  "offset": 11325044,
-  "expect": "00000000",
-  "replace": "f220f220"
+  "offset": 11325048,
+  "expect": "000000000000",
+  "replace": "d1e0f22068e0"
  },
  {
   "offset": 11325072,
   "expect": "00000000000000000000000000000000",
-  "replace": "f220f220f220f220f220f220f220f220"
+  "replace": "60e0f220f220f220f220f220f220c1c0"
  },
  {
-  "offset": 11325524,
-  "expect": "00000000",
-  "replace": "f220f220"
+  "offset": 11325528,
+  "expect": "000000000000",
+  "replace": "d1e0f22068e0"
  },
  {
   "offset": 11325552,
-  "expect": "00000000",
-  "replace": "f220f220"
+  "expect": "000000000000",
+  "replace": "60e0f220d9e0"
  },
  {
-  "offset": 11326004,
-  "expect": "00000000",
-  "replace": "f220f220"
+  "offset": 11326008,
+  "expect": "000000000000000000000000000000000000000000000000000000000000",
+  "replace": "d1e0f22068e000000000000000001840996099601020000060e0f220d9e0"
  },
  {
-  "offset": 11326032,
-  "expect": "00000000",
-  "replace": "f220f220"
+  "offset": 11326488,
+  "expect": "000000000000000000000000000000000000000000000000000000000000",
+  "replace": "b9a0f2209140000000000000000050c0f220f2201020000060e0f220d9e0"
  },
  {
-  "offset": 11326484,
-  "expect": "00000000",
-  "replace": "f220f220"
- },
- {
-  "offset": 11326500,
-  "expect": "00000000",
-  "replace": "f220f220"
- },
- {
-  "offset": 11326512,
-  "expect": "00000000",
-  "replace": "f220f220"
- },
- {
-  "offset": 11326964,
-  "expect": "00000000",
-  "replace": "f220f220"
- },
- {
-  "offset": 11326980,
-  "expect": "00000000",
-  "replace": "f220f220"
- },
- {
-  "offset": 11326992,
-  "expect": "00000000",
-  "replace": "f220f220"
+  "offset": 11326968,
+  "expect": "000000000000000000000000000000000000000000000000000000000000",
+  "replace": "6900f220f22058c0000000003060d1e0f220b1a00000000060e0f220d9e0"
  },
  {
   "offset": 11327448,
-  "expect": "000000000000000000000000",
-  "replace": "f220f220f220f220f220f220"
+  "expect": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  "replace": "0800b9a0f220f220e200d9e0f220f220f22028600000000060e0f220f220f220f220f220f220f220f220f2201020"
  },
  {
-  "offset": 11327472,
-  "expect": "0000000000000000000000000000000000000000",
-  "replace": "f220f220f220f220f220f220f220f220f220f220"
+  "offset": 11327930,
+  "expect": "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  "replace": "08208120d9e0f220f220f220a160204000000000000060e0f220f220f220f220f220f220f220f220f2201020"
  },
  {
-  "offset": 11327928,
-  "expect": "000000000000000000000000",
-  "replace": "f220f220f220f220f220f220"
+  "offset": 11328416,
+  "expect": "000000000000",
+  "replace": "182018400800"
  },
  {
-  "offset": 11327952,
-  "expect": "0000000000000000000000000000000000000000",
-  "replace": "f220f220f220f220f220f220f220f220f220f220"
+  "offset": 12299730,
+  "expect": "ffffffffffff",
+  "replace": "ff7cff5cffde"
  },
  {
-  "offset": 12300202,
-  "expect": "ffffffffffffffffffffffff",
-  "replace": "f220f220f220f220f220f220"
- },
- {
-  "offset": 12300226,
-  "expect": "ffffffffffffffffffffffffffffffffffffffff",
-  "replace": "f220f220f220f220f220f220f220f220f220f220"
+  "offset": 12300204,
+  "expect": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+  "replace": "ffbef4cef2a3f220f220f220f40aff1afffffffffffffd92f220f220f220f220f220f220f220f220f220ff9d"
  },
  {
   "offset": 12300682,
-  "expect": "ffffffffffffffffffffffff",
-  "replace": "f220f220f220f220f220f220"
+  "expect": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+  "replace": "ffdef367f220f220f220f2a3f220f220f220fef9fffffffffd92f220f220f220f220f220f220f220f220f220ff9d"
  },
  {
-  "offset": 12300706,
-  "expect": "ffffffffffffffffffffffffffffffffffffffff",
-  "replace": "f220f220f220f220f220f220f220f220f220f220"
+  "offset": 12301162,
+  "expect": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+  "replace": "fd51f220f220fdd4fffffffffed9f2c4f220f387fffffffffd92f220f2a3"
  },
  {
-  "offset": 12301158,
-  "expect": "ffffffff",
-  "replace": "f220f220"
+  "offset": 12301642,
+  "expect": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+  "replace": "f367f220f46cfffffffffffffffffdf4f220f220ff9dfffffd92f220f2a3"
  },
  {
-  "offset": 12301174,
-  "expect": "ffffffff",
-  "replace": "f220f220"
+  "offset": 12302122,
+  "expect": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+  "replace": "f2c4f220fd51ffffffffffffffffff5bf42bf42bff9dfffffd92f220f2a3"
  },
  {
-  "offset": 12301186,
-  "expect": "ffffffff",
-  "replace": "f220f220"
- },
- {
-  "offset": 12301638,
-  "expect": "ffffffff",
-  "replace": "f220f220"
- },
- {
-  "offset": 12301654,
-  "expect": "ffffffff",
-  "replace": "f220f220"
- },
- {
-  "offset": 12301666,
-  "expect": "ffffffff",
-  "replace": "f220f220"
- },
- {
-  "offset": 12302118,
-  "expect": "ffffffff",
-  "replace": "f220f220"
- },
- {
-  "offset": 12302146,
-  "expect": "ffffffff",
-  "replace": "f220f220"
- },
- {
-  "offset": 12302598,
-  "expect": "ffffffff",
-  "replace": "f220f220"
+  "offset": 12302602,
+  "expect": "ffffffffffff",
+  "replace": "f2c4f220fd71"
  },
  {
   "offset": 12302626,
-  "expect": "ffffffff",
-  "replace": "f220f220"
+  "expect": "ffffffffffff",
+  "replace": "fd92f220f2a3"
  },
  {
-  "offset": 12303078,
-  "expect": "ffffffff",
-  "replace": "f220f220"
+  "offset": 12303082,
+  "expect": "ffffffffffff",
+  "replace": "f2c4f220fd71"
  },
  {
   "offset": 12303106,
   "expect": "ffffffffffffffffffffffffffffffff",
-  "replace": "f220f220f220f220f220f220f220f220"
+  "replace": "fd92f220f220f220f220f220f220f326"
  },
  {
-  "offset": 12303558,
-  "expect": "ffffffff",
-  "replace": "f220f220"
+  "offset": 12303562,
+  "expect": "ffffffffffff",
+  "replace": "f2c4f220fd71"
  },
  {
   "offset": 12303586,
   "expect": "ffffffffffffffffffffffffffffffff",
-  "replace": "f220f220f220f220f220f220f220f220"
+  "replace": "fd92f220f220f220f220f220f220f326"
  },
  {
-  "offset": 12304038,
-  "expect": "ffffffff",
-  "replace": "f220f220"
+  "offset": 12304042,
+  "expect": "ffffffffffff",
+  "replace": "f2c4f220fd71"
  },
  {
   "offset": 12304066,
-  "expect": "ffffffff",
-  "replace": "f220f220"
+  "expect": "ffffffffffff",
+  "replace": "fd92f220f2a3"
  },
  {
-  "offset": 12304518,
-  "expect": "ffffffff",
-  "replace": "f220f220"
+  "offset": 12304522,
+  "expect": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+  "replace": "f2c4f220fd51ffffffffffffffffff5cf44bf44bff7dfffffd92f220f2a3"
  },
  {
-  "offset": 12304546,
-  "expect": "ffffffff",
-  "replace": "f220f220"
+  "offset": 12305002,
+  "expect": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+  "replace": "f367f220f46cfffffffffffffffffdf4f220f220ffbdfffffd92f220f2a3"
  },
  {
-  "offset": 12304998,
-  "expect": "ffffffff",
-  "replace": "f220f220"
- },
- {
-  "offset": 12305014,
-  "expect": "ffffffff",
-  "replace": "f220f220"
- },
- {
-  "offset": 12305026,
-  "expect": "ffffffff",
-  "replace": "f220f220"
- },
- {
-  "offset": 12305478,
-  "expect": "ffffffff",
-  "replace": "f220f220"
- },
- {
-  "offset": 12305494,
-  "expect": "ffffffff",
-  "replace": "f220f220"
- },
- {
-  "offset": 12305506,
-  "expect": "ffffffff",
-  "replace": "f220f220"
+  "offset": 12305482,
+  "expect": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+  "replace": "fd51f220f220fdd4fffffffffed9f2c4f220f3a8fffffffffd92f220f2a3"
  },
  {
   "offset": 12305962,
-  "expect": "ffffffffffffffffffffffff",
-  "replace": "f220f220f220f220f220f220"
+  "expect": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+  "replace": "ffdef367f220f220f282f2a3f220f220f220fefafffffffffd92f220f220f220f220f220f220f220f220f220ff9d"
  },
  {
-  "offset": 12305986,
-  "expect": "ffffffffffffffffffffffffffffffffffffffff",
-  "replace": "f220f220f220f220f220f220f220f220f220f220"
+  "offset": 12306444,
+  "expect": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+  "replace": "ffbef4eff2a3f220f220f220f40aff1bfffffffffffffd92f220f220f220f220f220f220f220f220f220ff9d"
  },
  {
-  "offset": 12306442,
-  "expect": "ffffffffffffffffffffffff",
-  "replace": "f220f220f220f220f220f220"
- },
- {
-  "offset": 12306466,
-  "expect": "ffffffffffffffffffffffffffffffffffffffff",
-  "replace": "f220f220f220f220f220f220f220f220f220f220"
+  "offset": 12306930,
+  "expect": "ffffffffffff",
+  "replace": "ff7cff5cffde"
  }
 ];

@@ -1,0 +1,23 @@
+# Player progress knob: draw through the keyed helper.
+name: 0118-progress-knob-keyed
+kind: module
+module: 27
+region: code
+address: 0x307f79a
+gate: build refuses unless the stock bytes at the target equal
+  `expect`; the finished image must also pass the grown
+  build validator. Pairs with the keyed knob art (resources 220
+  and 386) in patches/antialias/screens-glyphs.json.
+expect: e3f7d6fe
+replace: e4f735f9
+rationale: The progress segment of module 27's player Display fills
+  (40, 254)..(201, 268) with the ground, draws the bar columns, then
+  draws the knob (resource 220, light 386) with DrawImageAt
+  (0x0306354A), which is opaque. The stock knob's corners are baked
+  dark, so over a theater ground taken from cover art the knob sat in
+  a dark square. This BL now targets the keyed helper 0x03063A08,
+  which takes the same (id, x, y) and skips 0xF800, and the knob art
+  is a keyed disc with an antialiased edge. The bar area is refilled
+  with the ground before every knob draw, so a moving knob leaves no
+  trace. It is the only draw of 220/386 in the firmware (scan of
+  every module for a `movs r0, #0xdc` / `#0x182` before a BL).

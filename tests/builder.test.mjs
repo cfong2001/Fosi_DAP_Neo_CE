@@ -15,7 +15,7 @@
 //   (c) framework-only plus the CE splash mark:
 //         build.py --no-transplants \
 //           --theme-config patches/theme_editor/ce-mark.json
-//         e74b7bfa86864338091596ec84e7c558bc1006fd12e6a67bdd6ac247ab9f0372
+//         9916286d6a9937e935ccc340021092689877403a1ef584430dca7192194f4134
 //   (d) the default unified build (byte patches plus vorbis75):
 //         build.py
 //         92c446066e715d74a719671d3ee643ed4b7587c94801eb6dc3893f2271ed944d
@@ -48,12 +48,12 @@
 //           fc3b17d67a34fcc88814e48c31b8d91a10c9f9c765a9d7a50511136703dbae21
 //         build.py --bt-auto-off never --dac-filter nos
 //           5df1b0594375ac294b181dfb4e60e1f74d25046e33f0008f5ab14c9e3df8fdb9
-//   (m) the everything build (patches/full/: 65 patches, both
+//   (m) the everything build (patches/full/: 66 patches, both
 //       transplants, two growth insertions, the merged tail and
 //       the merged theme runs), with the page's embedded Opus data
 //       (docs/builder-opus-data.mjs; DAP_NEO_OPUS_DATA overrides it):
 //         build_full.py (one build.py pass)
-//         7f496fae397b7b9fea4ab4b9bf4131c3e35b2cded19f1722b94cfeb9cd786aa6
+//         db0a11d27a00295f18e4a07b9745af1564e06f66af872ec43129aa738b4fa362
 //   standalone lock screen (the embedded 406-byte reference-toolchain
 //   routine in a module 31 extension, plus patch 0033):
 //         build.py --no-transplants --manifest <framework manifest plus
@@ -140,7 +140,7 @@ for (const [patch, path] of fullManifest.map((entry, i) =>
   assert.equal(patch.expect, field("expect").toLowerCase());
   assert.equal(patch.replace, field("replace").toLowerCase());
 }
-assert.equal(FULL_EXTRA_PATCHES.length, 27);
+assert.equal(FULL_EXTRA_PATCHES.length, 28);
 assert.equal(FULL_TAIL.length, 2040);
 assert.equal(FULL_TAIL.sha256,
   "6d77b1102cc4a82828ed8c1670eef99de708565e95d585a58dfdeb1d01047a71");
@@ -148,9 +148,9 @@ assert.deepEqual(FULL_GROWTHS.map(g => [g.module, g.length, g.sha256]), [
   [31, 6936, "010197e684a8a3e3f1a0937b61fe89a7f620b48c0872e5305f781d42d9b88f05"],
   [24, 26, "7b80afb308d276a4d0012cd4302f7a5f2a1c5192a1f2e70d3f23867e195a942a"],
 ]);
-assert.equal(FULL_THEME_RUNS.length, 550);
+assert.equal(FULL_THEME_RUNS.length, 955);
 assert.equal(FULL_IMAGE_SHA256,
-  "7f496fae397b7b9fea4ab4b9bf4131c3e35b2cded19f1722b94cfeb9cd786aa6");
+  "db0a11d27a00295f18e4a07b9745af1564e06f66af872ec43129aa738b4fa362");
 for (const g of FULL_GROWTHS)
   assert.equal(await sha256Hex(hexToBytes(g.hex)), g.sha256);
 assert.equal(await sha256Hex(hexToBytes(FULL_TAIL.hex)), FULL_TAIL.sha256);
@@ -172,7 +172,7 @@ const cases = [
    "7817072c1558bbbdff2f85710b6e30de0db5e4c432dda30bd6fd2ad399ae298b"],
   ["(c) toggles on plus the CE splash mark",
    {groups: allGroups, patchGroups: PATCH_GROUPS, ceMarkRuns: CE_MARK_RUNS},
-   "e74b7bfa86864338091596ec84e7c558bc1006fd12e6a67bdd6ac247ab9f0372"],
+   "9916286d6a9937e935ccc340021092689877403a1ef584430dca7192194f4134"],
   ["(d) toggles on plus the vorbis75 transplant (unified build)",
    {groups: allGroups, patchGroups: PATCH_GROUPS, vorbis: VORBIS75},
    "92c446066e715d74a719671d3ee643ed4b7587c94801eb6dc3893f2271ed944d"],

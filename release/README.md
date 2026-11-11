@@ -5,7 +5,7 @@ against their pins by `.github/workflows/firmware.yml` on every change.
 
 | File | What it is | Length | SHA-256 |
 |---|---|---|---|
-| `DP3_V137_CE.img` | **Standard.** Every composed CE feature (list below). Header date 2026-10-23. | 13,638,454 bytes (6,962 more than stock) | `7f496fae397b7b9fea4ab4b9bf4131c3e35b2cded19f1722b94cfeb9cd786aa6` |
+| `DP3_V137_CE.img` | **Standard.** Every composed CE feature (list below). Header date 2026-10-23. | 13,638,454 bytes (6,962 more than stock) | `db0a11d27a00295f18e4a07b9745af1564e06f66af872ec43129aa738b4fa362` |
 | `DP3_V137_CE_minimal.img` | **Minimal option.** The default framework set and full-precision Vorbis only. Header date 2026-10-23. | 13,631,492 bytes (same as stock) | `92c446066e715d74a719671d3ee643ed4b7587c94801eb6dc3893f2271ed944d` |
 | `DP3_V137_CE_recovery.img` | Unmodified stock bytes dated 2026-10-24, one day after either CE image, so the boot validator prefers it. | 13,631,492 bytes | `aff851b31d6eee55cbd4bb3fc0464ac79f0039ee86ae6723225ac036a157d223` |
 | `*.report.json` | Build reports: every patch with its address and old and new bytes, transplant hashes, validation results. The standard report summarises its byte ranges. | | |

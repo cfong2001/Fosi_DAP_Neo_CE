@@ -1,5 +1,26 @@
 # Changelog
 
+## 2026-11-11: antialiased screens, dialogs and progress bar
+
+- Baked antialiasing extends to the stored screen art
+  (`patches/antialias/generate_screens.py`):
+  - dialog card corners
+  - the low-battery icon
+  - "Powering off…" text
+  - the CE splash mark (now generated)
+  - the progress bar columns and knob
+- Patch 0118 (full build) draws the progress knob through the keyed
+  helper. Over a theater ground the stock knob sat in a dark square.
+- The README renders and the site simulator draw the progress bar from
+  the image's own resources at module 27's coordinates.
+- `test_screens.py` checks the art in the Standard image and runs the
+  keyed knob draw in emulation. Verify's CE mark check now derives its
+  byte count from the runs.
+- Baked text uses Barlow, the site's typeface (vendored in `docs/fonts`),
+  so the output is the same on every machine.
+- New Standard pin `db0a11d2…`. Minimal and recovery are unchanged. The
+  merged theme has 955 runs.
+
 ## 2026-11-11: antialiased status and browser icons
 
 - The status and browser icon set (lock, play state, battery levels and

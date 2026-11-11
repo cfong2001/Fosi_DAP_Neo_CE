@@ -27,8 +27,8 @@ Proves, against the real stock image:
       the studio's example theme recolours exactly the counted
       pixels of resources 6 to 10, its diff against the default
       build confined to those resources' pixel ranges; the
-      runs-only CE mark config changes exactly its 496 census
-      bytes; and a tampered expected count, a guard-word source,
+      runs-only CE mark config changes exactly the bytes its runs change
+      (and only inside them); and a tampered expected count, a guard-word source,
       a run with wrong expected bytes, and --theme-config with
       --recovery are all refused. Skipped on the same condition
       as check 7.
@@ -51,7 +51,7 @@ Proves, against the real stock image:
       whole-image hash. Skipped on the same condition as
       check 7.
   13. The FULL build (patches/full/, check 13 below): every
-      feature composed in one pass (65 patches, both
+      feature composed in one pass (66 patches, both
       transplants, two growth insertions, the merged gap
       tail, the merged theme config). Its whole-image hash and
       length are pinned; every segment of the composed image
@@ -396,7 +396,7 @@ def main():
     # and changes exactly twice the summed expected counts (the
     # trailer CRC is derived from the whole image and is exempt,
     # as in check 7). The runs-only CE mark config must change
-    # exactly its 496 census bytes and nothing else. A tampered
+    # exactly the bytes its runs change and nothing else. A tampered
     # expected count, a guard-word source, a run whose expected
     # bytes are wrong, and --theme-config with --recovery refuse.
     THEME_DIR = HERE.parent / 'theme_editor'
@@ -446,10 +446,15 @@ def main():
                          and len(trep['theme']['resources']) == 5)
             ce = json.loads((THEME_DIR / 'ce-mark.json').read_text())
             ce_allowed = set()
+            ce_changed = 0          # bytes the runs actually change
+            ce_written = 0          # bytes the runs write (the report's count)
             for run in ce['runs']:
                 o = int(run['offset'], 16)
+                ce_written += len(bytes.fromhex(run['expect']))
                 ce_allowed |= set(range(
                     o, o + len(bytes.fromhex(run['expect']))))
+                ce_changed += sum(a != b for a, b in zip(
+                    bytes.fromhex(run['expect']), bytes.fromhex(run['replace'])))
             tce = tmp / 'theme-ce.img'
             r = run_build(['--input', str(STOCK), '--output', str(tce),
                            '--ecpatch-dir', str(ecp),
@@ -461,8 +466,8 @@ def main():
                 content = diff_offsets(dimg, cimg) - crc
                 crep = json.loads(
                     Path(str(tce) + '.report.json').read_text())
-                ce_ok = (content == ce_allowed and len(content) == 496
-                         and crep['theme']['bytes_changed'] == 496
+                ce_ok = (content <= ce_allowed and len(content) == ce_changed
+                         and crep['theme']['bytes_changed'] == ce_written
                          and len(crep['theme']['runs']) == len(ce['runs']))
 
             def refuse(cfg, name):
@@ -495,7 +500,7 @@ def main():
             detail = (f'default build == pinned unified hash: '
                       f'{default_ok}; example diff confined to '
                       f'resources 6-10, {2 * ex_total} bytes: {ex_ok}; '
-                      f'CE mark diff == 496 census bytes: {ce_ok}; '
+                      f'CE mark diff == its {ce_changed} changed bytes, inside its runs: {ce_ok}; '
                       f'refusals hold: {ref_ok}')
         check('theme build: pinned default, confined example and CE '
               'mark diffs, refusals hold', bool(ok), detail)
@@ -627,10 +632,10 @@ def main():
               'default build unchanged', ok, detail)
 
     # -- 13. full build (patches/full/) --------------------------------
-    # One build.py pass composing every feature: 65 patches, the
+    # One build.py pass composing every feature: 66 patches, the
     # vorbis75 and opus72 transplants, two growth insertions
     # (module 31 +6,936, module 24 +26), the merged
-    # 2,040-byte gap tail and the merged 550-run theme config. The
+    # 2,040-byte gap tail and the merged 938-run theme config. The
     # ebook reader (module 30) is not shrunk, so the image is
     # exactly the growth total longer than stock. Confinement is
     # proven per segment against the default unified build: a
@@ -641,7 +646,7 @@ def main():
     # differ only at the theme runs, the mirrored header and
     # the trailer CRC once the growth shift is accounted for.
     FULL_DIR = HERE.parent / 'full'
-    FULL_SHA = '7f496fae397b7b9fea4ab4b9bf4131c3e35b2cded19f1722b94cfeb9cd786aa6'
+    FULL_SHA = 'db0a11d27a00295f18e4a07b9745af1564e06f66af872ec43129aa738b4fa362'
     GROWTH_TOTAL = 6962
     if ecp is None:
         check('full build: composed image pinned, diff confined '
@@ -668,7 +673,7 @@ def main():
             pin_ok = hashlib.sha256(f).hexdigest() == FULL_SHA \
                 and len(f) == len(stock) + GROWTH_TOTAL
             rep = json.loads(Path(str(fout) + '.report.json').read_text())
-            rep_ok = len(rep["patches_applied"]) == 65 \
+            rep_ok = len(rep["patches_applied"]) == 66 \
                 and [t['module75_sha256'] if 'module75_sha256' in t
                      else t['module72_sha256']
                      for t in rep['transplants_applied']] == [
@@ -752,7 +757,7 @@ def main():
             ok = pin_ok and rep_ok and confined and ext_ok \
                 and post_ok and default_ok
             detail = (f'whole-image pin and length (+{GROWTH_TOTAL}): '
-                      f'{pin_ok}; report pins (65 patches, both '
+                      f'{pin_ok}; report pins (66 patches, both '
                       f'transplant hashes, growths, tail): {rep_ok}; '
                       f'segment diff confined to the union of parts: '
                       f'{confined}; module 0 tail span (zero workspace '

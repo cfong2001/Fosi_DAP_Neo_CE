@@ -51,6 +51,7 @@ patches/0115-transport-keyed-repeat-state-ground.patch
 patches/0116-transport-keyed-right-state-ground.patch
 patches/0117-transport-keyed-right-variants-ground.patch
 patches/0110-transport-keyed-slot0-state-ground.patch
+patches/0118-progress-knob-keyed.patch
 # Theater hooks, regenerated for the merged tail (local copies):
 patches/0100-theater-setup-reset-hook.patch
 patches/0101-theater-blit-sync-a.patch
