@@ -1,0 +1,22 @@
+# Shorter I2C controller reset on the DAC's bus (gapless transition cost).
+name: i2c-reset-pulse
+kind: module
+module: 0
+region: code
+address: 0x03060338
+gate: build refuses unless the 6 stock bytes at the target equal `expect`;
+  the finished image must also pass firmware_patch.validate()
+rationale: The DAC register writer (0x03060c4c) brings the I2C controller
+  up for every write and takes it down after (0x0306021c init, transfer,
+  0x0306043a deinit). For buses 0-2 the init holds the controller's CRU
+  soft reset 0x1a for delay_ms(1) (0x03060338). A track start writes
+  seven DAC registers (mute, rate, volume, unmute) before the I2S DMA
+  restarts, so that hold alone is 7 ms of every track-change gap
+  (measured in patches/gapless/rig/). A soft-reset hold needs a few
+  cycles of the block's clock, which 0x0306032c ungates just before.
+  This patch holds it for delay_us(50) instead: `movs r0, #50` and the
+  BL retargeted from delay_ms 0x03064944 to delay_us 0x03064920.
+  Buses 3-8 keep the stock 1 ms hold. Bytes:
+  patches/gapless/tools/assemble_v2.py.
+expect: 012004f003fb
+replace: 322004f0f1fa

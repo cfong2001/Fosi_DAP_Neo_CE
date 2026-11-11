@@ -17,12 +17,13 @@
 0016-clock-v1-row-20.patch
 0017-clock-v1-row-21.patch
 0018-clock-v1-row-22.patch
+0019-i2c-reset-pulse.patch
 0020-gapless-state-pair.patch
 0021-gapless-gate-hook.patch
 0022-gapless-gate-cave.patch
-0023-gapless-delay-cave.patch
-0024-gapless-delay-hook.patch
-0025-gapless-delay-pool.patch
+0023-gapless-flag-literal.patch
+0024-gapless-keep-decoder.patch
+0025-gapless-gate-tail.patch
 0026-gapless-arm.patch
 0027-sortkeys-comparator-hook.patch
 0028-sortkeys-builder-a-hook.patch
