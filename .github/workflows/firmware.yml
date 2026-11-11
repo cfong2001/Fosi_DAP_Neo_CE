@@ -66,6 +66,9 @@ jobs:
       - name: Track-change transition rig (stock, CE and mutants)
         run: python patches/gapless/rig/test_transition.py
 
+      - name: Antialiased screen art and keyed progress knob
+        run: python patches/antialias/test_screens.py
+
       - name: Simulator data matches the emulated painter
         run: |
           python tools/gen_sim_data.py
