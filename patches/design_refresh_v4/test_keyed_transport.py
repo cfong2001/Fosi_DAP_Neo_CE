@@ -206,6 +206,26 @@ def ink_set(words, x0, y0):
             if w != KEY}
 
 
+def ink_map(words, x0, y0):
+    """Non-key pixels with their values: the glyph ink and its baked
+    antialiasing fringe, which the keyed path lands as they are."""
+    return {(x0 + i % 32, y0 + i // 32): w for i, w in enumerate(words)
+            if w != KEY}
+
+
+def replay(m, image_bytes, rect, ground):
+    """The framebuffer a keyed-draw sequence must leave in `rect`: the
+    ground, then each logged draw's non-key pixels in draw order."""
+    x0, y0, w, h = rect
+    want = {(x, y): ground for y in range(y0, y0 + h) for x in range(x0, x0 + w)}
+    for e in m.drawlog:
+        if e[0] == 'draw':
+            for p, v in ink_map(glyph_words(image_bytes, e[2]), e[3], e[4]).items():
+                if p in want:
+                    want[p] = v
+    return want
+
+
 def fb_addr(m, col, row):
     """The store's address math, from its disassembly: the display
     is two surfaces (rows 0..239 and 240..319), paged by the
@@ -339,8 +359,7 @@ def gate_b(v4):
         'composite ink mismatch'
     assert len(comp_stores) == len(strip_ink)
     v4_play = glyph_words(v4, 169)
-    ink = ink_set(v4_play, 104, 275)
-    want = {pos: 0xFFFF for pos in ink}
+    want = ink_map(v4_play, 104, 275)
     got = last_wins(m.stores, 104, 275, 32, 32)
     assert got == want, 'patched centre mismatch'
     # attribute stores to the play draw itself via the draw tags:
@@ -350,8 +369,8 @@ def gate_b(v4):
     play_stores = [s for s, g in zip(m.stores, m.store_tags)
                    if g == k + 1]
     assert {(c, r, v) for c, r, v in play_stores} == \
-        {(x, y, 0xFFFF) for x, y in ink}
-    assert len(play_stores) == len(ink)
+        {(x, y, v) for (x, y), v in want.items()}
+    assert len(play_stores) == len(want)
     n_ink = len(play_stores)
     mw, mh, res286 = res_words(v4, 286)
     k286 = next(i for i, e in enumerate(m.drawlog)
@@ -379,7 +398,9 @@ def gate_b(v4):
                'plus 180': ink_set(glyph_words(v4, 180), 104, 275),
                'computed chevron 157': ink_set(glyph_words(v4, 157),
                                                4, 275)}
-    landed = {(c, r) for c, r, v in m.stores if v == 0xFFFF and r >= 275}
+    family = {w for rid in (157, 174, 180) for w in glyph_words(v4, rid)
+              if w != KEY}
+    landed = {(c, r) for c, r, v in m.stores if v in family and r >= 275}
     union = set().union(*regions.values())
     assert landed == union, (sorted(landed - union)[:5],
                              sorted(union - landed)[:5])
@@ -417,8 +438,8 @@ def gate_c(v4):
     want = {}
     for i in range(1024):
         pos = (104 + i % 32, 275 + i // 32)
-        want[pos] = 0xFFFF if (v4_pause[i] != KEY
-                               or v4_play[i] != KEY) else GROUND
+        want[pos] = (v4_pause[i] if v4_pause[i] != KEY else
+                     v4_play[i] if v4_play[i] != KEY else GROUND)
     ghosts = {p: v for p, v in snap.items() if v != want[p]}
     assert not ghosts, ghosts
     leftover = sum(1 for i in range(1024)
@@ -447,7 +468,7 @@ def gate_c(v4):
     chev0 = ink_set(glyph_words(v4, 157), 0, 275)
     pause4 = ink_set(glyph_words(v4, 167), 4, 275)
     ghosts = {p: v for p, v in after.items()
-              if v == 0xFFFF and p not in chev0 and p not in pause4
+              if v != GROUND and p not in chev0 and p not in pause4
               and p in ink_set(glyph_words(v4, 157), 4, 275)}
     print(f'(c2) B=2, chevron to pause at the computed slot, '
           f'segment-only repaint: {len(ghosts)} ghost pixels '
@@ -506,8 +527,7 @@ def gate_c(v4):
     fb_fill(m, GROUND)
     m.painter(state_a=11, state_b=2, play=1, ground=GROUND)
     after = fb_read(m, *slot_rect)
-    want = {p: (0xFFFF if p in chev0 or p in pause4 else GROUND)
-            for p in after}
+    want = replay(m, v4, slot_rect, GROUND)
     ghosts = {p: v for p, v in after.items() if v != want[p]}
     assert not ghosts, ghosts
     print('(c3) the segment posted by that cycle, run over the '
