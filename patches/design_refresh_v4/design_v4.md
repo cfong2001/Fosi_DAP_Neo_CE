@@ -164,12 +164,17 @@ filled disc with the i cut out) complete the set. Meanings and
 state variants are the stock ones, per the stock art and the
 design refresh v3 mapping.
 
-Rendering rule: shapes are drawn on an 8x supersampled canvas,
-box-downscaled and thresholded at half coverage, so every
-output pixel is exactly the ink colour or the key colour
-0xF800. No anti-aliasing colours are emitted, because on the
-keyed path any non-key pixel lands: a blend fringe would land
-as a halo. Ink is the palette foreground (0xFFFF dark, 0x0000
+Rendering rule: shapes are drawn on an 8x supersampled canvas
+and box-downscaled to per-pixel coverage, with the antialiasing
+baked into the sprite. Coverage under 1/16 is the key colour
+0xF800; coverage of 15/16 or more is the ink; every pixel in
+between is the ink pre-blended, in RGB565, toward a neutral grey
+as bright as the theme ground (0x4A69 dark, 0xD69A light). The
+keyed path lands every non-key pixel as it is and cannot blend at
+run time, and in theater mode the ground comes from the cover, so
+a grey fringe is used: it reads as edge softening on any ground,
+where a fringe tinted to the default ground shows as an outline
+(patches/antialias/mock/grounds.png). Ink is the palette foreground (0xFFFF dark, 0x0000
 light). The accent is kept only on the two icons the stock bare
 row itself draws in the accent: quote and info (dark accent
 0xF220, light accent 0xFB20), in both of their presentations.

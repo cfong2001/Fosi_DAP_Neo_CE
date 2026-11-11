@@ -21,7 +21,7 @@ CE (Community Edition) is patched firmware for the Fosi Audio DAP Neo. It starts
 
 | Image | What it carries | SHA-256 |
 |---|---|---|
-| [`DP3_V137_CE.img`](release/DP3_V137_CE.img) | Standard: every feature below. 6,962 bytes longer than stock. | `6305014618c35c6c78d573dfda760ee75cd1978a9448961fed5d0fe04015f2b7` |
+| [`DP3_V137_CE.img`](release/DP3_V137_CE.img) | Standard: every feature below. 6,962 bytes longer than stock. | `57d920afd8a636b1c2e369ee7e2e55de70910afc47ff930de3f3792cf4b4dfd8` |
 | [`DP3_V137_CE_minimal.img`](release/DP3_V137_CE_minimal.img) | Minimal: audio and library fixes only, same length as stock. | `92c446066e715d74a719671d3ee643ed4b7587c94801eb6dc3893f2271ed944d` |
 | [`DP3_V137_CE_recovery.img`](release/DP3_V137_CE_recovery.img) | Stock code dated one day after CE, for going back. | `aff851b31d6eee55cbd4bb3fc0464ac79f0039ee86ae6723225ac036a157d223` |
 
@@ -61,7 +61,7 @@ Every change is a patch file or a module transplant that [`patches/framework/bui
 | `vorbis75` transplant | Full-precision Tremor in place of the stock low-precision build, with output rounded to nearest | ✓ | ✓ | [`vorbis_swap.md`](patches/vorbis_swap/vorbis_swap.md), [`vorbis_rounding.md`](patches/vorbis_swap/vorbis_rounding.md) |
 | `opus72` transplant, 5 renames | Opus in place of WMA | ✓ | | [`opus_swap/`](patches/opus_swap/README.md) |
 | title-copy, title-suffix | Track titles copied with a bound and always terminated | ✓ | | [`full/`](patches/full/README.md) |
-| 0110 to 0117, 189 theme runs | Design refresh v4 transport glyphs, drawn keyed over the background | ✓ | | [`design_v4.md`](patches/design_refresh_v4/design_v4.md) |
+| 0110 to 0117, 182 theme runs | Design refresh v4 transport glyphs, drawn keyed over the background | ✓ | | [`design_v4.md`](patches/design_refresh_v4/design_v4.md) |
 | 244 theme runs | Browser status icons | ✓ | | [`design_browser.md`](patches/design_refresh_v4/browser_icons/design_browser.md) |
 | 4 theme runs | Light-theme play-mode icons keyed, so they sit on the theater background | ✓ | | [`play_mode_light/`](patches/design_refresh_v4/play_mode_light/generate.py) |
 | 64 theme runs | CE splash mark | ✓ | | [`theme_editor/`](patches/theme_editor/README.md) |

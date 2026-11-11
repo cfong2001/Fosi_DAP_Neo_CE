@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-11-11: antialiased transport sprites
+
+- The v4 transport sprites carry baked antialiasing. Edge pixels are
+  pre-blended toward a neutral grey as bright as the theme ground, and
+  fully outside pixels stay the transparent key. No draw code changed.
+  The keyed-transport gates now check each sprite's own pixels.
+- Mockups for antialiased text (`patches/antialias/`). Not built.
+- New Standard pin `57d920af…`. Minimal and recovery are unchanged. The
+  merged theme config has 494 runs.
+
 ## 2026-11-11: gapless v2 and the transition rig
 
 - New transition rig (`patches/gapless/rig/`) runs the system core's real

@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Merge the full build's theme config: design refresh v4 glyph
-runs (189), the browser icon extension runs (244), the CE
+runs (182), the browser icon extension runs (244), the CE
 splash mark runs (64) and the light play-mode key runs (4),
-501 runs total.
+494 runs total.
 
 The four source configs are disjoint (the theme consumer refuses
 overlaps; the merge asserts it). Two outputs:

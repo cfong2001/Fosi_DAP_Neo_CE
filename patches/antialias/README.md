@@ -1,4 +1,20 @@
-# Antialiased text and icons: mockups
+# Antialiased text and icons
+
+## Shipped: baked antialiasing in the transport sprites
+
+The v4 transport sprites (resources 155 to 181 and their light twins)
+carry their antialiasing in the pixels. `generate_glyphs.py` keeps
+coverage under 1/16 as the transparent key 0xF800 and full coverage as
+the ink. Edge pixels are the ink pre-blended toward a neutral grey as
+bright as the theme ground (0x4A69 dark, 0xD69A light). The keyed path
+lands pixels as they are and cannot blend at run time, and in theater
+mode the ground comes from the cover. `grounds.py`
+(`mock/grounds.png`) shows why the target is grey: a fringe tinted to
+the default ground shows as a brown outline on other covers. No draw
+code changed. The keyed-transport emulation gates check every landed
+pixel against the sprites.
+
+## Mockups: text options (not built)
 
 Nothing here changes firmware. `mock.py` renders the theater now-playing
 screen and a file list three ways, from the device's own 1-bit fonts (read
