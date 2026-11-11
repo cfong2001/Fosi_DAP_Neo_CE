@@ -1,0 +1,14 @@
+# Gapless fast path, part 5 of 6: the gate cave's last instruction.
+name: gapless-5-gate-tail
+kind: module
+module: 0
+region: code
+address: 0x03051684
+gate: build refuses unless the 4 stock bytes at the target equal `expect`;
+  the finished image must also pass firmware_patch.validate()
+rationale: B.W 0x0306cb30, the gate's branch into the stock
+  reset-and-start body after its re-executed prologue (0022). Two `bx
+  lr` stub slots that the v1 delay cave's literal used; the referenced
+  stub at 0x0305168a after them is untouched.
+expect: 70477047
+replace: 1bf054ba

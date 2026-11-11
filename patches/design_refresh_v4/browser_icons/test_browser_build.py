@@ -6,7 +6,7 @@ is written to disk):
 
   1. the default build (framework manifest, no theme config),
      whose SHA-256 must equal the pinned default
-     623214370755053ed69dc53f0c7ae5ec0504bcb3e9ca6f2766cc9e9049101090,
+     92c446066e715d74a719671d3ee643ed4b7587c94801eb6dc3893f2271ed944d,
      proving the default build is untouched;
   2. the validation build: the v4 manifest (the default patch set
      plus the eight transport repoint patches) and a merged theme
@@ -34,8 +34,8 @@ from rknano_image import Image  # noqa: E402
 RAW = (ROOT / 'DP3_V137.img').read_bytes()
 assert hashlib.sha256(RAW).hexdigest() == \
     'fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cdfade5e9c6ea3bd71ac6deef'
-DEFAULT_SHA = '623214370755053ed69dc53f0c7ae5ec0504bcb3e9ca6f2766' \
-              'cc9e9049101090'
+DEFAULT_SHA = '92c446066e715d74a719671d3ee643ed4b7587c94801eb6dc3' \
+              '893f2271ed944d'
 
 
 def load_build():
@@ -75,7 +75,7 @@ def main():
 
     entries = {e['id']: e for e in Image(out).images()}
     bad = []
-    for asset_dir, count in ((HERE / 'icon_set_browser', 38),
+    for asset_dir, count in ((HERE / 'icon_set_browser', 43),
                              (HERE.parent / 'icon_set_v4', 54)):
         mapping = json.loads((asset_dir / 'mapping.json').read_text())
         assert mapping['count'] == count, (asset_dir, mapping['count'])
@@ -86,7 +86,7 @@ def main():
             if got != want:
                 bad.append(a['id'])
     assert not bad, f'resources not byte-exact in build: {bad}'
-    print('validation build: all 38 browser resources and all 54 '
+    print('validation build: all 43 browser resources and all 54 '
           'v4 resources match their .bin files byte for byte')
     print('PASS')
     return 0

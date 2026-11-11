@@ -155,7 +155,7 @@ Removal itself is low-risk and buys nothing resident:
 - What a removal must also touch: the menu (name table entry "Ebook" and id slot 30 in the manager's table), and the browser's classification of .txt (module 0's category tables list TXT under the group that activates this window; leaving TXT classified while the window is gone gives .txt files a dead destination). SAVEINFO's last-window state could also name window index 8 and would need the same treatment as any removed window.
 - What removal does not free: the codepage modules 63–69 and the text machinery in module 0 are shared. Lyrics, ID3 tags, and file names all render through the same text draw and codepage tables (module 69 carries the GBK table). Deleting the reader frees neither the tables nor the 0x030247C4 data arena, which every window shares. Module 30's BSS (2,492 B at 0x030247FC) overlaps module 23's BSS in the same arena.
 
-**Verdict: merely available, not the best home.** Chase's constraint was that removal is acceptable if space is needed. Space is not what this slot provides; the binding constraint for the feature code is co-residency with the browser and the resident core, and a window slot cannot provide it.
+**Verdict: merely available, not the best home.** The owner's constraint was that removal is acceptable if space is needed. Space is not what this slot provides; the binding constraint for the feature code is co-residency with the browser and the resident core, and a window slot cannot provide it.
 
 ### The rest of the candidate 3 field
 

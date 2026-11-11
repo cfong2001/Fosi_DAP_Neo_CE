@@ -1,8 +1,7 @@
 # Gapless fast path, part 0 of 6: the patch-owned state pair.
-# Two words of patch state, embedded in dead stub-farm bytes (see rationale).
-# Initial values are the boot values: no decoder retained, no previous rate.
-# One of 0020-0025 (the gapless set, in manifest order); 0026 is the
-# separate, deliberately unstacked ARM patch.
+# Patch state embedded in dead stub-farm bytes (see rationale). The
+# initial value is the boot value: no decoder retained. One of 0020-0025
+# (the gapless set, in manifest order); 0026 arms it.
 name: gapless-0-state-pair
 kind: module
 module: 0
@@ -10,10 +9,11 @@ region: code
 address: 0x030515b0
 gate: build refuses unless the 8 stock bytes at the target equal `expect`;
   the finished image must also pass firmware_patch.validate()
-rationale: Patch-owned state for the fast-path gate (0022) and the delay
-  cut (0023): word 0 = retained decoder module id (0 = none) with the
-  fast-path-active flag in bit 7 (module | 0x80); word 1 = previous
-  track's sample rate, maintained by the delay cave on every load-start.
+rationale: Patch-owned state for the fast-path gate (0022): word 0 =
+  retained decoder module id (0 = none), with bit 7 set while the
+  resident decoder is being reused (module | 0x80). Word 1 is unused
+  since the v2 gate (it held the previous sample rate for the retired
+  80 ms delay cut) and stays zero.
   The site is two `bx lr` stub slots inside the module-0 stub farm at
   0x030515ac..0x030515b8. An exhaustive reference scan of all 82 modules
   (BL/B.W targets, literal words in code and data, MOVW/MOVT pairs)
@@ -25,7 +25,7 @@ rationale: Patch-owned state for the fast-path gate (0022) and the delay
   boot: after any reset the pair reads 0/0, so the gate can never skip
   the first load of a session. The code segment is SRAM written by the
   loader at runtime (the same mechanism that loads every overlay), so
-  the gate and delay caves update the pair in place. The content is
+  the gate updates word 0 in place. The content is
   data, not code; nothing branches here.
 expect: 7047704770477047
 replace: 0000000000000000

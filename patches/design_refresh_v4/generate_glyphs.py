@@ -2,11 +2,15 @@
 """Design refresh v4: transparent transport glyphs for the player row.
 
 Deterministic generator. Every glyph is drawn from geometric
-primitives on an 8x supersampled canvas, downscaled by box filter
-and thresholded at half coverage, so each output pixel is either
-the ink colour or the key colour 0xF800 exactly. No anti-aliasing
-colours are emitted: on the keyed draw path (format 1) any pixel
-that is not 0xF800 lands, so a blend fringe would land as a halo.
+primitives on an 8x supersampled canvas and downscaled by box filter
+to per-pixel coverage. The antialiasing is baked into the sprite:
+coverage under 1/16 is the key colour 0xF800 (transparent on the
+keyed draw path), coverage of 15/16 or more is the ink, and every
+pixel in between is the ink pre-blended, in RGB565, toward a neutral
+grey as bright as the set's theme ground (0x7222 dark, 0xBEFA light).
+The keyed path cannot blend at run time and the theater ground comes
+from cover art, so a neutral fringe is the target that stays clean on
+any ground (patches/antialias/mock/grounds.png compares the choices).
 
 Meanings follow the stock resources (see icon_set_v3/mapping.json
 and the stock contact sheets): keycap and bare presentations of
@@ -50,6 +54,21 @@ KEY = 0xF800
 INK_DARK, INK_LIGHT = 0xFFFF, 0x0000
 ACC_DARK, ACC_LIGHT = 0xF220, 0xFB20
 GROUND_DARK, GROUND_LIGHT = 0x7222, 0xBEFA
+
+
+def neutral(ground):
+    """RGB565 grey with the luminance (Rec. 601) of `ground`."""
+    r, g, b = (((ground >> 11) & 31) * 255 // 31, ((ground >> 5) & 63) * 255 // 63,
+               (ground & 31) * 255 // 31)
+    y = round(0.299 * r + 0.587 * g + 0.114 * b)
+    return (y * 31 + 127) // 255 << 11 | (y * 63 + 127) // 255 << 5 | (y * 31 + 127) // 255
+
+
+# The fringe is blended toward a neutral grey as bright as the theme
+# ground, not the ground itself: in theater mode the ground comes from
+# the cover art, and a grey fringe reads as plain edge softening on any
+# ground where a tinted one shows as an outline.
+FRINGE_DARK, FRINGE_LIGHT = neutral(GROUND_DARK), neutral(GROUND_LIGHT)
 
 # id -> (design slug, accent?)
 FAMILY = {
@@ -157,14 +176,27 @@ class Canvas:
         b2 = (px - tx * 2.0 - nx * 4.3, py - ty * 2.0 - ny * 4.3)
         self.poly([tip, b1, b2], fill=fill)
 
-    def finish(self, ink):
+    def finish(self, ink, ground):
+        """32x32 RGB565 words with the antialiasing baked in against
+        `ground` (see the module docstring)."""
         small = self.img.resize((32, 32), Image.BOX)
         px = small.load()
         words = []
         for y in range(32):
             for x in range(32):
-                words.append(ink if px[x, y] >= 128 else KEY)
+                words.append(bake(ink, ground, px[x, y] / 255))
         return words
+
+
+def bake(ink, ground, cov):
+    if cov < 1 / 16:
+        return KEY
+    if cov >= 15 / 16:
+        return ink
+    a, b = rgb888(ink), rgb888(ground)
+    r, g, bl = (round(i * cov + j * (1 - cov)) for i, j in zip(a, b))
+    w = (r * 31 + 127) // 255 << 11 | (g * 63 + 127) // 255 << 5 | (bl * 31 + 127) // 255
+    return w ^ 0x0020 if w == KEY else w
 
 
 def bezier(p0, p1, p2, n=40):
@@ -273,7 +305,8 @@ def main():
         light = rid >= 323
         ink = (ACC_LIGHT if accent else INK_LIGHT) if light else \
               (ACC_DARK if accent else INK_DARK)
-        words = draw_design(design).finish(ink)
+        words = draw_design(design).finish(
+            ink, FRINGE_LIGHT if light else FRINGE_DARK)
         rendered[rid] = words
         e = imgs[rid]
         assert (e['width'], e['height'], e['size']) == (32, 32, 2048), rid
@@ -304,7 +337,8 @@ def main():
                 continue
             design, accent = slot
             tile = draw_design(design).finish(
-                accent_ink if accent else ink)
+                accent_ink if accent else ink,
+                FRINGE_LIGHT if light else FRINGE_DARK)
             x0 = 4 + 50 * k
             for i, w in enumerate(tile):
                 words[(i // 32) * 240 + x0 + i % 32] = w

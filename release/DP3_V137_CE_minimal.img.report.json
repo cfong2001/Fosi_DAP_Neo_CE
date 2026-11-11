@@ -3,7 +3,7 @@
   "input_file": "DP3_V137.img",
   "output_file": "DP3_V137_CE_minimal.img",
   "input_sha256": "fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cdfade5e9c6ea3bd71ac6deef",
-  "output_sha256": "623214370755053ed69dc53f0c7ae5ec0504bcb3e9ca6f2766cc9e9049101090",
+  "output_sha256": "92c446066e715d74a719671d3ee643ed4b7587c94801eb6dc3893f2271ed944d",
   "byte_length": 13631492,
   "header_date": "20261023",
   "patches_applied": [
@@ -217,6 +217,17 @@
       "new_hex": "00389c1c00000000000000000000000000882a1100882a11"
     },
     {
+      "patch": "i2c-reset-pulse",
+      "file": "0019-i2c-reset-pulse.patch",
+      "kind": "module",
+      "module": 0,
+      "region": "code",
+      "cpu_address": "0x3060338",
+      "file_offset": "0x399e4",
+      "old_hex": "012004f003fb",
+      "new_hex": "322004f0f1fa"
+    },
+    {
       "patch": "gapless-0-state-pair",
       "file": "0020-gapless-state-pair.patch",
       "kind": "module",
@@ -247,40 +258,40 @@
       "cpu_address": "0x3051664",
       "file_offset": "0x2ad10",
       "old_hex": "7047704770477047704770477047704770477047704770477047704770477047",
-      "new_hex": "70b50546aff1bc0630684006400ea842ffe735601bf05aba80242543356070bd"
+      "new_hex": "5ff868211268aff1bc0132b10b6843405b0602e0803008607047086070b50546"
     },
     {
-      "patch": "gapless-3-delay-cave",
-      "file": "0023-gapless-delay-cave.patch",
+      "patch": "gapless-3-flag-literal",
+      "file": "0023-gapless-flag-literal.patch",
       "kind": "module",
       "module": 0,
       "region": "code",
-      "cpu_address": "0x30514fe",
-      "file_offset": "0x2abaa",
-      "old_hex": "7047704770477047704770477047704770477047704770477047",
-      "new_hex": "2ca1604b9b684a684b60934203d10a68802a00d3704713f016ba"
+      "cpu_address": "0x3051500",
+      "file_offset": "0x2abac",
+      "old_hex": "70477047",
+      "new_hex": "38410003"
     },
     {
-      "patch": "gapless-4-delay-hook",
-      "file": "0024-gapless-delay-hook.patch",
+      "patch": "gapless-4-keep-decoder",
+      "file": "0024-gapless-keep-decoder.patch",
       "kind": "module",
       "module": 33,
       "region": "code",
-      "cpu_address": "0x3088fea",
-      "file_offset": "0x9e22e",
-      "old_hex": "dbf7abfc",
-      "new_hex": "c8f788fa"
+      "cpu_address": "0x30893c4",
+      "file_offset": "0x9e608",
+      "old_hex": "cf4810b500680a2828bf10bddfe800f0051b1b1b1b1b1b1b1b1bfff7c6ffe3f793fb01210e20c9f717f901210f20c9f713f900216e20c9f7d7f80021bde810407e20c9f7d1b8fff7b0ffbde81040e3f77bbb",
+      "new_hex": "cf4810b500680a2828bf10bd0446fff7ccff0db1e3f798fb7cb901210e20c9f71bf901210f20c9f717f900216e20c9f7dbf800217e20c9f7d7f810bd00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf"
     },
     {
-      "patch": "gapless-5-delay-pool",
-      "file": "0025-gapless-delay-pool.patch",
+      "patch": "gapless-5-gate-tail",
+      "file": "0025-gapless-gate-tail.patch",
       "kind": "module",
       "module": 0,
       "region": "code",
       "cpu_address": "0x3051684",
       "file_offset": "0x2ad30",
       "old_hex": "70477047",
-      "new_hex": "d8680303"
+      "new_hex": "1bf054ba"
     },
     {
       "patch": "gapless-6-arm",
@@ -288,10 +299,10 @@
       "kind": "module",
       "module": 0,
       "region": "code",
-      "cpu_address": "0x3051674",
-      "file_offset": "0x2ad20",
-      "old_hex": "ffe7",
-      "new_hex": "02d0"
+      "cpu_address": "0x3051676",
+      "file_offset": "0x2ad22",
+      "old_hex": "02e0",
+      "new_hex": "02d1"
     },
     {
       "patch": "sortkeys-comparator-hook",
@@ -382,31 +393,39 @@
   "tail": null,
   "growth": [],
   "diff_vs_stock": {
-    "bytes_changed": 71517,
+    "bytes_changed": 71547,
     "ranges": [
       [
         "0x2",
         "0x2"
       ],
       [
-        "0x2abaa",
-        "0x2abbd"
-      ],
-      [
-        "0x2abc0",
-        "0x2abc3"
+        "0x2abac",
+        "0x2abaf"
       ],
       [
         "0x2ac5c",
         "0x2ac63"
       ],
       [
-        "0x2ad11",
-        "0x2ad2d"
+        "0x2ad10",
+        "0x2ad27"
       ],
       [
-        "0x2ad2f",
+        "0x2ad2a",
+        "0x2ad2b"
+      ],
+      [
+        "0x2ad2d",
         "0x2ad33"
+      ],
+      [
+        "0x399e4",
+        "0x399e4"
+      ],
+      [
+        "0x399e8",
+        "0x399e9"
       ],
       [
         "0x3a3c0",
@@ -1277,12 +1296,36 @@
         "0x7cf8a"
       ],
       [
-        "0x9e22e",
-        "0x9e22e"
+        "0x9e614",
+        "0x9e626"
       ],
       [
-        "0x9e230",
-        "0x9e231"
+        "0x9e628",
+        "0x9e629"
+      ],
+      [
+        "0x9e62c",
+        "0x9e62c"
+      ],
+      [
+        "0x9e632",
+        "0x9e632"
+      ],
+      [
+        "0x9e634",
+        "0x9e634"
+      ],
+      [
+        "0x9e638",
+        "0x9e639"
+      ],
+      [
+        "0x9e63c",
+        "0x9e63c"
+      ],
+      [
+        "0x9e642",
+        "0x9e659"
       ],
       [
         "0x12c960",

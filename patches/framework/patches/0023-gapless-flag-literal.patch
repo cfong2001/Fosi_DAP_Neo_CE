@@ -1,0 +1,16 @@
+# Gapless fast path, part 3 of 6: literal for the gate's core-1 check.
+name: gapless-3-flag-literal
+kind: module
+module: 0
+region: code
+address: 0x03051500
+gate: build refuses unless the 4 stock bytes at the target equal `expect`;
+  the finished image must also pass firmware_patch.validate()
+rationale: The word 0x03004138, the stock core-1 running flag, loaded by
+  the gate (0022) with LDR.W [pc, #-0x168]. It occupies two `bx lr` stub
+  slots in the range the v1 delay cave used (0x030514fe..0x03051517,
+  verified unreferenced in the same scan as 0022). The v1 delay cut is
+  retired: the rig shows the 80 ms settle at 0x03088fea runs after the
+  I2S DMA restart, so it never formed part of the gap.
+expect: 70477047
+replace: 38410003

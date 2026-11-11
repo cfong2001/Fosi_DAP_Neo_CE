@@ -1,5 +1,54 @@
 # Changelog
 
+## 2026-11-11: antialiased status and browser icons
+
+- The status and browser icon set (lock, play state, battery levels and
+  charging frames, headphones, file, clock) now has baked antialiasing.
+  These are drawn opaque, so edges blend exactly into each icon's own
+  ground. Battery shells and terminals are rounded.
+- Five stock two-colour keyed sprites are redrawn inside their stock
+  footprints with antialiased edges: the black mini pause/play (189,
+  190, 355, 356) and the light-theme speaker 298.
+- Stock art that already had smooth edges is unchanged (large clock
+  digits, Bluetooth, headphones 116, checkmarks, spinner, arrows,
+  dots). So are the 7x9 pixel digits, which read best crisp.
+- New Standard pin `7f496fae…`. The merged theme has 550 runs (browser
+  300). The browser icon tests run without an unpacked tree.
+
+## 2026-11-11: antialiased transport sprites
+
+- The v4 transport sprites carry baked antialiasing. Edge pixels are
+  pre-blended toward a neutral grey as bright as the theme ground, and
+  fully outside pixels stay the transparent key. No draw code changed.
+  The keyed-transport gates now check each sprite's own pixels.
+- Mockups for antialiased text (`patches/antialias/`). Not built.
+- New Standard pin `57d920af…`. Minimal and recovery are unchanged. The
+  merged theme config has 494 runs.
+
+## 2026-11-11: gapless v2 and the transition rig
+
+- New transition rig (`patches/gapless/rig/`) runs the system core's real
+  end-of-track and user-skip code under Unicorn with a virtual clock. It
+  models the decoder core, CRU reset and clock state, module loads and DAC
+  I2C. `test_transition.py` checks stock, the CE image and two mutants in
+  about a second, and runs in the firmware workflow.
+- The rig found that the first armed gapless release (Standard `9cc86655…`,
+  Minimal `62321437…`) stalled for about 27 s on every same-format track
+  change. The stock stop path holds core 1 in reset and gates its clock,
+  and the v1 gate then skipped the reboot.
+- Gapless v2: the decoder shutdown no longer halts core 1 on a natural end
+  of track (0024). The gate also requires the core-1 running flag (0022,
+  0023, 0025), so user skips, codec changes and other halts fall back to
+  the full reload. The 80 ms delay cut is retired, because that delay runs
+  after the I2S restart.
+- 0019: the DAC bus I2C controller reset hold drops from 1 ms to 50 µs.
+  Each track change makes seven DAC writes.
+- Measured in the rig, from the end-of-track event to the I2S restart:
+  stock 20.5 ms, CE 4.7 ms (FLAC to FLAC). Decoder-side open and decode are
+  not included. Claims now say "shorter track changes", not "gapless".
+- New release pins: Standard `63050146…`, Minimal `92c44606…`. Recovery is
+  unchanged.
+
 ## 2026-11-10: site redesign with Stageshow
 
 - The Pages site takes the look of Stageshow (github.com/benjitaylor/skills,

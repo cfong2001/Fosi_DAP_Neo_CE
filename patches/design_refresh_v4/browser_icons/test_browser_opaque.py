@@ -40,9 +40,9 @@ raw = (ROOT / 'DP3_V137.img').read_bytes()
 assert hashlib.sha256(raw).hexdigest() == \
     'fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cdfade5e9c6ea3bd71ac6deef'
 im = Image(raw)
-EXT = WORK / 'extracted'
-CODE = (EXT / 'module_00_code_03050000.bin').read_bytes()
-DATA = (EXT / 'module_00_data_03004000.bin').read_bytes()
+# module 0 straight from the pinned image (no unpacked tree needed)
+CODE = raw[slice(*(lambda o, n: (o, o + n))(*im.module_region(0, 'code')))]
+DATA = raw[slice(*(lambda o, n: (o, o + n))(*im.module_region(0, 'data')))]
 END = 0x030EF000
 STORE = 0x03063E60
 RES_CELL = 0x0302328C

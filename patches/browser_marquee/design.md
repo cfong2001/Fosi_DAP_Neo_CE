@@ -5,7 +5,7 @@ selected, the row text starts scrolling after a one second dwell and
 shows the entry's metadata, the way a long title scrolls in the
 player. Built and validated entirely under emulation; nothing has
 been flashed. The default build is unchanged (verified byte
-identical, SHA-256 `62321437...`).
+identical, SHA-256 `92c44606...`).
 
 Second version: the scroll string for a file with usable tags is
 now the tag string (ARTIST - TITLE, plus - ALBUM when present),
@@ -743,7 +743,7 @@ The v3 payload is 6,544 bytes against the full build's
 patches/full/ is untouched, and the default build is
 unaffected: a framework build with the default manifest
 reproduces the pinned unified image
-`623214370755053ed69dc53f0c7ae5ec0504bcb3e9ca6f2766cc9e9049101090`
+`92c446066e715d74a719671d3ee643ed4b7587c94801eb6dc3893f2271ed944d`
 byte for byte.
 
 ## v4: cover thumbnail with the text shift
@@ -981,7 +981,7 @@ The v4 payload is 7,252 bytes against the full build's
 patches/full/ is untouched, and the default build is
 unaffected: a framework build with the default manifest
 reproduces the pinned unified image
-`623214370755053ed69dc53f0c7ae5ec0504bcb3e9ca6f2766cc9e9049101090`
+`92c446066e715d74a719671d3ee643ed4b7587c94801eb6dc3893f2271ed944d`
 byte for byte (re-verified for v4).
 
 ## Phase E notes
@@ -1402,7 +1402,7 @@ it appeared.
 Payload 6,992 B in the module 31 growth window (3,808 code
 + 3,184 data), 444 B spare. Variant image 13,638,484 B,
 SHA-256
-c58e51b5670fe08ffdd9e73c5a7f7cdb3539a4a62c138cf287f12806155e26c2. Hooks: the four standing hooks (0300
+b86d2488b1b623348cca2ac71813e22cc6f48b0e62d8d3a61b1568a2098429f0. Hooks: the four standing hooks (0300
 gate, 0301 key, 0302 exit, 0303 toggle) plus 0310 to 0315
 above; hooks 0304 to 0309 do not exist in this variant. The
 gap tail ships as 2,044 zero bytes and carries the slice

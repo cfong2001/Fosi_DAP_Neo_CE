@@ -76,8 +76,8 @@ const FEATURES = [
   {heading: "Sound", items: [
     {id: "vorbis", patch: "patches/vorbis_swap/", title: "Full-precision Vorbis", on: true,
      note: "Decodes Ogg Vorbis at full precision instead of stock's low-accuracy decoder (about 40 dB better in emulation)."},
-    {id: "g:gapless", patch: "patches/gapless/", title: "Gapless playback", on: true,
-     note: "Same-format tracks hand over using the decoder already loaded. The hand-over still needs a device test."},
+    {id: "g:gapless", patch: "patches/gapless/", title: "Faster track changes", on: true,
+     note: "At the end of a track the decoder stays loaded for the next file of the same format: about 4.7 ms of system work instead of 20.5 ms in emulation. Not sample-exact gapless."},
     {id: "opus", patch: "patches/opus_swap/", title: "Opus playback", tag: "replaces WMA",
      note: "Plays .opus files; WMA files stop playing. No Opus tags or cover art. Adds 277 KB of decoder data to the download when built."},
     {id: "g:clock", patch: "patches/clock_v1/", title: "Lower decoder clocks", on: true,

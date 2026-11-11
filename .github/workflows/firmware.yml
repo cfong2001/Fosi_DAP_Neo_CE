@@ -63,6 +63,9 @@ jobs:
       - name: EQ preset selector and fit under emulation
         run: python patches/eq_presets/test_eq_presets.py
 
+      - name: Track-change transition rig (stock, CE and mutants)
+        run: python patches/gapless/rig/test_transition.py
+
       - name: Simulator data matches the emulated painter
         run: |
           python tools/gen_sim_data.py

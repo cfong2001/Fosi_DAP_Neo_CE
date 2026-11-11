@@ -221,7 +221,7 @@ test('install flow verifies, copies and downloads release images', async t => {
     const digest = await crypto.subtle.digest('SHA-256', await file.arrayBuffer());
     return {size: file.size, hash: Array.from(new Uint8Array(digest), b => b.toString(16).padStart(2, '0')).join('')};
   });
-  assert.deepEqual(written, {size: 13638454, hash: '9cc86655ddf23bddf72903b828e58f6b0a978836825e74c0f2a1a5056bdc98a3'});
+  assert.deepEqual(written, {size: 13638454, hash: '7f496fae397b7b9fea4ab4b9bf4131c3e35b2cded19f1722b94cfeb9cd786aa6'});
 
   // Download the minimal image under the update name.
   await page.locator('#image-choices input[value=minimal]').check();
@@ -232,7 +232,7 @@ test('install flow verifies, copies and downloads release images', async t => {
   assert.equal(download.suggestedFilename(), 'RKNANOFWIMG');
   const saved = await fs.readFile(await download.path());
   assert.equal(require('node:crypto').createHash('sha256').update(saved).digest('hex'),
-    '623214370755053ed69dc53f0c7ae5ec0504bcb3e9ca6f2766cc9e9049101090');
+    '92c446066e715d74a719671d3ee643ed4b7587c94801eb6dc3893f2271ed944d');
 
   // A tampered recovery image is refused and nothing new is written.
   tamper = true;
@@ -309,11 +309,11 @@ test('builder needs no local files and reproduces the release images', async t =
   assert.ok(order[0] < order[2] && order[1] < order[2], 'EQ and DAC filter sit above the features');
   // All CE features: the Standard image, Opus data loaded on demand.
   assert.ok(await page.locator('#feature-list').isHidden());
-  assert.equal(await build(), '9cc86655ddf23bddf72903b828e58f6b0a978836825e74c0f2a1a5056bdc98a3');
+  assert.equal(await build(), '7f496fae397b7b9fea4ab4b9bf4131c3e35b2cded19f1722b94cfeb9cd786aa6');
   // Pick features starts as the Minimal image.
   await page.locator('input[name=build-base][value=custom]').check();
   assert.ok(await page.locator('#feature-list').isVisible());
-  assert.equal(await build(), '623214370755053ed69dc53f0c7ae5ec0504bcb3e9ca6f2766cc9e9049101090');
+  assert.equal(await build(), '92c446066e715d74a719671d3ee643ed4b7587c94801eb6dc3893f2271ed944d');
   // Theater excludes the Bluetooth shortcut and the lock screen, and says why.
   const box = id => page.locator(`#feature-list input[data-feature="${id}"]`);
   await box('theater').check();

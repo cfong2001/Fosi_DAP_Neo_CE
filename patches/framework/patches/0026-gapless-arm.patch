@@ -3,25 +3,22 @@
 # It was added after the Phase D observation named in gapless_patch.md
 # (resident decoder accepting the stock 0x65 open exchange after
 # end-of-stream) was recorded in emulation (patches/harness/milestone2.md).
-# The system side of the transition is still unobserved until hardware.
+# The system side now runs in the transition rig (patches/gapless/rig/);
+# hardware timing is still unmeasured.
 name: gapless-6-arm
 kind: module
 module: 0
 region: code
-address: 0x03051674
+address: 0x03051676
 gate: build refuses unless the 2 bytes at the target equal `expect`
   (the gate cave as installed by 0022); the finished image must also
   pass firmware_patch.validate()
-rationale: One branch inside the gate cave at 0x03051664 (0022). As
-  shipped by 0022 the instruction at cave+0x10 is an unconditional
-  branch to the stock path (ffe7), so the same-module comparison the
-  cave performs is ignored and every decoder load runs the stock
-  reset-and-start body. This patch replaces those 2 bytes with
-  `beq` to the cave's skip block (02d0): when the retained module word
-  (masked) equals the requested decoder module, the gate records
-  module|0x80 and returns to the codec case without running the
-  reset-and-start body -- no image re-copy, no core-1 reset, no
-  parameter-page re-copy, no ready poll -- and the delay cut (0023)
-  becomes live for same-rate transitions. Nothing else changes.
-expect: ffe7
-replace: 02d0
+rationale: One branch inside the gate cave (0022), at cave+0x12. As
+  built by 0022 it is an unconditional branch to the stock path (02e0),
+  so the gate always runs the full reset-and-start body. This patch makes
+  it `bne` (02d1): when core 1 is running and the requested decoder
+  module is the retained one, the gate returns without the reload and
+  the resident decoder takes the next file's 0x65 open. With 0024 that
+  is every natural end-of-track advance between tracks of one format.
+expect: 02e0
+replace: 02d1

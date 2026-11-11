@@ -1,11 +1,13 @@
 # Gapless playback patch set: DP3_V137 (stock SHA fcc1cd3e…)
 
-> Current status: armed in both images. Patch 0026 (`0026-gapless-arm.patch`)
-> is in the framework manifest, after the decoder-side observation this
-> document gates it on was recorded in emulation
-> ([`../harness/milestone2.md`](../harness/milestone2.md)). The "shipped
-> DISARMED" status below describes the set as first delivered. The system side
-> of the transition is still unobserved until hardware.
+> Current status: superseded by gapless v2 (see [`README.md`](README.md)).
+> This document describes v1 as first delivered. v1's premise that a
+> same-module load could skip the reset-and-start body was wrong: the stock
+> stop path halts core 1 on every track change, so v1 skipped the reboot
+> of a halted core (the transition rig in [`rig/`](rig/) shows the open
+> exchange timing out and a ~27 s stall). Its 80 ms delay cut is retired
+> because that delay runs after the I2S restart. The v1 cost budget in §6
+> is also superseded by the rig's measurements.
 
 Status: **built and statically verified, shipped DISARMED.** The set installs
 the complete same-codec fast-path machinery (loader gate, wait cut, state)
