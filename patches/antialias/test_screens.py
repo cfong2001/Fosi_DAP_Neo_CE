@@ -54,8 +54,11 @@ def main():
     # 1. reproducible outputs
     outputs = [HERE / 'screens-glyphs.json', ROOT / 'patches' / 'theme_editor' / 'ce-mark.json']
     before = [p.read_bytes() for p in outputs]
-    subprocess.run([sys.executable, str(HERE / 'generate_screens.py')], check=True,
-                   capture_output=True)
+    gen = subprocess.run([sys.executable, str(HERE / 'generate_screens.py')],
+                         capture_output=True, text=True)
+    if gen.returncode:
+        print(gen.stdout + gen.stderr)
+        raise SystemExit('generate_screens.py failed')
     after = [p.read_bytes() for p in outputs]
     check('generator reproduces screens-glyphs.json and ce-mark.json', before == after)
 

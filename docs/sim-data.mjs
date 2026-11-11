@@ -20,10 +20,10 @@ export const SECTIONS = {
   },
   "ce": {
     "file": "release/DP3_V137_CE.img",
-    "image_sha256": "70fb5bc70c8e82b0b9c1a589cd419438ff612b126470d6b358836273438d66df",
+    "image_sha256": "db0a11d27a00295f18e4a07b9745af1564e06f66af872ec43129aa738b4fa362",
     "offset": 9105314,
     "length": 4086176,
-    "sha256": "d3215f9d46fc7030620538a48bd7e698c21fab874d9dca7959324a05934c90ab"
+    "sha256": "575edb0afb1823f5d75031508dc9c2aa9b9872e38fe74e64e8717b3d8fe3975f"
   }
 };
 export const PAINTER = {"stock": {"0:1": [["fill", 53, 5, 78, 24], ["draw", 286, 53, 5, true], ["draw", 155, 0, 275, false], ["draw", 169, 104, 275, false]], "0:0": [["fill", 53, 5, 78, 24], ["draw", 286, 53, 5, true], ["draw", 155, 0, 275, false], ["draw", 168, 104, 275, false]], "1:1": [["fill", 53, 5, 78, 24], ["draw", 286, 53, 5, true], ["draw", 156, 0, 275, false], ["draw", 180, 104, 275, false], ["draw", 174, 54, 275, false]], "2:1": [["fill", 53, 5, 78, 24], ["draw", 286, 53, 5, true], ["draw", 157, 0, 275, false], ["draw", 180, 104, 275, false], ["draw", 174, 54, 275, false], ["draw", 157, 4, 275, false]]}, "ce": {"0:1": [["fill", 53, 5, 78, 24], ["draw", 286, 53, 5, true], ["fill", 0, 275, 239, 306], ["draw", 155, 0, 275, true], ["fill", 104, 275, 135, 306], ["draw", 169, 104, 275, true]], "0:0": [["fill", 53, 5, 78, 24], ["draw", 286, 53, 5, true], ["fill", 0, 275, 239, 306], ["draw", 155, 0, 275, true], ["fill", 104, 275, 135, 306], ["draw", 168, 104, 275, true]], "1:1": [["fill", 53, 5, 78, 24], ["draw", 286, 53, 5, true], ["fill", 0, 275, 239, 306], ["draw", 156, 0, 275, true], ["fill", 104, 275, 135, 306], ["draw", 180, 104, 275, true], ["fill", 54, 275, 85, 306], ["draw", 174, 54, 275, true]], "2:1": [["fill", 53, 5, 78, 24], ["draw", 286, 53, 5, true], ["fill", 0, 275, 31, 306], ["draw", 157, 0, 275, true], ["fill", 104, 275, 135, 306], ["draw", 180, 104, 275, true], ["fill", 54, 275, 85, 306], ["draw", 174, 54, 275, true], ["fill", 4, 275, 35, 306], ["draw", 157, 4, 275, true]]}};

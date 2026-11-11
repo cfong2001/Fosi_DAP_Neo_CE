@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Merge the full build's theme config: design refresh v4 glyph
 runs (182), the browser icon extension runs (300), the CE
-splash mark runs (46), the light play-mode key runs (4) and the
-antialiased screens, dialogs, progress bar and knob runs (430), 962
+splash mark runs (40), the light play-mode key runs (4) and the
+antialiased screens, dialogs, progress bar and knob runs (429), 955
 runs total.
 
 The five source configs are disjoint (the theme consumer refuses

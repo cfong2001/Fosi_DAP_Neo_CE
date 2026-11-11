@@ -16,8 +16,10 @@
 - `test_screens.py` checks the art in the Standard image and runs the
   keyed knob draw in emulation. Verify's CE mark check now derives its
   byte count from the runs.
-- New Standard pin `70fb5bc7…`. Minimal and recovery are unchanged. The
-  merged theme has 962 runs.
+- Baked text uses Barlow, the site's typeface (vendored in `docs/fonts`),
+  so the output is the same on every machine.
+- New Standard pin `db0a11d2…`. Minimal and recovery are unchanged. The
+  merged theme has 955 runs.
 
 ## 2026-11-11: antialiased status and browser icons
 

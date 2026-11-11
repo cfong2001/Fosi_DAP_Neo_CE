@@ -646,7 +646,7 @@ def main():
     # differ only at the theme runs, the mirrored header and
     # the trailer CRC once the growth shift is accounted for.
     FULL_DIR = HERE.parent / 'full'
-    FULL_SHA = '70fb5bc70c8e82b0b9c1a589cd419438ff612b126470d6b358836273438d66df'
+    FULL_SHA = 'db0a11d27a00295f18e4a07b9745af1564e06f66af872ec43129aa738b4fa362'
     GROWTH_TOTAL = 6962
     if ecp is None:
         check('full build: composed image pinned, diff confined '

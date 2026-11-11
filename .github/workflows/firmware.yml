@@ -34,7 +34,7 @@ jobs:
           python-version: '3.12'
 
       - name: Install pinned Python tools
-        run: python -m pip install capstone==5.0.7 keystone-engine==0.9.2 unicorn==2.1.4
+        run: python -m pip install capstone==5.0.7 keystone-engine==0.9.2 unicorn==2.1.4 pillow==11.3.0
 
       - name: Install reference ARM toolchain
         run: |

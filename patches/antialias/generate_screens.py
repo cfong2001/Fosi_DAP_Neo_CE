@@ -47,8 +47,10 @@ from rknano_image import Image as FW  # noqa: E402
 STOCK_SHA = 'fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cdfade5e9c6ea3bd71ac6deef'
 KEY = 0xF800
 S = 8
-SANS = '/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf'
-SANS_BOLD = '/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf'
+# Barlow (SIL OFL 1.1), the site's typeface, vendored in docs/fonts: the
+# baked text must render the same everywhere, so no system font is used.
+SANS = str(ROOT / 'docs' / 'fonts' / 'Barlow-Regular.ttf')
+SANS_BOLD = str(ROOT / 'docs' / 'fonts' / 'Barlow-SemiBold.ttf')
 
 
 def rgb888(v):
@@ -239,13 +241,13 @@ def main():
     low_battery(out[303], 72, 91, 0xFFFF, 0xA800)
 
     out[294] = r = Res(raw, E[294])
-    text_block(r, (50, 180, 190, 204), 0xFFFF, 'Powering off…', SANS, 12,
+    text_block(r, (50, 180, 190, 204), 0xFFFF, 'Powering off…', SANS, 14,
                (120, 197), 'ms', 0x0000)
 
     ce = {}
     for rid, ground in ((127, 0x0000), (293, 0xFFFF)):
         ce[rid] = r = Res(raw, E[rid])
-        text_block(r, (200, 294, 238, 316), ground, 'CE', SANS_BOLD, 19,
+        text_block(r, (200, 294, 238, 316), ground, 'CE', SANS_BOLD, 20,
                    (233, 312), 'rs', 0xF220)
 
     for rid, ground in ((187, 0x7222), (188, 0x7222), (353, 0xBEFA), (354, 0xBEFA)):
@@ -274,7 +276,7 @@ def sheet(out, ce):
     crops = [(137, (0, 0, 40, 30)), (137, (66, 92, 138, 130)), (303, (66, 85, 138, 123)),
              (359, (0, 0, 40, 30)), (294, (50, 180, 190, 204)), (127, (196, 292, 240, 318)),
              (293, (196, 292, 240, 318))]
-    f = ImageFont.truetype(SANS, 13)
+    f = ImageFont.load_default()
     z = 5
     W, y = 1500, 10
     img = Image.new('RGB', (W, 3000), (128, 128, 128))

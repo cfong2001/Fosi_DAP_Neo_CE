@@ -3,7 +3,7 @@
  "input_file": "DP3_V137.img",
  "output_file": "DP3_V137_CE.img",
  "input_sha256": "fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cdfade5e9c6ea3bd71ac6deef",
- "output_sha256": "70fb5bc70c8e82b0b9c1a589cd419438ff612b126470d6b358836273438d66df",
+ "output_sha256": "db0a11d27a00295f18e4a07b9745af1564e06f66af872ec43129aa738b4fa362",
  "byte_length": 13638454,
  "header_date": "20261023",
  "patches_applied": [
@@ -3664,280 +3664,244 @@
     "new_hex": "29452945294529452945294529452945"
    },
    {
-    "file_offset": "0xacdab0",
+    "file_offset": "0xacdab2",
     "bytes": 6,
     "old_hex": "000000000000",
-    "new_hex": "102020401020"
+    "new_hex": "182018400800"
    },
    {
-    "file_offset": "0xacdc8a",
+    "file_offset": "0xacdc8c",
     "bytes": 44,
     "old_hex": "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-    "new_hex": "30609960d9e0f220f220f220e200a16040a0000000001840d1e0d1e0d1e0d1e0d1e0d1e0d1e0d1e0d1e068e0"
+    "new_hex": "08208120d9e0f220f220f220a160204000000000000060e0f220f220f220f220f220f220f220f220f2201020"
    },
    {
-    "file_offset": "0xacde68",
+    "file_offset": "0xacde6a",
     "bytes": 46,
     "old_hex": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-    "new_hex": "8120f220f220f220f220f220f220f220f220d1c0000000002040f220f220f220f220f220f220f220f220f2207920"
+    "new_hex": "0800c1a0f220f220f220d9e0f220f220f22028600000000060e0f220f220f220f220f220f220f220f220f2201020"
    },
    {
-    "file_offset": "0xace046",
-    "bytes": 48,
-    "old_hex": "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-    "new_hex": "7900f220f220f220f220894060e060e08940d9e0d1c0000000002040f220f220f220d1e0b1a0b1a0b1a0b1a0b1a060c0"
+    "file_offset": "0xace04a",
+    "bytes": 30,
+    "old_hex": "000000000000000000000000000000000000000000000000000000000000",
+    "new_hex": "7100f220f22058c0000000003060d1e0f220b9a00000000060e0f220d9e0"
    },
    {
-    "file_offset": "0xace224",
-    "bytes": 38,
-    "old_hex": "0000000000000000000000000000000000000000000000000000000000000000000000000000",
-    "new_hex": "2860f220f220f220d1e020400000000000000000080048a0000000002040f220f220f22068e0"
+    "file_offset": "0xace22a",
+    "bytes": 30,
+    "old_hex": "000000000000000000000000000000000000000000000000000000000000",
+    "new_hex": "b9a0f2209140000000000000000050c0f220f2201020000060e0f220d9e0"
    },
    {
-    "file_offset": "0xace404",
-    "bytes": 10,
-    "old_hex": "00000000000000000000",
-    "new_hex": "8920f220f220f22048a0"
+    "file_offset": "0xace40a",
+    "bytes": 30,
+    "old_hex": "000000000000000000000000000000000000000000000000000000000000",
+    "new_hex": "d1e0f22068e000000000000000001840996099601020000060e0f220d9e0"
    },
    {
-    "file_offset": "0xace420",
-    "bytes": 10,
-    "old_hex": "00000000000000000000",
-    "new_hex": "2040f220f220f22068e0"
+    "file_offset": "0xace5ea",
+    "bytes": 6,
+    "old_hex": "000000000000",
+    "new_hex": "d1e0f22068e0"
    },
    {
-    "file_offset": "0xace5e4",
-    "bytes": 8,
-    "old_hex": "0000000000000000",
-    "new_hex": "c1a0f220f220e200"
+    "file_offset": "0xace602",
+    "bytes": 6,
+    "old_hex": "000000000000",
+    "new_hex": "60e0f220d9e0"
    },
    {
-    "file_offset": "0xace600",
-    "bytes": 22,
-    "old_hex": "00000000000000000000000000000000000000000000",
-    "new_hex": "2040f220f220f220b180790079007900790079001020"
+    "file_offset": "0xace7ca",
+    "bytes": 6,
+    "old_hex": "000000000000",
+    "new_hex": "d1e0f22068e0"
    },
    {
-    "file_offset": "0xace7c4",
-    "bytes": 8,
-    "old_hex": "0000000000000000",
-    "new_hex": "d9e0f220f220c1a0"
-   },
-   {
-    "file_offset": "0xace7e0",
-    "bytes": 22,
-    "old_hex": "00000000000000000000000000000000000000000000",
-    "new_hex": "2040f220f220f220f220f220f220f220f220f2202040"
-   },
-   {
-    "file_offset": "0xace9a4",
-    "bytes": 8,
-    "old_hex": "0000000000000000",
-    "new_hex": "d9e0f220f220b9a0"
-   },
-   {
-    "file_offset": "0xace9c0",
-    "bytes": 22,
-    "old_hex": "00000000000000000000000000000000000000000000",
-    "new_hex": "2040f220f220f220f220f220f220f220f220f2202040"
-   },
-   {
-    "file_offset": "0xaceb84",
-    "bytes": 8,
-    "old_hex": "0000000000000000",
-    "new_hex": "c1c0f220f220d9e0"
-   },
-   {
-    "file_offset": "0xaceba0",
-    "bytes": 22,
-    "old_hex": "00000000000000000000000000000000000000000000",
-    "new_hex": "2040f220f220f2207920204020402040204020400800"
-   },
-   {
-    "file_offset": "0xaced64",
-    "bytes": 10,
-    "old_hex": "00000000000000000000",
-    "new_hex": "9140f220f220f2203880"
-   },
-   {
-    "file_offset": "0xaced80",
-    "bytes": 10,
-    "old_hex": "00000000000000000000",
-    "new_hex": "2040f220f220f22068e0"
-   },
-   {
-    "file_offset": "0xacef44",
-    "bytes": 12,
-    "old_hex": "000000000000000000000000",
-    "new_hex": "3060f220f220f220c9c01020"
-   },
-   {
-    "file_offset": "0xacef5a",
+    "file_offset": "0xace7e2",
     "bytes": 16,
     "old_hex": "00000000000000000000000000000000",
-    "new_hex": "3060000000002040f220f220f22068e0"
+    "new_hex": "60e0f220f220f220f220f220f220c1c0"
    },
    {
-    "file_offset": "0xacf126",
-    "bytes": 48,
-    "old_hex": "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-    "new_hex": "9140f220f220f220d1e0710040a048a06900b9a0d1c0000000002040f220f220f220c1a09940994099409940994068e0"
+    "file_offset": "0xace9aa",
+    "bytes": 6,
+    "old_hex": "000000000000",
+    "new_hex": "d1e0f22068e0"
    },
    {
-    "file_offset": "0xacf306",
-    "bytes": 48,
-    "old_hex": "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-    "new_hex": "08009960f220f220f220f220f220f220f220f220d1c0000000002040f220f220f220f220f220f220f220f220f220a980"
+    "file_offset": "0xace9c2",
+    "bytes": 16,
+    "old_hex": "00000000000000000000000000000000",
+    "new_hex": "60e0f220f220f220f220f220f220c1c0"
    },
    {
-    "file_offset": "0xacf4ea",
+    "file_offset": "0xaceb8a",
+    "bytes": 6,
+    "old_hex": "000000000000",
+    "new_hex": "d1e0f22068e0"
+   },
+   {
+    "file_offset": "0xaceba2",
+    "bytes": 6,
+    "old_hex": "000000000000",
+    "new_hex": "60e0f220d9e0"
+   },
+   {
+    "file_offset": "0xaced6a",
+    "bytes": 30,
+    "old_hex": "000000000000000000000000000000000000000000000000000000000000",
+    "new_hex": "d1e0f22068e000000000000000001840996099601020000060e0f220d9e0"
+   },
+   {
+    "file_offset": "0xacef4a",
+    "bytes": 30,
+    "old_hex": "000000000000000000000000000000000000000000000000000000000000",
+    "new_hex": "b9a0f2209140000000000000000050c0f220f2201020000060e0f220d9e0"
+   },
+   {
+    "file_offset": "0xacf12a",
+    "bytes": 30,
+    "old_hex": "000000000000000000000000000000000000000000000000000000000000",
+    "new_hex": "6900f220f22058c0000000003060d1e0f220b1a00000000060e0f220d9e0"
+   },
+   {
+    "file_offset": "0xacf30a",
+    "bytes": 46,
+    "old_hex": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "new_hex": "0800b9a0f220f220e200d9e0f220f220f22028600000000060e0f220f220f220f220f220f220f220f220f2201020"
+   },
+   {
+    "file_offset": "0xacf4ec",
     "bytes": 44,
     "old_hex": "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-    "new_hex": "50a0b9a0f220f220f220f220f220c1a060c0000000002040f220f220f220f220f220f220f220f220f220a980"
+    "new_hex": "08208120d9e0f220f220f220a160204000000000000060e0f220f220f220f220f220f220f220f220f2201020"
    },
    {
-    "file_offset": "0xacf6ce",
-    "bytes": 10,
-    "old_hex": "00000000000000000000",
-    "new_hex": "10203060388030601020"
+    "file_offset": "0xacf6d2",
+    "bytes": 6,
+    "old_hex": "000000000000",
+    "new_hex": "182018400800"
    },
    {
-    "file_offset": "0xbbc902",
+    "file_offset": "0xbbc904",
     "bytes": 6,
     "old_hex": "ffffffffffff",
-    "new_hex": "ff9dff5bff7d"
+    "new_hex": "ff7cff5cffde"
    },
    {
-    "file_offset": "0xbbcadc",
+    "file_offset": "0xbbcade",
     "bytes": 44,
     "old_hex": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
-    "new_hex": "fed9f44bf2a3f220f220f220f282f40afe56ffffffffff5bf2c4f2c4f2c4f2c4f2c4f2c4f2c4f2c4f2c4fd51"
+    "new_hex": "ffbef4cef2a3f220f220f220f40aff1afffffffffffffd92f220f220f220f220f220f220f220f220f220ff9d"
    },
    {
-    "file_offset": "0xbbccba",
+    "file_offset": "0xbbccbc",
     "bytes": 46,
     "old_hex": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
-    "new_hex": "f4eff220f220f220f220f220f220f220f220f2e4ffffffffff3bf220f220f220f220f220f220f220f220f220f50f"
+    "new_hex": "ffdef367f220f220f220f2a3f220f220f220fef9fffffffffd92f220f220f220f220f220f220f220f220f220ff9d"
    },
    {
-    "file_offset": "0xbbce98",
-    "bytes": 48,
-    "old_hex": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
-    "new_hex": "f50ff220f220f220f220f48dfd93fd92f48df2c3f2e4ffffffffff3bf220f220f220f2e4f388f388f388f388f388fdb3"
+    "file_offset": "0xbbce9c",
+    "bytes": 30,
+    "old_hex": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+    "new_hex": "fd51f220f220fdd4fffffffffed9f2c4f220f387fffffffffd92f220f2a3"
    },
    {
-    "file_offset": "0xbbd076",
-    "bytes": 38,
-    "old_hex": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
-    "new_hex": "ff1af220f220f220f2c4ff3bffffffffffffffffffdefe15ffffffffff3bf220f220f220fd51"
+    "file_offset": "0xbbd07c",
+    "bytes": 30,
+    "old_hex": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+    "new_hex": "f367f220f46cfffffffffffffffffdf4f220f220ff9dfffffd92f220f2a3"
    },
    {
-    "file_offset": "0xbbd256",
-    "bytes": 10,
-    "old_hex": "ffffffffffffffffffff",
-    "new_hex": "f4cef220f220f220fe36"
+    "file_offset": "0xbbd25c",
+    "bytes": 30,
+    "old_hex": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+    "new_hex": "f2c4f220fd51ffffffffffffffffff5bf42bf42bff9dfffffd92f220f2a3"
    },
    {
-    "file_offset": "0xbbd272",
-    "bytes": 10,
-    "old_hex": "ffffffffffffffffffff",
-    "new_hex": "ff3bf220f220f220fd51"
+    "file_offset": "0xbbd43c",
+    "bytes": 6,
+    "old_hex": "ffffffffffff",
+    "new_hex": "f2c4f220fd71"
    },
    {
-    "file_offset": "0xbbd436",
-    "bytes": 8,
-    "old_hex": "ffffffffffffffff",
-    "new_hex": "f346f220f220f282"
+    "file_offset": "0xbbd454",
+    "bytes": 6,
+    "old_hex": "ffffffffffff",
+    "new_hex": "fd92f220f2a3"
    },
    {
-    "file_offset": "0xbbd452",
-    "bytes": 22,
-    "old_hex": "ffffffffffffffffffffffffffffffffffffffffffff",
-    "new_hex": "ff3bf220f220f220f3c9f50ff50ff50ff50ff50fff9d"
+    "file_offset": "0xbbd61c",
+    "bytes": 6,
+    "old_hex": "ffffffffffff",
+    "new_hex": "f2c4f220fd71"
    },
    {
-    "file_offset": "0xbbd616",
-    "bytes": 8,
-    "old_hex": "ffffffffffffffff",
-    "new_hex": "f2a3f220f220f346"
-   },
-   {
-    "file_offset": "0xbbd632",
-    "bytes": 22,
-    "old_hex": "ffffffffffffffffffffffffffffffffffffffffffff",
-    "new_hex": "ff3bf220f220f220f220f220f220f220f220f220ff1b"
-   },
-   {
-    "file_offset": "0xbbd7f6",
-    "bytes": 8,
-    "old_hex": "ffffffffffffffff",
-    "new_hex": "f2a3f220f220f367"
-   },
-   {
-    "file_offset": "0xbbd812",
-    "bytes": 22,
-    "old_hex": "ffffffffffffffffffffffffffffffffffffffffffff",
-    "new_hex": "ff3bf220f220f220f220f220f220f220f220f220ff1b"
-   },
-   {
-    "file_offset": "0xbbd9d6",
-    "bytes": 8,
-    "old_hex": "ffffffffffffffff",
-    "new_hex": "f326f220f220f2a3"
-   },
-   {
-    "file_offset": "0xbbd9f2",
-    "bytes": 22,
-    "old_hex": "ffffffffffffffffffffffffffffffffffffffffffff",
-    "new_hex": "ff3bf220f220f220f4efff3bff3bff3bff3bff3bffde"
-   },
-   {
-    "file_offset": "0xbbdbb6",
-    "bytes": 10,
-    "old_hex": "ffffffffffffffffffff",
-    "new_hex": "f48df220f220f220fe98"
-   },
-   {
-    "file_offset": "0xbbdbd2",
-    "bytes": 10,
-    "old_hex": "ffffffffffffffffffff",
-    "new_hex": "ff3bf220f220f220fd51"
-   },
-   {
-    "file_offset": "0xbbdd96",
-    "bytes": 12,
-    "old_hex": "ffffffffffffffffffffffff",
-    "new_hex": "feb8f220f220f220f325ff9d"
-   },
-   {
-    "file_offset": "0xbbddac",
+    "file_offset": "0xbbd634",
     "bytes": 16,
     "old_hex": "ffffffffffffffffffffffffffffffff",
-    "new_hex": "feb8ffffffffff3bf220f220f220fd51"
+    "new_hex": "fd92f220f220f220f220f220f220f326"
    },
    {
-    "file_offset": "0xbbdf78",
-    "bytes": 48,
-    "old_hex": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
-    "new_hex": "f46cf220f220f220f2c4fd51fe56fe56fd51f367f2e4ffffffffff3bf220f220f220f346f44cf44cf44cf44cf44cfd51"
+    "file_offset": "0xbbd7fc",
+    "bytes": 6,
+    "old_hex": "ffffffffffff",
+    "new_hex": "f2c4f220fd71"
    },
    {
-    "file_offset": "0xbbe158",
-    "bytes": 48,
-    "old_hex": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
-    "new_hex": "ffdef42bf220f220f220f220f220f220f220f220f2e4ffffffffff3bf220f220f220f220f220f220f220f220f220f3c9"
+    "file_offset": "0xbbd814",
+    "bytes": 16,
+    "old_hex": "ffffffffffffffffffffffffffffffff",
+    "new_hex": "fd92f220f220f220f220f220f220f326"
    },
    {
-    "file_offset": "0xbbe33c",
+    "file_offset": "0xbbd9dc",
+    "bytes": 6,
+    "old_hex": "ffffffffffff",
+    "new_hex": "f2c4f220fd71"
+   },
+   {
+    "file_offset": "0xbbd9f4",
+    "bytes": 6,
+    "old_hex": "ffffffffffff",
+    "new_hex": "fd92f220f2a3"
+   },
+   {
+    "file_offset": "0xbbdbbc",
+    "bytes": 30,
+    "old_hex": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+    "new_hex": "f2c4f220fd51ffffffffffffffffff5cf44bf44bff7dfffffd92f220f2a3"
+   },
+   {
+    "file_offset": "0xbbdd9c",
+    "bytes": 30,
+    "old_hex": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+    "new_hex": "f367f220f46cfffffffffffffffffdf4f220f220ffbdfffffd92f220f2a3"
+   },
+   {
+    "file_offset": "0xbbdf7c",
+    "bytes": 30,
+    "old_hex": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+    "new_hex": "fd51f220f220fdd4fffffffffed9f2c4f220f3a8fffffffffd92f220f2a3"
+   },
+   {
+    "file_offset": "0xbbe15c",
+    "bytes": 46,
+    "old_hex": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+    "new_hex": "ffdef367f220f220f282f2a3f220f220f220fefafffffffffd92f220f220f220f220f220f220f220f220f220ff9d"
+   },
+   {
+    "file_offset": "0xbbe33e",
     "bytes": 44,
     "old_hex": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
-    "new_hex": "fe15f387f220f220f220f220f220f346fdb3ffffffffff3bf220f220f220f220f220f220f220f220f220f3c9"
+    "new_hex": "ffbef4eff2a3f220f220f220f40aff1bfffffffffffffd92f220f220f220f220f220f220f220f220f220ff9d"
    },
    {
-    "file_offset": "0xbbe520",
-    "bytes": 10,
-    "old_hex": "ffffffffffffffffffff",
-    "new_hex": "ffbdfed9fe97fed9ff9d"
+    "file_offset": "0xbbe524",
+    "bytes": 6,
+    "old_hex": "ffffffffffff",
+    "new_hex": "ff7cff5cffde"
    },
    {
     "file_offset": "0xc87b4c",
@@ -5194,6 +5158,12 @@
     "new_hex": "ffffffffffffffffffff"
    },
    {
+    "file_offset": "0xbd51b2",
+    "bytes": 14,
+    "old_hex": "ffffffffffffffffffffffffffff",
+    "new_hex": "84104208420842084a498c71ffdf"
+   },
+   {
     "file_offset": "0xbd51e8",
     "bytes": 2,
     "old_hex": "0000",
@@ -5201,15 +5171,15 @@
    },
    {
     "file_offset": "0xbd51fc",
-    "bytes": 4,
-    "old_hex": "ffffffff",
-    "new_hex": "e73cf79e"
+    "bytes": 6,
+    "old_hex": "ffffffffffff",
+    "new_hex": "f79e31a6bdd7"
    },
    {
     "file_offset": "0xbd5236",
-    "bytes": 18,
-    "old_hex": "0000ffffffffffffffffffffffffffff0000",
-    "new_hex": "fffffffff79edefbf79efffff7bedefbf79e"
+    "bytes": 20,
+    "old_hex": "0000ffffffffffffffffffffffffffff0000ffff",
+    "new_hex": "fffff7be73ae4228ce79fffff7be73ae4228ce79"
    },
    {
     "file_offset": "0xbd5372",
@@ -5218,16 +5188,16 @@
     "new_hex": "ffffffffffffffffffffffff"
    },
    {
-    "file_offset": "0xbd5394",
-    "bytes": 10,
-    "old_hex": "ffffffffffffffffffff",
-    "new_hex": "4a4942084208528aa514"
+    "file_offset": "0xbd5392",
+    "bytes": 14,
+    "old_hex": "ffffffffffffffffffffffffffff",
+    "new_hex": "5acb94b2df1bdf1bce7942287bef"
    },
    {
     "file_offset": "0xbd53dc",
-    "bytes": 4,
-    "old_hex": "ffffffff",
-    "new_hex": "4208ad55"
+    "bytes": 6,
+    "old_hex": "ffffffffffff",
+    "new_hex": "f7be52aac658"
    },
    {
     "file_offset": "0xbd53ec",
@@ -5237,45 +5207,45 @@
    },
    {
     "file_offset": "0xbd5416",
-    "bytes": 18,
-    "old_hex": "0000ffffffffffffffffffffffffffff0000",
-    "new_hex": "ffff9cf318c34208bdf7a55418c34208b5b6"
+    "bytes": 20,
+    "old_hex": "0000ffffffffffffffffffffffffffff0000ffff",
+    "new_hex": "ffff9cf339e7d6baf7beffff9cf339e7d6baf7be"
    },
    {
     "file_offset": "0xbd5552",
     "bytes": 74,
     "old_hex": "0000ffffffffffffffff0000ffffffffffff0000000000000000ffffffffffff0000ffffffffffffffffffff0000ffffffff0000000000000000ffffffffffff0000ffff000000000000",
-    "new_hex": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff00009492bdf794b200009d13ffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+    "new_hex": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff5acbad55ffffffffffffd6ba2925fffffffffffff7bef7deffffffffffffffffffffffffffffffffffff"
    },
    {
     "file_offset": "0xbd55a6",
     "bytes": 40,
     "old_hex": "00000000ffffffffffffffff0000ffff000000000000ffffffffffffffff000000000000ffff0000",
-    "new_hex": "ffffffffffffffffffffffffffffffffffffffffffffce79e75cffffffffffffffffffffffffffff"
+    "new_hex": "fffff7def7befffffffffffffffffffffffff7beffdffffffffffffffffffffffffffffff79effff"
+   },
+   {
+    "file_offset": "0xbd55d8",
+    "bytes": 2,
+    "old_hex": "ffff",
+    "new_hex": "f79e"
    },
    {
     "file_offset": "0xbd55e4",
-    "bytes": 8,
-    "old_hex": "0000000000000000",
-    "new_hex": "ffffffffffffffff"
-   },
-   {
-    "file_offset": "0xbd55f6",
-    "bytes": 18,
-    "old_hex": "0000ffffffffffffffffffffffffffff0000",
-    "new_hex": "ffff39c7ad75ffffffff4228a534ffffffff"
+    "bytes": 36,
+    "old_hex": "0000000000000000ffffffffffffffffffff0000ffffffffffffffffffffffffffff0000",
+    "new_hex": "ffffffffffffffffffdff7beffffffffffffffff7bef8430ffffffffffff7bef8430ffff"
    },
    {
     "file_offset": "0xbd5732",
     "bytes": 186,
     "old_hex": "0000ffffffffffffffff0000ffffffff0000ffffffffffffffff0000ffffffff0000ffffffff0000ffffffff0000ffff0000ffffffffffffffff0000ffffffff00000000ffffffffffff0000ffffffffffffffffffff0000ffffffffffffffff00000000ffffffffffff0000ffffffff0000ffffffffffff0000ffffffffffffffffffffffffffffffffffffffffffff0000ffffffffffffffff0000ffffffff00000000000000000000ffffffffffff00000000000000000000",
-    "new_hex": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff0000c618ffffffff632c52aaffffad7539c721245acbe73cffffbdf794b2ffffffff7bef9cd3ffffffff7bcfdedbffffdf1b5acb212439c7ad75ffffffff94b2a5345aab2124d6ba8c51ce59ffffbdf794927bef294539c7c638ffffffffe73c52aa212452aaa53494b2ffffffffffffffffffffffff9cf331a629456b4def9dffff73ae10824a29630c630c18a34208630cef9dffffffff"
+    "new_hex": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff5acbad55ffffffffffffce992945ffffef5d4a49212421045aebf7beffdf10a2ef7dffffe73c0000df1bfffff7de10a2ef9dffdf6b4d2104212439c7defbffffffff0000841000005aebffff2124defbffff9cf3420839c7294518e3bdd7ffffffffce792945294531864a498430ffffffffffffffffffff738e20e4294539c7defbffff738e108210822104ce79738e108210822104ce79ffff"
    },
    {
     "file_offset": "0xbd5912",
     "bytes": 182,
     "old_hex": "00000000000000000000ffffffffffff0000ffffffffffffffff0000ffffffff0000ffffffff0000ffffffff0000ffff0000ffffffffffffffff0000ffffffff0000ffffffffffffffff0000ffffffffffffffffffff0000ffffffffffffffff0000ffffffffffffffff0000ffffffff0000ffffffffffff0000ffffffffffffffffffffffffffffffffffffffffffff0000ffffffffffffffff0000ffffffffffffffff0000ffffffffffffffffffffffffffff0000",
-    "new_hex": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff0000c618ffffffff52aa5aebc6381082c618f7be6b6d31a6ffffce592104fffff79e10822945ffffef7d0000f79ef7be21249492f7bece9918e3ce79ffff5aab18e3ce59f7bef7be4208ad55ffff94b20000a534f7de94922124ffffffff42286b6df7bece5918a35acbffffffffffffffffffffad5518e3d6baef9d52aa52aaffffc65821048c71bdf7bdf729658430bdf7f7de"
+    "new_hex": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff5acb8410c618c618ad7531869492ffff5acb8410ffffffff630c7befffff5acbad55ffffa51400009cd3ffffbdf74208ffff9492528affdfffff94b2528affffffff00008430ffffffffffff2104defbffff9cf32104ef5dffffad552104ffffffff2945a514ffffef7d29258430ffffffffffffffff9cd34a49f7beffffa51439e7ffffffff7bcf8c51ffffffffffff7bcf8c51ffff"
    },
    {
     "file_offset": "0xbd5af2",
@@ -5287,7 +5257,7 @@
     "file_offset": "0xbd5b02",
     "bytes": 166,
     "old_hex": "0000ffffffffffffffff0000ffffffff0000ffffffff0000ffffffff0000ffff000000000000000000000000ffffffff0000ffffffffffffffffffffffffffffffffffffffff0000ffffffffffffffff0000ffffffffffffffff0000ffffffff0000ffffffffffff0000ffffffffffffffffffffffffffffffffffffffffffff0000ffffffffffffffff0000ffffffffffffffff0000ffffffffffffffffffffffffffff0000",
-    "new_hex": "ffffffffffffffffffffffffffffffffffff0000630c7bef5aab0000c6186b4d6b6dfffffffff7be0000ce79ffdf1082dedbb5b652aa2945e73cad7539e7ffffad753186ffffffffffff7bcf73aeffff5aab73aeffffffffffff4208ad55ffff94b239e7fffffffff7be0000ef7de73c0000f79effffffff738e5acbffffffffffffffffffff4a498c71ffffffffdf1b0000ef7dffff3166bdd7ffffffff39c7ad75ffffffff"
+    "new_hex": "ffffffffffffffffffffffffffffffff5acb4208630c630c6b2dad75ffffffff10a2ef5dffffffffce5931a6ffffa514632cffff5aeb841052aaffff7bcf8c71ffff528aad75fffffffff7be1082ffffffff0000f7beffffffffffff2104defbffff9cf362ecffffffffffff0000ffffe73c10a2ffffffffffff738e8430ffffffffffffffff52aaad55ffffffffffff0000ef9dffff7bcf8c51ffffffffffff7bcf8c51ffff"
    },
    {
     "file_offset": "0xbd5cd2",
@@ -5299,7 +5269,7 @@
     "file_offset": "0xbd5ce2",
     "bytes": 166,
     "old_hex": "0000ffffffffffffffff0000ffffffff0000ffffffff0000ffffffff0000ffff0000ffffffffffffffffffffffffffff0000ffffffffffffffffffffffffffffffffffffffff0000ffffffffffffffff0000ffffffffffffffff0000ffffffffffff000000000000ffffffffffffffffffffffffffffffffffffffffffffffff0000ffffffffffffffff0000ffffffffffffffff0000ffffffffffffffffffffffffffff0000",
-    "new_hex": "ffffffffffffffffffffffffffffffffffff0000630c84109492dedbffff4a699492ffffffffffff2945b596ffff528a9cd373ae94b26b4da5346b4d7befffff8c710000210421042104210473aeffff5aab9492ffffffffffff4208ad55ffff94b252aaffffffffffff0000e75cce5918c3ffffffffffff94925acbffffffffffffffffffff2965ad75ffffffffffff0000d69affff3166bdd7ffffffff39c7ad75ffffffff"
+    "new_hex": "ffffffffffffffffffffffffffffffff5acbad55ffffffffffffffffffffffff0000f7deffffffffdedb2124ffffef5d2124ffff2124f7be2124ffdf3186dedbffff4a4918c32104210421042945ffffffff0000ffffffffffffffff2104defbffff9cf3630cffffffffffff0000ffdfdedb2925ffffffffffff7bef8430ffffffffffffffff4228bdd7ffffffffffff18e3e71cffff7bcf8c51ffffffffffff7bcf8c51ffff"
    },
    {
     "file_offset": "0xbd5eb2",
@@ -5311,7 +5281,7 @@
     "file_offset": "0xbd5ec2",
     "bytes": 166,
     "old_hex": "0000ffffffffffffffff0000ffffffff0000ffffffff0000ffffffff0000ffff0000ffffffffffffffffffffffffffff0000ffffffffffffffffffffffffffffffffffffffff0000ffffffffffffffff0000ffffffffffffffff0000ffffffffffff0000ffffffffffffffffffffffffffffffffffffffffffffffffffffffff0000ffffffffffffffff0000ffffffffffffffff0000ffffffffffffffffffffffffffff0000",
-    "new_hex": "ffffffffffffffffffffffffffffffffffff0000c618ffffffffffffffff5aeb7befffffffffffff10a2c618ffff94925aab31a6dedbad55630c2945be17ffff9cf339e7ffffffffffffffffffffffff5aab9492ffffffffffff4208ad55ffff94b252aaffffffffffff0000e75cdefb0000f7beffffffff7bcf5acbffffffffffffffffffff39e79cf3ffffffffef9d0000e71cffff3166bdd7ffffffff39c7ad75ffffffff"
+    "new_hex": "ffffffffffffffffffffffffffffffff5acbad55ffffffffffffffffffffffff1082ef7dffffffffce7931a6ffffffff39e7ad55528affff5aebad752945ffffffff5aabb596ffffffffffffffffffffffff0000ffffffffffffffff2104defbffff9cf3630cffffffffffff0000ffdfe73c18a3ffffffffffff73ae8430ffffffffffffffff528aad75ffffffffffff0000ef9dffff7bcf8c51ffffffffffff7bcf8c51ffff"
    },
    {
     "file_offset": "0xbd6092",
@@ -5321,15 +5291,9 @@
    },
    {
     "file_offset": "0xbd60a2",
-    "bytes": 186,
-    "old_hex": "0000ffffffffffffffff0000ffffffff0000ffffffff0000ffffffff0000ffff0000ffffffffffffffff0000ffffffff0000ffffffffffffffffffffffffffffffffffffffff0000ffffffffffffffff0000ffffffffffffffff0000ffffffffffff0000000000000000ffffffffffffffffffffffffffffffffffffffffffff0000ffffffffffffffff0000ffffffffffffffff0000ffffffffffffffffffffffffffff0000ffffffffffffffffffffffffffff00000000ffff",
-    "new_hex": "ffffffffffffffffffffffffffffffffffff0000c618ffffffffffffffffad552104ef7dffffa53418c3f7beffffd69a10822104ffffef5d18a30000f7deffffe75c0000bdd7fffffffff79ee71cffff5aab9492ffffffffffff4208ad55ffff94b252aaffffffffffff0000e75cffff31868430ffffe71c18e35acbffffffffffffffffffff8c5139c7f7beffff84303186ffffffff3166bdd7ffffffff39c7ad75ffffffffbdf79cf3ffffffffbdf79d13ffffffffbdf79d13"
-   },
-   {
-    "file_offset": "0xbd6166",
-    "bytes": 4,
-    "old_hex": "00000000",
-    "new_hex": "ffffffff"
+    "bytes": 200,
+    "old_hex": "0000ffffffffffffffff0000ffffffff0000ffffffff0000ffffffff0000ffff0000ffffffffffffffff0000ffffffff0000ffffffffffffffffffffffffffffffffffffffff0000ffffffffffffffff0000ffffffffffffffff0000ffffffffffff0000000000000000ffffffffffffffffffffffffffffffffffffffffffff0000ffffffffffffffff0000ffffffffffffffff0000ffffffffffffffffffffffffffff0000ffffffffffffffffffffffffffff00000000ffffffffffffffffffffffff00000000",
+    "new_hex": "ffffffffffffffffffffffffffffffff5acbad55ffffffffffffffffffffffff52aa9492ffffffff6b6d73aeffffffff8430212494d2ffffad552124738effffffff94d25aabffffffffce5973aeffffffff0000ffffffffffffffff2104defbffff9cf3630cffffffffffff0000ffdfffff2124a554ffffef9d29458430ffffffffffffffff94b2528affdfffffad5539a7ffffffff7bcf8c51ffffffffffff7bcf8c51ffffffffffff8430be17ffffe73c6b6def7dffffad559cf3ffffffffffffffffffffffff"
    },
    {
     "file_offset": "0xbd6176",
@@ -5345,21 +5309,9 @@
    },
    {
     "file_offset": "0xbd6284",
-    "bytes": 8,
-    "old_hex": "0000000000000000",
-    "new_hex": "ffffffffffffffff"
-   },
-   {
-    "file_offset": "0xbd6296",
-    "bytes": 166,
-    "old_hex": "0000ffff00000000ffffffffffff0000000000000000ffffffffffff0000ffffffffffffffffffffffffffffffff00000000000000000000ffffffff0000ffffffffffffffff0000ffffffff0000ffffffffffffffff0000ffffffffffffffffffffffffffffffffffffffffffff0000000000000000ffffffffffffffffffff0000ffffffffffffffffffffffffffff0000ffffffffffffffffffffffffffff00000000ffff",
-    "new_hex": "c618ffffffffffffffffffff73ae18e339c72104c618ffffffffffff18c3630cffffffff31864a29ffffffffffffbdf72124318639c72104bdf7ffff5aab9492ffffffffffff4208ad55ffff94b252aaffffffffffff0000e75cffffd6da31a618c339e76b4d5aebfffffffffffffffffffff7de5aeb210431862945d6baffffffff3166bdd7ffffffff39c7ad75ffffffff841041e8ffffffff84104208ffffffff7bef4208"
-   },
-   {
-    "file_offset": "0xbd6346",
-    "bytes": 4,
-    "old_hex": "00000000",
-    "new_hex": "ffffffff"
+    "bytes": 198,
+    "old_hex": "0000000000000000ffffffffffffffff00000000ffff00000000ffffffffffff0000000000000000ffffffffffff0000ffffffffffffffffffffffffffffffff00000000000000000000ffffffff0000ffffffffffffffff0000ffffffff0000ffffffffffffffff0000ffffffffffffffffffffffffffffffffffffffffffff0000000000000000ffffffffffffffffffff0000ffffffffffffffffffffffffffff0000ffffffffffffffffffffffffffff00000000ffffffffffffffffffffffff00000000",
+    "new_hex": "ffffffffffffffffffffffffffff5acbad55ffffffffffffffffffffffffe73c39e7318629454a69ef9dffffffffd69a0000df1bffffef7d0000be17fffffffff7de5aeb210439e72965c638ffffffff0000ffffffffffffffff2124defbffff9cf3630cffffffffffff0000ffdfffffce592945294531864a698430ffffffffffffffffffdf630c212439c72965d6baffffffff7bef8c51ffffffffffff7bef8c51ffffffffffff29458c51ffffc6580000dedbffff632c4a69ffffffffffffffffffffffff"
    },
    {
     "file_offset": "0xbd6356",
@@ -5368,16 +5320,16 @@
     "new_hex": "ffffffff"
    },
    {
-    "file_offset": "0xbd6484",
+    "file_offset": "0xbd6486",
     "bytes": 4,
     "old_hex": "ffffffff",
-    "new_hex": "f79ee71c"
+    "new_hex": "e75cef7d"
    },
    {
     "file_offset": "0xbd64a8",
     "bytes": 4,
     "old_hex": "ffffffff",
-    "new_hex": "e73ce73c"
+    "new_hex": "ef7de73c"
    },
    {
     "file_offset": "0xbd64c2",
@@ -5386,28 +5338,34 @@
     "new_hex": "ffffffffffffffffffffffff"
    },
    {
-    "file_offset": "0xbd64da",
-    "bytes": 4,
-    "old_hex": "ffffffff",
-    "new_hex": "62ec8410"
+    "file_offset": "0xbd64d8",
+    "bytes": 8,
+    "old_hex": "ffffffffffffffff",
+    "new_hex": "f79effff630c94b2"
    },
    {
     "file_offset": "0xbd64ec",
     "bytes": 4,
     "old_hex": "ffffffff",
-    "new_hex": "ef7de73c"
+    "new_hex": "ef9de73c"
    },
    {
     "file_offset": "0xbd66a4",
-    "bytes": 26,
-    "old_hex": "0000000000000000ffffffffffffffffffffffffffffffffffff",
-    "new_hex": "ffffffffffffffffffffffffffffad557bcf9cf36b4d18c3e71c"
+    "bytes": 8,
+    "old_hex": "0000000000000000",
+    "new_hex": "ffffffffffffffff"
    },
    {
-    "file_offset": "0xbd6892",
+    "file_offset": "0xbd66b6",
     "bytes": 10,
     "old_hex": "ffffffffffffffffffff",
-    "new_hex": "e75c9cf3841094b2e75c"
+    "new_hex": "ef9ddedb94b218c3e73c"
+   },
+   {
+    "file_offset": "0xbd6896",
+    "bytes": 8,
+    "old_hex": "ffffffffffffffff",
+    "new_hex": "9cf34228738edefb"
    },
    {
     "file_offset": "0xc10470",
@@ -6545,7 +6503,7 @@
    }
   ],
   "pixels_changed": 0,
-  "bytes_changed": 183462
+  "bytes_changed": 183364
  },
  "tail": {
   "exec": "0x307bfb4",
@@ -6573,8 +6531,8 @@
   }
  ],
  "diff_vs_stock": {
-  "bytes_changed": 4747777,
-  "range_count": 428444,
+  "bytes_changed": 4747534,
+  "range_count": 428479,
   "note": "range list omitted; rebuild with patches/full/build/build_full.py for it"
  },
  "validation": "validate_grown() passed (structural checks, layout derived from the image)",

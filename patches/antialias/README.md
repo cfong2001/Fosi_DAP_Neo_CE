@@ -31,7 +31,8 @@ from the stock and release images: every changed icon at 6x.
   blended toward the screen behind them.
 - **Low-battery icon** in 137/303: a rounded shell and terminal, and a
   smooth bolt.
-- **"Powering off…"** in 294: smooth proportional text.
+- **"Powering off…"** in 294: smooth text in Barlow, the site's typeface
+  (vendored in `docs/fonts`, so every machine renders the same pixels).
 - **CE splash mark** in 127/293: smooth bold text. The generator writes
   `../theme_editor/ce-mark.json`.
 - **Progress bar columns** (187, 188, 353, 354): softened top and bottom
