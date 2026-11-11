@@ -11,7 +11,7 @@ outside the homes listed here.
 
 | Home | Capacity | Occupants | Spare |
 |---|---|---|---|
-| Module 0 stub-farm caves | about 84 B of verified-dead stub slots | DAC fix trampoline (14 B, patch 0002), gapless gate, delay cave and state (70 B, patches 0020 to 0026) | 8 B in three scraps (4 + 2 + 2) |
+| Module 0 stub-farm caves | about 84 B of verified-dead stub slots | DAC fix trampoline (14 B, patch 0002), gapless gate, its tail, core-1 flag literal and state (48 B, patches 0020 to 0026) | 30 B: the old three scraps (4 + 2 + 2) plus 0x030514FE (2 B) and 0x03051504 to 0x03051517 (20 B) freed by the retired delay cave |
 | Module 39 sort cave (0x0309F000) | 1,196 B | Natural sort blob, 1,052 B (patch 0031) | about 140 B |
 | Gap tail (exec 0x0307BFB4 to 0x0307C7B0) | 2,044 B | M3U staging 1,192 B (runtime data, zeros in the image), resolver hooks 410 B (patches 0041, 0042), Bluetooth toggle 436 B (patch 0032 tail variant), 2 B alignment pad | 4 B |
 | Module 31 segment extension (exec 0x0307EE48 to 0x03080B54) | 7,436 B | Browser-hook trampoline 64 B (patch 0040), M3U bridge plus parser linked together 6,644 B, lock-screen routine 406 B (patch 0033) | 322 B |

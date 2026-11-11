@@ -5,7 +5,7 @@ selected, the row text starts scrolling after a one second dwell and
 shows the entry's metadata, the way a long title scrolls in the
 player. Built and validated entirely under emulation; nothing has
 been flashed. The default build is unchanged (verified byte
-identical, SHA-256 `62321437...`).
+identical, SHA-256 `92c44606...`).
 
 Second version: the scroll string for a file with usable tags is
 now the tag string (ARTIST - TITLE, plus - ALBUM when present),
@@ -743,7 +743,7 @@ The v3 payload is 6,544 bytes against the full build's
 patches/full/ is untouched, and the default build is
 unaffected: a framework build with the default manifest
 reproduces the pinned unified image
-`623214370755053ed69dc53f0c7ae5ec0504bcb3e9ca6f2766cc9e9049101090`
+`92c446066e715d74a719671d3ee643ed4b7587c94801eb6dc3893f2271ed944d`
 byte for byte.
 
 ## v4: cover thumbnail with the text shift
@@ -981,7 +981,7 @@ The v4 payload is 7,252 bytes against the full build's
 patches/full/ is untouched, and the default build is
 unaffected: a framework build with the default manifest
 reproduces the pinned unified image
-`623214370755053ed69dc53f0c7ae5ec0504bcb3e9ca6f2766cc9e9049101090`
+`92c446066e715d74a719671d3ee643ed4b7587c94801eb6dc3893f2271ed944d`
 byte for byte (re-verified for v4).
 
 ## Phase E notes

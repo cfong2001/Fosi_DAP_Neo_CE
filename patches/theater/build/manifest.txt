@@ -1,6 +1,6 @@
 # Theater variant manifest: the full default build PLUS
 # the five theater hook patches in this directory. The
-# first 32 entries are the default manifest patches,
+# first 33 entries are the default manifest patches,
 # referenced relative to this file. Use ONLY with
 # --tail theater_tail.bin; the tail payload is exclusive
 # (see README.md). The default manifest is unchanged.

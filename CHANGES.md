@@ -1,5 +1,29 @@
 # Changelog
 
+## 2026-11-11: gapless v2 and the transition rig
+
+- New transition rig (`patches/gapless/rig/`) runs the system core's real
+  end-of-track and user-skip code under Unicorn with a virtual clock. It
+  models the decoder core, CRU reset and clock state, module loads and DAC
+  I2C. `test_transition.py` checks stock, the CE image and two mutants in
+  about a second, and runs in the firmware workflow.
+- The rig found that the first armed gapless release (Standard `9cc86655…`,
+  Minimal `62321437…`) stalled for about 27 s on every same-format track
+  change. The stock stop path holds core 1 in reset and gates its clock,
+  and the v1 gate then skipped the reboot.
+- Gapless v2: the decoder shutdown no longer halts core 1 on a natural end
+  of track (0024). The gate also requires the core-1 running flag (0022,
+  0023, 0025), so user skips, codec changes and other halts fall back to
+  the full reload. The 80 ms delay cut is retired, because that delay runs
+  after the I2S restart.
+- 0019: the DAC bus I2C controller reset hold drops from 1 ms to 50 µs.
+  Each track change makes seven DAC writes.
+- Measured in the rig, from the end-of-track event to the I2S restart:
+  stock 20.5 ms, CE 4.7 ms (FLAC to FLAC). Decoder-side open and decode are
+  not included. Claims now say "shorter track changes", not "gapless".
+- New release pins: Standard `63050146…`, Minimal `92c44606…`. Recovery is
+  unchanged.
+
 ## 2026-11-10: site redesign with Stageshow
 
 - The Pages site takes the look of Stageshow (github.com/benjitaylor/skills,

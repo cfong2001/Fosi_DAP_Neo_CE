@@ -17,7 +17,7 @@ Emits, next to this script:
   0102-theater-blit-sync-b.patch
   0103-theater-blit-painter-a.patch
   0104-theater-blit-painter-b.patch
-  manifest.txt              default 32 patches + the five above
+  manifest.txt              default 33 patches + the five above
 
 State: 28 bytes at SAVEINFO+0x1C8 (0x03023468), inside the
 +0x1C7..+0x2D5 verbatim block. Census evidence: README.md here and
@@ -453,7 +453,7 @@ def main():
     entries = [e for e in entries if e]
     lines = ['# Theater variant manifest: the full default build PLUS',
              '# the five theater hook patches in this directory. The',
-             '# first 32 entries are the default manifest patches,',
+             '# first 33 entries are the default manifest patches,',
              '# referenced relative to this file. Use ONLY with',
              '# --tail theater_tail.bin; the tail payload is exclusive',
              '# (see README.md). The default manifest is unchanged.',

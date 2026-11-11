@@ -5,8 +5,8 @@ against their pins by `.github/workflows/firmware.yml` on every change.
 
 | File | What it is | Length | SHA-256 |
 |---|---|---|---|
-| `DP3_V137_CE.img` | **Standard.** Every composed CE feature (list below). Header date 2026-10-23. | 13,638,454 bytes (6,962 more than stock) | `9cc86655ddf23bddf72903b828e58f6b0a978836825e74c0f2a1a5056bdc98a3` |
-| `DP3_V137_CE_minimal.img` | **Minimal option.** The default framework set and full-precision Vorbis only. Header date 2026-10-23. | 13,631,492 bytes (same as stock) | `623214370755053ed69dc53f0c7ae5ec0504bcb3e9ca6f2766cc9e9049101090` |
+| `DP3_V137_CE.img` | **Standard.** Every composed CE feature (list below). Header date 2026-10-23. | 13,638,454 bytes (6,962 more than stock) | `6305014618c35c6c78d573dfda760ee75cd1978a9448961fed5d0fe04015f2b7` |
+| `DP3_V137_CE_minimal.img` | **Minimal option.** The default framework set and full-precision Vorbis only. Header date 2026-10-23. | 13,631,492 bytes (same as stock) | `92c446066e715d74a719671d3ee643ed4b7587c94801eb6dc3893f2271ed944d` |
 | `DP3_V137_CE_recovery.img` | Unmodified stock bytes dated 2026-10-24, one day after either CE image, so the boot validator prefers it. | 13,631,492 bytes | `aff851b31d6eee55cbd4bb3fc0464ac79f0039ee86ae6723225ac036a157d223` |
 | `*.report.json` | Build reports: every patch with its address and old and new bytes, transplant hashes, validation results. The standard report summarises its byte ranges. | | |
 | `SHA256SUMS` | Hashes of the three images. | | |
@@ -44,7 +44,8 @@ Both images carry the default framework set:
   APE and DSD128 decode loads are unmeasured; test those formats first.
 - Full-precision Vorbis with round-to-nearest output (about 40 dB better
   SNR than stock in emulation).
-- Gapless fast path for same-codec transitions.
+- Shorter track changes between files of the same format (decoder stays
+  loaded; see patches/gapless/).
 - Natural sort: case and accent folding, a leading "The " ignored,
   numbers compared as numbers.
 - Wheel timer period 400 to 1000 µs, fewer wakeups.
@@ -101,7 +102,8 @@ official updates, with the CE file in place of the official one.
    Leaving an update file in place can rerun the installer.
 4. Test, in this order: boot to the menu, play an MP3, then a FLAC file.
    Then try APE and DSD128 if you have them (the unmeasured clock gate), an
-   Ogg Vorbis file, two same-format tracks in a row (gapless), and a
+   Ogg Vorbis file, two same-format tracks in a row (the next must start promptly), a
+   track skip within one format, and a
    library rescan (natural sort). On the standard image also try an Opus
    file, a track with album art and one without (theater), an `.m3u`
    playlist with next and previous, the hold switch (lock screen), and a

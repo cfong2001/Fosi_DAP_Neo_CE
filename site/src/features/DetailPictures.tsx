@@ -25,12 +25,12 @@ export default function DetailPicture({theme,width,mode}:{theme:Theme;width:numb
         <p>60% fewer timer wakeups.<br/>Battery-life gains have not been measured.</p>
       </div> : <div className="detail-gapless">
         <div className="detail-wave-label"><span>Track 01.flac</span><span>Track 02.flac</span></div>
-        <svg viewBox="0 0 440 90" role="img" aria-label="Two same-format tracks joining without a decoder reload">
+        <svg viewBox="0 0 440 90" role="img" aria-label="Two same-format tracks with a shorter gap and no decoder reload">
           {Array.from({length:44},(_,i)=><rect key={i} x={i*10+2} y={45-(14+(i*23)%60)/2} width="5" height={14+(i*23)%60} rx="2" className={i<22?'wave-first':'wave-second'}/>)}
-          <rect className="detail-gap" x="212" y="0" width={s.on?'0':'16'} height="90" />
+          <rect className="detail-gap" x="212" y="0" width={s.on?'4':'16'} height="90" />
         </svg>
         <div className="detail-join"><i/><span>Track boundary</span></div>
-        <States value={s.on?'ce':'stock'} states={{stock:'Stock: reload, reset, ready poll',ce:'CE: same-format decoder fast path'}} />
+        <States value={s.on?'ce':'stock'} states={{stock:'Stock: about 20.5 ms of reload, reboot and DAC writes',ce:'CE: about 4.7 ms, decoder kept running'}} />
       </div>}
     </div>}
   </Stage>

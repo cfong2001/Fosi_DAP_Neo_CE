@@ -3,7 +3,7 @@
  "input_file": "DP3_V137.img",
  "output_file": "DP3_V137_CE.img",
  "input_sha256": "fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cdfade5e9c6ea3bd71ac6deef",
- "output_sha256": "9cc86655ddf23bddf72903b828e58f6b0a978836825e74c0f2a1a5056bdc98a3",
+ "output_sha256": "6305014618c35c6c78d573dfda760ee75cd1978a9448961fed5d0fe04015f2b7",
  "byte_length": 13638454,
  "header_date": "20261023",
  "patches_applied": [
@@ -217,6 +217,17 @@
    "new_hex": "00389c1c00000000000000000000000000882a1100882a11"
   },
   {
+   "patch": "i2c-reset-pulse",
+   "file": "0019-i2c-reset-pulse.patch",
+   "kind": "module",
+   "module": 0,
+   "region": "code",
+   "cpu_address": "0x3060338",
+   "file_offset": "0x399e4",
+   "old_hex": "012004f003fb",
+   "new_hex": "322004f0f1fa"
+  },
+  {
    "patch": "gapless-0-state-pair",
    "file": "0020-gapless-state-pair.patch",
    "kind": "module",
@@ -247,40 +258,40 @@
    "cpu_address": "0x3051664",
    "file_offset": "0x2ad10",
    "old_hex": "7047704770477047704770477047704770477047704770477047704770477047",
-   "new_hex": "70b50546aff1bc0630684006400ea842ffe735601bf05aba80242543356070bd"
+   "new_hex": "5ff868211268aff1bc0132b10b6843405b0602e0803008607047086070b50546"
   },
   {
-   "patch": "gapless-3-delay-cave",
-   "file": "0023-gapless-delay-cave.patch",
+   "patch": "gapless-3-flag-literal",
+   "file": "0023-gapless-flag-literal.patch",
    "kind": "module",
    "module": 0,
    "region": "code",
-   "cpu_address": "0x30514fe",
-   "file_offset": "0x2abaa",
-   "old_hex": "7047704770477047704770477047704770477047704770477047",
-   "new_hex": "2ca1604b9b684a684b60934203d10a68802a00d3704713f016ba"
+   "cpu_address": "0x3051500",
+   "file_offset": "0x2abac",
+   "old_hex": "70477047",
+   "new_hex": "38410003"
   },
   {
-   "patch": "gapless-4-delay-hook",
-   "file": "0024-gapless-delay-hook.patch",
+   "patch": "gapless-4-keep-decoder",
+   "file": "0024-gapless-keep-decoder.patch",
    "kind": "module",
    "module": 33,
    "region": "code",
-   "cpu_address": "0x3088fea",
-   "file_offset": "0x9fd60",
-   "old_hex": "dbf7abfc",
-   "new_hex": "c8f788fa"
+   "cpu_address": "0x30893c4",
+   "file_offset": "0xa013a",
+   "old_hex": "cf4810b500680a2828bf10bddfe800f0051b1b1b1b1b1b1b1b1bfff7c6ffe3f793fb01210e20c9f717f901210f20c9f713f900216e20c9f7d7f80021bde810407e20c9f7d1b8fff7b0ffbde81040e3f77bbb",
+   "new_hex": "cf4810b500680a2828bf10bd0446fff7ccff0db1e3f798fb7cb901210e20c9f71bf901210f20c9f717f900216e20c9f7dbf800217e20c9f7d7f810bd00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf"
   },
   {
-   "patch": "gapless-5-delay-pool",
-   "file": "0025-gapless-delay-pool.patch",
+   "patch": "gapless-5-gate-tail",
+   "file": "0025-gapless-gate-tail.patch",
    "kind": "module",
    "module": 0,
    "region": "code",
    "cpu_address": "0x3051684",
    "file_offset": "0x2ad30",
    "old_hex": "70477047",
-   "new_hex": "d8680303"
+   "new_hex": "1bf054ba"
   },
   {
    "patch": "gapless-6-arm",
@@ -288,10 +299,10 @@
    "kind": "module",
    "module": 0,
    "region": "code",
-   "cpu_address": "0x3051674",
-   "file_offset": "0x2ad20",
-   "old_hex": "ffe7",
-   "new_hex": "02d0"
+   "cpu_address": "0x3051676",
+   "file_offset": "0x2ad22",
+   "old_hex": "02e0",
+   "new_hex": "02d1"
   },
   {
    "patch": "sortkeys-comparator-hook",
@@ -3785,8 +3796,8 @@
   }
  ],
  "diff_vs_stock": {
-  "bytes_changed": 4747586,
-  "range_count": 428371,
+  "bytes_changed": 4747566,
+  "range_count": 428375,
   "note": "range list omitted; rebuild with patches/full/build/build_full.py for it"
  },
  "validation": "validate_grown() passed (structural checks, layout derived from the image)",
