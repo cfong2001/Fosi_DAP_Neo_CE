@@ -3,7 +3,7 @@
  "input_file": "DP3_V137.img",
  "output_file": "DP3_V137_CE.img",
  "input_sha256": "fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cdfade5e9c6ea3bd71ac6deef",
- "output_sha256": "57d920afd8a636b1c2e369ee7e2e55de70910afc47ff930de3f3792cf4b4dfd8",
+ "output_sha256": "5c2283c814046cf95eaa6f782eb4c3aae7c3aa1196458c93ec1130453ce97bf5",
  "byte_length": 13638454,
  "header_date": "20261023",
  "patches_applied": [
@@ -1862,49 +1862,37 @@
     "file_offset": "0xa9d624",
     "bytes": 16,
     "old_hex": "e0c3e0c32945294529452945e0c2e0c2",
-    "new_hex": "29452945294529452945294529452945"
+    "new_hex": "29452945496459844964294529452945"
    },
    {
     "file_offset": "0xa9d642",
     "bytes": 16,
     "old_hex": "e0a2294529452945294529452945e0a2",
-    "new_hex": "2945f220f220f220f220f22029452945"
+    "new_hex": "5164ca01f220f220f220ca0151642945"
    },
    {
-    "file_offset": "0xa9d660",
-    "bytes": 16,
-    "old_hex": "e0a2294529452945294529452945e0c3",
-    "new_hex": "f220f220f220f220f220f220f2202945"
+    "file_offset": "0xa9d65e",
+    "bytes": 18,
+    "old_hex": "2945e0a2294529452945294529452945e0c3",
+    "new_hex": "5164f220f220f220f220f220f220f2205164"
    },
    {
     "file_offset": "0xa9d67c",
     "bytes": 18,
     "old_hex": "2945e0c3294529452945294529452945e0a2",
-    "new_hex": "f220f220f220f2202945f220f220f220f220"
+    "new_hex": "d201f220f22091a2598491a2f220f220d201"
    },
    {
-    "file_offset": "0xa9d69a",
-    "bytes": 4,
-    "old_hex": "2945e0a3",
-    "new_hex": "f220f220"
-   },
-   {
-    "file_offset": "0xa9d6a8",
-    "bytes": 4,
-    "old_hex": "10a3e0a2",
-    "new_hex": "f220f220"
-   },
-   {
-    "file_offset": "0xa9d6b6",
-    "bytes": 294,
-    "old_hex": "e0a3e0c3e0c2e0c3e0c2e0a2e0c3e0a2e0c3e0c3e0c3e0a229452945e0c318c318c318c318c318c318c318e318e318e318c318c318c3e0c32945e0a318e318e418e318e318e318e418e318e318e318e318e318e4e0a22945e0c2210421032103210321042104210421042104210421032104e0c22945e0c3212421242124212421242124212421242124212421242124e0c32945e0c3294529452925294529452945294529452945294529452945e0c32945e0c3294529652965294529452945294529452945294529452945e0a22945e0a3316629652965294529452945294529452945294529452966e0c32945e0c331a631a53186318631863186318631863186318631863186e0c229452945e0c2e0c3e0c2e0c3e0c3e0c3e0c3e0c3e0c3e0c3e0c3e0c3",
-    "new_hex": "2945f220f220f220f220f220f220f220f220f220294529452945294529452945f220f220f220f220f220f220f220f220f220f2202945294529452945f220f220f220f220f220f220f220f220f220f220f2202945294529452945f220f220f220f220f2202945f220f220f220f220f2202945294529452945f220f220f220f220294529452945f220f220f220f2202945294529452945f220f220f220f220f2202945f220f220f220f220f2202945294529452945f220f220f220f220f2202945f220f220f220f220f2202945294529452945f220f220f220f220f220f220f220f220f220f220f2202945294529452945f220f220f220f220f220f220f220f220f220f220f22029452945294529452945f220f220f220f220f220f220f220f220f22029452945"
+    "file_offset": "0xa9d698",
+    "bytes": 324,
+    "old_hex": "29452945e0a32945294529452945294510a3e0a229452945294529452945e0a3e0c3e0c2e0c3e0c2e0a2e0c3e0a2e0c3e0c3e0c3e0a229452945e0c318c318c318c318c318c318c318e318e318e318c318c318c3e0c32945e0a318e318e418e318e318e318e418e318e318e318e318e318e4e0a22945e0c2210421032103210321042104210421042104210421032104e0c22945e0c3212421242124212421242124212421242124212421242124e0c32945e0c3294529452925294529452945294529452945294529452945e0c32945e0c3294529652965294529452945294529452945294529452945e0a22945e0a3316629652965294529452945294529452945294529452966e0c32945e0c331a631a53186318631863186318631863186318631863186e0c229452945e0c2e0c3e0c2e0c3e0c3e0c3e0c3e0c3e0c3e0c3e0c3e0c3",
+    "new_hex": "5164f220f22081a329452945294581a3f220f220516429452945294529455984f220f220b1e1a9c2a9c2a9c2b1e1f220f2206983294529452945294589a3f220f220f220f220f220f220f220f220f220a1c22945294529452945a9c2f220f220f220f220f220f220f220f220f220c1e12945294529452945a9c2f220f220f220a9c24964a9c2f220f220f220c1e12945294529452945a9c2f220f220f220698329456983f220f220f220c1e12945294529452945a9c2f220f220f220c9e12945b1e1f220f220f220c1e12945294529452945a9c2f220f220f220e2003945d201f220f220f220c1e12945294529452945a9c2f220f220f220f220f220f220f220f220f220c1e1294529452945294591a2f220f220f220f220f220f220f220f220f220a9c229452945294529452945a1c2c1e1c1e1c1e1c1e1c1e1c1e1c1e1a9c239642945"
    },
    {
     "file_offset": "0xb5cc70",
     "bytes": 288,
     "old_hex": "18e3c618dedbdedb39c70000000039e7dedbdedbc61818e331a6dedbdedbdedb6b6d000000006b6ddedbdedbdedb31a631a6dedbdedbdedb6b6d000000006b6ddedbdedbdedb31a631a6dedbdedbdedb6b6d000000006b6ddedbdedbdedb31a631a6dedbdedbdedb6b6d000000006b6ddedbdedbdedb31a631a6dedbdedbdedb6b6d000000006b6ddedbdedbdedb31a631a6dedbdedbdedb6b6d000000006b6ddedbdedbdedb31a631a6dedbdedbdedb6b6d000000006b6ddedbdedbdedb31a631a6dedbdedbdedb6b6d000000006b6ddedbdedbdedb31a631a6dedbdedbdedb6b6d000000006b6ddedbdedbdedb31a631a6dedbdedbdedb6b6d000000006b6ddedbdedbdedb31a618e3c618dedbdedb39c70000000039e7dedbdedbc61818e3",
-    "new_hex": "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000ffffffff00000000ffffffffffff0000000000000000ffffffffffff00000000ffffffffffff0000000000000000ffffffffffff00000000ffffffffffff0000000000000000ffffffffffff00000000ffffffffffff0000000000000000ffffffffffff00000000ffffffffffff0000000000000000ffffffffffff00000000ffffffffffff0000000000000000ffffffffffff00000000ffffffffffff00000000000000000000ffffffff00000000ffffffffffff00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+    "new_hex": "0000000000000000000000000000000000000000000000000000000000005acb39c70000000029655aeb00000000000000000000738effffffff10a20000ef7dffff8c7100000000000000008410ffffffff21040000ffffffff9cf300000000000000008410ffffffff21040000ffffffff9cf300000000000000008410ffffffff21040000ffffffff9cf300000000000000008410ffffffff21040000ffffffff9cf300000000000000008410ffffffff21040000ffffffff9cf300000000000000008410ffffffff21040000ffffffff9cf300000000000000007bcfffffffff18c30000ffffffff94b2000000000000000000007bcf52aa0000000042287bef18c300000000000000000000000000000000000000000000000000000000"
    },
    {
     "file_offset": "0xb5cd94",
@@ -1916,37 +1904,37 @@
     "file_offset": "0xb5cdac",
     "bytes": 8,
     "old_hex": "dedbdedbbdf74208",
-    "new_hex": "0000000000000000"
+    "new_hex": "0000318600000000"
    },
    {
     "file_offset": "0xb5cdc4",
     "bytes": 12,
     "old_hex": "dedbdedbdedbdedb84300861",
-    "new_hex": "0000ffffffff000000000000"
+    "new_hex": "00009cf3bdf7210400000000"
    },
    {
     "file_offset": "0xb5cddc",
     "bytes": 14,
     "old_hex": "dedbdedbdedbdedbdedbc6184228",
-    "new_hex": "0000ffffffffffff000000000000"
+    "new_hex": "00009cf3ffffffff6b6d00000000"
    },
    {
     "file_offset": "0xb5cdf4",
     "bytes": 110,
     "old_hex": "dedbdedbdedbdedbdedbdedbdedb94b21082000000000000dedbdedbdedbdedbdedbdedbdedbdedbad75000000000000dedbdedbdedbdedbdedbdedbdedbdedbb596000000000000dedbdedbdedbdedbdedbdedbd6ba84101082000000000000dedbdedbdedbdedbdedbc61839e7",
-    "new_hex": "0000ffffffffffffffffffff0000000000000000000000000000ffffffffffffffffffffffff000000000000000000000000ffffffffffffffffffffffffffff00000000000000000000ffffffffffffffffffff0000000000000000000000000000ffffffffffffffff00000000"
+    "new_hex": "00009cf3ffffffffffffbdf721040000000000000000000000009cf3ffffffffffffffffffff6b6d000000000000000000009cf3ffffffffffffffffffff8c71000000000000000000009cf3ffffffffffffce7939c70000000000000000000000009cf3ffffffff841000000000"
    },
    {
     "file_offset": "0xb5ce6c",
     "bytes": 12,
     "old_hex": "dedbdedbdedbd6ba7bcf0861",
-    "new_hex": "0000ffffffff000000000000"
+    "new_hex": "00009cf3c638294500000000"
    },
    {
     "file_offset": "0xb5ce84",
     "bytes": 8,
     "old_hex": "dedbdedbbdd731a6",
-    "new_hex": "0000000000000000"
+    "new_hex": "000031a600000000"
    },
    {
     "file_offset": "0xb5ce9c",
@@ -1956,603 +1944,717 @@
    },
    {
     "file_offset": "0xb5ceb0",
-    "bytes": 108,
-    "old_hex": "7bcfbdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd77bcf2945bdd7ffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfbdd72945bdd7ffdf",
-    "new_hex": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff18c318c3ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff18c318c3ffffffff"
+    "bytes": 110,
+    "old_hex": "7bcfbdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd77bcf2945bdd7ffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfbdd72945bdd7ffdf18c3",
+    "new_hex": "3166bdf7ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffc63839e718c318c3bdf7ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffdedb18c318c3ffffffff52aa"
    },
    {
-    "file_offset": "0xb5cf44",
-    "bytes": 12,
-    "old_hex": "18c3ffdfbdd72945bdd7ffdf",
-    "new_hex": "ffffffff18c318c3ffffffff"
+    "file_offset": "0xb5cf42",
+    "bytes": 14,
+    "old_hex": "18c318c3ffdfbdd72945bdd7ffdf",
+    "new_hex": "4208ffffffff318618c3ffffffff"
    },
    {
     "file_offset": "0xb5cf78",
     "bytes": 12,
     "old_hex": "18c3ffdfbdd72945bdd7ffdf",
-    "new_hex": "ffffffff18c318c3ffffffff"
+    "new_hex": "df1bffff31a618c3ffffffff"
    },
    {
     "file_offset": "0xb5cfac",
     "bytes": 12,
     "old_hex": "18c3ffdfef7ddefbbdd7ffdf",
-    "new_hex": "ffffffffffffffffffffffff"
+    "new_hex": "df1bffffffffd6baffffffff"
    },
    {
     "file_offset": "0xb5cfe0",
     "bytes": 12,
     "old_hex": "18c3ffdfef7ddefbbdd7ffdf",
-    "new_hex": "ffffffffffffffffffffffff"
+    "new_hex": "df1bffffffffffffffffffff"
    },
    {
     "file_offset": "0xb5d014",
     "bytes": 12,
     "old_hex": "18c3ffdfef7ddefbbdd7ffdf",
-    "new_hex": "ffffffffffffffffffffffff"
+    "new_hex": "df1bffffffffffffffffffff"
    },
    {
     "file_offset": "0xb5d048",
     "bytes": 12,
     "old_hex": "18c3ffdfef7ddefbbdd7ffdf",
-    "new_hex": "ffffffffffffffffffffffff"
+    "new_hex": "df1bffffffffffffffffffff"
    },
    {
     "file_offset": "0xb5d07c",
     "bytes": 12,
     "old_hex": "18c3ffdfef7ddefbbdd7ffdf",
-    "new_hex": "ffffffffffffffffffffffff"
+    "new_hex": "df1bffffffffffffffffffff"
    },
    {
     "file_offset": "0xb5d0b0",
     "bytes": 12,
     "old_hex": "18c3ffdfef7ddefbbdd7ffdf",
-    "new_hex": "ffffffffffffffffffffffff"
+    "new_hex": "df1bffffffffe75cffffffff"
    },
    {
     "file_offset": "0xb5d0e4",
-    "bytes": 12,
-    "old_hex": "18c3ffdfbdd72945bdd7ffdf",
-    "new_hex": "ffffffff18c318c3ffffffff"
+    "bytes": 14,
+    "old_hex": "18c3ffdfbdd72945bdd7ffdf18c3",
+    "new_hex": "df1bffff4a6918c3ffffffff4208"
    },
    {
-    "file_offset": "0xb5d118",
-    "bytes": 112,
-    "old_hex": "18c3ffdfbdd72945bdd7ffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfbdd729457bcfbdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd77bcf2945",
-    "new_hex": "ffffffff18c318c3ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff18c318c3ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff18c318c3"
+    "file_offset": "0xb5d116",
+    "bytes": 114,
+    "old_hex": "18c318c3ffdfbdd72945bdd7ffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfbdd729457bcfbdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd77bcf2945",
+    "new_hex": "3166ffffffff31a618c3c638ffffffffdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bffffffffdefb18c318c339e7dedbffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffdefb4a4918c318c3"
    },
    {
     "file_offset": "0xb5d188",
-    "bytes": 108,
-    "old_hex": "7bcfbdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7ad752945bdd7ffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffffe73c2945bdd7ffdf",
-    "new_hex": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff18c318c3ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff18c318c3ffffffff"
+    "bytes": 110,
+    "old_hex": "7bcfbdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7ad752945bdd7ffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffffe73c2945bdd7ffdf18c3",
+    "new_hex": "3166bdf7ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffc63839e718c318c3bdf7ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffdedb18c318c3ffffffff52aa"
    },
    {
-    "file_offset": "0xb5d21c",
-    "bytes": 12,
-    "old_hex": "18c3ffffe73c2945bdd7ffdf",
-    "new_hex": "ffffffff18c318c3ffffffff"
+    "file_offset": "0xb5d21a",
+    "bytes": 14,
+    "old_hex": "18c318c3ffffe73c2945bdd7ffdf",
+    "new_hex": "4208ffffffff318618c3ffffffff"
    },
    {
     "file_offset": "0xb5d250",
     "bytes": 12,
     "old_hex": "18c3ffffe73c2945bdd7ffdf",
-    "new_hex": "ffffffff18c318c3ffffffff"
+    "new_hex": "df1bffff31a618c3ffffffff"
    },
    {
     "file_offset": "0xb5d284",
     "bytes": 12,
     "old_hex": "18c3ffffffdfdefbbdd7ffdf",
-    "new_hex": "ffffffffffffffffffffffff"
+    "new_hex": "df1bffffffffd6baffffffff"
    },
    {
     "file_offset": "0xb5d2b8",
     "bytes": 12,
     "old_hex": "18c3ffffffdfdefbbdd7ffdf",
-    "new_hex": "ffffffffffffffffffffffff"
+    "new_hex": "df1bffffffffffffffffffff"
    },
    {
     "file_offset": "0xb5d2ec",
     "bytes": 12,
     "old_hex": "18c3ffffffdfdefbbdd7ffdf",
-    "new_hex": "ffffffffffffffffffffffff"
+    "new_hex": "df1bffffffffffffffffffff"
    },
    {
     "file_offset": "0xb5d320",
     "bytes": 12,
     "old_hex": "18c3ffffffdfdefbbdd7ffdf",
-    "new_hex": "ffffffffffffffffffffffff"
+    "new_hex": "df1bffffffffffffffffffff"
    },
    {
     "file_offset": "0xb5d354",
     "bytes": 12,
     "old_hex": "18c3ffffffdfdefbbdd7ffdf",
-    "new_hex": "ffffffffffffffffffffffff"
+    "new_hex": "df1bffffffffffffffffffff"
    },
    {
     "file_offset": "0xb5d388",
     "bytes": 12,
     "old_hex": "18c3ffffffdfdefbbdd7ffdf",
-    "new_hex": "ffffffffffffffffffffffff"
+    "new_hex": "df1bffffffffe75cffffffff"
    },
    {
     "file_offset": "0xb5d3bc",
-    "bytes": 12,
-    "old_hex": "18c3ffffe73c2945bdd7ffdf",
-    "new_hex": "ffffffff18c318c3ffffffff"
+    "bytes": 14,
+    "old_hex": "18c3ffffe73c2945bdd7ffdf18c3",
+    "new_hex": "df1bffff4a6918c3ffffffff4208"
    },
    {
-    "file_offset": "0xb5d3f0",
-    "bytes": 112,
-    "old_hex": "18c3ffffe73c2945bdd7ffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffffe73c29457bcfbdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7ad752945",
-    "new_hex": "ffffffff18c318c3ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff18c318c3ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff18c318c3"
+    "file_offset": "0xb5d3ee",
+    "bytes": 114,
+    "old_hex": "18c318c3ffffe73c2945bdd7ffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffffe73c29457bcfbdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7ad752945",
+    "new_hex": "3166ffffffff31a618c3c638ffffffffdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bffffffffdefb18c318c339e7dedbffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffdefb4a4918c318c3"
    },
    {
     "file_offset": "0xb5d460",
-    "bytes": 108,
-    "old_hex": "7bcfbdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd77bcf2945bdd7ffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfbdd72945bdd7ffdf",
-    "new_hex": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff18c318c3ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff18c318c3ffffffff"
+    "bytes": 110,
+    "old_hex": "7bcfbdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd77bcf2945bdd7ffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfbdd72945bdd7ffdf18c3",
+    "new_hex": "3166bdf7ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffc63839e718c318c3bdf7ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffdedb18c318c3ffffffff52aa"
    },
    {
-    "file_offset": "0xb5d4f4",
-    "bytes": 12,
-    "old_hex": "18c3ffdfbdd72945bdd7ffdf",
-    "new_hex": "ffffffff18c318c3ffffffff"
+    "file_offset": "0xb5d4f2",
+    "bytes": 14,
+    "old_hex": "18c318c3ffdfbdd72945bdd7ffdf",
+    "new_hex": "4208ffffffff318618c3ffffffff"
    },
    {
     "file_offset": "0xb5d528",
     "bytes": 12,
     "old_hex": "18c3ffdfbdd72945bdd7ffdf",
-    "new_hex": "ffffffff18c318c3ffffffff"
+    "new_hex": "df1bffff31a618c3ffffffff"
    },
    {
     "file_offset": "0xb5d55c",
     "bytes": 12,
     "old_hex": "18c3ffdfef7ddefbbdd7ffdf",
-    "new_hex": "ffffffffffffffffffffffff"
+    "new_hex": "df1bffffffffd6baffffffff"
    },
    {
     "file_offset": "0xb5d590",
     "bytes": 12,
     "old_hex": "18c3ffdfef7ddefbbdd7ffdf",
-    "new_hex": "ffffffffffffffffffffffff"
+    "new_hex": "df1bffffffffffffffffffff"
    },
    {
     "file_offset": "0xb5d5c4",
     "bytes": 12,
     "old_hex": "18c3ffdfef7ddefbbdd7ffdf",
-    "new_hex": "ffffffffffffffffffffffff"
+    "new_hex": "df1bffffffffffffffffffff"
    },
    {
     "file_offset": "0xb5d5f8",
     "bytes": 12,
     "old_hex": "18c3ffdfef7ddefbbdd7ffdf",
-    "new_hex": "ffffffffffffffffffffffff"
+    "new_hex": "df1bffffffffffffffffffff"
    },
    {
     "file_offset": "0xb5d62c",
     "bytes": 12,
     "old_hex": "18c3ffdfef7ddefbbdd7ffdf",
-    "new_hex": "ffffffffffffffffffffffff"
+    "new_hex": "df1bffffffffffffffffffff"
    },
    {
     "file_offset": "0xb5d660",
     "bytes": 12,
     "old_hex": "18c3ffdfef7ddefbbdd7ffdf",
-    "new_hex": "ffffffffffffffffffffffff"
+    "new_hex": "df1bffffffffe75cffffffff"
    },
    {
     "file_offset": "0xb5d694",
-    "bytes": 12,
-    "old_hex": "18c3ffdfbdd72945bdd7ffdf",
-    "new_hex": "ffffffff18c318c3ffffffff"
+    "bytes": 14,
+    "old_hex": "18c3ffdfbdd72945bdd7ffdf18c3",
+    "new_hex": "df1bffff4a6918c3ffffffff4208"
    },
    {
-    "file_offset": "0xb5d6c8",
-    "bytes": 112,
-    "old_hex": "18c3ffdfbdd72945bdd7ffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfbdd729457bcfbdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd77bcf2945",
-    "new_hex": "ffffffff18c318c3ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff18c318c3ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff18c318c3"
+    "file_offset": "0xb5d6c6",
+    "bytes": 114,
+    "old_hex": "18c318c3ffdfbdd72945bdd7ffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfbdd729457bcfbdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd77bcf2945",
+    "new_hex": "3166ffffffff31a618c3c638ffffffffdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bffffffffdefb18c318c339e7dedbffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffdefb4a4918c318c3"
    },
    {
     "file_offset": "0xb5d738",
     "bytes": 54,
     "old_hex": "94b2d6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6ba94b22945d6ba",
-    "new_hex": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff18c318c3ffff"
+    "new_hex": "3166bdf7ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffc63839e718c318c3bdf7"
    },
    {
-    "file_offset": "0xb5d79c",
-    "bytes": 526,
-    "old_hex": "d6ba2945d6baffff10a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a2ffffd6ba2945d6baffff10a2368b368b368b368b10a2368b368b368b368b10a2368b368b368b368b10a210a210a210a210a210a2ffffd6ba2945d6baffff10a2368b368b368b368b10a2368b368b368b368b10a2368b368b368b368b10a210a210a210a210a210a2fffff7bedefbd6baffff10a2368b368b368b368b10a2368b368b368b368b10a2368b368b368b368b10a210a210a210a210a210a2fffff7bedefbd6baffff10a2368b368b368b368b10a2368b368b368b368b10a2368b368b368b368b10a210a210a210a210a210a2fffff7bedefbd6baffff10a2368b368b368b368b10a2368b368b368b368b10a2368b368b368b368b10a210a210a210a210a210a2fffff7bedefbd6baffff10a2368b368b368b368b10a2368b368b368b368b10a2368b368b368b368b10a210a210a210a210a210a2fffff7bedefbd6baffff10a2368b368b368b368b10a2368b368b368b368b10a2368b368b368b368b10a210a210a210a210a210a2fffff7bedefbd6baffff10a2368b368b368b368b10a2368b368b368b368b10a2368b368b368b368b10a210a210a210a210a210a2ffffd6ba2945d6baffff10a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a2ffffd6ba2945d6ba",
-    "new_hex": "18c318c3ffffffff18c318c318c318c318c318c318c318c318c318c318c318c318c318c318c318c318c318c318c318c3ffffffff18c318c3ffffffff18c3368b368b368b368b18c3368b368b368b368b18c3368b368b368b368b18c318c318c318c318c3ffffffff18c318c3ffffffff18c3368b368b368b368b18c3368b368b368b368b18c3368b368b368b368b18c318c318c318c318c3ffffffffffffffffffffffff18c3368b368b368b368b18c3368b368b368b368b18c3368b368b368b368b18c318c318c318c318c3ffffffffffffffffffffffff18c3368b368b368b368b18c3368b368b368b368b18c3368b368b368b368b18c318c318c318c318c3ffffffffffffffffffffffff18c3368b368b368b368b18c3368b368b368b368b18c3368b368b368b368b18c318c318c318c318c3ffffffffffffffffffffffff18c3368b368b368b368b18c3368b368b368b368b18c3368b368b368b368b18c318c318c318c318c3ffffffffffffffffffffffff18c3368b368b368b368b18c3368b368b368b368b18c3368b368b368b368b18c318c318c318c318c3ffffffffffffffffffffffff18c3368b368b368b368b18c3368b368b368b368b18c3368b368b368b368b18c318c318c318c318c3ffffffff18c318c3ffffffff18c318c318c318c318c318c318c318c318c318c318c318c318c318c318c318c318c318c318c318c3ffffffff18c318c3ffff"
-   },
-   {
-    "file_offset": "0xb5d9d8",
-    "bytes": 56,
-    "old_hex": "d6ba294594b2d6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6ba94b22945",
-    "new_hex": "18c318c3ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff18c318c3"
+    "file_offset": "0xb5d79a",
+    "bytes": 630,
+    "old_hex": "ffffd6ba2945d6baffff10a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a2ffffd6ba2945d6baffff10a2368b368b368b368b10a2368b368b368b368b10a2368b368b368b368b10a210a210a210a210a210a2ffffd6ba2945d6baffff10a2368b368b368b368b10a2368b368b368b368b10a2368b368b368b368b10a210a210a210a210a210a2fffff7bedefbd6baffff10a2368b368b368b368b10a2368b368b368b368b10a2368b368b368b368b10a210a210a210a210a210a2fffff7bedefbd6baffff10a2368b368b368b368b10a2368b368b368b368b10a2368b368b368b368b10a210a210a210a210a210a2fffff7bedefbd6baffff10a2368b368b368b368b10a2368b368b368b368b10a2368b368b368b368b10a210a210a210a210a210a2fffff7bedefbd6baffff10a2368b368b368b368b10a2368b368b368b368b10a2368b368b368b368b10a210a210a210a210a210a2fffff7bedefbd6baffff10a2368b368b368b368b10a2368b368b368b368b10a2368b368b368b368b10a210a210a210a210a210a2fffff7bedefbd6baffff10a2368b368b368b368b10a2368b368b368b368b10a2368b368b368b368b10a210a210a210a210a210a2ffffd6ba2945d6baffff10a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a2ffffd6ba2945d6baffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd6ba294594b2d6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6ba94b22945",
+    "new_hex": "dedb18c318c3ffffffff52aa18c318c318c318c318c318c318c318c318c318c318c318c318c318c318c318c318c318c34208ffffffff318618c3ffffffff18c3368b368b368b368b18c3368b368b368b368b18c3368b368b368b368b18c318c318c318c318c3df1bffff31a618c3ffffffff18c3368b368b368b368b18c3368b368b368b368b18c3368b368b368b368b18c318c318c318c318c3df1bffffffffd6baffffffff18c3368b368b368b368b18c3368b368b368b368b18c3368b368b368b368b18c318c318c318c318c3df1bffffffffffffffffffff18c3368b368b368b368b18c3368b368b368b368b18c3368b368b368b368b18c318c318c318c318c3df1bffffffffffffffffffff18c3368b368b368b368b18c3368b368b368b368b18c3368b368b368b368b18c318c318c318c318c3df1bffffffffffffffffffff18c3368b368b368b368b18c3368b368b368b368b18c3368b368b368b368b18c318c318c318c318c3df1bffffffffffffffffffff18c3368b368b368b368b18c3368b368b368b368b18c3368b368b368b368b18c318c318c318c318c3df1bffffffffe75cffffffff18c3368b368b368b368b18c3368b368b368b368b18c3368b368b368b368b18c318c318c318c318c3df1bffff4a6918c3ffffffff420818c318c318c318c318c318c318c318c318c318c318c318c318c318c318c318c318c318c33166ffffffff31a618c3c638ffffffffdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bffffffffdefb18c318c339e7dedbffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffdefb4a4918c318c3"
    },
    {
     "file_offset": "0xb5da10",
     "bytes": 54,
     "old_hex": "ad75e73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73cad752945e73c",
-    "new_hex": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff18c318c3ffff"
+    "new_hex": "3166bdf7ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffc63839e718c318c3bdf7"
    },
    {
-    "file_offset": "0xb5da74",
-    "bytes": 526,
-    "old_hex": "e73c2945e73cffff4a494a494a494a494a494a494a494a494a494a494a494a494a494a494a494a494a494a494a494a494a49ffffe73c2945e73cffff4a49368b368b368b368b4a49368b368b368b368b4a49368b368b368b368b4a49368b368b368b368b4a49ffffe73c2945e73cffff4a49368b368b368b368b4a49368b368b368b368b4a49368b368b368b368b4a49368b368b368b368b4a49ffffffdfdefbe73cffff4a49368b368b368b368b4a49368b368b368b368b4a49368b368b368b368b4a49368b368b368b368b4a49ffffffdfdefbe73cffff4a49368b368b368b368b4a49368b368b368b368b4a49368b368b368b368b4a49368b368b368b368b4a49ffffffdfdefbe73cffff4a49368b368b368b368b4a49368b368b368b368b4a49368b368b368b368b4a49368b368b368b368b4a49ffffffdfdefbe73cffff4a49368b368b368b368b4a49368b368b368b368b4a49368b368b368b368b4a49368b368b368b368b4a49ffffffdfdefbe73cffff4a49368b368b368b368b4a49368b368b368b368b4a49368b368b368b368b4a49368b368b368b368b4a49ffffffdfdefbe73cffff4a49368b368b368b368b4a49368b368b368b368b4a49368b368b368b368b4a49368b368b368b368b4a49ffffe73c2945e73cffff4a494a494a494a494a494a494a494a494a494a494a494a494a494a494a494a494a494a494a494a494a49ffffe73c2945e73c",
-    "new_hex": "18c318c3ffffffff18c318c318c318c318c318c318c318c318c318c318c318c318c318c318c318c318c318c318c318c3ffffffff18c318c3ffffffff18c3368b368b368b368b18c3368b368b368b368b18c3368b368b368b368b18c3368b368b368b368bffffffff18c318c3ffffffff18c3368b368b368b368b18c3368b368b368b368b18c3368b368b368b368b18c3368b368b368b368bffffffffffffffffffffffff18c3368b368b368b368b18c3368b368b368b368b18c3368b368b368b368b18c3368b368b368b368bffffffffffffffffffffffff18c3368b368b368b368b18c3368b368b368b368b18c3368b368b368b368b18c3368b368b368b368bffffffffffffffffffffffff18c3368b368b368b368b18c3368b368b368b368b18c3368b368b368b368b18c3368b368b368b368bffffffffffffffffffffffff18c3368b368b368b368b18c3368b368b368b368b18c3368b368b368b368b18c3368b368b368b368bffffffffffffffffffffffff18c3368b368b368b368b18c3368b368b368b368b18c3368b368b368b368b18c3368b368b368b368bffffffffffffffffffffffff18c3368b368b368b368b18c3368b368b368b368b18c3368b368b368b368b18c3368b368b368b368bffffffff18c318c3ffffffff18c318c318c318c318c318c318c318c318c318c318c318c318c318c318c318c318c318c318c318c3ffffffff18c318c3ffff"
-   },
-   {
-    "file_offset": "0xb5dcb0",
-    "bytes": 56,
-    "old_hex": "e73c2945ad75e73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73cad752945",
-    "new_hex": "18c318c3ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff18c318c3"
+    "file_offset": "0xb5da72",
+    "bytes": 630,
+    "old_hex": "ffffe73c2945e73cffff4a494a494a494a494a494a494a494a494a494a494a494a494a494a494a494a494a494a494a494a494a49ffffe73c2945e73cffff4a49368b368b368b368b4a49368b368b368b368b4a49368b368b368b368b4a49368b368b368b368b4a49ffffe73c2945e73cffff4a49368b368b368b368b4a49368b368b368b368b4a49368b368b368b368b4a49368b368b368b368b4a49ffffffdfdefbe73cffff4a49368b368b368b368b4a49368b368b368b368b4a49368b368b368b368b4a49368b368b368b368b4a49ffffffdfdefbe73cffff4a49368b368b368b368b4a49368b368b368b368b4a49368b368b368b368b4a49368b368b368b368b4a49ffffffdfdefbe73cffff4a49368b368b368b368b4a49368b368b368b368b4a49368b368b368b368b4a49368b368b368b368b4a49ffffffdfdefbe73cffff4a49368b368b368b368b4a49368b368b368b368b4a49368b368b368b368b4a49368b368b368b368b4a49ffffffdfdefbe73cffff4a49368b368b368b368b4a49368b368b368b368b4a49368b368b368b368b4a49368b368b368b368b4a49ffffffdfdefbe73cffff4a49368b368b368b368b4a49368b368b368b368b4a49368b368b368b368b4a49368b368b368b368b4a49ffffe73c2945e73cffff4a494a494a494a494a494a494a494a494a494a494a494a494a494a494a494a494a494a494a494a494a49ffffe73c2945e73cffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe73c2945ad75e73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73cad752945",
+    "new_hex": "dedb18c318c3ffffffff52aa18c318c318c318c318c318c318c318c318c318c318c318c318c318c318c318c318c318c34208ffffffff318618c3ffffffff18c3368b368b368b368b18c3368b368b368b368b18c3368b368b368b368b18c3368b368b368b368bdf1bffff31a618c3ffffffff18c3368b368b368b368b18c3368b368b368b368b18c3368b368b368b368b18c3368b368b368b368bdf1bffffffffd6baffffffff18c3368b368b368b368b18c3368b368b368b368b18c3368b368b368b368b18c3368b368b368b368bdf1bffffffffffffffffffff18c3368b368b368b368b18c3368b368b368b368b18c3368b368b368b368b18c3368b368b368b368bdf1bffffffffffffffffffff18c3368b368b368b368b18c3368b368b368b368b18c3368b368b368b368b18c3368b368b368b368bdf1bffffffffffffffffffff18c3368b368b368b368b18c3368b368b368b368b18c3368b368b368b368b18c3368b368b368b368bdf1bffffffffffffffffffff18c3368b368b368b368b18c3368b368b368b368b18c3368b368b368b368b18c3368b368b368b368bdf1bffffffffe75cffffffff18c3368b368b368b368b18c3368b368b368b368b18c3368b368b368b368b18c3368b368b368b368bdf1bffff4a6918c3ffffffff420818c318c318c318c318c318c318c318c318c318c318c318c318c318c318c318c318c318c33166ffffffff31a618c3c638ffffffffdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bffffffffdefb18c318c339e7dedbffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffdefb4a4918c318c3"
    },
    {
     "file_offset": "0xb5dce8",
     "bytes": 54,
     "old_hex": "f800e73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73cad75f800e73c",
-    "new_hex": "fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff800f800ffff"
+    "new_hex": "3166bdf7ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffc63839e7f800f800bdf7"
    },
    {
-    "file_offset": "0xb5dd4c",
-    "bytes": 6,
-    "old_hex": "e73cf800e73c",
-    "new_hex": "f800f800ffff"
+    "file_offset": "0xb5dd4a",
+    "bytes": 12,
+    "old_hex": "ffffe73cf800e73cfffff800",
+    "new_hex": "dedbf800f800ffffffff52aa"
    },
    {
-    "file_offset": "0xb5dd7c",
-    "bytes": 10,
-    "old_hex": "f800ffffe73cf800e73c",
-    "new_hex": "fffffffff800f800ffff"
+    "file_offset": "0xb5dd7a",
+    "bytes": 12,
+    "old_hex": "f800f800ffffe73cf800e73c",
+    "new_hex": "4208ffffffff3186f800ffff"
    },
    {
     "file_offset": "0xb5ddb0",
     "bytes": 10,
     "old_hex": "f800ffffe73cf800e73c",
-    "new_hex": "fffffffff800f800ffff"
+    "new_hex": "df1bffff31a6f800ffff"
    },
    {
     "file_offset": "0xb5dde4",
     "bytes": 10,
     "old_hex": "f800ffffffdfdefbe73c",
-    "new_hex": "ffffffffffffffffffff"
+    "new_hex": "df1bffffffffd6baffff"
    },
    {
     "file_offset": "0xb5de18",
     "bytes": 10,
     "old_hex": "f800ffffffdfdefbe73c",
-    "new_hex": "ffffffffffffffffffff"
+    "new_hex": "df1bffffffffffffffff"
    },
    {
     "file_offset": "0xb5de4c",
     "bytes": 10,
     "old_hex": "f800ffffffdfdefbe73c",
-    "new_hex": "ffffffffffffffffffff"
+    "new_hex": "df1bffffffffffffffff"
    },
    {
     "file_offset": "0xb5de80",
     "bytes": 10,
     "old_hex": "f800ffffffdfdefbe73c",
-    "new_hex": "ffffffffffffffffffff"
+    "new_hex": "df1bffffffffffffffff"
    },
    {
     "file_offset": "0xb5deb4",
     "bytes": 10,
     "old_hex": "f800ffffffdfdefbe73c",
-    "new_hex": "ffffffffffffffffffff"
+    "new_hex": "df1bffffffffffffffff"
    },
    {
     "file_offset": "0xb5dee8",
     "bytes": 10,
     "old_hex": "f800ffffffdfdefbe73c",
-    "new_hex": "ffffffffffffffffffff"
+    "new_hex": "df1bffffffffe75cffff"
    },
    {
     "file_offset": "0xb5df1c",
-    "bytes": 10,
-    "old_hex": "f800ffffe73cf800e73c",
-    "new_hex": "fffffffff800f800ffff"
+    "bytes": 14,
+    "old_hex": "f800ffffe73cf800e73cfffff800",
+    "new_hex": "df1bffff4a69f800ffffffff4208"
    },
    {
-    "file_offset": "0xb5df50",
-    "bytes": 10,
-    "old_hex": "f800ffffe73cf800e73c",
-    "new_hex": "fffffffff800f800ffff"
-   },
-   {
-    "file_offset": "0xb5df88",
-    "bytes": 54,
-    "old_hex": "e73cf800f800e73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73cad75",
-    "new_hex": "f800f800fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff800"
+    "file_offset": "0xb5df4e",
+    "bytes": 112,
+    "old_hex": "f800f800ffffe73cf800e73cffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe73cf800f800e73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73cad75",
+    "new_hex": "3166ffffffff31a6f800c638ffffffffdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bffffffffdefbf800f80039e7dedbffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffdefb4a49f800"
    },
    {
     "file_offset": "0xb5dfc0",
-    "bytes": 108,
-    "old_hex": "f800bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7ad75f800bdd7ffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffffe73cf800bdd7ffdf",
-    "new_hex": "fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff800f800fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff800f800ffffffff"
+    "bytes": 110,
+    "old_hex": "f800bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7ad75f800bdd7ffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffffe73cf800bdd7ffdff800",
+    "new_hex": "3166bdf7ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffc63839e7f800f800bdf7ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffdedbf800f800ffffffff52aa"
    },
    {
-    "file_offset": "0xb5e054",
-    "bytes": 12,
-    "old_hex": "f800ffffe73cf800bdd7ffdf",
-    "new_hex": "fffffffff800f800ffffffff"
+    "file_offset": "0xb5e052",
+    "bytes": 14,
+    "old_hex": "f800f800ffffe73cf800bdd7ffdf",
+    "new_hex": "4208ffffffff3186f800ffffffff"
    },
    {
     "file_offset": "0xb5e088",
     "bytes": 12,
     "old_hex": "f800ffffe73cf800bdd7ffdf",
-    "new_hex": "fffffffff800f800ffffffff"
+    "new_hex": "df1bffff31a6f800ffffffff"
    },
    {
     "file_offset": "0xb5e0bc",
     "bytes": 12,
     "old_hex": "f800ffffffdfdefbbdd7ffdf",
-    "new_hex": "ffffffffffffffffffffffff"
+    "new_hex": "df1bffffffffd6baffffffff"
    },
    {
     "file_offset": "0xb5e0f0",
     "bytes": 12,
     "old_hex": "f800ffffffdfdefbbdd7ffdf",
-    "new_hex": "ffffffffffffffffffffffff"
+    "new_hex": "df1bffffffffffffffffffff"
    },
    {
     "file_offset": "0xb5e124",
     "bytes": 12,
     "old_hex": "f800ffffffdfdefbbdd7ffdf",
-    "new_hex": "ffffffffffffffffffffffff"
+    "new_hex": "df1bffffffffffffffffffff"
    },
    {
     "file_offset": "0xb5e158",
     "bytes": 12,
     "old_hex": "f800ffffffdfdefbbdd7ffdf",
-    "new_hex": "ffffffffffffffffffffffff"
+    "new_hex": "df1bffffffffffffffffffff"
    },
    {
     "file_offset": "0xb5e18c",
     "bytes": 12,
     "old_hex": "f800ffffffdfdefbbdd7ffdf",
-    "new_hex": "ffffffffffffffffffffffff"
+    "new_hex": "df1bffffffffffffffffffff"
    },
    {
     "file_offset": "0xb5e1c0",
     "bytes": 12,
     "old_hex": "f800ffffffdfdefbbdd7ffdf",
-    "new_hex": "ffffffffffffffffffffffff"
+    "new_hex": "df1bffffffffe75cffffffff"
    },
    {
     "file_offset": "0xb5e1f4",
-    "bytes": 12,
-    "old_hex": "f800ffffe73cf800bdd7ffdf",
-    "new_hex": "fffffffff800f800ffffffff"
+    "bytes": 14,
+    "old_hex": "f800ffffe73cf800bdd7ffdff800",
+    "new_hex": "df1bffff4a69f800ffffffff4208"
    },
    {
-    "file_offset": "0xb5e228",
-    "bytes": 110,
-    "old_hex": "f800ffffe73cf800bdd7ffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffffe73cf800f800bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7ad75",
-    "new_hex": "fffffffff800f800fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff800f800fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff800"
+    "file_offset": "0xb5e226",
+    "bytes": 112,
+    "old_hex": "f800f800ffffe73cf800bdd7ffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffffe73cf800f800bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7ad75",
+    "new_hex": "3166ffffffff31a6f800c638ffffffffdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bffffffffdefbf800f80039e7dedbffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffdefb4a49f800"
    },
    {
     "file_offset": "0xb5e298",
-    "bytes": 108,
-    "old_hex": "f800bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd77bcff800bdd7ffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfbdd7f800bdd7ffdf",
-    "new_hex": "fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff800f800fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff800f800ffffffff"
+    "bytes": 110,
+    "old_hex": "f800bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd77bcff800bdd7ffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfbdd7f800bdd7ffdff800",
+    "new_hex": "3166bdf7ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffc63839e7f800f800bdf7ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffdedbf800f800ffffffff52aa"
    },
    {
-    "file_offset": "0xb5e32c",
-    "bytes": 12,
-    "old_hex": "f800ffdfbdd7f800bdd7ffdf",
-    "new_hex": "fffffffff800f800ffffffff"
+    "file_offset": "0xb5e32a",
+    "bytes": 14,
+    "old_hex": "f800f800ffdfbdd7f800bdd7ffdf",
+    "new_hex": "4208ffffffff3186f800ffffffff"
    },
    {
     "file_offset": "0xb5e360",
     "bytes": 12,
     "old_hex": "f800ffdfbdd7f800bdd7ffdf",
-    "new_hex": "fffffffff800f800ffffffff"
+    "new_hex": "df1bffff31a6f800ffffffff"
    },
    {
     "file_offset": "0xb5e394",
     "bytes": 12,
     "old_hex": "f800ffdfef7ddefbbdd7ffdf",
-    "new_hex": "ffffffffffffffffffffffff"
+    "new_hex": "df1bffffffffd6baffffffff"
    },
    {
     "file_offset": "0xb5e3c8",
     "bytes": 12,
     "old_hex": "f800ffdfef7ddefbbdd7ffdf",
-    "new_hex": "ffffffffffffffffffffffff"
+    "new_hex": "df1bffffffffffffffffffff"
    },
    {
     "file_offset": "0xb5e3fc",
     "bytes": 12,
     "old_hex": "f800ffdfef7ddefbbdd7ffdf",
-    "new_hex": "ffffffffffffffffffffffff"
+    "new_hex": "df1bffffffffffffffffffff"
    },
    {
     "file_offset": "0xb5e430",
     "bytes": 12,
     "old_hex": "f800ffdfef7ddefbbdd7ffdf",
-    "new_hex": "ffffffffffffffffffffffff"
+    "new_hex": "df1bffffffffffffffffffff"
    },
    {
     "file_offset": "0xb5e464",
     "bytes": 12,
     "old_hex": "f800ffdfef7ddefbbdd7ffdf",
-    "new_hex": "ffffffffffffffffffffffff"
+    "new_hex": "df1bffffffffffffffffffff"
    },
    {
     "file_offset": "0xb5e498",
     "bytes": 12,
     "old_hex": "f800ffdfef7ddefbbdd7ffdf",
-    "new_hex": "ffffffffffffffffffffffff"
+    "new_hex": "df1bffffffffe75cffffffff"
    },
    {
     "file_offset": "0xb5e4cc",
-    "bytes": 12,
-    "old_hex": "f800ffdfbdd7f800bdd7ffdf",
-    "new_hex": "fffffffff800f800ffffffff"
+    "bytes": 14,
+    "old_hex": "f800ffdfbdd7f800bdd7ffdff800",
+    "new_hex": "df1bffff4a69f800ffffffff4208"
    },
    {
-    "file_offset": "0xb5e500",
-    "bytes": 110,
-    "old_hex": "f800ffdfbdd7f800bdd7ffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfbdd7f800f800bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd77bcf",
-    "new_hex": "fffffffff800f800fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff800f800fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff800"
+    "file_offset": "0xb5e4fe",
+    "bytes": 112,
+    "old_hex": "f800f800ffdfbdd7f800bdd7ffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfffdfbdd7f800f800bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd7bdd77bcf",
+    "new_hex": "3166ffffffff31a6f800c638ffffffffdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bffffffffdefbf800f80039e7dedbffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffdefb4a49f800"
    },
    {
     "file_offset": "0xb5e570",
     "bytes": 54,
     "old_hex": "f800d6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6ba94b2f800d6ba",
-    "new_hex": "fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff800f800ffff"
+    "new_hex": "3166bdf7ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffc63839e7f800f800bdf7"
    },
    {
-    "file_offset": "0xb5e5d4",
-    "bytes": 6,
-    "old_hex": "d6baf800d6ba",
-    "new_hex": "f800f800ffff"
+    "file_offset": "0xb5e5d2",
+    "bytes": 12,
+    "old_hex": "ffffd6baf800d6bafffff800",
+    "new_hex": "dedbf800f800ffffffff52aa"
    },
    {
-    "file_offset": "0xb5e604",
-    "bytes": 10,
-    "old_hex": "f800ffffd6baf800d6ba",
-    "new_hex": "fffffffff800f800ffff"
+    "file_offset": "0xb5e602",
+    "bytes": 12,
+    "old_hex": "f800f800ffffd6baf800d6ba",
+    "new_hex": "4208ffffffff3186f800ffff"
    },
    {
     "file_offset": "0xb5e638",
     "bytes": 10,
     "old_hex": "f800ffffd6baf800d6ba",
-    "new_hex": "fffffffff800f800ffff"
+    "new_hex": "df1bffff31a6f800ffff"
    },
    {
     "file_offset": "0xb5e66c",
     "bytes": 10,
     "old_hex": "f800fffff7bedefbd6ba",
-    "new_hex": "ffffffffffffffffffff"
+    "new_hex": "df1bffffffffd6baffff"
    },
    {
     "file_offset": "0xb5e6a0",
     "bytes": 10,
     "old_hex": "f800fffff7bedefbd6ba",
-    "new_hex": "ffffffffffffffffffff"
+    "new_hex": "df1bffffffffffffffff"
    },
    {
     "file_offset": "0xb5e6d4",
     "bytes": 10,
     "old_hex": "f800fffff7bedefbd6ba",
-    "new_hex": "ffffffffffffffffffff"
+    "new_hex": "df1bffffffffffffffff"
    },
    {
     "file_offset": "0xb5e708",
     "bytes": 10,
     "old_hex": "f800fffff7bedefbd6ba",
-    "new_hex": "ffffffffffffffffffff"
+    "new_hex": "df1bffffffffffffffff"
    },
    {
     "file_offset": "0xb5e73c",
     "bytes": 10,
     "old_hex": "f800fffff7bedefbd6ba",
-    "new_hex": "ffffffffffffffffffff"
+    "new_hex": "df1bffffffffffffffff"
    },
    {
     "file_offset": "0xb5e770",
     "bytes": 10,
     "old_hex": "f800fffff7bedefbd6ba",
-    "new_hex": "ffffffffffffffffffff"
+    "new_hex": "df1bffffffffe75cffff"
    },
    {
     "file_offset": "0xb5e7a4",
-    "bytes": 10,
-    "old_hex": "f800ffffd6baf800d6ba",
-    "new_hex": "fffffffff800f800ffff"
+    "bytes": 14,
+    "old_hex": "f800ffffd6baf800d6bafffff800",
+    "new_hex": "df1bffff4a69f800ffffffff4208"
    },
    {
-    "file_offset": "0xb5e7d8",
-    "bytes": 10,
-    "old_hex": "f800ffffd6baf800d6ba",
-    "new_hex": "fffffffff800f800ffff"
-   },
-   {
-    "file_offset": "0xb5e810",
-    "bytes": 54,
-    "old_hex": "d6baf800f800d6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6ba94b2",
-    "new_hex": "f800f800fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff800"
+    "file_offset": "0xb5e7d6",
+    "bytes": 112,
+    "old_hex": "f800f800ffffd6baf800d6baffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd6baf800f800d6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6bad6ba94b2",
+    "new_hex": "3166ffffffff31a6f800c638ffffffffdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bffffffffdefbf800f80039e7dedbffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffdefb4a49f800"
    },
    {
     "file_offset": "0xb5e848",
     "bytes": 54,
     "old_hex": "f800e73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73cad75f800e73c",
-    "new_hex": "fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff800f800ffff"
+    "new_hex": "3166bdf7ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffc63839e7f800f800bdf7"
    },
    {
-    "file_offset": "0xb5e8ac",
-    "bytes": 6,
-    "old_hex": "e73cf800e73c",
-    "new_hex": "f800f800ffff"
+    "file_offset": "0xb5e8aa",
+    "bytes": 12,
+    "old_hex": "ffffe73cf800e73cfffff800",
+    "new_hex": "dedbf800f800ffffffff52aa"
    },
    {
-    "file_offset": "0xb5e8dc",
-    "bytes": 10,
-    "old_hex": "f800ffffe73cf800e73c",
-    "new_hex": "fffffffff800f800ffff"
+    "file_offset": "0xb5e8da",
+    "bytes": 12,
+    "old_hex": "f800f800ffffe73cf800e73c",
+    "new_hex": "4208ffffffff3186f800ffff"
    },
    {
     "file_offset": "0xb5e910",
     "bytes": 10,
     "old_hex": "f800ffffe73cf800e73c",
-    "new_hex": "fffffffff800f800ffff"
+    "new_hex": "df1bffff31a6f800ffff"
    },
    {
     "file_offset": "0xb5e944",
     "bytes": 10,
     "old_hex": "f800ffffffdfdefbe73c",
-    "new_hex": "ffffffffffffffffffff"
+    "new_hex": "df1bffffffffd6baffff"
    },
    {
     "file_offset": "0xb5e978",
     "bytes": 10,
     "old_hex": "f800ffffffdfdefbe73c",
-    "new_hex": "ffffffffffffffffffff"
+    "new_hex": "df1bffffffffffffffff"
    },
    {
     "file_offset": "0xb5e9ac",
     "bytes": 10,
     "old_hex": "f800ffffffdfdefbe73c",
-    "new_hex": "ffffffffffffffffffff"
+    "new_hex": "df1bffffffffffffffff"
    },
    {
     "file_offset": "0xb5e9e0",
     "bytes": 10,
     "old_hex": "f800ffffffdfdefbe73c",
-    "new_hex": "ffffffffffffffffffff"
+    "new_hex": "df1bffffffffffffffff"
    },
    {
     "file_offset": "0xb5ea14",
     "bytes": 10,
     "old_hex": "f800ffffffdfdefbe73c",
-    "new_hex": "ffffffffffffffffffff"
+    "new_hex": "df1bffffffffffffffff"
    },
    {
     "file_offset": "0xb5ea48",
     "bytes": 10,
     "old_hex": "f800ffffffdfdefbe73c",
-    "new_hex": "ffffffffffffffffffff"
+    "new_hex": "df1bffffffffe75cffff"
    },
    {
     "file_offset": "0xb5ea7c",
-    "bytes": 10,
-    "old_hex": "f800ffffe73cf800e73c",
-    "new_hex": "fffffffff800f800ffff"
+    "bytes": 14,
+    "old_hex": "f800ffffe73cf800e73cfffff800",
+    "new_hex": "df1bffff4a69f800ffffffff4208"
    },
    {
-    "file_offset": "0xb5eab0",
-    "bytes": 10,
-    "old_hex": "f800ffffe73cf800e73c",
-    "new_hex": "fffffffff800f800ffff"
+    "file_offset": "0xb5eaae",
+    "bytes": 112,
+    "old_hex": "f800f800ffffe73cf800e73cffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe73cf800f800e73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73cad75",
+    "new_hex": "3166ffffffff31a6f800c638ffffffffdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bdf1bffffffffdefbf800f80039e7dedbffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffdefb4a49f800"
    },
    {
-    "file_offset": "0xb5eae8",
-    "bytes": 54,
-    "old_hex": "e73cf800f800e73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73ce73cad75",
-    "new_hex": "f800f800fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff800"
+    "file_offset": "0xb72b44",
+    "bytes": 20,
+    "old_hex": "000000000000f800f800f800f800000000000000",
+    "new_hex": "31a600002104f800f800f800f80031a600002104"
+   },
+   {
+    "file_offset": "0xb72b62",
+    "bytes": 2,
+    "old_hex": "f800",
+    "new_hex": "ad55"
+   },
+   {
+    "file_offset": "0xb72b70",
+    "bytes": 12,
+    "old_hex": "f800f800000000000000f800",
+    "new_hex": "ad55f800000000000000ad55"
+   },
+   {
+    "file_offset": "0xb72b88",
+    "bytes": 12,
+    "old_hex": "f800f800000000000000f800",
+    "new_hex": "ad55f800000000000000ad55"
+   },
+   {
+    "file_offset": "0xb72ba0",
+    "bytes": 12,
+    "old_hex": "f800f800000000000000f800",
+    "new_hex": "ad55f800000000000000ad55"
+   },
+   {
+    "file_offset": "0xb72bb8",
+    "bytes": 12,
+    "old_hex": "f800f800000000000000f800",
+    "new_hex": "ad55f800000000000000ad55"
+   },
+   {
+    "file_offset": "0xb72bd0",
+    "bytes": 12,
+    "old_hex": "f800f800000000000000f800",
+    "new_hex": "ad55f800000000000000ad55"
+   },
+   {
+    "file_offset": "0xb72be8",
+    "bytes": 12,
+    "old_hex": "f800f800000000000000f800",
+    "new_hex": "ad55f800000000000000ad55"
+   },
+   {
+    "file_offset": "0xb72c00",
+    "bytes": 12,
+    "old_hex": "f800f800000000000000f800",
+    "new_hex": "ad55f800000000000000ad55"
+   },
+   {
+    "file_offset": "0xb72c18",
+    "bytes": 12,
+    "old_hex": "f800f800000000000000f800",
+    "new_hex": "ad55f800000000000000ad55"
+   },
+   {
+    "file_offset": "0xb72c30",
+    "bytes": 12,
+    "old_hex": "f800f800000000000000f800",
+    "new_hex": "ad55f800000000000000ad55"
+   },
+   {
+    "file_offset": "0xb72c48",
+    "bytes": 24,
+    "old_hex": "f800f800000000000000f800f800f800f800000000000000",
+    "new_hex": "ad55f800210400001082f800f800f800f800210400001082"
+   },
+   {
+    "file_offset": "0xb72c66",
+    "bytes": 4,
+    "old_hex": "00000000",
+    "new_hex": "18c39492"
+   },
+   {
+    "file_offset": "0xb72c82",
+    "bytes": 2,
+    "old_hex": "0000",
+    "new_hex": "528a"
+   },
+   {
+    "file_offset": "0xb72c9c",
+    "bytes": 4,
+    "old_hex": "00000000",
+    "new_hex": "18c39492"
+   },
+   {
+    "file_offset": "0xb72cb8",
+    "bytes": 2,
+    "old_hex": "0000",
+    "new_hex": "528a"
+   },
+   {
+    "file_offset": "0xb72cd2",
+    "bytes": 4,
+    "old_hex": "00000000",
+    "new_hex": "18c39492"
+   },
+   {
+    "file_offset": "0xb72cee",
+    "bytes": 2,
+    "old_hex": "0000",
+    "new_hex": "528a"
+   },
+   {
+    "file_offset": "0xb72d06",
+    "bytes": 4,
+    "old_hex": "0000f800",
+    "new_hex": "39c7ad75"
+   },
+   {
+    "file_offset": "0xb72d1a",
+    "bytes": 4,
+    "old_hex": "00000000",
+    "new_hex": "08617bcf"
+   },
+   {
+    "file_offset": "0xb72d30",
+    "bytes": 4,
+    "old_hex": "0000f800",
+    "new_hex": "39c7ad75"
+   },
+   {
+    "file_offset": "0xb72d44",
+    "bytes": 4,
+    "old_hex": "00000000",
+    "new_hex": "08617bcf"
+   },
+   {
+    "file_offset": "0xb72d5a",
+    "bytes": 4,
+    "old_hex": "0000f800",
+    "new_hex": "39c7ad75"
+   },
+   {
+    "file_offset": "0xb72d6e",
+    "bytes": 4,
+    "old_hex": "00000000",
+    "new_hex": "08617bcf"
    },
    {
     "file_offset": "0xb96682",
@@ -2568,75 +2670,75 @@
    },
    {
     "file_offset": "0xb966c8",
-    "bytes": 120,
-    "old_hex": "3186b5964a69294529452945294529452945294529454a69ad75318629452945294529452965b5b6296529452945294529452945294529452945294529452965b59629652945294529458c51422829452945294529452945294529452945294529452945294542288c512945294539c7a514294529452945",
-    "new_hex": "2945294529452945ffffffffffffffffffff294529452945294529452945294529452945294529452945ffffffffffffffffffffffffffffffffffff294529452945294529452945294529452945ffffffffffffffffffff2945ffffffffffffffffffff2945294529452945294529452945ffffffffffff"
+    "bytes": 122,
+    "old_hex": "3186b5964a69294529452945294529452945294529454a69ad75318629452945294529452965b5b6296529452945294529452945294529452945294529452965b59629652945294529458c51422829452945294529452945294529452945294529452945294542288c512945294539c7a5142945294529452945",
+    "new_hex": "2945294529458430ce79ffffffffffffce798430294529452945294529452945294529452945294562ece71cffffffffffffffffffffffffffffe71c62ec29452945294529452945294529456b4dffffffffffffdedb9cf384309cf3dedbffffffffffff6b4d2945294529452945294539e7ef9dffffffff7bcf"
    },
    {
-    "file_offset": "0xb9674e",
+    "file_offset": "0xb9674c",
+    "bytes": 26,
+    "old_hex": "29452945294529452945a51439c729457bef528a294529452945",
+    "new_hex": "7bcfffffffffef9d39e72945294529452945ad55ffffffff632c"
+   },
+   {
+    "file_offset": "0xb96774",
     "bytes": 22,
-    "old_hex": "2945294529452945a51439c729457bef528a29452945",
-    "new_hex": "ffffffffffff29452945294529452945ffffffffffff"
-   },
-   {
-    "file_offset": "0xb96776",
-    "bytes": 20,
-    "old_hex": "294529452945528ad6ba2945bdf7296529452945",
-    "new_hex": "ffffffffffff2945294529452945ffffffffffff"
+    "old_hex": "2945294529452945528ad6ba2945bdf7296529452945",
+    "new_hex": "632cffffffffad552945294529452945ffffffffb5b6"
    },
    {
     "file_offset": "0xb9679c",
-    "bytes": 18,
-    "old_hex": "2945294529452965f7be2945d69a29452945",
-    "new_hex": "ffffffffffff2945294529452945ffffffff"
+    "bytes": 20,
+    "old_hex": "2945294529452965f7be2945d69a294529452945",
+    "new_hex": "b5b6ffffffff2945294529455acbffffffff6b6d"
    },
    {
-    "file_offset": "0xb967c4",
-    "bytes": 20,
-    "old_hex": "2945294539c7ffff2945ce5929458410d69aa534",
-    "new_hex": "ffffffff294529452945ffffffffffff29452945"
+    "file_offset": "0xb967c2",
+    "bytes": 22,
+    "old_hex": "29452945294539c7ffff2945ce5929458410d69aa534",
+    "new_hex": "6b6dffffffff62ec29452945d69affffffff6b6d2945"
    },
    {
     "file_offset": "0xb967e8",
     "bytes": 24,
     "old_hex": "c638d69a5aeb4a69ffff2945c638ad75ffffffffd69a31a6",
-    "new_hex": "2945ffffffffffff29452945ffffffffffffffff29452945"
+    "new_hex": "5acbffffffffe73c29452945ffffffffffff94b229452945"
    },
    {
     "file_offset": "0xb9680c",
     "bytes": 26,
     "old_hex": "6b4dffffffffffffb596ffdf2945b596ef7dffffffffffff52aa",
-    "new_hex": "29452945ffffffffffff29452945ffffffffffffffff29452945"
+    "new_hex": "29457bcfffffffffffff42282945ffffffffffff94b229452945"
    },
    {
     "file_offset": "0xb96832",
     "bytes": 26,
     "old_hex": "8c71ffffffffffffef7df79e29458c51ffffffffffffffff6b4d",
-    "new_hex": "29452945ffffffffffff29452945ffffffffffffffff29452945"
+    "new_hex": "29457bcfffffffffffff42282945ffffffffffff94b229452945"
    },
    {
     "file_offset": "0xb96858",
     "bytes": 26,
     "old_hex": "a534ffffffffffffffdfd69a29454a69ffffffffffffffff8c51",
-    "new_hex": "29452945ffffffffffff29452945ffffffffffffffff29452945"
+    "new_hex": "29457bcfffffffffffff42282945ffffffffffff94b229452945"
    },
    {
     "file_offset": "0xb9687e",
     "bytes": 26,
     "old_hex": "c618ffffffffffffffdf738e294539e7f79effffffffffffad75",
-    "new_hex": "29452945ffffffffffff29452945ffffffffffff294529452945"
+    "new_hex": "29457bcfffffffffffff42282945ffffffffffff8c7129452945"
    },
    {
     "file_offset": "0xb968a4",
     "bytes": 26,
     "old_hex": "d69affffffffffffad75294529452945dedbffffffffffffce59",
-    "new_hex": "29452945ffffffffffff294529452945ffffffff294529452945"
+    "new_hex": "2945738effffffffffff39e729457befdf1bc63839c729452945"
    },
    {
     "file_offset": "0xb968ca",
     "bytes": 26,
     "old_hex": "d69affffffffffff738e2945294529459cd3ef5dffffffffd69a",
-    "new_hex": "29452945ffffffff294529452945294529452945294529452945"
+    "new_hex": "29452945b5b6e71c949229452945294529452945294529452945"
    },
    {
     "file_offset": "0xb968f0",
@@ -2651,88 +2753,40 @@
     "new_hex": "2945294529452945"
    },
    {
-    "file_offset": "0xb96944",
-    "bytes": 26,
-    "old_hex": "29452945294529452945294529452945294529452945ffffffff",
-    "new_hex": "ffffffffffffffffffffffffffffffff29452945294529452945"
+    "file_offset": "0xb96942",
+    "bytes": 60,
+    "old_hex": "294529452945294529452945294529452945294529452945ffffffffffffffffffffffffffffffdfffdff7beffff294529452945ffdf294529452945",
+    "new_hex": "5acbc638c658c658c658c658c658c658c6586b4d2945294529452945c638ffffd69ac658c658c658c658ce59ffffdf1b2945294529452945c658d69a"
    },
    {
-    "file_offset": "0xb96968",
-    "bytes": 22,
-    "old_hex": "ffdfffdff7beffff294529452945ffdf294529452945",
-    "new_hex": "ffffffffffffffffffff2945294529452945ffffffff"
-   },
-   {
-    "file_offset": "0xb96992",
-    "bytes": 8,
-    "old_hex": "ffff294529452945",
-    "new_hex": "29452945ffffffff"
+    "file_offset": "0xb9698a",
+    "bytes": 16,
+    "old_hex": "ffffffff29452945ffff294529452945",
+    "new_hex": "b5b6e71c2945294529452945c658c658"
    },
    {
     "file_offset": "0xb969a6",
-    "bytes": 16,
-    "old_hex": "2965ffffffff2945ffff294529452945",
-    "new_hex": "ffffffff2945294529452945ffffffff"
-   },
-   {
-    "file_offset": "0xb969c2",
-    "bytes": 344,
-    "old_hex": "31862945ffffffdfffff29452965ffdf420829452945294529454208dedb29452945f7beffff2945294531a6ffff2945294529452965ffff4a6929452945ffdfffff29452945294539c7ffff294531a6ffdf3186294529452945ffdfffff29452945294529454a69f7beffdf31a62945294529452945f7beffff29452945294529452945f7bef79e29452945294529452945f7beffdf29452945294529457bcff7beef5d39c72945294529452945f7beffdf2945294529454a49f79e29652945ffff2965294529452945f7beffff2945294552aaf7be39c72945294531a6ffff294529452945f7beffff29452965ffdf318629452945294529454228e73c31862945f7beffff294529452945294529452945294529452945420829452945f7beffdf294529452945294529452945294529452945294529452945f7beffffffdfffdfffdfffdfffdfffdfffdfffdfffdff7bef7bef7beffff",
-    "new_hex": "ffffffff2945294529452945ffffffffffffffff29452945ffffffffffffffff2945294529452945ffffffff2945ffffffffffffffff2945ffffffff2945294529452945ffffffff29452945ffffffff29452945ffffffff2945294529452945ffffffff29452945ffffffff29452945ffffffff2945294529452945ffffffff2945ffffffffffffffff2945ffffffff2945294529452945ffffffffffffffff29452945ffffffffffffffff2945294529452945ffffffff294529452945294529452945ffffffff2945294529452945ffffffff294529452945294529452945ffffffff2945294529452945ffffffff294529452945294529452945ffffffff2945294529452945ffffffffffffffffffffffffffffffffffffffff29452945294529452945ffffffffffffffffffffffffffffffff29452945294529452945294529452945294529452945294529452945294529452945"
+    "bytes": 372,
+    "old_hex": "2965ffffffff2945ffff29452945294529452945294529452945294531862945ffffffdfffff29452965ffdf420829452945294529454208dedb29452945f7beffff2945294531a6ffff2945294529452965ffff4a6929452945ffdfffff29452945294539c7ffff294531a6ffdf3186294529452945ffdfffff29452945294529454a69f7beffdf31a62945294529452945f7beffff29452945294529452945f7bef79e29452945294529452945f7beffdf29452945294529457bcff7beef5d39c72945294529452945f7beffdf2945294529454a49f79e29652945ffff2965294529452945f7beffff2945294552aaf7be39c72945294531a6ffff294529452945f7beffff29452965ffdf318629452945294529454228e73c31862945f7beffff294529452945294529452945294529452945420829452945f7beffdf294529452945294529452945294529452945294529452945f7beffffffdfffdfffdfffdfffdfffdfffdfffdfffdff7bef7bef7beffff",
+    "new_hex": "ad75e71c2945294529452945c658c65829454a49294529454a292945ad75e71c2945294529452945c658c658a514ffff52aa52aaffffa534ad75e71c2945294529452945c658c6585acbffffe71ce71cffff5acbad75e71c2945294529452945c658c65829458430ffffffff84302945ad75e71c2945294529452945c658c65829458430ffffffff84302945ad75e71c2945294529452945c658c6585acbffffe71ce71cffff5acbad75e71c2945294529452945c658c658a514ffff52aa52aaffffa534ad75e71c2945294529452945c658c65829454a49294529454a292945ad75e71c2945294529452945c658c658294529452945294529452945ad75e71c2945294529452945c658ce59294529452945294529452945b5b6e71c2945294529452945c658ffffb5b6ad75ad75ad75ad75b5b6ffffe71c29452945294529456b4ddf1be71ce71ce71ce71ce71ce71ce71c84102945294529452945294529452945294529452945294529452945294529452945"
    },
    {
     "file_offset": "0xb96b36",
-    "bytes": 32,
-    "old_hex": "21042104210421042104210421042104210421042104210429452945ffffffff",
-    "new_hex": "294529452945ffffffffffffffffffffffff2945294529452945294529452945"
+    "bytes": 34,
+    "old_hex": "21042104210421042104210421042104210421042104210429452945ffffffffffff",
+    "new_hex": "294529455acbc638c658c658c658c658b5b62945294529452945294529452945c638"
    },
    {
-    "file_offset": "0xb96b66",
-    "bytes": 262,
-    "old_hex": "ffff210421042945ffff210421042104210421042104210421042104ffffffff21042104ffff2104294529452945294529452945294521042104ffffffff2104ffff21242945294529452945294529452945294521242124ffffffffffff212429452945294529452945294529452945294521242124ffffffff212421242124212421242124212421242124212421242124ffffffff2124ffffffffffffffffffffffffffffffffffffffff2124ffffffff2124ffffffffffffffff8c714228ffffffffffffffff2124ffffffff2124ffffffffffff6b6d21043186ffffffffffffffff2124ffffffff2124ffffffffffffe71c6b6d3186ffffffffffffffff2124ffffffff",
-    "new_hex": "294529452945294529452945ffffffffffffffffffffffffffffffffffff29452945294529452945ffffffffffffffffffffffffffffffffffffffff2945294529452945ffffffffffffffffffffffffffffffffffffffff2945294529452945ffffffffffffffff29452945ffffffffffffffff2945294529452945ffffffffffff294529452945ffffffffffffffff2945294529452945ffffffffffffffff29452945ffffffffffffffff2945294529452945ffffffffffffffff29452945ffffffffffffffff2945294529452945ffffffffffffffff29452945ffffffffffffffff2945294529452945ffffffffffffffff29452945ffffffffffffffff294529452945"
+    "file_offset": "0xb96b64",
+    "bytes": 352,
+    "old_hex": "ffffffff210421042945ffff210421042104210421042104210421042104ffffffff21042104ffff2104294529452945294529452945294521042104ffffffff2104ffff21242945294529452945294529452945294521242124ffffffffffff212429452945294529452945294529452945294521242124ffffffff212421242124212421242124212421242124212421242124ffffffff2124ffffffffffffffffffffffffffffffffffffffff2124ffffffff2124ffffffffffffffff8c714228ffffffffffffffff2124ffffffff2124ffffffffffff6b6d21043186ffffffffffffffff2124ffffffff2124ffffffffffffe71c6b6d3186ffffffffffffffff2124ffffffff2945ffffffffffffffff6b6d3186ffffffffffffffff2945ffffffff2945ffffffffffffffff6b6d3186ffffffffffffffff2945ffffffff2945ffffffffffffffff8c714228ffffffffffffffff2945ffffffff2965ffff",
+    "new_hex": "ce59294529452945294529452945c658ffffffffffffffffffffffffffffce5929452945294529452945c658ffffffffffffffffffffffffffffffffc6182945294529452945c658ffffffffffffbdd7c638ffffffffffffe71c2945294529452945c658ffffffff94b229452945ffffffffffffe71c2945294529452945c658ffffe73c4a6929452945ffffffffffffe71c2945294529452945c658ffffffffffff62ec2945ffffffffffffe71c2945294529452945c658ffffffffffff62ec2945ffffffffffffe71c2945294529452945c658ffffffffffff62ec2945ffffffffffffe71c2945294529452945c658ffffffffffff62ec2945ffffffffffffe71c2945294529452945c658ffffffffffffc658b5b6ffffffffffffe71c2945294529452945c658ffffffffffffffffffffffffffffffffe71c2945294529452945c658ffffffffffffffffffffffffffffffffe71c2945294529452945c658"
    },
    {
-    "file_offset": "0xb96c76",
-    "bytes": 4,
-    "old_hex": "6b6d3186",
-    "new_hex": "ffffffff"
-   },
-   {
-    "file_offset": "0xb96c84",
-    "bytes": 4,
-    "old_hex": "ffffffff",
-    "new_hex": "29452945"
-   },
-   {
-    "file_offset": "0xb96c92",
-    "bytes": 4,
-    "old_hex": "6b6d3186",
-    "new_hex": "ffffffff"
-   },
-   {
-    "file_offset": "0xb96ca0",
-    "bytes": 4,
-    "old_hex": "ffffffff",
-    "new_hex": "29452945"
-   },
-   {
-    "file_offset": "0xb96cae",
-    "bytes": 4,
-    "old_hex": "8c714228",
-    "new_hex": "ffffffff"
-   },
-   {
-    "file_offset": "0xb96cbc",
-    "bytes": 6,
-    "old_hex": "ffffffff2965",
-    "new_hex": "294529452945"
-   },
-   {
-    "file_offset": "0xb96cd6",
-    "bytes": 60,
-    "old_hex": "2965ffffffff296529652965296529652965296529652965296529652965ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
-    "new_hex": "29452945294529452945ffffffffffffffffffffffffffffffff29452945294529452945294529452945294529452945294529452945294529452945"
+    "file_offset": "0xb96cd4",
+    "bytes": 62,
+    "old_hex": "ffff2965ffffffff296529652965296529652965296529652965296529652965ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+    "new_hex": "e71c29452945294529456b4ddf1be71ce71ce71ce71ce71ce71ce71c84102945294529452945294529452945294529452945294529452945294529452945"
    },
    {
     "file_offset": "0xb96fa4",
@@ -2744,13 +2798,13 @@
     "file_offset": "0xb96fc4",
     "bytes": 24,
     "old_hex": "5aebffdff7be949242082945294539e79492f7beffdf5aeb",
-    "new_hex": "29452945294529452945ffffffff29452945294529452945"
+    "new_hex": "29452945294539c76b6d94b294b26b6d39c7294529452945"
    },
    {
     "file_offset": "0xb96fe6",
     "bytes": 530,
     "old_hex": "8410ffff7bcf294529452945ffff29452945294529457bcfffff8410294529452945632cffff39e72945294529452945ffff2945294529452945294539e7ffff632c29452945ffdf7bcf29452945294529452945ffff2945294529452945294529457bcfffdf29457befffdf294529452945294529452945ffff2945294529452945294529452945ffdf7befdefb94b2294529452945294529452945ffff29452945294529452945294529459cd3defbffff4a69294529452945294529452945ffff29452945294529452945294529454a69ffffffff2945294529452945294529452945ffff29452945294529452945294529452945ffffffff29452945294529452945294518e32945ffffffffffffffffffff294529452945ffffffff528a21042104210429452945210429452104210429452945210421042104528affffdefb9cf3212421242124294529452945294529452124212421242124212421249cf3defb8c51ffdf29452945294529452945294529452945294529452945294529452945ffdf8c512945ffdf8c512945294529452945294529452965294529452945296529458c51ffdf294529457bcfffff52aa31862965318629452945294529453186318629655acbffff7bcf29453186294594b2ffff8c71318631a63186318631863186318631868c71ffff94b2318629452945294531a67befffffffdfa534632c39c739c7632cad55ffdfffdf7bef",
-    "new_hex": "294529452945ffffffffffffffffffffffffffffffff294529452945294529452945294529452945ffffffffffffffffffffffffffffffffffffffff2945294529452945294529452945ffffffffffffffffffff29452945ffffffffffffffffffff29452945294529452945ffffffffffffffffffffffff29452945ffffffffffffffffffffffff2945294529452945ffffffffffffffffffffffff29452945ffffffffffffffffffffffff2945294529452945ffffffffffffffffffffffff29452945ffffffffffffffffffffffff294529452945ffffffffffffffffffffffffffff29452945ffffffffffffffffffffffffffff29452945ffffffffffffffffffffffffffff2945294529452945ffffffffffffffffffff294529452945ffffffffffffffffffffffffffffffff294529452945ffffffffffff2945294529452945ffffffffffffffffffffffffffffffffffff29452945ffffffffffff2945294529452945ffffffffffffffffffffffffffffffffffffffffffffffffffffffff29452945294529452945ffffffffffffffffffffffffffffffffffffffffffffffff2945294529452945294529452945ffffffffffffffffffffffffffffffffffffffff294529452945294529452945294529452945ffffffffffffffffffffffffffffffff2945294529452945294529452945294529452945294529452945ffffffff29452945294529452945"
+    "new_hex": "2945294539c7ad75ffffffffffffffffffffffffad7539c729452945294529452945294529454a49e73cffffffffffffffffffffffffffffffffe73c4a492945294529452945294539c7e73cffffffffffffffff528a528affffffffffffffffe73c39c72945294529452945ad75ffffffffffffffffffff29452945ffffffffffffffffffffad7529452945294539c7ffffffffffffffffffffffff29452945ffffffffffffffffffffffff39c7294529456b6dffffffffffffffffffffffff29452945ffffffffffffffffffffffff6b6d2945294594b2ffffffffffffffffffffffff29452945d69affffffffffffffffffff94b22945294594b2ffffffffffffffffffffffff5aab294529458c51ffffffffffffffff94b2294529456b6dffffffffffffffffffffffffffff94b2294529454a49e71cffffffff6b6d2945294539c7ffffffffffffffffffffffffffffffffdefb5aab2945c638ffffffff39c7294529452945ad75ffffffffffffffffffffffffffffffffffffef5dffffffffad75294529452945294539c7e73cffffffffffffffffffffffffffffffffffffffffe73c39c7294529452945294529454a49e73cffffffffffffffffffffffffffffffffe73c4a49294529452945294529452945294539c7ad75ffffffffffffffffffffffffad7539c7294529452945294529452945294529452945294539c76b6d94b294b26b6d39c7294529452945"
    },
    {
     "file_offset": "0xb97208",
@@ -2759,10 +2813,46 @@
     "new_hex": "29452945294529452945294529452945"
    },
    {
+    "file_offset": "0xc0a3a2",
+    "bytes": 4,
+    "old_hex": "f8000000",
+    "new_hex": "ce5918c3"
+   },
+   {
+    "file_offset": "0xc0a3b0",
+    "bytes": 2,
+    "old_hex": "0000",
+    "new_hex": "b5b6"
+   },
+   {
+    "file_offset": "0xc0a3be",
+    "bytes": 2,
+    "old_hex": "0000",
+    "new_hex": "9cf3"
+   },
+   {
+    "file_offset": "0xc0a448",
+    "bytes": 8,
+    "old_hex": "f800f800f8000000",
+    "new_hex": "defbdefbdefb7bef"
+   },
+   {
+    "file_offset": "0xc0a460",
+    "bytes": 2,
+    "old_hex": "0000",
+    "new_hex": "9cd3"
+   },
+   {
+    "file_offset": "0xc0a472",
+    "bytes": 2,
+    "old_hex": "f800",
+    "new_hex": "b596"
+   },
+   {
     "file_offset": "0xc4ba94",
     "bytes": 284,
     "old_hex": "000000000000ffffffffffffffff000000000000ffffffff000000000000ffffffffffffffff000000000000ffffffff000000000000ffffffffffffffff000000000000ffffffff000000000000ffffffffffffffff000000000000ffffffff000000000000ffffffffffffffff000000000000ffffffff000000000000ffffffffffffffff000000000000ffffffff000000000000ffffffffffffffff000000000000ffffffff000000000000ffffffffffffffff000000000000ffffffff000000000000ffffffffffffffff000000000000ffffffff000000000000ffffffffffffffff000000000000ffffffff000000000000ffffffffffffffff000000000000ffffffff000000000000ffffffffffffffff000000000000",
-    "new_hex": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff00000000ffffffff000000000000ffffffffffffffff000000000000ffffffff000000000000ffffffffffffffff000000000000ffffffff000000000000ffffffffffffffff000000000000ffffffff000000000000ffffffffffffffff000000000000ffffffff000000000000ffffffffffffffff000000000000ffffffff000000000000ffffffffffffffff000000000000ffffffff000000000000ffffffffffffffffffff00000000ffffffff000000000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+    "new_hex": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffa534c638ffffffffd69aa514ffffffffffffffffffff8c7100000000ef5dffff10820000738effffffffffffffff7bef00000000defbffff00000000630cffffffffffffffff7bef00000000defbffff00000000630cffffffffffffffff7bef00000000defbffff00000000630cffffffffffffffff7bef00000000defbffff00000000630cffffffffffffffff7bef00000000defbffff00000000630cffffffffffffffff7bef00000000defbffff00000000630cffffffffffffffff843000000000e73cffff000000006b4dffffffffffffffffffff8430ad55ffffffffbdd78410e73cffffffffffffffffffffffffffffffffffffffffffffffffffff"
    },
    {
     "file_offset": "0xc4bbb6",
@@ -2774,37 +2864,37 @@
     "file_offset": "0xc4bbce",
     "bytes": 8,
     "old_hex": "212421244208bdf7",
-    "new_hex": "ffffffffffffffff"
+    "new_hex": "ffffce79ffffffff"
    },
    {
     "file_offset": "0xc4bbe6",
     "bytes": 12,
     "old_hex": "21242124212421247bcff79e",
-    "new_hex": "ffff00000000ffffffffffff"
+    "new_hex": "ffff630c4208defbffffffff"
    },
    {
     "file_offset": "0xc4bbfe",
     "bytes": 14,
     "old_hex": "2124212421242124212439e7bdd7",
-    "new_hex": "ffff000000000000ffffffffffff"
+    "new_hex": "ffff630c000000009492ffffffff"
    },
    {
     "file_offset": "0xc4bc16",
     "bytes": 110,
     "old_hex": "21242124212421242124212421246b4def7dffffffffffff21242124212421242124212421242124528affffffffffff212421242124212421242124212421244a69ffffffffffff21242124212421242124212429457befef7dffffffffffff2124212421242124212439e7c618",
-    "new_hex": "ffff00000000000000000000ffffffffffffffffffffffffffff000000000000000000000000ffffffffffffffffffffffff0000000000000000000000000000ffffffffffffffffffff00000000000000000000ffffffffffffffffffffffffffff0000000000000000ffffffff"
+    "new_hex": "ffff630c0000000000004208defbffffffffffffffffffffffff630c000000000000000000009492ffffffffffffffffffff630c00000000000000000000738effffffffffffffffffff630c0000000000003186c638ffffffffffffffffffffffff630c000000007befffffffff"
    },
    {
     "file_offset": "0xc4bc8e",
     "bytes": 12,
     "old_hex": "21242124212429458430f79e",
-    "new_hex": "ffff00000000ffffffffffff"
+    "new_hex": "ffff630c39c7d6baffffffff"
    },
    {
     "file_offset": "0xc4bca6",
     "bytes": 8,
     "old_hex": "212421244228ce59",
-    "new_hex": "ffffffffffffffff"
+    "new_hex": "ffffce59ffffffff"
    },
    {
     "file_offset": "0xc4bcbe",
@@ -2814,303 +2904,687 @@
    },
    {
     "file_offset": "0xc4bcd4",
-    "bytes": 166,
-    "old_hex": "8c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c70c635ffffffff8c70212421242124212421242124212421242124212421242124212421242124212421242124212421242124212421248c70ffffffff8c702124ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff21248c70ffffffff8c702124ffff",
-    "new_hex": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000ffffffffffff000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000ffffffffffff00000000"
+    "bytes": 168,
+    "old_hex": "8c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c70c635ffffffff8c70212421242124212421242124212421242124212421242124212421242124212421242124212421242124212421248c70ffffffff8c702124ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff21248c70ffffffff8c702124ffffffff",
+    "new_hex": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe73c4a49000000000000000000000000000000000000000000000000000000000000000000000000000000004208d6baffffffffffff4a4900000000000000000000000000000000000000000000000000000000000000000000000000000000000000002945ffffffffffff00000000bdd7"
    },
    {
-    "file_offset": "0xc4bda2",
-    "bytes": 14,
-    "old_hex": "21248c70ffffffff8c702124ffff",
-    "new_hex": "00000000ffffffffffff00000000"
+    "file_offset": "0xc4bda0",
+    "bytes": 16,
+    "old_hex": "ffff21248c70ffffffff8c702124ffff",
+    "new_hex": "d69a00000000e71cffffffff00000000"
    },
    {
     "file_offset": "0xc4bdd8",
     "bytes": 14,
     "old_hex": "21248c70212421248c702124ffff",
-    "new_hex": "0000000000000000ffff00000000"
+    "new_hex": "2104000000002965ffff00000000"
    },
    {
     "file_offset": "0xc4be0e",
     "bytes": 14,
     "old_hex": "21248c70212421248c702124ffff",
-    "new_hex": "0000000000000000ffff00000000"
+    "new_hex": "2104000000000000ffff00000000"
    },
    {
     "file_offset": "0xc4be44",
     "bytes": 14,
     "old_hex": "21248c70212421248c702124ffff",
-    "new_hex": "0000000000000000ffff00000000"
+    "new_hex": "2104000000000000ffff00000000"
    },
    {
     "file_offset": "0xc4be7a",
     "bytes": 14,
     "old_hex": "21248c70212421248c702124ffff",
-    "new_hex": "0000000000000000ffff00000000"
+    "new_hex": "2104000000000000ffff00000000"
    },
    {
     "file_offset": "0xc4beb0",
     "bytes": 14,
     "old_hex": "21248c70212421248c702124ffff",
-    "new_hex": "0000000000000000ffff00000000"
+    "new_hex": "2104000000000000ffff00000000"
    },
    {
     "file_offset": "0xc4bee6",
-    "bytes": 14,
-    "old_hex": "21248c70212421248c702124ffff",
-    "new_hex": "0000000000000000ffff00000000"
+    "bytes": 16,
+    "old_hex": "21248c70212421248c702124ffffffff",
+    "new_hex": "21040000000018c3ffff00000000d69a"
    },
    {
-    "file_offset": "0xc4bf1c",
-    "bytes": 166,
-    "old_hex": "21248c70ffffffff8c702124ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff21248c70ffffffff8c70212421242124212421242124212421242124212421242124212421242124212421242124212421242124212421248c70ffffffffffff8c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c70c635",
-    "new_hex": "00000000ffffffffffff000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000ffffffffffff000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+    "file_offset": "0xc4bf1a",
+    "bytes": 168,
+    "old_hex": "ffff21248c70ffffffff8c702124ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff21248c70ffffffff8c70212421242124212421242124212421242124212421242124212421242124212421242124212421242124212421248c70ffffffffffff8c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c70c635",
+    "new_hex": "e73c00000000c618ffffffff420800000000210421042104210421042104210421042104210421042104210421042104210421042104000000002124ffffffffffffd6ba2945000000000000000000000000000000000000000000000000000000000000000000000000000000002124ce59ffffffffffffffffffffe71cdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbffffffff"
    },
    {
     "file_offset": "0xc4bfc8",
-    "bytes": 166,
-    "old_hex": "8c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c70c635ffffffff8c70212421242124212421242124212421242124212421242124212421242124212421242124212421242124212421248c70ffffffff8c702124ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff21248c70ffffffff8c702124ffff",
-    "new_hex": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000ffffffffffff000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000ffffffffffff00000000"
+    "bytes": 168,
+    "old_hex": "8c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c70c635ffffffff8c70212421242124212421242124212421242124212421242124212421242124212421242124212421242124212421248c70ffffffff8c702124ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff21248c70ffffffff8c702124ffff368b",
+    "new_hex": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe73c4a49000000000000000000000000000000000000000000000000000000000000000000000000000000004208d6baffffffffffff4a4900000000000000000000000000000000000000000000000000000000000000000000000000000000000000002945ffffffffffff0000000024c8"
    },
    {
-    "file_offset": "0xc4c096",
-    "bytes": 14,
-    "old_hex": "21248c70ffffffff8c702124ffff",
-    "new_hex": "00000000ffffffffffff00000000"
+    "file_offset": "0xc4c094",
+    "bytes": 16,
+    "old_hex": "ffff21248c70ffffffff8c702124ffff",
+    "new_hex": "d69a00000000e71cffffffff00000000"
    },
    {
     "file_offset": "0xc4c0cc",
     "bytes": 14,
     "old_hex": "21248c70212421248c702124ffff",
-    "new_hex": "0000000000000000ffff00000000"
+    "new_hex": "2104000000002965ffff00000000"
    },
    {
     "file_offset": "0xc4c102",
     "bytes": 14,
     "old_hex": "21248c70212421248c702124ffff",
-    "new_hex": "0000000000000000ffff00000000"
+    "new_hex": "2104000000000000ffff00000000"
    },
    {
     "file_offset": "0xc4c138",
     "bytes": 14,
     "old_hex": "21248c70212421248c702124ffff",
-    "new_hex": "0000000000000000ffff00000000"
+    "new_hex": "2104000000000000ffff00000000"
    },
    {
     "file_offset": "0xc4c16e",
     "bytes": 14,
     "old_hex": "21248c70212421248c702124ffff",
-    "new_hex": "0000000000000000ffff00000000"
+    "new_hex": "2104000000000000ffff00000000"
    },
    {
     "file_offset": "0xc4c1a4",
     "bytes": 14,
     "old_hex": "21248c70212421248c702124ffff",
-    "new_hex": "0000000000000000ffff00000000"
+    "new_hex": "2104000000000000ffff00000000"
    },
    {
     "file_offset": "0xc4c1da",
-    "bytes": 14,
-    "old_hex": "21248c70212421248c702124ffff",
-    "new_hex": "0000000000000000ffff00000000"
+    "bytes": 16,
+    "old_hex": "21248c70212421248c702124ffff368b",
+    "new_hex": "21040000000018c3ffff000000002d69"
    },
    {
-    "file_offset": "0xc4c210",
-    "bytes": 166,
-    "old_hex": "21248c70ffffffff8c702124ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff21248c70ffffffff8c70212421242124212421242124212421242124212421242124212421242124212421242124212421242124212421248c70ffffffffffff8c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c70c635",
-    "new_hex": "00000000ffffffffffff000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000ffffffffffff000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+    "file_offset": "0xc4c20e",
+    "bytes": 168,
+    "old_hex": "ffff21248c70ffffffff8c702124ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff21248c70ffffffff8c70212421242124212421242124212421242124212421242124212421242124212421242124212421242124212421248c70ffffffffffff8c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c70c635",
+    "new_hex": "e73c00000000c618ffffffff420800000000210421042104210421042104210421042104210421042104210421042104210421042104000000002124ffffffffffffd6ba2945000000000000000000000000000000000000000000000000000000000000000000000000000000002124ce59ffffffffffffffffffffe71cdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbffffffff"
    },
    {
     "file_offset": "0xc4c2bc",
-    "bytes": 166,
-    "old_hex": "8c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c70c635ffffffff8c70212421242124212421242124212421242124212421242124212421242124212421242124212421242124212421248c70ffffffff8c702124ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff21248c70ffffffff8c702124ffff",
-    "new_hex": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000ffffffffffff000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000ffffffffffff00000000"
+    "bytes": 168,
+    "old_hex": "8c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c70c635ffffffff8c70212421242124212421242124212421242124212421242124212421242124212421242124212421242124212421248c70ffffffff8c702124ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff21248c70ffffffff8c702124ffff368b",
+    "new_hex": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe73c4a49000000000000000000000000000000000000000000000000000000000000000000000000000000004208d6baffffffffffff4a4900000000000000000000000000000000000000000000000000000000000000000000000000000000000000002945ffffffffffff0000000024c8"
    },
    {
-    "file_offset": "0xc4c38a",
-    "bytes": 14,
-    "old_hex": "21248c70ffffffff8c702124ffff",
-    "new_hex": "00000000ffffffffffff00000000"
+    "file_offset": "0xc4c388",
+    "bytes": 16,
+    "old_hex": "ffff21248c70ffffffff8c702124ffff",
+    "new_hex": "d69a00000000e71cffffffff00000000"
    },
    {
     "file_offset": "0xc4c3c0",
     "bytes": 14,
     "old_hex": "21248c70212421248c702124ffff",
-    "new_hex": "0000000000000000ffff00000000"
+    "new_hex": "2104000000002965ffff00000000"
    },
    {
     "file_offset": "0xc4c3f6",
     "bytes": 14,
     "old_hex": "21248c70212421248c702124ffff",
-    "new_hex": "0000000000000000ffff00000000"
+    "new_hex": "2104000000000000ffff00000000"
    },
    {
     "file_offset": "0xc4c42c",
     "bytes": 14,
     "old_hex": "21248c70212421248c702124ffff",
-    "new_hex": "0000000000000000ffff00000000"
+    "new_hex": "2104000000000000ffff00000000"
    },
    {
     "file_offset": "0xc4c462",
     "bytes": 14,
     "old_hex": "21248c70212421248c702124ffff",
-    "new_hex": "0000000000000000ffff00000000"
+    "new_hex": "2104000000000000ffff00000000"
    },
    {
     "file_offset": "0xc4c498",
     "bytes": 14,
     "old_hex": "21248c70212421248c702124ffff",
-    "new_hex": "0000000000000000ffff00000000"
+    "new_hex": "2104000000000000ffff00000000"
    },
    {
     "file_offset": "0xc4c4ce",
-    "bytes": 14,
-    "old_hex": "21248c70212421248c702124ffff",
-    "new_hex": "0000000000000000ffff00000000"
+    "bytes": 16,
+    "old_hex": "21248c70212421248c702124ffff368b",
+    "new_hex": "21040000000018c3ffff000000002d69"
    },
    {
-    "file_offset": "0xc4c504",
-    "bytes": 166,
-    "old_hex": "21248c70ffffffff8c702124ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff21248c70ffffffff8c70212421242124212421242124212421242124212421242124212421242124212421242124212421242124212421248c70ffffffffffff8c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c70c635",
-    "new_hex": "00000000ffffffffffff000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000ffffffffffff000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+    "file_offset": "0xc4c502",
+    "bytes": 168,
+    "old_hex": "ffff21248c70ffffffff8c702124ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff21248c70ffffffff8c70212421242124212421242124212421242124212421242124212421242124212421242124212421242124212421248c70ffffffffffff8c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c70c635",
+    "new_hex": "e73c00000000c618ffffffff420800000000210421042104210421042104210421042104210421042104210421042104210421042104000000002124ffffffffffffd6ba2945000000000000000000000000000000000000000000000000000000000000000000000000000000002124ce59ffffffffffffffffffffe71cdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbffffffff"
    },
    {
     "file_offset": "0xc4c5b0",
-    "bytes": 166,
-    "old_hex": "8c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c70c635ffffffff8c70212421242124212421242124212421242124212421242124212421242124212421242124212421242124212421248c70ffffffff8c702124ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff21248c70ffffffff8c702124ffff",
-    "new_hex": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000ffffffffffff000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000ffffffffffff00000000"
+    "bytes": 168,
+    "old_hex": "8c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c70c635ffffffff8c70212421242124212421242124212421242124212421242124212421242124212421242124212421242124212421248c70ffffffff8c702124ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff21248c70ffffffff8c702124ffff368b",
+    "new_hex": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe73c4a49000000000000000000000000000000000000000000000000000000000000000000000000000000004208d6baffffffffffff4a4900000000000000000000000000000000000000000000000000000000000000000000000000000000000000002945ffffffffffff0000000024c8"
    },
    {
-    "file_offset": "0xc4c67e",
-    "bytes": 14,
-    "old_hex": "21248c70ffffffff8c702124ffff",
-    "new_hex": "00000000ffffffffffff00000000"
+    "file_offset": "0xc4c67c",
+    "bytes": 16,
+    "old_hex": "ffff21248c70ffffffff8c702124ffff",
+    "new_hex": "d69a00000000e71cffffffff00000000"
    },
    {
     "file_offset": "0xc4c6b4",
     "bytes": 14,
     "old_hex": "21248c70212421248c702124ffff",
-    "new_hex": "0000000000000000ffff00000000"
+    "new_hex": "2104000000002965ffff00000000"
    },
    {
     "file_offset": "0xc4c6ea",
     "bytes": 14,
     "old_hex": "21248c70212421248c702124ffff",
-    "new_hex": "0000000000000000ffff00000000"
+    "new_hex": "2104000000000000ffff00000000"
    },
    {
     "file_offset": "0xc4c720",
     "bytes": 14,
     "old_hex": "21248c70212421248c702124ffff",
-    "new_hex": "0000000000000000ffff00000000"
+    "new_hex": "2104000000000000ffff00000000"
    },
    {
     "file_offset": "0xc4c756",
     "bytes": 14,
     "old_hex": "21248c70212421248c702124ffff",
-    "new_hex": "0000000000000000ffff00000000"
+    "new_hex": "2104000000000000ffff00000000"
    },
    {
     "file_offset": "0xc4c78c",
     "bytes": 14,
     "old_hex": "21248c70212421248c702124ffff",
-    "new_hex": "0000000000000000ffff00000000"
+    "new_hex": "2104000000000000ffff00000000"
    },
    {
     "file_offset": "0xc4c7c2",
-    "bytes": 14,
-    "old_hex": "21248c70212421248c702124ffff",
-    "new_hex": "0000000000000000ffff00000000"
+    "bytes": 16,
+    "old_hex": "21248c70212421248c702124ffff368b",
+    "new_hex": "21040000000018c3ffff000000002d69"
    },
    {
-    "file_offset": "0xc4c7f8",
-    "bytes": 166,
-    "old_hex": "21248c70ffffffff8c702124ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff21248c70ffffffff8c70212421242124212421242124212421242124212421242124212421242124212421242124212421242124212421248c70ffffffffffff8c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c70c635",
-    "new_hex": "00000000ffffffffffff000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000ffffffffffff000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+    "file_offset": "0xc4c7f6",
+    "bytes": 168,
+    "old_hex": "ffff21248c70ffffffff8c702124ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff21248c70ffffffff8c70212421242124212421242124212421242124212421242124212421242124212421242124212421242124212421248c70ffffffffffff8c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c70c635",
+    "new_hex": "e73c00000000c618ffffffff420800000000210421042104210421042104210421042104210421042104210421042104210421042104000000002124ffffffffffffd6ba2945000000000000000000000000000000000000000000000000000000000000000000000000000000002124ce59ffffffffffffffffffffe71cdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbffffffff"
    },
    {
     "file_offset": "0xc4c8a4",
-    "bytes": 166,
-    "old_hex": "8c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c70c635ffffffff8c70212421242124212421242124212421242124212421242124212421242124212421242124212421242124212421248c70ffffffff8c702124ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff21248c70ffffffff8c702124ffff",
-    "new_hex": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000ffffffffffff000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000ffffffffffff00000000"
+    "bytes": 168,
+    "old_hex": "8c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c70c635ffffffff8c70212421242124212421242124212421242124212421242124212421242124212421242124212421242124212421248c70ffffffff8c702124ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff21248c70ffffffff8c702124ffff368b",
+    "new_hex": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe73c4a49000000000000000000000000000000000000000000000000000000000000000000000000000000004208d6baffffffffffff4a4900000000000000000000000000000000000000000000000000000000000000000000000000000000000000002945ffffffffffff0000000024c8"
    },
    {
-    "file_offset": "0xc4c972",
-    "bytes": 14,
-    "old_hex": "21248c70ffffffff8c702124ffff",
-    "new_hex": "00000000ffffffffffff00000000"
+    "file_offset": "0xc4c970",
+    "bytes": 16,
+    "old_hex": "ffff21248c70ffffffff8c702124ffff",
+    "new_hex": "d69a00000000e71cffffffff00000000"
    },
    {
     "file_offset": "0xc4c9a8",
     "bytes": 14,
     "old_hex": "21248c70212421248c702124ffff",
-    "new_hex": "0000000000000000ffff00000000"
+    "new_hex": "2104000000002965ffff00000000"
    },
    {
     "file_offset": "0xc4c9de",
     "bytes": 14,
     "old_hex": "21248c70212421248c702124ffff",
-    "new_hex": "0000000000000000ffff00000000"
+    "new_hex": "2104000000000000ffff00000000"
    },
    {
     "file_offset": "0xc4ca14",
     "bytes": 14,
     "old_hex": "21248c70212421248c702124ffff",
-    "new_hex": "0000000000000000ffff00000000"
+    "new_hex": "2104000000000000ffff00000000"
    },
    {
     "file_offset": "0xc4ca4a",
     "bytes": 14,
     "old_hex": "21248c70212421248c702124ffff",
-    "new_hex": "0000000000000000ffff00000000"
+    "new_hex": "2104000000000000ffff00000000"
    },
    {
     "file_offset": "0xc4ca80",
     "bytes": 14,
     "old_hex": "21248c70212421248c702124ffff",
-    "new_hex": "0000000000000000ffff00000000"
+    "new_hex": "2104000000000000ffff00000000"
    },
    {
     "file_offset": "0xc4cab6",
-    "bytes": 14,
-    "old_hex": "21248c70212421248c702124ffff",
-    "new_hex": "0000000000000000ffff00000000"
+    "bytes": 16,
+    "old_hex": "21248c70212421248c702124ffff368b",
+    "new_hex": "21040000000018c3ffff000000002d69"
    },
    {
-    "file_offset": "0xc4caec",
-    "bytes": 166,
-    "old_hex": "21248c70ffffffff8c702124ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff21248c70ffffffff8c70212421242124212421242124212421242124212421242124212421242124212421242124212421242124212421248c70ffffffffffff8c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c70c635",
-    "new_hex": "00000000ffffffffffff000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000ffffffffffff000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+    "file_offset": "0xc4caea",
+    "bytes": 168,
+    "old_hex": "ffff21248c70ffffffff8c702124ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff21248c70ffffffff8c70212421242124212421242124212421242124212421242124212421242124212421242124212421242124212421248c70ffffffffffff8c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c70c635",
+    "new_hex": "e73c00000000c618ffffffff420800000000210421042104210421042104210421042104210421042104210421042104210421042104000000002124ffffffffffffd6ba2945000000000000000000000000000000000000000000000000000000000000000000000000000000002124ce59ffffffffffffffffffffe71cdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbffffffff"
    },
    {
     "file_offset": "0xc4cb98",
-    "bytes": 776,
-    "old_hex": "8c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c70c635f800f800f8008c70212421242124212421242124212421242124212421242124212421242124212421242124212421242124212421248c70f800f800f8008c702124ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff21248c70f800f800f8008c702124ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff21248c70f800f800f8008c702124ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff21248c7021242124f8008c702124ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff21248c7021242124f8008c702124ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff21248c7021242124f8008c702124ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff21248c7021242124f8008c702124ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff21248c7021242124f8008c702124ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff21248c7021242124f8008c702124ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff21248c70f800f800f8008c702124ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff21248c70f800f800f8008c70212421242124212421242124212421242124212421242124212421242124212421242124212421242124212421248c70f800f800f800f8008c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c70c635",
-    "new_hex": "f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000f800f800f800f800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000f800f800f800f80000000000f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80000000000f800f800f800f80000000000f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8000000000000000000f800f80000000000f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8000000000000000000f800f80000000000f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8000000000000000000f800f80000000000f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8000000000000000000f800f80000000000f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8000000000000000000f800f80000000000f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8000000000000000000f800f80000000000f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80000000000f800f800f800f800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000f800f800f800f800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800"
+    "bytes": 174,
+    "old_hex": "8c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c70c635f800f800f8008c70212421242124212421242124212421242124212421242124212421242124212421242124212421242124212421248c70f800f800f8008c702124ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff21248c70f800f800f8008c702124ffffffff",
+    "new_hex": "f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800e73c4a49000000000000000000000000000000000000000000000000000000000000000000000000000000004208d6baf800f800f800f8004a4900000000000000000000000000000000000000000000000000000000000000000000000000000000000000002945f800f800f800f80000000000bdd7"
+   },
+   {
+    "file_offset": "0xc4cc6a",
+    "bytes": 18,
+    "old_hex": "ffff21248c70f800f800f8008c702124ffff",
+    "new_hex": "d69a00000000e71cf800f800f80000000000"
+   },
+   {
+    "file_offset": "0xc4cca4",
+    "bytes": 16,
+    "old_hex": "21248c7021242124f8008c702124ffff",
+    "new_hex": "2104000000002965f800f80000000000"
+   },
+   {
+    "file_offset": "0xc4ccdc",
+    "bytes": 16,
+    "old_hex": "21248c7021242124f8008c702124ffff",
+    "new_hex": "2104000000000000defbf80000000000"
+   },
+   {
+    "file_offset": "0xc4cd14",
+    "bytes": 16,
+    "old_hex": "21248c7021242124f8008c702124ffff",
+    "new_hex": "2104000000000000defbf80000000000"
+   },
+   {
+    "file_offset": "0xc4cd4c",
+    "bytes": 16,
+    "old_hex": "21248c7021242124f8008c702124ffff",
+    "new_hex": "2104000000000000defbf80000000000"
+   },
+   {
+    "file_offset": "0xc4cd84",
+    "bytes": 16,
+    "old_hex": "21248c7021242124f8008c702124ffff",
+    "new_hex": "2104000000000000defbf80000000000"
+   },
+   {
+    "file_offset": "0xc4cdbc",
+    "bytes": 18,
+    "old_hex": "21248c7021242124f8008c702124ffffffff",
+    "new_hex": "21040000000018c3f800f80000000000d69a"
+   },
+   {
+    "file_offset": "0xc4cdf2",
+    "bytes": 174,
+    "old_hex": "ffff21248c70f800f800f8008c702124ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff21248c70f800f800f8008c70212421242124212421242124212421242124212421242124212421242124212421242124212421242124212421248c70f800f800f800f8008c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c70c635",
+    "new_hex": "e73c00000000c618f800f800f800420800000000210421042104210421042104210421042104210421042104210421042104210421042104000000002124f800f800f800f800d6ba2945000000000000000000000000000000000000000000000000000000000000000000000000000000002124ce59f800f800f800f800f800f800e71cdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbf800f800"
    },
    {
     "file_offset": "0xc4cea8",
-    "bytes": 750,
-    "old_hex": "8c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c70c635f800f8008c70212421242124212421242124212421242124212421242124212421242124212421242124212421242124212421248c70f800f8008c702124ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff21248c70f800f8008c702124ffff368b368b368b368bffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff21248c70f800f8008c702124ffff368b368b368b368bffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff21248c70212421248c702124ffff368b368b368b368bffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff21248c70212421248c702124ffff368b368b368b368bffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff21248c70212421248c702124ffff368b368b368b368bffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff21248c70212421248c702124ffff368b368b368b368bffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff21248c70212421248c702124ffff368b368b368b368bffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff21248c70212421248c702124ffff368b368b368b368bffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff21248c70f800f8008c702124ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff21248c70f800f8008c70212421242124212421242124212421242124212421242124212421242124212421242124212421242124212421248c70f800f800f8008c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c70c635",
-    "new_hex": "f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000f800f800f800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000f800f800f80000000000368b368b368b368bf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80000000000f800f800f80000000000368b368b368b368bf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8000000000000000000f80000000000368b368b368b368bf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8000000000000000000f80000000000368b368b368b368bf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8000000000000000000f80000000000368b368b368b368bf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8000000000000000000f80000000000368b368b368b368bf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8000000000000000000f80000000000368b368b368b368bf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8000000000000000000f80000000000368b368b368b368bf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80000000000f800f800f800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000f800f800f800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800"
+    "bytes": 168,
+    "old_hex": "8c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c70c635f800f8008c70212421242124212421242124212421242124212421242124212421242124212421242124212421242124212421248c70f800f8008c702124ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff21248c70f800f8008c702124ffff368b",
+    "new_hex": "f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800e73c4a49000000000000000000000000000000000000000000000000000000000000000000000000000000004208d6baf800f800f8004a4900000000000000000000000000000000000000000000000000000000000000000000000000000000000000002945f800f800f8000000000024c8"
+   },
+   {
+    "file_offset": "0xc4cf74",
+    "bytes": 16,
+    "old_hex": "ffff21248c70f800f8008c702124ffff",
+    "new_hex": "d69a00000000e71cf800f80000000000"
+   },
+   {
+    "file_offset": "0xc4cfac",
+    "bytes": 14,
+    "old_hex": "21248c70212421248c702124ffff",
+    "new_hex": "2104000000002965f80000000000"
+   },
+   {
+    "file_offset": "0xc4cfe2",
+    "bytes": 14,
+    "old_hex": "21248c70212421248c702124ffff",
+    "new_hex": "2104000000000000f80000000000"
+   },
+   {
+    "file_offset": "0xc4d018",
+    "bytes": 14,
+    "old_hex": "21248c70212421248c702124ffff",
+    "new_hex": "2104000000000000f80000000000"
+   },
+   {
+    "file_offset": "0xc4d04e",
+    "bytes": 14,
+    "old_hex": "21248c70212421248c702124ffff",
+    "new_hex": "2104000000000000f80000000000"
+   },
+   {
+    "file_offset": "0xc4d084",
+    "bytes": 14,
+    "old_hex": "21248c70212421248c702124ffff",
+    "new_hex": "2104000000000000f80000000000"
+   },
+   {
+    "file_offset": "0xc4d0ba",
+    "bytes": 16,
+    "old_hex": "21248c70212421248c702124ffff368b",
+    "new_hex": "21040000000018c3f800000000002d69"
+   },
+   {
+    "file_offset": "0xc4d0ee",
+    "bytes": 168,
+    "old_hex": "ffff21248c70f800f8008c702124ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff21248c70f800f8008c70212421242124212421242124212421242124212421242124212421242124212421242124212421242124212421248c70f800f800f8008c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c70c635",
+    "new_hex": "e73c00000000c618f800f800420800000000210421042104210421042104210421042104210421042104210421042104210421042104000000002124f800f800f800d6ba2945000000000000000000000000000000000000000000000000000000000000000000000000000000002124ce59f800f800f800f800f800e71cdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbf800f800"
    },
    {
     "file_offset": "0xc4d19c",
-    "bytes": 750,
-    "old_hex": "8c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c70c635f800f8008c70212421242124212421242124212421242124212421242124212421242124212421242124212421242124212421248c70f800f8008c702124ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff21248c70f800f8008c702124ffff368b368b368b368bffff368b368b368b368bffffffffffffffffffffffffffffffffffffffffffff21248c70f800f8008c702124ffff368b368b368b368bffff368b368b368b368bffffffffffffffffffffffffffffffffffffffffffff21248c70212421248c702124ffff368b368b368b368bffff368b368b368b368bffffffffffffffffffffffffffffffffffffffffffff21248c70212421248c702124ffff368b368b368b368bffff368b368b368b368bffffffffffffffffffffffffffffffffffffffffffff21248c70212421248c702124ffff368b368b368b368bffff368b368b368b368bffffffffffffffffffffffffffffffffffffffffffff21248c70212421248c702124ffff368b368b368b368bffff368b368b368b368bffffffffffffffffffffffffffffffffffffffffffff21248c70212421248c702124ffff368b368b368b368bffff368b368b368b368bffffffffffffffffffffffffffffffffffffffffffff21248c70212421248c702124ffff368b368b368b368bffff368b368b368b368bffffffffffffffffffffffffffffffffffffffffffff21248c70f800f8008c702124ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff21248c70f800f8008c70212421242124212421242124212421242124212421242124212421242124212421242124212421242124212421248c70f800f800f8008c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c70c635",
-    "new_hex": "f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000f800f800f800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000f800f800f80000000000368b368b368b368bf800368b368b368b368bf800f800f800f800f800f800f800f800f800f800f80000000000f800f800f80000000000368b368b368b368bf800368b368b368b368bf800f800f800f800f800f800f800f800f800f800f8000000000000000000f80000000000368b368b368b368bf800368b368b368b368bf800f800f800f800f800f800f800f800f800f800f8000000000000000000f80000000000368b368b368b368bf800368b368b368b368bf800f800f800f800f800f800f800f800f800f800f8000000000000000000f80000000000368b368b368b368bf800368b368b368b368bf800f800f800f800f800f800f800f800f800f800f8000000000000000000f80000000000368b368b368b368bf800368b368b368b368bf800f800f800f800f800f800f800f800f800f800f8000000000000000000f80000000000368b368b368b368bf800368b368b368b368bf800f800f800f800f800f800f800f800f800f800f8000000000000000000f80000000000368b368b368b368bf800368b368b368b368bf800f800f800f800f800f800f800f800f800f800f80000000000f800f800f800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000f800f800f800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800"
+    "bytes": 168,
+    "old_hex": "8c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c70c635f800f8008c70212421242124212421242124212421242124212421242124212421242124212421242124212421242124212421248c70f800f8008c702124ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff21248c70f800f8008c702124ffff368b",
+    "new_hex": "f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800e73c4a49000000000000000000000000000000000000000000000000000000000000000000000000000000004208d6baf800f800f8004a4900000000000000000000000000000000000000000000000000000000000000000000000000000000000000002945f800f800f8000000000024c8"
+   },
+   {
+    "file_offset": "0xc4d268",
+    "bytes": 16,
+    "old_hex": "ffff21248c70f800f8008c702124ffff",
+    "new_hex": "d69a00000000e71cf800f80000000000"
+   },
+   {
+    "file_offset": "0xc4d2a0",
+    "bytes": 14,
+    "old_hex": "21248c70212421248c702124ffff",
+    "new_hex": "2104000000002965f80000000000"
+   },
+   {
+    "file_offset": "0xc4d2d6",
+    "bytes": 14,
+    "old_hex": "21248c70212421248c702124ffff",
+    "new_hex": "2104000000000000f80000000000"
+   },
+   {
+    "file_offset": "0xc4d30c",
+    "bytes": 14,
+    "old_hex": "21248c70212421248c702124ffff",
+    "new_hex": "2104000000000000f80000000000"
+   },
+   {
+    "file_offset": "0xc4d342",
+    "bytes": 14,
+    "old_hex": "21248c70212421248c702124ffff",
+    "new_hex": "2104000000000000f80000000000"
+   },
+   {
+    "file_offset": "0xc4d378",
+    "bytes": 14,
+    "old_hex": "21248c70212421248c702124ffff",
+    "new_hex": "2104000000000000f80000000000"
+   },
+   {
+    "file_offset": "0xc4d3ae",
+    "bytes": 16,
+    "old_hex": "21248c70212421248c702124ffff368b",
+    "new_hex": "21040000000018c3f800000000002d69"
+   },
+   {
+    "file_offset": "0xc4d3e2",
+    "bytes": 168,
+    "old_hex": "ffff21248c70f800f8008c702124ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff21248c70f800f8008c70212421242124212421242124212421242124212421242124212421242124212421242124212421242124212421248c70f800f800f8008c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c70c635",
+    "new_hex": "e73c00000000c618f800f800420800000000210421042104210421042104210421042104210421042104210421042104210421042104000000002124f800f800f800d6ba2945000000000000000000000000000000000000000000000000000000000000000000000000000000002124ce59f800f800f800f800f800e71cdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbf800f800"
    },
    {
     "file_offset": "0xc4d490",
-    "bytes": 750,
-    "old_hex": "8c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c70c635f800f8008c70212421242124212421242124212421242124212421242124212421242124212421242124212421242124212421248c70f800f8008c702124ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff21248c70f800f8008c702124ffff368b368b368b368bffff368b368b368b368bffff368b368b368b368bffffffffffffffffffffffff21248c70f800f8008c702124ffff368b368b368b368bffff368b368b368b368bffff368b368b368b368bffffffffffffffffffffffff21248c70212421248c702124ffff368b368b368b368bffff368b368b368b368bffff368b368b368b368bffffffffffffffffffffffff21248c70212421248c702124ffff368b368b368b368bffff368b368b368b368bffff368b368b368b368bffffffffffffffffffffffff21248c70212421248c702124ffff368b368b368b368bffff368b368b368b368bffff368b368b368b368bffffffffffffffffffffffff21248c70212421248c702124ffff368b368b368b368bffff368b368b368b368bffff368b368b368b368bffffffffffffffffffffffff21248c70212421248c702124ffff368b368b368b368bffff368b368b368b368bffff368b368b368b368bffffffffffffffffffffffff21248c70212421248c702124ffff368b368b368b368bffff368b368b368b368bffff368b368b368b368bffffffffffffffffffffffff21248c70f800f8008c702124ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff21248c70f800f8008c70212421242124212421242124212421242124212421242124212421242124212421242124212421242124212421248c70f800f800f8008c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c70c635",
-    "new_hex": "f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000f800f800f800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000f800f800f80000000000368b368b368b368bf800368b368b368b368bf800368b368b368b368bf800f800f800f800f800f80000000000f800f800f80000000000368b368b368b368bf800368b368b368b368bf800368b368b368b368bf800f800f800f800f800f8000000000000000000f80000000000368b368b368b368bf800368b368b368b368bf800368b368b368b368bf800f800f800f800f800f8000000000000000000f80000000000368b368b368b368bf800368b368b368b368bf800368b368b368b368bf800f800f800f800f800f8000000000000000000f80000000000368b368b368b368bf800368b368b368b368bf800368b368b368b368bf800f800f800f800f800f8000000000000000000f80000000000368b368b368b368bf800368b368b368b368bf800368b368b368b368bf800f800f800f800f800f8000000000000000000f80000000000368b368b368b368bf800368b368b368b368bf800368b368b368b368bf800f800f800f800f800f8000000000000000000f80000000000368b368b368b368bf800368b368b368b368bf800368b368b368b368bf800f800f800f800f800f80000000000f800f800f800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000f800f800f800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800"
+    "bytes": 168,
+    "old_hex": "8c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c70c635f800f8008c70212421242124212421242124212421242124212421242124212421242124212421242124212421242124212421248c70f800f8008c702124ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff21248c70f800f8008c702124ffff368b",
+    "new_hex": "f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800e73c4a49000000000000000000000000000000000000000000000000000000000000000000000000000000004208d6baf800f800f8004a4900000000000000000000000000000000000000000000000000000000000000000000000000000000000000002945f800f800f8000000000024c8"
+   },
+   {
+    "file_offset": "0xc4d55c",
+    "bytes": 16,
+    "old_hex": "ffff21248c70f800f8008c702124ffff",
+    "new_hex": "d69a00000000e71cf800f80000000000"
+   },
+   {
+    "file_offset": "0xc4d594",
+    "bytes": 14,
+    "old_hex": "21248c70212421248c702124ffff",
+    "new_hex": "2104000000002965f80000000000"
+   },
+   {
+    "file_offset": "0xc4d5ca",
+    "bytes": 14,
+    "old_hex": "21248c70212421248c702124ffff",
+    "new_hex": "2104000000000000f80000000000"
+   },
+   {
+    "file_offset": "0xc4d600",
+    "bytes": 14,
+    "old_hex": "21248c70212421248c702124ffff",
+    "new_hex": "2104000000000000f80000000000"
+   },
+   {
+    "file_offset": "0xc4d636",
+    "bytes": 14,
+    "old_hex": "21248c70212421248c702124ffff",
+    "new_hex": "2104000000000000f80000000000"
+   },
+   {
+    "file_offset": "0xc4d66c",
+    "bytes": 14,
+    "old_hex": "21248c70212421248c702124ffff",
+    "new_hex": "2104000000000000f80000000000"
+   },
+   {
+    "file_offset": "0xc4d6a2",
+    "bytes": 16,
+    "old_hex": "21248c70212421248c702124ffff368b",
+    "new_hex": "21040000000018c3f800000000002d69"
+   },
+   {
+    "file_offset": "0xc4d6d6",
+    "bytes": 168,
+    "old_hex": "ffff21248c70f800f8008c702124ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff21248c70f800f8008c70212421242124212421242124212421242124212421242124212421242124212421242124212421242124212421248c70f800f800f8008c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c70c635",
+    "new_hex": "e73c00000000c618f800f800420800000000210421042104210421042104210421042104210421042104210421042104210421042104000000002124f800f800f800d6ba2945000000000000000000000000000000000000000000000000000000000000000000000000000000002124ce59f800f800f800f800f800e71cdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbf800f800"
    },
    {
     "file_offset": "0xc4d784",
-    "bytes": 750,
-    "old_hex": "8c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c70c635f800f8008c70212421242124212421242124212421242124212421242124212421242124212421242124212421242124212421248c70f800f8008c702124ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff21248c70f800f8008c702124ffff368b368b368b368bffff368b368b368b368bffff368b368b368b368bffff368b368b368b368bffff21248c70f800f8008c702124ffff368b368b368b368bffff368b368b368b368bffff368b368b368b368bffff368b368b368b368bffff21248c70212421248c702124ffff368b368b368b368bffff368b368b368b368bffff368b368b368b368bffff368b368b368b368bffff21248c70212421248c702124ffff368b368b368b368bffff368b368b368b368bffff368b368b368b368bffff368b368b368b368bffff21248c70212421248c702124ffff368b368b368b368bffff368b368b368b368bffff368b368b368b368bffff368b368b368b368bffff21248c70212421248c702124ffff368b368b368b368bffff368b368b368b368bffff368b368b368b368bffff368b368b368b368bffff21248c70212421248c702124ffff368b368b368b368bffff368b368b368b368bffff368b368b368b368bffff368b368b368b368bffff21248c70212421248c702124ffff368b368b368b368bffff368b368b368b368bffff368b368b368b368bffff368b368b368b368bffff21248c70f800f8008c702124ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff21248c70f800f8008c70212421242124212421242124212421242124212421242124212421242124212421242124212421242124212421248c70f800f800f8008c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c70c635",
-    "new_hex": "f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000f800f800f800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000f800f800f80000000000368b368b368b368bf800368b368b368b368bf800368b368b368b368bf800368b368b368b368bf80000000000f800f800f80000000000368b368b368b368bf800368b368b368b368bf800368b368b368b368bf800368b368b368b368bf8000000000000000000f80000000000368b368b368b368bf800368b368b368b368bf800368b368b368b368bf800368b368b368b368bf8000000000000000000f80000000000368b368b368b368bf800368b368b368b368bf800368b368b368b368bf800368b368b368b368bf8000000000000000000f80000000000368b368b368b368bf800368b368b368b368bf800368b368b368b368bf800368b368b368b368bf8000000000000000000f80000000000368b368b368b368bf800368b368b368b368bf800368b368b368b368bf800368b368b368b368bf8000000000000000000f80000000000368b368b368b368bf800368b368b368b368bf800368b368b368b368bf800368b368b368b368bf8000000000000000000f80000000000368b368b368b368bf800368b368b368b368bf800368b368b368b368bf800368b368b368b368bf80000000000f800f800f800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000f800f800f800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800"
+    "bytes": 168,
+    "old_hex": "8c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c70c635f800f8008c70212421242124212421242124212421242124212421242124212421242124212421242124212421242124212421248c70f800f8008c702124ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff21248c70f800f8008c702124ffff368b",
+    "new_hex": "f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800e73c4a49000000000000000000000000000000000000000000000000000000000000000000000000000000004208d6baf800f800f8004a4900000000000000000000000000000000000000000000000000000000000000000000000000000000000000002945f800f800f8000000000024c8"
+   },
+   {
+    "file_offset": "0xc4d850",
+    "bytes": 16,
+    "old_hex": "ffff21248c70f800f8008c702124ffff",
+    "new_hex": "d69a00000000e71cf800f80000000000"
+   },
+   {
+    "file_offset": "0xc4d888",
+    "bytes": 14,
+    "old_hex": "21248c70212421248c702124ffff",
+    "new_hex": "2104000000002965f80000000000"
+   },
+   {
+    "file_offset": "0xc4d8be",
+    "bytes": 14,
+    "old_hex": "21248c70212421248c702124ffff",
+    "new_hex": "2104000000000000f80000000000"
+   },
+   {
+    "file_offset": "0xc4d8f4",
+    "bytes": 14,
+    "old_hex": "21248c70212421248c702124ffff",
+    "new_hex": "2104000000000000f80000000000"
+   },
+   {
+    "file_offset": "0xc4d92a",
+    "bytes": 14,
+    "old_hex": "21248c70212421248c702124ffff",
+    "new_hex": "2104000000000000f80000000000"
+   },
+   {
+    "file_offset": "0xc4d960",
+    "bytes": 14,
+    "old_hex": "21248c70212421248c702124ffff",
+    "new_hex": "2104000000000000f80000000000"
+   },
+   {
+    "file_offset": "0xc4d996",
+    "bytes": 16,
+    "old_hex": "21248c70212421248c702124ffff368b",
+    "new_hex": "21040000000018c3f800000000002d69"
+   },
+   {
+    "file_offset": "0xc4d9ca",
+    "bytes": 168,
+    "old_hex": "ffff21248c70f800f8008c702124ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff21248c70f800f8008c70212421242124212421242124212421242124212421242124212421242124212421242124212421242124212421248c70f800f800f8008c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c708c70c635",
+    "new_hex": "e73c00000000c618f800f800420800000000210421042104210421042104210421042104210421042104210421042104210421042104000000002124f800f800f800d6ba2945000000000000000000000000000000000000000000000000000000000000000000000000000000002124ce59f800f800f800f800f800e71cdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbdefbf800f800"
+   },
+   {
+    "file_offset": "0xc61a9a",
+    "bytes": 20,
+    "old_hex": "000000000000f800f800f800f800000000000000",
+    "new_hex": "31a600002104f800f800f800f80031a600002104"
+   },
+   {
+    "file_offset": "0xc61ab8",
+    "bytes": 2,
+    "old_hex": "f800",
+    "new_hex": "ad55"
+   },
+   {
+    "file_offset": "0xc61ac6",
+    "bytes": 12,
+    "old_hex": "f800f800000000000000f800",
+    "new_hex": "ad55f800000000000000ad55"
+   },
+   {
+    "file_offset": "0xc61ade",
+    "bytes": 12,
+    "old_hex": "f800f800000000000000f800",
+    "new_hex": "ad55f800000000000000ad55"
+   },
+   {
+    "file_offset": "0xc61af6",
+    "bytes": 12,
+    "old_hex": "f800f800000000000000f800",
+    "new_hex": "ad55f800000000000000ad55"
+   },
+   {
+    "file_offset": "0xc61b0e",
+    "bytes": 12,
+    "old_hex": "f800f800000000000000f800",
+    "new_hex": "ad55f800000000000000ad55"
+   },
+   {
+    "file_offset": "0xc61b26",
+    "bytes": 12,
+    "old_hex": "f800f800000000000000f800",
+    "new_hex": "ad55f800000000000000ad55"
+   },
+   {
+    "file_offset": "0xc61b3e",
+    "bytes": 12,
+    "old_hex": "f800f800000000000000f800",
+    "new_hex": "ad55f800000000000000ad55"
+   },
+   {
+    "file_offset": "0xc61b56",
+    "bytes": 12,
+    "old_hex": "f800f800000000000000f800",
+    "new_hex": "ad55f800000000000000ad55"
+   },
+   {
+    "file_offset": "0xc61b6e",
+    "bytes": 12,
+    "old_hex": "f800f800000000000000f800",
+    "new_hex": "ad55f800000000000000ad55"
+   },
+   {
+    "file_offset": "0xc61b86",
+    "bytes": 12,
+    "old_hex": "f800f800000000000000f800",
+    "new_hex": "ad55f800000000000000ad55"
+   },
+   {
+    "file_offset": "0xc61b9e",
+    "bytes": 24,
+    "old_hex": "f800f800000000000000f800f800f800f800000000000000",
+    "new_hex": "ad55f800210400001082f800f800f800f800210400001082"
+   },
+   {
+    "file_offset": "0xc61bbc",
+    "bytes": 4,
+    "old_hex": "00000000",
+    "new_hex": "18c39492"
+   },
+   {
+    "file_offset": "0xc61bd8",
+    "bytes": 2,
+    "old_hex": "0000",
+    "new_hex": "528a"
+   },
+   {
+    "file_offset": "0xc61bf2",
+    "bytes": 4,
+    "old_hex": "00000000",
+    "new_hex": "18c39492"
+   },
+   {
+    "file_offset": "0xc61c0e",
+    "bytes": 2,
+    "old_hex": "0000",
+    "new_hex": "528a"
+   },
+   {
+    "file_offset": "0xc61c28",
+    "bytes": 4,
+    "old_hex": "00000000",
+    "new_hex": "18c39492"
+   },
+   {
+    "file_offset": "0xc61c44",
+    "bytes": 2,
+    "old_hex": "0000",
+    "new_hex": "528a"
+   },
+   {
+    "file_offset": "0xc61c5c",
+    "bytes": 4,
+    "old_hex": "0000f800",
+    "new_hex": "39c7ad75"
+   },
+   {
+    "file_offset": "0xc61c70",
+    "bytes": 4,
+    "old_hex": "00000000",
+    "new_hex": "08617bcf"
+   },
+   {
+    "file_offset": "0xc61c86",
+    "bytes": 4,
+    "old_hex": "0000f800",
+    "new_hex": "39c7ad75"
+   },
+   {
+    "file_offset": "0xc61c9a",
+    "bytes": 4,
+    "old_hex": "00000000",
+    "new_hex": "08617bcf"
+   },
+   {
+    "file_offset": "0xc61cb0",
+    "bytes": 4,
+    "old_hex": "0000f800",
+    "new_hex": "39c7ad75"
+   },
+   {
+    "file_offset": "0xc61cc4",
+    "bytes": 4,
+    "old_hex": "00000000",
+    "new_hex": "08617bcf"
    },
    {
     "file_offset": "0xc855d8",
@@ -3126,75 +3600,75 @@
    },
    {
     "file_offset": "0xc8561e",
-    "bytes": 120,
-    "old_hex": "3186b5964a69294529452945294529452945294529454a69ad75318629452945294529452965b5b6296529452945294529452945294529452945294529452965b59629652945294529458c51422829452945294529452945294529452945294529452945294542288c512945294539c7a514294529452945",
-    "new_hex": "2945294529452945ffffffffffffffffffff294529452945294529452945294529452945294529452945ffffffffffffffffffffffffffffffffffff294529452945294529452945294529452945ffffffffffffffffffff2945ffffffffffffffffffff2945294529452945294529452945ffffffffffff"
+    "bytes": 122,
+    "old_hex": "3186b5964a69294529452945294529452945294529454a69ad75318629452945294529452965b5b6296529452945294529452945294529452945294529452965b59629652945294529458c51422829452945294529452945294529452945294529452945294542288c512945294539c7a5142945294529452945",
+    "new_hex": "2945294529458430ce79ffffffffffffce798430294529452945294529452945294529452945294562ece71cffffffffffffffffffffffffffffe71c62ec29452945294529452945294529456b4dffffffffffffdedb9cf384309cf3dedbffffffffffff6b4d2945294529452945294539e7ef9dffffffff7bcf"
    },
    {
-    "file_offset": "0xc856a4",
+    "file_offset": "0xc856a2",
+    "bytes": 26,
+    "old_hex": "29452945294529452945a51439c729457bef528a294529452945",
+    "new_hex": "7bcfffffffffef9d39e72945294529452945ad55ffffffff632c"
+   },
+   {
+    "file_offset": "0xc856ca",
     "bytes": 22,
-    "old_hex": "2945294529452945a51439c729457bef528a29452945",
-    "new_hex": "ffffffffffff29452945294529452945ffffffffffff"
-   },
-   {
-    "file_offset": "0xc856cc",
-    "bytes": 20,
-    "old_hex": "294529452945528ad6ba2945bdf7296529452945",
-    "new_hex": "ffffffffffff2945294529452945ffffffffffff"
+    "old_hex": "2945294529452945528ad6ba2945bdf7296529452945",
+    "new_hex": "632cffffffffad552945294529452945ffffffffb5b6"
    },
    {
     "file_offset": "0xc856f2",
-    "bytes": 18,
-    "old_hex": "2945294529452965f7be2945d69a29452945",
-    "new_hex": "ffffffffffff2945294529452945ffffffff"
+    "bytes": 20,
+    "old_hex": "2945294529452965f7be2945d69a294529452945",
+    "new_hex": "b5b6ffffffff2945294529455acbffffffff6b6d"
    },
    {
-    "file_offset": "0xc8571a",
-    "bytes": 20,
-    "old_hex": "2945294539c7ffff2945ce5929458410d69aa534",
-    "new_hex": "ffffffff294529452945ffffffffffff29452945"
+    "file_offset": "0xc85718",
+    "bytes": 22,
+    "old_hex": "29452945294539c7ffff2945ce5929458410d69aa534",
+    "new_hex": "6b6dffffffff62ec29452945d69affffffff6b6d2945"
    },
    {
     "file_offset": "0xc8573e",
     "bytes": 24,
     "old_hex": "c638d69a5aeb4a69ffff2945c638ad75ffffffffd69a31a6",
-    "new_hex": "2945ffffffffffff29452945ffffffffffffffff29452945"
+    "new_hex": "5acbffffffffe73c29452945ffffffffffff94b229452945"
    },
    {
     "file_offset": "0xc85762",
     "bytes": 26,
     "old_hex": "6b4dffffffffffffb596ffdf2945b596ef7dffffffffffff52aa",
-    "new_hex": "29452945ffffffffffff29452945ffffffffffffffff29452945"
+    "new_hex": "29457bcfffffffffffff42282945ffffffffffff94b229452945"
    },
    {
     "file_offset": "0xc85788",
     "bytes": 26,
     "old_hex": "8c71ffffffffffffef7df79e29458c51ffffffffffffffff6b4d",
-    "new_hex": "29452945ffffffffffff29452945ffffffffffffffff29452945"
+    "new_hex": "29457bcfffffffffffff42282945ffffffffffff94b229452945"
    },
    {
     "file_offset": "0xc857ae",
     "bytes": 26,
     "old_hex": "a534ffffffffffffffdfd69a29454a69ffffffffffffffff8c51",
-    "new_hex": "29452945ffffffffffff29452945ffffffffffffffff29452945"
+    "new_hex": "29457bcfffffffffffff42282945ffffffffffff94b229452945"
    },
    {
     "file_offset": "0xc857d4",
     "bytes": 26,
     "old_hex": "c618ffffffffffffffdf738e294539e7f79effffffffffffad75",
-    "new_hex": "29452945ffffffffffff29452945ffffffffffff294529452945"
+    "new_hex": "29457bcfffffffffffff42282945ffffffffffff8c7129452945"
    },
    {
     "file_offset": "0xc857fa",
     "bytes": 26,
     "old_hex": "d69affffffffffffad75294529452945dedbffffffffffffce59",
-    "new_hex": "29452945ffffffffffff294529452945ffffffff294529452945"
+    "new_hex": "2945738effffffffffff39e729457befdf1bc63839c729452945"
    },
    {
     "file_offset": "0xc85820",
     "bytes": 26,
     "old_hex": "d69affffffffffff738e2945294529459cd3ef5dffffffffd69a",
-    "new_hex": "29452945ffffffff294529452945294529452945294529452945"
+    "new_hex": "29452945b5b6e71c949229452945294529452945294529452945"
    },
    {
     "file_offset": "0xc85846",
@@ -3209,88 +3683,40 @@
     "new_hex": "2945294529452945"
    },
    {
-    "file_offset": "0xc8589a",
-    "bytes": 26,
-    "old_hex": "29452945294529452945294529452945294529452945ffffffff",
-    "new_hex": "ffffffffffffffffffffffffffffffff29452945294529452945"
+    "file_offset": "0xc85898",
+    "bytes": 60,
+    "old_hex": "294529452945294529452945294529452945294529452945ffffffffffffffffffffffffffffffdfffdff7beffff294529452945ffdf294529452945",
+    "new_hex": "5acbc638c658c658c658c658c658c658c6586b4d2945294529452945c638ffffd69ac658c658c658c658ce59ffffdf1b2945294529452945c658d69a"
    },
    {
-    "file_offset": "0xc858be",
-    "bytes": 22,
-    "old_hex": "ffdfffdff7beffff294529452945ffdf294529452945",
-    "new_hex": "ffffffffffffffffffff2945294529452945ffffffff"
-   },
-   {
-    "file_offset": "0xc858e8",
-    "bytes": 8,
-    "old_hex": "ffff294529452945",
-    "new_hex": "29452945ffffffff"
+    "file_offset": "0xc858e0",
+    "bytes": 16,
+    "old_hex": "ffffffff29452945ffff294529452945",
+    "new_hex": "b5b6e71c2945294529452945c658c658"
    },
    {
     "file_offset": "0xc858fc",
-    "bytes": 16,
-    "old_hex": "2965ffffffff2945ffff294529452945",
-    "new_hex": "ffffffff2945294529452945ffffffff"
-   },
-   {
-    "file_offset": "0xc85918",
-    "bytes": 344,
-    "old_hex": "31862945ffffffdfffff29452965ffdf420829452945294529454208dedb29452945f7beffff2945294531a6ffff2945294529452965ffff4a6929452945ffdfffff29452945294539c7ffff294531a6ffdf3186294529452945ffdfffff29452945294529454a69f7beffdf31a62945294529452945f7beffff29452945294529452945f7bef79e29452945294529452945f7beffdf29452945294529457bcff7beef5d39c72945294529452945f7beffdf2945294529454a49f79e29652945ffff2965294529452945f7beffff2945294552aaf7be39c72945294531a6ffff294529452945f7beffff29452965ffdf318629452945294529454228e73c31862945f7beffff294529452945294529452945294529452945420829452945f7beffdf294529452945294529452945294529452945294529452945f7beffffffdfffdfffdfffdfffdfffdfffdfffdfffdff7bef7bef7beffff",
-    "new_hex": "ffffffff2945294529452945ffffffffffffffff29452945ffffffffffffffff2945294529452945ffffffff2945ffffffffffffffff2945ffffffff2945294529452945ffffffff29452945ffffffff29452945ffffffff2945294529452945ffffffff29452945ffffffff29452945ffffffff2945294529452945ffffffff2945ffffffffffffffff2945ffffffff2945294529452945ffffffffffffffff29452945ffffffffffffffff2945294529452945ffffffff294529452945294529452945ffffffff2945294529452945ffffffff294529452945294529452945ffffffff2945294529452945ffffffff294529452945294529452945ffffffff2945294529452945ffffffffffffffffffffffffffffffffffffffff29452945294529452945ffffffffffffffffffffffffffffffff29452945294529452945294529452945294529452945294529452945294529452945"
+    "bytes": 372,
+    "old_hex": "2965ffffffff2945ffff29452945294529452945294529452945294531862945ffffffdfffff29452965ffdf420829452945294529454208dedb29452945f7beffff2945294531a6ffff2945294529452965ffff4a6929452945ffdfffff29452945294539c7ffff294531a6ffdf3186294529452945ffdfffff29452945294529454a69f7beffdf31a62945294529452945f7beffff29452945294529452945f7bef79e29452945294529452945f7beffdf29452945294529457bcff7beef5d39c72945294529452945f7beffdf2945294529454a49f79e29652945ffff2965294529452945f7beffff2945294552aaf7be39c72945294531a6ffff294529452945f7beffff29452965ffdf318629452945294529454228e73c31862945f7beffff294529452945294529452945294529452945420829452945f7beffdf294529452945294529452945294529452945294529452945f7beffffffdfffdfffdfffdfffdfffdfffdfffdfffdff7bef7bef7beffff",
+    "new_hex": "ad75e71c2945294529452945c658c65829454a49294529454a292945ad75e71c2945294529452945c658c658a514ffff52aa52aaffffa534ad75e71c2945294529452945c658c6585acbffffe71ce71cffff5acbad75e71c2945294529452945c658c65829458430ffffffff84302945ad75e71c2945294529452945c658c65829458430ffffffff84302945ad75e71c2945294529452945c658c6585acbffffe71ce71cffff5acbad75e71c2945294529452945c658c658a514ffff52aa52aaffffa534ad75e71c2945294529452945c658c65829454a49294529454a292945ad75e71c2945294529452945c658c658294529452945294529452945ad75e71c2945294529452945c658ce59294529452945294529452945b5b6e71c2945294529452945c658ffffb5b6ad75ad75ad75ad75b5b6ffffe71c29452945294529456b4ddf1be71ce71ce71ce71ce71ce71ce71c84102945294529452945294529452945294529452945294529452945294529452945"
    },
    {
     "file_offset": "0xc85a8c",
-    "bytes": 32,
-    "old_hex": "21042104210421042104210421042104210421042104210429452945ffffffff",
-    "new_hex": "294529452945ffffffffffffffffffffffff2945294529452945294529452945"
+    "bytes": 34,
+    "old_hex": "21042104210421042104210421042104210421042104210429452945ffffffffffff",
+    "new_hex": "294529455acbc638c658c658c658c658b5b62945294529452945294529452945c638"
    },
    {
-    "file_offset": "0xc85abc",
-    "bytes": 262,
-    "old_hex": "ffff210421042945ffff210421042104210421042104210421042104ffffffff21042104ffff2104294529452945294529452945294521042104ffffffff2104ffff21242945294529452945294529452945294521242124ffffffffffff212429452945294529452945294529452945294521242124ffffffff212421242124212421242124212421242124212421242124ffffffff2124ffffffffffffffffffffffffffffffffffffffff2124ffffffff2124ffffffffffffffff8c714228ffffffffffffffff2124ffffffff2124ffffffffffff6b6d21043186ffffffffffffffff2124ffffffff2124ffffffffffffe71c6b6d3186ffffffffffffffff2124ffffffff",
-    "new_hex": "294529452945294529452945ffffffffffffffffffffffffffffffffffff29452945294529452945ffffffffffffffffffffffffffffffffffffffff2945294529452945ffffffffffffffffffffffffffffffffffffffff2945294529452945ffffffffffffffff29452945ffffffffffffffff2945294529452945ffffffffffff294529452945ffffffffffffffff2945294529452945ffffffffffffffff29452945ffffffffffffffff2945294529452945ffffffffffffffff29452945ffffffffffffffff2945294529452945ffffffffffffffff29452945ffffffffffffffff2945294529452945ffffffffffffffff29452945ffffffffffffffff294529452945"
+    "file_offset": "0xc85aba",
+    "bytes": 352,
+    "old_hex": "ffffffff210421042945ffff210421042104210421042104210421042104ffffffff21042104ffff2104294529452945294529452945294521042104ffffffff2104ffff21242945294529452945294529452945294521242124ffffffffffff212429452945294529452945294529452945294521242124ffffffff212421242124212421242124212421242124212421242124ffffffff2124ffffffffffffffffffffffffffffffffffffffff2124ffffffff2124ffffffffffffffff8c714228ffffffffffffffff2124ffffffff2124ffffffffffff6b6d21043186ffffffffffffffff2124ffffffff2124ffffffffffffe71c6b6d3186ffffffffffffffff2124ffffffff2945ffffffffffffffff6b6d3186ffffffffffffffff2945ffffffff2945ffffffffffffffff6b6d3186ffffffffffffffff2945ffffffff2945ffffffffffffffff8c714228ffffffffffffffff2945ffffffff2965ffff",
+    "new_hex": "ce59294529452945294529452945c658ffffffffffffffffffffffffffffce5929452945294529452945c658ffffffffffffffffffffffffffffffffc6182945294529452945c658ffffffffffffbdd7c638ffffffffffffe71c2945294529452945c658ffffffff94b229452945ffffffffffffe71c2945294529452945c658ffffe73c4a6929452945ffffffffffffe71c2945294529452945c658ffffffffffff62ec2945ffffffffffffe71c2945294529452945c658ffffffffffff62ec2945ffffffffffffe71c2945294529452945c658ffffffffffff62ec2945ffffffffffffe71c2945294529452945c658ffffffffffff62ec2945ffffffffffffe71c2945294529452945c658ffffffffffffc658b5b6ffffffffffffe71c2945294529452945c658ffffffffffffffffffffffffffffffffe71c2945294529452945c658ffffffffffffffffffffffffffffffffe71c2945294529452945c658"
    },
    {
-    "file_offset": "0xc85bcc",
-    "bytes": 4,
-    "old_hex": "6b6d3186",
-    "new_hex": "ffffffff"
-   },
-   {
-    "file_offset": "0xc85bda",
-    "bytes": 4,
-    "old_hex": "ffffffff",
-    "new_hex": "29452945"
-   },
-   {
-    "file_offset": "0xc85be8",
-    "bytes": 4,
-    "old_hex": "6b6d3186",
-    "new_hex": "ffffffff"
-   },
-   {
-    "file_offset": "0xc85bf6",
-    "bytes": 4,
-    "old_hex": "ffffffff",
-    "new_hex": "29452945"
-   },
-   {
-    "file_offset": "0xc85c04",
-    "bytes": 4,
-    "old_hex": "8c714228",
-    "new_hex": "ffffffff"
-   },
-   {
-    "file_offset": "0xc85c12",
-    "bytes": 6,
-    "old_hex": "ffffffff2965",
-    "new_hex": "294529452945"
-   },
-   {
-    "file_offset": "0xc85c2c",
-    "bytes": 60,
-    "old_hex": "2965ffffffff296529652965296529652965296529652965296529652965ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
-    "new_hex": "29452945294529452945ffffffffffffffffffffffffffffffff29452945294529452945294529452945294529452945294529452945294529452945"
+    "file_offset": "0xc85c2a",
+    "bytes": 62,
+    "old_hex": "ffff2965ffffffff296529652965296529652965296529652965296529652965ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+    "new_hex": "e71c29452945294529456b4ddf1be71ce71ce71ce71ce71ce71ce71c84102945294529452945294529452945294529452945294529452945294529452945"
    },
    {
     "file_offset": "0xc85efa",
@@ -3302,13 +3728,13 @@
     "file_offset": "0xc85f1a",
     "bytes": 24,
     "old_hex": "5aebffdff7be949242082945294539e79492f7beffdf5aeb",
-    "new_hex": "29452945294529452945ffffffff29452945294529452945"
+    "new_hex": "29452945294539c76b6d94b294b26b6d39c7294529452945"
    },
    {
     "file_offset": "0xc85f3c",
     "bytes": 530,
     "old_hex": "8410ffff7bcf294529452945ffff29452945294529457bcfffff8410294529452945632cffff39e72945294529452945ffff2945294529452945294539e7ffff632c29452945ffdf7bcf29452945294529452945ffff2945294529452945294529457bcfffdf29457befffdf294529452945294529452945ffff2945294529452945294529452945ffdf7befdefb94b2294529452945294529452945ffff29452945294529452945294529459cd3defbffff4a69294529452945294529452945ffff29452945294529452945294529454a69ffffffff2945294529452945294529452945ffff29452945294529452945294529452945ffffffff29452945294529452945294518e32945ffffffffffffffffffff294529452945ffffffff528a21042104210429452945210429452104210429452945210421042104528affffdefb9cf3212421242124294529452945294529452124212421242124212421249cf3defb8c51ffdf29452945294529452945294529452945294529452945294529452945ffdf8c512945ffdf8c512945294529452945294529452965294529452945296529458c51ffdf294529457bcfffff52aa31862965318629452945294529453186318629655acbffff7bcf29453186294594b2ffff8c71318631a63186318631863186318631868c71ffff94b2318629452945294531a67befffffffdfa534632c39c739c7632cad55ffdfffdf7bef",
-    "new_hex": "294529452945ffffffffffffffffffffffffffffffff294529452945294529452945294529452945ffffffffffffffffffffffffffffffffffffffff2945294529452945294529452945ffffffffffffffffffff29452945ffffffffffffffffffff29452945294529452945ffffffffffffffffffffffff29452945ffffffffffffffffffffffff2945294529452945ffffffffffffffffffffffff29452945ffffffffffffffffffffffff2945294529452945ffffffffffffffffffffffff29452945ffffffffffffffffffffffff294529452945ffffffffffffffffffffffffffff29452945ffffffffffffffffffffffffffff29452945ffffffffffffffffffffffffffff2945294529452945ffffffffffffffffffff294529452945ffffffffffffffffffffffffffffffff294529452945ffffffffffff2945294529452945ffffffffffffffffffffffffffffffffffff29452945ffffffffffff2945294529452945ffffffffffffffffffffffffffffffffffffffffffffffffffffffff29452945294529452945ffffffffffffffffffffffffffffffffffffffffffffffff2945294529452945294529452945ffffffffffffffffffffffffffffffffffffffff294529452945294529452945294529452945ffffffffffffffffffffffffffffffff2945294529452945294529452945294529452945294529452945ffffffff29452945294529452945"
+    "new_hex": "2945294539c7ad75ffffffffffffffffffffffffad7539c729452945294529452945294529454a49e73cffffffffffffffffffffffffffffffffe73c4a492945294529452945294539c7e73cffffffffffffffff528a528affffffffffffffffe73c39c72945294529452945ad75ffffffffffffffffffff29452945ffffffffffffffffffffad7529452945294539c7ffffffffffffffffffffffff29452945ffffffffffffffffffffffff39c7294529456b6dffffffffffffffffffffffff29452945ffffffffffffffffffffffff6b6d2945294594b2ffffffffffffffffffffffff29452945d69affffffffffffffffffff94b22945294594b2ffffffffffffffffffffffff5aab294529458c51ffffffffffffffff94b2294529456b6dffffffffffffffffffffffffffff94b2294529454a49e71cffffffff6b6d2945294539c7ffffffffffffffffffffffffffffffffdefb5aab2945c638ffffffff39c7294529452945ad75ffffffffffffffffffffffffffffffffffffef5dffffffffad75294529452945294539c7e73cffffffffffffffffffffffffffffffffffffffffe73c39c7294529452945294529454a49e73cffffffffffffffffffffffffffffffffe73c4a49294529452945294529452945294539c7ad75ffffffffffffffffffffffffad7539c7294529452945294529452945294529452945294539c76b6d94b294b26b6d39c7294529452945"
    },
    {
     "file_offset": "0xc8615e",
@@ -3726,7 +4152,7 @@
    }
   ],
   "pixels_changed": 0,
-  "bytes_changed": 180254
+  "bytes_changed": 179710
  },
  "tail": {
   "exec": "0x307bfb4",
@@ -3754,8 +4180,8 @@
   }
  ],
  "diff_vs_stock": {
-  "bytes_changed": 4747874,
-  "range_count": 428333,
+  "bytes_changed": 4747626,
+  "range_count": 428357,
   "note": "range list omitted; rebuild with patches/full/build/build_full.py for it"
  },
  "validation": "validate_grown() passed (structural checks, layout derived from the image)",

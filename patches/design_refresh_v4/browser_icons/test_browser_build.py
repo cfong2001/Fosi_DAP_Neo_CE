@@ -75,7 +75,7 @@ def main():
 
     entries = {e['id']: e for e in Image(out).images()}
     bad = []
-    for asset_dir, count in ((HERE / 'icon_set_browser', 38),
+    for asset_dir, count in ((HERE / 'icon_set_browser', 43),
                              (HERE.parent / 'icon_set_v4', 54)):
         mapping = json.loads((asset_dir / 'mapping.json').read_text())
         assert mapping['count'] == count, (asset_dir, mapping['count'])
@@ -86,7 +86,7 @@ def main():
             if got != want:
                 bad.append(a['id'])
     assert not bad, f'resources not byte-exact in build: {bad}'
-    print('validation build: all 38 browser resources and all 54 '
+    print('validation build: all 43 browser resources and all 54 '
           'v4 resources match their .bin files byte for byte')
     print('PASS')
     return 0

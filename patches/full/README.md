@@ -9,7 +9,7 @@ structural validation.
 | | |
 |---|---|
 | Input | `DP3_V137.img`, 13,631,492 bytes, SHA-256 `fcc1cd3e…` |
-| Output | 13,638,454 bytes, SHA-256 `57d920afd8a636b1c2e369ee7e2e55de70910afc47ff930de3f3792cf4b4dfd8` |
+| Output | 13,638,454 bytes, SHA-256 `5c2283c814046cf95eaa6f782eb4c3aae7c3aa1196458c93ec1130453ce97bf5` |
 | Composition | 64 byte patches, 2 transplants, 2 growth insertions, one merged gap tail, one merged theme config |
 | Default build | unchanged, still SHA-256 `92c44606…` (verify.py checks 1 to 13 pass; check 13 pins this build) |
 
@@ -75,7 +75,7 @@ pin.
 | Opus replacing WMA | opus72 transplant (module 72 SHA-256 `6a7d50d2…`) and the five classifier rename patches from `patches/opus_swap/` |
 | Safer track titles | Title pair from `patches/theater/text/`, module 27, same length |
 | Design refresh v4 glyphs | Local patches 0110 to 0117 (module 27, the v4 repoint sites retargeted to the ground-filling wrapper in the tail) and 182 runs in the merged theme config |
-| Browser icon extension | 244 runs in the merged theme config from `patches/design_refresh_v4/browser_icons/browser-glyphs.json` |
+| Browser icon extension | 315 runs in the merged theme config from `patches/design_refresh_v4/browser_icons/browser-glyphs.json` |
 | CE splash mark | 64 runs in the merged theme config from `patches/theme_editor/ce-mark.json` |
 | Theater mode | Local patches 0100 to 0104 (module 18) and the 676-byte payload in the tail at 0x0307C354. The sampler cap is 64 rows here (48 in the standalone variant), so a 190-pixel-tall cover gets a true top third |
 | Theater on no-art tracks | Local patches 0045 and 0046 (module 27) and `theater_noart_close` / `theater_noart_open` in the tail |

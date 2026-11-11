@@ -1,5 +1,20 @@
 # Changelog
 
+## 2026-11-11: antialiased status and browser icons
+
+- The status and browser icon set (lock, play state, battery levels and
+  charging frames, headphones, file, clock) now has baked antialiasing.
+  These are drawn opaque, so edges blend exactly into each icon's own
+  ground. Battery shells and terminals are rounded.
+- Five stock two-colour keyed sprites are redrawn inside their stock
+  footprints with antialiased edges: the black mini pause/play (189,
+  190, 355, 356) and the light-theme speaker 298.
+- Stock art that already had smooth edges is unchanged (large clock
+  digits, Bluetooth, headphones 116, checkmarks, spinner, arrows,
+  dots). So are the 7x9 pixel digits, which read best crisp.
+- New Standard pin `5c2283c8…`. The merged theme has 565 runs (browser
+  315). The browser icon tests run without an unpacked tree.
+
 ## 2026-11-11: antialiased transport sprites
 
 - The v4 transport sprites carry baked antialiasing. Edge pixels are

@@ -630,7 +630,7 @@ def main():
     # One build.py pass composing every feature: 65 patches, the
     # vorbis75 and opus72 transplants, two growth insertions
     # (module 31 +6,936, module 24 +26), the merged
-    # 2,040-byte gap tail and the merged 494-run theme config. The
+    # 2,040-byte gap tail and the merged 565-run theme config. The
     # ebook reader (module 30) is not shrunk, so the image is
     # exactly the growth total longer than stock. Confinement is
     # proven per segment against the default unified build: a
@@ -641,7 +641,7 @@ def main():
     # differ only at the theme runs, the mirrored header and
     # the trailer CRC once the growth shift is accounted for.
     FULL_DIR = HERE.parent / 'full'
-    FULL_SHA = '57d920afd8a636b1c2e369ee7e2e55de70910afc47ff930de3f3792cf4b4dfd8'
+    FULL_SHA = '5c2283c814046cf95eaa6f782eb4c3aae7c3aa1196458c93ec1130453ce97bf5'
     GROWTH_TOTAL = 6962
     if ecp is None:
         check('full build: composed image pinned, diff confined '

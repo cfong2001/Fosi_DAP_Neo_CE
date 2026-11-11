@@ -82,7 +82,7 @@ this window calls variants 0 and 2, so it never appears here.
 
 ### The set
 
-38 resources: 20 dark, 18 light. Meanings follow the stock art
+38 resources: 20 dark, 18 light (plus the five keyed sprites described under Art spec, 43 in all). Meanings follow the stock art
 (the v3 mapping agrees where it covers these ids: lock,
 small-pause, small-play, battery-level-n, battery-charging-n,
 headphones, clock).
@@ -154,26 +154,41 @@ code and no list resource (there are none).
 ## Art spec
 
 Generator: generate_browser_icons.py (deterministic; 8x
-supersampled primitive canvas, box downscale, half-coverage
-threshold, no anti-aliasing colours emitted). Bare filled glyphs:
+supersampled primitive canvas, box downscale to coverage, with the
+antialiasing baked into the pixels). Coverage under 1/16 is the
+pixel's ground (or the 0xF800 key), 15/16 or more is the ink, and
+partial coverage is the ink blended toward the ground. These
+resources are drawn opaque (route (b)), so that blend is exact. Over
+a key it blends toward a fixed target instead (see the keyed set
+below). Bare filled glyphs:
 padlock (accent 0xF220, the state colour stock marks hold with),
 pause bars, play triangle, headphones (band and filled pads),
 document with X, filled document with a 1 cutout, clock disc
-with hand cutouts, battery outline with bar slots. Ink 0xFFFF on
+with hand cutouts, battery shell (rounded, stock 2 px wall, rounded
+terminal) with bar slots. Ink 0xFFFF on
 the dark set, 0x0000 on the light set; battery bars keep the
 stock state colours above. The five blank resources (38, 261,
 265, 427, 431) are solid ground, byte-identical to stock by
 design. Every resource keeps its exact stock dimensions and byte
-length. Contact sheets: sheets/stock_vs_browser_3x_dark.png and
+length.
+
+Keyed set (added with the baked antialiasing): five two-colour stock
+sprites redrawn inside their stock footprint, with the 0xF800
+surround kept. Black mini pause/play 189/190 (dark) and 355/356
+(light) blend toward light grey 0xC618, because a black glyph only
+reads on a light surface. The speaker 298 is the light-theme twin
+of 132 and blends toward the white light-theme ground.
+
+Contact sheets: sheets/stock_vs_browser_3x_dark.png and
 sheets/stock_vs_browser_3x_light.png (stock left, new right, 3x).
 
 ## Gates and results
 
 - Pixel audit (runs inside the generator): every replaced
   resource uses only its declared colours (ink, ground or field,
-  bar colour); corners sit on the declared ground (dark battery
-  outline touches the left edge, as stock's does); blanks are
-  pure ground; battery bar column runs match the frame's level.
+  bar colour) and baked blends of the ink toward them; only keyed
+  frames contain the key; blanks are pure ground; battery bar
+  column runs match the frame's level.
   Pass.
 - Opacity emulation (test_browser_opaque.py, the prove_keying.py
   harness pattern on real module 0 code): DrawImage emits every
@@ -186,9 +201,9 @@ sheets/stock_vs_browser_3x_light.png (stock left, new right, 3x).
   92c446066e715d74a719671d3ee643ed4b7587c94801eb6dc3893f2271ed944d.
   A build with the v4 manifest (default patches plus the eight
   transport repoints) and a merged theme config (v4 runs plus
-  the 244 browser runs) produces image SHA-256
-  f96f3e2c2782417ca5825218184493f64c553e110050d950a248effe496061be,
-  in which all 38 browser resources and all 54 v4 resources match
+  the 315 browser runs) produces image SHA-256
+  69584f72b1dd7cd953eccc088da80b93cedb0778322ef37f1eb20b27936df822,
+  in which all 43 browser resources and all 54 v4 resources match
   their .bin files byte for byte. Pass.
 - No interference: the v4 keyed transport gates
   (../test_keyed_transport.py) re-run after this set was added;
@@ -198,7 +213,7 @@ sheets/stock_vs_browser_3x_light.png (stock left, new right, 3x).
 ## Integration note
 
 Art only; no patches, no manifest changes, no repoints. The full
-build's theme merge gains the runs from browser-glyphs.json (244
+build's theme merge gains the runs from browser-glyphs.json (315
 runs) alongside the CE mark and the v4 runs; build.py refuses
 overlapping claims, and the validation build above proves this
 merge. Files the integrator must take from this directory:

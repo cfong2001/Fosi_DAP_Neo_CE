@@ -57,7 +57,7 @@ test('reproduces the pin and refuses existing output and aliases',
     const result = run(stock, opus, out);
     assert.equal(result.status, 0, result.stderr);
     const outputBefore = sha(await readFile(out));
-    assert.equal(outputBefore, '57d920afd8a636b1c2e369ee7e2e55de70910afc47ff930de3f3792cf4b4dfd8');
+    assert.equal(outputBefore, '5c2283c814046cf95eaa6f782eb4c3aae7c3aa1196458c93ec1130453ce97bf5');
     assert.notEqual(run(stock, opus, out).status, 0);
     assert.equal(sha(await readFile(out)), outputBefore);
     assert.notEqual(run(stock, opus, stock).status, 0);

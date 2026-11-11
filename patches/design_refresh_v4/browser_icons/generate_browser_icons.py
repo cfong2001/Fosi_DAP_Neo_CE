@@ -139,6 +139,21 @@ def battery_spec(rid):
 for _rid in list(range(145, 155)) + list(range(311, 321)):
     SPECS[_rid] = battery_spec(_rid)
 
+# Keyed two-colour stock sprites, redrawn with baked antialiasing
+# inside their stock footprint. Over a key the fringe blends toward a
+# fixed target: the black play-state pair (both themes) only reads on
+# a light surface, so light grey; 298 is the light-theme twin of the
+# speaker 132 and sits on the white light-theme ground.
+LIGHT_SURFACE = 0xC618
+for _rid, _art, _target, _what in (
+        (189, 'mini-pause', LIGHT_SURFACE, 'mini pause (dark)'),
+        (190, 'mini-play', LIGHT_SURFACE, 'mini play (dark)'),
+        (355, 'mini-pause', LIGHT_SURFACE, 'mini pause (light)'),
+        (356, 'mini-play', LIGHT_SURFACE, 'mini play (light)'),
+        (298, 'speaker', 0xFFFF, 'speaker (light)')):
+    SPECS[_rid] = dict(art=_art, ground=KEY, ink=0x0000, target=_target,
+                       keyed=True, meaning=_what)
+
 
 def rgb888(v):
     return (((v >> 11) & 31) * 255 // 31, ((v >> 5) & 63) * 255 // 63,
@@ -201,10 +216,40 @@ class Canvas:
         self.stroke(pts, width, fill=fill)
 
     def mask(self):
+        """Per-pixel coverage, 0.0 to 1.0, from the 8x supersample."""
         small = self.img.resize((self.w, self.h), Image.BOX)
         px = small.load()
-        return [[px[x, y] >= 128 for x in range(self.w)]
+        return [[px[x, y] / 255 for x in range(self.w)]
                 for y in range(self.h)]
+
+
+def neutral(v):
+    """RGB565 grey with the luminance (Rec. 601) of `v`."""
+    r, g, b = rgb888(v)
+    y = round(0.299 * r + 0.587 * g + 0.114 * b)
+    return (y * 31 + 127) // 255 << 11 | (y * 63 + 127) // 255 << 5 | \
+        (y * 31 + 127) // 255
+
+
+def blend(ink, target, cov):
+    a, b = rgb888(ink), rgb888(target)
+    r, g, bl = (round(i * cov + j * (1 - cov)) for i, j in zip(a, b))
+    w = (r * 31 + 127) // 255 << 11 | (g * 63 + 127) // 255 << 5 | \
+        (bl * 31 + 127) // 255
+    return w ^ 0x0020 if w == KEY else w
+
+
+def bake(ink, under, cov, target=None):
+    """One pixel with baked antialiasing. `under` is what the pixel
+    is when uncovered: an opaque ground, or KEY for a transparent
+    surround. Partial coverage blends the ink toward the ground
+    itself when it is opaque (exact, since the sprite lands as
+    drawn) and toward `target` (a neutral grey) over a key."""
+    if cov < 1 / 16:
+        return under
+    if cov >= 15 / 16:
+        return ink
+    return blend(ink, under if under != KEY else target, cov)
 
 
 def glyph_mask(art, w, h):
@@ -236,6 +281,14 @@ def glyph_mask(art, w, h):
         c.poly([(8.6, 1.2), (11.8, 4.4), (11.8, 1.2)], fill=0)  # fold
         c.rrect((6.3, 5.6, 7.9, 12.4), 0.7, fill=0)   # digit 1
         c.poly([(6.3, 5.6), (4.7, 7.6), (6.3, 8.0)], fill=0)
+    elif art == 'mini-pause':                       # stock bars x 1..3, 8..10
+        c.rrect((1.0, 0.0, 4.0, 12.0), 1.0)
+        c.rrect((8.0, 0.0, 11.0, 12.0), 1.0)
+    elif art == 'mini-play':                        # stock x 2..10, y 0..11
+        c.poly([(2.0, -0.3), (2.0, 12.3), (11.4, 6.0)])
+    elif art == 'speaker':                          # stock 8x14 cone
+        c.poly([(0, 3), (3, 3), (6.4, 0), (8, 0), (8, 14), (6.4, 14),
+                (3, 11), (0, 11)])
     elif art == 'clock':
         c.circle(9, 9, 7.4)                           # disc
         c.stroke([(9, 9), (9, 4.9)], 1.8, fill=0)     # hands
@@ -262,23 +315,33 @@ def battery_words(spec, w, h):
         bx0, by0, bx1, by1 = 1, 1, 24, 12
         nub = (25, 4, 26, 9)
         inner = (3, 3, 22, 10)
-    body.rect((bx0, by0, bx1, by1))
-    body.rect(nub)
-    body.rect(inner, fill=0)
+    # rounded shell with the stock 2 px wall and a rounded terminal;
+    # the antialiasing is baked into the curves (bake())
+    body.rrect((bx0, by0, bx1 + 1, by1 + 1), 2.6)
+    body.rrect((nub[0] - 1, nub[1], nub[2] + 1, nub[3] + 1), 1.0)
+    ix0, iy0, ix1, iy1 = inner
+    body.rrect((ix0, iy0, ix1 + 1, iy1 + 1), 1.0, fill=0)
     outline = body.mask()
+    # where the rounded shell's outer edge sits, for the light
+    # charging frames' keyed exterior
+    shell = Canvas(w, h)
+    shell.rrect((bx0, by0, bx1 + 1, by1 + 1), 2.6)
+    shell.rrect((nub[0] - 1, nub[1], nub[2] + 1, nub[3] + 1), 1.0)
+    inside = shell.mask()
+    target = neutral(FIELD_DARK if dark else 0xFFFF)
     words = []
     for y in range(h):
         for x in range(w):
-            if outline[y][x]:
-                words.append(spec['ink'])
-            elif any(a <= x <= b for a, b in BAR_RUNS[:spec['level']]) \
+            if any(a <= x <= b for a, b in BAR_RUNS[:spec['level']]) \
                     and BAR_ROWS[0] <= y <= BAR_ROWS[1]:
-                words.append(spec['bar'])
-            elif spec['charging'] and not dark and \
-                    not (bx0 <= x <= nub[2] and by0 <= y <= by1):
-                words.append(KEY)          # light charging: exterior key
+                under = spec['bar']
+            elif spec['charging'] and not dark and inside[y][x] < 1 / 16:
+                under = KEY                # light charging: exterior key
+            elif spec['charging'] and not dark:
+                under = 0xFFFF
             else:
-                words.append(spec['field'])
+                under = spec['field']
+            words.append(bake(spec['ink'], under, outline[y][x], target))
     return words
 
 
@@ -286,7 +349,8 @@ def render(spec, w, h):
     if spec['art'] == 'battery':
         return battery_words(spec, w, h)
     mask = glyph_mask(spec['art'], w, h)
-    return [spec['ink'] if mask[y][x] else spec['ground']
+    target = spec.get('target', neutral(spec['ground']))
+    return [bake(spec['ink'], spec['ground'], mask[y][x], target)
             for y in range(h) for x in range(w)]
 
 
@@ -361,36 +425,32 @@ def main():
     print(f'{len(assets)} resources, {len(runs)} runs')
 
     # ---- route (b) pixel audit -------------------------------------
-    # Every replaced resource uses only its declared colours; every
-    # corner sits on the declared ground (charging frames: on the
-    # key); blanks are pure ground; battery bar runs match level.
+    # Every pixel is its declared ground (or key), the ink, a battery
+    # bar, or a baked blend of the ink toward its ground (toward the
+    # neutral target over a key); blanks are pure ground; battery bar
+    # runs match the level; no pixel is the key unless the stock
+    # frame keyed it.
     for a in assets:
         spec = SPECS[a['id']]
         words = rendered[a['id']]
-        allowed = {spec['ink'], spec.get('ground', spec.get('field'))}
         if spec['art'] == 'battery':
-            allowed.add(spec['bar'])
-            if spec['charging'] and spec['theme'] == 'light':
-                allowed.add(0xFFFF)
-        used = set(words)
-        assert used <= allowed, (a['id'], used - allowed)
-        w, h = a['w'], a['h']
-        corners = [words[0], words[w - 1], words[w * (h - 1)],
-                   words[w * h - 1]]
-        if spec['art'] == 'battery' and spec['theme'] == 'dark':
-            # the dark outline touches the left edge (stock outline
-            # box x 0..25, y 0..13): left corners are ink, right
-            # corners are field (or key on the charging frames)
-            want = [spec['ink'],
-                    KEY if spec['charging'] else spec['field'],
-                    spec['ink'],
-                    KEY if spec['charging'] else spec['field']]
+            dark = spec['theme'] == 'dark'
+            grounds = {spec['field'], spec['bar']}
+            if spec['charging'] and not dark:
+                grounds |= {KEY, 0xFFFF}
+            target = neutral(FIELD_DARK if dark else 0xFFFF)
         else:
-            want_corner = KEY if spec.get('charging') else \
-                spec.get('ground', spec.get('field'))
-            want = [want_corner] * 4
-        assert corners == want, \
-            (a['id'], [hex(c) for c in corners], [hex(c) for c in want])
+            grounds = {spec['ground']}
+            target = spec.get('target', neutral(spec['ground']))
+        allowed = set(grounds) | {spec['ink']}
+        for g in grounds:
+            for k in range(256):
+                allowed.add(bake(spec['ink'], g, k / 255, target))
+        used = set(words)
+        assert used <= allowed, (a['id'], [hex(v) for v in used - allowed])
+        if KEY in used:
+            assert spec.get('charging') or spec.get('keyed'), a['id']
+        w, h = a['w'], a['h']
         if spec['art'] == 'blank':
             assert used == {spec['ground']}, a['id']
         if spec['art'] == 'battery':
@@ -405,7 +465,7 @@ def main():
                     runs_seen.append([x, x])
             assert [tuple(r) for r in runs_seen] == \
                 list(BAR_RUNS[:spec['level']]), (a['id'], runs_seen)
-    print('pixel audit: PASS (colour sets, corners, blanks, bar runs)')
+    print('pixel audit: PASS (colour sets with baked blends, blanks, bar runs)')
 
     # ---- contact sheets: stock vs new at 3x -------------------------
     font = ImageFont.truetype(
