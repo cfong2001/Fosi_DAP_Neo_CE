@@ -749,7 +749,7 @@ expect to find Neo-specific ones of their own.
 
 ## 6. Easiest path per goal
 
-For each of Chase's goals: the easiest known path, and what existing
+For each of the project's goals: the easiest known path, and what existing
 work it rests on. "Nothing found" means the survey (§4) and the three
 primary sources contain no implementation to reuse.
 
