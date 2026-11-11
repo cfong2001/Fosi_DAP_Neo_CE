@@ -201,8 +201,8 @@ sheets/stock_vs_browser_3x_light.png (stock left, new right, 3x).
   92c446066e715d74a719671d3ee643ed4b7587c94801eb6dc3893f2271ed944d.
   A build with the v4 manifest (default patches plus the eight
   transport repoints) and a merged theme config (v4 runs plus
-  the 315 browser runs) produces image SHA-256
-  69584f72b1dd7cd953eccc088da80b93cedb0778322ef37f1eb20b27936df822,
+  the 300 browser runs) produces image SHA-256
+  6f83979834998c231cdd598ac20379fcab00606de44a8d038b49fa4cbedf3dca,
   in which all 43 browser resources and all 54 v4 resources match
   their .bin files byte for byte. Pass.
 - No interference: the v4 keyed transport gates
@@ -213,7 +213,7 @@ sheets/stock_vs_browser_3x_light.png (stock left, new right, 3x).
 ## Integration note
 
 Art only; no patches, no manifest changes, no repoints. The full
-build's theme merge gains the runs from browser-glyphs.json (315
+build's theme merge gains the runs from browser-glyphs.json (300
 runs) alongside the CE mark and the v4 runs; build.py refuses
 overlapping claims, and the validation build above proves this
 merge. Files the integrator must take from this directory:

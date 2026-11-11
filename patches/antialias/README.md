@@ -14,6 +14,15 @@ the default ground shows as a brown outline on other covers. No draw
 code changed. The keyed-transport emulation gates check every landed
 pixel against the sprites.
 
+## Shipped: baked antialiasing in the status and browser icons
+
+`../design_refresh_v4/browser_icons/generate_browser_icons.py` bakes the
+same way. These icons are drawn opaque, so edges blend exactly into each
+icon's own ground. Battery shells and terminals are rounded. Five stock
+two-colour keyed sprites (189, 190, 355, 356, 298) are redrawn inside
+their stock footprints. `compare.py` writes `mock/icons_before_after.png`
+from the stock and release images: every changed icon at 6x.
+
 ## Mockups: text options (not built)
 
 Nothing here changes firmware. `mock.py` renders the theater now-playing

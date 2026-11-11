@@ -12,8 +12,8 @@
 - Stock art that already had smooth edges is unchanged (large clock
   digits, Bluetooth, headphones 116, checkmarks, spinner, arrows,
   dots). So are the 7x9 pixel digits, which read best crisp.
-- New Standard pin `5c2283c8…`. The merged theme has 565 runs (browser
-  315). The browser icon tests run without an unpacked tree.
+- New Standard pin `7f496fae…`. The merged theme has 550 runs (browser
+  300). The browser icon tests run without an unpacked tree.
 
 ## 2026-11-11: antialiased transport sprites
 

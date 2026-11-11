@@ -138,6 +138,9 @@ def battery_spec(rid):
 
 for _rid in list(range(145, 155)) + list(range(311, 321)):
     SPECS[_rid] = battery_spec(_rid)
+    SPECS[_rid]['id'] = _rid
+
+STOCK = {}      # id -> stock words, filled by main() before rendering
 
 # Keyed two-colour stock sprites, redrawn with baked antialiasing
 # inside their stock footprint. Over a key the fringe blends toward a
@@ -183,8 +186,10 @@ class Canvas:
                           (y1 + 1) * S - 1], fill=fill)
 
     def rrect(self, box, r, fill=255):
+        # box edges are pixel boundaries; PIL's end coordinate is
+        # inclusive, so stop one supersample short of x1, y1
         x0, y0, x1, y1 = [c * S for c in box]
-        self.d.rounded_rectangle([x0, y0, x1, y1], radius=r * S,
+        self.d.rounded_rectangle([x0, y0, x1 - 1, y1 - 1], radius=r * S,
                                  fill=fill)
 
     def circle(self, cx, cy, r, fill=255):
@@ -335,8 +340,15 @@ def battery_words(spec, w, h):
             if any(a <= x <= b for a, b in BAR_RUNS[:spec['level']]) \
                     and BAR_ROWS[0] <= y <= BAR_ROWS[1]:
                 under = spec['bar']
-            elif spec['charging'] and not dark and inside[y][x] < 1 / 16:
-                under = KEY                # light charging: exterior key
+            elif inside[y][x] < 1 and dark:
+                # (partly) outside the rounded shell. The dark frames'
+                # outline runs to the sprite edge, so rounding uncovers
+                # stock's own edge pixels there.
+                under = STOCK[spec['id']][y * w + x]
+            elif inside[y][x] < 1:
+                # light frames: a white margin, or the key on the
+                # charging frames, as stock
+                under = KEY if spec['charging'] else 0xFFFF
             elif spec['charging'] and not dark:
                 under = 0xFFFF
             else:
@@ -387,6 +399,10 @@ def main():
     rendered = {}
     assets = []
     runs = []
+    for rid, e in imgs.items():
+        if rid in SPECS:
+            STOCK[rid] = struct.unpack_from(f'>{e["size"] // 2}H', raw,
+                                            e['data_offset'])
     for rid in sorted(SPECS):
         spec = SPECS[rid]
         e = imgs[rid]
@@ -436,6 +452,8 @@ def main():
         if spec['art'] == 'battery':
             dark = spec['theme'] == 'dark'
             grounds = {spec['field'], spec['bar']}
+            if dark:
+                grounds |= set(STOCK[a['id']])
             if spec['charging'] and not dark:
                 grounds |= {KEY, 0xFFFF}
             target = neutral(FIELD_DARK if dark else 0xFFFF)
