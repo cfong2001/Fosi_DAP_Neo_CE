@@ -78,7 +78,7 @@ modification, on a count mismatch, and on a runs entry whose expected
 bytes do not match; `--theme-config` with `--recovery` is refused.
 `verify.py` check 10 pins all of it: the default build unchanged, the
 example theme's diff confined to resources 6 to 10 at exactly 32,760
-bytes, the CE mark diff at exactly its 496 bytes, and the refusals.
+bytes, the CE mark diff at exactly the bytes its runs change, and the refusals.
 
 Two things remain open. Literal code sites are still not themeable:
 the APPROVED_LITERAL_SITES registry in `tools/ui_theme.py` is empty,

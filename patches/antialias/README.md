@@ -23,6 +23,29 @@ two-colour keyed sprites (189, 190, 355, 356, 298) are redrawn inside
 their stock footprints. `compare.py` writes `mock/icons_before_after.png`
 from the stock and release images: every changed icon at 6x.
 
+## Shipped: full-screen art, dialogs and the progress bar
+
+`generate_screens.py` bakes the rest of the stored art the same way:
+
+- **Dialog cards** (137, 193, 203, 303, 359, 369): exact radius-16 corners,
+  blended toward the screen behind them.
+- **Low-battery icon** in 137/303: a rounded shell and terminal, and a
+  smooth bolt.
+- **"Powering off…"** in 294: smooth proportional text.
+- **CE splash mark** in 127/293: smooth bold text. The generator writes
+  `../theme_editor/ce-mark.json`.
+- **Progress bar columns** (187, 188, 353, 354): softened top and bottom
+  rows. These are the 1x6 columns module 27 repeats along the bar.
+- **Progress knob** (220, 386): a keyed disc. Patch
+  `../full/patches/0118` draws it through the keyed helper, so it no longer
+  sits in its stock dark square over a theater ground.
+
+`test_screens.py` checks the art in the Standard image. It confirms the
+repoint and runs the keyed knob draw in emulation. Menu and list text is
+drawn by the firmware's 1-bit font, which cannot hold antialiasing, so it
+is unchanged. The README renders and the site simulator draw the progress
+bar from these resources at module 27's coordinates.
+
 ## Mockups: text options (not built)
 
 Nothing here changes firmware. `mock.py` renders the theater now-playing

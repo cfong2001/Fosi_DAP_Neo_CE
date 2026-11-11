@@ -8,7 +8,7 @@
 import {SECTIONS} from "./sim-data.mjs";
 import {
   WIDTH, HEIGHT, ART, parseResourceSection, resourceSectionOf, fill, draw, blit,
-  paintPlayer, groundFor, theaterGround, rgbaToWords, toRGBA, sampleCover, rgb888
+  paintPlayer, paintProgress, groundFor, theaterGround, rgbaToWords, toRGBA, sampleCover, rgb888
 } from "./sim-core.mjs";
 import {sha256} from "./theme-core.mjs";
 import {repoFromLocation, rawUrl} from "./repo.mjs";
@@ -98,12 +98,15 @@ function frame(side) {
     if (!state.noArt) blit(fb, state.art, ART.size, ART.size, ART.x, ART.y);
     paintPlayer(fb, res, side, {page: state.page, playing: state.playing,
                                 light: state.light, ground});
+    const length = tracks[state.track][2];
+    paintProgress(fb, res, {fraction: state.position / length, light: state.light, ground});
   }
   return fb;
 }
 
-// Text, times and the progress bar are not resources; draw them at the
-// README renderer's approximate positions in the theme's text colour.
+// Text and times are not resources; draw them at the README renderer's
+// approximate positions in the theme's text colour. (The progress bar is
+// drawn from the image's own resources, in frame().)
 function drawText(ctx) {
   const [title, artist, length] = tracks[state.track];
   const ink = state.light ? "#141414" : "#f0f0f0";
@@ -116,8 +119,6 @@ function drawText(ctx) {
   ctx.textAlign = "left"; ctx.fillText(clock(state.position), 6, 257);
   ctx.textAlign = "right"; ctx.fillText("-" + clock(length - state.position), 234, 257);
   ctx.lineWidth = 1;
-  ctx.strokeRect(38.5, 252.5, 162, 10);
-  ctx.fillRect(38, 252, Math.round(163 * state.position / length), 11);
   if (state.noArt) {
     ctx.strokeRect(ART.x + 0.5, ART.y + 0.5, ART.size - 1, ART.size - 1);
     ctx.font = "12px Arial, sans-serif"; ctx.textAlign = "center";

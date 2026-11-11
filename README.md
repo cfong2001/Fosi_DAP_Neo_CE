@@ -21,7 +21,7 @@ CE (Community Edition) is patched firmware for the Fosi Audio DAP Neo. It starts
 
 | Image | What it carries | SHA-256 |
 |---|---|---|
-| [`DP3_V137_CE.img`](release/DP3_V137_CE.img) | Standard: every feature below. 6,962 bytes longer than stock. | `7f496fae397b7b9fea4ab4b9bf4131c3e35b2cded19f1722b94cfeb9cd786aa6` |
+| [`DP3_V137_CE.img`](release/DP3_V137_CE.img) | Standard: every feature below. 6,962 bytes longer than stock. | `70fb5bc70c8e82b0b9c1a589cd419438ff612b126470d6b358836273438d66df` |
 | [`DP3_V137_CE_minimal.img`](release/DP3_V137_CE_minimal.img) | Minimal: audio and library fixes only, same length as stock. | `92c446066e715d74a719671d3ee643ed4b7587c94801eb6dc3893f2271ed944d` |
 | [`DP3_V137_CE_recovery.img`](release/DP3_V137_CE_recovery.img) | Stock code dated one day after CE, for going back. | `aff851b31d6eee55cbd4bb3fc0464ac79f0039ee86ae6723225ac036a157d223` |
 
@@ -43,7 +43,7 @@ Everything here is in the standard image; the minimal image has the sound and li
 - Selecting an `.m3u` file in the browser plays it as a playlist; next, previous and shuffle stay inside it (up to 59 tracks from up to 6 folders).
 - With hold on, the lock screen shows the track title and elapsed time.
 - A long press of Power turns Bluetooth on or off. The status icons are redrawn, and the boot splash carries a CE mark.
-- Icons are antialiased. The transport, status, battery and browser icons carry smoothed edges in their pixels, so curves and diagonals no longer step. Icons on a solid strip blend exactly into it. The transport glyphs sit on album-derived backgrounds, so their edges blend toward a neutral grey. The 7×9 digits stay pixel-sharp. Before and after: [`icons_before_after.png`](patches/antialias/mock/icons_before_after.png).
+- Icons and baked screen art are antialiased. The transport, status, battery and browser icons, the dialog cards, the low-battery and power-off screens, the CE splash mark and the progress bar carry smoothed edges in their pixels, so curves, diagonals and text no longer step. Art on a solid ground blends exactly into it. Art over the album-derived background (the transport glyphs and the progress bar and knob) blends toward a neutral grey. List and menu text still comes from the 1-bit system font. Before and after: [icons](patches/antialias/mock/icons_before_after.png), [screens](patches/antialias/mock/screens_before_after.png).
 - Volume no longer freezes after two DAC errors, decoder clocks are lower, and the wheel timer wakes less often.
 
 ![Vorbis signal-to-noise per file, stock against CE](media/vorbis.png)
@@ -65,7 +65,8 @@ Every change is a patch file or a module transplant that [`patches/framework/bui
 | 0110 to 0117, 182 theme runs | Design refresh v4 transport glyphs, drawn keyed over the background, with baked antialiasing | ✓ | | [`design_v4.md`](patches/design_refresh_v4/design_v4.md) |
 | 300 theme runs | Browser and status icons (antialiased) | ✓ | | [`design_browser.md`](patches/design_refresh_v4/browser_icons/design_browser.md) |
 | 4 theme runs | Light-theme play-mode icons keyed, so they sit on the theater background | ✓ | | [`play_mode_light/`](patches/design_refresh_v4/play_mode_light/generate.py) |
-| 64 theme runs | CE splash mark | ✓ | | [`theme_editor/`](patches/theme_editor/README.md) |
+| 46 theme runs | CE splash mark, antialiased | ✓ | | [`theme_editor/`](patches/theme_editor/README.md) |
+| 0118, 430 theme runs | Antialiased dialog corners, low-battery icon, "Powering off…" text and progress bar; the progress knob is drawn keyed, so it sits on the theater background without a square | ✓ | | [`antialias/`](patches/antialias/README.md) |
 | 0100 to 0104, 0045, 0046 | Theater background, including the no-art reset | ✓ | | [`theater_mode.md`](patches/design_refresh_v2/theater_mode.md) |
 | 0032 | Bluetooth on a long press of Power | ✓ | | [`ui_features.md`](patches/ui_features/ui_features.md) |
 | 0040 to 0044, 0060 to 0062 | M3U playlists: browser import, playback hooks, exit on other playback | ✓ | | [`m3u_design.md`](patches/m3u/m3u_design.md) |

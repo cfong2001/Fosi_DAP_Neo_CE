@@ -11,9 +11,12 @@ Every figure says where its pixels come from:
   algorithm  the theater background computed with port_derived() from
              patches/full/build/tests/test_theater_full.py, the Python port
              that the test checks against the firmware's own trampoline
-  drawn      cover art, title and artist text, time labels and the progress
-             bar, drawn by this script at approximate positions (the painter code that draws
-             them needs a mounted card, so it cannot run offline)
+  composed   the progress bar: the image's own column and knob resources
+             (187, 188, 220) placed at the coordinates module 27 uses
+             (patches/ui_features/renderer/renderer.md)
+  drawn      cover art, title and artist text and time labels, drawn by
+             this script at approximate positions (the painter code that
+             draws them needs a mounted card, so it cannot run offline)
 
 Usage (from the repository root, with Unicorn, Capstone and Pillow):
 
@@ -142,9 +145,29 @@ def player(fw, ground, art, title, artist, light=False, b=0, play=1):
     d.text((120, 231), artist, fill=ink, font=font(13), anchor='mm')
     d.text((6, 257), '1:12', fill=ink, font=font(11), anchor='lm')
     d.text((234, 257), '-2:48', fill=ink, font=font(11), anchor='rm')
-    d.rectangle([38, 252, 200, 262], outline=ink)
-    d.rectangle([38, 252, 100, 262], fill=ink)
+    progress(fw, img, ground, light, 72 / 240)
     return img
+
+
+def progress(fw, img, ground, light, fraction):
+    """The player's progress bar as module 27 draws it (renderer.md):
+    a ground fill over (40, 254)..(201, 268), then one 1x6 column per
+    position at (46 + i, 258) for 148 positions, the filled column
+    (resource 187) up to the fraction of 147 and the empty column (188)
+    after it, then the knob (220) at (min(fill + 42, 196), 254). The
+    light theme takes the same ids plus 166."""
+    off = 166 if light else 0
+    ImageDraw.Draw(img).rectangle([40, 254, 201, 268], fill=rgb(ground))
+    filled = round(fraction * 147)
+    on, off_col = fw.resource(187 + off), fw.resource(188 + off)
+    for i in range(148):
+        img.paste(on if i < filled else off_col, (46 + i, 258))
+    knob = fw.resource(220 + off)
+    # keyed: the CE image draws the knob through the keyed helper (patch
+    # 0118) and its corners are 0xF800; the stock knob has no key pixels
+    mask = Image.new('L', knob.size)
+    mask.putdata([0 if p == rgb(0xF800) else 255 for p in knob.getdata()])
+    img.paste(knob, (min(filled + 42, 196), 254), mask)
 
 
 def framed(screens, captions, scale=2, gap=24, title=None, note=None):
@@ -178,7 +201,7 @@ def fig_player(stock, ce, out):
     framed([s, c], ['Stock V137', 'CE standard image'],
            note='Status icon and transport row: real painter output on each image (emulated). '
                 f'CE ground 0x{ground:04X} from the theater algorithm.\n'
-                'Cover, text and progress bar drawn by the renderer; their positions are approximate.'
+                'Cover and text drawn by the renderer at approximate positions; progress bar from the image.'
            ).save(out / 'player.png')
     return ground
 

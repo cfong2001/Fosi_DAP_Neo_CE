@@ -11,7 +11,8 @@ import path from "node:path";
 import {SECTIONS, PAINTER} from "../docs/sim-data.mjs";
 import {
   WIDTH, HEIGHT, parseResourceSection, resourceSectionOf, fill, paintPlayer,
-  theaterGround, sampleCover, rgb565, framebufferBytes, rgbaToWords
+  paintProgress, resourceWords, theaterGround, sampleCover, rgb565, framebufferBytes,
+  rgbaToWords
 } from "../docs/sim-core.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -88,4 +89,24 @@ test("theater ground follows the firmware port", () => {
   split.fill(0, 0, 48 * 144);
   assert.equal(theaterGround(split, 144, 144, false), 0);
   assert.equal(rgbaToWords(new Uint8ClampedArray([255, 255, 255, 0]))[0], 0);
+});
+
+test("progress bar is the image's own columns and knob at the player's coordinates", () => {
+  const res = parseResourceSection(resourceSectionOf(images.ce.image));
+  const ground = 0x7222;
+  for (const light of [false, true]) {
+    const off = light ? 166 : 0;
+    const fb = new Uint16Array(WIDTH * HEIGHT);
+    paintProgress(fb, res, {fraction: 0.5, light, ground});
+    const filled = Math.round(0.5 * 147);
+    const on = resourceWords(res, 187 + off), offc = resourceWords(res, 188 + off);
+    for (const i of [0, filled - 10, filled + 20, 147]) {   // clear of the knob
+      const col = i < filled ? on : offc;
+      for (let r = 0; r < 6; r++) assert.equal(fb[(258 + r) * WIDTH + 46 + i], col[r], `col ${i} row ${r}`);
+    }
+    const knob = resourceWords(res, 220 + off), kx = Math.min(filled + 42, 196);
+    assert.equal(fb[(254 + 7) * WIDTH + kx + 7], knob[7 * 14 + 7]);
+    assert.equal(fb[254 * WIDTH + 40], ground, "ground fill at the bar's corner");
+    assert.equal(fb[253 * WIDTH + 40], 0, "nothing above the bar area");
+  }
 });
