@@ -1402,7 +1402,7 @@ it appeared.
 Payload 6,992 B in the module 31 growth window (3,808 code
 + 3,184 data), 444 B spare. Variant image 13,638,484 B,
 SHA-256
-c58e51b5670fe08ffdd9e73c5a7f7cdb3539a4a62c138cf287f12806155e26c2. Hooks: the four standing hooks (0300
+b86d2488b1b623348cca2ac71813e22cc6f48b0e62d8d3a61b1568a2098429f0. Hooks: the four standing hooks (0300
 gate, 0301 key, 0302 exit, 0303 toggle) plus 0310 to 0315
 above; hooks 0304 to 0309 do not exist in this variant. The
 gap tail ships as 2,044 zero bytes and carries the slice
