@@ -41,8 +41,6 @@
 ../opus_swap/opus-rename-classifier-mod31.patch
 ../opus_swap/opus-rename-classifier-mod38.patch
 # Safer track titles (module 27 pair):
-../theater/text/title-copy.patch
-../theater/text/title-suffix.patch
 # Design refresh v4 transport repoints (module 27):
 patches/0113-transport-keyed-info-bare-ground.patch
 patches/0111-transport-keyed-playpause-bare-ground.patch
@@ -106,3 +104,9 @@ patches/0145-profile-commit.patch
 ../player_ui/0152-marquee-dwell.patch
 ../player_ui/0153-marquee-step-stamp.patch
 ../player_ui/0154-play-all-albums.patch
+
+# Metadata-first player title and seven-row track information:
+../player_ui/0160-track-info.patch
+../player_ui/0161-metadata-helpers.patch
+../player_ui/0162-track-info-entry.patch
+../player_ui/0163-player-tag-title.patch
