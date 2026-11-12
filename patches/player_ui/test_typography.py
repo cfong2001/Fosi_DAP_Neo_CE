@@ -25,11 +25,15 @@ class Typography(unittest.TestCase):
         u.reg_write(UC_ARM_REG_SP,0x030ED000);u.reg_write(UC_ARM_REG_LR,END|1)
         return u
     def test_time_draws_main_font(self):
-        for args,expected,x in [((0,3,9,0),'03:09',7),((0,59,59,1),'59:59',167),((1,0,0,0),'99:00',7)]:
-            u=self.machine(); seen=[]
+        for args,expected,x in [((0,3,9,0),'03:09',7),((0,59,59,1),'59:59',191),((1,0,0,0),'99:00',7)]:
+            u=self.machine(); seen=[]; fills=[]
             u.mem_write(0x030247E4,b'\x55')
             def hook(uc,addr,size,data):
-                if addr==0x03062CEE:
+                if addr==0x030632FA:
+                    fills.append(tuple(uc.reg_read(r) for r in (UC_ARM_REG_R0,UC_ARM_REG_R1,UC_ARM_REG_R2,UC_ARM_REG_R3)))
+                    for reg in (UC_ARM_REG_R0,UC_ARM_REG_R1,UC_ARM_REG_R2,UC_ARM_REG_R3):uc.reg_write(reg,0xBAD)
+                    uc.reg_write(UC_ARM_REG_PC,uc.reg_read(UC_ARM_REG_LR))
+                elif addr==0x03062CEE:
                     rect=uc.reg_read(UC_ARM_REG_R0);text=uc.reg_read(UC_ARM_REG_R2)
                     seen.append((struct.unpack('<4H',uc.mem_read(rect,8)),uc.mem_read(text,12).decode('utf-16le').split('\0')[0]))
                     uc.reg_write(UC_ARM_REG_PC,uc.reg_read(UC_ARM_REG_LR))
@@ -37,10 +41,21 @@ class Typography(unittest.TestCase):
             for reg,val in zip((UC_ARM_REG_R0,UC_ARM_REG_R1,UC_ARM_REG_R2,UC_ARM_REG_R3),args):u.reg_write(reg,val)
             for reg in (UC_ARM_REG_R4,UC_ARM_REG_R5,UC_ARM_REG_R6,UC_ARM_REG_R7):u.reg_write(reg,0x12345678)
             u.emu_start(0x0307E72D,END,count=1000)
-            self.assertEqual(seen,[((x,256,x+65,271),expected)])
+            right=72 if x==7 else 239
+            self.assertEqual(seen,[((x,240,right,253),expected)])
+            self.assertEqual(fills,[(x,240,right,253)])
+            self.assertLess(seen[0][0][3],254) # Stock progress erase starts here.
             self.assertEqual(u.reg_read(UC_ARM_REG_SP),0x030ED000)
             for reg in (UC_ARM_REG_R4,UC_ARM_REG_R5,UC_ARM_REG_R6,UC_ARM_REG_R7):self.assertEqual(u.reg_read(reg),0x12345678)
             self.assertEqual(u.mem_read(0x030247E4,1),b'\0' if args[3] else b'\x55')
+    def test_time_digits_fit_the_line(self):
+        im=Image((REPO/'release/DP3_V137_CE.img').read_bytes())
+        base=im.sections['font_b']['offset']
+        for ch in '0123456789:':
+            rec=im.raw[base+ord(ch)*33:base+(ord(ch)+1)*33]
+            rows=[y for y in range(16) if int.from_bytes(rec[y*2:y*2+2],'big')]
+            self.assertLess(max(rows),14)
+
     def test_marquee_stamp_wrap(self):
         for tick in (0,50,65535,65536,0xFFFFFFFF):
             u=self.machine();u.reg_write(UC_ARM_REG_R5,0x03023888);u.reg_write(UC_ARM_REG_R6,0x03023298)

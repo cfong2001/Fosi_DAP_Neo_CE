@@ -3,7 +3,7 @@
  "input_file": "DP3_V137.img",
  "output_file": "DP3_V137_CE.img",
  "input_sha256": "fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cdfade5e9c6ea3bd71ac6deef",
- "output_sha256": "638723894dfcd34011621e4ad02a449bc47eb5f463fb041e8f59a4a05b843742",
+ "output_sha256": "58e5801689bf70f8d68b730000f42ddae83dc6ff134d55a0e3d66b1af57c39f7",
  "byte_length": 13638148,
  "header_date": "20261023",
  "patches_applied": [
@@ -973,7 +973,7 @@
    "cpu_address": "0x307e72c",
    "file_offset": "0x88c0a",
    "old_hex": "10b5dff844c18ab000281cbf3920adf804000fd14cf6cd404843c00c3030adf80400acfb0140c008404200eb800001eb40003030adf806003c20adf808004cf6cd405043c00c3030adf80a00acfb0210c008404200eb800002eb40003030adf80c0000244ff48070adf80e4000904bb1cb23062201a9dd20e5f700f9364804700ab010bd0723062201a9dd20e5f7f6f8",
-   "new_hex": "10b588b01c46002818bf63210a23b1fbf3f000fb131130303031adf80000adf802103a20adf80400b2fbf3f000fb132230303032adf80600adf808200020adf80a00002c0cbf0720a720adf8100040f20010adf81200002c0cbf4820e820adf8140040f20f10adf8160004a801466a460023dff814c0e047002c02d003480021017008b010bd0000ef2c0603e4470203"
+   "new_hex": "10b588b01c46002818bf63210a23b1fbf3f000fb131130303031adf80000adf802103a20adf80400b2fbf3f000fb132230303032adf80600adf808200020adf80a00002c0cbf0720bf20adf8100040f2f000adf81200002c0cbf4820ef20adf8140040f2fd00adf8160004a801466a460023dff814c0e047002c02d003480021017008b010bd0000c1130503e4470203"
   },
   {
    "patch": "0151-marquee-stamp",
@@ -1183,6 +1183,17 @@
    "file_offset": "0x7ed5c",
    "old_hex": "d5f76aff",
    "new_hex": "d4f716f9"
+  },
+  {
+   "patch": "0155-time-clear-and-draw",
+   "file": "0155-time-clear-and-draw.patch",
+   "kind": "module",
+   "module": 0,
+   "region": "code",
+   "cpu_address": "0x30513c0",
+   "file_offset": "0x2aa6c",
+   "old_hex": "2de9f0411646ab2251434a0a424986b01f4651f822400c9d616841f00201616041494ff000084ff4006c032a0ed2dfe802f00207",
+   "new_hex": "07b582b0084b1b880093c388828841880088dff818c0e04702b0bde807400023dff80cc06047000000440003fb320603ef2c0603"
   }
  ],
  "transplants_applied": [
@@ -14573,8 +14584,8 @@
   }
  ],
  "diff_vs_stock": {
-  "bytes_changed": 5102644,
-  "range_count": 455885,
+  "bytes_changed": 5102694,
+  "range_count": 455888,
   "note": "range list omitted; rebuild with patches/full/build/build_full.py for it"
  },
  "validation": "validate_grown() passed (structural checks, layout derived from the image)",

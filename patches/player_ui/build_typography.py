@@ -30,14 +30,15 @@ def main():
             f'expect: {expect.hex()}\nreplace: {code.hex()}\nrationale: {rationale}\n')
     with tempfile.TemporaryDirectory() as tmp:
         b = Path(tmp)
-        (b/'link.ld').write_text('SECTIONS { .time 0x0307E72C : { *(.text.time) } .marquee 0x03053114 : { *(.text.marquee) } /DISCARD/ : { *(.ARM*) *(.comment) } }')
+        (b/'link.ld').write_text('SECTIONS { .time 0x0307E72C : { *(.text.time) } .marquee 0x03053114 : { *(.text.marquee) } .draw 0x030513C0 : { *(.text.draw) } /DISCARD/ : { *(.ARM*) *(.comment) } }')
         subprocess.run(['arm-none-eabi-gcc','-mcpu=cortex-m3','-mthumb','-nostdlib','-Wl,-T,'+str(b/'link.ld'),str(HERE/'typography.S'),'-o',str(b/'ui.elf')],check=True)
         for section, mod, address, limit, name in (
             ('time',27,0x0307E72C,148,'0150-player-time-font'),
-            ('marquee',0,0x03053114,20,'0151-marquee-stamp')):
+            ('marquee',0,0x03053114,20,'0151-marquee-stamp'),
+            ('draw',0,0x030513C0,68,'0155-time-clear-and-draw')):
             subprocess.run(['arm-none-eabi-objcopy','-O','binary','--only-section=.'+section,str(b/'ui.elf'),str(b/'part.bin')],check=True)
             code=(b/'part.bin').read_bytes(); assert len(code)<=limit,(section,len(code),limit)
-            patch(name,mod,address,code,'Main-font time text in the existing time routine.' if mod else 'Reset the marquee interval to 50 ticks after its first draw. The 20-byte tier-1 pocket has no static references (patches/space/census.json).')
+            patch(name,mod,address,code,{'time':'Main-font time text above the progress bar in the existing time routine.', 'marquee':'Reset the marquee interval after its first draw; tier-1 unused pocket.', 'draw':'Clear the time rectangle with the active ground before rendering; tier-1 unused pocket (patches/space/census.json).'}[section])
     patch('0152-marquee-dwell',0,0x030630BA,bytes.fromhex('96218185'),'Register a 150-tick initial pause in the existing interval field; no new state.')
     patch('0153-marquee-step-stamp',0,0x0306300E,branch(0x0306300E,0x03053114,True),'After a successful scroll draw, stamp the current tick and use 50 ticks between subsequent steps.')
     patch('0154-play-all-albums',23,0x0307DA44,('Play All Albums'+'\0').encode('utf-16le'),'Correct the inline English album action in its existing 32-byte slot.')

@@ -32,22 +32,22 @@ player_time:
     cmp r4, #0
     ite eq
     moveq r0, #7
-    movne r0, #167
+    movne r0, #191
     strh r0, [sp, #16]
-    movw r0, #256
+    movw r0, #240
     strh r0, [sp, #18]
     cmp r4, #0
     ite eq
     moveq r0, #72
-    movne r0, #232
+    movne r0, #239
     strh r0, [sp, #20]
-    movw r0, #271
+    movw r0, #253
     strh r0, [sp, #22]
     add r0, sp, #16
     mov r1, r0
     mov r2, sp
     movs r3, #0
-    ldr ip, =0x03062CEF
+    ldr ip, =0x030513C1
     blx ip
     cmp r4, #0
     beq 1f
@@ -67,3 +67,27 @@ marquee_stamp:
     movs r0, #50
     strh r0, [r5, #0x2C]
     bx lr
+
+/* Clear the text rectangle before rendering tabular digits. Main-font ink
+ * occupies rows 2..12; the 14-row line ends before the bar at y=254. */
+.section .text.draw,"ax",%progbits
+.global time_draw
+.thumb_func
+time_draw:
+    push {r0, r1, r2, lr}
+    sub sp, #8
+    ldr r3, =0x03004400
+    ldrh r3, [r3]
+    str r3, [sp]
+    ldrh r3, [r0, #6]
+    ldrh r2, [r0, #4]
+    ldrh r1, [r0, #2]
+    ldrh r0, [r0]
+    ldr ip, =0x030632FB
+    blx ip
+    add sp, #8
+    pop.w {r0, r1, r2, lr}
+    movs r3, #0
+    ldr ip, =0x03062CEF
+    bx ip
+.ltorg

@@ -2,9 +2,15 @@
 
 Standard CE draws elapsed and total time with the same text renderer and
 font as the player title. The existing 148-byte time routine now formats
-`MM:SS` into a bounded stack buffer and draws in a 66 by 16 pixel rectangle.
+`MM:SS` into a bounded stack buffer. Its 14-pixel text line at y=240 ends
+before the progress bar at y=254; the total counter starts at x=191.
+A helper clears each rectangle with the current ground before drawing, so
+changing digits leave no stale ink. The actual Font B digit and colon
+records have ink only through row 12 and fit the line without clipping.
 The stock 99-minute display limit and total-time state reset are preserved.
-The sprite-digit resources are no longer used by this routine.
+The sprite-digit resources are no longer used by this routine. The
+52-byte clear-and-draw helper occupies a separate tier-1 resident pocket
+at `0x030513C0`; it preserves the renderer arguments across the fill.
 
 The shared marquee registrar starts with a 150-tick pause (1.5 seconds).
 Only after an actual scroll draw does the stepper select 50 ticks between

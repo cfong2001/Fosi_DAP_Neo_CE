@@ -491,7 +491,7 @@ export const FULL_EXTRA_PATCHES = [
   "region": "code",
   "address": 50849580,
   "expect": "10b5dff844c18ab000281cbf3920adf804000fd14cf6cd404843c00c3030adf80400acfb0140c008404200eb800001eb40003030adf806003c20adf808004cf6cd405043c00c3030adf80a00acfb0210c008404200eb800002eb40003030adf80c0000244ff48070adf80e4000904bb1cb23062201a9dd20e5f700f9364804700ab010bd0723062201a9dd20e5f7f6f8",
-  "replace": "10b588b01c46002818bf63210a23b1fbf3f000fb131130303031adf80000adf802103a20adf80400b2fbf3f000fb132230303032adf80600adf808200020adf80a00002c0cbf0720a720adf8100040f20010adf81200002c0cbf4820e820adf8140040f20f10adf8160004a801466a460023dff814c0e047002c02d003480021017008b010bd0000ef2c0603e4470203",
+  "replace": "10b588b01c46002818bf63210a23b1fbf3f000fb131130303031adf80000adf802103a20adf80400b2fbf3f000fb132230303032adf80600adf808200020adf80a00002c0cbf0720bf20adf8100040f2f000adf81200002c0cbf4820ef20adf8140040f2fd00adf8160004a801466a460023dff814c0e047002c02d003480021017008b010bd0000c1130503e4470203",
   "index": 87
  },
  {
@@ -683,6 +683,16 @@ export const FULL_EXTRA_PATCHES = [
   "expect": "d5f76aff",
   "replace": "d4f716f9",
   "index": 106
+ },
+ {
+  "file": "0155-time-clear-and-draw.patch",
+  "name": "0155-time-clear-and-draw",
+  "module": 0,
+  "region": "code",
+  "address": 50664384,
+  "expect": "2de9f0411646ab2251434a0a424986b01f4651f822400c9d616841f00201616041494ff000084ff4006c032a0ed2dfe802f00207",
+  "replace": "07b582b0084b1b880093c388828841880088dff818c0e04702b0bde807400023dff80cc06047000000440003fb320603ef2c0603",
+  "index": 107
  }
 ];
 export const FULL_TAIL = {
@@ -11806,4 +11816,4 @@ export const FULL_THEME_RUNS = [
   "replace": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
  }
 ];
-export const FULL_IMAGE_SHA256 = "638723894dfcd34011621e4ad02a449bc47eb5f463fb041e8f59a4a05b843742";
+export const FULL_IMAGE_SHA256 = "58e5801689bf70f8d68b730000f42ddae83dc6ff134d55a0e3d66b1af57c39f7";
