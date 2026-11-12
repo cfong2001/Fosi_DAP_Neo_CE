@@ -10,14 +10,14 @@ from unicorn.arm_const import *
 class Artwork(unittest.TestCase):
     def machine(self):
         u=Typography().machine()
-        for pattern in ('016*.patch','017*.patch'):
+        for pattern in ('016*.patch','017*.patch','018*.patch'):
             for p in HERE.glob(pattern):
                 r=parse_patch(p);u.mem_write(r['address'],r['replace'])
         return u
     def put(self,u,addr,value):u.mem_write(addr,struct.pack('<I',value))
     @staticmethod
     def contrast(v):
-        def gain(n,m):return max(0,min(m,(118*n-9*m+50)//100))
+        def gain(n,m):return max(0,min(m,(120*n-10*m+50)//100))
         return gain(v>>11,31)<<11|gain(v>>5&63,63)<<5|gain(v&31,31)
     def row(self,*,target=144,top=36,left=48,width=144,art_width=144,h=144,r=0,mode=16,height=1,codec=6):
         u=self.machine();buf=0x03026A20
@@ -95,5 +95,37 @@ class Artwork(unittest.TestCase):
             uc.reg_write(UC_ARM_REG_PC,uc.reg_read(UC_ARM_REG_LR))
         u.hook_add(UC_HOOK_CODE,hook);u.emu_start(0x0307EBA9,END,count=100000)
         self.assertTrue(fills);self.assertTrue(all(48<=x0<=x1<=191 and 36<=y0<=y1<=179 for x0,y0,x1,y1 in fills));self.assertEqual(text,['FLAC'])
+
+    def test_progress_bar_is_the_inverse_of_the_ground(self):
+        def half(a,b):return ((a&0xF7DE)>>1)+((b&0xF7DE)>>1)
+        for ground in (0x10A2,0x61A1,0x09EA,0xBE9A,0xFFFF,0x0000,0x8410):
+            u=self.machine();u.mem_write(0x03004400,struct.pack('<H',ground))
+            u.mem_write(0x03024904,b'\x55'*24);u.mem_write(0x0302491C,b'\x55'*24)
+            sp=u.reg_read(UC_ARM_REG_SP);u.mem_write(sp,struct.pack('<I',ground))
+            regs=(UC_ARM_REG_R0,UC_ARM_REG_R1,UC_ARM_REG_R2,UC_ARM_REG_R3,UC_ARM_REG_R4)
+            for reg,v in zip(regs,(0x28,0xFE,0xC9,0x10C,0x1234)):u.reg_write(reg,v)
+            calls=[]
+            def hook(uc,addr,n,data):
+                if addr==0x030632FA:
+                    calls.append(([uc.reg_read(r) for r in regs],uc.reg_read(UC_ARM_REG_SP),
+                                  struct.unpack('<I',uc.mem_read(uc.reg_read(UC_ARM_REG_SP),4))[0],
+                                  uc.reg_read(UC_ARM_REG_LR)))
+                    uc.emu_stop()
+            u.hook_add(UC_HOOK_CODE,hook);u.reg_write(UC_ARM_REG_LR,END|1)
+            u.emu_start(0x03053EF5,END,count=2000)
+            self.assertEqual(len(calls),1,'the ground fill still runs')
+            args,sp2,colour,lr=calls[0]
+            self.assertEqual((args,sp2,colour,lr),([0x28,0xFE,0xC9,0x10C,0x1234],sp,ground,END|1),
+                             'fill gets the original arguments, stack and return address')
+            inv=~ground&0xFFFF;mid=half(inv,ground);track=half(mid,half(mid,ground))
+            played=list(struct.unpack('<6H',u.mem_read(0x03024904,12)))
+            unplayed=list(struct.unpack('<6H',u.mem_read(0x0302491C,12)))
+            self.assertEqual(played,[mid,inv,inv,inv,inv,mid])
+            self.assertEqual(unplayed,[half(track,ground)]+[track]*4+[half(track,ground)])
+            self.assertEqual(bytes(u.mem_read(0x03024904+12,12)),b'\x55'*12,'writes stay in the 1x6 column')
+
+    def test_progress_hook_replaces_only_the_ground_fill(self):
+        r=parse_patch(HERE/'0182-artwork-bar-hook.patch')
+        self.assertEqual((r['module'],r['address'],r['expect']),(27,0x0307F6AE,bytes.fromhex('e3f724fe')))
 
 if __name__=='__main__':unittest.main()

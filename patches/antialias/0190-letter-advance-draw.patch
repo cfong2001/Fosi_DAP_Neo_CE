@@ -1,0 +1,21 @@
+# Letters advance by their record's width byte when drawn.
+name: 0190-letter-advance-draw
+kind: module
+module: 0
+region: code
+address: 0x306263c
+gate: build refuses unless the stock bytes at the target equal
+  `expect`. Pairs with 0191 and the letter tails in
+  patches/antialias/font-glyphs.json and font-a-glyphs.json.
+expect: 02a8
+replace: 02e0
+rationale: The glyph drawer (0x03062582) takes the advance from the
+  record's tail byte, then, for A-Z and a-z only, replaces it with an
+  ink measure (0x03063E06) of the top 10 rows (8 in the small font):
+  leftmost plus rightmost inked column plus 2. Ink below those rows is
+  not counted, so L, A and z could not be spaced correctly; the redrawn
+  L sat 4 columns right of its slot ("F LAC"). This replaces
+  `add r0, sp, #8` with a branch over the measure call and its `sxth
+  r4, r0`, so letters keep the tail advance. Every A-Z and a-z record in
+  both fonts is redrawn with a tail of width + 1, as every other
+  redrawn glyph already has.

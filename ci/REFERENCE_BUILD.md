@@ -47,7 +47,7 @@ node ci/verify_composed_artifacts.mjs /tmp/ce-recorded-layout31.json
 ```
 
 The 6,532-byte module-31 SHA-256 must be
-`3f7e09cae9658c4cf21bfc4f9be92a037051f10a74e759f2e7fd8d4c0cac2aa9`.
+`4e717adca5c06a13c2f76e981387852d64d86458d3d6eee0b405144d5fc78ac3`.
 With local decoder inputs, build the complete recorded composition, using an
 output path that does not already exist:
 
@@ -62,7 +62,7 @@ The full build prints a large byte-diff report to the log. For the current
 recorded composition, the 2,040-byte merged tail SHA-256 must be
 `1443d354b9a388f156d23178eb302b7535e703b0e3295d8dc329cd7b71820f69`,
 and the 13,638,148-byte image SHA-256 must be
-`1cd195c5a8e124b8cc38b6805df0be92bc5ab97404d2b8b5d8446d39fc50dae4`.
+`ff47214049ab5ef6c50de1e50d3bfea80ae4c1580e34ce28e23ace37cc62a1f7`.
 These are regression pins for this revision, not permanent hashes for future
 changes. Any intentional source or artifact change requires review, updated
 pins and regenerated browser data, meaningful behavioral regression tests,

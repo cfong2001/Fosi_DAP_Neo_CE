@@ -85,7 +85,7 @@ The scaled image is centered vertically inside the requested box. Padding
 uses the theater ground, with a symmetric radius-10 corner mask.
 
 Contrast is applied to each RGB565 component around its midpoint with a
-factor of 1.18 and saturation. The compositor builds a temporary 190-pixel
+factor of 1.20 and saturation (1.18 before 2026-11-12). The compositor builds a temporary 190-pixel
 stack row, then calls the original bitmap function. It preserves that
 function's return value. The decoder's buffer is never edited, so the
 stock duplicate final-row blit cannot apply contrast twice. The theater
@@ -103,6 +103,31 @@ the two player backgrounds; the placeholder is drawn only when needed.
 python patches/player_ui/build_artwork.py
 python patches/player_ui/test_artwork.py
 ```
+
+## Progress bar in the inverse of the ground
+
+When the player opens, module 27 stages resources 187 and 188 (light 353
+and 354) as 1x6 RGB565 columns at `0x03024904` (played) and `0x0302491C`
+(unplayed). Each bar draw fills (40,254)..(201,268) with the ground and
+blits one column per position. Patch 0182 sends that fill's BL at
+`0x0307F6AE` to `bar_fill` (0183, a 28-byte stub in a tier-1 pocket at
+`0x03053EF4`). The stub saves r0-r4 and lr, calls `bar_recolor` (0179,
+`0x0305DE20`) with the ground cell `0x03004400`, restores them and tail
+calls the original fill with its stack argument in place.
+
+`bar_recolor` writes the played column as the inverse of the ground and
+the unplayed column 3/8 of the way from the ground to the inverse, with
+rows 0 and 5 halved into the ground as the antialiased stock columns are.
+Averages use the packed RGB565 halving `((a & 0xF7DE) >> 1) + ((b &
+0xF7DE) >> 1)`. Recolouring before every draw follows each theater
+ground and theme change without new state. The knob keeps its orange
+art. A mid-grey ground (around `0x8410`) inverts to nearly the same
+grey, so the bar has little contrast there.
+
+The tests execute the stub and routine for seven grounds, including
+black, white and mid-grey: the fill still runs with its original
+arguments, stack word, r4 and return address, both columns hold the
+expected words, and nothing past the 1x6 column changes.
 
 The tests execute the emitted Thumb routines and check row geometry,
 independent contrast values, aspect padding, corner symmetry, bitmap

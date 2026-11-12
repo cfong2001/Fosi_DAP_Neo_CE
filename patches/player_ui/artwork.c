@@ -8,7 +8,7 @@ typedef uint32_t u32;
 #define BLIT ((u32 (*)(int,int,int,int,u32,const u16*))0x0306333F)
 #define KEYED ((void (*)(u32,int,int))0x03063A09)
 static SEC(".text.contrast") int gain(int v,int max) {
-    v=(118*v-9*max+50)/100;
+    v=(120*v-10*max+50)/100;
     return v<0?0:v>max?max:v;
 }
 SEC(".text.contrast") u16 art_contrast(u16 v) {
@@ -80,4 +80,38 @@ SEC(".text.badge") void art_badge(u32 id) {
     badge_fill(x,y,*(volatile u16*)0x030235B4);
     *ink=*(volatile u16*)0x030235B6;
     Rect r={x+4,y+2,x+51,y+17};DRAW(&r,&r,text,0);*ink=old;
+}
+/* Progress bar in the inverse of the ground. Module 27 stages resources
+ * 187 and 188 (light: 353, 354) as 1x6 native RGB565 columns at
+ * 0x03024904 (played) and 0x0302491C (unplayed) when the player opens,
+ * then each bar draw fills (40,254)..(201,268) with the ground and blits
+ * the columns. The hook replaces that fill's BL: the columns are
+ * recoloured from the current ground cell first, so the bar follows
+ * every theater background. Played: the inverse. Unplayed: 3/8 of the
+ * way from the ground to the inverse. Rows 0 and 5 are blended halfway
+ * into the ground, as the antialiased stock columns are. */
+/* Per-component average of two RGB565 words (each channel's low bit
+ * dropped first, so no carry crosses channels). */
+static SEC(".text.bar") u32 half(u32 a,u32 b) {
+    return ((a&0xF7DE)>>1)+((b&0xF7DE)>>1);
+}
+SEC(".text.bar") void bar_recolor(u32 ground) {
+    u16 *played=(u16*)0x03024904,*unplayed=(u16*)0x0302491C;
+    u32 inv=~ground&0xFFFF,mid=half(inv,ground),track=half(mid,half(mid,ground));
+    played[0]=played[5]=mid;
+    unplayed[0]=unplayed[5]=half(track,ground);
+    for(int r=1;r<5;r++){played[r]=inv;unplayed[r]=track;}
+}
+/* Entered by BL in place of the ground fill: same r0..r3 and stack
+ * colour argument, so the fill is a tail call with the frame restored. */
+__attribute__((naked,section(".text.bar_entry"))) void bar_fill(void) {
+    __asm__ volatile(
+        "push {r0-r4, lr}\n"
+        "ldr r0, =0x03004400\n"
+        "ldrh r0, [r0]\n"
+        "bl bar_recolor\n"
+        "pop {r0-r4, lr}\n"
+        "ldr ip, =0x030632FB\n"
+        "bx ip\n"
+        ".ltorg\n");
 }

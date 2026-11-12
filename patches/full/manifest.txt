@@ -122,12 +122,21 @@ patches/0145-profile-commit.patch
 ../player_ui/0177-artwork-formats.patch
 ../player_ui/0178-artwork-badge_fill.patch
 
+# Progress bar in the inverse of the ground (hook on the bar's ground fill):
+../player_ui/0179-artwork-bar.patch
+../player_ui/0183-artwork-bar_entry.patch
+../player_ui/0182-artwork-bar-hook.patch
+
 # Keep parsed titles in the scanned library database:
 ../library_titles/0180-library-title-fallback.patch
 ../library_titles/0181-library-title-copy-hook.patch
 
 # Clear main-font time above the progress bar:
 ../player_ui/0155-time-clear-and-draw.patch
+
+# Letters advance by their redrawn width (patches/antialias):
+../antialias/0190-letter-advance-draw.patch
+../antialias/0191-letter-advance-measure.patch
 
 # USB audio transport details and uncluttered data screen:
 ../usb_screen/0190-usb-card.patch

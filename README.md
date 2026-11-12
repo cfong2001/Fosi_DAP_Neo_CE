@@ -21,7 +21,7 @@ CE (Community Edition) is patched firmware for the Fosi Audio DAP Neo. It starts
 
 | Image | What it carries | SHA-256 |
 |---|---|---|
-| [`DP3_V137_CE.img`](release/DP3_V137_CE.img) | Standard: every feature below. 6,656 bytes longer than stock. | `1cd195c5a8e124b8cc38b6805df0be92bc5ab97404d2b8b5d8446d39fc50dae4` |
+| [`DP3_V137_CE.img`](release/DP3_V137_CE.img) | Standard: every feature below. 6,656 bytes longer than stock. | `ff47214049ab5ef6c50de1e50d3bfea80ae4c1580e34ce28e23ace37cc62a1f7` |
 | [`DP3_V137_CE_minimal.img`](release/DP3_V137_CE_minimal.img) | Minimal: audio and library fixes only, same length as stock. | `0dfd10e23749f9b6c65499266f1a7a2ec038160b089ba0fc2ca68dcf2b24c986` |
 | [`DP3_V137_CE_recovery.img`](release/DP3_V137_CE_recovery.img) | Stock code dated one day after CE, for going back. | `aff851b31d6eee55cbd4bb3fc0464ac79f0039ee86ae6723225ac036a157d223` |
 
@@ -31,13 +31,13 @@ The [install page](https://cfong2001.github.io/Fosi_DAP_Neo_CE/) checks the imag
 
 ## Features
 
-Everything here is in the standard image; the minimal image has the sound and library changes except Opus. Figures are rendered from the firmware images by [`tools/render_readme.py`](tools/render_readme.py): controls and icons are the firmware's own pixels, while cover art and text are drawn.
+Everything here is in the standard image; the minimal image has the sound and library changes except Opus. Figures are rendered from the firmware images by [`tools/render_readme.py`](tools/render_readme.py): controls, icons and CE's time digits are the firmware's own pixels, and CE's cover contrast, rounded corners, format badge, no-art tile and progress bar colours follow the CE artwork routines at their coordinates. Cover art, titles and artists are drawn.
 
 ![CE player with four covers and one track without art](media/theater.png)
 
 - Now Playing and library lists use title tags, with filename fallback. **Refresh the library after updating** to replace previously stored filenames. Track information has seven labeled rows with readable units and Unknown for missing artist/album tags.
-- Covers are centered with rounded corners, an 18% contrast boost and a rounded format badge. Tracks without artwork show an outline tile with a music note. Time uses the main font, and title scrolling pauses before advancing more slowly.
-- Theater mode takes the player background from the album art; tracks without art use the theme default. The transport controls are drawn as glyphs over that background instead of dark tiles.
+- Covers are centered with rounded corners, a 20% contrast boost and a rounded format badge. Tracks without artwork show an outline tile with a music note. Time uses the main font, and title scrolling pauses before advancing more slowly.
+- Theater mode takes the player background from the album art; tracks without art use the theme default. The transport controls are drawn as glyphs over that background instead of dark tiles, and the progress bar is drawn in the inverse of the background so it stands out from any cover's colour (a mid-grey background, whose inverse is also mid-grey, is the exception).
 - Ogg Vorbis decodes at full precision: about 85 to 97 dB signal-to-noise against a reference decode, where stock measures about 40.
 - Opus files play in place of WMA (standard image only).
 - Track changes are much shorter. When a track ends and the next is the same format, the decoder stays loaded and running and the next track starts warm. Stock silences the first three decoded buffers of every track to hide a cold decoder's start-up, about 78 ms for MP3 and up to about 279 ms for FLAC; CE skips that, and the system-side work before the next track's audio starts drops from about 20.5 ms to 4.7 ms in emulation. This is not sample-exact gapless playback: the decoder still opens the next file after the last one ends.
@@ -47,7 +47,7 @@ Everything here is in the standard image; the minimal image has the sound and li
 - Focus mode: after five seconds without input the player hides its controls and enlarges the cover; any key or wheel turn brings them back, and that first press only wakes the screen.
 - System Settings gains a Power Profile item with three options, High, Balanced and Battery Saver, each setting screen brightness, auto screen off and auto power off together (100 %, 1 minute, never; 60 %, 30 seconds, 10 minutes; 20 %, 10 seconds, 5 minutes). The labels are translated into all 21 menu languages, and the item marks whichever profile matches the current settings.
 - A long press of Power turns Bluetooth on or off. The status icons are redrawn, and the boot splash carries a CE mark.
-- Both system fonts are redrawn from Barlow SemiBold: the menu and list font and the small font used for status text. They are still 1-bit, because the firmware draws text without grey levels, but strokes are even and the spacing is regular. Stock spacing let `L` run into the next letter; that is fixed. Accented Latin letters are redrawn too; other scripts keep their stock glyphs.
+- Both system fonts are redrawn from Barlow SemiBold: the menu and list font and the small font used for status text. They are still 1-bit, because the firmware draws text without grey levels, but strokes are even and the spacing is regular. Stock measured letter widths over the top 10 rows only, which let `L` run into the next letter and pushed CE's redrawn `L` four columns right ("F LAC"); letters now advance by their own drawn width in both fonts. Accented Latin letters are redrawn too; other scripts keep their stock glyphs.
 - Icons and baked screen art are antialiased. The transport, status, battery and browser icons, the dialog cards, the low-battery and power-off screens, the CE splash mark and the progress bar carry smoothed edges in their pixels, so curves, diagonals and text no longer step. Art on a solid ground blends exactly into it. Art over the album-derived background (the transport glyphs and the progress bar and knob) blends toward a neutral grey.
 - Volume no longer freezes after two DAC errors, decoder clocks are lower, and the wheel timer wakes less often.
 
@@ -211,6 +211,5 @@ This project is not affiliated with Fosi Audio. The stock firmware remains Fosi 
 - The site's illustrations use the Stageshow kit by Benji Taylor (MIT), vendored in [`site/src/kit/`](site/src/kit/README.md).
 - This repository is GPL-3.0 ([`LICENSE`](LICENSE)).
 
-USB Audio now displays its actual PCM transport format; the data screen omits
-the redundant connection text. See [the improvement concepts](IMPROVEMENTS.md)
-for the ranked follow-up work and USB host-metadata dependencies.
+USB Audio shows its actual PCM transport format; the data screen omits the
+redundant connection text. See [ranked improvement concepts](IMPROVEMENTS.md).

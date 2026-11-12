@@ -18,9 +18,16 @@ Every figure says where its pixels come from:
              firmware's advance rule (0x030627BE, ported in
              patches/antialias/generate_font.py); the list layout around
              it (row height, margins, selection bar) is drawn
-  drawn      cover art, title and artist text and time labels, drawn by
-             this script at approximate positions (the painter code that
-             draws them needs a mounted card, so it cannot run offline)
+  ported     the CE cover treatment, format badge, no-art tile, progress
+             bar colours and time line: Python ports of
+             patches/player_ui/artwork.c (contrast factor 1.20, radius-10 corner mask, 56x20 badge at (132, 156),
+             outline and music note, bar columns from the inverted
+             ground) and typography.S (MM:SS in Font B at
+             (7, 240) and (191, 240)), at the coordinates those routines use
+  drawn      cover art, title and artist text, and the stock time labels,
+             drawn by this script at approximate positions (the painter
+             code that draws them needs a mounted card, so it cannot run
+             offline)
 
 Usage (from the repository root, with Unicorn, Capstone and Pillow):
 
@@ -73,7 +80,8 @@ def to565(r, g, b):
 
 
 class Fw:
-    def __init__(self, path):
+    def __init__(self, path, ce=False):
+        self.ce = ce                # CE: letters advance by their tail (0190/0191)
         self.raw = Path(path).read_bytes()
         self.res = {e['id']: e for e in Firmware(self.raw).images()}
 
@@ -98,7 +106,7 @@ class Fw:
                     if row & (0x8000 >> gx) and 0 <= x + gx < img.width \
                             and 0 <= y + gy < img.height:
                         img.putpixel((x + gx, y + gy), ink)
-            x += GF.advance(rec, cp)
+            x += GF.advance(rec, cp, self.ce)
         return x
 
     def paint(self, ground, a=0, b=0, play=1, theme=0):
@@ -152,22 +160,112 @@ def theater_ground(art, light):
 
 # ---------------------------------------------------------------- screens
 
-def player(fw, ground, art, title, artist, light=False, b=0, play=1):
-    """Full player screen: painter output plus drawn art and text."""
+def player(fw, ground, art, title, artist, light=False, b=0, play=1, ce=False,
+           codec='FLAC'):
+    """Full player screen: painter output plus art and text. Stock art and
+    time are drawn; CE art, badge, placeholder and time follow the CE
+    routines (see ce_cover, ce_badge, ce_placeholder, ce_time)."""
     img = fw.paint(ground, b=b, play=play, theme=1 if light else 0)
     d = ImageDraw.Draw(img)
     ink = (20, 20, 20) if light else (240, 240, 240)
-    if art is not None:
+    if ce:
+        if art is not None:
+            img.paste(ce_cover(art, ground), (48, 36))
+        else:
+            ce_placeholder(img, ink)
+        ce_badge(fw, img, codec, light)
+    elif art is not None:
         img.paste(art, (48, 36))
     else:
         d.rectangle([48, 36, 191, 179], outline=ink)
         d.text((120, 108), 'no art', fill=ink, font=font(12), anchor='mm')
-    d.text((120, 206), title, fill=ink, font=font(17, True), anchor='mm')
-    d.text((120, 231), artist, fill=ink, font=font(13), anchor='mm')
-    d.text((6, 257), '1:12', fill=ink, font=font(11), anchor='lm')
-    d.text((234, 257), '-2:48', fill=ink, font=font(11), anchor='rm')
+    # CE time sits on a line at y = 240, so its drawn title and artist
+    # move up to stay clear of it
+    ty, ay = (200, 223) if ce else (206, 231)
+    d.text((120, ty), title, fill=ink, font=font(17, True), anchor='mm')
+    d.text((120, ay), artist, fill=ink, font=font(13), anchor='mm')
+    if ce:
+        ce_time(fw, img, ground, '01:12', '04:00', ink)
+    else:
+        d.text((6, 257), '1:12', fill=ink, font=font(11), anchor='lm')
+        d.text((234, 257), '-2:48', fill=ink, font=font(11), anchor='rm')
     progress(fw, img, ground, light, 72 / 240)
     return img
+
+
+# CE artwork compositor (patches/player_ui/artwork.c), ported.
+EDGE = (7, 5, 4, 3, 2, 2, 1, 1, 0, 0)    # radius-10 corner inset per row
+
+
+def inset(row, height):
+    y = row if row < height // 2 else height - 1 - row
+    return EDGE[y] if y < 10 else 0
+
+
+def gain(v, top):
+    v = int((120 * v - 10 * top + 50) / 100)     # C division truncates
+    return max(0, min(top, v))
+
+
+def contrast(word):
+    return gain(word >> 11, 31) << 11 | gain((word >> 5) & 63, 63) << 5 | \
+        gain(word & 31, 31)
+
+
+def ce_cover(art, ground):
+    """art_pixels over a square cover: contrast on every pixel inside the
+    rounded mask, the theater ground outside it. The source pixels (and so
+    the theater sample) are untouched."""
+    out = Image.new('RGB', art.size)
+    for y in range(art.height):
+        n = inset(y, art.height)
+        for x in range(art.width):
+            w = ground if x < n or x >= art.width - n else \
+                contrast(to565(*art.getpixel((x, y))))
+            out.putpixel((x, y), rgb(w))
+    return out
+
+
+def ce_placeholder(img, ink):
+    """art_placeholder in the normal box: a 2-pixel rounded outline and a
+    music note, as the routine's fills."""
+    d = ImageDraw.Draw(img)
+    x, top, side = 48, 36, 144
+    for y in range(side):
+        n = inset(y, side)
+        if y < 2 or y >= side - 2:
+            d.line([(x + n, top + y), (x + side - 1 - n, top + y)], fill=ink)
+        else:
+            d.line([(x + n, top + y), (x + 1 + n, top + y)], fill=ink)
+            d.line([(x + side - 2 - n, top + y), (x + side - 1 - n, top + y)], fill=ink)
+    d.rectangle([121, 78, 125, 122], fill=ink)
+    d.rectangle([125, 78, 139, 83], fill=ink)
+    for y in range(10):
+        n = 3 if y < 2 or y > 7 else 0
+        d.line([(108 + n, 117 + y), (125 - n, 117 + y)], fill=ink)
+
+
+def ce_badge(fw, img, label, light):
+    """art_badge in the normal box: a 56x20 rounded tile at (132, 156) in
+    palette cell 0, the label in Font B at (136, 158) in the text colour.
+    The palette cell is taken as the theme's default ground."""
+    x, y = 132, 156
+    fill_ = rgb(0xFFFF if light else DARK_GROUND)
+    d = ImageDraw.Draw(img)
+    for r in range(20):
+        n = inset(r, 20)
+        d.line([(x + n, y + r), (x + 55 - n, y + r)], fill=fill_)
+    fw.text(img, x + 4, y + 2, label, (0, 0, 0) if light else (255, 255, 255))
+
+
+def ce_time(fw, img, ground, elapsed, total, ink):
+    """player_time: each MM:SS string set in Font B on the 14-pixel line at
+    y = 240, elapsed in (7..72), total in (191..239), each rectangle
+    cleared to the ground first."""
+    d = ImageDraw.Draw(img)
+    for x0, x1, s in ((7, 72, elapsed), (191, 239, total)):
+        d.rectangle([x0, 240, x1, 253], fill=rgb(ground))
+        fw.text(img, x0, 240, s, ink)
 
 
 def progress(fw, img, ground, light, fraction):
@@ -180,7 +278,7 @@ def progress(fw, img, ground, light, fraction):
     off = 166 if light else 0
     ImageDraw.Draw(img).rectangle([40, 254, 201, 268], fill=rgb(ground))
     filled = round(fraction * 147)
-    on, off_col = fw.resource(187 + off), fw.resource(188 + off)
+    on, off_col = bar_columns(fw, ground, light)
     for i in range(148):
         img.paste(on if i < filled else off_col, (46 + i, 258))
     knob = fw.resource(220 + off)
@@ -189,6 +287,30 @@ def progress(fw, img, ground, light, fraction):
     mask = Image.new('L', knob.size)
     mask.putdata([0 if p == rgb(0xF800) else 255 for p in knob.getdata()])
     img.paste(knob, (min(filled + 42, 196), 254), mask)
+
+
+def half(a, b):
+    """Per-component average of two RGB565 words (artwork.c half)."""
+    return ((a & 0xF7DE) >> 1) + ((b & 0xF7DE) >> 1)
+
+
+def bar_columns(fw, ground, light):
+    """The played and unplayed 1x6 columns: the image's resources 187
+    and 188 (light: +166) on stock; on CE, bar_recolor's columns from the
+    ground (played = inverse, unplayed = 3/8 of the way to it, rows 0
+    and 5 blended halfway into the ground)."""
+    if not fw.ce:
+        off = 166 if light else 0
+        return fw.resource(187 + off), fw.resource(188 + off)
+    inv = ~ground & 0xFFFF
+    mid = half(inv, ground)
+    track = half(mid, half(mid, ground))
+    cols = []
+    for body, edge in ((inv, mid), (track, half(track, ground))):
+        c = Image.new('RGB', (1, 6))
+        c.putdata([rgb(edge)] + [rgb(body)] * 4 + [rgb(edge)])
+        cols.append(c)
+    return cols
 
 
 def framed(screens, captions, scale=2, gap=24, title=None, note=None):
@@ -218,31 +340,36 @@ def fig_player(stock, ce, out):
     art = cover('ember')
     ground = theater_ground(art, light=False)
     s = player(stock, DARK_GROUND, art, 'Ember Skyline', 'Demonstration Ensemble')
-    c = player(ce, ground, art, 'Ember Skyline', 'Demonstration Ensemble')
+    c = player(ce, ground, art, 'Ember Skyline', 'Demonstration Ensemble', ce=True)
     framed([s, c], ['Stock V137', 'CE standard image'],
-           note='Status icon and transport row: real painter output on each image (emulated). '
-                f'CE ground 0x{ground:04X} from the theater algorithm.\n'
-                'Cover and text drawn by the renderer at approximate positions; progress bar from the image.'
+           note='Status icon and transport row: real painter output (emulated). '
+                f'CE ground 0x{ground:04X} from the theater algorithm; CE bar is the inverted ground.\n'
+                'CE cover contrast, corners, badge and time follow the CE routines; '
+                'cover art, title and artist drawn at approximate positions.'
            ).save(out / 'player.png')
     return ground
 
 
 def fig_theater(ce, out):
     screens, caps = [], []
-    for kind, title in (('ember', 'Ember Skyline'), ('tide', 'Low Tide'), ('violet', 'Prism')):
+    for kind, title, codec in (('ember', 'Ember Skyline', 'FLAC'), ('tide', 'Low Tide', 'MP3'),
+                               ('violet', 'Prism', 'OPUS')):
         art = cover(kind)
         g = theater_ground(art, light=False)
-        screens.append(player(ce, g, art, title, 'Demonstration Ensemble'))
+        screens.append(player(ce, g, art, title, 'Demonstration Ensemble', ce=True, codec=codec))
         caps.append(f'dark, ground 0x{g:04X}')
     art = cover('tide')
     g = theater_ground(art, light=True)
-    screens.append(player(ce, g, art, 'Low Tide', 'Demonstration Ensemble', light=True))
+    screens.append(player(ce, g, art, 'Low Tide', 'Demonstration Ensemble', light=True,
+                          ce=True, codec='MP3'))
     caps.append(f'light, ground 0x{g:04X}')
-    screens.append(player(ce, DARK_GROUND, None, 'Untitled', 'No artwork'))
+    screens.append(player(ce, DARK_GROUND, None, 'Untitled.wav', 'Unknown', ce=True,
+                          codec='WAV'))
     caps.append('no art: theme default')
     framed(screens, caps, scale=1, gap=16,
-           note='Ground = average of the top third of the cover, mixed 55% toward black (dark) '
-                'or 75% toward paper (light).').save(out / 'theater.png')
+           note='Ground = average of the top third of the original cover, mixed 55% toward black '
+                '(dark) or 75% toward paper (light). CE contrast, corners and badge; bar in the inverted ground.'
+           ).save(out / 'theater.png')
 
 
 def fig_transport(stock, ce, ground, out):
@@ -343,7 +470,7 @@ def fig_menus(stock, ce, out):
 
 def fig_screens(stock, ce, out):
     """Zoomed details of the baked screen art, stock beside CE."""
-    def on(fw, rid, ground):
+    def on_(fw, rid, ground):
         r = fw.resource(rid)
         under = Image.new('RGB', r.size, ground)
         e = fw.res[rid]
@@ -354,18 +481,20 @@ def fig_screens(stock, ce, out):
         return under
 
     def bar(fw, light):
-        ground = rgb(0xBEFA if light else 0x7222)
+        g = 0xBEFA if light else 0x7222
+        ground = rgb(g)
         img = Image.new('RGB', (240, 30), ground)
         off = 166 if light else 0
+        on, off_col = bar_columns(fw, g, light)
         for i in range(148):
-            img.paste(fw.resource((187 if i < 62 else 188) + off), (46 + i, 12))
-        knob = on(fw, 220 + off, ground) if fw is ce else fw.resource(220 + off)
+            img.paste(on if i < 62 else off_col, (46 + i, 12))
+        knob = on_(fw, 220 + off, ground) if fw.ce else fw.resource(220 + off)
         img.paste(knob, (104, 8))
         return img
 
-    rows = [('Low battery (137)', lambda fw: on(fw, 137, (0, 0, 0)).crop((64, 90, 140, 134))),
+    rows = [('Low battery (137)', lambda fw: on_(fw, 137, (0, 0, 0)).crop((64, 90, 140, 134))),
             ('Low battery, light (303)',
-             lambda fw: on(fw, 303, (255, 255, 255)).crop((64, 83, 140, 127))),
+             lambda fw: on_(fw, 303, (255, 255, 255)).crop((64, 83, 140, 127))),
             ('Powering off (294)', lambda fw: fw.resource(294).crop((60, 186, 180, 210))),
             ('Progress bar and knob', lambda fw: bar(fw, False).crop((70, 2, 150, 28))),
             ('Progress bar, light', lambda fw: bar(fw, True).crop((70, 2, 150, 28)))]
@@ -387,7 +516,7 @@ def fig_screens(stock, ce, out):
         y += a_.height * z + gap
     d.text((gap, y + 4), 'Resources decoded from each image (exact), 4x; keyed pixels over the '
            'screen behind them. Progress bar composed from 187/188 and knob 220 (light: +166) at '
-           'module 27\'s coordinates.', fill=SUB, font=font(13))
+           'module 27\'s coordinates; CE columns from the inverted ground.', fill=SUB, font=font(13))
     sheet.save(out / 'screens.png')
 
 
@@ -444,7 +573,7 @@ def main():
     ap.add_argument('--out', type=Path, default=REPO / 'media')
     a = ap.parse_args()
     a.out.mkdir(parents=True, exist_ok=True)
-    stock, ce = Fw(a.stock), Fw(a.ce)
+    stock, ce = Fw(a.stock), Fw(a.ce, ce=True)
     ground = fig_player(stock, ce, a.out)
     fig_theater(ce, a.out)
     fig_transport(stock, ce, ground, a.out)

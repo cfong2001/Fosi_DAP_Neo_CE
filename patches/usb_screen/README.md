@@ -17,7 +17,7 @@ playing.
 
 Original CE code, informed by SDK display semantics. The 72-byte card and
 144-byte strings use previously unreferenced resident pockets at
-0x0305DE20 and 0x03054404. Exact stock-byte gates protect their placement;
+0x0306004C and 0x03054404. Exact stock-byte gates protect their placement;
 Unicorn runs the real USB window painter in both USB personalities and
 checks that connection text is absent and transport text fits above the
 existing power controls. No persistent RAM or overlay growth is added.
