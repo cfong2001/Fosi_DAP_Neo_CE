@@ -3,7 +3,7 @@
   "input_file": "DP3_V137.img",
   "output_file": "DP3_V137_CE_minimal.img",
   "input_sha256": "fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cdfade5e9c6ea3bd71ac6deef",
-  "output_sha256": "92c446066e715d74a719671d3ee643ed4b7587c94801eb6dc3893f2271ed944d",
+  "output_sha256": "1cf609559048a02686585a159dab06fa4856954aa647283a50a8b47da33e3c99",
   "byte_length": 13631492,
   "header_date": "20261023",
   "patches_applied": [
@@ -159,7 +159,7 @@
       "cpu_address": "0x3079a04",
       "file_offset": "0x530b0",
       "old_hex": "00389c1c00c2eb0b00c2eb0b00b4c40400389c1c00389c1c",
-      "new_hex": "00389c1c000000000000000000000000001c4e0e001c4e0e"
+      "new_hex": "00389c1c00000000000000000000000000389c1c00389c1c"
     },
     {
       "patch": "clock-v1-row-18",
@@ -170,7 +170,7 @@
       "cpu_address": "0x3079a20",
       "file_offset": "0x530cc",
       "old_hex": "00389c1c00c2eb0b00c2eb0b00b4c40400389c1c00389c1c",
-      "new_hex": "00389c1c00000000000000000000000000882a1100882a11"
+      "new_hex": "00389c1c00000000000000000000000000389c1c00389c1c"
     },
     {
       "patch": "clock-v1-row-19",
@@ -192,7 +192,7 @@
       "cpu_address": "0x3079a58",
       "file_offset": "0x53104",
       "old_hex": "00389c1c00c2eb0b00c2eb0b00b4c40400389c1c00389c1c",
-      "new_hex": "00389c1c00000000000000000000000000882a1100882a11"
+      "new_hex": "00389c1c00000000000000000000000000389c1c00389c1c"
     },
     {
       "patch": "clock-v1-row-21",
@@ -203,7 +203,7 @@
       "cpu_address": "0x3079a74",
       "file_offset": "0x53120",
       "old_hex": "00389c1c00c2eb0b00c2eb0b00b4c40400389c1c00389c1c",
-      "new_hex": "00389c1c00000000000000000000000000882a1100882a11"
+      "new_hex": "00389c1c00000000000000000000000000389c1c00389c1c"
     },
     {
       "patch": "clock-v1-row-22",
@@ -214,18 +214,7 @@
       "cpu_address": "0x3079a90",
       "file_offset": "0x5313c",
       "old_hex": "00389c1c00c2eb0b00c2eb0b00b4c40400389c1c00389c1c",
-      "new_hex": "00389c1c00000000000000000000000000882a1100882a11"
-    },
-    {
-      "patch": "i2c-reset-pulse",
-      "file": "0019-i2c-reset-pulse.patch",
-      "kind": "module",
-      "module": 0,
-      "region": "code",
-      "cpu_address": "0x3060338",
-      "file_offset": "0x399e4",
-      "old_hex": "012004f003fb",
-      "new_hex": "322004f0f1fa"
+      "new_hex": "00389c1c00000000000000000000000000389c1c00389c1c"
     },
     {
       "patch": "gapless-0-state-pair",
@@ -280,7 +269,7 @@
       "cpu_address": "0x30893c4",
       "file_offset": "0x9e608",
       "old_hex": "cf4810b500680a2828bf10bddfe800f0051b1b1b1b1b1b1b1b1bfff7c6ffe3f793fb01210e20c9f717f901210f20c9f713f900216e20c9f7d7f80021bde810407e20c9f7d1b8fff7b0ffbde81040e3f77bbb",
-      "new_hex": "cf4810b500680a2828bf10bd0446fff7ccff0db1e3f798fb7cb901210e20c9f71bf901210f20c9f717f900216e20c9f7dbf800217e20c9f7d7f810bd00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf"
+      "new_hex": "cf4810b500680a2828bf10bd0446fff7ccff0db9062c12d0e3f796fb7cb901210e20c9f719f901210f20c9f715f900216e20c9f7d9f800217e20c9f7d5f810bd00bf00bf00bf00bf00bf00bf00bf00bf00bf"
     },
     {
       "patch": "gapless-5-gate-tail",
@@ -393,7 +382,7 @@
   "tail": null,
   "growth": [],
   "diff_vs_stock": {
-    "bytes_changed": 71547,
+    "bytes_changed": 71532,
     "ranges": [
       [
         "0x2",
@@ -418,14 +407,6 @@
       [
         "0x2ad2d",
         "0x2ad33"
-      ],
-      [
-        "0x399e4",
-        "0x399e4"
-      ],
-      [
-        "0x399e8",
-        "0x399e9"
       ],
       [
         "0x3a3c0",
@@ -604,14 +585,6 @@
         "0x530bf"
       ],
       [
-        "0x530c1",
-        "0x530c3"
-      ],
-      [
-        "0x530c5",
-        "0x530c7"
-      ],
-      [
         "0x530d1",
         "0x530d3"
       ],
@@ -622,14 +595,6 @@
       [
         "0x530d9",
         "0x530db"
-      ],
-      [
-        "0x530dd",
-        "0x530df"
-      ],
-      [
-        "0x530e1",
-        "0x530e3"
       ],
       [
         "0x530ed",
@@ -664,14 +629,6 @@
         "0x53113"
       ],
       [
-        "0x53115",
-        "0x53117"
-      ],
-      [
-        "0x53119",
-        "0x5311b"
-      ],
-      [
         "0x53125",
         "0x53127"
       ],
@@ -684,14 +641,6 @@
         "0x5312f"
       ],
       [
-        "0x53131",
-        "0x53133"
-      ],
-      [
-        "0x53135",
-        "0x53137"
-      ],
-      [
         "0x53141",
         "0x53143"
       ],
@@ -702,14 +651,6 @@
       [
         "0x53149",
         "0x5314b"
-      ],
-      [
-        "0x5314d",
-        "0x5314f"
-      ],
-      [
-        "0x53151",
-        "0x53153"
       ],
       [
         "0x59910",
@@ -1297,34 +1238,10 @@
       ],
       [
         "0x9e614",
-        "0x9e626"
+        "0x9e645"
       ],
       [
-        "0x9e628",
-        "0x9e629"
-      ],
-      [
-        "0x9e62c",
-        "0x9e62c"
-      ],
-      [
-        "0x9e632",
-        "0x9e632"
-      ],
-      [
-        "0x9e634",
-        "0x9e634"
-      ],
-      [
-        "0x9e638",
-        "0x9e639"
-      ],
-      [
-        "0x9e63c",
-        "0x9e63c"
-      ],
-      [
-        "0x9e642",
+        "0x9e647",
         "0x9e659"
       ],
       [

@@ -5,8 +5,8 @@ against their pins by `.github/workflows/firmware.yml` on every change.
 
 | File | What it is | Length | SHA-256 |
 |---|---|---|---|
-| `DP3_V137_CE.img` | **Standard.** Every composed CE feature (list below). Header date 2026-10-23. | 13,638,660 bytes (7,168 more than stock) | `148446d95dfcb85afbaa2b8c13310aed4ea97db80b849f7bb4bb10612e1fa5e1` |
-| `DP3_V137_CE_minimal.img` | **Minimal option.** The default framework set and full-precision Vorbis only. Header date 2026-10-23. | 13,631,492 bytes (same as stock) | `92c446066e715d74a719671d3ee643ed4b7587c94801eb6dc3893f2271ed944d` |
+| `DP3_V137_CE.img` | **Standard.** Every composed CE feature (list below). Header date 2026-10-23. | 13,638,660 bytes (7,168 more than stock) | `6fb923612567088663bc145fda4812e97a96c1a304d5e25bbb2c5b4bef2baefb` |
+| `DP3_V137_CE_minimal.img` | **Minimal option.** The default framework set and full-precision Vorbis only. Header date 2026-10-23. | 13,631,492 bytes (same as stock) | `1cf609559048a02686585a159dab06fa4856954aa647283a50a8b47da33e3c99` |
 | `DP3_V137_CE_recovery.img` | Unmodified stock bytes dated 2026-10-24, one day after either CE image, so the boot validator prefers it. | 13,631,492 bytes | `aff851b31d6eee55cbd4bb3fc0464ac79f0039ee86ae6723225ac036a157d223` |
 | `*.report.json` | Build reports: every patch with its address and old and new bytes, transplant hashes, validation results. The standard report summarises its byte ranges. | | |
 | `SHA256SUMS` | Hashes of the three images. | | |
@@ -44,12 +44,13 @@ Both images carry the default framework set:
 
 - DAC error counter: counts consecutive I2C failures, so two transient
   errors no longer freeze volume and DAC control for the session.
-- Clock table v1: per-codec decoder clocks lowered to measured targets.
-  APE and DSD128 decode loads are unmeasured; test those formats first.
+- Clock table v1: decoder clocks lowered for MP3, WMA, AAC, WAV, FLAC and
+  the lower Vorbis tiers. APE, ALAC, DSD and the top Vorbis tier keep
+  stock clocks, at or above what Rockchip's SDK uses for them.
 - Full-precision Vorbis with round-to-nearest output (about 40 dB better
   SNR than stock in emulation).
-- Shorter track changes between files of the same format (decoder stays
-  loaded; see patches/gapless/).
+- Shorter track changes between FLAC files (decoder stays loaded; other
+  formats reload it as stock does; see patches/gapless/).
 - Natural sort: case and accent folding, a leading "The " ignored,
   numbers compared as numbers.
 - Wheel timer period 400 to 1000 µs, fewer wakeups.
@@ -112,8 +113,8 @@ official updates, with the CE file in place of the official one.
 3. After the device restarts, **delete `RKNANOFWIMG`** from the card.
    Leaving an update file in place can rerun the installer.
 4. Test, in this order: boot to the menu, play an MP3, then a FLAC file.
-   Then try APE and DSD128 if you have them (the unmeasured clock gate), an
-   Ogg Vorbis file, two same-format tracks in a row (the next must start promptly), a
+   Then try APE and DSD128 if you have them (their decode loads are unmeasured), an
+   Ogg Vorbis file, two FLAC tracks in a row (the next must start promptly), a
    track skip within one format, and a
    library rescan (natural sort). On the standard image also try an Opus
    file, a track with album art and one without (theater), an `.m3u`

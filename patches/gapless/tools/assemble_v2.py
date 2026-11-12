@@ -2,7 +2,9 @@
 """Assemble the gapless v2 patch bytes at their final addresses (keystone)
 and check each against a capstone re-disassembly in place.
 
-Prints the expect/replace pairs for patches 0022-0026. Run from the repo
+Prints the expect/replace pairs for patches 0022-0026. (0019, a shorter
+I2C controller reset hold, was removed: Rockchip's SDK I2C driver holds
+that reset for DelayMs(1), as stock does.) Run from the repo
 root; needs keystone-engine and capstone.
 """
 import struct
@@ -28,8 +30,6 @@ SHUT = 0x030893C4           # module 33 decoder shutdown, 82 B
 CLOSE = 0x0308936E          # 0x74 close on the HifiFile channel, waits
 HALT = 0x0306CB0C           # hold core-1 reset, gate its clock
 RESET, CLKGATE = 0x0305261C, 0x030525AC
-I2C_PULSE = 0x03060338      # bus 0-2 controller reset hold: delay_ms(1)
-DELAY_US = 0x03064920
 
 
 def asm(seq, base):
@@ -85,8 +85,21 @@ def gate(armed):
     return code
 
 
+FLAC = 6                    # codec index ([0x0304B4D4]) the firmware's own
+                            # classifier assigns .FLA files (run under
+                            # emulation in patches/gapless/rig/)
+
+
 def shutdown():
-    done = SHUT + 0x3A
+    """Module 33's decoder shutdown, rewritten in place. A user stop or skip
+    (r5 != 0) halts core 1 as stock does. A natural advance keeps core 1
+    running only for FLAC, the one decoder proven to accept a second file
+    after end of stream (patches/harness/milestone2.md). Every other codec
+    halts as stock does and Rockchip's SDK always does (StartBBSystem holds
+    the core in reset for every file); the gate then sees a halted core and
+    runs the full reload."""
+    halt = SHUT + 0x18
+    done = SHUT + 0x3E
     code = asm([
         b'\xcf\x48',                        # ldr r0, [pc, #0x33c] (stock)
         'push {r4, lr}',
@@ -95,7 +108,9 @@ def shutdown():
         'it hs; pophs {r4, pc}',
         'mov r4, r0',
         f'bl #{CLOSE}',                     # close the decoder's file
-        f'cbz r5, #{SHUT + 0x18}',          # natural advance: keep core 1
+        f'cbnz r5, #{halt}',                # user stop or skip: halt
+        f'cmp r4, #{FLAC}',
+        f'beq #{done}',                     # natural advance, FLAC: keep core 1
         f'bl #{HALT}',
         f'cbnz r4, #{done}',                # codec 0 also parks its blocks
         'movs r1, #1', 'movs r0, #0xe', f'bl #{RESET}',
@@ -104,7 +119,7 @@ def shutdown():
         'movs r1, #0', 'movs r0, #0x7e', f'bl #{CLKGATE}',
         'pop {r4, pc}',
     ], SHUT)
-    assert len(code) == 0x3C, hex(len(code))
+    assert len(code) == 0x40, hex(len(code))
     return code + b'\x00\xbf' * ((0x52 - len(code)) // 2)   # nop to 0x03089416
 
 
@@ -117,7 +132,6 @@ def main():
         off, _ = im.module_region(mod, 'code')
         return raw[off + addr - m['code_exec']:off + addr - m['code_exec'] + n]
 
-    pulse = asm(['movs r0, #50', f'bl #{DELAY_US}'], I2C_PULSE)
     g0, g1 = gate(False), gate(True)
     sd = shutdown()
     lit = struct.pack('<I', RUNNING)
@@ -128,14 +142,13 @@ def main():
         ('0023 flag literal', 0, FLAG_LIT, stock(0, FLAG_LIT, 4), lit),
         ('0024 keep decoder', 33, SHUT, stock(33, SHUT, 0x52), sd),
         ('0026 arm', 0, arm_at, g0[0x12:0x14], g1[0x12:0x14]),
-        ('0019 i2c reset pulse', 0, I2C_PULSE, stock(0, I2C_PULSE, 6), pulse),
     ]
     for name, mod, addr, exp, rep in rows:
         print(f'{name}: module {mod} @ {addr:#010x} ({len(rep)} B)')
         print(f'  expect:  {exp.hex()}')
         print(f'  replace: {rep.hex()}')
     print('gate (armed):'); show(g1, GATE)
-    print('shutdown:'); show(sd[:0x3C], SHUT)
+    print('shutdown:'); show(sd[:0x40], SHUT)
 
 
 if __name__ == '__main__':

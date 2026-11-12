@@ -166,17 +166,26 @@ Module 33 switch detail (TBB at 0x03088592, table bytes at
 - case 3 (WAV): unconditional → row 9
 - case 4 (OGG): bitrate/field tiers → rows 14, 15, 16 (equal
   clocks) or 17 (top tier)
-- case 5 (FLAC) → 18; case 6 (ALAC) → 19; case 7 (APE) →
-  20; case 8 (DSD-DFF) → 21; case 9 (DSD-DSF) → 22
+- case 5 (APE) → 18; case 6 (FLAC) → 19; case 7 (ALAC,
+  likely) → 20; case 8 (DSD-DFF) → 21; case 9 (DSD-DSF) → 22
   (direct, no tier test)
+
+Correction (2026-11-12): this section first named case 5 FLAC and
+case 7 APE, assuming codec ids follow decoder-module order. Running the
+firmware's own extension classifier under emulation
+(`patches/gapless/rig/`, `Scenario(ext=...).start_first()`) settles it:
+`.MP3` → 0, `.WMA` → 1, `.AAC`/`.M4A` → 2, `.WAV` → 3, `.OGG` → 4,
+`.APE` → 5, `.FLA` → 6, `.DFF` → 8, `.DSF` → 9. ALAC arrives as `.M4A`
+(2 at open), so 7 is ALAC by elimination. Rows 18 and 19 were therefore
+labelled the wrong way round below and in clock table v1; both are
+corrected.
 
 Cross-check: nanitecfw's published Nano row comments, rows 5,6 MP3
 (row 5 "≤128k/44.1k"), 7,8 WMA, 9 WAV, 10,11 AAC, 14–16 "type 4"
 (OGG), match this assignment row for row. (Evidence grade: codec
 assignment is *proven* for the switch structure and tier conditions;
-the codec-name↔case mapping rests on the decoder-module order from
-Phases 1/2 plus the Nano cross-check. Strong, but the names are
-inference, not strings in the binary.)
+cases 0 to 6, 8 and 9 are proven by running the classifier under
+emulation (see the correction above); case 7 is ALAC by elimination.)
 
 ## 5. The decoded table (all values MHz)
 
@@ -203,9 +212,9 @@ B bus (calstclk). Row = id.
 | 15 | 300 | 80 | 80 | 80 | 400 | 400 | **OGG** tier 2 |
 | 16 | 300 | 80 | 80 | 80 | 400 | 400 | **OGG** tier 3 |
 | 17 | 480 | 200 | 200 | 80 | 480 | 480 | **OGG** top tier |
-| 18 | 480 | 200 | 200 | 80 | 480 | 480 | **FLAC** |
-| 19 | 480 | 200 | 200 | 80 | 480 | 480 | **ALAC** |
-| 20 | 480 | 200 | 200 | 80 | 480 | 480 | **APE** |
+| 18 | 480 | 200 | 200 | 80 | 480 | 480 | **APE** |
+| 19 | 480 | 200 | 200 | 80 | 480 | 480 | **FLAC** |
+| 20 | 480 | 200 | 200 | 80 | 480 | 480 | **ALAC** (likely) |
 | 21 | 480 | 200 | 200 | 80 | 480 | 480 | **DSD-DFF** |
 | 22 | 480 | 200 | 200 | 80 | 480 | 480 | **DSD-DSF** |
 | 23 | 36 | 36 | 36 | 36 | 36 | 36 | EQ_L (SDK value match) |

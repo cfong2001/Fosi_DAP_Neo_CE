@@ -5,8 +5,8 @@ Proves, against the real stock image:
   1. A zero-patch build differs from stock ONLY in the header date and
      the mirror/CRC fields that the date change implies.
   2. The shipped manifest (no-op self-test + DAC fix + clock v1,
-     framework-only) applies all 31 patches and reproduces the known
-     1,414-byte stacked diff, with a consistent report.
+     framework-only) applies all 32 patches and reproduces the known
+     1,399-byte stacked diff, with a consistent report.
   3. A tampered input image (one flipped byte at the self-test patch's
      target) makes the build refuse (stock SHA gate).
   4. The patch's expected-bytes precondition itself fails loudly when
@@ -51,7 +51,7 @@ Proves, against the real stock image:
       whole-image hash. Skipped on the same condition as
       check 7.
   13. The FULL build (patches/full/, check 13 below): every
-      feature composed in one pass (66 patches, both
+      feature composed in one pass (65 patches, both
       transplants, two growth insertions, the merged gap
       tail, the merged theme config). Its whole-image hash and
       length are pinned; every segment of the composed image
@@ -166,10 +166,10 @@ def main():
 
     # -- 2. shipped manifest, framework-only (no transplants) -----------
     # The manifest carries the no-op self-test, the DAC fix, the
-    # 16 clock-v1 patches, the DAC-bus I2C reset patch (0019), the
-    # gapless v2 set 0020-0025 with its ARM patch 0026 (whose 2 bytes
-    # land inside the 0022 cave), the 5 sort-key patches and the wheel
-    # power patch: 33 patches, a known 1,414-byte diff vs stock.
+    # 16 clock-v1 patches, the gapless v2 set 0020-0025 with its ARM
+    # patch 0026 (whose 2 bytes land inside the 0022 cave), the 5
+    # sort-key patches and the wheel power patch: 32 patches, a known
+    # 1,399-byte diff vs stock.
     out2 = tmp / 'manifest.img'
     r = run_build(['--input', str(STOCK), '--output', str(out2),
                    '--no-transplants'])
@@ -179,16 +179,16 @@ def main():
         img2 = out2.read_bytes()
         report = json.loads(Path(str(out2) + '.report.json').read_text())
         applied = report['patches_applied']
-        ok = (len(applied) == 33
+        ok = (len(applied) == 32
               and applied[0]['patch'] == 'noop-selftest'
               and applied[0]['old_hex'] == applied[0]['new_hex']
               and report['diff_vs_stock']['bytes_changed'] ==
-              len(diff_offsets(stock, img2)) == 1414
+              len(diff_offsets(stock, img2)) == 1399
               and report['transplants_applied'] == [])
         detail = (f"patches applied: {len(applied)} "
                   f"({applied[0]['patch']} … {applied[-1]['patch']}), "
                   f"bytes changed: {report['diff_vs_stock']['bytes_changed']}")
-    check('shipped manifest build: 33 patches, known 1,414-byte diff, '
+    check('shipped manifest build: 32 patches, known 1,399-byte diff, '
           'report consistent', ok, detail)
 
     # -- 3. tampered input refused by the SHA gate -----------------------
@@ -382,7 +382,7 @@ def main():
         frep = json.loads(
             Path(str(tmp / 'grown-full.img') + '.report.json').read_text())
         ok_full = (len(frep['growth']) == 1
-                   and len(frep['patches_applied']) == 33
+                   and len(frep['patches_applied']) == 32
                    and len(frep['transplants_applied']) == 1)
     check('grown build: segment isolation + full-build composition',
           bool(ok and ok_full),
@@ -416,7 +416,7 @@ def main():
             dimg = dflt.read_bytes()
             fp.validate(dimg)
             default_ok = hashlib.sha256(dimg).hexdigest() == \
-                '92c446066e715d74a719671d3ee643ed4b7587c94801eb6dc3893f2271ed944d'
+                '1cf609559048a02686585a159dab06fa4856954aa647283a50a8b47da33e3c99'
             entries = {e['id']: e
                        for e in fwbuild._rock26_resources(stock)}
             crc = set(range(n - 4, n))
@@ -552,9 +552,9 @@ def main():
             confined = diff_offsets(u, v) <= \
                 (regions | sites | set(range(n - 4, n)))
             default_ok = hashlib.sha256(u).hexdigest() == \
-                '92c446066e715d74a719671d3ee643ed4b7587c94801eb6dc3893f2271ed944d'
+                '1cf609559048a02686585a159dab06fa4856954aa647283a50a8b47da33e3c99'
             vrep = json.loads(Path(str(vout) + '.report.json').read_text())
-            counts_ok = (len(vrep['patches_applied']) == 38
+            counts_ok = (len(vrep['patches_applied']) == 37
                          and len(vrep['transplants_applied']) == 2)
             ok = (mod_ok and renames_ok and confined and default_ok
                   and counts_ok and len(v) == n)
@@ -562,7 +562,7 @@ def main():
                       f'renames OPU in variant / WMA in default: '
                       f'{renames_ok}; variant-vs-default diff confined: '
                       f'{confined}; default build == pinned unified hash: '
-                      f'{default_ok}; 38 patches + 2 transplants: '
+                      f'{default_ok}; 37 patches + 2 transplants: '
                       f'{counts_ok}; variant diff vs stock '
                       f'{len(diff_offsets(stock, v))} bytes, '
                       f'sha {hashlib.sha256(v).hexdigest()[:16]}…')
@@ -616,16 +616,16 @@ def main():
             payload_ok = v[tail_file:tail_file + len(payload)] == payload \
                 and not any(v[0x532C0:tail_file])
             trep = json.loads(Path(str(tout) + '.report.json').read_text())
-            counts_ok = (len(trep['patches_applied']) == 38
+            counts_ok = (len(trep['patches_applied']) == 37
                          and len(trep['transplants_applied']) == 1
                          and trep['tail']['payload_bytes'] == len(payload))
             default_ok = hashlib.sha256(u).hexdigest() == \
-                '92c446066e715d74a719671d3ee643ed4b7587c94801eb6dc3893f2271ed944d'
+                '1cf609559048a02686585a159dab06fa4856954aa647283a50a8b47da33e3c99'
             ok = confined and payload_ok and counts_ok and default_ok
             detail = (f'variant-vs-default diff confined to hooks + '
                       f'tail span + record + CRC: {confined}; payload '
                       f'at tail with zero workspace zone: {payload_ok}; '
-                      f'38 patches + 1 transplant + tail record: '
+                      f'37 patches + 1 transplant + tail record: '
                       f'{counts_ok}; default build == pinned unified '
                       f'hash: {default_ok}; variant sha '
                       f'{hashlib.sha256(v).hexdigest()[:16]}…')
@@ -633,7 +633,7 @@ def main():
               'default build unchanged', ok, detail)
 
     # -- 13. full build (patches/full/) --------------------------------
-    # One build.py pass composing every feature: 66 patches, the
+    # One build.py pass composing every feature: 65 patches, the
     # vorbis75 and opus72 transplants, two growth insertions
     # (module 31 +6,936, module 24 +26), the merged
     # 2,040-byte gap tail and the merged 938-run theme config. The
@@ -647,7 +647,7 @@ def main():
     # differ only at the theme runs, the mirrored header and
     # the trailer CRC once the growth shift is accounted for.
     FULL_DIR = HERE.parent / 'full'
-    FULL_SHA = '148446d95dfcb85afbaa2b8c13310aed4ea97db80b849f7bb4bb10612e1fa5e1'
+    FULL_SHA = '6fb923612567088663bc145fda4812e97a96c1a304d5e25bbb2c5b4bef2baefb'
     PAYLOAD_GROWTH = 6962       # module 31 + module 24 payloads
     GROWTH_TOTAL = 7168         # plus 206 zeros that sector-align the mirror
     if ecp is None:
@@ -677,7 +677,7 @@ def main():
                 and struct.unpack_from('<I', f, 0x1F4)[0] == MIRROR_OFF + GROWTH_TOTAL \
                 and not any(f[MIRROR_OFF + PAYLOAD_GROWTH:MIRROR_OFF + GROWTH_TOTAL])
             rep = json.loads(Path(str(fout) + '.report.json').read_text())
-            rep_ok = len(rep["patches_applied"]) == 66 \
+            rep_ok = len(rep["patches_applied"]) == 65 \
                 and [t['module75_sha256'] if 'module75_sha256' in t
                      else t['module72_sha256']
                      for t in rep['transplants_applied']] == [
@@ -757,11 +757,11 @@ def main():
                                      < MIRROR_OFF + GROWTH_TOTAL + 0x200):
                         post_ok = False
             default_ok = hashlib.sha256(u).hexdigest() == \
-                '92c446066e715d74a719671d3ee643ed4b7587c94801eb6dc3893f2271ed944d'
+                '1cf609559048a02686585a159dab06fa4856954aa647283a50a8b47da33e3c99'
             ok = pin_ok and rep_ok and confined and ext_ok \
                 and post_ok and default_ok
             detail = (f'whole-image pin and length (+{GROWTH_TOTAL}): '
-                      f'{pin_ok}; report pins (66 patches, both '
+                      f'{pin_ok}; report pins (65 patches, both '
                       f'transplant hashes, growths, tail): {rep_ok}; '
                       f'segment diff confined to the union of parts: '
                       f'{confined}; module 0 tail span (zero workspace '

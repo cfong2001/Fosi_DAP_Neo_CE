@@ -1,4 +1,4 @@
-# Gapless fast path, part 4 of 6: keep core 1 running on a natural advance.
+# Gapless fast path, part 4 of 6: keep core 1 running on a natural FLAC advance.
 name: gapless-4-keep-decoder
 kind: module
 module: 33
@@ -15,11 +15,15 @@ rationale: Rewrites the decoder shutdown 0x030893c4 in place. Its only
   (resets 0xe/0xf, gates 0x6e/0x7e). The rewrite keeps all of that
   except that it skips the halt when r5 == 0, so after a natural end
   of track the decoder stays resident and running, which is the state
-  patches/harness/milestone2.md proved accepts the next 0x65 open.
-  User skips and stops still halt, and the gate (0022) then falls back
+  patches/harness/milestone2.md proved accepts the next 0x65 open. It
+  skips the halt only for codec 6 (FLAC), the one decoder that proof
+  covers: Rockchip's SDK restarts the decoder core for every file
+  (StartBBSystem), and no other decoder has been shown to accept a
+  second file without that reset, so every other codec halts and parks
+  its blocks exactly as stock does. User skips and stops still halt, and the gate (0022) then falls back
   to the full stock reload. If the next track needs a different decoder
   the stock reset-and-start body asserts the core-1 reset itself before
   copying. The tbb table is gone; the freed tail is filled with nops.
   Bytes: patches/gapless/tools/assemble_v2.py.
 expect: cf4810b500680a2828bf10bddfe800f0051b1b1b1b1b1b1b1b1bfff7c6ffe3f793fb01210e20c9f717f901210f20c9f713f900216e20c9f7d7f80021bde810407e20c9f7d1b8fff7b0ffbde81040e3f77bbb
-replace: cf4810b500680a2828bf10bd0446fff7ccff0db1e3f798fb7cb901210e20c9f71bf901210f20c9f717f900216e20c9f7dbf800217e20c9f7d7f810bd00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf
+replace: cf4810b500680a2828bf10bd0446fff7ccff0db9062c12d0e3f796fb7cb901210e20c9f719f901210f20c9f715f900216e20c9f7d9f800217e20c9f7d5f810bd00bf00bf00bf00bf00bf00bf00bf00bf00bf

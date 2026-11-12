@@ -1,5 +1,37 @@
 # Changelog
 
+## 2026-11-12: patches brought back within Rockchip's SDK
+
+An audit of every shipped patch that touches clocks, resets or the
+decoder core, against Rockchip's RKNanoD SDK (reference only; nothing
+copied). Three departures were fixed:
+
+- **Decoder clocks.** Rockchip runs high-rate APE, ALAC and DSD at a
+  400 MHz decoder clock and the top Vorbis tier at 260 MHz. Clock table
+  v1 had cut them to 288 and 240 with no load measurement, and CE runs a
+  heavier full-precision Vorbis decoder. Those rows now keep stock's
+  480 MHz. The audit also found rows 18 and 19 mislabelled: the
+  firmware's classifier, run under emulation, makes `.APE` codec 5 (row
+  18) and `.FLA` codec 6 (row 19), so v1 had been running APE at 288
+  while calling it FLAC. FLAC (row 19) stays at 288, above the SDK's
+  220. `analysis/clock_table.md` and `core1_loader_protocol.md` carry
+  the corrected mapping.
+- **I2C reset hold.** Patch 0019 cut the DAC bus I2C controller's reset
+  hold from 1 ms to 50 µs. The SDK's I2C driver holds it for
+  `DelayMs(1)`, as stock does. 0019 is removed.
+- **Decoder kept running.** The SDK restarts the decoder core for every
+  file. Gapless v2 kept it running for every same-format natural
+  advance, but only the FLAC decoder has been shown to accept a second
+  file without a reset, and an MP3 advance would have resumed with its
+  SYNTH and IMDCT blocks held in reset. Patch 0024 now keeps the core
+  running only for FLAC (codec 6); every other codec halts and reloads
+  as stock does. The rig gains an APE to APE case.
+- In the rig, FLAC to FLAC now takes 11.4 ms against stock's 20.5 (it
+  was 4.7 with the shorter I2C hold); every other transition matches
+  stock.
+- New pins: Standard `6fb92361…`, Minimal `1cf60955…`. The framework
+  set is 32 patches (1,399-byte diff), the full build 65.
+
 ## 2026-11-12: list and menu font, resident-space census
 
 - Font B's Latin glyphs (lists, menus, titles; 314 records) are redrawn

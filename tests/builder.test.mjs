@@ -7,59 +7,59 @@
 //
 //   (a) framework-only build:
 //         build.py --no-transplants
-//         696e7c9d12108d692eb1e1d255c9236de5022d780244707abf4d7bebd86f4439
+//         c71c98c4e47241551634445ffa4ecd418757f030513728edf3be94dfecf4b8ac
 //   (b) framework-only plus the example theme:
 //         build.py --no-transplants \
 //           --theme-config patches/theme_editor/theme.example.json
-//         7817072c1558bbbdff2f85710b6e30de0db5e4c432dda30bd6fd2ad399ae298b
+//         75c8d0a8270028a5ecff1fb81149185240a9461c84f19a42c787e0a0c86f1c77
 //   (c) framework-only plus the CE splash mark:
 //         build.py --no-transplants \
 //           --theme-config patches/theme_editor/ce-mark.json
-//         9916286d6a9937e935ccc340021092689877403a1ef584430dca7192194f4134
+//         1d2847abd0fe363a29eeee0d3b69eb4429cae722b988e96840ae92b3a9c7d938
 //   (d) the default unified build (byte patches plus vorbis75):
 //         build.py
-//         92c446066e715d74a719671d3ee643ed4b7587c94801eb6dc3893f2271ed944d
+//         1cf609559048a02686585a159dab06fa4856954aa647283a50a8b47da33e3c99
 //   (k) the theater variant (the default build plus the five
 //       theater hook patches and the 676-byte tail payload):
 //         build.py --manifest patches/theater/build/manifest.txt \
 //           --tail patches/theater/build/theater_tail.bin
-//         daca592f5bfd1785f6221f891db25392fc2d7a6ae3bc42c9cc3d51338d246301
-//   (l) the theater variant plus the title pair (39 patches):
-//         0d5a1dd6c687693978d5f48ad9091edb279a132bc09281cb2cbc065f55f382c5
+//         698c7def8898496f128090f2a4d6666a689c1e1e138851bb2fce7f6ae30c54e0
+//   (l) the theater variant plus the title pair (38 patches):
+//         3b57f57f4634c797ddad024b737e038953e53ee592e25d45375e3187c81a7989
 //   (p) the default unified build with the example EQ presets
 //       (patches/eq_presets/example.json: a custom curve in slot 5 and
 //       an AutoEQ GraphicEQ in slot 6, fitted in the browser):
 //         build.py --eq-presets patches/eq_presets/example.json
-//         40e85bedfe586587d28ea91e6ec7e824db4c6a8b051584d4ae2ca399fd6f90c1
+//         4981629b659a0c2e5b183f36640d55bb9bc679ad9ec06a0470cf4ae5d99f8664
 //   (n) the default unified build with each DAC filter:
 //         build.py --dac-filter fast-linear-phase
-//           f39fe25deb32290e0c9adbacbbdfc2556d26566b34505fa7526f92c127b23b42
+//           bd7301f0b61a3e7e15b923e372363b200cf9e3c8f8384ac27cd64b04120685ed
 //         build.py --dac-filter slow-low-latency
-//           4691a4a34d4ab920e73c5c950e3272e465348b050932df5cd1d321ea19b29f34
+//           ab8f0c3bb4cdf821839f728303db1f3465222d47f081be585d390a016cdca538
 //         build.py --dac-filter slow-linear-phase
-//           fb31eb0a048271aa245de55b6a492c26d37de531363e393cf8f01ac5658565c6
+//           2c859507e7bd8170733b007127c99c6787316d4ba3fedb565943492c4e6c2bfc
 //         build.py --dac-filter nos
-//           351f03d7c84fc4a251f13bf306a5eba4ae9cc0eef446087a260389d3360bf645
+//           40a13e126ad761cc6b598104da29ce3b6f76a9eaa46c6625b87c74d2337d703a
 //   (o) the default unified build with each Bluetooth auto-off option,
 //       and with both new options together:
 //         build.py --bt-auto-off 10min
-//           25f06df1884cf09fd661e2988621a18ac0f38fee729daf61aae9b676fc5225e2
+//           c92fb4143c732234fd30582b6c11a0e11df46e80475f43779354be5519ff8ace
 //         build.py --bt-auto-off never
-//           fc3b17d67a34fcc88814e48c31b8d91a10c9f9c765a9d7a50511136703dbae21
+//           acfa0e0bd40fd7a839172b1f59a82e170acbe4614c429382c86b6d75ee422bd2
 //         build.py --bt-auto-off never --dac-filter nos
-//           5df1b0594375ac294b181dfb4e60e1f74d25046e33f0008f5ab14c9e3df8fdb9
-//   (m) the everything build (patches/full/: 66 patches, both
+//           566546aea3b1a9367b54cb1b211a030eef4876ac19de0201d303e17f7cce28a2
+//   (m) the everything build (patches/full/: 65 patches, both
 //       transplants, two growth insertions, the merged tail and
 //       the merged theme runs), with the page's embedded Opus data
 //       (docs/builder-opus-data.mjs; DAP_NEO_OPUS_DATA overrides it):
 //         build_full.py (one build.py pass)
-//         148446d95dfcb85afbaa2b8c13310aed4ea97db80b849f7bb4bb10612e1fa5e1
+//         6fb923612567088663bc145fda4812e97a96c1a304d5e25bbb2c5b4bef2baefb
 //   standalone lock screen (the embedded 406-byte reference-toolchain
 //   routine in a module 31 extension, plus patch 0033):
 //         build.py --no-transplants --manifest <framework manifest plus
 //           patches/ui_features/lockscreen_build/0033-ui-lockscreen-title.patch>
 //           --grow 31:code:lockscreen.bin
-//         5513e217a63a8ef56c8c515e7a4e480c29232097664318e06234d90960dfde66
+//         25e8341a39cd41413042d5e9379bad71eb946bde19fcebebf30a2709ee718068
 //
 // Run:  node tests/builder.test.mjs
 // The stock image defaults to the repo-root DP3_V137.img; override
@@ -150,7 +150,7 @@ assert.deepEqual(FULL_GROWTHS.map(g => [g.module, g.length, g.sha256]), [
 ]);
 assert.equal(FULL_THEME_RUNS.length, 1269);
 assert.equal(FULL_IMAGE_SHA256,
-  "148446d95dfcb85afbaa2b8c13310aed4ea97db80b849f7bb4bb10612e1fa5e1");
+  "6fb923612567088663bc145fda4812e97a96c1a304d5e25bbb2c5b4bef2baefb");
 for (const g of FULL_GROWTHS)
   assert.equal(await sha256Hex(hexToBytes(g.hex)), g.sha256);
 assert.equal(await sha256Hex(hexToBytes(FULL_TAIL.hex)), FULL_TAIL.sha256);
@@ -166,35 +166,35 @@ const theaterBytes = await theaterTail(
 const cases = [
   ["(a) toggles on, no theme, no mark",
    {groups: allGroups, patchGroups: PATCH_GROUPS},
-   "696e7c9d12108d692eb1e1d255c9236de5022d780244707abf4d7bebd86f4439"],
+   "c71c98c4e47241551634445ffa4ecd418757f030513728edf3be94dfecf4b8ac"],
   ["(b) toggles on plus the example theme",
    {groups: allGroups, patchGroups: PATCH_GROUPS, themeConfig: exampleTheme},
-   "7817072c1558bbbdff2f85710b6e30de0db5e4c432dda30bd6fd2ad399ae298b"],
+   "75c8d0a8270028a5ecff1fb81149185240a9461c84f19a42c787e0a0c86f1c77"],
   ["(c) toggles on plus the CE splash mark",
    {groups: allGroups, patchGroups: PATCH_GROUPS, ceMarkRuns: CE_MARK_RUNS},
-   "9916286d6a9937e935ccc340021092689877403a1ef584430dca7192194f4134"],
+   "1d2847abd0fe363a29eeee0d3b69eb4429cae722b988e96840ae92b3a9c7d938"],
   ["(d) toggles on plus the vorbis75 transplant (unified build)",
    {groups: allGroups, patchGroups: PATCH_GROUPS, vorbis: VORBIS75},
-   "92c446066e715d74a719671d3ee643ed4b7587c94801eb6dc3893f2271ed944d"],
+   "1cf609559048a02686585a159dab06fa4856954aa647283a50a8b47da33e3c99"],
   ["(e) gapless off, other feature patches on",
    {groups: new Set([...allGroups].filter(id => id !== "gapless")), patchGroups: PATCH_GROUPS},
-   "152c16b3f5c1b8423954d3f6d254c765194c80e7b0ef827f1144a05b19c24964"],
+   "25c34dafafb155f32911bd40d386792b90ea7c37d6ffabcbfd4637b1b8a367f1"],
   ["(f) module 31 insertion, framework reference",
    {groups: allGroups, patchGroups: PATCH_GROUPS,
     module31Payload: Uint8Array.from({length: 1000}, (_, i) => i % 251)},
-   "99f7e9589c2b8a7d68297655a7d6c8a6881c64511690ce76ecd38aed7d54eb79"],
+   "80d2e24602376eab8515797342d322c7616ae9a2f897c681da1132864f77f923"],
   ["(g) paired player title repair, framework reference",
    {groups: allGroups, patchGroups: PATCH_GROUPS, extraPatches: TITLE_PATCHES},
-   "98de2192663800f29b6484001db9c88188d1bb33bf667a877b79c8fb45329c98"],
+   "8c39a2e1fcda66cf5d33f6284c94b7a55ab488eb4b5771ae0b2c35a0dde3c98d"],
   ["(k) theater variant: default build plus hooks and tail",
    {groups: allGroups, patchGroups: PATCH_GROUPS, vorbis: VORBIS75,
     extraPatches: THEATER_PATCHES, tailPayload: theaterBytes},
-   "daca592f5bfd1785f6221f891db25392fc2d7a6ae3bc42c9cc3d51338d246301"],
+   "698c7def8898496f128090f2a4d6666a689c1e1e138851bb2fce7f6ae30c54e0"],
   ["(l) theater plus title pair (different modules, no overlap)",
    {groups: allGroups, patchGroups: PATCH_GROUPS, vorbis: VORBIS75,
     extraPatches: [...THEATER_PATCHES, ...TITLE_PATCHES],
     tailPayload: theaterBytes},
-   "0d5a1dd6c687693978d5f48ad9091edb279a132bc09281cb2cbc065f55f382c5"],
+   "3b57f57f4634c797ddad024b737e038953e53ee592e25d45375e3187c81a7989"],
 ];
 {
   const example = JSON.parse(await readFile(new URL("../patches/eq_presets/example.json", import.meta.url), "utf8"));
@@ -207,21 +207,21 @@ const cases = [
   cases.push(["(p) unified build with the example EQ presets (browser fit)",
     {groups: allGroups, patchGroups: PATCH_GROUPS, vorbis: VORBIS75,
      extraPatches: slotPatches(stock, slots)},
-    "40e85bedfe586587d28ea91e6ec7e824db4c6a8b051584d4ae2ca399fd6f90c1"]);
+    "4981629b659a0c2e5b183f36640d55bb9bc679ad9ec06a0470cf4ae5d99f8664"]);
   assert.throws(() => parseCurve("1 2 3"), /31 dB values/);
 }
 for (const [id, hash] of [
-  ["fast-linear-phase", "f39fe25deb32290e0c9adbacbbdfc2556d26566b34505fa7526f92c127b23b42"],
-  ["slow-low-latency", "4691a4a34d4ab920e73c5c950e3272e465348b050932df5cd1d321ea19b29f34"],
-  ["slow-linear-phase", "fb31eb0a048271aa245de55b6a492c26d37de531363e393cf8f01ac5658565c6"],
-  ["nos", "351f03d7c84fc4a251f13bf306a5eba4ae9cc0eef446087a260389d3360bf645"],
+  ["fast-linear-phase", "bd7301f0b61a3e7e15b923e372363b200cf9e3c8f8384ac27cd64b04120685ed"],
+  ["slow-low-latency", "ab8f0c3bb4cdf821839f728303db1f3465222d47f081be585d390a016cdca538"],
+  ["slow-linear-phase", "2c859507e7bd8170733b007127c99c6787316d4ba3fedb565943492c4e6c2bfc"],
+  ["nos", "40a13e126ad761cc6b598104da29ce3b6f76a9eaa46c6625b87c74d2337d703a"],
 ]) cases.push(["(n) unified build with DAC filter " + id,
   {groups: allGroups, patchGroups: PATCH_GROUPS, vorbis: VORBIS75,
    extraPatches: dacFilterPatches(id)}, hash]);
 for (const [id, extra, hash] of [
-  ["10min", [], "25f06df1884cf09fd661e2988621a18ac0f38fee729daf61aae9b676fc5225e2"],
-  ["never", [], "fc3b17d67a34fcc88814e48c31b8d91a10c9f9c765a9d7a50511136703dbae21"],
-  ["never", dacFilterPatches("nos"), "5df1b0594375ac294b181dfb4e60e1f74d25046e33f0008f5ab14c9e3df8fdb9"],
+  ["10min", [], "c92fb4143c732234fd30582b6c11a0e11df46e80475f43779354be5519ff8ace"],
+  ["never", [], "acfa0e0bd40fd7a839172b1f59a82e170acbe4614c429382c86b6d75ee422bd2"],
+  ["never", dacFilterPatches("nos"), "566546aea3b1a9367b54cb1b211a030eef4876ac19de0201d303e17f7cce28a2"],
 ]) cases.push(["(o) unified build with Bluetooth auto-off " + id + (extra.length ? " and DAC filter nos" : ""),
   {groups: allGroups, patchGroups: PATCH_GROUPS, vorbis: VORBIS75,
    extraPatches: [...btAutoOffPatches(id), ...extra]}, hash]);
@@ -236,7 +236,7 @@ assert.throws(() => dacFilterPatches("bogus"), /unknown DAC filter/);
     ? JSON.parse(await readFile(process.env.DAP_NEO_OPUS_DATA, "utf8")) : OPUS_DATA;
   cases.push(["(g) unified build plus the Opus variant",
     {groups: allGroups, patchGroups: PATCH_GROUPS, vorbis: VORBIS75, opus, opusPatches: OPUS_PATCHES},
-    "f6f908c6f6a171e2f20e7d453a3592b8a5dde763cac87d9dab4232d679da9028"]);
+    "2c17dde9101c5a8b61e2400b166c4bcf7f47d2f820bfe25db9a1683e3cec2996"]);
   cases.push(["(m) everything build: all features in one image",
     {groups: allGroups, patchGroups: PATCH_GROUPS, vorbis: VORBIS75,
      opus, opusPatches: OPUS_PATCHES,
@@ -253,14 +253,14 @@ assert.throws(() => dacFilterPatches("bogus"), /unknown DAC filter/);
   const tailPayload = await bluetoothTail(bt, sha256Hex);
   cases.push(["(h) Bluetooth tail and hook, framework reference",
     {groups: allGroups, patchGroups: PATCH_GROUPS, tailPayload, extraPatches: [BT_PATCH]},
-    "76e21aa86ff4fe38774ac197351edf8b899f643379bd7d62520736f0aa10a76e"]);
+    "525c54d1da01fa3916179d135af2262ebc047e2897b2a4a3add6d69020a13861"]);
 }
 {
   const payload = await lockscreenPayload(process.env.DAP_NEO_LOCK_DATA
     ? new Uint8Array(await readFile(process.env.DAP_NEO_LOCK_DATA)) : hexToBytes(LOCK_PAYLOAD.hex), sha256Hex);
   cases.push(["standalone lock-screen extension, framework reference",
     {groups: allGroups, patchGroups: PATCH_GROUPS, module31Payload: payload, extraPatches: [LOCK_PATCH]},
-    "5513e217a63a8ef56c8c515e7a4e480c29232097664318e06234d90960dfde66"]);
+    "25e8341a39cd41413042d5e9379bad71eb946bde19fcebebf30a2709ee718068"]);
 }
 if (process.env.DAP_NEO_PLAYLIST_OVERLAY && process.env.DAP_NEO_PLAYLIST_RESOLVER) {
   const overlay = new Uint8Array(await readFile(process.env.DAP_NEO_PLAYLIST_OVERLAY));

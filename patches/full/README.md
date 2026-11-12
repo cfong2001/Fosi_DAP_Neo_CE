@@ -9,7 +9,7 @@ structural validation.
 | | |
 |---|---|
 | Input | `DP3_V137.img`, 13,631,492 bytes, SHA-256 `fcc1cd3e…` |
-| Output | 13,638,660 bytes, SHA-256 `148446d95dfcb85afbaa2b8c13310aed4ea97db80b849f7bb4bb10612e1fa5e1` |
+| Output | 13,638,660 bytes, SHA-256 `6fb923612567088663bc145fda4812e97a96c1a304d5e25bbb2c5b4bef2baefb` |
 | Composition | 64 byte patches, 2 transplants, 2 growth insertions, one merged gap tail, one merged theme config |
 | Default build | unchanged, still SHA-256 `92c44606…` (verify.py checks 1 to 13 pass; check 13 pins this build) |
 
@@ -70,7 +70,7 @@ pin.
 
 | Feature | Where its bytes live |
 |---|---|
-| Default framework set (33 patches) | Referenced in place from `patches/framework/patches/` |
+| Default framework set (32 patches) | Referenced in place from `patches/framework/patches/` |
 | Full-precision Vorbis | vorbis75 transplant, as in the default build; module 75 SHA-256 `dd8f772f…` |
 | Opus replacing WMA | opus72 transplant (module 72 SHA-256 `6a7d50d2…`) and the five classifier rename patches from `patches/opus_swap/` |
 | Safer track titles | Title pair from `patches/theater/text/`, module 27, same length |

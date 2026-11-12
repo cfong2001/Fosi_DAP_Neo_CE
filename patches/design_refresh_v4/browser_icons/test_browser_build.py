@@ -6,7 +6,7 @@ is written to disk):
 
   1. the default build (framework manifest, no theme config),
      whose SHA-256 must equal the pinned default
-     92c446066e715d74a719671d3ee643ed4b7587c94801eb6dc3893f2271ed944d,
+     1cf609559048a02686585a159dab06fa4856954aa647283a50a8b47da33e3c99,
      proving the default build is untouched;
   2. the validation build: the v4 manifest (the default patch set
      plus the eight transport repoint patches) and a merged theme
@@ -34,8 +34,8 @@ from rknano_image import Image  # noqa: E402
 RAW = (ROOT / 'DP3_V137.img').read_bytes()
 assert hashlib.sha256(RAW).hexdigest() == \
     'fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cdfade5e9c6ea3bd71ac6deef'
-DEFAULT_SHA = '92c446066e715d74a719671d3ee643ed4b7587c94801eb6dc3' \
-              '893f2271ed944d'
+DEFAULT_SHA = '1cf609559048a02686585a159dab06fa4856954aa647283a50' \
+              'a8b47da33e3c99'
 
 
 def load_build():

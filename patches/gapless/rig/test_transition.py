@@ -70,8 +70,8 @@ def patch_exec(raw, module, addr, data):
     return bytes(out)
 
 
-def run(raw, how, ext=b'FLA'):
-    s = Scenario(raw)
+def run(raw, how, ext=b'FLA', first=b'FLA'):
+    s = Scenario(raw, ext=first)
     s.start_first()
     s.ext = ext
     getattr(s, how)()
@@ -124,6 +124,7 @@ def main():
     c_nat = run(ce, 'run'); row('natural advance FLAC->FLAC', c_nat)
     c_skip = run(ce, 'skip'); row('user NEXT FLAC->FLAC', c_skip)
     c_chg = run(ce, 'run', b'APE'); row('natural advance FLAC->APE', c_chg)
+    c_ape = run(ce, 'run', b'APE', b'APE'); row('natural advance APE->APE', c_ape)
     halting = patch_exec(ce, 33, SHUTDOWN, STOCK_SHUTDOWN)
     m1 = run(halting, 'run'); row('mutant: 0024 reverted', m1)
     v1 = patch_exec(halting, 0, GATE_CORE1_CHECK, b'\x00\xbf')
@@ -147,6 +148,8 @@ def main():
           f"{c_nat['first_audio']:.3f} vs {s_nat['first_audio']:.3f} ms")
     check('CE skip: halts and fully reloads, no timeout',
           c_skip['halted'] and c_skip['decoder_loads'] and not c_skip['timeouts'])
+    check('CE APE->APE: fast path is FLAC-only, so it halts and fully reloads',
+          c_ape['halted'] and c_ape['decoder_loads'] and not c_ape['timeouts'])
     check('CE codec change: loads the new decoder, no timeout',
           c_chg['decoder_loads'] and not c_chg['timeouts'])
     check('mutant 0024 reverted: gate falls back to a full reload',
