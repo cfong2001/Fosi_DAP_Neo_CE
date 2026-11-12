@@ -14,6 +14,10 @@ Every figure says where its pixels come from:
   composed   the progress bar: the image's own column and knob resources
              (187, 188, 220) placed at the coordinates module 27 uses
              (patches/ui_features/renderer/renderer.md)
+  glyphs     text set from the image's own Font B records with the
+             firmware's advance rule (0x030627BE, ported in
+             patches/antialias/generate_font.py); the list layout around
+             it (row height, margins, selection bar) is drawn
   drawn      cover art, title and artist text and time labels, drawn by
              this script at approximate positions (the painter code that
              draws them needs a mounted card, so it cannot run offline)
@@ -44,6 +48,7 @@ def load_module(name, path):
 
 
 KT = load_module('keyed', REPO / 'patches/design_refresh_v4/test_keyed_transport.py')
+GF = load_module('genfont', REPO / 'patches/antialias/generate_font.py')
 DARK_GROUND = 0x10A2            # stock dark player ground (theater default)
 BG = (13, 17, 23)               # figure background
 CAPTION = (230, 230, 230)
@@ -79,6 +84,22 @@ class Fw:
         img = Image.new('RGB', (w, h))
         img.putdata([rgb(v) for (v,) in struct.iter_unpack('>H', data)])
         return img
+
+    def text(self, img, x, y, s, ink):
+        """Set s with this image's Font B records and the firmware's
+        advance rule; returns the end x."""
+        base = Firmware(self.raw).sections['font_b']['offset']
+        for ch in s:
+            cp = ord(ch)
+            rec = self.raw[base + cp * GF.STRIDE:base + (cp + 1) * GF.STRIDE]
+            for gy in range(GF.ROWS):
+                row = int.from_bytes(rec[2 * gy:2 * gy + 2], 'big')
+                for gx in range(16):
+                    if row & (0x8000 >> gx) and 0 <= x + gx < img.width \
+                            and 0 <= y + gy < img.height:
+                        img.putpixel((x + gx, y + gy), ink)
+            x += GF.advance(rec, cp)
+        return x
 
     def paint(self, ground, a=0, b=0, play=1, theme=0):
         """Run the real painter segment; return the 240x320 framebuffer."""
@@ -283,16 +304,91 @@ def fig_lockscreen(stock, ce, out):
     def screen(fw, extra):
         img = Image.new('RGB', (240, 64), rgb(0x2945))
         img.paste(fw.resource(39), (135, 4))
-        d = ImageDraw.Draw(img)
         if extra:
-            d.text((11, 24), 'Ember Skyline', fill=(240, 240, 240), font=font(13))
-            d.text((11, 40), '1:12 / 4:00', fill=(240, 240, 240), font=font(13))
+            fw.text(img, 11, 22, 'Ember Skyline', (240, 240, 240))
+            fw.text(img, 11, 40, '1:12 / 4:00', (240, 240, 240))
         return img
     framed([screen(stock, False), screen(ce, True)],
            ['Stock: hold icon only', 'CE: title and elapsed / total'], scale=3, gap=24,
-           note='Hold icon decoded from each image (exact). Text drawn at the routine\'s '
-                'rectangles (11, 24) and (11, 40); the firmware font differs.'
+           note='Hold icon decoded from each image (exact). Text set in the CE image\'s '
+                'Font B (glyphs) near the routine\'s rectangles (11, 24) and (11, 40).'
            ).save(out / 'lockscreen.png')
+
+
+def fig_menus(stock, ce, out):
+    rows = ['Music', 'Playlists', 'Albums', 'Artists', 'Settings',
+            'Playback order', 'Language', 'Bluetooth', 'Sleep timer']
+    files = ['01 So What.flac', '02 Freddie Freeloader.flac', '03 Blue in Green.flac',
+             '04 All Blues.flac', '05 Flamenco Sketches.flac', 'Café del Mar.mp3',
+             'Naïve Melody.flac', 'Dvořák - Largo.ogg', 'Łódź Nocturne.opus']
+
+    def screen(fw, items, sel):
+        img = Image.new('RGB', (240, 284), (0, 0, 0))
+        d = ImageDraw.Draw(img)
+        for i, t in enumerate(items):
+            y = 6 + i * 31
+            if i == sel:
+                d.rectangle([0, y, 239, y + 27], fill=rgb(0xF220))
+            fw.text(img, 12, y + 6, t, (255, 255, 255))
+        return img
+
+    framed([screen(stock, rows, 4), screen(ce, rows, 4),
+            screen(stock, files, 2), screen(ce, files, 2)],
+           ['Stock menu', 'CE menu', 'Stock file list', 'CE file list'], scale=2, gap=20,
+           title='List and menu text (Font B)',
+           note='Text set from each image\'s own Font B glyph records with the firmware\'s '
+                'advance rule (glyphs); row layout and selection bar drawn.'
+           ).save(out / 'menus.png')
+
+
+def fig_screens(stock, ce, out):
+    """Zoomed details of the baked screen art, stock beside CE."""
+    def on(fw, rid, ground):
+        r = fw.resource(rid)
+        under = Image.new('RGB', r.size, ground)
+        e = fw.res[rid]
+        px = struct.unpack_from(f'>{e["width"] * e["height"]}H', fw.raw, e['data_offset'])
+        mask = Image.new('L', r.size, 0)
+        mask.putdata([0 if v == 0xF800 else 255 for v in px])
+        under.paste(r, (0, 0), mask)
+        return under
+
+    def bar(fw, light):
+        ground = rgb(0xBEFA if light else 0x7222)
+        img = Image.new('RGB', (240, 30), ground)
+        off = 166 if light else 0
+        for i in range(148):
+            img.paste(fw.resource((187 if i < 62 else 188) + off), (46 + i, 12))
+        knob = on(fw, 220 + off, ground) if fw is ce else fw.resource(220 + off)
+        img.paste(knob, (104, 8))
+        return img
+
+    rows = [('Low battery (137)', lambda fw: on(fw, 137, (0, 0, 0)).crop((64, 90, 140, 134))),
+            ('Low battery, light (303)',
+             lambda fw: on(fw, 303, (255, 255, 255)).crop((64, 83, 140, 127))),
+            ('Powering off (294)', lambda fw: fw.resource(294).crop((60, 186, 180, 210))),
+            ('Progress bar and knob', lambda fw: bar(fw, False).crop((70, 2, 150, 28))),
+            ('Progress bar, light', lambda fw: bar(fw, True).crop((70, 2, 150, 28)))]
+    z, gap, label_w = 4, 24, 230
+    cells = [(t, f(stock), f(ce)) for t, f in rows]
+    w = max(a.width for _, a, _ in cells) * z
+    h = sum(a.height * z + gap for _, a, _ in cells)
+    sheet = Image.new('RGB', (label_w + 2 * (w + gap) + gap, 90 + h + 40), BG)
+    d = ImageDraw.Draw(sheet)
+    d.text((gap, 14), 'Screens, dialogs and progress bar', fill=CAPTION, font=font(20, True))
+    d.text((label_w, 52), 'Stock V137', fill=CAPTION, font=font(16, True))
+    d.text((label_w + w + gap, 52), 'CE standard image', fill=CAPTION, font=font(16, True))
+    y = 84
+    for title, a_, b_ in cells:
+        d.text((gap, y + a_.height * z // 2), title, fill=CAPTION, font=font(15), anchor='lm')
+        sheet.paste(a_.resize((a_.width * z, a_.height * z), Image.NEAREST), (label_w, y))
+        sheet.paste(b_.resize((b_.width * z, b_.height * z), Image.NEAREST),
+                    (label_w + w + gap, y))
+        y += a_.height * z + gap
+    d.text((gap, y + 4), 'Resources decoded from each image (exact), 4x; keyed pixels over the '
+           'screen behind them. Progress bar composed from 187/188 and knob 220 (light: +166) at '
+           'module 27\'s coordinates.', fill=SUB, font=font(13))
+    sheet.save(out / 'screens.png')
 
 
 def fig_vorbis(out):
@@ -355,6 +451,8 @@ def main():
     fig_splash(stock, ce, a.out)
     fig_browser(stock, ce, a.out)
     fig_lockscreen(stock, ce, a.out)
+    fig_menus(stock, ce, a.out)
+    fig_screens(stock, ce, a.out)
     fig_vorbis(a.out)
     for p in sorted(a.out.glob('*.png')):
         print(p, Image.open(p).size)

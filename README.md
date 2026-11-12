@@ -43,12 +43,17 @@ Everything here is in the standard image; the minimal image has the sound and li
 - Selecting an `.m3u` file in the browser plays it as a playlist; next, previous and shuffle stay inside it (up to 59 tracks from up to 6 folders).
 - With hold on, the lock screen shows the track title and elapsed time.
 - A long press of Power turns Bluetooth on or off. The status icons are redrawn, and the boot splash carries a CE mark.
-- Icons and baked screen art are antialiased. The transport, status, battery and browser icons, the dialog cards, the low-battery and power-off screens, the CE splash mark and the progress bar carry smoothed edges in their pixels, so curves, diagonals and text no longer step. Art on a solid ground blends exactly into it. Art over the album-derived background (the transport glyphs and the progress bar and knob) blends toward a neutral grey. List and menu text is still 1-bit, since the firmware's glyph format has no grey levels, but its Latin glyphs are redrawn from Barlow SemiBold with 2-pixel stems and even spacing (Latin-1 and Latin Extended-A included; other scripts keep stock glyphs). Before and after: [icons](patches/antialias/mock/icons_before_after.png), [screens](patches/antialias/mock/screens_before_after.png), [list font](patches/antialias/mock/font_before_after.png).
+- Menus and lists use a redrawn font. The firmware's glyphs are 1-bit, so text can't carry grey levels, but the Latin glyphs of the list and menu font are redrawn from Barlow SemiBold: 2-pixel stems, even spacing, tabular digits, and Latin-1 and Latin Extended-A accents. It also fixes a stock layout bug that let `L` overlap the next letter. Other scripts keep their stock glyphs.
+- Icons and baked screen art are antialiased. The transport, status, battery and browser icons, the dialog cards, the low-battery and power-off screens, the CE splash mark and the progress bar carry smoothed edges in their pixels, so curves and diagonals no longer step. Art on a solid ground blends exactly into it. Art over the album-derived background (the transport glyphs and the progress bar and knob) blends toward a neutral grey.
 - Volume no longer freezes after two DAC errors, decoder clocks are lower, and the wheel timer wakes less often.
+
+![Stock and CE menus and file lists, set in each image's own list font](media/menus.png)
+
+![Low-battery dialogs, power-off text and progress bar, stock against CE, 4x](media/screens.png)
 
 ![Vorbis signal-to-noise per file, stock against CE](media/vorbis.png)
 
-More figures: [transport controls in each player state](media/transport.png), [lock screen](media/lockscreen.png), [boot splash](media/splash.png), [status icons](media/browser_icons.png).
+More figures: [transport controls in each player state](media/transport.png), [lock screen](media/lockscreen.png), [boot splash](media/splash.png), [status icons](media/browser_icons.png), [every antialiased icon](patches/antialias/mock/icons_before_after.png), [full screens](patches/antialias/mock/screens_before_after.png), [list font close-up](patches/antialias/mock/font_before_after.png).
 
 Every change is a patch file or a module transplant that [`patches/framework/build.py`](patches/framework/build.py) applies to the hash-checked stock image. The standard image composes them with [`patches/full/build/build_full.py`](patches/full/build/build_full.py), adding 6,962 bytes of code in modules 31 and 24 and filling 2,040 bytes of an unused gap in module 0; [`patches/full/README.md`](patches/full/README.md) maps where every byte lives.
 
