@@ -1,0 +1,11 @@
+# profiles.S .text.commit assembled into a module 0 pocket at 0x03067064.
+name: 0146-pocket-profile-commit
+kind: module
+module: 0
+region: code
+address: 0x3067064
+gate: build refuses unless the stock bytes at the target equal
+  `expect`; regenerate with patches/power/profiles/build_profiles.py.
+expect: 70b5024601200021edf7c1fedff8c0c105460c46dce900321840114008431cbf002070bd45ea030044ea0201cce90001fff732ff002070bd242824bf
+replace: 7338032814d20b4900eb4000014406b40878094a1075fdf773fc0099487817f0d6f806bc887817f012f9012005f0befc18f048be68460503a0320203
+rationale: A stock routine here has no caller, branch, pointer or literal anywhere in core-0 code or data (patches/space/census_dead.py, tier 1), and no emulation suite executes it. Module 0 is resident in every window, so the settings window and every string lookup reach the code here.

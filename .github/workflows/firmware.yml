@@ -110,6 +110,13 @@ jobs:
           cd patches/focus_mode
           FOCUS_FULL_IMAGE="$RUNNER_TEMP/dist/DP3_V137_CE.img" python test_focus_mode.py
 
+      - name: Power profile item on the full build
+        run: |
+          cd patches/power/profiles
+          python build_profiles.py
+          git diff --exit-code -- . ../../full/patches
+          PROFILES_FULL_IMAGE="$RUNNER_TEMP/dist/DP3_V137_CE.img" python test_profiles.py
+
       - name: Standalone theater and focus variants
         run: |
           (cd patches/theater/build && python build_theater.py && python test_theater_lifecycle.py)

@@ -9,7 +9,7 @@ structural validation.
 | | |
 |---|---|
 | Input | `DP3_V137.img`, 13,631,492 bytes, SHA-256 `fcc1cd3e…` |
-| Output | 13,638,660 bytes, SHA-256 `748d00dbf3d33ec216732a181353f13f80c9d563feb56f2429e766cc0df95566` |
+| Output | 13,638,660 bytes, SHA-256 `1241064a5d347a3ddb3939fc4b5fb84c7b8f1acdd920900200573e878351e842` |
 | Composition | 64 byte patches, 2 transplants, 2 growth insertions, one merged gap tail, one merged theme config |
 | Default build | unchanged, still SHA-256 `92c44606…` (verify.py checks 1 to 13 pass; check 13 pins this build) |
 
@@ -84,7 +84,7 @@ pin.
 | M3U playlists | Module 31 growth payload (below), local patches 0040 to 0044, staging and the playlist hooks in the tail |
 | Lock screen | The 406-byte routine in the module 31 payload at 0x03080784, reached by local patch 0033 |
 | Navigation disarm stubs | Folder and file stubs in the module 31 payload at 0x0308091C, the tag stub as the module 24 growth, local patches 0060 to 0062 |
-| Battery profiles | Not in this build; removed at the owner's direction (verdict below) |
+| Power profiles | Local patches 0140 to 0146 (three module 0 pockets and four hook sites, from `patches/power/profiles/build_profiles.py`) and 64 runs in the merged theme config: the settings tree edits in each language and the new records' table after the image resources |
 
 ## The merged tail
 
@@ -234,17 +234,24 @@ no store carries the key color. The standalone v4 build leaves 58 and 34
 ghost pixels in the same sequences. The ground is the background cell at
 0x03004400, the color the painter's full repaint fills the screen with.
 
-## Battery verdict
+## Power profiles
 
-Battery profiles are not in this build; the owner removed the component.
-It never activated while carried. A settings item's descriptor is the first
-58 bytes of its string record, and the apply dispatch special-cases 173
-(EQ) and 196 (brightness). The working id 0xC5 turned out to be record 197,
-brightness's own "20%" label, and no orphan id can be proven unused offline
-because string fetches are table driven. Authoring a record under an
-unproven id could hijack a live string, so none was written. A hardware
-SAVEINFO and language dump, or a full cross-reference of every string
-fetch, would unblock it. The standalone `patches/power/` work is untouched.
+The earlier battery-profile build stayed out because it had no settings
+item: its working id 0xC5 was brightness's own "20%" record, and every
+stock id from 0 to 265 has text in some language. The new item avoids
+the question by using ids past the table. The menu tree is data (the
+first 58 bytes of every string record are the SDK's
+`MENU_TEXT_INFO_STRUCT`), and only two module 0 routines turn an id
+into a record address. Their hooks send ids 266 to 269 to a table after
+the image resources and leave every stock id on the stock path; stock
+code never fetches those ids, since on stock they would land in the
+next language's records. Settings (164) gets 266 as its 17th child in
+each language. The profiles write only stock settings through the
+settings window's own setters, so nothing new is stored and stock boot
+restores them. Clock caps and the wheel timer, which the earlier design
+also changed, are left out: the clock caps went below Rockchip's
+figures, and neither had a boot reapply path. Details and emulation
+checks: [`patches/power/profiles/`](../power/profiles/README.md).
 
 ## Space decisions for the owner
 

@@ -1,0 +1,11 @@
+# Power profile hook site in module 0.
+name: 0142-profile-string-lookup
+kind: module
+module: 0
+region: code
+address: 0x30630c2
+gate: build refuses unless the stock bytes at the target equal
+  `expect`; regenerate with patches/power/profiles/build_profiles.py.
+expect: f0b4754d
+replace: eef7e3ba
+rationale: GetResourceStr entry (push {r4-r7}; ldr r5, =SAVEINFO) becomes a branch to str_hook, which re-runs both instructions for every stock id and sends ids 266 and up to the label table.

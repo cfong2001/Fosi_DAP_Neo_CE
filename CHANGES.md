@@ -1,5 +1,25 @@
 # Changelog
 
+## 2026-11-12: power profiles
+
+- System Settings gains a Power Profile item (Standard image) with three
+  options: High, Balanced and Battery Saver. Each sets brightness, auto
+  screen off and auto power off through the settings window's own setters.
+  Labels in all 21 menu languages.
+- The settings menu tree is data: each string record starts with the SDK's
+  `MENU_TEXT_INFO_STRUCT`. The new item and options are ids 266 to 269,
+  past the stock table, so no stock string is touched. The two routines
+  that look up records send those ids to a table in the padding after the
+  image resources. Hooks in the settings window's value switch and commit
+  handler mark the matching profile and apply the chosen one.
+- 240 bytes of code in three dead module 0 routines (patches 0140 to 0146),
+  64 theme runs. `test_profiles.py` runs the real lookups and settings
+  code: stock text and headers are unchanged for all 266 ids in all 21
+  languages.
+- The first battery-profile design (clock caps, wheel timer, SAVEINFO area)
+  stays unstacked: its clock caps went below Rockchip's figures and it had
+  no settings item.
+
 ## 2026-11-12: theme code colours
 
 - Themes can now change the accent and divider-line colours, which the

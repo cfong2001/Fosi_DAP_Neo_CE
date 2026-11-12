@@ -1,0 +1,11 @@
+# Power profile hook site in module 32.
+name: 0145-profile-commit
+kind: module
+module: 32
+region: code
+address: 0x307fa80
+gate: build refuses unless the stock bytes at the target equal
+  `expect`; regenerate with patches/power/profiles/build_profiles.py.
+expect: 80f05281
+replace: a7f4f0aa
+rationale: The commit handler's range check (ids 152..265) branches out of range to its default exit; commit_hook catches the three option ids, applies the profile through the stock setters and saves, then takes the same exit.

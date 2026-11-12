@@ -21,7 +21,7 @@ CE (Community Edition) is patched firmware for the Fosi Audio DAP Neo. It starts
 
 | Image | What it carries | SHA-256 |
 |---|---|---|
-| [`DP3_V137_CE.img`](release/DP3_V137_CE.img) | Standard: every feature below. 7,168 bytes longer than stock. | `748d00dbf3d33ec216732a181353f13f80c9d563feb56f2429e766cc0df95566` |
+| [`DP3_V137_CE.img`](release/DP3_V137_CE.img) | Standard: every feature below. 7,168 bytes longer than stock. | `1241064a5d347a3ddb3939fc4b5fb84c7b8f1acdd920900200573e878351e842` |
 | [`DP3_V137_CE_minimal.img`](release/DP3_V137_CE_minimal.img) | Minimal: audio and library fixes only, same length as stock. | `0dfd10e23749f9b6c65499266f1a7a2ec038160b089ba0fc2ca68dcf2b24c986` |
 | [`DP3_V137_CE_recovery.img`](release/DP3_V137_CE_recovery.img) | Stock code dated one day after CE, for going back. | `aff851b31d6eee55cbd4bb3fc0464ac79f0039ee86ae6723225ac036a157d223` |
 
@@ -43,6 +43,7 @@ Everything here is in the standard image; the minimal image has the sound and li
 - Selecting an `.m3u` file in the browser plays it as a playlist; next, previous and shuffle stay inside it (up to 59 tracks from up to 6 folders).
 - With hold on, the lock screen shows the track title and elapsed time.
 - Focus mode: after five seconds without input the player hides its controls and enlarges the cover; any key or wheel turn brings them back, and that first press only wakes the screen.
+- System Settings gains a Power Profile item with three options, High, Balanced and Battery Saver, each setting screen brightness, auto screen off and auto power off together (100 %, 1 minute, never; 60 %, 30 seconds, 10 minutes; 20 %, 10 seconds, 5 minutes). The labels are translated into all 21 menu languages, and the item marks whichever profile matches the current settings.
 - A long press of Power turns Bluetooth on or off. The status icons are redrawn, and the boot splash carries a CE mark.
 - Both system fonts are redrawn from Barlow SemiBold: the menu and list font and the small font used for status text. They are still 1-bit, because the firmware draws text without grey levels, but strokes are even and the spacing is regular. Stock spacing let `L` run into the next letter; that is fixed. Accented Latin letters are redrawn too; other scripts keep their stock glyphs.
 - Icons and baked screen art are antialiased. The transport, status, battery and browser icons, the dialog cards, the low-battery and power-off screens, the CE splash mark and the progress bar carry smoothed edges in their pixels, so curves, diagonals and text no longer step. Art on a solid ground blends exactly into it. Art over the album-derived background (the transport glyphs and the progress bar and knob) blends toward a neutral grey.
@@ -78,6 +79,7 @@ Every change is a patch file or a module transplant that [`patches/framework/bui
 | 0032 | Bluetooth on a long press of Power | ✓ | | [`ui_features.md`](patches/ui_features/ui_features.md) |
 | 0040 to 0044, 0060 to 0062 | M3U playlists: browser import, playback hooks, exit on other playback | ✓ | | [`m3u_design.md`](patches/m3u/m3u_design.md) |
 | 0033 | Lock-screen title and time | ✓ | | [`ui_features.md`](patches/ui_features/ui_features.md) |
+| 0140 to 0146, 64 theme runs | Power Profile settings item: three presets of brightness, auto screen off and auto power off, written through the settings window's own setters | ✓ | | [`power/profiles/`](patches/power/profiles/README.md) |
 | 0047 to 0049, 0120 to 0131 | Focus mode: hides the player controls after five seconds and enlarges the cover; the playlist, no-art and transport hooks move to unused module 0 code to make room | ✓ | | [`focus_mode/`](patches/focus_mode/design.md), [`space/`](patches/space/README.md) |
 
 Patch 0000 is a no-op self-test fixture in both images. The measurements behind the table, in brief:
@@ -105,7 +107,6 @@ On the right, a Sennheiser HD 600 curve fitted within 0.9 dB. More figures: [DAC
 Built and tested offline, but not in either image:
 
 - The browser marquee ([`browser_marquee/`](patches/browser_marquee/)): the selected file's label grows to title, artist and album and scrolls after a one-second dwell, over the file's cover. It needs 6,992 bytes in the browser's code area, which playlists and the lock screen already fill. [Emulated capture](media/marquee_v5.gif).
-- Battery profiles ([`power/`](patches/power/)): the apply routine and selector hooks exist, but no free settings item has been proven.
 
 ## The configuration site
 
@@ -182,9 +183,9 @@ Start with [`platform_architecture.md`](analysis/platform_architecture.md) for t
 Every feature in the tables above is built, merged and reproduced by CI. Open work, in the order it unblocks other work:
 
 1. Hardware phase, in order: read back the candidate slot sectors over Rockusb before any write; confirm the standard image (longer than stock) installs and both slots validate; decode APE and DSD128 first (the clock table's unmeasured loads); a canary build for the gap tail code home; a window-cycle soak for the grown module 31 that carries playlists and the lock screen; observing the gapless transition on the system side; and a tripwire build that halts if any of the unused module 0 code ever runs ([`patches/space/`](patches/space/README.md)). Checks that need only a device and headphones: unplugging headphones should pause stock ([`ui_controls.md`](analysis/ui_controls.md) §1.7), stock should turn Bluetooth off after 5 minutes unconnected, and stock's Classical, Bass Boost and Heavy Metal presets should sound like Pop, Jazz and no EQ.
-2. Battery profiles: find a valid settings item and label (the proposed 0xC5 id collides with the stock brightness string), then resolve boot persistence, clock assumptions and hardware gates.
+2. Power profiles on hardware: confirm the new item draws and selects in the settings list, and measure what each profile saves. Clock and wheel-timer levers stay out of the profiles until their effects are measured, since lowering decoder clocks below Rockchip's figures is not safe.
 3. Theme follow-through: background and text are still resource-only, because the palette routine loads them from one shared register pair and swaps it per scheme; and check whether any window other than the player calls the shared artwork setup that theater mode hooks.
-4. Space: the playlist, theater no-art and transport hooks (368 bytes) now live in unused stock code in module 0, which freed the gap tail for focus mode. The rest of that unused code can hold text smoothing for the 1-bit fonts (about 200 bytes) and the lock-screen and Bluetooth routines. A tripwire build on hardware is still the proof those pockets are dead. The browser marquee needs 6,992 bytes, more than all the pockets of 64 bytes or larger put together (5,530), so it still fits only if playlists and the lock screen leave module 31. The trade-offs are in [`patches/full/README.md`](patches/full/README.md#space-decisions-for-the-owner).
+4. Space: the playlist, theater no-art and transport hooks (368 bytes) and the power profile code (240 bytes) now live in unused stock code in module 0, which freed the gap tail for focus mode. The rest of that unused code can hold text smoothing for the 1-bit fonts (about 200 bytes) and the lock-screen and Bluetooth routines. A tripwire build on hardware is still the proof those pockets are dead. The browser marquee needs 6,992 bytes, more than all the pockets of 64 bytes or larger put together (5,530), so it still fits only if playlists and the lock screen leave module 31. The trade-offs are in [`patches/full/README.md`](patches/full/README.md#space-decisions-for-the-owner).
 5. Smaller items: the FS type 3 enumeration contract (blocks M3U on those volumes), a library enumeration order, and the decoder parameter page past its two known fields.
 
 Two documents lost text to truncation in their first commits: the end of section 1.8 of [`patch_technique_and_sdk.md`](research/patch_technique_and_sdk.md) and the tail of [`vorbis_swap.md`](patches/vorbis_swap/vorbis_swap.md). No originals survive; both were reconstructed on 2026-10-31 from the project's source material and are marked at the seam. [`CHANGES.md`](CHANGES.md) records every change.

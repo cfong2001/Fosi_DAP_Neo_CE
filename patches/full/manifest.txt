@@ -90,3 +90,12 @@ patches/0033-ui-lockscreen-title.patch
 patches/0060-nav-folder-disarm.patch
 patches/0061-nav-file-disarm.patch
 patches/0062-nav-tag-disarm.patch
+# Power profile item (patches/power/profiles/): three module 0 pockets,
+# the two resource lookups, the settings value switch and commit handler:
+patches/0140-pocket-profile-lookup.patch
+patches/0141-pocket-profile-value.patch
+patches/0146-pocket-profile-commit.patch
+patches/0142-profile-string-lookup.patch
+patches/0143-profile-menu-lookup.patch
+patches/0144-profile-value-load.patch
+patches/0145-profile-commit.patch
