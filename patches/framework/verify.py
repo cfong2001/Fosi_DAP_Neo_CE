@@ -6,7 +6,7 @@ Proves, against the real stock image:
      the mirror/CRC fields that the date change implies.
   2. The shipped manifest (no-op self-test + DAC fix + clock v1,
      framework-only) applies all 31 patches and reproduces the known
-     1,414-byte stacked diff, with a consistent report.
+     1,384-byte stacked diff, with a consistent report.
   3. A tampered input image (one flipped byte at the self-test patch's
      target) makes the build refuse (stock SHA gate).
   4. The patch's expected-bytes precondition itself fails loudly when
@@ -169,7 +169,7 @@ def main():
     # 16 clock-v1 patches, the DAC-bus I2C reset patch (0019), the
     # gapless v2 set 0020-0025 with its ARM patch 0026 (whose 2 bytes
     # land inside the 0022 cave), the 5 sort-key patches and the wheel
-    # power patch: 33 patches, a known 1,414-byte diff vs stock.
+    # power patch: 33 patches, a known 1,384-byte diff vs stock.
     out2 = tmp / 'manifest.img'
     r = run_build(['--input', str(STOCK), '--output', str(out2),
                    '--no-transplants'])
@@ -183,12 +183,12 @@ def main():
               and applied[0]['patch'] == 'noop-selftest'
               and applied[0]['old_hex'] == applied[0]['new_hex']
               and report['diff_vs_stock']['bytes_changed'] ==
-              len(diff_offsets(stock, img2)) == 1414
+              len(diff_offsets(stock, img2)) == 1384
               and report['transplants_applied'] == [])
         detail = (f"patches applied: {len(applied)} "
                   f"({applied[0]['patch']} … {applied[-1]['patch']}), "
                   f"bytes changed: {report['diff_vs_stock']['bytes_changed']}")
-    check('shipped manifest build: 33 patches, known 1,414-byte diff, '
+    check('shipped manifest build: 33 patches, known 1,384-byte diff, '
           'report consistent', ok, detail)
 
     # -- 3. tampered input refused by the SHA gate -----------------------
@@ -416,7 +416,7 @@ def main():
             dimg = dflt.read_bytes()
             fp.validate(dimg)
             default_ok = hashlib.sha256(dimg).hexdigest() == \
-                '92c446066e715d74a719671d3ee643ed4b7587c94801eb6dc3893f2271ed944d'
+                '4fa813d99d6b84d871635be490f49f3a8d4f17bcb5f7ae2540edfb62d334ad4e'
             entries = {e['id']: e
                        for e in fwbuild._rock26_resources(stock)}
             crc = set(range(n - 4, n))
@@ -552,7 +552,7 @@ def main():
             confined = diff_offsets(u, v) <= \
                 (regions | sites | set(range(n - 4, n)))
             default_ok = hashlib.sha256(u).hexdigest() == \
-                '92c446066e715d74a719671d3ee643ed4b7587c94801eb6dc3893f2271ed944d'
+                '4fa813d99d6b84d871635be490f49f3a8d4f17bcb5f7ae2540edfb62d334ad4e'
             vrep = json.loads(Path(str(vout) + '.report.json').read_text())
             counts_ok = (len(vrep['patches_applied']) == 38
                          and len(vrep['transplants_applied']) == 2)
@@ -620,7 +620,7 @@ def main():
                          and len(trep['transplants_applied']) == 1
                          and trep['tail']['payload_bytes'] == len(payload))
             default_ok = hashlib.sha256(u).hexdigest() == \
-                '92c446066e715d74a719671d3ee643ed4b7587c94801eb6dc3893f2271ed944d'
+                '4fa813d99d6b84d871635be490f49f3a8d4f17bcb5f7ae2540edfb62d334ad4e'
             ok = confined and payload_ok and counts_ok and default_ok
             detail = (f'variant-vs-default diff confined to hooks + '
                       f'tail span + record + CRC: {confined}; payload '
@@ -647,7 +647,7 @@ def main():
     # differ only at the theme runs, the mirrored header and
     # the trailer CRC once the growth shift is accounted for.
     FULL_DIR = HERE.parent / 'full'
-    FULL_SHA = '148446d95dfcb85afbaa2b8c13310aed4ea97db80b849f7bb4bb10612e1fa5e1'
+    FULL_SHA = 'a7c7f5c2f04279359fd577f602abece687421776f46860ed6d63a7b7f42d05d6'
     PAYLOAD_GROWTH = 6962       # module 31 + module 24 payloads
     GROWTH_TOTAL = 7168         # plus 206 zeros that sector-align the mirror
     if ecp is None:
@@ -757,7 +757,7 @@ def main():
                                      < MIRROR_OFF + GROWTH_TOTAL + 0x200):
                         post_ok = False
             default_ok = hashlib.sha256(u).hexdigest() == \
-                '92c446066e715d74a719671d3ee643ed4b7587c94801eb6dc3893f2271ed944d'
+                '4fa813d99d6b84d871635be490f49f3a8d4f17bcb5f7ae2540edfb62d334ad4e'
             ok = pin_ok and rep_ok and confined and ext_ok \
                 and post_ok and default_ok
             detail = (f'whole-image pin and length (+{GROWTH_TOTAL}): '

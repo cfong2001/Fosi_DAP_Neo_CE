@@ -88,6 +88,12 @@ Case layout order in the binary is scrambled relative to TBB order.
 (MP3, WMA, AAC, WAV, OGG, FLAC, ALAC, APE, DSD-DFF, DSD-DSF); the full
 10-row table was not extracted case-by-case.
 
+**Correction (2026-11-12):** the id order is not catalog order. The
+firmware's own extension classifier, run under emulation in
+`patches/gapless/rig/`, gives MP3 0, WMA 1, AAC 2, WAV 3, OGG 4, APE 5,
+FLAC 6, DSD-DFF 8 and DSD-DSF 9 (ALAC 7 by elimination), and the rig
+loads module 76 for a FLAC file and 78 for an APE file.
+
 Load-and-start fn 0x03088d9c (called from dispatcher msg 0xe5 and four
 other module-33 open paths: 0x0308914c, 0x030891aa, 0x030892b6, 0x03089346):
 

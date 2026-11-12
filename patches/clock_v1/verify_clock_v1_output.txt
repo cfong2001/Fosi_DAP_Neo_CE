@@ -24,17 +24,17 @@ row format                            pll Acor Astk Apck Bcor Bbus
  16 OGG tier 3             stock      300   96   96   96  400  400
                            v1         300   96   96   96  240  240
  17 OGG top tier           stock      480  200  200   96  480  480
-                           v1         480   96   96   96  240  240
- 18 FLAC                   stock      480  200  200   96  480  480
+                           v1         480   96   96   96  480  480
+ 18 APE                    stock      480  200  200   96  480  480
+                           v1         480   96   96   96  480  480
+ 19 FLAC                   stock      480  200  200   96  480  480
                            v1         480   96   96   96  288  288
- 19 ALAC                   stock      480  200  200   96  480  480
-                           v1         480   96   96   96  288  288
- 20 APE                    stock      480  200  200   96  480  480
-                           v1         480   96   96   96  288  288
+ 20 ALAC                   stock      480  200  200   96  480  480
+                           v1         480   96   96   96  480  480
  21 DSD-DFF                stock      480  200  200   96  480  480
-                           v1         480   96   96   96  288  288
+                           v1         480   96   96   96  480  480
  22 DSD-DSF                stock      480  200  200   96  480  480
-                           v1         480   96   96   96  288  288
+                           v1         480   96   96   96  480  480
 
 == assertions ==
 PASS  (a) all 16 in-scope codec states hit target B core/B bus (violations: [])
@@ -42,12 +42,12 @@ PASS  (b) A core/stclk/pclk at 96 MHz floor for all codec-alone states (violatio
 PASS  (c) no byte outside the table differs except trailer CRC (outside diffs: [])
 PASS  (c) trailer CRC equals rk_crc32 of patched body
 PASS  (c) header mirror region byte-identical to stock
-      (260 bytes differ in total, 256 inside the table)
+      (230 bytes differ in total, 226 inside the table)
 PASS  (d) word 0 of all 36 rows untouched (violations: [])
 PASS  (d) all 20 out-of-scope rows byte-identical (violations: [])
 PASS  (e) firmware_patch.validate() passes on patched image
 PASS  (e) verify-rebuilt image byte-identical to build output
-      patched sha256 = f5a312742fed19bb035ddc5736683b0dce834956887acfb1624a72fa97cbcac3
+      patched sha256 = e4eb34d44b2025cdf7f763d4d577826f3999ffea1f28b00e073c3281d7fa0d0a
 
 == sensitivity: solver B core if row 4 (audio init, +48) is also held ==
   row  5 MP3 <=128k, <=44.1k    B core 192 MHz (target 144 codec-alone)
@@ -60,11 +60,11 @@ PASS  (e) verify-rebuilt image byte-identical to build output
   row 14 OGG tier 1             B core 288 MHz (target 240 codec-alone)
   row 15 OGG tier 2             B core 288 MHz (target 240 codec-alone)
   row 16 OGG tier 3             B core 288 MHz (target 240 codec-alone)
-  row 17 OGG top tier           B core 288 MHz (target 240 codec-alone)
-  row 18 FLAC                   B core 336 MHz (target 288 codec-alone)
-  row 19 ALAC                   B core 336 MHz (target 288 codec-alone)
-  row 20 APE                    B core 336 MHz (target 288 codec-alone)
-  row 21 DSD-DFF                B core 336 MHz (target 288 codec-alone)
-  row 22 DSD-DSF                B core 336 MHz (target 288 codec-alone)
+  row 17 OGG top tier           B core 480 MHz (target 480 codec-alone)
+  row 18 APE                    B core 480 MHz (target 480 codec-alone)
+  row 19 FLAC                   B core 336 MHz (target 288 codec-alone)
+  row 20 ALAC                   B core 480 MHz (target 480 codec-alone)
+  row 21 DSD-DFF                B core 480 MHz (target 480 codec-alone)
+  row 22 DSD-DSF                B core 480 MHz (target 480 codec-alone)
 
 RESULT: ALL CHECKS PASSED

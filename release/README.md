@@ -5,8 +5,8 @@ against their pins by `.github/workflows/firmware.yml` on every change.
 
 | File | What it is | Length | SHA-256 |
 |---|---|---|---|
-| `DP3_V137_CE.img` | **Standard.** Every composed CE feature (list below). Header date 2026-10-23. | 13,638,660 bytes (7,168 more than stock) | `148446d95dfcb85afbaa2b8c13310aed4ea97db80b849f7bb4bb10612e1fa5e1` |
-| `DP3_V137_CE_minimal.img` | **Minimal option.** The default framework set and full-precision Vorbis only. Header date 2026-10-23. | 13,631,492 bytes (same as stock) | `92c446066e715d74a719671d3ee643ed4b7587c94801eb6dc3893f2271ed944d` |
+| `DP3_V137_CE.img` | **Standard.** Every composed CE feature (list below). Header date 2026-10-23. | 13,638,660 bytes (7,168 more than stock) | `a7c7f5c2f04279359fd577f602abece687421776f46860ed6d63a7b7f42d05d6` |
+| `DP3_V137_CE_minimal.img` | **Minimal option.** The default framework set and full-precision Vorbis only. Header date 2026-10-23. | 13,631,492 bytes (same as stock) | `4fa813d99d6b84d871635be490f49f3a8d4f17bcb5f7ae2540edfb62d334ad4e` |
 | `DP3_V137_CE_recovery.img` | Unmodified stock bytes dated 2026-10-24, one day after either CE image, so the boot validator prefers it. | 13,631,492 bytes | `aff851b31d6eee55cbd4bb3fc0464ac79f0039ee86ae6723225ac036a157d223` |
 | `*.report.json` | Build reports: every patch with its address and old and new bytes, transplant hashes, validation results. The standard report summarises its byte ranges. | | |
 | `SHA256SUMS` | Hashes of the three images. | | |
@@ -44,8 +44,9 @@ Both images carry the default framework set:
 
 - DAC error counter: counts consecutive I2C failures, so two transient
   errors no longer freeze volume and DAC control for the session.
-- Clock table v1: per-codec decoder clocks lowered to measured targets.
-  APE and DSD128 decode loads are unmeasured; test those formats first.
+- Clock table v1: decoder clocks lowered for MP3, WMA, AAC, WAV, FLAC and
+  the lower Vorbis tiers. APE, ALAC, DSD and the top Vorbis tier keep
+  stock clocks, at or above what Rockchip's SDK uses for them.
 - Full-precision Vorbis with round-to-nearest output (about 40 dB better
   SNR than stock in emulation).
 - Shorter track changes between files of the same format (decoder stays

@@ -81,7 +81,7 @@ const FEATURES = [
     {id: "opus", patch: "patches/opus_swap/", title: "Opus playback", tag: "replaces WMA",
      note: "Plays .opus files; WMA files stop playing. No Opus tags or cover art. Adds 277 KB of decoder data to the download when built."},
     {id: "g:clock", patch: "patches/clock_v1/", title: "Lower decoder clocks", on: true,
-     note: "Each codec runs at a clock nearer its measured load. APE and DSD128 are unmeasured: test them first."},
+     note: "MP3, WMA, AAC, WAV, FLAC and lower-tier Vorbis run at lower clocks. APE, ALAC, DSD and top-tier Vorbis keep stock clocks, at or above Rockchip's own figures."},
     {id: "g:dac", patch: "patches/dac_fix/", title: "DAC error-counter fix", on: true,
      note: "Two passing I2C glitches no longer freeze volume and DAC control for the session."},
   ]},

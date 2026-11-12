@@ -3,7 +3,7 @@
  "input_file": "DP3_V137.img",
  "output_file": "DP3_V137_CE.img",
  "input_sha256": "fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cdfade5e9c6ea3bd71ac6deef",
- "output_sha256": "148446d95dfcb85afbaa2b8c13310aed4ea97db80b849f7bb4bb10612e1fa5e1",
+ "output_sha256": "a7c7f5c2f04279359fd577f602abece687421776f46860ed6d63a7b7f42d05d6",
  "byte_length": 13638660,
  "header_date": "20261023",
  "patches_applied": [
@@ -159,7 +159,7 @@
    "cpu_address": "0x3079a04",
    "file_offset": "0x530b0",
    "old_hex": "00389c1c00c2eb0b00c2eb0b00b4c40400389c1c00389c1c",
-   "new_hex": "00389c1c000000000000000000000000001c4e0e001c4e0e"
+   "new_hex": "00389c1c00000000000000000000000000389c1c00389c1c"
   },
   {
    "patch": "clock-v1-row-18",
@@ -170,7 +170,7 @@
    "cpu_address": "0x3079a20",
    "file_offset": "0x530cc",
    "old_hex": "00389c1c00c2eb0b00c2eb0b00b4c40400389c1c00389c1c",
-   "new_hex": "00389c1c00000000000000000000000000882a1100882a11"
+   "new_hex": "00389c1c00000000000000000000000000389c1c00389c1c"
   },
   {
    "patch": "clock-v1-row-19",
@@ -192,7 +192,7 @@
    "cpu_address": "0x3079a58",
    "file_offset": "0x53104",
    "old_hex": "00389c1c00c2eb0b00c2eb0b00b4c40400389c1c00389c1c",
-   "new_hex": "00389c1c00000000000000000000000000882a1100882a11"
+   "new_hex": "00389c1c00000000000000000000000000389c1c00389c1c"
   },
   {
    "patch": "clock-v1-row-21",
@@ -203,7 +203,7 @@
    "cpu_address": "0x3079a74",
    "file_offset": "0x53120",
    "old_hex": "00389c1c00c2eb0b00c2eb0b00b4c40400389c1c00389c1c",
-   "new_hex": "00389c1c00000000000000000000000000882a1100882a11"
+   "new_hex": "00389c1c00000000000000000000000000389c1c00389c1c"
   },
   {
    "patch": "clock-v1-row-22",
@@ -214,7 +214,7 @@
    "cpu_address": "0x3079a90",
    "file_offset": "0x5313c",
    "old_hex": "00389c1c00c2eb0b00c2eb0b00b4c40400389c1c00389c1c",
-   "new_hex": "00389c1c00000000000000000000000000882a1100882a11"
+   "new_hex": "00389c1c00000000000000000000000000389c1c00389c1c"
   },
   {
    "patch": "i2c-reset-pulse",
@@ -8415,8 +8415,8 @@
   }
  ],
  "diff_vs_stock": {
-  "bytes_changed": 4747851,
-  "range_count": 428764,
+  "bytes_changed": 4747821,
+  "range_count": 428754,
   "note": "range list omitted; rebuild with patches/full/build/build_full.py for it"
  },
  "validation": "validate_grown() passed (structural checks, layout derived from the image)",

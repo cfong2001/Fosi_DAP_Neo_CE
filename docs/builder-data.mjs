@@ -48,7 +48,7 @@ export const PATCH_GROUPS = [
  {
   "id": "clock",
   "label": "Clock table v1",
-  "blurb": "Patches 0003 to 0018: per-codec clock rows lowered toward the measured decode load.",
+  "blurb": "Patches 0003 to 0018: per-codec clock rows lowered, never below the RKNanoD SDK figure for the format.",
   "patches": [
    {
     "file": "0003-clock-v1-row-05.patch",
@@ -157,7 +157,7 @@ export const PATCH_GROUPS = [
     "region": "code",
     "address": 50829828,
     "expect": "00389c1c00c2eb0b00c2eb0b00b4c40400389c1c00389c1c",
-    "replace": "00389c1c000000000000000000000000001c4e0e001c4e0e",
+    "replace": "00389c1c00000000000000000000000000389c1c00389c1c",
     "index": 13
    },
    {
@@ -167,7 +167,7 @@ export const PATCH_GROUPS = [
     "region": "code",
     "address": 50829856,
     "expect": "00389c1c00c2eb0b00c2eb0b00b4c40400389c1c00389c1c",
-    "replace": "00389c1c00000000000000000000000000882a1100882a11",
+    "replace": "00389c1c00000000000000000000000000389c1c00389c1c",
     "index": 14
    },
    {
@@ -187,7 +187,7 @@ export const PATCH_GROUPS = [
     "region": "code",
     "address": 50829912,
     "expect": "00389c1c00c2eb0b00c2eb0b00b4c40400389c1c00389c1c",
-    "replace": "00389c1c00000000000000000000000000882a1100882a11",
+    "replace": "00389c1c00000000000000000000000000389c1c00389c1c",
     "index": 16
    },
    {
@@ -197,7 +197,7 @@ export const PATCH_GROUPS = [
     "region": "code",
     "address": 50829940,
     "expect": "00389c1c00c2eb0b00c2eb0b00b4c40400389c1c00389c1c",
-    "replace": "00389c1c00000000000000000000000000882a1100882a11",
+    "replace": "00389c1c00000000000000000000000000389c1c00389c1c",
     "index": 17
    },
    {
@@ -207,7 +207,7 @@ export const PATCH_GROUPS = [
     "region": "code",
     "address": 50829968,
     "expect": "00389c1c00c2eb0b00c2eb0b00b4c40400389c1c00389c1c",
-    "replace": "00389c1c00000000000000000000000000882a1100882a11",
+    "replace": "00389c1c00000000000000000000000000389c1c00389c1c",
     "index": 18
    }
   ]

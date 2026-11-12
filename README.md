@@ -21,8 +21,8 @@ CE (Community Edition) is patched firmware for the Fosi Audio DAP Neo. It starts
 
 | Image | What it carries | SHA-256 |
 |---|---|---|
-| [`DP3_V137_CE.img`](release/DP3_V137_CE.img) | Standard: every feature below. 7,168 bytes longer than stock. | `148446d95dfcb85afbaa2b8c13310aed4ea97db80b849f7bb4bb10612e1fa5e1` |
-| [`DP3_V137_CE_minimal.img`](release/DP3_V137_CE_minimal.img) | Minimal: audio and library fixes only, same length as stock. | `92c446066e715d74a719671d3ee643ed4b7587c94801eb6dc3893f2271ed944d` |
+| [`DP3_V137_CE.img`](release/DP3_V137_CE.img) | Standard: every feature below. 7,168 bytes longer than stock. | `a7c7f5c2f04279359fd577f602abece687421776f46860ed6d63a7b7f42d05d6` |
+| [`DP3_V137_CE_minimal.img`](release/DP3_V137_CE_minimal.img) | Minimal: audio and library fixes only, same length as stock. | `4fa813d99d6b84d871635be490f49f3a8d4f17bcb5f7ae2540edfb62d334ad4e` |
 | [`DP3_V137_CE_recovery.img`](release/DP3_V137_CE_recovery.img) | Stock code dated one day after CE, for going back. | `aff851b31d6eee55cbd4bb3fc0464ac79f0039ee86ae6723225ac036a157d223` |
 
 Start with the standard image. Use the minimal one if the standard image does not install (no image longer than stock has been installed yet), or if you play WMA files.
@@ -60,7 +60,7 @@ Every change is a patch file or a module transplant that [`patches/framework/bui
 | Patches | Change | Standard | Minimal | Evidence |
 |---|---|:---:|:---:|---|
 | 0001, 0002 | DAC error counter counts consecutive I2C failures instead of a session total, so two transient errors no longer freeze volume until a full stop | ✓ | ✓ | [`dac_fix.md`](patches/dac_fix/dac_fix.md) |
-| 0003 to 0018 | Clock table v1: per-codec decoder clocks lowered from the stock table (top row 480 MHz) to 144 MHz for MP3, WMA, AAC and WAV, 240 MHz for Vorbis and 288 MHz for FLAC, ALAC, APE and DSD; data only | ✓ | ✓ | [`clock_v1.md`](patches/clock_v1/clock_v1.md) |
+| 0003 to 0018 | Clock table v1: per-codec decoder clocks lowered from the stock table (top row 480 MHz) to 144 MHz for MP3, WMA, AAC and WAV, 240 MHz for the lower Vorbis tiers and 288 MHz for FLAC. APE, ALAC, DSD and the top Vorbis tier keep stock's 480 MHz, above the 260 to 400 MHz Rockchip's SDK uses for them, until their loads are measured; data only | ✓ | ✓ | [`clock_v1.md`](patches/clock_v1/clock_v1.md) |
 | 0019 to 0026 | Gapless fast path: at a natural end of track the decoder core keeps running, and a same-format next track skips the decoder reload, reset and boot; the DAC bus I2C reset hold drops from 1 ms to 50 µs (seven DAC writes per track change) | ✓ | ✓ | [`gapless/`](patches/gapless/README.md) |
 | 0027 to 0031 | Natural-sort keys and comparator: case and Latin-1 accent folding, one leading "The " stripped, digit runs compared as numbers | ✓ | ✓ | [`sort_keys.md`](patches/sort_keys/sort_keys.md) |
 | 0050 | Wheel timer period 400 to 1000 µs (2,500 to 1,000 wakes per second) | ✓ | ✓ | [`power.md`](patches/power/power.md) |
@@ -83,7 +83,7 @@ Patch 0000 is a no-op self-test fixture in both images. The measurements behind 
 - Vorbis: on a pinned 40-file corpus, stock measures 38.1 to 42.1 dB and the transplant 79.1 to 91.4 dB. Its float-to-16-bit conversion floored instead of rounding, a fixed 6.02 dB loss; after the rounding fix, delivered quality sits 0.01 to 0.21 dB under each file's 16-bit ceiling of 85.1 to 97.4 dB (no 16-bit output stage can pass 96 dB on this corpus). The module size (116,572 bytes) is unchanged. Details: [`vorbis_corpus.md`](patches/vorbis_swap/corpus/vorbis_corpus.md); pins and provenance: [`DEPENDENCY.md`](patches/vorbis_swap/DEPENDENCY.md).
 - Gapless: the decoder side is proven in the core-1 harness (a resident decoder decoded a second file bit-exact after end of stream). The system side runs in the transition rig ([`patches/gapless/rig/`](patches/gapless/rig/)): with a 0.05 ms decoder reply and 8 MB/s storage, the I2S restart comes 4.7 ms after the end-of-track event against 20.5 ms on stock. The rig also showed that the first armed release never released the decoder core from the reset the stock stop path puts it in, stalling same-format track changes for about 27 s; this release fixes that. Decoder-side open and first-frame decode time are not in those figures and need hardware.
 - Natural sort: a 4,000-pair consistency fuzz and a Unicorn differential test over 349 names, with zero failures.
-- Clock table: APE and DSD128 decode loads are unmeasured; they are the first hardware check.
+- Clock table: every lowered row stays above Rockchip's SDK figure for its format. APE, ALAC, DSD and top-tier Vorbis decode loads are unmeasured, so those rows keep stock clocks until a hardware check.
 - Wheel timer: worst-case wheel-step latency rises by about 1.2 ms. Keys use a separate SysTick path and are unaffected.
 
 ## Build options and variants

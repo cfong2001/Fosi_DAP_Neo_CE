@@ -14,7 +14,7 @@
 **Verdict: the full tail composition builds, fits, and passes all three emulation suites.** The resolver hook (410 bytes, both entry points plus the shared serve routine) is written and linked at 0x0307C45C, the trimmed staging layout (1,192 bytes) sits at 0x0307BFB4, and the Bluetooth blob (436 bytes) is relinked at 0x0307C5F8. Total tail use is 2,040 of the 2,044 usable bytes, with 4 bytes spare. The scratch image (live manifest plus patches 0032-tail, 0041, 0042 plus the extension blob) passes `firmware_patch.validate()`, and its diff against the plain live-manifest build is confined to the three patch sites, the extension span, the code length record, and the trailer CRC. Nothing was stacked into the live manifest and nothing was pushed.
 
 Scratch image SHA-256: `fddcc52bfcc9963c4780221159e52474b1ef2e1b035570110dc41bc04147f8c0`.
-Baseline (live manifest, same pipeline run) SHA-256: `92c446066e715d74a719671d3ee643ed4b7587c94801eb6dc3893f2271ed944d`. The baseline is not the older pinned unified image: the live tree has moved since that pin (the Vorbis transplant gained its rounding post-step), so the baseline was rebuilt fresh and the confinement measurement is taken against it.
+Baseline (live manifest, same pipeline run) SHA-256: `4fa813d99d6b84d871635be490f49f3a8d4f17bcb5f7ae2540edfb62d334ad4e`. The baseline is not the older pinned unified image: the live tree has moved since that pin (the Vorbis transplant gained its rounding post-step), so the baseline was rebuilt fresh and the confinement measurement is taken against it.
 Stock image SHA-256 verified unchanged at the end: `fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cdfade5e9c6ea3bd71ac6deef`.
 
 ## Tail layout

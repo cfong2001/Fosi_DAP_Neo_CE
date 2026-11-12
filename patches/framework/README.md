@@ -40,8 +40,8 @@ the wheel timer period patch, and the 0000 no-op self-test fixture) plus the tra
 ranges overlap a byte patch's, and verify.py check 7 proves the
 combined image equals the disjoint union of its parts. The current
 unified image (dated 2026-10-23) has SHA-256
-`92c446066e715d74a719671d3ee643ed4b7587c94801eb6dc3893f2271ed944d`
-and a 71,547-byte diff vs stock (1,414 framework + 70,139 Vorbis, minus
+`4fa813d99d6b84d871635be490f49f3a8d4f17bcb5f7ae2540edfb62d334ad4e`
+and a 71,517-byte diff vs stock (1,384 framework + 70,139 Vorbis, minus
 6 shared date/mirror/CRC bytes).
 
 Paths are portable. No tool hard-codes a workspace. Resolution order

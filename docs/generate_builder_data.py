@@ -84,7 +84,7 @@ STOCK_SHA256 = 'fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cdfade5e9c6ea3bd71ac6deef
 THEATER_TAIL_SHA256 = '96931a93bd197782f5efda40974ab31731c801e4231f29f44c1dfa7347c0fc78'
 BT_PAYLOAD_SHA256 = 'ce6ef701285885efb17b072df128602c3ee5da8359b7b267cd7e1ca92457cf06'
 LOCK_PAYLOAD_SHA256 = '9610d8d7995d821b4289c18e720c21c848494633d2af097e160101a23e2c92d2'
-FULL_IMAGE_SHA256 = '148446d95dfcb85afbaa2b8c13310aed4ea97db80b849f7bb4bb10612e1fa5e1'
+FULL_IMAGE_SHA256 = 'a7c7f5c2f04279359fd577f602abece687421776f46860ed6d63a7b7f42d05d6'
 FULL_TAIL_SHA256 = '6d77b1102cc4a82828ed8c1670eef99de708565e95d585a58dfdeb1d01047a71'
 FULL_GROWTH_PINS = ((31, 'payload31.bin',
                      '010197e684a8a3e3f1a0937b61fe89a7f620b48c0872e5305f781d42d9b88f05'),
@@ -104,8 +104,8 @@ GROUPS = [
      'consecutive failed I2C transactions instead of total ones.',
      (1, 2)),
     ('clock', 'Clock table v1',
-     'Patches 0003 to 0018: per-codec clock rows lowered toward '
-     'the measured decode load.', tuple(range(3, 19))),
+     'Patches 0003 to 0018: per-codec clock rows lowered, never '
+     'below the RKNanoD SDK figure for the format.', tuple(range(3, 19))),
     ('gapless', 'Gapless fast path',
      'Patches 0019 to 0026: at a natural end of track the decoder '
      'core keeps running and same-format tracks reuse it; 0019 '

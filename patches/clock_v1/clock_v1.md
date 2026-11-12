@@ -1,7 +1,7 @@
 # Clock table v1: tuned per-codec clocks for DP3_V137 (data-only patch)
 
 **Status: built and verified offline. Nothing flashed; no unit exists yet.**
-Stock SHA-256 `fcc1cd3e…deef` → patched `f5a31274…ac3`
+Stock SHA-256 `fcc1cd3e…deef` → patched `e4eb34d4…0d0a` (revision 2026-11-12; first release `f5a31274…ac3`)
 (`DP3_V137_clock_v1.img` in this directory, produced by
 `build_clock_v1.py`, independently reproduced and checked by
 `verify_clock_v1.py` → `verify_clock_v1_output.txt`: **all checks passed**).
@@ -37,12 +37,12 @@ deviation. See Flag 2.
 | 14 | OGG tier 1 | PLL 300 (=); A core 80->0; A stclk 80->0; A pclk 80->0; B core 400->240; B bus 400->240 |
 | 15 | OGG tier 2 | PLL 300 (=); A core 80->0; A stclk 80->0; A pclk 80->0; B core 400->240; B bus 400->240 |
 | 16 | OGG tier 3 | PLL 300 (=); A core 80->0; A stclk 80->0; A pclk 80->0; B core 400->240; B bus 400->240 |
-| 17 | OGG top tier | PLL 480 (=); A core 200->0; A stclk 200->0; A pclk 80->0; B core 480->240; B bus 480->240 |
-| 18 | FLAC | PLL 480 (=); A core 200->0; A stclk 200->0; A pclk 80->0; B core 480->288; B bus 480->288 |
-| 19 | ALAC | PLL 480 (=); A core 200->0; A stclk 200->0; A pclk 80->0; B core 480->288; B bus 480->288 |
-| 20 | APE | PLL 480 (=); A core 200->0; A stclk 200->0; A pclk 80->0; B core 480->288; B bus 480->288 |
-| 21 | DSD-DFF | PLL 480 (=); A core 200->0; A stclk 200->0; A pclk 80->0; B core 480->288; B bus 480->288 |
-| 22 | DSD-DSF | PLL 480 (=); A core 200->0; A stclk 200->0; A pclk 80->0; B core 480->288; B bus 480->288 |
+| 17 | OGG top tier | PLL 480 (=); A core 200->0; A stclk 200->0; A pclk 80->0; B core 480 (=); B bus 480 (=) |
+| 18 | APE | PLL 480 (=); A core 200->0; A stclk 200->0; A pclk 80->0; B core 480 (=); B bus 480 (=) |
+| 19 | FLAC | PLL 480 (=); A core 200->0; A stclk 200->0; A pclk 80->0; B core 480->288; B bus 480->288 |
+| 20 | ALAC | PLL 480 (=); A core 200->0; A stclk 200->0; A pclk 80->0; B core 480 (=); B bus 480 (=) |
+| 21 | DSD-DFF | PLL 480 (=); A core 200->0; A stclk 200->0; A pclk 80->0; B core 480 (=); B bus 480 (=) |
+| 22 | DSD-DSF | PLL 480 (=); A core 200->0; A stclk 200->0; A pclk 80->0; B core 480 (=); B bus 480 (=) |
 
 ## Solver outputs, codec row alone (MHz): headline rows
 
@@ -57,8 +57,9 @@ outputs in clock_table.md §6 exactly.
 | WMA / AAC (rows 7,8,10,11) | 300 → **144** | 150/150/96 → 96/96/96 | 200 → 200 |
 | WAV (row 9) | 450 → **144** | 200/200/96 → 96/96/96 | 450 → 450 |
 | OGG tiers 1–3 (rows 14–16) | 400 → **240** | 96/96/96 → 96/96/96 | 300 → 300 |
-| OGG top (row 17) | 480 → **240** | 200/200/96 → 96/96/96 | 480 → 480 |
-| FLAC / ALAC / APE / DSD (rows 18–22) | 480 → **288** | 200/200/96 → 96/96/96 | 480 → 480 |
+| OGG top (row 17) | 480 → 480 | 200/200/96 → 96/96/96 | 480 → 480 |
+| FLAC (row 19) | 480 → **288** | 200/200/96 → 96/96/96 | 480 → 480 |
+| APE / ALAC / DSD (rows 18, 20–22) | 480 → 480 | 200/200/96 → 96/96/96 | 480 → 480 |
 
 ## Verification (verify_clock_v1.py: all passed)
 
@@ -83,6 +84,34 @@ outputs in clock_table.md §6 exactly.
   `{module: 0, region: "code", address: <row exec +4>, expect, replace}`
   in `clock_v1.patch.json`; `clock_v1.patch` carries the same edits
   in nanitecfw grammar for the framework.
+
+## Revision 2026-11-12: Rockchip's own figures as a floor
+
+Two corrections, both checked against Rockchip's RKNanoD SDK
+(`Common/System/SysService/PowerManager.c`, the `g_CruAPPTabel` table;
+reference only, not copied here):
+
+- **Rows 18 and 19 were mislabelled.** Running the firmware's extension
+  classifier under emulation shows `.APE` is codec 5 and `.FLA` codec 6,
+  so the module 33 switch sends APE to row 18 and FLAC to row 19
+  (`analysis/clock_table.md` §4, correction). v1 as first written ran APE
+  at 288 MHz and called it FLAC.
+- **No decoder runs below the SDK's figure for its class.** The SDK
+  clocks the decoder core at 400 MHz for high-rate APE, ALAC and DSD
+  (`FREQ_HAPE`, `FREQ_HALAC`, `FREQ_DSDIFF`, `FREQ_DSF`) and at 260 MHz
+  for the top Vorbis tier (`FREQ_EHOGG`), above the 288 and 240 v1 first
+  wrote, and CE also runs a heavier full-precision Vorbis decoder. With
+  the decode loads unmeasured, rows 17, 18, 20, 21 and 22 keep stock's
+  480 MHz decoder clock. FLAC (row 19) stays at 288, above the SDK's
+  220 MHz for high-rate FLAC (`FREQ_HFLAC`); MP3, WMA, AAC and WAV at 144
+  and the lower Vorbis tiers at 240 are also above the SDK's figures (36
+  to 180 MHz). The system-core floor of 96 MHz is above the 80 MHz the
+  SDK uses for these classes.
+
+The SDK's solver resolves a request whose PLL field does not divide
+evenly (row 5: decoder 144 MHz over a 96 MHz PLL field) by searching for
+a PLL that does, and caps the system bus at 300 MHz and every divider
+at 8. Every v1 row stays inside those limits.
 
 ## Flags and conflicts (read before flashing)
 
@@ -110,7 +139,8 @@ outputs in clock_table.md §6 exactly.
    floor, so v1 leaves some dynamic-power saving on the table.
    Zeroing PLL is the first v1.1 candidate once the apply path is
    confirmed on a unit.
-3. **Scope is broader than the precedent on four rows.** nanitecfw
+3. **Superseded by the 2026-11-12 revision above:** rows 17, 18, 20, 21
+   and 22 now keep stock clocks. The original flag read: **Scope is broader than the precedent on four rows.** nanitecfw
    left its OGG-high, APE and DSD rows unchanged, and clock_table.md
    §7 likewise proposed leaving DSD rows 21–22 unchanged until their
    decode load is measured. The performance plan's §3.4 targets put

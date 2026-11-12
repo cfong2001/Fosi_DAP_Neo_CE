@@ -65,16 +65,20 @@ DOC_TABLE_MHZ = {
 }
 
 # In-scope codec rows: row -> (format label, B-core target MHz).
-# Targets are the performance plan section 3.4 solver outputs.
+# Targets are the performance plan section 3.4 solver outputs, except
+# where Rockchip's RKNanoD SDK clocks the decoder class higher than that
+# (PowerManager.c: FREQ_EHOGG 260, FREQ_HAPE / FREQ_HALAC / FREQ_DSDIFF /
+# FREQ_DSF 400 MHz): those rows keep stock's 480 MHz until the decode
+# load is measured on hardware.
 IN_SCOPE = {
     5: ('MP3 <=128k, <=44.1k', 144), 6: ('MP3 high', 144),
     7: ('WMA tier A', 144), 8: ('WMA tier B', 144),
     9: ('WAV', 144),
     10: ('AAC high', 144), 11: ('AAC low', 144),
     14: ('OGG tier 1', 240), 15: ('OGG tier 2', 240),
-    16: ('OGG tier 3', 240), 17: ('OGG top tier', 240),
-    18: ('FLAC', 288), 19: ('ALAC', 288), 20: ('APE', 288),
-    21: ('DSD-DFF', 288), 22: ('DSD-DSF', 288),
+    16: ('OGG tier 3', 240), 17: ('OGG top tier', 480),
+    18: ('APE', 480), 19: ('FLAC', 288), 20: ('ALAC', 480),
+    21: ('DSD-DFF', 480), 22: ('DSD-DSF', 480),
 }
 
 

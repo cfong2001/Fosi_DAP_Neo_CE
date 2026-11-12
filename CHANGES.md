@@ -1,5 +1,21 @@
 # Changelog
 
+## 2026-11-12: clock table v1 corrected against Rockchip's SDK
+
+- Rows 18 and 19 were mislabelled. Running the firmware's own extension
+  classifier under emulation makes `.APE` codec 5 and `.FLA` codec 6, and
+  the module 33 switch sends 5 to row 18 and 6 to row 19. v1 had been
+  running APE at 288 MHz while calling it FLAC.
+  `analysis/clock_table.md` and `core1_loader_protocol.md` carry the
+  corrected mapping.
+- No decoder now runs below Rockchip's figure for its class
+  (`PowerManager.c` in the RKNanoD SDK): APE, ALAC and DSD (400 MHz there)
+  and the top Vorbis tier (260 MHz there, and CE runs a heavier
+  full-precision decoder) keep stock's 480 MHz until their loads are
+  measured. FLAC stays at 288 MHz, above the SDK's 220. Every other
+  lowered row is above the SDK's figure too, and all rows sit inside the
+  SDK solver's divider and bus limits.
+
 ## 2026-11-12: list and menu font, resident-space census
 
 - Font B's Latin glyphs (lists, menus, titles; 314 records) are redrawn

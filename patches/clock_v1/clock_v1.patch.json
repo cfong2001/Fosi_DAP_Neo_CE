@@ -2,7 +2,7 @@
   "name": "clock_v1",
   "target": "Fosi Audio DAP Neo DP3_V137",
   "stock_sha256": "fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cdfade5e9c6ea3bd71ac6deef",
-  "patched_sha256": "f5a312742fed19bb035ddc5736683b0dce834956887acfb1624a72fa97cbcac3",
+  "patched_sha256": "e4eb34d44b2025cdf7f763d4d577826f3999ffea1f28b00e073c3281d7fa0d0a",
   "table": {
     "module": 0,
     "region": "code",
@@ -130,9 +130,9 @@
       "address_int": 50829828,
       "row": 17,
       "format": "OGG top tier",
-      "target_b_core_mhz": 240,
+      "target_b_core_mhz": 480,
       "expect_hex": "00389c1c00c2eb0b00c2eb0b00b4c40400389c1c00389c1c",
-      "replace_hex": "00389c1c000000000000000000000000001c4e0e001c4e0e"
+      "replace_hex": "00389c1c00000000000000000000000000389c1c00389c1c"
     },
     {
       "module": 0,
@@ -140,10 +140,10 @@
       "address": "0x3079a20",
       "address_int": 50829856,
       "row": 18,
-      "format": "FLAC",
-      "target_b_core_mhz": 288,
+      "format": "APE",
+      "target_b_core_mhz": 480,
       "expect_hex": "00389c1c00c2eb0b00c2eb0b00b4c40400389c1c00389c1c",
-      "replace_hex": "00389c1c00000000000000000000000000882a1100882a11"
+      "replace_hex": "00389c1c00000000000000000000000000389c1c00389c1c"
     },
     {
       "module": 0,
@@ -151,7 +151,7 @@
       "address": "0x3079a3c",
       "address_int": 50829884,
       "row": 19,
-      "format": "ALAC",
+      "format": "FLAC",
       "target_b_core_mhz": 288,
       "expect_hex": "00389c1c00c2eb0b00c2eb0b00b4c40400389c1c00389c1c",
       "replace_hex": "00389c1c00000000000000000000000000882a1100882a11"
@@ -162,10 +162,10 @@
       "address": "0x3079a58",
       "address_int": 50829912,
       "row": 20,
-      "format": "APE",
-      "target_b_core_mhz": 288,
+      "format": "ALAC",
+      "target_b_core_mhz": 480,
       "expect_hex": "00389c1c00c2eb0b00c2eb0b00b4c40400389c1c00389c1c",
-      "replace_hex": "00389c1c00000000000000000000000000882a1100882a11"
+      "replace_hex": "00389c1c00000000000000000000000000389c1c00389c1c"
     },
     {
       "module": 0,
@@ -174,9 +174,9 @@
       "address_int": 50829940,
       "row": 21,
       "format": "DSD-DFF",
-      "target_b_core_mhz": 288,
+      "target_b_core_mhz": 480,
       "expect_hex": "00389c1c00c2eb0b00c2eb0b00b4c40400389c1c00389c1c",
-      "replace_hex": "00389c1c00000000000000000000000000882a1100882a11"
+      "replace_hex": "00389c1c00000000000000000000000000389c1c00389c1c"
     },
     {
       "module": 0,
@@ -185,9 +185,9 @@
       "address_int": 50829968,
       "row": 22,
       "format": "DSD-DSF",
-      "target_b_core_mhz": 288,
+      "target_b_core_mhz": 480,
       "expect_hex": "00389c1c00c2eb0b00c2eb0b00b4c40400389c1c00389c1c",
-      "replace_hex": "00389c1c00000000000000000000000000882a1100882a11"
+      "replace_hex": "00389c1c00000000000000000000000000389c1c00389c1c"
     }
   ],
   "single_patch_proofs": [
@@ -244,32 +244,32 @@
     {
       "row": 17,
       "format": "OGG top tier",
-      "single_patch_output_sha256": "5033ff4ba5654ed40bc0017f519c44d78354d3a53af1584b4f8917f03309035f"
+      "single_patch_output_sha256": "c9d9ab6d84b8cd75a903b8932920ebcb10d3b4816300c961c52400882861f136"
     },
     {
       "row": 18,
-      "format": "FLAC",
-      "single_patch_output_sha256": "3300da03438a1fe210cbab06f39ad3d108d6a751ca3c12f48b29a4f352fbf01f"
+      "format": "APE",
+      "single_patch_output_sha256": "bd0da749a6807cff52720e2963e5da80b6d7069d69dc575594c0dd48bf36fc75"
     },
     {
       "row": 19,
-      "format": "ALAC",
+      "format": "FLAC",
       "single_patch_output_sha256": "ff00e8dc31bad01cf734561c5ebcc67500330f85ff04a67b2ba381c48b0fade1"
     },
     {
       "row": 20,
-      "format": "APE",
-      "single_patch_output_sha256": "b7780dfa12cd78fd866885c5bd336778a59c861975a89659577630f77e47b08e"
+      "format": "ALAC",
+      "single_patch_output_sha256": "9b0f2bc4a9e292fd4bf06b0edb679872eed0068752c82540ca0f613bb911a9a9"
     },
     {
       "row": 21,
       "format": "DSD-DFF",
-      "single_patch_output_sha256": "41f19ce719e6c7e69b62df4cfa191fedc71c60b798daef18880f6f26d0a4752d"
+      "single_patch_output_sha256": "3ca5c729668b421f8fd245bdc28c2f24c5848204553687c55f89ff6c4f35725a"
     },
     {
       "row": 22,
       "format": "DSD-DSF",
-      "single_patch_output_sha256": "3f434991bc04edc2dcd8bbf52d2a0f82c7dbd51f680d2115bb95724f6541490d"
+      "single_patch_output_sha256": "5ba7befff6c03880982138917c5e4200cc5a1ec54f4fb61f6262353f7b3acf7f"
     }
   ]
 }
