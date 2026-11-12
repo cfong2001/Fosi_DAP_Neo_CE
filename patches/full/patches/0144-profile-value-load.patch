@@ -1,0 +1,11 @@
+# Power profile hook site in module 32.
+name: 0144-profile-value-load
+kind: module
+module: 32
+region: code
+address: 0x307dbce
+gate: build refuses unless the stock bytes at the target equal
+  `expect`; regenerate with patches/power/profiles/build_profiles.py.
+expect: bc2d08bf
+replace: d6f750bd
+rationale: The settings window value switch starts with cmp r5, #188; it eq. value_hook runs that case itself, gives item 266 the profile matching the current settings, and re-enters the switch with the same flags otherwise.

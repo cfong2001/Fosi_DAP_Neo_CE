@@ -1,0 +1,11 @@
+# profiles.S .text.lookup assembled into a module 0 pocket at 0x0305168c.
+name: 0140-pocket-profile-lookup
+kind: module
+module: 0
+region: code
+address: 0x305168c
+gate: build refuses unless the stock bytes at the target equal
+  `expect`; regenerate with patches/power/profiles/build_profiles.py.
+expect: 10b5ca4c002120460ff0dafa0021601c0ff0d6fa0021a01c0ff0d2fa0021e01c0ff0cefa4021201d0ff0cafa0821e01d0ff0c6fa8021be480ff0c2fa0221bd480ff0befa0221bc480ff0bafa2046bde8104001210ff0b4ba30b583b00c46054669460ff01bfb6420
+replace: b0f5857f03d2f0b4134d11f016bd124b1b7ca0f5857000eb8300302358430f4b1b6818440e4b18444ff6ff7303ea420212f035beb0f5857f03d230b4064c11f09ebda0f585703a225043044b1b681844044b184412f023bea032020388320203825854009a575400
+rationale: A stock routine here has no caller, branch, pointer or literal anywhere in core-0 code or data (patches/space/census_dead.py, tier 1), and no emulation suite executes it. Module 0 is resident in every window, so the settings window and every string lookup reach the code here.

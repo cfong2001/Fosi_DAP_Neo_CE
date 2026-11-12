@@ -3,10 +3,10 @@
 runs (182), the browser icon extension runs (300), the CE
 splash mark runs (40), the light play-mode key runs (4) and the
 antialiased screens, dialogs, progress bar and knob runs (429) and the
-redrawn Font B Latin glyphs (314) and Font A Latin glyphs (314), 1,583
-runs total.
+redrawn Font B Latin glyphs (314), Font A Latin glyphs (314) and the
+power profile menu records (64), 1,647 runs total.
 
-The seven source configs are disjoint (the theme consumer refuses
+The eight source configs are disjoint (the theme consumer refuses
 overlaps; the merge asserts it). Two outputs:
 
   theme-full.json        run offsets shifted by the full build's
@@ -56,11 +56,12 @@ def main():
     screens = load_runs(REPO / 'patches' / 'antialias' / 'screens-glyphs.json')
     font = load_runs(REPO / 'patches' / 'antialias' / 'font-glyphs.json')
     font_a = load_runs(REPO / 'patches' / 'antialias' / 'font-a-glyphs.json')
+    menu = load_runs(REPO / 'patches' / 'power' / 'profiles' / 'profile-menu.json')
     print(f'v4 glyph runs: {len(v4)}; browser runs: {len(browser)}; '
           f'ce mark runs: {len(mark)}; light play-mode runs: {len(play_mode)}; '
           f'screens runs: {len(screens)}; font runs: {len(font)}; '
-          f'font A runs: {len(font_a)}')
-    runs = v4 + browser + mark + play_mode + screens + font + font_a
+          f'font A runs: {len(font_a)}; profile menu runs: {len(menu)}')
+    runs = v4 + browser + mark + play_mode + screens + font + font_a + menu
     seen = []
     for r in runs:
         off = int(r['offset'], 16) if isinstance(r['offset'], str) \

@@ -1,0 +1,11 @@
+# Power profile hook site in module 0.
+name: 0143-profile-menu-lookup
+kind: module
+module: 0
+region: code
+address: 0x3063206
+gate: build refuses unless the stock bytes at the target equal
+  `expect`; regenerate with patches/power/profiles/build_profiles.py.
+expect: 30b4244c
+replace: eef75bba
+rationale: GetMenuTextInfoWithIDNum entry (push {r4, r5}; ldr r4, =SAVEINFO) becomes a branch to menu_hook, which re-runs both for every stock id and reads the headers of ids 266 and up from the table.
