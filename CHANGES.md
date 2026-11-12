@@ -1,5 +1,19 @@
 # Changelog
 
+## 2026-11-12: focus mode in the standard image
+
+- Focus mode joins the standard image: after five seconds without input
+  the player hides its controls and enlarges the cover; the first key or
+  wheel turn only wakes it.
+- To make room, the playlist resolver hooks (216 B), the theater no-art
+  exits (100 B) and the transport ground wrapper (52 B) moved out of the
+  gap tail into module 0, into stock routines the census found nothing
+  can reach (patches 0047 to 0049). The 340-byte focus payload takes
+  their place at 0x0307C1DC; its twelve hooks are patches 0120 to 0131.
+- Every full-build emulation suite passes with the hooks in their new
+  homes, and `test_focus_mode.py` runs all four focus gates on the full
+  image (new CI step).
+
 ## 2026-11-12: Font A redrawn
 
 - Font A, the 6 x 12 font for status and small text, is redrawn from

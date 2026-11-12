@@ -1,4 +1,4 @@
-# Hook site: B.W to resolver_hook_count at 0x0307c222
+# Hook site: B.W to resolver_hook_count at 0x0306c8be
 # in the full build's merged tail.
 name: 0043-playlist-count-hook
 kind: module
@@ -9,7 +9,7 @@ gate: build refuses unless the stock bytes at the target equal
   `expect`; the finished image must also pass the grown
   build validator. Requires the full build's merged tail.
 expect: 2de9f041
-replace: 22f063ba
+replace: 12f0b1bd
 rationale: Replaces the count entry push.w with a B.W to the tail hook.
   While a playlist is armed, a mode 1 count returns the staged
   entry count, so the play context length is the playlist

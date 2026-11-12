@@ -1,0 +1,12 @@
+# Focus mode: BL to focus_geom at 0x0307c2b4
+# in the full build's merged tail. Design: patches/focus_mode/.
+name: 0123-focus-geometry-hook
+kind: module
+module: 27
+region: code
+address: 0x307e8de
+gate: stock byte precondition; validated by test_focus_mode.py under
+  emulation on the full build
+expect: 05f0d7f8
+replace: fdf7e9fc
+rationale: The artwork request function writes the box and destination globals on every call; this hook runs just before the displaced set-source-0 call and, while hidden, overwrites the four globals with the focus geometry (box 190x190, destination (25, 8)). Setup then scales and the picture context persists the new geometry until the next request.

@@ -9,7 +9,7 @@ structural validation.
 | | |
 |---|---|
 | Input | `DP3_V137.img`, 13,631,492 bytes, SHA-256 `fcc1cd3e…` |
-| Output | 13,638,660 bytes, SHA-256 `e0bbb61247dc1919646f989ca098bf52fb1da9dfde161d66de983c613089d209` |
+| Output | 13,638,660 bytes, SHA-256 `748d00dbf3d33ec216732a181353f13f80c9d563feb56f2429e766cc0df95566` |
 | Composition | 64 byte patches, 2 transplants, 2 growth insertions, one merged gap tail, one merged theme config |
 | Default build | unchanged, still SHA-256 `92c44606…` (verify.py checks 1 to 13 pass; check 13 pins this build) |
 
@@ -95,14 +95,22 @@ lays out four occupants:
 | Offset | Address | Bytes | Contents |
 |---|---|---|---|
 | 0x000 | 0x0307BFB4 | 552 | Playlist staging (zeros): header 16, 6 runs of 50, 59 entries of 4 |
-| 0x228 | 0x0307C1DC | 368 | Hooks, SHA-256 `cef74de6…`: playlist resolver, fetch, count and forward-step hooks; the two theater no-art exits; the transport ground wrapper |
-| 0x398 | 0x0307C34C | 8 | Free (zeros) |
+| 0x228 | 0x0307C1DC | 340 | Focus mode payload (`patches/focus_mode/build_focus.py`, assembled here), SHA-256 `479e1c49…` |
+| 0x37C | 0x0307C330 | 36 | Free (zeros) |
 | 0x3A0 | 0x0307C354 | 676 | Theater payload (reset stub at the base, blit trampoline at 0x0307C3A8), SHA-256 `17a558dd…` |
 | 0x644 | 0x0307C5F8 | 436 | Bluetooth blob, SHA-256 `ce6ef701…` |
 | 0x7F8 | 0x0307C7AC | 4 | Spare zeros, not emitted |
 
 Total emitted: 2,040 of 2,044 bytes. Merged tail SHA-256
-`6d77b1102cc4a82828ed8c1670eef99de708565e95d585a58dfdeb1d01047a71`.
+`5100d0d0e4c17f08ea6ede667f3c720edb721013836a7bf6cf7bc0d942446c4c`.
+
+The playlist, no-art and transport hooks that used to sit at 0x0307C1DC
+now live in module 0, in stock routines nothing can reach
+(`patches/space/`): the resolver hooks (216 B) at 0x0306C878, the no-art
+exits (100 B) at 0x03063CDC and the transport ground wrapper (52 B) at
+0x030539B4, written by patches 0047 to 0049. Module 0 is resident in
+every window, so every caller still reaches them; the move freed the
+contiguous span focus mode needs.
 
 How each occupant is placed:
 
@@ -240,14 +248,12 @@ fetch, would unblock it. The standalone `patches/power/` work is untouched.
 
 ## Space decisions for the owner
 
-Two built features do not fit this composition. Each would need an
-existing feature to shrink or leave. The owner ranks the browser marquee
-above focus mode, and keeps M3U playlists and the lock screen over the
-marquee, so neither joins the standard image for now.
+Focus mode is now in the standard image (above). The browser marquee
+still does not fit: it would need an existing feature to shrink or leave,
+and the owner keeps M3U playlists and the lock screen over it.
 
 | Feature | Needs | Available | What would make room |
 |---|---|---|---|
-| Focus mode (`patches/focus_mode/`) | 340 bytes resident whenever the player is loaded | 12 bytes in the tail (8 free, 4 spare); census pockets in module 0 (below) | Split its stubs across module 0 dead-code pockets once a tripwire build clears them; otherwise cut playlist staging to about 1 run and 25 entries, or remove the Bluetooth shortcut (436 bytes) |
 | Browser marquee v5 (`patches/browser_marquee/`) | 6,992 bytes in the module 31 window | 500 bytes | Remove playlists (trampoline, bridge and disarm stubs) and the lock screen from module 31, which frees 6,934 bytes |
 
 The census behind the focus figure is below. Both features remain

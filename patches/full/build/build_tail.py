@@ -64,6 +64,17 @@ EXTERNAL = {'RESUME_P': 0x03059DB0, 'RESUME_C': 0x0305B2C6,
             'RESUME_N': 0x03059D5C, 'RESUME_NA': 0x0307E978,
             'FILL': 0x030632FA, 'HELPER': 0x03063A08}
 SOURCES = ('resolver_hook.S', 'theater_noart.S', 'transport_ground.S')
+# Module 0 pockets for the hooks: stock routines that nothing can reach
+# (patches/space/census_dead.py, tier 1, with the emulation coverage gate),
+# each address word-aligned inside its pocket. (source, base, pocket end)
+POCKETS = (('resolver_hook.S', 0x0306C878, 0x0306C960),
+           ('theater_noart.S', 0x03063CDC, 0x03063D82),
+           ('transport_ground.S', 0x030539B4, 0x03053A14))
+POCKET_PATCHES = {'resolver_hook.S': '0047-pocket-playlist-hooks',
+                  'theater_noart.S': '0048-pocket-theater-noart',
+                  'transport_ground.S': '0049-pocket-transport-ground'}
+FOCUS_BASE = RES_BASE                   # focus payload where the hooks were
+FOCUS_MAX = THEATER_BASE - RES_BASE     # 376 B
 V4_PATCHES = REPO / 'patches' / 'design_refresh_v4' / 'patches'
 # The eight v4 transport repoints, retargeted to transport_keyed_draw.
 TRANSPORT = ('transport-keyed-slot0-state', 'transport-keyed-playpause-bare',
@@ -89,9 +100,10 @@ SITES = (
 # Filled in after the build passed the resolver and theater emulation
 # suites; the build refuses any later drift.
 EXPECTED = {
-    'resolver_sha256': 'cef74de61098517aaa3d951486bc41d14fd5be1a3fb030b5b709dec7cc4d9245',
+    'resolver_sha256': '799f461ac88b4ab1b4f2e047c47c2a9d3d99361767e1746d204dce394d827361',
+    'focus_sha256': '479e1c49e92232643b0832f7a7929912298dccc93c7a80eb4fac9d76f913dc33',
     'theater_sha256': '17a558dde5b96ef305236b436e7ec593d7fbf5a3ff56d8437c168e5dd0399d69',
-    'tail_sha256': '6d77b1102cc4a82828ed8c1670eef99de708565e95d585a58dfdeb1d01047a71',
+    'tail_sha256': '5100d0d0e4c17f08ea6ede667f3c720edb721013836a7bf6cf7bc0d942446c4c',
 }
 
 
@@ -116,37 +128,44 @@ def bw(site, target):
     return branch(site, target)
 
 
-def build_resolver(scratch):
-    """Assemble the hooks at RES_BASE. Returns (bytes, symbol table)."""
+def build_hooks(scratch):
+    """Assemble each hook source into its module 0 pocket. Returns
+    ({source: (base, bytes)}, symbol table)."""
     from capstone import Cs, CS_ARCH_ARM, CS_MODE_THUMB
     decoder = Cs(CS_ARCH_ARM, CS_MODE_THUMB)
-    source = '\n'.join((SRC / s).read_text() for s in SOURCES)
-    # ld cannot branch to an absolute address, so each external branch is
-    # assembled as a branch to itself and re-encoded after linking.
     pattern = re.compile(r'\b(b\.w|bl)(\s+)(' + '|'.join(EXTERNAL) + r')\b')
-    order = [(m.group(1), m.group(3)) for m in pattern.finditer(source)]
-    if sorted(n for _, n in order) != sorted(EXTERNAL):
-        raise ValueError(f'each external target must appear once: {order}')
-    source = pattern.sub(lambda m: f'{m.group(1)}{m.group(2)}.', source)
-    asm, obj, elf, raw, ld = [scratch / f for f in
-                              ('hook.S', 'hook.o', 'hook.elf', 'hook.bin',
-                               'hook.ld')]
-    asm.write_text(source)
+    flags = ['-mcpu=cortex-m3', '-mthumb', '-Os', '-ffreestanding',
+             '-fno-builtin', '-nostdlib', '-Wall', '-Wextra', '-Werror']
+    objs, orders, seen = [], {}, []
+    for src, base, end in POCKETS:
+        text = (SRC / src).read_text()
+        orders[src] = [(m.group(1), m.group(3)) for m in pattern.finditer(text)]
+        seen += [n for _, n in orders[src]]
+        # ld cannot branch to an absolute address, so each external branch
+        # is assembled as a branch to itself and re-encoded after linking.
+        text = pattern.sub(lambda m: f'{m.group(1)}{m.group(2)}.', text)
+        asm, obj = scratch / f'{src}.S', scratch / f'{src}.o'
+        asm.write_text(text)
+        run('arm-none-eabi-gcc', *flags, '-c', str(asm), '-o', str(obj))
+        objs.append(obj)
+    if sorted(seen) != sorted(EXTERNAL):
+        raise ValueError(f'each external target must appear once: {seen}')
+    sections = '\n'.join(
+        f' .p{i} {base:#x} : {{ *{Path(src).stem}.S.o(.text .text.*) }}\n'
+        f' ASSERT(. <= {end:#x}, "{src} overflows its pocket")'
+        for i, (src, base, end) in enumerate(POCKETS))
+    ld, elf = scratch / 'hooks.ld', scratch / 'hooks.elf'
     ld.write_text(f'''SECTIONS {{
- . = {RES_BASE:#x};
- .text : {{ *(.text) *(.text.*) }}
+{sections}
  .data : {{ *(.data) *(.data.*) }}
  .bss : {{ *(.bss) *(.bss.*) *(COMMON) }}
  /DISCARD/ : {{ *(.comment) *(.note*) *(.ARM.exidx*) *(.ARM.extab*) }}
  ASSERT(SIZEOF(.data) == 0, "hooks require data")
  ASSERT(SIZEOF(.bss) == 0, "hooks require BSS")
- ASSERT(. <= {THEATER_BASE:#x}, "hooks overlap theater")
 }}
 ''')
-    flags = ['-mcpu=cortex-m3', '-mthumb', '-Os', '-ffreestanding',
-             '-fno-builtin', '-nostdlib', '-Wall', '-Wextra', '-Werror']
-    run('arm-none-eabi-gcc', *flags, '-c', str(asm), '-o', str(obj))
-    run('arm-none-eabi-gcc', *flags, '-T', str(ld), str(obj), '-o', str(elf))
+    run('arm-none-eabi-gcc', *flags, '-T', str(ld), *map(str, objs), '-o', str(elf),
+        cwd=str(scratch))
     if run('arm-none-eabi-nm', '-u', str(elf)).strip():
         raise ValueError('hooks have undefined symbols')
     symbols = {}
@@ -154,34 +173,49 @@ def build_resolver(scratch):
         parts = line.split()
         if len(parts) == 3 and parts[1] == 'T':
             symbols[parts[2]] = int(parts[0], 16)
-    if symbols.get('resolver_hook_primary') != RES_BASE:
-        raise ValueError('primary hook is not at the hook base')
-    run('arm-none-eabi-objcopy', '-O', 'binary', str(elf), str(raw))
-    hook = bytearray(raw.read_bytes())
-    instructions = list(decoder.disasm(bytes(hook), RES_BASE))
-    placeholders = [i for i in instructions
-                    if i.mnemonic in ('b.w', 'bl')
-                    and i.op_str == f'#0x{i.address:x}']
-    if [i.mnemonic for i in placeholders] != [k for k, _ in order]:
-        raise ValueError('unexpected external-branch placeholders')
-    for insn, (kind, name) in zip(placeholders, order):
-        target = EXTERNAL[name]
-        offset = insn.address - RES_BASE
-        hook[offset:offset + 4] = branch(insn.address, target, kind == 'bl')
-        decoded = list(decoder.disasm(hook[offset:offset + 4], insn.address))
-        if len(decoded) != 1 or decoded[0].op_str != f'#0x{target:x}':
-            raise ValueError('hook branch audit failed')
-    end = RES_BASE + len(hook)
     allowed = set(EXTERNAL.values())
-    for insn in decoder.disasm(bytes(hook), RES_BASE):
-        if insn.mnemonic in ('b.w', 'bl') and insn.op_str.startswith('#'):
-            target = int(insn.op_str[1:], 16)
-            if not RES_BASE <= target < end and target not in allowed:
-                raise ValueError(f'{insn.address:#x}: {insn.mnemonic} to '
-                                 f'unexpected {target:#x}')
-    if RES_BASE + len(hook) > THEATER_BASE:
-        raise ValueError(f'hooks are {len(hook)} bytes; they overlap theater')
-    return bytes(hook), symbols
+    out = {}
+    for i, (src, base, end) in enumerate(POCKETS):
+        raw = scratch / f'p{i}.bin'
+        run('arm-none-eabi-objcopy', '-O', 'binary', '-j', f'.p{i}', str(elf), str(raw))
+        code = bytearray(raw.read_bytes())
+        placeholders = [x for x in decoder.disasm(bytes(code), base)
+                        if x.mnemonic in ('b.w', 'bl') and x.op_str == f'#0x{x.address:x}']
+        if [x.mnemonic for x in placeholders] != [k for k, _ in orders[src]]:
+            raise ValueError(f'{src}: unexpected external-branch placeholders')
+        for insn, (kind, name) in zip(placeholders, orders[src]):
+            target = EXTERNAL[name]
+            o = insn.address - base
+            code[o:o + 4] = branch(insn.address, target, kind == 'bl')
+            decoded = list(decoder.disasm(code[o:o + 4], insn.address))
+            if len(decoded) != 1 or decoded[0].op_str != f'#0x{target:x}':
+                raise ValueError('hook branch audit failed')
+        for insn in decoder.disasm(bytes(code), base):
+            if insn.mnemonic in ('b.w', 'bl') and insn.op_str.startswith('#'):
+                target = int(insn.op_str[1:], 16)
+                if not base <= target < base + len(code) and target not in allowed:
+                    raise ValueError(f'{insn.address:#x}: {insn.mnemonic} to '
+                                     f'unexpected {target:#x}')
+        if base + len(code) > end:
+            raise ValueError(f'{src}: {len(code)} bytes overflow its pocket')
+        out[src] = (base, bytes(code))
+    return out, symbols
+
+
+def build_focus():
+    """Assemble focus mode (patches/focus_mode/build_focus.py) at FOCUS_BASE.
+    Returns (payload, entries, patch defs)."""
+    import importlib.util
+    spec = importlib.util.spec_from_file_location(
+        'build_focus', REPO / 'patches' / 'focus_mode' / 'build_focus.py')
+    bf = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(bf)
+    bf.FOCUS_BASE = FOCUS_BASE
+    payload, entries = bf.assemble()
+    bf.roundtrip(payload, entries)
+    if len(payload) > FOCUS_MAX:
+        raise ValueError(f'focus payload {len(payload)} > {FOCUS_MAX}')
+    return payload, entries, bf
 
 
 def patch_file(name, title, module, address, expect, replace, gate,
@@ -247,10 +281,22 @@ def main():
     PATCHES.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(prefix='fosi-full-tail-') as tmp:
         scratch = Path(tmp)
-        resolver, symbols = build_resolver(scratch)
-        res_sha = hashlib.sha256(resolver).hexdigest()
-        print(f'tail hooks: {len(resolver)} bytes at {RES_BASE:#x}, '
-              f'sha256 {res_sha}')
+        pockets, symbols = build_hooks(scratch)
+        stock = (REPO / 'DP3_V137.img').read_bytes()
+        sys.path.insert(0, str(REPO / 'tools'))
+        from rknano_image import Image
+        sim = Image(stock)
+        m0_off, _ = sim.module_region(0, 'code')
+        m0_base = sim.modules[0]['code_exec']
+        hooks_blob = b''.join(code for _, code in pockets.values())
+        res_sha = hashlib.sha256(hooks_blob).hexdigest()
+        for src, (base, code) in pockets.items():
+            print(f'hooks {src}: {len(code)} bytes at {base:#x} (module 0 pocket)')
+
+        print(f'hooks sha256 {res_sha}')
+        focus, focus_entries, bf = build_focus()
+        focus_sha = hashlib.sha256(focus).hexdigest()
+        print(f'focus: {len(focus)} bytes at {FOCUS_BASE:#x}, sha256 {focus_sha}')
 
         # ---- theater below the Bluetooth blob ------------------------
         r = subprocess.run([sys.executable,
@@ -292,7 +338,7 @@ def main():
 
         # ---- merge ----------------------------------------------------
         tail = bytearray(TOTAL)
-        tail[STAGING:STAGING + len(resolver)] = resolver
+        tail[STAGING:STAGING + len(focus)] = focus
         tail[THEATER_BASE - TAIL_BASE:
              THEATER_BASE - TAIL_BASE + len(theater)] = theater
         tail[BT_BASE - TAIL_BASE:BT_BASE - TAIL_BASE + len(bt)] = bt
@@ -300,10 +346,42 @@ def main():
         tail_sha = hashlib.sha256(tail).hexdigest()
         print(f'merged tail: {len(tail)} bytes, sha256 {tail_sha}')
         if EXPECTED['tail_sha256'] is not None:
-            assert res_sha == EXPECTED['resolver_sha256'], 'resolver drift'
+            assert res_sha == EXPECTED['resolver_sha256'], 'hooks drift'
+            assert focus_sha == EXPECTED['focus_sha256'], 'focus drift'
             assert th_sha == EXPECTED['theater_sha256'], 'theater drift'
             assert tail_sha == EXPECTED['tail_sha256'], 'tail drift'
         (OUT / 'tail-full.bin').write_bytes(tail)
+
+        # ---- pocket patches: the hooks in module 0 dead code ----------
+        pgate = ('build refuses unless the stock bytes at the target equal\n'
+                 '  `expect`; the finished image must also pass the grown\n'
+                 '  build validator.')
+        for src, (base, code) in pockets.items():
+            o = m0_off + base - m0_base
+            patch_file(
+                POCKET_PATCHES[src],
+                f'# {src} assembled into a module 0 pocket at {base:#010x}.',
+                0, base, stock[o:o + len(code)].hex(), code.hex(), pgate,
+                'A stock routine here has no caller, branch, pointer or\n'
+                '  literal anywhere in core-0 code or data\n'
+                '  (patches/space/census_dead.py, tier 1), and no emulation\n'
+                '  suite executes it (patches/space/run_coverage.py). The\n'
+                '  hooks moved here from the gap tail to make room for focus\n'
+                '  mode; module 0 is resident in every window, so every\n'
+                '  caller still reaches them.')
+
+        # ---- focus mode hook sites (module 27) -----------------------
+        for k, (num, name, site, target, _note) in enumerate(bf.PATCH_DEFS):
+            mo = sim.module_region(27, 'code')[0] + site - sim.modules[27]['code_exec']
+            patch_file(
+                f'{120 + k:04d}-{name}',
+                f'# Focus mode: BL to {target} at {focus_entries[target]:#010x}\n'
+                f'# in the full build\'s merged tail. Design: patches/focus_mode/.',
+                27, site, stock[mo:mo + 4].hex(),
+                branch(site, focus_entries[target], link=True).hex(),
+                'stock byte precondition; validated by test_focus_mode.py under\n'
+                '  emulation on the full build',
+                bf.RATIONALES[name])
 
         # ---- hook site patches ----------------------------------------
         gate = ('build refuses unless the stock bytes at the target equal\n'
@@ -351,14 +429,14 @@ def main():
                  'offset': 0, 'address': hex(TAIL_BASE),
                  'bytes': STAGING,
                  'layout': 'header 16 + 6 runs x 50 + 59 entries x 4'},
-                {'name': 'playlist and theater hooks',
-                 'offset': STAGING, 'address': hex(RES_BASE),
-                 'bytes': len(resolver), 'sha256': res_sha,
-                 'entries': hooks},
+                {'name': 'focus mode payload',
+                 'offset': STAGING, 'address': hex(FOCUS_BASE),
+                 'bytes': len(focus), 'sha256': focus_sha,
+                 'entries': {k: hex(v) for k, v in focus_entries.items()}},
                 {'name': 'free (zeros)',
-                 'offset': STAGING + len(resolver),
-                 'address': hex(RES_BASE + len(resolver)),
-                 'bytes': THEATER_BASE - RES_BASE - len(resolver)},
+                 'offset': STAGING + len(focus),
+                 'address': hex(RES_BASE + len(focus)),
+                 'bytes': THEATER_BASE - RES_BASE - len(focus)},
                 {'name': 'theater payload (reset stub + trampoline)',
                  'offset': THEATER_BASE - TAIL_BASE,
                  'address': hex(THEATER_BASE), 'bytes': len(theater),
@@ -371,6 +449,11 @@ def main():
                  'offset': TOTAL, 'address': hex(TAIL_BASE + TOTAL),
                  'bytes': 2044 - TOTAL},
             ],
+            'pockets': [
+                {'source': src, 'address': hex(base), 'bytes': len(code),
+                 'patch': POCKET_PATCHES[src]}
+                for src, (base, code) in pockets.items()],
+            'hook_entries': hooks,
         }
         (OUT / 'layout_tail.json').write_text(
             json.dumps(layout, indent=2) + '\n')

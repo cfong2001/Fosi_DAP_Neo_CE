@@ -1,0 +1,18 @@
+# transport_ground.S assembled into a module 0 pocket at 0x030539b4.
+name: 0049-pocket-transport-ground
+kind: module
+module: 0
+region: code
+address: 0x30539b4
+gate: build refuses unless the stock bytes at the target equal
+  `expect`; the finished image must also pass the grown
+  build validator.
+expect: 2de9f04186b05fea000808881f4615460e46adf8080016bfb8f1010f0c240024002c02bf002006b0bde8f0815c282ad0a0f50051
+replace: 07b582b00a4b1b880093b0f19b03012b94bfef231f230b44084611461a4611f11f030ff090fc02b0bde8074010f012b800440003
+rationale: A stock routine here has no caller, branch, pointer or
+  literal anywhere in core-0 code or data
+  (patches/space/census_dead.py, tier 1), and no emulation
+  suite executes it (patches/space/run_coverage.py). The
+  hooks moved here from the gap tail to make room for focus
+  mode; module 0 is resident in every window, so every
+  caller still reaches them.

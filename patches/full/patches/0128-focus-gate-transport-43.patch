@@ -1,0 +1,12 @@
+# Focus mode: BL to focus_gate at 0x0307c29c
+# in the full build's merged tail. Design: patches/focus_mode/.
+name: 0128-focus-gate-transport-43
+kind: module
+module: 27
+region: code
+address: 0x307f7b6
+gate: stock byte precondition; validated by test_focus_mode.py under
+  emulation on the full build
+expect: e7f74ffd
+replace: fcf771fd
+rationale: Segment gate for the transport row segment: while hidden the row (and its mode indicator erase) is not drawn; the 0x43 bit stays pending and the row redraws on the wake paint. Gate sits at the segment test, not at the draw sites, so it composes with design refresh v4 either way.

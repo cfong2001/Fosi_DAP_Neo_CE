@@ -13,10 +13,10 @@ outside the homes listed here.
 |---|---|---|---|
 | Module 0 stub-farm caves | about 84 B of verified-dead stub slots | DAC fix trampoline (14 B, patch 0002), gapless gate, its tail, core-1 flag literal and state (48 B, patches 0020 to 0026), gapless warm start (16 B at 0x03051504, patch 0034) | 14 B: the old three scraps (4 + 2 + 2), 0x030514FE (2 B) and 0x03051514 to 0x03051517 (4 B) |
 | Module 39 sort cave (0x0309F000) | 1,196 B | Natural sort blob, 1,052 B (patch 0031) | about 140 B |
-| Gap tail (exec 0x0307BFB4 to 0x0307C7B0) | 2,044 B | M3U staging 1,192 B (runtime data, zeros in the image), resolver hooks 410 B (patches 0041, 0042), Bluetooth toggle 436 B (patch 0032 tail variant), 2 B alignment pad | 4 B |
+| Gap tail (exec 0x0307BFB4 to 0x0307C7B0) | 2,044 B | Full build: M3U staging 552 B (zeros), focus mode 340 B, theater 676 B, Bluetooth toggle 436 B | 40 B (36 free after focus, 4 spare) |
 | Module 31 segment extension (exec 0x0307EE48 to 0x03080B54) | 7,436 B | Browser-hook trampoline 64 B (patch 0040), M3U bridge plus parser linked together 6,644 B, lock-screen routine 406 B (patch 0033) | 322 B |
 | Module 32 segment extension (exec 0x030804AC to 0x03080B54) | 1,704 B | Battery-profile blob, 540 B (apply routine, defaults writer, selector entry, cave stubs, constants; patches 0051, 0052) | 1,164 B |
-| Module 0 dead-code pockets ([`patches/space/`](../space/README.md)) | 8,508 B in 150 pockets, largest 256 B; 5,530 B in pockets of 64 B or more | None yet: candidates by static reachability and an emulation coverage gate; a hardware tripwire build must clear them first | 8,508 B, provisional |
+| Module 0 dead-code pockets ([`patches/space/`](../space/README.md)) | 8,508 B in 150 pockets, largest 256 B; 5,530 B in pockets of 64 B or more | Playlist hooks (216 B at 0x0306C878), theater no-art exits (100 B at 0x03063CDC), transport ground wrapper (52 B at 0x030539B4); patches 0047 to 0049 in the full build | about 8,140 B; a hardware tripwire build is still the proof |
 | SAVEINFO verbatim block (+0x1C7 to +0x2D5) | about 270 B of settings space | Battery profiles, 32 B at +0x290 to +0x2AF (apply routine built; see patches/power/) | about 238 B |
 
 The two segment extensions overlap in exec space: the module 31

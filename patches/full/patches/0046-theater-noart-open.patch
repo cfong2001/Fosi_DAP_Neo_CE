@@ -1,4 +1,4 @@
-# Hook site: B.W to theater_noart_open at 0x0307c2c8
+# Hook site: B.W to theater_noart_open at 0x03063cf0
 # in the full build's merged tail.
 name: 0046-theater-noart-open
 kind: module
@@ -9,7 +9,7 @@ gate: build refuses unless the stock bytes at the target equal
   `expect`; the finished image must also pass the grown
   build validator. Requires the full build's merged tail.
 expect: 3460bde8
-replace: fdf7acbc
+replace: e5f7c0b9
 rationale: Same restore on the loader's exit when the audio file does
   not open. Replaces "str r4, [r6]" and the first half of the
   exit pop with a B.W to a stub that stores, restores the

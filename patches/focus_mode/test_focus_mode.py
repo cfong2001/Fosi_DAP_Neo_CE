@@ -53,6 +53,7 @@ Gates:
      cell over those rows. Stock-geometry control: 86 -> 29.
 """
 import hashlib
+import os
 import runpy
 import struct
 import subprocess
@@ -77,6 +78,12 @@ STOCK = (REPO / 'DP3_V137.img').read_bytes()
 STOCK_SHA = 'fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cdfade5e9c6ea3bd71ac6deef'
 assert hashlib.sha256(STOCK).hexdigest() == STOCK_SHA, 'stock SHA gate'
 
+# FOCUS_FULL_IMAGE=path runs every gate on the full build instead of the
+# standalone theater variant; there the payload sits at 0x0307C1DC, where
+# the full build's tail places it (patches/full/build/build_tail.py).
+FULL_IMAGE = os.environ.get('FOCUS_FULL_IMAGE')
+if FULL_IMAGE:
+    build_focus.FOCUS_BASE = 0x0307C1DC
 PAYLOAD, ENTRIES = build_focus.assemble()
 FOCUS = {name: addr for name, addr in ENTRIES.items()}
 STATE = 0x03023484
@@ -617,7 +624,8 @@ def gate4(variant):
 
 def main():
     tmp = tempfile.mkdtemp(prefix='neo-focus-test-')
-    variant = build_variant(tmp)
+    variant = (Path(FULL_IMAGE).read_bytes() if FULL_IMAGE
+               else build_variant(tmp))
     print(f'variant image sha256 {hashlib.sha256(variant).hexdigest()}')
     gate0(variant)
     gate1(variant)

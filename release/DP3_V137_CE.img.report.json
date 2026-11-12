@@ -3,7 +3,7 @@
  "input_file": "DP3_V137.img",
  "output_file": "DP3_V137_CE.img",
  "input_sha256": "fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cdfade5e9c6ea3bd71ac6deef",
- "output_sha256": "e0bbb61247dc1919646f989ca098bf52fb1da9dfde161d66de983c613089d209",
+ "output_sha256": "748d00dbf3d33ec216732a181353f13f80c9d563feb56f2429e766cc0df95566",
  "byte_length": 13638660,
  "header_date": "20261023",
  "patches_applied": [
@@ -467,7 +467,7 @@
    "cpu_address": "0x307f85a",
    "file_offset": "0x89d38",
    "old_hex": "e3f776fe",
-   "new_hex": "fcf75dfd"
+   "new_hex": "d4f7abf8"
   },
   {
    "patch": "0111-transport-keyed-playpause-bare-ground",
@@ -478,7 +478,7 @@
    "cpu_address": "0x307f832",
    "file_offset": "0x89d10",
    "old_hex": "e3f78afe",
-   "new_hex": "fcf771fd"
+   "new_hex": "d4f7bff8"
   },
   {
    "patch": "0114-transport-keyed-plus-bare-ground",
@@ -489,7 +489,7 @@
    "cpu_address": "0x307f874",
    "file_offset": "0x89d52",
    "old_hex": "e3f769fe",
-   "new_hex": "fcf750fd"
+   "new_hex": "d4f79ef8"
   },
   {
    "patch": "0112-transport-keyed-quote-bare-ground",
@@ -500,7 +500,7 @@
    "cpu_address": "0x307f840",
    "file_offset": "0x89d1e",
    "old_hex": "e3f783fe",
-   "new_hex": "fcf76afd"
+   "new_hex": "d4f7b8f8"
   },
   {
    "patch": "0115-transport-keyed-repeat-state-ground",
@@ -511,7 +511,7 @@
    "cpu_address": "0x307f884",
    "file_offset": "0x89d62",
    "old_hex": "e3f761fe",
-   "new_hex": "fcf748fd"
+   "new_hex": "d4f796f8"
   },
   {
    "patch": "0116-transport-keyed-right-state-ground",
@@ -522,7 +522,7 @@
    "cpu_address": "0x307f8a8",
    "file_offset": "0x89d86",
    "old_hex": "e3f74ffe",
-   "new_hex": "fcf736fd"
+   "new_hex": "d4f784f8"
   },
   {
    "patch": "0117-transport-keyed-right-variants-ground",
@@ -533,7 +533,7 @@
    "cpu_address": "0x307f8f0",
    "file_offset": "0x89dce",
    "old_hex": "e3f72bfe",
-   "new_hex": "fcf712fd"
+   "new_hex": "d4f760f8"
   },
   {
    "patch": "0110-transport-keyed-slot0-state-ground",
@@ -544,7 +544,7 @@
    "cpu_address": "0x307f806",
    "file_offset": "0x89ce4",
    "old_hex": "e3f7a0fe",
-   "new_hex": "fcf787fd"
+   "new_hex": "d4f7d5f8"
   },
   {
    "patch": "0118-progress-knob-keyed",
@@ -556,6 +556,138 @@
    "file_offset": "0x89c78",
    "old_hex": "e3f7d6fe",
    "new_hex": "e4f735f9"
+  },
+  {
+   "patch": "0120-focus-init-reset-hook",
+   "file": "0120-focus-init-reset-hook.patch",
+   "kind": "module",
+   "module": 27,
+   "region": "code",
+   "cpu_address": "0x307d1a2",
+   "file_offset": "0x87680",
+   "old_hex": "eaf74bf8",
+   "new_hex": "fff71bf8"
+  },
+  {
+   "patch": "0121-focus-service-tick-hook",
+   "file": "0121-focus-service-tick-hook.patch",
+   "kind": "module",
+   "module": 27,
+   "region": "code",
+   "cpu_address": "0x307e20c",
+   "file_offset": "0x886ea",
+   "old_hex": "e9f716f8",
+   "new_hex": "fdf7f8ff"
+  },
+  {
+   "patch": "0122-focus-key-hook",
+   "file": "0122-focus-key-hook.patch",
+   "kind": "module",
+   "module": 27,
+   "region": "code",
+   "cpu_address": "0x3080af6",
+   "file_offset": "0x8afd4",
+   "old_hex": "e1f70ef8",
+   "new_hex": "fbf7adfb"
+  },
+  {
+   "patch": "0123-focus-geometry-hook",
+   "file": "0123-focus-geometry-hook.patch",
+   "kind": "module",
+   "module": 27,
+   "region": "code",
+   "cpu_address": "0x307e8de",
+   "file_offset": "0x88dbc",
+   "old_hex": "05f0d7f8",
+   "new_hex": "fdf7e9fc"
+  },
+  {
+   "patch": "0124-focus-gate-status-1f",
+   "file": "0124-focus-gate-status-1f.patch",
+   "kind": "module",
+   "module": 27,
+   "region": "code",
+   "cpu_address": "0x307f510",
+   "file_offset": "0x899ee",
+   "old_hex": "e7f7a2fe",
+   "new_hex": "fcf7c4fe"
+  },
+  {
+   "patch": "0125-focus-gate-progress-41",
+   "file": "0125-focus-gate-progress-41.patch",
+   "kind": "module",
+   "module": 27,
+   "region": "code",
+   "cpu_address": "0x307f548",
+   "file_offset": "0x89a26",
+   "old_hex": "e7f786fe",
+   "new_hex": "fcf7a8fe"
+  },
+  {
+   "patch": "0126-focus-gate-progress-40",
+   "file": "0126-focus-gate-progress-40.patch",
+   "kind": "module",
+   "module": 27,
+   "region": "code",
+   "cpu_address": "0x307f598",
+   "file_offset": "0x89a76",
+   "old_hex": "e7f75efe",
+   "new_hex": "fcf780fe"
+  },
+  {
+   "patch": "0127-focus-gate-progress-4d",
+   "file": "0127-focus-gate-progress-4d.patch",
+   "kind": "module",
+   "module": 27,
+   "region": "code",
+   "cpu_address": "0x307f5ea",
+   "file_offset": "0x89ac8",
+   "old_hex": "e7f735fe",
+   "new_hex": "fcf757fe"
+  },
+  {
+   "patch": "0128-focus-gate-transport-43",
+   "file": "0128-focus-gate-transport-43.patch",
+   "kind": "module",
+   "module": 27,
+   "region": "code",
+   "cpu_address": "0x307f7b6",
+   "file_offset": "0x89c94",
+   "old_hex": "e7f74ffd",
+   "new_hex": "fcf771fd"
+  },
+  {
+   "patch": "0129-focus-gate-volume-19a",
+   "file": "0129-focus-gate-volume-19a.patch",
+   "kind": "module",
+   "module": 27,
+   "region": "code",
+   "cpu_address": "0x307f8f8",
+   "file_offset": "0x89dd6",
+   "old_hex": "e7f7aefc",
+   "new_hex": "fcf7d0fc"
+  },
+  {
+   "patch": "0130-focus-title-shift-hook",
+   "file": "0130-focus-title-shift-hook.patch",
+   "kind": "module",
+   "module": 27,
+   "region": "code",
+   "cpu_address": "0x307f9f0",
+   "file_offset": "0x89ece",
+   "old_hex": "e2f7b3ff",
+   "new_hex": "fcf776fc"
+  },
+  {
+   "patch": "0131-focus-artist-shift-hook",
+   "file": "0131-focus-artist-shift-hook.patch",
+   "kind": "module",
+   "module": 27,
+   "region": "code",
+   "cpu_address": "0x307faa8",
+   "file_offset": "0x89f86",
+   "old_hex": "e3f721f9",
+   "new_hex": "fcf72efc"
   },
   {
    "patch": "theater-setup-reset-hook",
@@ -632,7 +764,7 @@
    "cpu_address": "0x3059dac",
    "file_offset": "0x33458",
    "old_hex": "2de9f047",
-   "new_hex": "22f016ba"
+   "new_hex": "12f064bd"
   },
   {
    "patch": "0042-resolver-companion-hook",
@@ -643,7 +775,7 @@
    "cpu_address": "0x305b2c2",
    "file_offset": "0x3496e",
    "old_hex": "2de9f047",
-   "new_hex": "20f09bbf"
+   "new_hex": "11f0e9ba"
   },
   {
    "patch": "0043-playlist-count-hook",
@@ -654,7 +786,7 @@
    "cpu_address": "0x3059d58",
    "file_offset": "0x33404",
    "old_hex": "2de9f041",
-   "new_hex": "22f063ba"
+   "new_hex": "12f0b1bd"
   },
   {
    "patch": "0044-playlist-forward-step",
@@ -665,7 +797,7 @@
    "cpu_address": "0x305d598",
    "file_offset": "0x36c44",
    "old_hex": "a0890128",
-   "new_hex": "1ef052fe"
+   "new_hex": "0ff0a0f9"
   },
   {
    "patch": "0045-theater-noart-close",
@@ -676,7 +808,7 @@
    "cpu_address": "0x307e972",
    "file_offset": "0x88e50",
    "old_hex": "346098f8",
-   "new_hex": "fdf79fbc"
+   "new_hex": "e5f7b3b9"
   },
   {
    "patch": "0046-theater-noart-open",
@@ -687,7 +819,40 @@
    "cpu_address": "0x307e96c",
    "file_offset": "0x88e4a",
    "old_hex": "3460bde8",
-   "new_hex": "fdf7acbc"
+   "new_hex": "e5f7c0b9"
+  },
+  {
+   "patch": "0047-pocket-playlist-hooks",
+   "file": "0047-pocket-playlist-hooks.patch",
+   "kind": "module",
+   "module": 0,
+   "region": "code",
+   "cpu_address": "0x306c878",
+   "file_offset": "0x45f24",
+   "old_hex": "00b583b069466348fbf76bf8002818bf002003b000bd2de9f0435e4f85b088468146164669463846fbf75bf800281cbf05b0bde8f083f9f7acfebdf8064006eb4420401e6102b0fbf1f502a93846fbf748f84ff0000c002d98bfc5f1000cbdf8040006f2ff1200fb09f00cfb0401d01702ebd050421243463846faf7eafff9f7b4fe05b0bde8f0832de9f043dff8048185b089460746154669464046fbf721f800281cbf05b0bde8f083f9f772febdf8064005eb4420401e6102b0fbf1f502a94046fbf70ef8bdf804000022784302fb040105fb04f24b46",
+   "new_hex": "04b4314a127832b1012b04d12f4a914201d104bc2de004bc2de9f047edf78cba04b4294a12784ab1012b07d1284a964502d0284a964501d104bc704704bc2de9f047eef704bd04b41f4a12782ab1012903d11d4a507804bc704704bc2de9f041edf740baa0891849097801b1012001287047dff854c080b200b101389cf80130984200d3581eacf802000cf59e7202eb800210880130acf804009278322302fb03c2103213680b609388b2f806c063448b6008321c312a2312f801cb01f801cb013bf9d170470000b4bf0703b439020365e00703cba60803"
+  },
+  {
+   "patch": "0048-pocket-theater-noart",
+   "file": "0048-pocket-theater-noart.patch",
+   "kind": "module",
+   "module": 0,
+   "region": "code",
+   "cpu_address": "0x3063cdc",
+   "file_offset": "0x3d388",
+   "old_hex": "f0b587b01d460c9c16460f46002c04bf07b0f0bd02a9fff718fcbdf80a1060198842c4bf481b04b2bdf808100598694300eb41010091bdf90820234631463846fff792fb07b0f0bd2de9f04786b09846dde90f65ddf8389017468a46002d12bfb8f1000f",
+   "new_hex": "346000b500f00bf85df804eb98f800001af044be346000f002f8bde8f88307b50b49002048760b4991f8d80210b941f2a20001e00849088808490a88824205d0088007490a6842f000720a6007bd000068340203a0320203b435020300440003fc3c0203"
+  },
+  {
+   "patch": "0049-pocket-transport-ground",
+   "file": "0049-pocket-transport-ground.patch",
+   "kind": "module",
+   "module": 0,
+   "region": "code",
+   "cpu_address": "0x30539b4",
+   "file_offset": "0x2d060",
+   "old_hex": "2de9f04186b05fea000808881f4615460e46adf8080016bfb8f1010f0c240024002c02bf002006b0bde8f0815c282ad0a0f50051",
+   "new_hex": "07b582b00a4b1b880093b0f19b03012b94bfef231f230b44084611461a4611f11f030ff090fc02b0bde8074010f012b800440003"
   },
   {
    "patch": "0040-m3u-browser-hook",
@@ -10288,7 +10453,7 @@
   "exec": "0x307bfb4",
   "file_offset": "0x55660",
   "payload_bytes": 2040,
-  "payload_sha256": "6d77b1102cc4a82828ed8c1670eef99de708565e95d585a58dfdeb1d01047a71",
+  "payload_sha256": "5100d0d0e4c17f08ea6ede667f3c720edb721013836a7bf6cf7bc0d942446c4c",
   "span_bytes": 11164,
   "workspace_zone_zero_bytes": 9120,
   "code_len_old": "0x29c14",
@@ -10310,8 +10475,8 @@
   }
  ],
  "diff_vs_stock": {
-  "bytes_changed": 4748049,
-  "range_count": 429119,
+  "bytes_changed": 4748382,
+  "range_count": 429130,
   "note": "range list omitted; rebuild with patches/full/build/build_full.py for it"
  },
  "validation": "validate_grown() passed (structural checks, layout derived from the image)",

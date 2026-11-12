@@ -1,0 +1,12 @@
+# Focus mode: BL to focus_reset at 0x0307c1dc
+# in the full build's merged tail. Design: patches/focus_mode/.
+name: 0120-focus-init-reset-hook
+kind: module
+module: 27
+region: code
+address: 0x307d1a2
+gate: stock byte precondition; validated by test_focus_mode.py under
+  emulation on the full build
+expect: eaf74bf8
+replace: fff71bf8
+rationale: Player Init posts the first full repaint at this site; the focus reset stub performs that post, then initialises the focus state at SAVEINFO+0x1E4 (hidden clear, activity stamp = OS clock now, wheel snapshot = key-task total-steps word), so every player-window entry starts visible with a fresh idle budget.
