@@ -49,17 +49,23 @@ ENTRIES = [(2, 0), (0, 1), (3, 0)]                  # (0-based ordinal, run)
 STOCK_COUNT = 9                                      # folder-tree length
 
 
+SHARED_CTX = bytes([0x4C]) * 42                     # one per import
+
+
 def staging(armed):
+    """Packed layout (m3u_bridge.h): shared context at +16, run clusters
+    at +60, run totals at +188, entries (ordinal | run << 11) at +252."""
     s = bytearray(552)
     s[0] = 1 if armed else 0
     s[1] = len(ENTRIES)
     struct.pack_into('<H', s, 2, 0xFFFF)
     s[6] = len(RUNS)
+    s[16:58] = SHARED_CTX
     for i, (cluster, files) in enumerate(RUNS):
-        struct.pack_into('<IHH', s, 16 + 50 * i, cluster, files, 0)
-        s[16 + 50 * i + 8:16 + 50 * i + 50] = bytes([0x40 + i]) * 42
+        struct.pack_into('<I', s, 60 + 4 * i, cluster)
+        struct.pack_into('<H', s, 188 + 2 * i, files)
     for i, (ordinal, run) in enumerate(ENTRIES):
-        struct.pack_into('<HBB', s, 316 + 4 * i, ordinal, run, 0)
+        struct.pack_into('<H', s, 252 + 2 * i, ordinal | run << 11)
     return bytes(s)
 
 
@@ -161,7 +167,7 @@ def expect(player, label, position, entry):
     got = player.where()
     assert got == want, f'{label}: got {got}, want {want}'
     ctxt = bytes(player.u.mem_read(CTX + 0x50, 42))
-    assert ctxt == bytes([0x40 + run]) * 42, f'{label}: folder context'
+    assert ctxt == SHARED_CTX, f'{label}: folder context'
     print(f'PASS {label}: position {position} plays entry {entry} '
           f'(folder {want[1]:#x}, file {want[2]})')
 

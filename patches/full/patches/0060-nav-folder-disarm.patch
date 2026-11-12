@@ -9,7 +9,7 @@ gate: Do NOT stack alone. Requires the full build's module 31
   segment extension carrying the disarm stubs at the branch
   target.
 expect: 01252846
-replace: 02f065bc
+replace: 02f0c5bb
 rationale: Stock folder play begins here (movs r5, #1; mov r0, r5,
   then the classifier call at 0x0307E052). The stub clears
   the staging flag byte at 0x0307BFB4, reproduces both

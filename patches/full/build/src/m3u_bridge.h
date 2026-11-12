@@ -22,8 +22,8 @@
  *     cluster, within-directory index), which is what the tail hooks
  *     serve. The file's own first cluster is not part of staging.
  *
- * The staging layout written here is patches/m3u/tail_build/
- * tail_build.md's trimmed layout at 0x0307BFB4, byte for byte.
+ * The staging layout written here is the packed layout below, at
+ * 0x0307BFB4 in the merged gap tail.
  */
 #ifndef M3U_BRIDGE_H
 #define M3U_BRIDGE_H
@@ -34,24 +34,46 @@
 
 #include "m3u.h"
 
-/* ---- resolver staging (tail_build.md, trimmed layout) ------------- */
+/* ---- resolver staging (packed layout) -------------------------------
+ *
+ * 552 bytes at 0x0307BFB4, the same span the merged gap tail reserves.
+ * Every folder run used to carry its own copy of the 42-byte stock
+ * context, but the bridge captures that context once per import (the
+ * standing context at 0x0307BF5C) and the copies were identical, so the
+ * packed layout stores it once and keeps runs and entries as flat
+ * arrays:
+ *
+ *   +0    u8  flag (set last), +1 u8 entry count, +2 u16 last position
+ *         served, +4 u16 last ordinal served, +6 u8 run count, +7..+15 0
+ *   +16   42-byte stock context, then 2 bytes of padding
+ *   +60   u32 run cluster[32]
+ *   +188  u16 run total[32]           countA + countB of the run folder
+ *   +252  u16 entry[150]              bits 0-10: 0-based ordinal among
+ *                                     the folder's accepted files,
+ *                                     bits 11-15: run id
+ *
+ * The resolver hooks (resolver_hook.S) read this layout; keep the two
+ * in step. */
 
 #define M3U_STAGE_BASE      0x0307BFB4u
+#define M3U_STAGE_TOTAL     552u
 #define M3U_STAGE_HDR_LEN   16u
-#define M3U_STAGE_MAX_RUNS  6u    /* full build: caps reduced from the
-                                     compose variant's 12 / 144 so the
-                                     merged gap tail also holds the
-                                     theater payload (patches/full)   */
-#define M3U_STAGE_RUN_LEN   50u   /* u32 cluster, u16 countA, u16 countB,
-                                     42-byte stock context              */
-#define M3U_STAGE_MAX_ENT   59u
-#define M3U_STAGE_ENT_LEN   4u    /* u16 within-directory index,
-                                     u8 run id, u8 flags                */
-#define M3U_STAGE_RUNS_OFF  M3U_STAGE_HDR_LEN
-#define M3U_STAGE_ENT_OFF   (M3U_STAGE_HDR_LEN + \
-                             M3U_STAGE_MAX_RUNS * M3U_STAGE_RUN_LEN)
-#define M3U_STAGE_TOTAL     (M3U_STAGE_ENT_OFF + \
-                             M3U_STAGE_MAX_ENT * M3U_STAGE_ENT_LEN)
+#define M3U_STAGE_CTX_OFF   16u
+#define M3U_STAGE_CTX_LEN   42u
+#define M3U_STAGE_MAX_RUNS  32u
+#define M3U_STAGE_CLUS_OFF  60u
+#define M3U_STAGE_SUM_OFF   (M3U_STAGE_CLUS_OFF + 4u * M3U_STAGE_MAX_RUNS)
+#define M3U_STAGE_MAX_ENT   150u
+#define M3U_STAGE_ENT_OFF   (M3U_STAGE_SUM_OFF + 2u * M3U_STAGE_MAX_RUNS)
+#define M3U_STAGE_ORD_BITS  11u
+#define M3U_STAGE_MAX_ORD   ((1u << M3U_STAGE_ORD_BITS) - 1u)
+
+#if M3U_STAGE_ENT_OFF + 2u * M3U_STAGE_MAX_ENT != M3U_STAGE_TOTAL
+#error "staging layout does not fill its 552-byte span exactly"
+#endif
+#if M3U_STAGE_MAX_RUNS > (1u << (16u - M3U_STAGE_ORD_BITS))
+#error "run id does not fit the entry's high bits"
+#endif
 
 /* Entry point called by the 0040 trampoline (which has already matched
  * the node's 8.3 extension against "M3U"). node/state/ctx are the

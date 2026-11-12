@@ -666,7 +666,7 @@ def main():
     # -- 13. full build (patches/full/) --------------------------------
     # One build.py pass composing every feature: 89 patches, the
     # vorbis75 and opus72 transplants, two growth insertions
-    # (module 31 +6,936, module 24 +26), the merged
+    # (module 31 +6,616, module 24 +26), the merged
     # 2,040-byte gap tail and the merged 938-run theme config. The
     # ebook reader (module 30) is not shrunk, so the image is
     # exactly the growth total longer than stock. Confinement is
@@ -678,9 +678,9 @@ def main():
     # differ only at the theme runs, the mirrored header and
     # the trailer CRC once the growth shift is accounted for.
     FULL_DIR = HERE.parent / 'full'
-    FULL_SHA = '1241064a5d347a3ddb3939fc4b5fb84c7b8f1acdd920900200573e878351e842'
-    PAYLOAD_GROWTH = 6962       # module 31 + module 24 payloads
-    GROWTH_TOTAL = 7168         # plus 206 zeros that sector-align the mirror
+    FULL_SHA = '69ee512a082338fb656e2730dcaa15c206e25ad47faf2d97bc64f2e5090d2140'
+    PAYLOAD_GROWTH = 6642       # module 31 + module 24 payloads
+    GROWTH_TOTAL = 6656         # plus 14 zeros that sector-align the mirror
     if ecp is None:
         check('full build: composed image pinned, diff confined '
               'to the union of its parts, default unchanged', None,
@@ -715,7 +715,7 @@ def main():
                     'dd8f772fb5c7fa128ed5bdfde99401cff66798847eb6c993feea89a0997ab695',
                     '6a7d50d2647c6623181e3cbbc16a13d2bd9a8724559d62c84f25b83ae8cbb07d'] \
                 and [(g['module'], g['payload_bytes'])
-                     for g in rep['growth']] == [(31, 6936),
+                     for g in rep['growth']] == [(31, 6616),
                                                   (24, 26)] \
                 and rep['tail']['payload_bytes'] == 2040 \
                 and rep['tail']['payload_sha256'] == \

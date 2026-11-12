@@ -9,7 +9,7 @@
       "offset": 0,
       "address": "0x307bfb4",
       "bytes": 552,
-      "layout": "header 16 + 6 runs x 50 + 59 entries x 4"
+      "layout": "header 16 + context 44 + 32 runs x 6 + 150 entries x 2"
     },
     {
       "name": "focus mode payload",

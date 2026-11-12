@@ -13,11 +13,17 @@
  *
  * Scenario 1 imports a nine-entry playlist from the fake MUSIC
  * directory and checks the staging bytes field by field against the
- * tail_build.md layout, with every expected count and ordinal derived
- * by hand from the tree (see the tree comments). Scenario 2 checks
- * the FS-type-3 decline clears an old playlist flag. Scenario 3 checks an
- * import needing 13 runs declines with the flag clear. Scenario 4
- * checks a playlist with no resolvable entries declines.
+ * packed layout in m3u_bridge.h, with every expected count and ordinal
+ * derived by hand from the tree (see the tree comments). Scenario 2
+ * checks the FS-type-3 decline clears an old playlist flag. Scenario 3
+ * checks that an import needing 33 folder runs declines with the flag
+ * clear, and scenario 5 that 32 runs (the cap) arm. Scenario 4 checks
+ * a playlist with no resolvable entries declines. Scenario 6 checks
+ * the entry cap: 150 entries arm, 151 decline. Scenario 7 imports a
+ * .m3u8 playlist through its 8.3 alias (EVENIN~1.M3U for
+ * "Evening.m3u8"): UTF-8 with a BOM, CRLF line ends, a Windows drive
+ * path, an LFN entry, and a long name holding a code point past the
+ * BMP (stored as a surrogate pair) plus a case-folded accent.
  */
 #include <stdint.h>
 #include <stdio.h>
@@ -103,24 +109,28 @@ static const FakeEnt live_ents[] = {
     E("SET1    MP3", 0x20, 0x6101),
     E("SET2    MP3", 0x20, 0x6102)
 };
-/* PODCAST: EP1.MP3 ordinal 0. countA = 1, countB = 0. */
+/* PODCAST: EP1.MP3 ordinal 0, and an LFN file whose name holds a
+ * code point past the BMP (headphones emoji) and an accented letter,
+ * ordinal 1. countA = 2, countB = 0. */
 static const FakeEnt podcast_ents[] = {
-    E("EP1     MP3", 0x20, 0x6201)
+    E("EP1     MP3", 0x20, 0x6201),
+    EL("EP2~1   MP3", 0x20, 0x6202, "Ep 2 \xF0\x9F\x8E\xA7 Caf\xC3\xA9.mp3")
 };
 
 static const FakeDir dirs1[] = {
     { 0x0002, root_ents, 6 },
     { 0x1001, music_ents, 6 },
     { 0x1003, live_ents, 2 },
-    { 0x1002, podcast_ents, 1 }
+    { 0x1002, podcast_ents, 2 }
 };
 
-/* Scenario 3 tree: MUSIC with 13 subdirectories D00..D12, each with
- * one A.MP3. Filled in by init_tree3(). */
-static FakeEnt music3_ents[13];
-static FakeEnt sub3_ents[13][1];
-static FakeDir dirs3[15];
-static char sub3_names[13][12];
+/* Scenario 3 and 5 tree: MUSIC with TREE3_DIRS subdirectories D00..,
+ * each with one A.MP3. Filled in by init_tree3(). */
+#define TREE3_DIRS 33
+static FakeEnt music3_ents[TREE3_DIRS];
+static FakeEnt sub3_ents[TREE3_DIRS][1];
+static FakeDir dirs3[TREE3_DIRS + 2];
+static char sub3_names[TREE3_DIRS][12];
 
 static const FakeDir *g_dirs;
 static int g_ndirs;
@@ -154,7 +164,10 @@ static int mock_registrar(uint32_t dir_cluster, const uint8_t *name11,
     g_reg_attr = attr;
     if (memcmp(name11, "TEST    M3U", 11) != 0 &&
         memcmp(name11, "BIG     M3U", 11) != 0 &&
-        memcmp(name11, "EMPTY   M3U", 11) != 0) {
+        memcmp(name11, "EMPTY   M3U", 11) != 0 &&
+        memcmp(name11, "CAP     M3U", 11) != 0 &&
+        memcmp(name11, "LONG    M3U", 11) != 0 &&
+        memcmp(name11, "EVENIN~1M3U", 11) != 0) {
         return -1;
     }
     return 5;
@@ -251,6 +264,39 @@ static uint8_t sfn_checksum(const uint8_t *name11)
     return sum;
 }
 
+/* Long names in the fake tree are UTF-8; FAT stores UTF-16 units,
+ * with a surrogate pair for a code point past the BMP. */
+static int utf8_to_utf16(const char *in, uint16_t *out)
+{
+    const uint8_t *p = (const uint8_t *)in;
+    int n = 0;
+    while (*p) {
+        uint32_t cp;
+        if (p[0] < 0x80u) {
+            cp = *p++;
+        } else if ((p[0] & 0xE0u) == 0xC0u) {
+            cp = ((uint32_t)(p[0] & 0x1Fu) << 6) | (p[1] & 0x3Fu);
+            p += 2;
+        } else if ((p[0] & 0xF0u) == 0xE0u) {
+            cp = ((uint32_t)(p[0] & 0x0Fu) << 12) |
+                 ((uint32_t)(p[1] & 0x3Fu) << 6) | (p[2] & 0x3Fu);
+            p += 3;
+        } else {
+            cp = ((uint32_t)(p[0] & 0x07u) << 18) |
+                 ((uint32_t)(p[1] & 0x3Fu) << 12) |
+                 ((uint32_t)(p[2] & 0x3Fu) << 6) | (p[3] & 0x3Fu);
+            p += 4;
+        }
+        if (cp > 0xFFFFu) {
+            out[n++] = (uint16_t)(0xD800u + ((cp - 0x10000u) >> 10));
+            out[n++] = (uint16_t)(0xDC00u + (cp & 0x3FFu));
+        } else {
+            out[n++] = (uint16_t)cp;
+        }
+    }
+    return n;
+}
+
 /* One fake directory as a raw dirent stream: each entry expands to
  * its LFN dirents (reverse order, flagged last part first) plus its
  * SFN dirent; the stream ends with a zero dirent. */
@@ -269,7 +315,8 @@ static void build_stream(const FakeDir *d)
     for (i = 0; i < d->n; i++) {
         const FakeEnt *e = &d->ents[i];
         if (e->lfn != NULL) {
-            int chars = (int)strlen(e->lfn);
+            uint16_t units[256];
+            int chars = utf8_to_utf16(e->lfn, units);
             int parts = (chars + 13) / 13;
             int p;
             for (p = parts; p >= 1; p--) {
@@ -283,7 +330,7 @@ static void build_stream(const FakeDir *d)
                     int ci = (p - 1) * 13 + j;
                     uint16_t ch = 0xFFFFu;
                     if (ci < chars) {
-                        ch = (uint8_t)e->lfn[ci];
+                        ch = units[ci];
                     } else if (ci == chars) {
                         ch = 0;
                     }
@@ -356,26 +403,28 @@ static uint32_t rd32(const uint8_t *p)
            ((uint32_t)p[2] << 16) | ((uint32_t)p[3] << 24);
 }
 
+static void check_ctx(void)
+{
+    int j;
+    for (j = 0; j < 42; j++) {
+        CHECK(stage_buf[M3U_STAGE_CTX_OFF + j] == ctx42_pattern[j]);
+    }
+    CHECK(stage_buf[M3U_STAGE_CTX_OFF + 42] == 0);
+    CHECK(stage_buf[M3U_STAGE_CTX_OFF + 43] == 0);
+}
+
 static void check_run(int id, uint32_t clus, int ca, int cb)
 {
-    const uint8_t *run = stage_buf + M3U_STAGE_RUNS_OFF +
-                         (size_t)id * M3U_STAGE_RUN_LEN;
-    int j;
-    CHECK(rd32(run + 0) == clus);
-    CHECK(rd16(run + 4) == (uint16_t)ca);
-    CHECK(rd16(run + 6) == (uint16_t)cb);
-    for (j = 0; j < 42; j++) {
-        CHECK(run[8 + j] == ctx42_pattern[j]);
-    }
+    CHECK(rd32(stage_buf + M3U_STAGE_CLUS_OFF + 4 * id) == clus);
+    CHECK(rd16(stage_buf + M3U_STAGE_SUM_OFF + 2 * id) ==
+          (uint16_t)(ca + cb));
 }
 
 static void check_entry(int i, int idx, int run)
 {
-    const uint8_t *ent = stage_buf + M3U_STAGE_ENT_OFF +
-                         (size_t)i * M3U_STAGE_ENT_LEN;
-    CHECK(rd16(ent + 0) == (uint16_t)idx);
-    CHECK(ent[2] == (uint8_t)run);
-    CHECK(ent[3] == 0);
+    uint16_t w = rd16(stage_buf + M3U_STAGE_ENT_OFF + 2 * i);
+    CHECK((w & 0x07FFu) == (uint16_t)idx);
+    CHECK((w >> 11) == (uint16_t)run);
 }
 
 /* Build a fake browser node + state pair. level 2, current directory
@@ -413,7 +462,7 @@ static const char playlist1[] =
 static void init_tree3(void)
 {
     int i;
-    for (i = 0; i < 13; i++) {
+    for (i = 0; i < TREE3_DIRS; i++) {
         char *nm = sub3_names[i];
         memset(nm, ' ', 11);
         nm[11] = '\0';
@@ -439,7 +488,7 @@ static void init_tree3(void)
     dirs3[0].n = 6;
     dirs3[1].clus = 0x1001;
     dirs3[1].ents = music3_ents;
-    dirs3[1].n = 13;
+    dirs3[1].n = TREE3_DIRS;
 }
 
 int main(void)
@@ -477,7 +526,7 @@ int main(void)
     CHECK(memcmp(g_reg_name, "TEST    M3U", 11) == 0);
     CHECK(g_reg_attr == 0x20u);
     CHECK(g_acquire_calls >= 1);
-    /* header, tail_build.md field by field */
+    /* header, packed layout field by field */
     CHECK(stage_buf[0] == 1);                    /* flag, set last */
     CHECK(stage_buf[1] == 7);                    /* entry count */
     CHECK(rd16(stage_buf + 2) == 0xFFFF);        /* position: none */
@@ -486,11 +535,12 @@ int main(void)
     for (i = 7; i < 16; i++) {
         CHECK(stage_buf[i] == 0);
     }
+    check_ctx();
     /* runs in first-use order: MUSIC, LIVE, ROOT, PODCAST */
     check_run(0, 0x1001, 2, 1);
     check_run(1, 0x1003, 2, 0);
     check_run(2, 0x0002, 2, 2);
-    check_run(3, 0x1002, 1, 0);
+    check_run(3, 0x1002, 2, 0);
     /* entries: playlist order, duplicates kept */
     check_entry(0, 0, 0);   /* SONG1.MP3 in MUSIC */
     check_entry(1, 1, 1);   /* LIVE/SET2.MP3 */
@@ -518,16 +568,16 @@ int main(void)
                failures == before ? "ok" : "FAILURES");
     }
 
-    /* ---- scenario 3: 13 runs needed, cap is 12 ------------------- */
+    /* ---- scenario 3: 33 runs needed, cap is 32 ------------------- */
+    init_tree3();
     {
         int before = failures;
-        static char big_playlist[1024];
+        static char big_playlist[2048];
         int o = 0;
-        init_tree3();
         g_dirs = dirs3;
-        g_ndirs = 15;
+        g_ndirs = TREE3_DIRS + 2;
         g_stream_clus = 0xFFFFFFFFu;
-        for (i = 0; i < 13; i++) {
+        for (i = 0; i < TREE3_DIRS; i++) {
             o += snprintf(big_playlist + o, sizeof big_playlist - (size_t)o,
                           "D%02d/A.MP3\n", i);
         }
@@ -538,6 +588,35 @@ int main(void)
         CHECK(rc == 0);
         CHECK(stage_buf[0] == 0);       /* disarmed, never armed */
         printf("scenario 3 (run cap decline): %s\n",
+               failures == before ? "ok" : "FAILURES");
+    }
+
+    /* ---- scenario 5: exactly 32 runs arm --------------------------- */
+    {
+        int before = failures;
+        static char cap_playlist[2048];
+        int o = 0;
+        g_dirs = dirs3;
+        g_ndirs = TREE3_DIRS + 2;
+        g_stream_clus = 0xFFFFFFFFu;
+        for (i = 0; i < (int)M3U_STAGE_MAX_RUNS; i++) {
+            o += snprintf(cap_playlist + o, sizeof cap_playlist - (size_t)o,
+                          "D%02d/A.MP3\n", i);
+        }
+        g_playlist = cap_playlist;
+        memset(stage_buf, 0xEE, sizeof stage_buf);
+        make_node_state(node, state, 0x1001, "CAP     M3U");
+        rc = m3u_bridge_node_action(node, state, NULL);
+        CHECK(rc == 1);
+        CHECK(stage_buf[0] == 1);
+        CHECK(stage_buf[1] == M3U_STAGE_MAX_RUNS);
+        CHECK(stage_buf[6] == M3U_STAGE_MAX_RUNS);
+        check_ctx();
+        for (i = 0; i < (int)M3U_STAGE_MAX_RUNS; i++) {
+            check_run(i, 0x2000u + (uint32_t)i, 1, 0);
+            check_entry(i, 0, i);
+        }
+        printf("scenario 5 (32 runs arm): %s\n",
                failures == before ? "ok" : "FAILURES");
     }
 
@@ -554,6 +633,77 @@ int main(void)
         CHECK(rc == 0);
         CHECK(stage_buf[0] == 0);
         printf("scenario 4 (no resolvable entries): %s\n",
+               failures == before ? "ok" : "FAILURES");
+    }
+
+    /* ---- scenario 6: entry cap, 150 arm and 151 decline ----------- */
+    {
+        int before = failures;
+        static char rep_playlist[4096];
+        int n;
+        for (n = (int)M3U_STAGE_MAX_ENT; n <= (int)M3U_STAGE_MAX_ENT + 1;
+             n++) {
+            int o = 0;
+            g_dirs = dirs1;
+            g_ndirs = 4;
+            g_stream_clus = 0xFFFFFFFFu;
+            for (i = 0; i < n; i++) {
+                o += snprintf(rep_playlist + o,
+                              sizeof rep_playlist - (size_t)o,
+                              (i & 1) ? "TRACK3.FLA\n" : "LIVE/SET2.MP3\n");
+            }
+            g_playlist = rep_playlist;
+            memset(stage_buf, 0xEE, sizeof stage_buf);
+            make_node_state(node, state, 0x1001, "LONG    M3U");
+            rc = m3u_bridge_node_action(node, state, NULL);
+            if (n == (int)M3U_STAGE_MAX_ENT) {
+                CHECK(rc == 1);
+                CHECK(stage_buf[0] == 1);
+                CHECK(stage_buf[1] == M3U_STAGE_MAX_ENT);
+                CHECK(stage_buf[6] == 2);
+                check_run(0, 0x1003, 2, 0);
+                check_run(1, 0x1001, 2, 1);
+                check_entry(0, 1, 0);
+                check_entry(1, 1, 1);
+                check_entry(n - 2, 1, 0);
+                check_entry(n - 1, 1, 1);
+            } else {
+                CHECK(rc == 0);
+                CHECK(stage_buf[0] == 0);
+            }
+        }
+        printf("scenario 6 (entry cap 150 arm, 151 decline): %s\n",
+               failures == before ? "ok" : "FAILURES");
+    }
+
+    /* ---- scenario 7: .m3u8 through its 8.3 alias ------------------ */
+    {
+        int before = failures;
+        g_dirs = dirs1;
+        g_ndirs = 4;
+        g_stream_clus = 0xFFFFFFFFu;
+        g_playlist = "\xEF\xBB\xBF#EXTM3U\r\n"
+                     "#EXTINF:200,Artist - Title\r\n"
+                     "D:\\MUSIC\\LIVE\\SET1.MP3\r\n"
+                     "..\\Long File Name.flac\r\n"
+                     "SONG1.MP3\r\n"
+                     "/PODCAST/ep 2 \xF0\x9F\x8E\xA7 CAF\xC3\x89.MP3\r\n";
+        memset(stage_buf, 0xEE, sizeof stage_buf);
+        make_node_state(node, state, 0x1001, "EVENIN~1M3U");
+        rc = m3u_bridge_node_action(node, state, NULL);
+        CHECK(rc == 1);
+        CHECK(stage_buf[0] == 1);
+        CHECK(stage_buf[1] == 4);
+        CHECK(stage_buf[6] == 4);
+        check_run(0, 0x1003, 2, 0);     /* LIVE */
+        check_run(1, 0x0002, 2, 2);     /* root */
+        check_run(2, 0x1001, 2, 1);     /* MUSIC */
+        check_entry(0, 0, 0);           /* D:\MUSIC\LIVE\SET1.MP3 */
+        check_entry(1, 1, 1);           /* ..\Long File Name.flac */
+        check_entry(2, 0, 2);           /* SONG1.MP3 */
+        check_run(3, 0x1002, 2, 0);     /* PODCAST */
+        check_entry(3, 1, 3);           /* emoji + case-folded accent */
+        printf("scenario 7 (.m3u8 via 8.3 alias, BOM, CRLF): %s\n",
                failures == before ? "ok" : "FAILURES");
     }
 
