@@ -156,14 +156,21 @@ def main():
         for rid in range(266):
             rec = stock_record(stock, lang, rid)
             rig.call(0x030630C2, {UC_ARM_REG_R0: rid, UC_ARM_REG_R1: BUF, UC_ARM_REG_R2: 100})
-            if bytes(rig.uc.mem_read(BUF, 200)) != rec[58:258]:
+            expected = bytearray(rec[58:258])
+            # Standard CE intentionally renames these categories. Standalone
+            # profile builds retain stock text; validate the exact edited bytes.
+            if os.environ.get('PROFILES_FULL_IMAGE') and lang == 2 and rid in (82, 83):
+                label = ('Artists' if rid == 82 else 'Albums') + '\0'
+                encoded = label.encode('utf-16le')
+                expected[:len(encoded)] = encoded
+            if bytes(rig.uc.mem_read(BUF, 200)) != expected:
                 bad.append(('str', lang, rid))
             if rid in (164, 243):
                 continue                  # edited below
             rig.call(0x03063206, {UC_ARM_REG_R0: rid, UC_ARM_REG_R1: BUF})
             if bytes(rig.uc.mem_read(BUF, 58)) != rec[:58]:
                 bad.append(('menu', lang, rid))
-    check(not bad, f'stock text and headers unchanged for 266 ids x 21 languages ({bad[:3]})')
+    check(not bad, f'stock headers and expected text for 266 ids x 21 languages ({bad[:3]})')
 
     bad = []
     for lang, (_, labels) in enumerate(bp.LABELS):
