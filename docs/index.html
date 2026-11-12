@@ -99,7 +99,7 @@
 </section>
 <section class="card preview-card" id="simulator">
 <h2>2. Compare screens <small>240 × 320</small></h2>
-<p class="note">Real firmware pixels: every icon and background is decoded from the stock image and the CE standard image, and the status icon and transport row are drawn exactly as each image's player code draws them (recorded under emulation and checked word for word). The cover, title, artist and times are drawn by this page at approximate positions in an approximate font; the progress bar comes from the image's own resources.</p>
+<p class="note">Real firmware pixels: every icon and background is decoded from the stock image and the CE standard image, and the status icon and transport row are drawn exactly as each image's player code draws them (recorded under emulation and checked word for word). On the CE side the cover's contrast and rounded corners, the format badge, the no-cover tile and the time line follow the CE artwork and time routines at their coordinates; text is set in Barlow SemiBold, the face CE's font was redrawn from, not the image's own glyphs. The stock cover and times, and both titles and artists, are drawn at approximate positions. The progress bar comes from the image's own resources on stock; on CE its colours follow the CE routine that inverts the background.</p>
 <div class="sim-controls">
 <div class="control"><label for="sim-theme">Theme</label><select id="sim-theme"><option value="dark">Dark</option><option value="light">Light</option></select></div>
 <div class="control"><label for="sim-page">Transport row</label><select id="sim-page"><option value="0">Playing controls</option><option value="1">Second page</option><option value="2">Selection</option></select></div>

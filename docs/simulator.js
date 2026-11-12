@@ -7,17 +7,18 @@
 // in section 1, its section is taken from there instead.
 import {SECTIONS} from "./sim-data.mjs";
 import {
-  WIDTH, HEIGHT, ART, parseResourceSection, resourceSectionOf, fill, draw, blit,
-  paintPlayer, paintProgress, groundFor, theaterGround, rgbaToWords, toRGBA, sampleCover, rgb888
+  WIDTH, HEIGHT, ART, BADGE, parseResourceSection, resourceSectionOf, fill, draw, blit,
+  blitCover, paintPlaceholder, paintBadge, paintPlayer, paintProgress, groundFor, theaterGround,
+  rgbaToWords, toRGBA, sampleCover, rgb888
 } from "./sim-core.mjs";
 import {sha256} from "./theme-core.mjs";
 import {repoFromLocation, rawUrl} from "./repo.mjs";
 
 const $ = id => document.getElementById(id);
 const repo = repoFromLocation(window.location);
-const tracks = [["Ember Skyline", "Demonstration Ensemble", 228],
-                ["Low Tide", "Demonstration Ensemble", 251],
-                ["Prism", "Demonstration Ensemble", 199]];
+const tracks = [["Ember Skyline", "Demonstration Ensemble", 228, "FLAC"],
+                ["Low Tide", "Demonstration Ensemble", 251, "MP3"],
+                ["Prism", "Demonstration Ensemble", 199, "OPUS"]];
 const SAMPLE = sampleCover();
 
 const state = {
@@ -95,26 +96,50 @@ function frame(side) {
   } else {
     const ground = groundOf(side);
     fill(fb, 0, 0, WIDTH - 1, HEIGHT - 1, ground);
-    if (!state.noArt) blit(fb, state.art, ART.size, ART.size, ART.x, ART.y);
+    if (side === "ce") {
+      // CE: rounded, contrast-boosted cover or the outline-and-note tile,
+      // then the format badge (palette cell 0, taken as the theme ground)
+      if (state.noArt) paintPlaceholder(fb, state.light ? 0x0000 : 0xFFFF);
+      else blitCover(fb, state.art, ART.size, ART.x, ART.y, ground);
+      paintBadge(fb, groundFor(state.light));
+    } else if (!state.noArt) blit(fb, state.art, ART.size, ART.size, ART.x, ART.y);
     paintPlayer(fb, res, side, {page: state.page, playing: state.playing,
                                 light: state.light, ground});
     const length = tracks[state.track][2];
-    paintProgress(fb, res, {fraction: state.position / length, light: state.light, ground});
+    paintProgress(fb, res, {fraction: state.position / length, light: state.light, ground,
+                            inverse: side === "ce"});
   }
   return fb;
 }
 
-// Text and times are not resources; draw them at the README renderer's
-// approximate positions in the theme's text colour. (The progress bar is
-// drawn from the image's own resources, in frame().)
-function drawText(ctx) {
-  const [title, artist, length] = tracks[state.track];
+// Text and times are not resources. Stock: drawn at the README renderer's
+// approximate positions. CE: the time follows typography.S (MM:SS on the
+// 14-pixel line at y = 240, elapsed from x = 7, total from x = 191) and
+// the badge label sits at the badge's text origin, both in Barlow
+// SemiBold, the face CE's system font was redrawn from (the page cannot
+// reach the image's 1-bit glyphs). Title and artist stay approximate.
+const mmss = s => String(Math.min(99, Math.floor(s / 60))).padStart(2, "0") + ":" +
+  String(s % 60).padStart(2, "0");
+
+function drawText(ctx, side) {
+  const [title, artist, length, codec] = tracks[state.track];
+  const ce = side === "ce";
   const ink = state.light ? "#141414" : "#f0f0f0";
   ctx.fillStyle = ink; ctx.strokeStyle = ink; ctx.textBaseline = "middle";
   ctx.font = "bold 16px Arial, sans-serif"; ctx.textAlign = "center";
-  ctx.fillText(title, 120, 206, 224);
+  ctx.fillText(title, 120, ce ? 200 : 206, 224);
   ctx.font = "13px Arial, sans-serif";
-  ctx.fillText(artist, 120, 231, 224);
+  ctx.fillText(artist, 120, ce ? 223 : 231, 224);
+  if (ce) {
+    ctx.font = "600 13px Barlow, Arial, sans-serif"; ctx.textAlign = "left";
+    ctx.textBaseline = "top";
+    ctx.fillText(mmss(state.position), 7, 240);
+    ctx.fillText(mmss(length), 191, 240, 48);
+    ctx.font = "600 12px Barlow, Arial, sans-serif";
+    ctx.fillStyle = state.light ? "#000000" : "#ffffff";
+    ctx.fillText(codec, BADGE.x + 4, BADGE.y + 3, BADGE.width - 8);
+    return;
+  }
   ctx.font = "11px Arial, sans-serif";
   ctx.textAlign = "left"; ctx.fillText(clock(state.position), 6, 257);
   ctx.textAlign = "right"; ctx.fillText("-" + clock(length - state.position), 234, 257);
@@ -132,7 +157,7 @@ function render() {
     const ctx = canvas.getContext("2d");
     if (!state.res[side]) continue;
     ctx.putImageData(new ImageData(toRGBA(frame(side)), WIDTH, HEIGHT), 0, 0);
-    if (state.tab === "playing") drawText(ctx);
+    if (state.tab === "playing") drawText(ctx, side);
   }
   const theater = $("theater-status");
   if (state.tab === "playing" && state.res.ce) {

@@ -22,7 +22,9 @@ PARTS=(('row',0,0x0306D13C,0x0306D23C,170),
        ('placeholder',27,0x0307EBA8,0x0307ECA4,174),
        ('badge',0,0x03056160,0x0305622C,175),
        ('formats',27,0x0307EEB0,0x0307EF4E,177),
-       ('badge_fill',0,0x03053908,0x03053966,178))
+       ('badge_fill',0,0x03053908,0x03053966,178),
+       ('bar',0,0x0305DE20,0x0305DE86,179),
+       ('bar_entry',0,0x03053EF4,0x03053F42,183))
 
 def main():
     raw=(REPO/'DP3_V137.img').read_bytes()
@@ -47,6 +49,11 @@ def main():
             code=dest.read_bytes();assert addr+len(code)<=end,(part,len(code),end-addr)
             patch(f'{number:04}-artwork-{part}',mod,addr,code)
             print(part,len(code),'bytes')
+        # bar_fill must be the pocket's entry point; it is the hook's target
+        syms=subprocess.run(['arm-none-eabi-nm',str(b/'art.elf')],capture_output=True,text=True,check=True).stdout
+        bar_fill=int(next(l.split()[0] for l in syms.splitlines() if l.endswith(' bar_fill')),16)&~1
+    # The progress segment's ground fill (module 27) now enters bar_fill.
+    patch('0182-artwork-bar-hook',27,0x0307F6AE,branch(0x0307F6AE,bar_fill,link=True))
     patch('0176-artwork-centered-box',27,0x0307E8D2,bytes.fromhex('3020'))
 
     # Remove the record from the player ground in both themes. The placeholder

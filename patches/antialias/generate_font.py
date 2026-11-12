@@ -12,13 +12,13 @@ Record layout (font_b, stock file offset 0x371726, 33 bytes per code
 point): 16 rows of 16 bits, MSB first, then a tail byte. The measurer at
 0x030627BE gives the advance:
 
-  * ASCII letters: from the ink, by 0x03063E06 (leftmost + rightmost
-    inked column + 2 over the top 10 rows). Glyphs are placed with
-    their ink starting at column 0, so the advance is width + 1. A
-    letter wider below row 9 than above it (A, z) is shifted right
-    until that measure clears its ink.
-  * Everything else: tail - 0x80 when the tail is above 0x80. Each
-    redrawn glyph gets an explicit tail: width + 1; the space 4;
+  * Stock ASCII letters: from the ink, by 0x03063E06 (leftmost +
+    rightmost inked column + 2 over the top 10 rows), which misses ink
+    below row 9 (L, A, z). Patches 0190 and 0191 skip that measure in
+    the Standard image, so letters use the tail like everything else.
+  * Tail - 0x80 when the tail is above 0x80. Each redrawn glyph,
+    letters included, has its ink from column 0 and an explicit tail:
+    width + 1; the space 4;
     . , : ; ! ? one extra column on each side; digits one tabular
     width so counters do not shift.
 
@@ -160,25 +160,8 @@ def build():
             adv = w + 1 + 2 * PUNCT_PAD
         else:
             adv = w + 1
-        if ascii_letter(cp):
-            # The firmware measures letters over rows 0 to 9 only. A
-            # letter that is wider below row 9 (A, z) would touch the
-            # next one, so shift it right until the measured advance
-            # leaves a clear column after the ink.
-            if cp == 0x4C:
-                # L: nothing of the bar is in rows 0 to 9, so the measure
-                # sees only the stem. Stock lives with a 5-column overlap
-                # into the next letter. Here the bar is trimmed to 6
-                # columns and the glyph shifted until it clears.
-                ink = {(x, y) for x, y in ink if x < 6}
-            for k in range(8):
-                shifted = {(x + k, y) for x, y in ink}
-                top = [x for x, y in shifted if y < MEASURE]
-                if top and min(top) + max(top) + 2 >= max(x for x, _ in shifted) + 2:
-                    ink = shifted
-                    break
         stock_rec = raw[FONT_B + cp * STRIDE:FONT_B + (cp + 1) * STRIDE]
-        tail = stock_rec[TAIL] if ascii_letter(cp) else 0x80 + adv
+        tail = 0x80 + adv
         glyphs[cp] = record(ink, tail) + stock_rec[TAIL + 1:]   # bytes after the tail stay stock
     space = bytearray(raw[FONT_B + 0x20 * STRIDE:FONT_B + 0x21 * STRIDE])
     space[TAIL] = 0x80 + SPACE
@@ -200,10 +183,12 @@ def runs(raw, glyphs):
     return out
 
 
-def advance(rec, cp):
-    """The firmware's advance for a large-font record (0x030627BE)."""
+def advance(rec, cp, patched=True):
+    """The firmware's advance for a large-font record (0x030627BE). With
+    patches 0190 and 0191 (patched=True, the Standard image) letters take
+    the tail like every other glyph; stock measures them from the ink."""
     tail = rec[TAIL]
-    if ascii_letter(cp):
+    if ascii_letter(cp) and not patched:
         cols = [x for y in range(MEASURE) for x in range(16)
                 if int.from_bytes(rec[2 * y:2 * y + 2], 'big') & (0x8000 >> x)]
         return (min(cols) + max(cols) + 2) if cols else 0
@@ -221,7 +206,7 @@ def sheet(raw, glyphs, path):
              'Ölgemälde, Dvořák, Łódź  gjpqy', 'Settings  Playback order  3:49']
     z = 3
 
-    def render(get):
+    def render(get, patched):
         im = Image.new('RGB', (240, 22 * len(lines) + 6), (0, 0, 0))
         for i, s in enumerate(lines):
             x = 6
@@ -233,11 +218,11 @@ def sheet(raw, glyphs, path):
                     for gx in range(16):
                         if row & (0x8000 >> gx) and x + gx < 240:
                             im.putpixel((x + gx, 4 + 22 * i + y), (255, 255, 255))
-                x += advance(rec, cp)
+                x += advance(rec, cp, patched)
         return im.resize((240 * z, im.height * z), Image.NEAREST)
 
-    stock = render(lambda cp: raw[FONT_B + cp * STRIDE:FONT_B + (cp + 1) * STRIDE])
-    new = render(lambda cp: glyphs.get(cp, raw[FONT_B + cp * STRIDE:FONT_B + (cp + 1) * STRIDE]))
+    stock = render(lambda cp: raw[FONT_B + cp * STRIDE:FONT_B + (cp + 1) * STRIDE], False)
+    new = render(lambda cp: glyphs.get(cp, raw[FONT_B + cp * STRIDE:FONT_B + (cp + 1) * STRIDE]), True)
     out = Image.new('RGB', (stock.width, stock.height * 2 + 8), (128, 128, 128))
     out.paste(stock, (0, 0))
     out.paste(new, (0, stock.height + 8))

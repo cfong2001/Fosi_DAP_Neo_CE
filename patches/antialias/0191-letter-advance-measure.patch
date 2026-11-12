@@ -1,0 +1,15 @@
+# Letters measure by their record's width byte.
+name: 0191-letter-advance-measure
+kind: module
+module: 0
+region: code
+address: 0x306282e
+gate: build refuses unless the stock bytes at the target equal
+  `expect`. Pairs with 0190.
+expect: 6846
+replace: 02e0
+rationale: The string measurer's per-character width (0x030627BE)
+  repeats the drawer's rule. This replaces `mov r0, sp` with a branch
+  over the ink measure and its `uxth r4, r0`, so measured widths
+  (centering, wrapping, marquee thresholds) match what 0190 draws.
+  0x03063E06 has no other callers.
