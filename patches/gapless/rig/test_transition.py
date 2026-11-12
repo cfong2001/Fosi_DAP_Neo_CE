@@ -70,13 +70,40 @@ def patch_exec(raw, module, addr, data):
     return bytes(out)
 
 
-def run(raw, how, ext=b'FLA'):
-    s = Scenario(raw)
+MONITOR = 0x03064F7E         # playback monitor (decoder core channel 14)
+ZERO_SITE = 0x03065086       # monitor zeroes a decoded buffer (memset)
+RESTORE_SITE = 0x0306506E    # monitor restores the saved volume
+FRAMES = 0x0304AD84          # its start-of-track buffer counter
+
+
+def monitor_calls(s, n=4):
+    """Run the real playback monitor n times after the transition, as
+    the decoder core's buffer callbacks would, and report per call
+    whether it zeroed the buffer and whether it restored the volume."""
+    from unicorn import UC_HOOK_CODE
+    m, ev = s.m, []
+    m.u.hook_add(UC_HOOK_CODE, lambda *a: ev.append('zero'), begin=ZERO_SITE, end=ZERO_SITE)
+    m.u.hook_add(UC_HOOK_CODE, lambda *a: ev.append('restore'), begin=RESTORE_SITE, end=RESTORE_SITE)
+    out = []
+    for _ in range(n):
+        ev.clear()
+        m.call(MONITOR, limit=5_000_000)
+        out.append(tuple(ev))
+    return out
+
+
+def run(raw, how, ext=b'FLA', first=b'FLA'):
+    s = Scenario(raw, ext=first)
     s.start_first()
     s.ext = ext
     getattr(s, how)()
     m = s.m
+    counter = m.r32(FRAMES)
+    calls = monitor_calls(s)
     return {
+        'counter': counter,
+        'monitor': calls,
+        'zeroed': sum('zero' in c for c in calls),
         'first_audio': s.first_audio_ms(),
         'halted': any(k == 'reset' and on for k, on, _ in m.core1_log),
         'decoder_loads': [i for i, *_ in m.loads if i in DECODERS],
@@ -129,6 +156,14 @@ def main():
     v1 = patch_exec(halting, 0, GATE_CORE1_CHECK, b'\x00\xbf')
     m2 = run(v1, 'run'); row('mutant: v1 logic', m2)
 
+    c_mp3 = run(ce, 'run', b'MP3', b'MP3'); row('natural advance MP3->MP3', c_mp3)
+    c_ape = run(ce, 'run', b'APE', b'APE'); row('natural advance APE->APE', c_ape)
+    print('start-of-track silence (decoded buffers zeroed by the monitor):')
+    for label, r in (('stock natural FLAC->FLAC', s_nat), ('CE natural FLAC->FLAC', c_nat),
+                     ('CE natural MP3->MP3', c_mp3), ('CE natural APE->APE', c_ape),
+                     ('CE user NEXT', c_skip), ('CE codec change', c_chg)):
+        print(f'  {label:<26} {r["zeroed"]} buffers zeroed, monitor calls {r["monitor"]}')
+
     print('checks')
     for name, r in (('stock natural', s_nat), ('stock skip', s_skip),
                     ('stock codec change', s_chg)):
@@ -145,6 +180,13 @@ def main():
     check('CE natural: gap shorter than stock',
           c_nat['first_audio'] < s_nat['first_audio'],
           f"{c_nat['first_audio']:.3f} vs {s_nat['first_audio']:.3f} ms")
+    check('stock natural: three decoded buffers zeroed, volume restored on the fourth',
+          s_nat['zeroed'] == 3 and s_nat['monitor'][3] == ('restore',))
+    for name, r in (('FLAC', c_nat), ('MP3', c_mp3), ('APE', c_ape)):
+        check(f'CE natural {name}: warm start, no buffer zeroed, volume restored on the first',
+              not r['halted'] and r['zeroed'] == 0 and r['monitor'][0] == ('restore',))
+    check('CE skip and codec change keep the stock start-up silence (cold decoder)',
+          c_skip['zeroed'] == 3 and c_chg['zeroed'] == 3)
     check('CE skip: halts and fully reloads, no timeout',
           c_skip['halted'] and c_skip['decoder_loads'] and not c_skip['timeouts'])
     check('CE codec change: loads the new decoder, no timeout',

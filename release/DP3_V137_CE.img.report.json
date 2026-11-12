@@ -3,7 +3,7 @@
  "input_file": "DP3_V137.img",
  "output_file": "DP3_V137_CE.img",
  "input_sha256": "fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cdfade5e9c6ea3bd71ac6deef",
- "output_sha256": "a7c7f5c2f04279359fd577f602abece687421776f46860ed6d63a7b7f42d05d6",
+ "output_sha256": "9c68d11152b997c24d301837d6f17f118d2075b46523b23f7c1bf2a5c308e99a",
  "byte_length": 13638660,
  "header_date": "20261023",
  "patches_applied": [
@@ -258,7 +258,7 @@
    "cpu_address": "0x3051664",
    "file_offset": "0x2ad10",
    "old_hex": "7047704770477047704770477047704770477047704770477047704770477047",
-   "new_hex": "5ff868211268aff1bc0132b10b6843405b0602e0803008607047086070b50546"
+   "new_hex": "5ff868211268aff1bc0132b10b6843405b0602e0fff744bf00bf086070b50546"
   },
   {
    "patch": "gapless-3-flag-literal",
@@ -303,6 +303,17 @@
    "file_offset": "0x2ad22",
    "old_hex": "02e0",
    "new_hex": "02d1"
+  },
+  {
+   "patch": "gapless-warm-start",
+   "file": "0034-gapless-warm-start.patch",
+   "kind": "module",
+   "module": 0,
+   "region": "code",
+   "cpu_address": "0x3051504",
+   "file_offset": "0x2abb0",
+   "old_hex": "70477047704770477047704770477047",
+   "new_hex": "80300860032001490860704784ad0403"
   },
   {
    "patch": "sortkeys-comparator-hook",
@@ -8415,7 +8426,7 @@
   }
  ],
  "diff_vs_stock": {
-  "bytes_changed": 4747821,
+  "bytes_changed": 4747837,
   "range_count": 428754,
   "note": "range list omitted; rebuild with patches/full/build/build_full.py for it"
  },

@@ -198,7 +198,7 @@ sheets/stock_vs_browser_3x_light.png (stock left, new right, 3x).
   helper emits exactly its 144 non-key pixels. Pass.
 - Validation build (test_browser_build.py): the default build
   still hashes to the pinned
-  4fa813d99d6b84d871635be490f49f3a8d4f17bcb5f7ae2540edfb62d334ad4e.
+  0dfd10e23749f9b6c65499266f1a7a2ec038160b089ba0fc2ca68dcf2b24c986.
   A build with the v4 manifest (default patches plus the eight
   transport repoints) and a merged theme config (v4 runs plus
   the 300 browser runs) produces image SHA-256

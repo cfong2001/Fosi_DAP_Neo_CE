@@ -1,13 +1,27 @@
-# Gapless fast path (v2)
+# Gapless fast path (v3)
 
 Shipped armed in both images. When a track ends and the next file uses the
 same decoder, the decoder core stays loaded and running and takes the next
 file's open directly. There is no image copy, no core reset and no boot
 handshake. The DAC's I2C writes during the change are also cheaper.
 
-This shortens the track change; it does not make it sample-exact. The
-decoder still opens the next file after the last buffer of the old one has
-played, so a short silence remains.
+v3 adds the **warm start**. After every track start, stock zeroes the first
+three decoded buffers and restores the volume on the fourth. That is
+Rockchip's `AudioErrorFrameNum` logic (SDK `Service.c`), there to hide a
+cold decoder's start-up output, and it is by far the largest part of the
+gap. It costs three decoded buffers of silence, about 78 ms for MP3 and up
+to about 279 ms for FLAC with 4,096-sample blocks. When the decoder is
+retained it is warm, so v3 skips that silence: its first buffer plays.
+
+This is not sample-exact. The decoder still opens the next file after the
+last buffer of the old one has played, so a few milliseconds of silence
+remain.
+
+Rockchip's own design supports keeping the decoder: the SDK's decoder-core
+program (`BBSystem/Main2.c`) runs a full file-open, decode-open,
+decode-close, file-close cycle for each file without restarting the core.
+The system side restarts the core (`StartBBSystem`) only to load a
+decoder program, which a retained decoder no longer needs.
 
 ## Measured in the transition rig
 
@@ -17,11 +31,20 @@ the playback task taking the end-of-track event (`0xEC`) to the I2S DMA
 restart. The model assumes a 0.05 ms decoder reply, 8 MB/s module loads,
 0.11 ms per DAC I2C write and a 120 MHz system clock.
 
-| Transition | Stock | CE v1 (first armed release) | CE v2 |
+| Transition | Stock | CE v1 (first armed release) | CE v3 |
 |---|---|---|---|
-| End of track, FLAC to FLAC | 20.5 ms | about 27,500 ms (stall) | 4.7 ms |
-| User NEXT, FLAC to FLAC | 23.2 ms | about 27,500 ms (stall) | 14.7 ms |
-| End of track, FLAC to APE | 20.3 ms | 20.3 ms | 13.8 ms |
+| End of track, FLAC to FLAC | 20.5 ms + 3 silent buffers | about 27,500 ms (stall) | 4.7 ms, no silent buffers |
+| End of track, MP3 to MP3 | 27.2 ms + 3 silent buffers | about 27,500 ms (stall) | 4.7 ms, no silent buffers |
+| End of track, APE to APE | 20.3 ms + 3 silent buffers | about 27,500 ms (stall) | 4.7 ms, no silent buffers |
+| User NEXT, FLAC to FLAC | 23.2 ms + 3 silent buffers | about 27,500 ms (stall) | 14.7 ms + 3 silent buffers |
+| End of track, FLAC to APE | 20.3 ms + 3 silent buffers | 20.3 ms | 13.8 ms + 3 silent buffers |
+
+The silent buffers are measured by running the real playback monitor
+(`0x03064F7E`) after each transition: it zeroes the buffer on each of its
+first three calls on stock and on any cold start, and zeroes none after a
+retained, warm start. Ogg, AAC, WAV and DSD take the same fast path in the
+rig. A skip or a codec change reloads the decoder, so it keeps the stock
+start-up silence.
 
 Where stock spends its 20.5 ms: a 33.7 KB decoder reload, `delay_ms(5)`
 and the core-1 boot inside the reset-and-start routine, and seven DAC
@@ -56,6 +79,7 @@ could not see it: it runs only the decoder core.
 | 0023 | Literal `0x03004138` for the gate |
 | 0024 | Decoder shutdown rewritten in place: on a natural advance (`r5 == 0`), close the decoder's file but do not halt core 1 |
 | 0026 | Arms the gate's module compare |
+| 0034 | Warm start: the gate's retained path also sets the monitor's start-of-track counter (`0x0304AD84`) to 3, so no buffer is zeroed and the volume is restored on the first buffer |
 
 User skips and stops still halt core 1, and the gate then falls back to the
 full stock reload. So does a codec change, or any other program that halts

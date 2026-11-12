@@ -244,7 +244,7 @@ ink and accent. The test in the composites loop is now id >= 321;
 the light composites carry black ink and the light accent, and
 the keyed transport gates pass unchanged, since no pixel position
 moved.) The default build is unchanged
-(SHA-256 `4fa813d99d6b84d871635be490f49f3a8d4f17bcb5f7ae2540edfb62d334ad4e`);
+(SHA-256 `0dfd10e23749f9b6c65499266f1a7a2ec038160b089ba0fc2ca68dcf2b24c986`);
 `patches/framework/verify.py` passes 12/12.
 
 ## Emulation gates and results

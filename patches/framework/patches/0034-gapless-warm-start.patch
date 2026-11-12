@@ -1,0 +1,27 @@
+# Gapless fast path: warm start (no start-of-track muting for a retained decoder).
+name: gapless-warm-start
+kind: module
+module: 0
+region: code
+address: 0x03051504
+gate: build refuses unless the 16 stock bytes at the target equal `expect`;
+  the finished image must also pass firmware_patch.validate()
+rationale: After every track start the playback monitor (0x03064F7E, the
+  decoder core's channel 14 callback) zeroes the first three decoded
+  buffers and restores the volume on the fourth (counter at 0x0304AD84,
+  reset to 0 by module 34's start routine at 0x0308C2A2). That is
+  Rockchip's AudioErrorFrameNum logic (SDK Service.c), which hides a
+  cold decoder's start-up output; on a natural advance it is 3 buffers of
+  silence (about 80 ms for MP3, up to about 280 ms for 4,096-sample FLAC
+  frames), by far the largest part of the gap. When the gate (0022)
+  retains the decoder, the decoder is warm and its first output is
+  real audio, so the gate's retained path now branches here: it stores
+  module | 0x80 to the state word as before, then sets the counter to 3.
+  The monitor's next call counts to 4, restores the saved volume (the
+  value already set) and zeroes nothing. Cold starts, skips and codec
+  changes take the gate's miss path and keep stock behaviour. Occupies
+  four verified-dead `bx lr` stubs of the module 0 stub farm (the span
+  the retired delay cave freed; patches/framework/space_budget.md).
+  Bytes: patches/gapless/tools/assemble_v2.py.
+expect: 70477047704770477047704770477047
+replace: 80300860032001490860704784ad0403

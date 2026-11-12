@@ -25,6 +25,7 @@
 0024-gapless-keep-decoder.patch
 0025-gapless-gate-tail.patch
 0026-gapless-arm.patch
+0034-gapless-warm-start.patch
 0027-sortkeys-comparator-hook.patch
 0028-sortkeys-builder-a-hook.patch
 0029-sortkeys-builder-bmain-hook.patch

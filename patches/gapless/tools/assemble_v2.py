@@ -23,6 +23,8 @@ STATE = 0x030515B0          # retained-module word (patch 0020)
 FLAG_LIT = 0x03051500       # literal: address of the core-1 running flag
 RUNNING = 0x03004138        # cleared by halt 0x0306CB0C, set by core-1 boot
 GATE = 0x03051664           # gate cave, 32 B (0022) + 4 B tail (0025)
+WARM = 0x03051504           # warm-start extension, 16 B of verified-dead stubs (0034)
+FRAMES = 0x0304AD84         # playback monitor's start-of-track buffer counter
 BODY = 0x0306CB30           # stock reset-and-start after its prologue
 SHUT = 0x030893C4           # module 33 decoder shutdown, 82 B
 CLOSE = 0x0308936E          # 0x74 close on the HifiFile channel, waits
@@ -73,9 +75,8 @@ def gate(armed):
         'eors r3, r0',
         'lsls r3, r3, #25',                 # Z = same decoder module
         f'bne #{miss}' if armed else f'b #{miss}',
-        'adds r0, #0x80',                   # retained: module | 0x80
-        'str r0, [r1]',
-        'bx lr',
+        f'b.w #{WARM}',                     # retained: warm start (0034)
+        'nop',
         'str r0, [r1]',                     # miss: remember the module
         'push {r4, r5, r6, lr}',            # stock prologue, then body
         'mov r5, r0',
@@ -83,6 +84,28 @@ def gate(armed):
     ], GATE)
     assert len(code) == 36, len(code)
     return code
+
+
+def warm():
+    """Retained path of the gate. Marks the module retained, then sets
+    the playback monitor's start-of-track counter to 3. Stock (as in
+    Rockchip's SDK, Service.c AudioErrorFrameNum) zeroes the first three
+    decoded buffers after every start and restores the volume on the
+    fourth, to hide a cold decoder's start-up output. A retained decoder
+    is warm, so the first buffer plays: the monitor's next call counts to
+    4, restores the saved volume (unchanged) and zeroes nothing. The
+    counter itself was reset to 0 by module 34's start routine
+    (0x0308C2A2) before the gate runs."""
+    code = asm([
+        'adds r0, #0x80',                   # retained: module | 0x80
+        'str r0, [r1]',
+        'movs r0, #3',
+        'ldr r1, [pc, #4]',                 # literal at WARM + 12
+        'str r0, [r1]',
+        'bx lr',
+    ], WARM)
+    assert len(code) == 12, len(code)
+    return code + struct.pack('<I', FRAMES)
 
 
 def shutdown():
@@ -122,7 +145,9 @@ def main():
     sd = shutdown()
     lit = struct.pack('<I', RUNNING)
     arm_at = GATE + 0x12
+    wm = warm()
     rows = [
+        ('0034 warm start', 0, WARM, stock(0, WARM, 16), wm),
         ('0022 gate cave', 0, GATE, stock(0, GATE, 32), g0[:32]),
         ('0025 gate tail', 0, GATE + 32, stock(0, GATE + 32, 4), g0[32:]),
         ('0023 flag literal', 0, FLAG_LIT, stock(0, FLAG_LIT, 4), lit),
@@ -135,6 +160,7 @@ def main():
         print(f'  expect:  {exp.hex()}')
         print(f'  replace: {rep.hex()}')
     print('gate (armed):'); show(g1, GATE)
+    print('warm start:'); show(wm[:12], WARM)
     print('shutdown:'); show(sd[:0x3C], SHUT)
 
 
