@@ -114,7 +114,7 @@ test("progress bar is the image's own columns and knob at the player's coordinat
 // Same arithmetic as artwork.c (gain, inset) for the CE cover treatment.
 test("CE cover treatment follows the artwork compositor", async () => {
   const {artContrast, artInset, blitCover, paintBadge, BADGE, ART} = await import("../docs/sim-core.mjs");
-  const cGain = (v, top) => { const n = 118 * v - 9 * top + 50; const q = n < 0 ? -Math.floor(-n / 100) : Math.floor(n / 100); return Math.max(0, Math.min(top, q)); };
+  const cGain = (v, top) => { const n = 120 * v - 10 * top + 50; const q = n < 0 ? -Math.floor(-n / 100) : Math.floor(n / 100); return Math.max(0, Math.min(top, q)); };
   for (let w = 0; w < 0x10000; w += 97)
     assert.equal(artContrast(w), (cGain(w >> 11, 31) << 11) | (cGain((w >> 5) & 63, 63) << 5) | cGain(w & 31, 31));
   assert.equal(artContrast(0), 0);
@@ -130,4 +130,22 @@ test("CE cover treatment follows the artwork compositor", async () => {
   assert.equal(fb[BADGE.y * WIDTH + BADGE.x + 7], 0x10A2);
   assert.notEqual(fb[BADGE.y * WIDTH + BADGE.x + 6], 0x10A2);
   assert.equal(fb[(BADGE.y + 10) * WIDTH + BADGE.x + 55], 0x10A2);
+});
+
+test("CE progress bar is the inverse of the ground, as bar_recolor draws it", async () => {
+  const {paintProgress, barColumns} = await import("../docs/sim-core.mjs");
+  const res = parseResourceSection(resourceSectionOf(images.ce.image));
+  const half = (a, b) => ((a & 0xF7DE) >> 1) + ((b & 0xF7DE) >> 1);
+  for (const ground of [0x61A1, 0x10A2, 0xBE9A, 0xFFFF]) {
+    const inv = ~ground & 0xFFFF;
+    const fb = new Uint16Array(WIDTH * HEIGHT);
+    paintProgress(fb, res, {fraction: 0.5, ground, inverse: true});
+    const filled = Math.round(0.5 * 147), {played, unplayed} = barColumns(ground);
+    assert.deepEqual(played, [half(inv, ground), inv, inv, inv, inv, half(inv, ground)]);
+    for (let r = 0; r < 6; r++) {
+      assert.equal(fb[(258 + r) * WIDTH + 46], played[r]);
+      assert.equal(fb[(258 + r) * WIDTH + 46 + 147], unplayed[r]);
+    }
+    assert.equal(fb[254 * WIDTH + 40], ground);
+  }
 });

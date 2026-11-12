@@ -98,17 +98,33 @@ export function paintPlayer(fb, res, image, {page = 0, playing = true, light = f
 // (40, 254)..(201, 268), one 1x6 column per position at (46 + i, 258) for
 // 148 positions (resource 187 up to the filled fraction of 147, then 188),
 // and the knob (220) at (min(filled + 42, 196), 254). Light: ids + 166.
-export function paintProgress(fb, res, {fraction = 0, light = false, ground}) {
+// With inverse (CE, artwork.c bar_recolor) the columns are recoloured
+// from the ground first: played = inverse, unplayed = 3/8 of the way to it.
+export const half565 = (a, b) => ((a & 0xF7DE) >> 1) + ((b & 0xF7DE) >> 1);
+export function barColumns(ground) {
+  const inv = ~ground & 0xFFFF, mid = half565(inv, ground);
+  const track = half565(mid, half565(mid, ground)), tedge = half565(track, ground);
+  return {played: [mid, inv, inv, inv, inv, mid], unplayed: [tedge, track, track, track, track, tedge]};
+}
+
+export function paintProgress(fb, res, {fraction = 0, light = false, ground, inverse = false}) {
   const off = light ? LIGHT_OFFSET : 0;
-  fill(fb, 40, 254, 201, 268, ground ?? groundFor(light));
+  const g = ground ?? groundFor(light);
+  fill(fb, 40, 254, 201, 268, g);
   const filled = Math.round(Math.min(1, Math.max(0, fraction)) * 147);
-  for (let i = 0; i < 148; i++) draw(fb, res, (i < filled ? 187 : 188) + off, 46 + i, 258);
+  const cols = inverse ? barColumns(g) : null;
+  for (let i = 0; i < 148; i++) {
+    if (cols) {
+      const col = i < filled ? cols.played : cols.unplayed;
+      for (let r = 0; r < 6; r++) fb[(258 + r) * WIDTH + 46 + i] = col[r];
+    } else draw(fb, res, (i < filled ? 187 : 188) + off, 46 + i, 258);
+  }
   // keyed: CE draws the knob through the keyed helper (patch 0118); the
   // stock knob has no 0xF800 pixels, so this is exact for both images
   draw(fb, res, 220 + off, Math.min(filled + 42, 196), 254, true);
 }
 
-// CE artwork treatment, ported from patches/player_ui/artwork.c: an 18%
+// CE artwork treatment, ported from patches/player_ui/artwork.c: a 20%
 // contrast gain per RGB565 component, a radius-10 corner mask, a 2-pixel
 // rounded outline with a music note when there is no cover, and a 56x20
 // rounded badge tile at (132, 156) for the file type.
@@ -120,7 +136,7 @@ export function artInset(row, height) {
   return y < 10 ? EDGE[y] : 0;
 }
 
-const gain = (v, top) => Math.max(0, Math.min(top, Math.trunc((118 * v - 9 * top + 50) / 100)));
+const gain = (v, top) => Math.max(0, Math.min(top, Math.trunc((120 * v - 10 * top + 50) / 100)));
 export const artContrast = w =>
   (gain(w >> 11, 31) << 11) | (gain((w >> 5) & 63, 63) << 5) | gain(w & 31, 31);
 

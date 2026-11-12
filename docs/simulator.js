@@ -106,7 +106,8 @@ function frame(side) {
     paintPlayer(fb, res, side, {page: state.page, playing: state.playing,
                                 light: state.light, ground});
     const length = tracks[state.track][2];
-    paintProgress(fb, res, {fraction: state.position / length, light: state.light, ground});
+    paintProgress(fb, res, {fraction: state.position / length, light: state.light, ground,
+                            inverse: side === "ce"});
   }
   return fb;
 }

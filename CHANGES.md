@@ -1,5 +1,26 @@
 # Changelog
 
+## 2026-11-12: Letter spacing, stronger cover contrast, inverted progress bar
+
+- Letters in both system fonts advance by their drawn width. Stock
+  measured letters over the top 10 rows only (8 in the small font), so
+  ink below that was missed; the redrawn `L` had been shifted four
+  columns right to compensate, which read as "F LAC" in the format badge.
+  Patches 0190 and 0191 branch over that measure at its only two call
+  sites; every redrawn letter now carries width + 1 in its tail, and no
+  letter is shifted.
+- The cover contrast factor rises from 1.18 to 1.20.
+- The progress bar is drawn in the inverse of the background. Patch 0182
+  hooks the bar's ground fill; 0183 and 0179 (module 0 pockets at
+  `0x03053EF4` and `0x0305DE20`) recolour the staged 1x6 columns from the
+  ground cell before every draw: played is the inverse, unplayed 3/8 of
+  the way to it, edges halved into the ground. The knob is unchanged.
+- Standard image SHA-256 `ff47214049ab5ef6c50de1e50d3bfea80ae4c1580e34ce28e23ace37cc62a1f7`,
+  same length. Minimal and recovery images are unchanged.
+- README figures, the Pages simulator and the site illustration show the
+  new spacing, contrast and bar. Tests: emulated bar routine (seven
+  grounds), font advance rules, builder parity and the full CI set.
+
 ## 2026-11-12: Figures and examples show the current player
 
 - The README player and theater figures draw CE covers with the artwork

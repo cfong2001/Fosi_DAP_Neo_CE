@@ -56,7 +56,10 @@ function paint(ctx: CanvasRenderingContext2D, state: Display) {
     text('Sample artwork',240,382,30,'#cddbd1','center')
     // Elapsed and total time sit on their own line above the progress bar.
     text('01:24',28,422,26);text('04:13',452,422,26,'#d3dfd9','right')
-    ctx.fillStyle='#ffffff44';ctx.fillRect(28,440,424,5);ctx.fillStyle='#fff';ctx.fillRect(28,440,154,5)
+    // The bar is drawn in the inverse of the background: played at full
+    // strength, the rest of the track 3/8 of the way from the background.
+    const ground=parseInt(COVERS[cover][2].slice(1),16), inv='#'+(0xffffff^ground).toString(16).padStart(6,'0')
+    ctx.fillStyle=inv;ctx.globalAlpha=.375;ctx.fillRect(28,440,424,5);ctx.globalAlpha=1;ctx.fillRect(28,440,154,5)
     // The CE transport glyphs, drawn straight over the derived background
     // (no dark tiles behind them): previous, play, next.
     ctx.fillStyle='#f5f1e5'

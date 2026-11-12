@@ -58,14 +58,21 @@ spacing is even. Other scripts keep their stock glyphs.
 
 Fitting the firmware's layout rules (`0x030627BE`, `0x03063E06`):
 
-- **Letter advance.** For ASCII letters the firmware measures the ink in
-  rows 0 to 9 only (leftmost + rightmost column + 2). Records are read
+- **Letter advance.** For ASCII letters stock firmware measures the ink in
+  rows 0 to 9 only (leftmost + rightmost column + 2), at two sites: the
+  glyph drawer (`0x0306263C`) and the string measurer (`0x0306282E`).
+  Patches [`0190`](0190-letter-advance-draw.patch) and
+  [`0191`](0191-letter-advance-measure.patch) branch over both, so in the
+  Standard image letters advance by their tail byte like every other
+  glyph, and each redrawn letter's tail is its width + 1. The ink
+  measure has no other callers. Records are read
   through a halfword byte swap (`0x03056B94`), so rows are big-endian
   and the tail is byte 32.
 - **The stock `L` bug.** With its bar below row 9, stock's `L` advances
-  2 px and overlaps the next letter by 5. The redrawn `L` trims its bar
-  to 6 columns and shifts right until the measure clears it. `K` shifts
-  one column for the same reason.
+  2 px and overlaps the next letter by 5. The earlier workaround shifted
+  the redrawn `L`, `A`, `K` and `z` right until the measure cleared their
+  ink, which left a 4-column gap before `L` ("F LAC"). With 0190 and 0191
+  no letter is shifted and the `L` keeps its full bar.
 - **Other glyphs** get explicit tail advances: the space is 4, digits
   share one width, and punctuation gets a column on each side.
 - **Vertical fit.** The baseline is row 12, one row above stock, so
