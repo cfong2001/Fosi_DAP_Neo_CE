@@ -70,7 +70,9 @@ positions inside the playlist.
 - **Changing play mode mid-playlist.** Module 33's switch into
   repeat-folder converts the position with the resolver, so the same
   folder-repeat behavior applies.
-- **Capacity.** Staging holds 59 entries in at most 6 folder runs. Larger
-  playlists decline wholesale and the M3U file is not opened as a list.
+- **Capacity.** Staging holds 150 entries in at most 32 folder runs (the
+  packed layout, [`README.md`](README.md#playlist-staging); it was 59 in 6
+  when this note was written). Larger playlists decline wholesale and the
+  M3U file is not opened as a list.
 - **Hardware.** Real iterator behavior on a card, the decoder start and
   timing, and the FS type 3 decline are unobserved.

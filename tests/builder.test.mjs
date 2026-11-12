@@ -53,7 +53,7 @@
 //       the merged theme runs), with the page's embedded Opus data
 //       (docs/builder-opus-data.mjs; DAP_NEO_OPUS_DATA overrides it):
 //         build_full.py (one build.py pass)
-//         3097536635a2884fb5ec689c2ad13fce2f4afa25f86a65263c5ab2d7485775aa
+//         f4f95f3203cd6d29349bdac33bf3ab65ff7c33911f89a93539ea226ee762d5d5
 //   standalone lock screen (the embedded 406-byte reference-toolchain
 //   routine in a module 31 extension, plus patch 0033):
 //         build.py --no-transplants --manifest <framework manifest plus
@@ -148,12 +148,12 @@ assert.equal(FULL_TAIL.length, 2040);
 assert.equal(FULL_TAIL.sha256,
   "5100d0d0e4c17f08ea6ede667f3c720edb721013836a7bf6cf7bc0d942446c4c");
 assert.deepEqual(FULL_GROWTHS.map(g => [g.module, g.length, g.sha256]), [
-  [31, 6936, "010197e684a8a3e3f1a0937b61fe89a7f620b48c0872e5305f781d42d9b88f05"],
+  [31, 6616, "3f7e09cae9658c4cf21bfc4f9be92a037051f10a74e759f2e7fd8d4c0cac2aa9"],
   [24, 26, "7b80afb308d276a4d0012cd4302f7a5f2a1c5192a1f2e70d3f23867e195a942a"],
 ]);
 assert.equal(FULL_THEME_RUNS.length, 1649);
 assert.equal(FULL_IMAGE_SHA256,
-  "3097536635a2884fb5ec689c2ad13fce2f4afa25f86a65263c5ab2d7485775aa");
+  "f4f95f3203cd6d29349bdac33bf3ab65ff7c33911f89a93539ea226ee762d5d5");
 for (const g of FULL_GROWTHS)
   assert.equal(await sha256Hex(hexToBytes(g.hex)), g.sha256);
 assert.equal(await sha256Hex(hexToBytes(FULL_TAIL.hex)), FULL_TAIL.sha256);

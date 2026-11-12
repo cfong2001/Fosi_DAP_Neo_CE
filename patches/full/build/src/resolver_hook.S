@@ -28,13 +28,14 @@
  *                   takes stock's resolver, reset and advance path
  *                   instead of the folder iterator's next file.
  *
- * Staging at STAGE (written by the bridge, see m3u_bridge.h):
+ * Staging at STAGE (written by the bridge; packed layout, m3u_bridge.h):
  *   +0 flag (u8), +1 entry count (u8), +2 last position served (u16),
- *   +4 last ordinal served (u16), +6 run count (u8). Runs at +16, 50
- *   bytes each (u32 cluster, u16 countA, u16 countB, 42-byte context).
- *   Entries at +316, 4 bytes each (u16 0-based ordinal among the folder's
- *   accepted files, u8 run id, u8 flags). The bridge arms the flag only
- *   after a complete import, so the count is at least 1 when it is set.
+ *   +4 last ordinal served (u16), +6 run count (u8). The 42-byte stock
+ *   context at +16, shared by every run. Run clusters at +60 (u32 x 32),
+ *   run totals at +188 (u16 x 32, countA + countB). Entries at +252,
+ *   u16 x 150: bits 0-10 the 0-based ordinal among the folder's accepted
+ *   files, bits 11-15 the run id. The bridge arms the flag only after a
+ *   complete import, so the count is at least 1 when it is set.
  *
  * The three entry hooks are reached by B.W from the stock entry, whose
  * displaced first instruction is a push.w. A declined call restores r2,
@@ -53,8 +54,10 @@
     .equ RESUME_N, 0x03059D5C      /* count entry + 4 */
     .equ RET_START, 0x0307E065     /* module 31 playlist start */
     .equ RET_MODE, 0x0308A6CB      /* module 33 play-mode switch */
-    .equ RUNS_OFF, 16
-    .equ ENTRIES_OFF, 316          /* 16 + 6 * 50, full build caps */
+    .equ CTX_OFF, 16               /* shared 42-byte context */
+    .equ CLUS_OFF, 60              /* u32 run cluster[32] */
+    .equ TOTAL_OFF, 188            /* u16 run total[32] */
+    .equ ENTRIES_OFF, 252          /* u16 entry[150] */
 
     .text
 
@@ -151,21 +154,18 @@ serve:
     subs    r0, r3, #1             /* past the end: last entry */
 2:  strh    r0, [ip, #2]
     add     r2, ip, #ENTRIES_OFF
-    add     r2, r2, r0, lsl #2     /* entry pointer */
-    ldrh    r0, [r2]
+    ldrh    r2, [r2, r0, lsl #1]   /* entry word */
+    ubfx    r0, r2, #0, #11
     adds    r0, r0, #1             /* 1-based ordinal for stock */
     strh    r0, [ip, #4]
-    ldrb    r2, [r2, #2]           /* run id */
-    movs    r3, #50
-    mla     r2, r2, r3, ip
-    adds    r2, r2, #RUNS_OFF      /* run pointer */
-    ldr     r3, [r2]
+    lsrs    r2, r2, #11            /* run id */
+    add     r3, ip, #CLUS_OFF
+    ldr     r3, [r3, r2, lsl #2]
     str     r3, [r1]               /* cluster */
-    ldrh    r3, [r2, #4]
-    ldrh    ip, [r2, #6]
-    add     r3, r3, ip
+    add     r3, ip, #TOTAL_OFF
+    ldrh    r3, [r3, r2, lsl #1]
     str     r3, [r1, #8]           /* countA + countB */
-    adds    r2, r2, #8
+    add     r2, ip, #CTX_OFF
     adds    r1, r1, #0x1C
     movs    r3, #42
 3:  ldrb    ip, [r2], #1

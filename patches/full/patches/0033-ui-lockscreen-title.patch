@@ -12,8 +12,8 @@ gate: build refuses unless the 4 stock bytes at the target equal
   segment extension carrying the lock routine at the branch
   target.
 expect: e4f72fbf
-replace: 01f071bf
+replace: 01f0d1be
 rationale: Same site and contract as the compose variant's 0033; the
   target moved because the full build's bridge+parser blob
-  is built with reduced staging caps (6 runs / 59 entries)
-  under the local toolchain.
+  differs (packed staging layout, no resolution log in the
+  blob) and is built under the local toolchain.

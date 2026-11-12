@@ -9,7 +9,7 @@ gate: Do NOT stack alone. Requires the full build's module 31
   segment extension carrying the disarm stubs at the branch
   target.
 expect: e648d8f769ff
-replace: 02f0b3bb00bf
+replace: 02f013bb00bf
 rationale: The validated music-file action reaches this site. The stub
   clears the staging flag byte at 0x0307BFB4, reproduces the
   displaced PC-relative load and call, restores the original

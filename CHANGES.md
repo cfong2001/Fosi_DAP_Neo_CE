@@ -1,13 +1,42 @@
 # Changelog
 
-## 2026-11-12: Player typography and clearer library labels
+## 2026-11-12: Player typography and library labels
 
-Standard CE now draws playback time with its main font, pauses scrolling for
-1.5 seconds before advancing at 0.5-second intervals, and labels its English
-library entries Artists, Albums and Play All Albums. The time routine stays
-in its existing slot; a 10-byte resident helper reuses the shared marquee
-state. Thumb emulation checks the text, bounds, register preservation, timing
-fields and tick wrap. No hardware validation has been performed.
+Standard CE draws time with the main font, pauses scrolling for 1.5 seconds,
+then advances every 0.5 seconds. English library labels now read Artists,
+Albums and Play All Albums. The image length is unchanged; Thumb tests cover
+text bounds, register preservation and scrolling cadence.
+
+## 2026-11-12: larger M3U playlists
+
+- Playlists hold up to 150 tracks from up to 32 folders, up from 59 tracks
+  from 6 folders, in the same 552 bytes of resident staging. Each folder
+  record used to carry its own copy of a 42-byte context that is identical
+  for every folder; the packed layout stores it once, keeps folder
+  clusters and totals as arrays, and packs each entry into 16 bits (an
+  11-bit file ordinal and a 5-bit folder id). Layout:
+  [`patches/full/README.md`](patches/full/README.md#playlist-staging).
+- The bridge records resolved entries straight into staging instead of a
+  separate 354-byte log in the module 31 payload. The payload is 6,616
+  bytes (was 6,936) and the standard image is 6,656 bytes longer than
+  stock (was 7,168).
+- Long names with a character outside the Basic Multilingual Plane, such
+  as an emoji, now resolve: FAT stores those as a UTF-16 surrogate pair,
+  and the bridge compared them one unit at a time.
+- `.m3u8` playlists are documented and tested: they import through their
+  8.3 alias, whose extension is `M3U`.
+- The stock file counter the bridge calls runs a CUE-sheet branch in
+  mode 6 that writes directory entries and calls into the module 37
+  window. The branch needs `CUE` in the caller's extension table, and the
+  bridge's table has none, so it cannot run; the constraint is now
+  recorded at the call.
+- Tests: the host bridge suite checks the packed layout field by field
+  and the caps at their edges (32 folders arm, 33 decline; 150 entries
+  arm, 151 decline), and imports a `.m3u8` with a BOM, CRLF line ends,
+  a drive-letter path and an emoji file name. `emu_resolver_full.py`
+  part (d) runs the assembled hook over a full table (150 entries, 32
+  folders, ordinal 2047, folder id 31) for 153 positions. The lifecycle
+  and start audits pass on the new image.
 
 ## 2026-11-12: EQ preset names
 

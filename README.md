@@ -21,7 +21,7 @@ CE (Community Edition) is patched firmware for the Fosi Audio DAP Neo. It starts
 
 | Image | What it carries | SHA-256 |
 |---|---|---|
-| [`DP3_V137_CE.img`](release/DP3_V137_CE.img) | Standard: every feature below. 7,168 bytes longer than stock. | `3097536635a2884fb5ec689c2ad13fce2f4afa25f86a65263c5ab2d7485775aa` |
+| [`DP3_V137_CE.img`](release/DP3_V137_CE.img) | Standard: every feature below. 6,656 bytes longer than stock. | `f4f95f3203cd6d29349bdac33bf3ab65ff7c33911f89a93539ea226ee762d5d5` |
 | [`DP3_V137_CE_minimal.img`](release/DP3_V137_CE_minimal.img) | Minimal: audio and library fixes only, same length as stock. | `0dfd10e23749f9b6c65499266f1a7a2ec038160b089ba0fc2ca68dcf2b24c986` |
 | [`DP3_V137_CE_recovery.img`](release/DP3_V137_CE_recovery.img) | Stock code dated one day after CE, for going back. | `aff851b31d6eee55cbd4bb3fc0464ac79f0039ee86ae6723225ac036a157d223` |
 
@@ -40,7 +40,7 @@ Everything here is in the standard image; the minimal image has the sound and li
 - Opus files play in place of WMA (standard image only).
 - Track changes are much shorter. When a track ends and the next is the same format, the decoder stays loaded and running and the next track starts warm. Stock silences the first three decoded buffers of every track to hide a cold decoder's start-up, about 78 ms for MP3 and up to about 279 ms for FLAC; CE skips that, and the system-side work before the next track's audio starts drops from about 20.5 ms to 4.7 ms in emulation. This is not sample-exact gapless playback: the decoder still opens the next file after the last one ends.
 - The library sorts naturally: numbers by value, a leading "The" ignored, and case and accents no longer splitting the list.
-- Selecting an `.m3u` file in the browser plays it as a playlist; next, previous and shuffle stay inside it (up to 59 tracks from up to 6 folders).
+- Selecting an `.m3u` or `.m3u8` file in the browser plays it as a playlist; next, previous and shuffle stay inside it (up to 150 tracks from up to 32 folders). Entries can be relative to the playlist, absolute from the card root, or Windows-style (`D:\Music\...`, backslashes); UTF-8 and Windows-1252 text both work.
 - With hold on, the lock screen shows the track title and elapsed time.
 - Focus mode: after five seconds without input the player hides its controls and enlarges the cover; any key or wheel turn brings them back, and that first press only wakes the screen.
 - System Settings gains a Power Profile item with three options, High, Balanced and Battery Saver, each setting screen brightness, auto screen off and auto power off together (100 %, 1 minute, never; 60 %, 30 seconds, 10 minutes; 20 %, 10 seconds, 5 minutes). The labels are translated into all 21 menu languages, and the item marks whichever profile matches the current settings.
@@ -77,7 +77,7 @@ Every change is a patch file or a module transplant that [`patches/framework/bui
 | 0118, 429 theme runs | Antialiased dialog corners, low-battery icon, "Powering off…" text and progress bar; the progress knob is drawn keyed, so it sits on the theater background without a square | ✓ | | [`antialias/`](patches/antialias/README.md) |
 | 0100 to 0104, 0045, 0046 | Theater background, including the no-art reset | ✓ | | [`theater_mode.md`](patches/design_refresh_v2/theater_mode.md) |
 | 0032 | Bluetooth on a long press of Power | ✓ | | [`ui_features.md`](patches/ui_features/ui_features.md) |
-| 0040 to 0044, 0060 to 0062 | M3U playlists: browser import, playback hooks, exit on other playback | ✓ | | [`m3u_design.md`](patches/m3u/m3u_design.md) |
+| 0040 to 0044, 0047, 0060 to 0062 | M3U playlists: browser import, playback hooks, exit on other playback; 150 entries from 32 folders in packed staging | ✓ | | [`m3u/`](patches/m3u/README.md), [`playlist staging`](patches/full/README.md#playlist-staging) |
 | 0033 | Lock-screen title and time | ✓ | | [`ui_features.md`](patches/ui_features/ui_features.md) |
 | 0140 to 0146, 64 theme runs | Power Profile settings item: three presets of brightness, auto screen off and auto power off, written through the settings window's own setters | ✓ | | [`power/profiles/`](patches/power/profiles/README.md) |
 | 0047 to 0049, 0120 to 0131 | Focus mode: hides the player controls after five seconds and enlarges the cover; the playlist, no-art and transport hooks move to unused module 0 code to make room | ✓ | | [`focus_mode/`](patches/focus_mode/design.md), [`space/`](patches/space/README.md) |

@@ -5,7 +5,7 @@ against their pins by `.github/workflows/firmware.yml` on every change.
 
 | File | What it is | Length | SHA-256 |
 |---|---|---|---|
-| `DP3_V137_CE.img` | **Standard.** Every composed CE feature (list below). Header date 2026-10-23. | 13,638,660 bytes (7,168 more than stock) | `3097536635a2884fb5ec689c2ad13fce2f4afa25f86a65263c5ab2d7485775aa` |
+| `DP3_V137_CE.img` | **Standard.** Every composed CE feature (list below). Header date 2026-10-23. | 13,638,148 bytes (6,656 more than stock) | `f4f95f3203cd6d29349bdac33bf3ab65ff7c33911f89a93539ea226ee762d5d5` |
 | `DP3_V137_CE_minimal.img` | **Minimal option.** The default framework set and full-precision Vorbis only. Header date 2026-10-23. | 13,631,492 bytes (same as stock) | `0dfd10e23749f9b6c65499266f1a7a2ec038160b089ba0fc2ca68dcf2b24c986` |
 | `DP3_V137_CE_recovery.img` | Unmodified stock bytes dated 2026-10-24, one day after either CE image, so the boot validator prefers it. | 13,631,492 bytes | `aff851b31d6eee55cbd4bb3fc0464ac79f0039ee86ae6723225ac036a157d223` |
 | `*.report.json` | Build reports: every patch with its address and old and new bytes, transplant hashes, validation results. The standard report summarises its byte ranges. | | |
@@ -25,7 +25,7 @@ Rockusb (USB) recovery.
 Start with the standard image unless one of these applies, then use the
 minimal one:
 
-- **The standard image is 7,168 bytes longer than stock.** The installer
+- **The standard image is 6,656 bytes longer than stock.** The installer
   computes a 13 MiB transfer from the header, and whether a longer image
   installs and boots correctly has not been tested
   ([`analysis/slot_reclamation/report.md`](../analysis/slot_reclamation/report.md)).
@@ -66,9 +66,9 @@ The standard image adds:
 - The list and menu font's Latin glyphs redrawn from Barlow SemiBold
   (still 1-bit), which also fixes stock `L` overlapping the next letter.
 - Theater mode: the player background derives from the album art.
-- M3U playlists: select an `.m3u` file in the browser to play it. Up to 59
-  entries in 6 folder runs; next, previous, wrap and shuffle stay in the
-  playlist.
+- M3U playlists: select an `.m3u` or `.m3u8` file in the browser to play
+  it. Up to 150 entries from up to 32 folders; next, previous, wrap and
+  shuffle stay in the playlist.
 - Lock-screen track title and elapsed and total time.
 - A long press of Power toggles Bluetooth.
 - Safer track-title handling.
