@@ -60,6 +60,16 @@ as a standing check.
   regions after the images section (0xC92E10 to 0xC94000 and 0xC94200 to
   0xD00000 in stock) hold no offsets and shift positionally.
 
+## Mirror alignment (added after the gates)
+
+`apply_insertions` ends with `align_mirror`: it pads zeros before the
+duplicate header until its offset is a multiple of 512, because the boot
+validator (module 1, `0x0307E2CA`) reads the mirror at sector
+`(u32 @ 0x1F4) >> 9` and compares the whole sector. The gate results
+below predate this step and describe unpadded images; a 1,000-byte
+growth now adds 1,024 bytes. `tools/validate_grown.py` refuses an
+unaligned mirror or one past `0xCFBE00`.
+
 ## Dependent-offset map
 
 For an insertion of `n` bytes at the end of segment S, with storage

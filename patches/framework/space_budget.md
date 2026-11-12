@@ -16,6 +16,7 @@ outside the homes listed here.
 | Gap tail (exec 0x0307BFB4 to 0x0307C7B0) | 2,044 B | M3U staging 1,192 B (runtime data, zeros in the image), resolver hooks 410 B (patches 0041, 0042), Bluetooth toggle 436 B (patch 0032 tail variant), 2 B alignment pad | 4 B |
 | Module 31 segment extension (exec 0x0307EE48 to 0x03080B54) | 7,436 B | Browser-hook trampoline 64 B (patch 0040), M3U bridge plus parser linked together 6,644 B, lock-screen routine 406 B (patch 0033) | 322 B |
 | Module 32 segment extension (exec 0x030804AC to 0x03080B54) | 1,704 B | Battery-profile blob, 540 B (apply routine, defaults writer, selector entry, cave stubs, constants; patches 0051, 0052) | 1,164 B |
+| Module 0 dead-code pockets ([`patches/space/`](../space/README.md)) | 8,508 B in 150 pockets, largest 256 B; 5,530 B in pockets of 64 B or more | None yet: candidates by static reachability and an emulation coverage gate; a hardware tripwire build must clear them first | 8,508 B, provisional |
 | SAVEINFO verbatim block (+0x1C7 to +0x2D5) | about 270 B of settings space | Battery profiles, 32 B at +0x290 to +0x2AF (apply routine built; see patches/power/) | about 238 B |
 
 The two segment extensions overlap in exec space: the module 31
@@ -60,9 +61,12 @@ USB and settings and verifies the extension bytes after.
 - A tail build is the same length again: the gap is inside the
   image, so the step edits the code_len record and fills existing
   zero space.
-- A grown build adds exactly its payload length (a 1,000-byte
-  module 31 growth produces a 13,632,492-byte image in verify
-  check 9). The whole firmware with every feature composed is
+- A grown build adds its payload length, rounded up to a whole
+  512-byte sector: the insertion step pads zeros before the header
+  mirror so the boot validator, which reads the mirror by sector,
+  finds it (a 1,000-byte module 31 growth produces a 13,632,516-byte
+  image in verify check 9). The mirror may move to `0xCFBE00` at most
+  before the installer's rounded transfer grows past 13 MiB. The whole firmware with every feature composed is
   therefore the stock length plus the module 31 payload, about
   5 KB over stock, with the update package layout otherwise
   unchanged.

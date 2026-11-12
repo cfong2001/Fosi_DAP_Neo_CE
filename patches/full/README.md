@@ -247,11 +247,20 @@ marquee, so neither joins the standard image for now.
 
 | Feature | Needs | Available | What would make room |
 |---|---|---|---|
-| Focus mode (`patches/focus_mode/`) | 340 bytes resident whenever the player is loaded | 12 bytes in the tail (8 free, 4 spare) | Cut playlist staging to about 1 run and 25 entries, or remove the Bluetooth shortcut (436 bytes) from this build |
+| Focus mode (`patches/focus_mode/`) | 340 bytes resident whenever the player is loaded | 12 bytes in the tail (8 free, 4 spare); census pockets in module 0 (below) | Split its stubs across module 0 dead-code pockets once a tripwire build clears them; otherwise cut playlist staging to about 1 run and 25 entries, or remove the Bluetooth shortcut (436 bytes) |
 | Browser marquee v5 (`patches/browser_marquee/`) | 6,992 bytes in the module 31 window | 500 bytes | Remove playlists (trampoline, bridge and disarm stubs) and the lock screen from module 31, which frees 6,934 bytes |
 
 The census behind the focus figure is below. Both features remain
 standalone variants with passing suites.
+
+A later reachability census of module 0 ([`patches/space/`](../space/README.md))
+found 8,508 bytes of stock code that nothing can reach, in 150 pockets
+(51 of them 64 bytes or more, 5,530 bytes in all). Module 0 is resident
+from every window, so those pockets are the right residency class for
+the focus stubs, and also for the lock-screen and Bluetooth routines,
+which would free contiguous space here. None is used yet: a hardware
+tripwire build has to show that no pocket ever runs. The marquee does
+not fit in them.
 
 ### Focus mode residency census
 

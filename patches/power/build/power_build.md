@@ -30,6 +30,8 @@ on evidence recorded after the design was written:
 
 - Module 0 dead space is exhausted. The resident-home census
   (analysis/resident_home, PR #24) found 8 bytes in three scraps.
+  (A later reachability census, patches/space/, finds 8,508 bytes of
+  unreachable stock code; it is unused pending a hardware tripwire.)
 - The module 0 package gap is live FAT workspace except its tail at
   0x0307BFB4..0x0307C7B0, and the tail composition (PR #28) fills
   2,040 of those 2,044 bytes with the M3U staging, the resolver
