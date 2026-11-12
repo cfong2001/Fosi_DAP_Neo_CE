@@ -663,6 +663,26 @@ export const FULL_EXTRA_PATCHES = [
   "expect": "10b584b00c46069994460c281ebf4ff0ff3004b010bd01290cbfa21c002203a8cde9000302ab6146002000f0a5f9bdf808102170bdf80c10617004b0",
   "replace": "2de9f34105460f4616460024dff8288014222821204600f0f3fce31905f12702121a1946009628440134c047142cefd102b0bde8f08100bffb320603",
   "index": 104
+ },
+ {
+  "file": "0180-library-title-fallback.patch",
+  "name": "0180-library-title-fallback",
+  "module": 0,
+  "region": "code",
+  "address": 50672012,
+  "expect": "2de9f8430f1e06464ff0",
+  "replace": "03880bb901f050be7047",
+  "index": 105
+ },
+ {
+  "file": "0181-library-title-copy-hook.patch",
+  "name": "0181-library-title-copy-hook",
+  "module": 38,
+  "region": "code",
+  "address": 50851676,
+  "expect": "d5f76aff",
+  "replace": "d4f716f9",
+  "index": 106
  }
 ];
 export const FULL_TAIL = {
@@ -11786,4 +11806,4 @@ export const FULL_THEME_RUNS = [
   "replace": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
  }
 ];
-export const FULL_IMAGE_SHA256 = "16a0282645a7e3c84b21dd80f416e2d76d66211a97c6582e1d3e532478cdd779";
+export const FULL_IMAGE_SHA256 = "94914e7152de62e8e8fafd1fcc428cfc8eceafef2d33c4667f35672f692fa927";

@@ -21,7 +21,7 @@ CE (Community Edition) is patched firmware for the Fosi Audio DAP Neo. It starts
 
 | Image | What it carries | SHA-256 |
 |---|---|---|
-| [`DP3_V137_CE.img`](release/DP3_V137_CE.img) | Standard: every feature below. 6,656 bytes longer than stock. | `16a0282645a7e3c84b21dd80f416e2d76d66211a97c6582e1d3e532478cdd779` |
+| [`DP3_V137_CE.img`](release/DP3_V137_CE.img) | Standard: every feature below. 6,656 bytes longer than stock. | `94914e7152de62e8e8fafd1fcc428cfc8eceafef2d33c4667f35672f692fa927` |
 | [`DP3_V137_CE_minimal.img`](release/DP3_V137_CE_minimal.img) | Minimal: audio and library fixes only, same length as stock. | `0dfd10e23749f9b6c65499266f1a7a2ec038160b089ba0fc2ca68dcf2b24c986` |
 | [`DP3_V137_CE_recovery.img`](release/DP3_V137_CE_recovery.img) | Stock code dated one day after CE, for going back. | `aff851b31d6eee55cbd4bb3fc0464ac79f0039ee86ae6723225ac036a157d223` |
 
@@ -35,6 +35,8 @@ Everything here is in the standard image; the minimal image has the sound and li
 
 ![CE player with four covers and one track without art](media/theater.png)
 
+- Now Playing and library lists use title tags, with filename fallback. **Refresh the library after updating** to replace previously stored filenames. Track information has seven labeled rows with readable units and Unknown for missing artist/album tags.
+- Covers are centered with rounded corners, an 18% contrast boost and a rounded format badge. Tracks without artwork show an outline tile with a music note. Time uses the main font, and title scrolling pauses before advancing more slowly.
 - Theater mode takes the player background from the album art; tracks without art use the theme default. The transport controls are drawn as glyphs over that background instead of dark tiles.
 - Ogg Vorbis decodes at full precision: about 85 to 97 dB signal-to-noise against a reference decode, where stock measures about 40.
 - Opus files play in place of WMA (standard image only).
