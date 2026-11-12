@@ -12,7 +12,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50854352,
   "expect": "adf80c70bdf80c1033f811206ab320f81120491c89b2adf80c108029f2d3",
   "replace": "002133f8112042b17f2903d220f811200131f6e720f8117001e026e000bf",
-  "index": 37
+  "index": 38
  },
  {
   "file": "title-suffix.patch",
@@ -22,7 +22,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50854458,
   "expect": "8ab220f8127000eb410030f8081c2e2908bf20f8087c30f80a1c2e2908bf20f80a7cc7e7",
   "replace": "20f8117005290ad300eb41000a3841882e2908bf478001882e2908bf0780c9e700bf00bf",
-  "index": 38
+  "index": 39
  },
  {
   "file": "0113-transport-keyed-info-bare-ground.patch",
@@ -32,7 +32,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50853978,
   "expect": "e3f776fe",
   "replace": "fcf75dfd",
-  "index": 39
+  "index": 40
  },
  {
   "file": "0111-transport-keyed-playpause-bare-ground.patch",
@@ -42,7 +42,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50853938,
   "expect": "e3f78afe",
   "replace": "fcf771fd",
-  "index": 40
+  "index": 41
  },
  {
   "file": "0114-transport-keyed-plus-bare-ground.patch",
@@ -52,7 +52,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50854004,
   "expect": "e3f769fe",
   "replace": "fcf750fd",
-  "index": 41
+  "index": 42
  },
  {
   "file": "0112-transport-keyed-quote-bare-ground.patch",
@@ -62,7 +62,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50853952,
   "expect": "e3f783fe",
   "replace": "fcf76afd",
-  "index": 42
+  "index": 43
  },
  {
   "file": "0115-transport-keyed-repeat-state-ground.patch",
@@ -72,7 +72,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50854020,
   "expect": "e3f761fe",
   "replace": "fcf748fd",
-  "index": 43
+  "index": 44
  },
  {
   "file": "0116-transport-keyed-right-state-ground.patch",
@@ -82,7 +82,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50854056,
   "expect": "e3f74ffe",
   "replace": "fcf736fd",
-  "index": 44
+  "index": 45
  },
  {
   "file": "0117-transport-keyed-right-variants-ground.patch",
@@ -92,7 +92,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50854128,
   "expect": "e3f72bfe",
   "replace": "fcf712fd",
-  "index": 45
+  "index": 46
  },
  {
   "file": "0110-transport-keyed-slot0-state-ground.patch",
@@ -102,7 +102,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50853894,
   "expect": "e3f7a0fe",
   "replace": "fcf787fd",
-  "index": 46
+  "index": 47
  },
  {
   "file": "0118-progress-knob-keyed.patch",
@@ -112,7 +112,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50853786,
   "expect": "e3f7d6fe",
   "replace": "e4f735f9",
-  "index": 47
+  "index": 48
  },
  {
   "file": "0100-theater-setup-reset-hook.patch",
@@ -122,7 +122,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50870430,
   "expect": "70b50e46",
   "replace": "f8f759bd",
-  "index": 48
+  "index": 49
  },
  {
   "file": "0101-theater-blit-sync-a.patch",
@@ -132,7 +132,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50870898,
   "expect": "dff764fc",
   "replace": "f8f799fc",
-  "index": 49
+  "index": 50
  },
  {
   "file": "0102-theater-blit-sync-b.patch",
@@ -142,7 +142,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50870910,
   "expect": "dff75efc",
   "replace": "f8f793fc",
-  "index": 50
+  "index": 51
  },
  {
   "file": "0103-theater-blit-painter-a.patch",
@@ -152,7 +152,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50871170,
   "expect": "dff7dcfb",
   "replace": "f8f711fc",
-  "index": 51
+  "index": 52
  },
  {
   "file": "0104-theater-blit-painter-b.patch",
@@ -162,7 +162,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50871188,
   "expect": "dff7d3fb",
   "replace": "f8f708fc",
-  "index": 52
+  "index": 53
  },
  {
   "file": "0032-ui-bt-dispatcher-hook-tail.patch",
@@ -172,7 +172,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50732638,
   "expect": "2046bde8f09f",
   "replace": "1af0cbbb00bf",
-  "index": 53
+  "index": 54
  },
  {
   "file": "0041-resolver-primary-hook.patch",
@@ -182,7 +182,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50699692,
   "expect": "2de9f047",
   "replace": "22f016ba",
-  "index": 54
+  "index": 55
  },
  {
   "file": "0042-resolver-companion-hook.patch",
@@ -192,7 +192,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50705090,
   "expect": "2de9f047",
   "replace": "20f09bbf",
-  "index": 55
+  "index": 56
  },
  {
   "file": "0043-playlist-count-hook.patch",
@@ -202,7 +202,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50699608,
   "expect": "2de9f041",
   "replace": "22f063ba",
-  "index": 56
+  "index": 57
  },
  {
   "file": "0044-playlist-forward-step.patch",
@@ -212,7 +212,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50714008,
   "expect": "a0890128",
   "replace": "1ef052fe",
-  "index": 57
+  "index": 58
  },
  {
   "file": "0045-theater-noart-close.patch",
@@ -222,7 +222,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50850162,
   "expect": "346098f8",
   "replace": "fdf79fbc",
-  "index": 58
+  "index": 59
  },
  {
   "file": "0046-theater-noart-open.patch",
@@ -232,7 +232,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50850156,
   "expect": "3460bde8",
   "replace": "fdf7acbc",
-  "index": 59
+  "index": 60
  },
  {
   "file": "0040-m3u-browser-hook.patch",
@@ -242,7 +242,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50847514,
   "expect": "fff76df9",
   "replace": "00f095bf",
-  "index": 60
+  "index": 61
  },
  {
   "file": "0033-ui-lockscreen-title.patch",
@@ -252,7 +252,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50849950,
   "expect": "e4f72fbf",
   "replace": "01f071bf",
-  "index": 61
+  "index": 62
  },
  {
   "file": "0060-nav-folder-disarm.patch",
@@ -262,7 +262,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50847822,
   "expect": "01252846",
   "replace": "02f065bc",
-  "index": 62
+  "index": 63
  },
  {
   "file": "0061-nav-file-disarm.patch",
@@ -272,7 +272,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50848204,
   "expect": "e648d8f769ff",
   "replace": "02f0b3bb00bf",
-  "index": 63
+  "index": 64
  },
  {
   "file": "0062-nav-tag-disarm.patch",
@@ -282,7 +282,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50850930,
   "expect": "a5f8f2c0",
   "replace": "00f0bbb8",
-  "index": 64
+  "index": 65
  }
 ];
 export const FULL_TAIL = {
@@ -6651,4 +6651,4 @@ export const FULL_THEME_RUNS = [
   "replace": "fe00e60092009a00f200e600ee00fe00ee00ee00fe00000000"
  }
 ];
-export const FULL_IMAGE_SHA256 = "6fb923612567088663bc145fda4812e97a96c1a304d5e25bbb2c5b4bef2baefb";
+export const FULL_IMAGE_SHA256 = "a7c7f5c2f04279359fd577f602abece687421776f46860ed6d63a7b7f42d05d6";

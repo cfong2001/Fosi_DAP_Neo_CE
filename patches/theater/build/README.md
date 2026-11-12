@@ -163,7 +163,7 @@ build.py):
 Variant image SHA-256:
 6ad01b38b66f66bb78eed1b2fd3088457b52c0426aefb668a521b8cca92d34a0
 (72,131 bytes changed vs stock; the default build is unchanged
-at 1cf609559048a02686585a159dab06fa4856954aa647283a50a8b47da33e3c99).
+at 4fa813d99d6b84d871635be490f49f3a8d4f17bcb5f7ae2540edfb62d334ad4e).
 
 ## Validation
 

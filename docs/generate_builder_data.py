@@ -84,7 +84,7 @@ STOCK_SHA256 = 'fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cdfade5e9c6ea3bd71ac6deef
 THEATER_TAIL_SHA256 = '96931a93bd197782f5efda40974ab31731c801e4231f29f44c1dfa7347c0fc78'
 BT_PAYLOAD_SHA256 = 'ce6ef701285885efb17b072df128602c3ee5da8359b7b267cd7e1ca92457cf06'
 LOCK_PAYLOAD_SHA256 = '9610d8d7995d821b4289c18e720c21c848494633d2af097e160101a23e2c92d2'
-FULL_IMAGE_SHA256 = '6fb923612567088663bc145fda4812e97a96c1a304d5e25bbb2c5b4bef2baefb'
+FULL_IMAGE_SHA256 = 'a7c7f5c2f04279359fd577f602abece687421776f46860ed6d63a7b7f42d05d6'
 FULL_TAIL_SHA256 = '6d77b1102cc4a82828ed8c1670eef99de708565e95d585a58dfdeb1d01047a71'
 FULL_GROWTH_PINS = ((31, 'payload31.bin',
                      '010197e684a8a3e3f1a0937b61fe89a7f620b48c0872e5305f781d42d9b88f05'),
@@ -107,9 +107,10 @@ GROUPS = [
      'Patches 0003 to 0018: per-codec clock rows lowered, never '
      'below the RKNanoD SDK figure for the format.', tuple(range(3, 19))),
     ('gapless', 'Gapless fast path',
-     'Patches 0020 to 0026: at a natural end of a FLAC track the '
-     'decoder core keeps running and the next FLAC track reuses it.',
-     tuple(range(20, 27))),
+     'Patches 0019 to 0026: at a natural end of track the decoder '
+     'core keeps running and same-format tracks reuse it; 0019 '
+     'shortens the DAC bus I2C reset hold.',
+     tuple(range(19, 27))),
     ('sort', 'Natural sort keys',
      'Patches 0027 to 0031: library sort folds case and accents '
      'and compares digit runs as numbers.', tuple(range(27, 32))),
@@ -328,7 +329,7 @@ def main():
         patch = dict(patch)
         patch['index'] = index
         grouped[group_of[number]].append(patch)
-    assert sum(len(v) for v in grouped.values()) == len(patches) == 32
+    assert sum(len(v) for v in grouped.values()) == len(patches) == 33
     groups_out = [{'id': gid, 'label': label, 'blurb': blurb,
                    'patches': grouped[gid]}
                   for gid, label, blurb, _n in GROUPS]
@@ -337,7 +338,7 @@ def main():
         'patches/framework/patches/\n'
         '// (manifest.txt order). Do not edit by hand.\n'
         'export const PATCH_GROUPS = ' + js(groups_out) + ';\n')
-    print('builder-data.mjs: 32 patches in', len(groups_out), 'groups')
+    print('builder-data.mjs: 33 patches in', len(groups_out), 'groups')
 
     # ---- CE splash mark runs
     cemark = json.loads(
@@ -503,13 +504,13 @@ def main():
         line = line.split('#', 1)[0].strip()
         if line:
             full_names.append(line)
-    assert len(full_names) == 65, len(full_names)
+    assert len(full_names) == 66, len(full_names)
     full_patches = []
     for index, name in enumerate(full_names):
         patch = parse_patch(full_dir / name)
         patch['index'] = index
         full_patches.append(patch)
-    # The first 36 entries are the framework set and the Opus
+    # The first 37 entries are the framework set and the Opus
     # renames, which the page already carries (builder-data.mjs and
     # builder-opus.mjs); only the rest are new data here.
     for i, patch in enumerate(full_patches[:len(patches)]):

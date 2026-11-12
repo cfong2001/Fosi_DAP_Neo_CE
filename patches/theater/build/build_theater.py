@@ -16,7 +16,7 @@ Emits, next to this script:
   0102-theater-blit-sync-b.patch
   0103-theater-blit-painter-a.patch
   0104-theater-blit-painter-b.patch
-  manifest.txt              default 32 patches + the five above
+  manifest.txt              default 33 patches + the five above
 
 State: 28 bytes at SAVEINFO+0x1C8 (0x03023468), inside the
 +0x1C7..+0x2D5 verbatim block. Census evidence: README.md here and

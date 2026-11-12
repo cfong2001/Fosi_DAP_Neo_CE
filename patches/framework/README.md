@@ -40,8 +40,8 @@ the wheel timer period patch, and the 0000 no-op self-test fixture) plus the tra
 ranges overlap a byte patch's, and verify.py check 7 proves the
 combined image equals the disjoint union of its parts. The current
 unified image (dated 2026-10-23) has SHA-256
-`1cf609559048a02686585a159dab06fa4856954aa647283a50a8b47da33e3c99`
-and a 71,532-byte diff vs stock (1,399 framework + 70,139 Vorbis, minus
+`4fa813d99d6b84d871635be490f49f3a8d4f17bcb5f7ae2540edfb62d334ad4e`
+and a 71,517-byte diff vs stock (1,384 framework + 70,139 Vorbis, minus
 6 shared date/mirror/CRC bytes).
 
 Paths are portable. No tool hard-codes a workspace. Resolution order
@@ -283,7 +283,7 @@ before a single byte is interpreted as a patch target.
    code leaves every other module's extracted segments
    byte-identical, grows module 31's code by exactly the payload at
    its tail, passes the layout-generalized validator, and composes
-   with the full shipped build (32 patches plus the transplant)
+   with the full shipped build (33 patches plus the transplant)
    unchanged.
 10. The `--theme-config` build: the default unified build still
     reproduces its pinned whole-image hash; the studio example

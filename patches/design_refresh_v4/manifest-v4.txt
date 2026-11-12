@@ -20,6 +20,7 @@
 ../framework/patches/0016-clock-v1-row-20.patch
 ../framework/patches/0017-clock-v1-row-21.patch
 ../framework/patches/0018-clock-v1-row-22.patch
+../framework/patches/0019-i2c-reset-pulse.patch
 ../framework/patches/0020-gapless-state-pair.patch
 ../framework/patches/0021-gapless-gate-hook.patch
 ../framework/patches/0022-gapless-gate-cave.patch

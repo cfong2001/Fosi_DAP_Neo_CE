@@ -132,9 +132,9 @@ def build_variant(tmp):
     raw = out.read_bytes()
     # v5: the payload grows module 31 and the zeroed gap tail holds the
     # slice line buffer, as recorded in design.md (Accounting).
-    expected = ('4d14ce1dfefd269a315d6d70466e30a2eca2f6cef190a6c439a5daedb3a0ace6'
+    expected = ('b273c340142b08ea6b037ad06cb2dc360046be0144e30ef2938ad3ee46e5180a'
                 if no_transplants else
-                '15ddd10a7cc61966ed4fc6549037a4a08646b44171e6e4c8da7543c3aa0acbb0')
+                'd3c972d3fe2eb07680d61c2ac58a5d197d2b1ed029c7b2e78cffb5298517ed1a')
     if hashlib.sha256(raw).hexdigest() != expected:
         raise SystemExit('marquee test variant hash mismatch; refusing unreviewed output')
     if no_transplants:

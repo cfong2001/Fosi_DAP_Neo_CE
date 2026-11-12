@@ -3,7 +3,7 @@
  "input_file": "DP3_V137.img",
  "output_file": "DP3_V137_CE.img",
  "input_sha256": "fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cdfade5e9c6ea3bd71ac6deef",
- "output_sha256": "6fb923612567088663bc145fda4812e97a96c1a304d5e25bbb2c5b4bef2baefb",
+ "output_sha256": "a7c7f5c2f04279359fd577f602abece687421776f46860ed6d63a7b7f42d05d6",
  "byte_length": 13638660,
  "header_date": "20261023",
  "patches_applied": [
@@ -217,6 +217,17 @@
    "new_hex": "00389c1c00000000000000000000000000389c1c00389c1c"
   },
   {
+   "patch": "i2c-reset-pulse",
+   "file": "0019-i2c-reset-pulse.patch",
+   "kind": "module",
+   "module": 0,
+   "region": "code",
+   "cpu_address": "0x3060338",
+   "file_offset": "0x399e4",
+   "old_hex": "012004f003fb",
+   "new_hex": "322004f0f1fa"
+  },
+  {
    "patch": "gapless-0-state-pair",
    "file": "0020-gapless-state-pair.patch",
    "kind": "module",
@@ -269,7 +280,7 @@
    "cpu_address": "0x30893c4",
    "file_offset": "0xa013a",
    "old_hex": "cf4810b500680a2828bf10bddfe800f0051b1b1b1b1b1b1b1b1bfff7c6ffe3f793fb01210e20c9f717f901210f20c9f713f900216e20c9f7d7f80021bde810407e20c9f7d1b8fff7b0ffbde81040e3f77bbb",
-   "new_hex": "cf4810b500680a2828bf10bd0446fff7ccff0db9062c12d0e3f796fb7cb901210e20c9f719f901210f20c9f715f900216e20c9f7d9f800217e20c9f7d5f810bd00bf00bf00bf00bf00bf00bf00bf00bf00bf"
+   "new_hex": "cf4810b500680a2828bf10bd0446fff7ccff0db1e3f798fb7cb901210e20c9f71bf901210f20c9f717f900216e20c9f7dbf800217e20c9f7d7f810bd00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf"
   },
   {
    "patch": "gapless-5-gate-tail",
@@ -8404,8 +8415,8 @@
   }
  ],
  "diff_vs_stock": {
-  "bytes_changed": 4747820,
-  "range_count": 428750,
+  "bytes_changed": 4747821,
+  "range_count": 428754,
   "note": "range list omitted; rebuild with patches/full/build/build_full.py for it"
  },
  "validation": "validate_grown() passed (structural checks, layout derived from the image)",

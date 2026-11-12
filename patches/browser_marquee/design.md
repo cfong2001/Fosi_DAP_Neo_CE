@@ -743,7 +743,7 @@ The v3 payload is 6,544 bytes against the full build's
 patches/full/ is untouched, and the default build is
 unaffected: a framework build with the default manifest
 reproduces the pinned unified image
-`1cf609559048a02686585a159dab06fa4856954aa647283a50a8b47da33e3c99`
+`4fa813d99d6b84d871635be490f49f3a8d4f17bcb5f7ae2540edfb62d334ad4e`
 byte for byte.
 
 ## v4: cover thumbnail with the text shift
@@ -981,7 +981,7 @@ The v4 payload is 7,252 bytes against the full build's
 patches/full/ is untouched, and the default build is
 unaffected: a framework build with the default manifest
 reproduces the pinned unified image
-`1cf609559048a02686585a159dab06fa4856954aa647283a50a8b47da33e3c99`
+`4fa813d99d6b84d871635be490f49f3a8d4f17bcb5f7ae2540edfb62d334ad4e`
 byte for byte (re-verified for v4).
 
 ## Phase E notes
@@ -1402,7 +1402,7 @@ it appeared.
 Payload 6,992 B in the module 31 growth window (3,808 code
 + 3,184 data), 444 B spare. Variant image 13,638,484 B,
 SHA-256
-15ddd10a7cc61966ed4fc6549037a4a08646b44171e6e4c8da7543c3aa0acbb0. Hooks: the four standing hooks (0300
+d3c972d3fe2eb07680d61c2ac58a5d197d2b1ed029c7b2e78cffb5298517ed1a. Hooks: the four standing hooks (0300
 gate, 0301 key, 0302 exit, 0303 toggle) plus 0310 to 0315
 above; hooks 0304 to 0309 do not exist in this variant. The
 gap tail ships as 2,044 zero bytes and carries the slice
