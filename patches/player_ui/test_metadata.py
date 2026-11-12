@@ -36,7 +36,7 @@ class Metadata(Typography):
         u.mem_write(0x0302385C,struct.pack('<H',0x1234));u.mem_write(0x030235B6,struct.pack('<H',0xABCD));u.mem_write(0x03004400,b'\x22\x11')
         rows=[];fills=[]
         def hook(uc,addr,n,data):
-            if addr==0x0305943E:uc.reg_write(UC_ARM_REG_R0,size)
+            if addr==0x030545D4:uc.reg_write(UC_ARM_REG_R0,size)
             elif addr==0x03062CEE:
                 rows.append((struct.unpack('<4h',uc.mem_read(uc.reg_read(UC_ARM_REG_R0),8)),self.read_text(uc,uc.reg_read(UC_ARM_REG_R2))))
             elif addr==0x030632FA:fills.append(tuple(uc.reg_read(r) for r in (UC_ARM_REG_R0,UC_ARM_REG_R1,UC_ARM_REG_R2,UC_ARM_REG_R3)))
