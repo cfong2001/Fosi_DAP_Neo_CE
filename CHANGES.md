@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-11-12: Player typography and library labels
+
+Standard CE draws time with the main font, pauses scrolling for 1.5 seconds,
+then advances every 0.5 seconds. English library labels now read Artists,
+Albums and Play All Albums. The image length is unchanged; Thumb tests cover
+text bounds, register preservation and scrolling cadence.
+
 ## 2026-11-12: larger M3U playlists
 
 - Playlists hold up to 150 tracks from up to 32 folders, up from 59 tracks

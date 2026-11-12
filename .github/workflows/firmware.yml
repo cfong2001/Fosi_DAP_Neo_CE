@@ -69,6 +69,12 @@ jobs:
       - name: Antialiased screen art and keyed progress knob
         run: python patches/antialias/test_screens.py
 
+      - name: Player time typography, marquee timing and labels
+        run: |
+          python patches/player_ui/build_typography.py
+          git diff --exit-code -- patches/player_ui
+          python patches/player_ui/test_typography.py
+
       - name: Redrawn Font B glyphs
         run: python patches/antialias/test_font.py
 

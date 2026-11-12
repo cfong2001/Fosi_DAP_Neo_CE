@@ -48,12 +48,12 @@
 //           1f6b348f17154f834702c9714a2bb5a632062bcda1343dbe6dbeebee979cf8ed
 //         build.py --bt-auto-off never --dac-filter nos
 //           e67602680d1749d62df1c4d60343bbff6baad146c406fc8559703f597b67adaf
-//   (m) the everything build (patches/full/: 89 patches, both
+//   (m) the everything build (patches/full/: 94 patches, both
 //       transplants, two growth insertions, the merged tail and
 //       the merged theme runs), with the page's embedded Opus data
 //       (docs/builder-opus-data.mjs; DAP_NEO_OPUS_DATA overrides it):
 //         build_full.py (one build.py pass)
-//         69ee512a082338fb656e2730dcaa15c206e25ad47faf2d97bc64f2e5090d2140
+//         f4f95f3203cd6d29349bdac33bf3ab65ff7c33911f89a93539ea226ee762d5d5
 //   standalone lock screen (the embedded 406-byte reference-toolchain
 //   routine in a module 31 extension, plus patch 0033):
 //         build.py --no-transplants --manifest <framework manifest plus
@@ -143,7 +143,7 @@ for (const [patch, path] of fullManifest.map((entry, i) =>
   assert.equal(patch.expect, field("expect").toLowerCase());
   assert.equal(patch.replace, field("replace").toLowerCase());
 }
-assert.equal(FULL_EXTRA_PATCHES.length, 50);
+assert.equal(FULL_EXTRA_PATCHES.length, 55);
 assert.equal(FULL_TAIL.length, 2040);
 assert.equal(FULL_TAIL.sha256,
   "5100d0d0e4c17f08ea6ede667f3c720edb721013836a7bf6cf7bc0d942446c4c");
@@ -151,9 +151,9 @@ assert.deepEqual(FULL_GROWTHS.map(g => [g.module, g.length, g.sha256]), [
   [31, 6616, "3f7e09cae9658c4cf21bfc4f9be92a037051f10a74e759f2e7fd8d4c0cac2aa9"],
   [24, 26, "7b80afb308d276a4d0012cd4302f7a5f2a1c5192a1f2e70d3f23867e195a942a"],
 ]);
-assert.equal(FULL_THEME_RUNS.length, 1647);
+assert.equal(FULL_THEME_RUNS.length, 1649);
 assert.equal(FULL_IMAGE_SHA256,
-  "69ee512a082338fb656e2730dcaa15c206e25ad47faf2d97bc64f2e5090d2140");
+  "f4f95f3203cd6d29349bdac33bf3ab65ff7c33911f89a93539ea226ee762d5d5");
 for (const g of FULL_GROWTHS)
   assert.equal(await sha256Hex(hexToBytes(g.hex)), g.sha256);
 assert.equal(await sha256Hex(hexToBytes(FULL_TAIL.hex)), FULL_TAIL.sha256);
