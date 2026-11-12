@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-11-12: Font A redrawn
+
+- Font A, the 6 x 12 font for status and small text, is redrawn from
+  Barlow SemiBold at 11 px, matching the list font. Same generator
+  (`generate_font.py a`), same firmware rules (letters measured over rows
+  0 to 7, explicit tails for everything else). 314 theme runs; the merged
+  theme has 1,583.
+
 ## 2026-11-12: gapless v3, warm start
 
 - Stock zeroes the first three decoded buffers of every track and

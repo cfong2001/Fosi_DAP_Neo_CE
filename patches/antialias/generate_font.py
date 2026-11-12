@@ -44,10 +44,38 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
 STOCK_SHA = 'fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cdfade5e9c6ea3bd71ac6deef'
 FONT_B, STRIDE, ROWS = 0x371726, 33, 16
+TAIL = 32                   # tail byte index in a record
+MEASURE = 10                # rows the firmware measures a letter over
+CELL, FULL = 8, 16          # default ASCII advance, full-cell advance
+OUT, SHEET = 'font-glyphs.json', 'font_before_after.png'
 BASELINE = 12
 FACE = ROOT / 'docs' / 'fonts' / 'Barlow-SemiBold.ttf'
 SIZE = 16
 SPACE = 4
+PUNCT_PAD = 1               # clear columns each side of . , : ; ! ?
+TABULAR = True              # digits share one advance
+
+# Font A, the 6 x 12 font for status and small text (font_a section at
+# stock 0x16FB20, 32 bytes per code point: 12 rows of 16 bits, tail at
+# byte 24). The measurer reads 8 rows for it. Barlow SemiBold 11 px puts
+# caps on rows 2 to 9 and descenders on 10 and 11, the stock layout.
+PROFILES = {
+    'b': {},
+    'a': dict(FONT_B=0x16FB20, STRIDE=32, ROWS=12, TAIL=24, MEASURE=8,
+              CELL=6, FULL=12, BASELINE=9, SIZE=11, SPACE=3,
+              FACE=ROOT / 'docs' / 'fonts' / 'Barlow-SemiBold.ttf',
+              PUNCT_PAD=0, TABULAR=False,
+              OUT='font-a-glyphs.json', SHEET='font_a_before_after.png'),
+}
+
+
+_DEFAULTS = {k: globals()[k] for k in PROFILES['a']}
+
+
+def use(name):
+    """Switch the module to one font's profile ('b' is the default)."""
+    globals().update(_DEFAULTS)
+    globals().update(PROFILES[name])
 
 CODEPOINTS = ([c for c in range(0x21, 0x7F)] +
               [c for c in range(0xA1, 0x100) if c != 0xAD] +
@@ -123,13 +151,13 @@ def build():
             skipped.append((cp, 'leaves the cell'))
             continue
         w = max(x for x, _ in ink) + 1
-        if 0x30 <= cp <= 0x39:
+        if TABULAR and 0x30 <= cp <= 0x39:
             pad = (digit_w - w) // 2
             ink = {(x + pad, y) for x, y in ink}
             adv = digit_w + 1
         elif chr(cp) in '.,:;!?':
-            ink = {(x + 1, y) for x, y in ink}      # one column each side
-            adv = w + 3
+            ink = {(x + PUNCT_PAD, y) for x, y in ink}
+            adv = w + 1 + 2 * PUNCT_PAD
         else:
             adv = w + 1
         if ascii_letter(cp):
@@ -145,15 +173,15 @@ def build():
                 ink = {(x, y) for x, y in ink if x < 6}
             for k in range(8):
                 shifted = {(x + k, y) for x, y in ink}
-                top = [x for x, y in shifted if y < 10]
+                top = [x for x, y in shifted if y < MEASURE]
                 if top and min(top) + max(top) + 2 >= max(x for x, _ in shifted) + 2:
                     ink = shifted
                     break
         stock_rec = raw[FONT_B + cp * STRIDE:FONT_B + (cp + 1) * STRIDE]
-        tail = stock_rec[32] if ascii_letter(cp) else 0x80 + adv
-        glyphs[cp] = record(ink, tail)
+        tail = stock_rec[TAIL] if ascii_letter(cp) else 0x80 + adv
+        glyphs[cp] = record(ink, tail) + stock_rec[TAIL + 1:]   # bytes after the tail stay stock
     space = bytearray(raw[FONT_B + 0x20 * STRIDE:FONT_B + 0x21 * STRIDE])
-    space[32] = 0x80 + SPACE
+    space[TAIL] = 0x80 + SPACE
     glyphs[0x20] = bytes(space)
     return raw, glyphs, skipped
 
@@ -174,18 +202,18 @@ def runs(raw, glyphs):
 
 def advance(rec, cp):
     """The firmware's advance for a large-font record (0x030627BE)."""
-    tail = rec[32]
+    tail = rec[TAIL]
     if ascii_letter(cp):
-        cols = [x for y in range(10) for x in range(16)
+        cols = [x for y in range(MEASURE) for x in range(16)
                 if int.from_bytes(rec[2 * y:2 * y + 2], 'big') & (0x8000 >> x)]
         return (min(cols) + max(cols) + 2) if cols else 0
     if tail == 0x20:
-        return 16
+        return FULL
     if tail > 0x80:
         return tail - 0x80
     if tail == 0x80 and cp >= 0x7F:
-        return 16
-    return 8
+        return FULL
+    return CELL
 
 
 def sheet(raw, glyphs, path):
@@ -220,12 +248,14 @@ def sheet(raw, glyphs, path):
 def main():
     raw, glyphs, skipped = build()
     rs = runs(raw, glyphs)
-    (HERE / 'font-glyphs.json').write_text(
+    (HERE / OUT).write_text(
         json.dumps({'version': 1, 'runs': rs}, indent=1) + '\n')
-    sheet(raw, glyphs, HERE / 'mock' / 'font_before_after.png')
+    sheet(raw, glyphs, HERE / 'mock' / SHEET)
     print(f'{len(glyphs)} glyph records, {len(rs)} runs; kept stock: '
           + ', '.join(f'U+{cp:04X} ({why})' for cp, why in skipped))
 
 
 if __name__ == '__main__':
-    sys.exit(main())
+    for name in (sys.argv[1:] or ['b', 'a']):
+        use(name)
+        main()
