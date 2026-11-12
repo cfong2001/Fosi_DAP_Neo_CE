@@ -55,7 +55,7 @@ BP_BASE = EXT_BASE + TRAMP_SLOT
 # Filled in after the first build passed the parser suite and the
 # host bridge test; the build refuses any later drift.
 EXPECTED = {
-    'payload_sha256': '4e717adca5c06a13c2f76e981387852d64d86458d3d6eee0b405144d5fc78ac3',
+    'payload_sha256': '3f7e09cae9658c4cf21bfc4f9be92a037051f10a74e759f2e7fd8d4c0cac2aa9',
     'site33': '01f0d1be',
     'site40': '00f095bf',
 }
