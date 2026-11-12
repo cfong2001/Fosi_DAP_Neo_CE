@@ -92,6 +92,9 @@ const allGroups = new Set(PATCH_GROUPS.map(g => g.id));
 const exampleTheme = JSON.parse(await readFile(
   new URL("../patches/theme_editor/theme.example.json", import.meta.url),
   "utf8"));
+const codeColours = JSON.parse(await readFile(
+  new URL("../patches/theme_editor/code-colours.example.json", import.meta.url),
+  "utf8"));
 
 // Keep the browser's embedded hook preconditions synchronized with the
 // source patch files even when local experimental binaries are absent.
@@ -170,6 +173,9 @@ const cases = [
   ["(b) toggles on plus the example theme",
    {groups: allGroups, patchGroups: PATCH_GROUPS, themeConfig: exampleTheme},
    "5da35007cdaaef5a8cc3f061739675966dcbb563a18650df78a4d68d6c78dbfd"],
+  ["(b2) toggles on plus the code-colour example",
+   {groups: allGroups, patchGroups: PATCH_GROUPS, themeConfig: codeColours},
+   "d747c810d1fb5f16b3c3f7f66149b86b5882ee2f05f77c71b04f95aa11f34099"],
   ["(c) toggles on plus the CE splash mark",
    {groups: allGroups, patchGroups: PATCH_GROUPS, ceMarkRuns: CE_MARK_RUNS},
    "45573aeb4c8102a4649176ead83ddf6fa68b94746d7fda7a68c8a59f57f4c691"],
@@ -305,6 +311,19 @@ await assert.rejects(buildFirmware(stock, {
   themeConfig: {version: 1, runs: [mark]}, ceMarkRuns: CE_MARK_RUNS,
 }, sha256Hex), /overlaps an earlier modification/);
 console.log("PASS overlapping theme and mark runs are refused");
+
+// A code colour must name a known role, and a run that claims one of
+// its movw sites is refused as an overlap, as in build.py.
+await assert.rejects(buildFirmware(stock, {
+  groups: allGroups, patchGroups: PATCH_GROUPS,
+  themeConfig: {version: 1, code_colours: {background: "#000000"}},
+}, sha256Hex), /unknown code colour/);
+await assert.rejects(buildFirmware(stock, {
+  groups: allGroups, patchGroups: PATCH_GROUPS,
+  themeConfig: {version: 1, code_colours: {accent_light: "#0284C7"},
+                runs: [{offset: "0x3ec86", expect: "4ff62030", replace: "4ff62030"}]},
+}, sha256Hex), /overlaps an earlier modification/);
+console.log("PASS code colours: unknown roles and overlapping runs are refused");
 await assert.rejects(buildFirmware(stock, {
   groups: allGroups, patchGroups: PATCH_GROUPS, opusPatches: OPUS_PATCHES,
   opus: {ranges: [{offset: 0, replace: "00"}]},

@@ -71,8 +71,11 @@
 <div class="page">
 <section class="card">
 <h2>1. Choose colors</h2>
-<p class="note">Colors reach the firmware only through the exact resource rules in section 3. The screens in section 2 show real firmware pixels, not this palette.</p>
+<p class="note">These five colors reach the firmware only through the exact resource rules in section 3. The screens in section 2 show real firmware pixels, not this palette.</p>
 <div class="palette" id="palette"></div>
+<h3>Accent and line colours</h3>
+<p class="note">These four are set by code, not resources: the orange accent and the divider lines of each scheme. Tick one to change it. The build checks the instruction at both of its sites (the scheme routine and the clock painter) against stock and rewrites the colour in both.</p>
+<div class="palette" id="code-palette"></div>
 <div class="hint">
 <h3>Firmware file</h3>
 <div class="button-row"><button class="button main" type="button" id="firmware-fetch">Load stock V137 from the repository (13.6 MB)</button></div>

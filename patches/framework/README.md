@@ -128,8 +128,21 @@ discipline as the rest of the framework:
   state left by the earlier steps. `patches/theme_editor/ce-mark.json`
   ships the CE splash mark this way: 64 runs, 496 bytes across
   splash resources 127 and 293, no palette and no resource rules.
+- A config may carry `code_colours`, any of `accent_light`,
+  `line_light`, `accent_dark` and `line_dark` as `#RRGGBB`. These
+  are the accent and divider colours the UI sets in code: each is a
+  `movw r0, #imm16` in module 0 that appears in the palette routine
+  and again in the clock/status painter (which repaints the cells),
+  so the build rewrites both sites or neither. It locates each site
+  through the image's module 0 record, decodes the instruction and
+  refuses unless it is exactly `movw r0` with the stock value
+  (sites and values: `CODE_COLOUR_SITES` in `build.py`, from the
+  census in `patches/design_refresh_v2/schemes/`). Background and
+  text are not offered: the routines load them from one shared
+  register pair and swap it per scheme.
 - `literal_sites` are refused: the `APPROVED_LITERAL_SITES`
   registry in `tools/ui_theme.py` is empty at this revision.
+  `code_colours` is the reviewed route for the sites above.
 - `--theme-config` cannot be combined with `--recovery`, and a
   build without it is byte-identical to the build before this
   step existed (verify check 10 pins the unified hash).

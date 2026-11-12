@@ -1,6 +1,13 @@
 // Pure V137 parser and color transforms. No network calls or firmware writes.
 export const STOCK_SHA256 = "fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cdfade5e9c6ea3bd71ac6deef";
 export const ROLES = ["background", "text", "highlight", "icons", "progress_bar"];
+// Colours set by code in module 0 (build.py CODE_COLOUR_SITES), with
+// their stock values. Optional; each one present is patched at both
+// of its sites.
+export const CODE_ROLES = {
+  accent_light: "#FF6600", line_light: "#EEEEEE",
+  accent_dark: "#F74400", line_dark: "#101010",
+};
 export const GUARD_WORDS = new Set([0x0000, 0x00f8]); // possible colorkeys, not proven
 export const KNOWN_LABELS = new Map([
   [0, "startup/spinner artwork"], [1, "QR-code artwork"],
@@ -87,6 +94,13 @@ export function validateTheme(config, entries) {
   for (const role of ROLES) rgb565(config.palette[role]);
   assert(Array.isArray(config.resources) && Array.isArray(config.literal_sites),
          "resources and literal_sites must be arrays");
+  const code = config.code_colours ?? {};
+  assert(code && typeof code === "object" && !Array.isArray(code),
+         "code_colours must be an object");
+  for (const [role, value] of Object.entries(code)) {
+    assert(role in CODE_ROLES, "Unknown code colour " + role);
+    rgb565(value);
+  }
   const keys = new Set();
   for (const rule of config.resources) {
     assert(Number.isInteger(rule.id) && rule.id >= 0 && rule.id < entries.length,
@@ -118,7 +132,9 @@ export function rgbaPixels(firmware, asset, replacements = new Map()) {
   }
   return arr;
 }
-export function exportConfig(palette, rules) {
+export function exportConfig(palette, rules, codeColours = {}) {
   const resources = [...rules].sort((a,b) => a.id - b.id || asWord(a.source) - asWord(b.source));
-  return {version: 1, palette: {...palette}, resources, literal_sites: []};
+  const cfg = {version: 1, palette: {...palette}, resources, literal_sites: []};
+  if (Object.keys(codeColours).length) cfg.code_colours = {...codeColours};
+  return cfg;
 }

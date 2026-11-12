@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "code_colours": {
+    "accent_light": "#0284C7",
+    "line_light": "#D6DCE4",
+    "accent_dark": "#38BDF8",
+    "line_dark": "#2A3140"
+  }
+}

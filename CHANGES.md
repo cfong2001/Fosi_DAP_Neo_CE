@@ -1,5 +1,18 @@
 # Changelog
 
+## 2026-11-12: theme code colours
+
+- Themes can now change the accent and divider-line colours, which the
+  firmware sets in code rather than in resources. A config's
+  `code_colours` takes any of `accent_light`, `line_light`,
+  `accent_dark` and `line_dark`. Each is a `movw r0` immediate in module 0
+  loaded by both the palette routine and the clock painter; the build
+  rewrites both, after decoding each site and checking it holds the stock
+  value. The page builder applies it byte for byte the same (new test case
+  b2), and the theme studio has controls for it.
+- `verify.py` check 10 confines the example's diff to the eight sites and
+  refuses an unknown role.
+
 ## 2026-11-12: focus mode in the standard image
 
 - Focus mode joins the standard image: after five seconds without input

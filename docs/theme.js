@@ -1,5 +1,5 @@
 import {
-  STOCK_SHA256, ROLES, GUARD_WORDS, parseFirmware, sha256,
+  STOCK_SHA256, ROLES, CODE_ROLES, GUARD_WORDS, parseFirmware, sha256,
   frequencies, rgbaPixels, rgb565, rgb888, asWord, wordHex,
   validateTheme, exportConfig
 } from "./theme-core.mjs";
@@ -17,7 +17,12 @@ const roleLabels = {
   background: "Background", text: "Text", highlight: "Selection",
   icons: "Icons", progress_bar: "Progress"
 };
+const codeLabels = {
+  accent_light: "Accent, light scheme", line_light: "Lines, light scheme",
+  accent_dark: "Accent, dark scheme", line_dark: "Lines, dark scheme"
+};
 const state = {
+  code: {},
   palette: {...defaults}, firmware: null, selected: null,
   rules: new Map(), page: 0, filter: ""
 };
@@ -57,6 +62,36 @@ function populatePalette() {
     item.append(name, output, field); root.append(item);
   }
   applyPalette();
+  populateCodePalette();
+}
+// Accent and line colours the firmware sets in code. A role is only
+// exported (and patched) while its box is ticked.
+function populateCodePalette() {
+  const root = $("code-palette");
+  if (!root) return;
+  root.replaceChildren();
+  for (const [role, stock] of Object.entries(CODE_ROLES)) {
+    const item = document.createElement("label");
+    item.className = "color-field";
+    const on = document.createElement("input");
+    on.type = "checkbox"; on.checked = role in state.code;
+    on.setAttribute("aria-label", "Change " + codeLabels[role]);
+    const name = document.createElement("span");
+    name.textContent = codeLabels[role];
+    const output = document.createElement("output");
+    const field = document.createElement("input");
+    field.type = "color"; field.value = (state.code[role] || stock).toLowerCase();
+    field.setAttribute("aria-label", codeLabels[role] + " hex color");
+    const sync = () => {
+      if (on.checked) state.code[role] = field.value.toUpperCase();
+      else delete state.code[role];
+      output.textContent = on.checked ? field.value.toUpperCase() : "stock";
+    };
+    on.addEventListener("change", sync);
+    field.addEventListener("input", () => { on.checked = true; sync(); });
+    sync();
+    item.append(on, name, output, field); root.append(item);
+  }
 }
 function applyPalette() {
   renderAsset();
@@ -230,7 +265,7 @@ function addRule() {
     status("editor-status", "Rule pinned to " + entry.count + " verified source pixels in asset #" + asset.id + ".", "good");
   } catch (err) { status("editor-status", err.message, "bad"); }
 }
-function config() { return exportConfig(state.palette, state.rules.values()); }
+function config() { return exportConfig(state.palette, state.rules.values(), state.code); }
 function exportTheme() {
   try {
     const cfg = config();
@@ -255,6 +290,7 @@ function applyThemeData(data) {
       }
     }
     state.palette = {...defaults, ...data.palette};
+    state.code = {...(data.code_colours || {})};
     state.rules = new Map(data.resources.map(rule =>
       [rule.id + ":" + asWord(rule.source), {...rule,source:wordHex(asWord(rule.source))}]));
     populatePalette(); summarizeRules(); renderAsset();

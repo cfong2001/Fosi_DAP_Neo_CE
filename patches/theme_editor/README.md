@@ -78,13 +78,24 @@ modification, on a count mismatch, and on a runs entry whose expected
 bytes do not match; `--theme-config` with `--recovery` is refused.
 `verify.py` check 10 pins all of it: the default build unchanged, the
 example theme's diff confined to resources 6 to 10 at exactly 32,760
-bytes, the CE mark diff at exactly the bytes its runs change, and the refusals.
+bytes, the CE mark diff at exactly the bytes its runs change, the
+code-colour example's diff confined to its eight instruction sites, and
+the refusals.
 
-Two things remain open. Literal code sites are still not themeable:
-the APPROVED_LITERAL_SITES registry in `tools/ui_theme.py` is empty,
-and the build refuses a config whose `literal_sites` list is
-non-empty; approving the palette sites the colour census pinned is a
-separate decision. The word convention: the studio names resource
+The accent and divider-line colours are set in code, not resources.
+Section 1 of the studio has a second group for them: tick a colour to
+change it, and the export carries it under `code_colours`. Each one is a
+`movw r0` immediate in module 0 that the palette routine and the clock
+painter both load, so the build rewrites both and checks each against
+stock first. `code-colours.example.json` sets all four.
+
+Two things remain open. Arbitrary literal sites are still not
+themeable: the APPROVED_LITERAL_SITES registry in `tools/ui_theme.py` is
+empty, and the build refuses a config whose `literal_sites` list is
+non-empty. The palette sites the colour census pinned are reachable only
+through `code_colours`, which names them by role. Background and text
+stay resource-only, since the routines share one register pair for them
+and swap it per scheme. The word convention: the studio names resource
 words little-endian and its counts hold under that reading, while the
 colour census proved from decoded renders, and the emulated player
 painter confirms (`tools/gen_sim_data.py`), that the panel displays

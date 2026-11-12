@@ -287,6 +287,41 @@ def apply_transplants(raw, names, ecpatch_dir, patch_ranges):
 # Approving the census palette sites is a separate decision.
 
 THEME_ROLES = ('background', 'text', 'highlight', 'icons', 'progress_bar')
+
+# Colours the UI sets in code, not in resources. Each role is a
+# `movw r0, #imm16` (T3) in module 0 that appears twice: once in the
+# palette routine, which fills the colour cells when a scheme is
+# chosen, and once in the clock/status painter, which writes the same
+# cells again on every repaint. A role is patched at both sites or
+# not at all, otherwise the painter restores the stock value on the
+# next redraw. Addresses and stock immediates come from the census
+# (patches/design_refresh_v2/schemes/palette_registry_proposal.json);
+# the build decodes each site from the image and refuses unless it
+# is exactly that instruction. Background and text are not here: the
+# routines load them from one shared register pair and swap it per
+# scheme, so they are not independent sites.
+CODE_COLOUR_SITES = {
+    'accent_light': (0xFB20, (0x030655DA, 0x03065F4A)),
+    'line_light':   (0xEF7D, (0x030655E2, 0x03065F52)),
+    'accent_dark':  (0xF220, (0x030655F0, 0x03065F90)),
+    'line_dark':    (0x1082, (0x030655F8, 0x03065F98)),
+}
+
+
+def _movw_r0(word):
+    """Thumb-2 MOVW r0, #word (encoding T3), as stored bytes."""
+    hw1 = 0xF240 | ((word >> 1) & 0x400) | (word >> 12)
+    hw2 = ((word >> 8) & 7) << 12 | (word & 0xFF)
+    return struct.pack('<HH', hw1, hw2)
+
+
+def _movw_r0_imm(four):
+    """Inverse of _movw_r0, or None if the bytes are not MOVW r0."""
+    hw1, hw2 = struct.unpack('<HH', four)
+    if hw1 & 0xFBF0 != 0xF240 or hw2 & 0x8F00 != 0:
+        return None
+    return ((hw1 & 0xF) << 12 | ((hw1 >> 10) & 1) << 11
+            | ((hw2 >> 12) & 7) << 8 | (hw2 & 0xFF))
 THEME_GUARD_WORDS = (0x0000, 0x00F8)
 ROCK26_SIGNATURE = b'ROCK26IMAGERES  '
 
@@ -411,7 +446,20 @@ def parse_theme_config(config):
             raise ValueError(
                 'theme: run expect/replace must be equal, non-zero length')
         runs.append({'offset': off, 'expect': expect, 'replace': replace})
-    return {'palette_words': palette_words, 'resources': rules, 'runs': runs}
+    code_colours = config.get('code_colours', {})
+    if code_colours is None:
+        code_colours = {}
+    if not isinstance(code_colours, dict):
+        raise ValueError('theme: code_colours must be an object')
+    code_words = {}
+    for role, value in code_colours.items():
+        if role not in CODE_COLOUR_SITES:
+            raise ValueError(
+                f'theme: unknown code colour {role!r}; use '
+                + ', '.join(CODE_COLOUR_SITES))
+        code_words[role] = _theme_rgb565(value)
+    return {'palette_words': palette_words, 'resources': rules, 'runs': runs,
+            'code_words': code_words}
 
 
 def _rock26_resources(raw):
@@ -508,6 +556,34 @@ def apply_theme(raw, config, claimed_ranges):
                           'target': hex(cfg['palette_words'][rule['role']]),
                           'count': len(hits),
                           'file_offset': hex(base)})
+    rec_code = []
+    if cfg['code_words']:
+        img = Image(bytes(raw))
+        code_off, code_len = img.module_region(0, 'code')
+        code_exec = img.modules[0]['code_exec']
+    for role in CODE_COLOUR_SITES:
+        if role not in cfg['code_words']:
+            continue
+        stock, sites = CODE_COLOUR_SITES[role]
+        word = cfg['code_words'][role]
+        for addr in sites:
+            rel = addr - code_exec
+            if not 0 <= rel <= code_len - 4:
+                raise ValueError(
+                    f'theme: code colour site {hex(addr)} is outside '
+                    f'module 0 code')
+            off = code_off + rel
+            imm = _movw_r0_imm(bytes(raw[off:off + 4]))
+            if imm != stock:
+                raise ValueError(
+                    f'theme: code colour {role} at {hex(addr)}: expected '
+                    f'movw r0, #{hex(stock)}, found '
+                    f'{bytes(raw[off:off + 4]).hex()}; refusing')
+            claim([off, off + 3], f'code colour {role}')
+            raw[off:off + 4] = _movw_r0(word)
+        rec_code.append({'role': role, 'stock': hex(stock),
+                         'target': hex(word),
+                         'sites': [hex(a) for a in sites]})
     rec_runs = []
     for run in cfg['runs']:
         off, expect, replace = run['offset'], run['expect'], run['replace']
@@ -523,9 +599,10 @@ def apply_theme(raw, config, claimed_ranges):
         rec_runs.append({'file_offset': hex(off), 'bytes': len(expect),
                          'old_hex': expect.hex(), 'new_hex': replace.hex()})
     record = {'resources': rec_rules, 'runs': rec_runs,
+              'code_colours': rec_code,
               'pixels_changed': sum(r['count'] for r in rec_rules),
               'bytes_changed': 2 * sum(r['count'] for r in rec_rules)
-              + sum(r['bytes'] for r in rec_runs)}
+              + sum(r['bytes'] for r in rec_runs) + 8 * len(rec_code)}
     return bytes(raw), record, claimed
 
 
@@ -1000,7 +1077,8 @@ def main():
     if report.get('theme'):
         t = report['theme']
         print(f"    - theme: {len(t['resources'])} resource recolour(s) "
-              f"({t['pixels_changed']} pixels), {len(t['runs'])} run(s); "
+              f"({t['pixels_changed']} pixels), {len(t['runs'])} run(s), "
+              f"{len(t['code_colours'])} code colour(s); "
               f"{t['bytes_changed']} bytes")
     if report.get('tail'):
         e = report['tail']
