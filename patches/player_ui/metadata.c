@@ -8,7 +8,7 @@ typedef struct { int16_t x0,y0,x1,y1; } Rect;
 #define FILE_NAME ((const u16 *)0x0304ADF4)
 #define DRAW ((void (*)(Rect*,Rect*,const u16*,u32))0x03062CEF)
 #define FILL ((void (*)(int,int,int,int,u32))0x030632FB)
-#define FILE_SIZE ((u32 (*)(u32))0x0305943F)
+#define FILE_SIZE ((u32 (*)(u32))0x030545D5)
 #define SEC(n) __attribute__((section(n),noinline))
 
 static SEC(".text.helper") u16 *ascii(u16 *d,const char *s) {
