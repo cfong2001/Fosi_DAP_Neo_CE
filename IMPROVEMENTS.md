@@ -8,6 +8,7 @@ called out rather than hidden behind a score.
 
 | Priority | Concept | Value | Effort | Implementation / dependency |
 |---|---|---:|---:|---|
+| 0 | First-flash review, read-only backup and matching recovery preparation | 5 | 2 | Implemented offline tooling; physical backup/restore qualification remains required |
 | 1 | Remove redundant USB connection text | 3 | 1 | Implemented in USB screen PR |
 | 2 | Show the actual USB PCM format and data rate | 4 | 1 | Implemented in USB screen PR; source-file tags are unavailable over UAC |
 | 3 | Row-based fills, clears and opaque blits | 5 | 2 | Implemented in drawing engine PR; byte-parity and bounds tests |

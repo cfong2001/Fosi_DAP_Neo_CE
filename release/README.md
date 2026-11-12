@@ -11,6 +11,10 @@ against their pins by `.github/workflows/firmware.yml` on every change.
 | `*.report.json` | Build reports: every patch with its address and old and new bytes, transplant hashes, validation results. The standard report summarises its byte ranges. | | |
 | `SHA256SUMS` | Hashes of the three images. | | |
 
+See [FLASH_REVIEW.md](FLASH_REVIEW.md) for the current major-flaw review,
+version-aware recovery preparation and device qualification procedure. The
+bundled V137 recovery must not be assumed to supersede official V155.
+
 ## Not yet tested on hardware
 
 No CE image has been flashed to a device. The images pass every offline

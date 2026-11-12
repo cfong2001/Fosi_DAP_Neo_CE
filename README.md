@@ -27,7 +27,7 @@ CE (Community Edition) is patched firmware for the Fosi Audio DAP Neo. It starts
 
 Start with the standard image. Use the minimal one if the standard image does not install (no image longer than stock has been installed yet), or if you play WMA files.
 
-The [install page](https://cfong2001.github.io/Fosi_DAP_Neo_CE/) checks the image's SHA-256 and copies it to the player's storage as `RKNANOFWIMG`; you then run the update on the device. To do it by hand, rename the image to `RKNANOFWIMG` (no extension), copy it to the top level of the player's storage, run the update the way you would an official Fosi update, and delete the file afterwards. [`release/README.md`](release/README.md) has the full steps, a testing order and recovery.
+Complete the [flash review and recovery gates](release/FLASH_REVIEW.md) before writing anything to a player. The [install page](https://cfong2001.github.io/Fosi_DAP_Neo_CE/) checks the image's SHA-256 and copies it to the player's storage as `RKNANOFWIMG`; you then run the update on the device. To do it by hand, rename the image to `RKNANOFWIMG` (no extension), copy it to the top level of the player's storage, run the update the way you would an official Fosi update, and delete the file afterwards. [`release/README.md`](release/README.md) has the full steps, a testing order and recovery.
 
 ## Features
 
@@ -172,13 +172,18 @@ Start with [`platform_architecture.md`](analysis/platform_architecture.md) for t
 
 ## Safety and recovery
 
+Read the [current flash review and recovery plan](release/FLASH_REVIEW.md) first.
+The bundled V137 recovery is older than official V155; use the offline
+preparation tool to produce a correctly dated recovery from the official
+firmware matching your device. First-flash device qualification remains open.
+
 - Nothing here has been tested on hardware. Treat every image as unproven.
 - The slot validator boots the slot whose image has the strictly newer BCD header date; on a tie it boots slot 1. It checks a header marker and an unkeyed CRC and verifies no signature ([`boot_slots.md`](analysis/boot_slots.md)).
 - The stock installer writes the update to slot 2 and then copies slot 2 over slot 1, so after a stock-path install both slots hold CE and no stock copy remains on the device.
 - To go back, install the recovery image the same way. It is stock code dated 2026-10-24, one day after CE (2026-10-23), so the validator selects it; plain stock (2026-10-22) is older than CE and would not replace it.
 - The boot validator reads the header copy by 512-byte sector. Standard images built before 2026-11-11 (pin `db0a11d2…` and earlier longer-than-stock pins) put that copy partway into a sector, so neither slot would likely validate. Do not flash them. Current builds pad the copy onto a sector boundary, and the validators refuse one that is not. The minimal and recovery images are stock length and were never affected.
 - If the player does not boot, recovery needs the Rockchip USB (Rockusb) tools. How Rockusb logical block addresses map to the validator's slot sectors is still unproven.
-- The planned safer layout keeps stock in slot 1 and CE in slot 2, so corrupting the slot 2 header falls back to stock. On such a unit the stock update flow must never run, because it would copy slot 2 over the stock fallback; keep update files off the card.
+- The proposed dual-image layout keeps stock in one slot and CE in the other. Its physical map and fallback are unverified; never corrupt a slot header as a recovery method. On such a unit the stock update flow must never run, because it would copy slot 2 over the stock fallback; keep update files off the card.
 
 ## Status and open work
 

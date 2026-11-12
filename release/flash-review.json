@@ -1,0 +1,63 @@
+{
+  "status": "OFFLINE CHECKS PASSED; DEVICE QUALIFICATION REQUIRED",
+  "source_candidate": {
+    "sha256": "66d79d648bee93d71c3adfdf229434bed57b337c6f9448d3c90d82a4a10df8bf",
+    "bytes": 13638148,
+    "header_date": "2026-10-23",
+    "mirror_offset": "0xc95a00",
+    "updater_transfer_bytes": 13631488,
+    "nonzero_payload_after_transfer": false,
+    "stored_segments": 108,
+    "package_checks": "passed",
+    "hardware_boot_verified": false,
+    "physical_slot_geometry_verified": false,
+    "recovery_on_device_verified": false
+  },
+  "source_official": {
+    "sha256": "4713a2eb4b523d49ad003ac2df159c1c596339aef1a9a060e6ea6bbbf18e1332",
+    "bytes": 13631492,
+    "header_date": "2026-11-02",
+    "mirror_offset": "0xcb0000",
+    "updater_transfer_bytes": 13631488,
+    "nonzero_payload_after_transfer": false,
+    "stored_segments": 108,
+    "package_checks": "passed",
+    "hardware_boot_verified": false,
+    "physical_slot_geometry_verified": false,
+    "recovery_on_device_verified": false,
+    "version": "V155"
+  },
+  "prepared_candidate": {
+    "sha256": "244b904fb50cec8b4bf5758d4c725507c07e26196e446c3c4abbddaa0ab139f8",
+    "bytes": 13638148,
+    "header_date": "2026-11-13",
+    "mirror_offset": "0xc95a00",
+    "updater_transfer_bytes": 13631488,
+    "nonzero_payload_after_transfer": false,
+    "stored_segments": 108,
+    "package_checks": "passed",
+    "hardware_boot_verified": false,
+    "physical_slot_geometry_verified": false,
+    "recovery_on_device_verified": false
+  },
+  "prepared_recovery": {
+    "sha256": "c0b226351edc842b29b5985067a9a46e86b68ae56df73179b19fdf33e5e70ca1",
+    "bytes": 13631492,
+    "header_date": "2026-11-14",
+    "mirror_offset": "0xcb0000",
+    "updater_transfer_bytes": 13631488,
+    "nonzero_payload_after_transfer": false,
+    "stored_segments": 108,
+    "package_checks": "passed",
+    "hardware_boot_verified": false,
+    "physical_slot_geometry_verified": false,
+    "recovery_on_device_verified": false
+  },
+  "source_candidate_not_newer_than_official": true,
+  "modified_code_or_resources": false,
+  "release_gate": "Do not flash until a full device backup, readback-verified slot map, recovery entry and restore procedure are established on this unit.",
+  "recovery_note": "Recovery is the supplied official firmware with a newer header date; no CE code is present. Date ordering is a traced validator rule, not proof of early-boot acceptance.",
+  "example_reference_only": true,
+  "official_source_matches_device_verified": false,
+  "full_device_backup_verified": false
+}
