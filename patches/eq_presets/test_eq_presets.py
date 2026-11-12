@@ -9,6 +9,9 @@
 3. The example config's AutoEQ curve (Sennheiser HD 600) lands in slot 6
    with a realised error under 1.0 dB rms, computed with the firmware's
    own band filters.
+4. The example's slot 6 name replaces that menu item's text in all 21
+   languages and leaves every other EQ name as stock; bad names are
+   refused.
 """
 import struct
 import sys
@@ -53,9 +56,10 @@ def selected_array(raw, mode):
     return [g - 12 for g in got[0]] if got else None
 
 
-def build(stock, slots):
+def build(stock, slots, names=None):
     base = fw.load_manifest(REPO / 'patches' / 'framework' / 'patches' / 'manifest.txt')
-    out, _ = fw.build_image(stock, base + eqfit.slot_patches(stock, slots), fw.DEFAULT_BUILD_DATE)
+    extra = eqfit.slot_patches(stock, slots) + eqfit.name_patches(stock, names or {})
+    out, _ = fw.build_image(stock, base + extra, fw.DEFAULT_BUILD_DATE)
     return out
 
 
@@ -75,13 +79,29 @@ def main():
     print('no curves configured: every item applies stock gains:', same)
     fails += not same
 
-    slots, report = eqfit.load_config(HERE / 'example.json', stock)
-    img = build(stock, slots)
+    slots, names, report = eqfit.load_config(HERE / 'example.json', stock)
+    img = build(stock, slots, names)
     sel = {n: selected_array(img, n) for n in range(1, 7)}
     ok = sel[5] == slots[5] and sel[6] == slots[6] and all(sel[n] == stock_sel[n] for n in (1, 2, 3, 4))
     print('example config reaches slots 5 and 6, others unchanged:', ok, report)
     fails += not ok
     fails += report[6]['rms_error_db'] >= 1.0
+
+    def eq_names(raw):
+        im = Image(raw)
+        return [[r['text'] for r in list(im.lang(lang))[175:181]] for lang in range(21)]
+    before, after = eq_names(stock), eq_names(img)
+    named = (all(a[5] == names[6] for a in after)
+             and all(a[:5] == b[:5] for a, b in zip(after, before)))
+    print(f'slot 6 named {names[6]!r} in 21 languages, other names stock:', named)
+    fails += not named
+    for bad in ('', ' Warm', 'x' * 25, 'a\nb'):
+        try:
+            eqfit.name_patches(stock, {1: bad})
+            print('accepted a bad name:', repr(bad))
+            fails += 1
+        except ValueError:
+            pass
     if fails:
         raise SystemExit(f'FAIL: {fails}')
     print('OK')

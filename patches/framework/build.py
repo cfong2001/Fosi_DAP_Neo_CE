@@ -1021,8 +1021,9 @@ def main():
             sys.path.insert(0, str(REPO / 'patches' / 'eq_presets'))
             import eqfit
             stock_raw = input_path.read_bytes()
-            slots, eq_report = eqfit.load_config(a.eq_presets, stock_raw)
-            patches = patches + eqfit.slot_patches(stock_raw, slots)
+            slots, eq_names, eq_report = eqfit.load_config(a.eq_presets, stock_raw)
+            patches = (patches + eqfit.slot_patches(stock_raw, slots)
+                       + eqfit.name_patches(stock_raw, eq_names))
         if a.dac_filter:
             patches = patches + [dac_filter_patch(a.dac_filter)]
         if a.bt_auto_off:

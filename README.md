@@ -96,7 +96,7 @@ These build options leave the published images unchanged. Each works with either
 
 | Option | What it does | Flag | Details |
 |---|---|---|---|
-| EQ presets | The EQ is 31 bands at ±12 dB, but stock presets use five bands, and Classical, Bass Boost and Heavy Metal play Pop's curve, Jazz's curve and no EQ. This fixes the selector and loads an AutoEQ `GraphicEQ` file or 31 dB values into any preset, fitted to the firmware's band filters. | `--eq-presets CONFIG.json` | [`eq_presets/`](patches/eq_presets/README.md) |
+| EQ presets | The EQ is 31 bands at ±12 dB, but stock presets use five bands, and Classical, Bass Boost and Heavy Metal play Pop's curve, Jazz's curve and no EQ. This fixes the selector and loads an AutoEQ `GraphicEQ` file or 31 dB values into any preset, fitted to the firmware's band filters. Each preset can be renamed in the EQ menu. | `--eq-presets CONFIG.json` | [`eq_presets/`](patches/eq_presets/README.md) |
 | DAC filter | The CS43198 has five interpolation filters and stock code can select each one, but no menu offers the choice. Pick one of the other four. One byte. | `--dac-filter NAME` | [`dac_filter/`](patches/dac_filter/README.md) |
 | Bluetooth auto-off | Stock turns Bluetooth off after 5 minutes with nothing connected and saves it as Off. Raise the limit to 10 minutes or remove it. Four bytes. | `--bt-auto-off 10min\|never` | [`bt_auto_off/`](patches/bt_auto_off/README.md) |
 

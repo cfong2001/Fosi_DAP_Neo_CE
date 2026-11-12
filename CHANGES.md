@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-11-12: EQ preset names
+
+- Each EQ preset slot takes an optional `name` (`--eq-presets` config and
+  the builder's name fields). It replaces that item's menu string, records
+  175 to 180, in all 21 languages, so the EQ menu and the settings value
+  show it. A slot can carry a name without a curve.
+- The browser builder now applies string patches (build.py's `string`
+  kind), checked against each language's stock text and byte-identical to
+  build.py. The example config names slot 6 "HD 600"; its builder pin is
+  d247ed21….
+
 ## 2026-11-12: power profiles
 
 - System Settings gains a Power Profile item (Standard image) with three

@@ -17,7 +17,7 @@ import {BT_PAYLOAD, LOCK_PAYLOAD} from "./builder-payloads.mjs";
 import {FULL_EXTRA_PATCHES, FULL_TAIL, FULL_GROWTHS, FULL_THEME_RUNS, FULL_IMAGE_SHA256} from "./builder-full.mjs";
 import {sha256} from "./theme-core.mjs";
 import {githubUrl, repoFromLocation} from "./repo.mjs";
-import {SLOTS, bandTable, parseCurve, fit, slotPatches} from "./eq-core.mjs";
+import {SLOTS, NAME_MAX, bandTable, parseCurve, fit, slotPatches, namePatches} from "./eq-core.mjs";
 import {DAC_FILTERS, dacFilterPatches} from "./builder-dacfilter.mjs";
 import {BT_AUTO_OFF, btAutoOffPatches} from "./builder-btautooff.mjs";
 
@@ -215,15 +215,26 @@ function renderEqSlots() {
     file.addEventListener("change", async () => {
       if (file.files[0]) text.value = await file.files[0].text();
     });
-    root.append(label, text, file);
+    const rename = document.createElement("input");
+    rename.type = "text";
+    rename.id = "eq-name-" + n;
+    rename.maxLength = NAME_MAX;
+    rename.placeholder = "Menu name (empty: " + name + ")";
+    rename.setAttribute("aria-label", "Menu name for " + name);
+    root.append(label, rename, text, file);
   }
 }
 
 // Fitted EQ patches for every filled slot, plus a summary for the status.
 function eqSelection(bytes) {
-  const slots = {}, notes = [];
+  const slots = {}, names = {}, notes = [];
   let R = null;
   for (const [n, name] of Object.entries(SLOTS)) {
+    const rename = $("eq-name-" + n).value.trim();
+    if (rename) {
+      names[n] = rename;
+      notes.push(name + " renamed " + JSON.stringify(rename));
+    }
     const text = $("eq-slot-" + n).value.trim();
     if (!text) continue;
     R = R || bandTable(bytes);
@@ -233,7 +244,8 @@ function eqSelection(bytes) {
       (result.peak > 0 ? "+" : "") + result.peak.toFixed(1) + " dB)");
   }
   if (!notes.length) return {patches: [], note: ""};
-  return {patches: slotPatches(bytes, slots), note: ", EQ presets " + notes.join(", ")};
+  return {patches: [...slotPatches(bytes, slots), ...namePatches(bytes, names)],
+          note: ", EQ presets " + notes.join(", ")};
 }
 
 function renderChoices(id, choices) {
