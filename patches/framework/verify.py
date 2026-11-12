@@ -51,7 +51,7 @@ Proves, against the real stock image:
       whole-image hash. Skipped on the same condition as
       check 7.
   13. The FULL build (patches/full/, check 13 below): every
-      feature composed in one pass (107 patches, both
+      feature composed in one pass (108 patches, both
       transplants, two growth insertions, the merged gap
       tail, the merged theme config). Its whole-image hash and
       length are pinned; every segment of the composed image
@@ -664,7 +664,7 @@ def main():
               'default build unchanged', ok, detail)
 
     # -- 13. full build (patches/full/) --------------------------------
-    # One build.py pass composing every feature: 107 patches, the
+    # One build.py pass composing every feature: 108 patches, the
     # vorbis75 and opus72 transplants, two growth insertions
     # (module 31 +6,616, module 24 +26), the merged
     # 2,040-byte gap tail and the merged 938-run theme config. The
@@ -678,7 +678,7 @@ def main():
     # differ only at the theme runs, the mirrored header and
     # the trailer CRC once the growth shift is accounted for.
     FULL_DIR = HERE.parent / 'full'
-    FULL_SHA = '638723894dfcd34011621e4ad02a449bc47eb5f463fb041e8f59a4a05b843742'
+    FULL_SHA = '58e5801689bf70f8d68b730000f42ddae83dc6ff134d55a0e3d66b1af57c39f7'
     PAYLOAD_GROWTH = 6642       # module 31 + module 24 payloads
     GROWTH_TOTAL = 6656         # plus 14 zeros that sector-align the mirror
     if ecp is None:
@@ -708,7 +708,7 @@ def main():
                 and struct.unpack_from('<I', f, 0x1F4)[0] == MIRROR_OFF + GROWTH_TOTAL \
                 and not any(f[MIRROR_OFF + PAYLOAD_GROWTH:MIRROR_OFF + GROWTH_TOTAL])
             rep = json.loads(Path(str(fout) + '.report.json').read_text())
-            rep_ok = len(rep["patches_applied"]) == 107 \
+            rep_ok = len(rep["patches_applied"]) == 108 \
                 and [t['module75_sha256'] if 'module75_sha256' in t
                      else t['module72_sha256']
                      for t in rep['transplants_applied']] == [
@@ -792,7 +792,7 @@ def main():
             ok = pin_ok and rep_ok and confined and ext_ok \
                 and post_ok and default_ok
             detail = (f'whole-image pin and length (+{GROWTH_TOTAL}): '
-                      f'{pin_ok}; report pins (107 patches, both '
+                      f'{pin_ok}; report pins (108 patches, both '
                       f'transplant hashes, growths, tail): {rep_ok}; '
                       f'segment diff confined to the union of parts: '
                       f'{confined}; module 0 tail span (zero workspace '

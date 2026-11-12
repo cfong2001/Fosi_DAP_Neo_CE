@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-11-12: Main-font time layout
+
+- Time counters sit above the progress bar, with the total counter aligned
+  to the right edge. Their rectangles are cleared before each update.
+- The typography regression checks the active font glyph height and both
+  clear/draw rectangles, including preservation across clobbered LCD calls.
+
 ## 2026-11-12: Library title tags
 
 - Standard CE keeps the parsed title tag when saving library records. The

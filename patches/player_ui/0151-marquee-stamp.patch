@@ -7,4 +7,4 @@ address: 0x3053114
 gate: pinned stock bytes; Unicorn typography regression suite
 expect: 2de9f04115460f1e0646
 replace: 3068a8623220a8857047
-rationale: Reset the marquee interval to 50 ticks after its first draw. The 20-byte tier-1 pocket has no static references (patches/space/census.json).
+rationale: Reset the marquee interval after its first draw; tier-1 unused pocket.

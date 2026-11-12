@@ -125,3 +125,6 @@ patches/0145-profile-commit.patch
 # Keep parsed titles in the scanned library database:
 ../library_titles/0180-library-title-fallback.patch
 ../library_titles/0181-library-title-copy-hook.patch
+
+# Clear main-font time above the progress bar:
+../player_ui/0155-time-clear-and-draw.patch
