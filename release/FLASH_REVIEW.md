@@ -82,6 +82,29 @@ flashes a device. Keep the files on the host until the gates below pass.
    alone. The normal stock updater cannot preserve that arrangement.
    Do not trigger the stock updater or slot-sync on a dual-image setup.
 
+## Community restore tool review
+
+A model-specific community tool exists:
+[danielNZ27/Fosi-Dap-Neo-firmware-restore-tool](https://github.com/danielNZ27/Fosi-Dap-Neo-firmware-restore-tool).
+It is not a Fosi-supported or locally hardware-qualified recovery path.
+Its README reports holding Vol+, Vol− and OK while connecting USB and a
+Rockusb identity of 2207:262D. Treat those as community instructions to
+verify by enumeration, not proof that a black screen means recovery.
+Do not run the restore script merely to test detection.
+
+The reviewed `restore-stock.py` (Git blob
+`ae5627283a2f80c445b8f15155cf12c6a38c283d`) immediately writes both fixed
+slot addresses after its initial read. It does **not** make a full backup,
+validate the input package SHA/CRC or read back the complete written
+images. Despite the README's broad verification description, the script
+checks only the first 512 bytes of slot 1 after writing both slots. It
+also slices the input to 13 MiB. Consequently, it is useful protocol
+reference, not a ready backup/verified-restore solution for this unit.
+A qualified restore must verify the full written firmware regions,
+including their mirrors, against the intended bytes, and preserve the
+unit's own non-firmware data. These gaps must be closed before relying
+on it for a first experimental flash.
+
 ## First trial and rollback
 
 Start at low volume with expendable media and stable power. Confirm cold
