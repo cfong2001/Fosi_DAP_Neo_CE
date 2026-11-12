@@ -144,6 +144,47 @@ function applyModulePatch(bytes, base, modules, patch) {
   return [off, off + replace.length - 1];
 }
 
+// String resources (build.py apply_patches, kind "string"): each language
+// holds 266 records of 258 bytes; the text is UTF-16LE at +58, 200 bytes.
+export function stringRecord(bytes, language, id) {
+  const start = u32(bytes, 0xf8);
+  const count = bytes[start] | (bytes[start + 1] << 8);
+  if (!(language >= 0 && language < count && id >= 0 && id < 266))
+    throw new Error("language/string ID out of bounds");
+  const rec = start + u32(bytes, start + 2 + 4 * language) + 258 * id;
+  if ((bytes[rec] | (bytes[rec + 1] << 8)) !== id)
+    throw new Error("string resource record ID mismatch");
+  const off = rec + 58;
+  let text = "";
+  for (let i = 0; i < 200; i += 2) {
+    const c = bytes[off + i] | (bytes[off + i + 1] << 8);
+    if (!c) break;
+    text += String.fromCharCode(c);
+  }
+  return {off, text};
+}
+
+function applyStringPatch(bytes, patch) {
+  let rec;
+  try {
+    rec = stringRecord(bytes, patch.language, patch.string_id);
+  } catch (err) {
+    throw new Error("patch " + patch.name + ": " + err.message);
+  }
+  if (rec.text !== patch.expect_text)
+    throw new Error("patch " + patch.name + ": stock UI text precondition mismatch: expected " +
+      JSON.stringify(patch.expect_text) + ", found " + JSON.stringify(rec.text));
+  if (2 * patch.replace_text.length + 2 > 200)
+    throw new Error("patch " + patch.name + ": replacement string too long");
+  bytes.fill(0, rec.off, rec.off + 200);
+  for (let i = 0; i < patch.replace_text.length; i++) {
+    const c = patch.replace_text.charCodeAt(i);
+    bytes[rec.off + 2 * i] = c & 0xff;
+    bytes[rec.off + 2 * i + 1] = c >> 8;
+  }
+  return [rec.off, rec.off + 199];
+}
+
 function rangesOverlap(a, b) { return a[0] <= b[1] && b[0] <= a[1]; }
 
 // ---- theme step (port of build.py parse_theme_config + apply_theme)
@@ -500,7 +541,8 @@ export async function buildFirmware(stockBytes, options, sha256Hex) {
   selected.sort((x, y) => x.index - y.index);
   let claimed = [];
   for (const patch of selected)
-    claimed.push(applyModulePatch(bytes, base, modules, patch));
+    claimed.push(patch.kind === "string" ? applyStringPatch(bytes, patch)
+                                         : applyModulePatch(bytes, base, modules, patch));
 
   let vorbisRecord = null;
   if (options.vorbis) {

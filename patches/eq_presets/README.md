@@ -39,16 +39,19 @@ python3 patches/framework/build.py --eq-presets my-eq.json --output out/ce-eq.im
 
 ```json
 {"slots": {
-  "1": {"file": "Sennheiser HD 600 GraphicEQ.txt"},
+  "1": {"file": "Sennheiser HD 600 GraphicEQ.txt", "name": "HD 600"},
   "6": {"text": "4 4 4 4 3 3 2 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"},
-  "3": {"gains": [0, 0, 0, ... 31 integers]}
+  "3": {"gains": [0, 0, 0, ... 31 integers]},
+  "4": {"name": "Flat"}
 }}
 ```
 
 Slots 1 to 6 are Pop, Jazz, Rock, Classical, Bass Boost and Heavy Metal.
 A slot takes an AutoEQ `GraphicEQ.txt` (the Equalizer APO export on
 autoeq.app), 31 dB values for a custom curve, or 31 integer gains to use
-as they are. The browser builder has six boxes that take the same text.
+as they are. Any slot can also take a `name`, with or without a curve.
+The browser builder has six boxes that take the same text, each with a
+name field.
 
 The build:
 
@@ -56,10 +59,21 @@ The build:
    item *n* reads array *n*;
 2. writes each configured slot;
 3. writes what stock already applied into any slot you leave out, so an
-   unconfigured item sounds exactly as it did.
+   unconfigured item sounds exactly as it did;
+4. writes each slot's `name` over that item's menu string.
 
-Menu names stay the same; the README of your build is the only record of
-which curve sits under which name.
+## Names
+
+The six items are string records 175 to 180 (Pop to Heavy Metal; 174 is
+Off). The EQ menu lists a node's children by these records, and the
+settings window shows the selected value through the same child record,
+so a new name shows in both places. A name replaces the item's text in
+all 21 menu languages; each string patch checks its own language's stock
+text first. Names are 1 to 24 characters, the length of the longest stock
+name (French Bass Boost), with no control characters or leading and
+trailing spaces. A character the firmware font lacks will not draw, so
+check unusual symbols on the device. Without a name the item keeps its
+stock label in every language.
 
 ## Fitting
 
@@ -80,7 +94,9 @@ rms. Most of that is above 15 kHz, where up to 5 dB remains near 18 kHz.
 - `test_eq_presets.py` runs stock's selector under Unicorn, shows the
   duplicate presets, checks that a build with nothing configured applies
   exactly stock's gains for every item, and checks that the example lands
-  in its slots with under 1 dB rms fit error.
+  in its slots with under 1 dB rms fit error. It also checks that the
+  example's slot 6 name replaces record 180 in all 21 languages, that the
+  other five names stay stock, and that bad names are refused.
 - `tests/builder.test.mjs`: the browser fit gives the same gains as
   Python, and the browser image equals `build.py --eq-presets example.json`
   byte for byte.

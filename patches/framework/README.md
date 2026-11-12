@@ -92,8 +92,8 @@ $PY build.py --dac-filter nos --output out/DP3_V137_nos.img
 $PY build.py --bt-auto-off never --output out/DP3_V137_bt.img
 
 # EQ presets: AutoEQ GraphicEQ files or custom curves for the six EQ
-# menu presets, fitted to the firmware's band filters; also fixes the
-# stock preset selector. See patches/eq_presets/README.md
+# menu presets, fitted to the firmware's band filters, with optional menu
+# names; also fixes the stock preset selector. See patches/eq_presets/README.md
 $PY build.py --eq-presets ../eq_presets/example.json --output out/DP3_V137_eq.img
 
 # prove the framework round-trips, refuses tampered inputs, and that

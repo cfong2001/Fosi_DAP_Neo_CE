@@ -2,7 +2,7 @@
 // patches/eq_presets/eqfit.py. Same grid, same ridge start, same greedy
 // refinement, so both produce the same integer gains
 // (tests/builder.test.mjs checks this against build.py output).
-import {parseModules} from "./builder-core.mjs";
+import {parseModules, stringRecord} from "./builder-core.mjs";
 
 export const ISO = [20, 25, 31.5, 40, 50, 63, 80, 100, 125, 160, 200, 250, 315, 400, 500,
   630, 800, 1000, 1250, 1600, 2000, 2500, 3150, 4000, 5000, 6300, 8000,
@@ -167,6 +167,34 @@ export function slotPatches(bytes, slots) {
     if (hex(next) !== hex(old))
       patches.push({index: 60 + n, name: "eq-preset-" + n, module: 33, region: "data",
                     address: TABLE + 62 * (n - 1), expect: hex(old), replace: hex(next)});
+  }
+  return patches;
+}
+
+// Menu names (eqfit.py name_patches): slot n is string record 174 + n in
+// every language. A name is 1..24 printable BMP characters, no edge spaces.
+export const NAME_MAX = 24;
+export function checkName(n, name) {
+  if (typeof name !== "string" || !name || name !== name.trim())
+    throw new Error("slot " + n + ": name must be non-empty text without leading or trailing spaces");
+  if (name.length > NAME_MAX)
+    throw new Error("slot " + n + ": name longer than " + NAME_MAX + " characters");
+  for (const ch of name) {
+    const c = ch.codePointAt(0);
+    if (c < 0x20 || (c >= 0x7f && c < 0xa0) || c > 0xffff)
+      throw new Error("slot " + n + ": name has a control character or one outside the BMP");
+  }
+  return name;
+}
+
+export function namePatches(bytes, names) {
+  const patches = [];
+  for (const n of Object.keys(names).map(Number).sort((a, b) => a - b)) {
+    const name = checkName(n, names[n]);
+    for (let lang = 0; lang < 21; lang++)
+      patches.push({index: 70 + n, kind: "string", name: "eq-name-" + n + "-lang" + lang,
+                    language: lang, string_id: 174 + n,
+                    expect_text: stringRecord(bytes, lang, 174 + n).text, replace_text: name});
   }
   return patches;
 }

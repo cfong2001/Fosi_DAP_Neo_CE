@@ -28,9 +28,9 @@
 //         94be36f98a80bfa79a5f2b6796c5233ad9b7bed155759d84b75b3e09453d0197
 //   (p) the default unified build with the example EQ presets
 //       (patches/eq_presets/example.json: a custom curve in slot 5 and
-//       an AutoEQ GraphicEQ in slot 6, fitted in the browser):
+//       an AutoEQ GraphicEQ in slot 6 renamed "HD 600", fitted in the browser):
 //         build.py --eq-presets patches/eq_presets/example.json
-//         84ebe6a3a9cd9067137bb4c62d63d230463142fcddf79dd3c69cb18eb05f557e
+//         d247ed21386901f2c8561a9e6383e8fda0cb23951b422a41dd23011338abeffa
 //   (n) the default unified build with each DAC filter:
 //         build.py --dac-filter fast-linear-phase
 //           c5c9d99af21ed706345252ab40f21f62f46f41650f6fc8323dc46e95ece47d5e
@@ -76,7 +76,7 @@ import {BT_PATCH, LOCK_PATCH, PLAYLIST_PATCHES, TITLE_PATCHES, bluetoothTail, lo
 import {OPUS_DATA} from "../docs/builder-opus-data.mjs";
 import {BT_PAYLOAD, LOCK_PAYLOAD} from "../docs/builder-payloads.mjs";
 import {FULL_EXTRA_PATCHES, FULL_TAIL, FULL_GROWTHS, FULL_THEME_RUNS, FULL_IMAGE_SHA256} from "../docs/builder-full.mjs";
-import {bandTable, parseCurve, fit, slotPatches} from "../docs/eq-core.mjs";
+import {bandTable, parseCurve, fit, slotPatches, namePatches} from "../docs/eq-core.mjs";
 import {DAC_FILTERS, dacFilterPatches} from "../docs/builder-dacfilter.mjs";
 import {BT_AUTO_OFF, btAutoOffPatches} from "../docs/builder-btautooff.mjs";
 import assert from "node:assert/strict";
@@ -204,17 +204,20 @@ const cases = [
 ];
 {
   const example = JSON.parse(await readFile(new URL("../patches/eq_presets/example.json", import.meta.url), "utf8"));
-  const R = bandTable(stock), slots = {};
+  const R = bandTable(stock), slots = {}, names = {};
   for (const [n, spec] of Object.entries(example.slots)) {
+    if (spec.name) names[n] = spec.name;
     const text = spec.text ?? await readFile(new URL("../patches/eq_presets/" + spec.file, import.meta.url), "utf8");
     slots[n] = fit(parseCurve(text), R).gains;
   }
   assert.deepEqual(slots[6], [-1,0,0,1,0,0,0,-1,-2,-1,-2,-1,-2,0,0,-1,-1,-1,-3,-1,1,0,-3,-1,-2,-2,3,5,-11,-7,-12]);
   cases.push(["(p) unified build with the example EQ presets (browser fit)",
     {groups: allGroups, patchGroups: PATCH_GROUPS, vorbis: VORBIS75,
-     extraPatches: slotPatches(stock, slots)},
-    "84ebe6a3a9cd9067137bb4c62d63d230463142fcddf79dd3c69cb18eb05f557e"]);
+     extraPatches: [...slotPatches(stock, slots), ...namePatches(stock, names)]},
+    "d247ed21386901f2c8561a9e6383e8fda0cb23951b422a41dd23011338abeffa"]);
   assert.throws(() => parseCurve("1 2 3"), /31 dB values/);
+  for (const bad of ["", " Warm", "x".repeat(25), "a\nb"])
+    assert.throws(() => namePatches(stock, {1: bad}), /slot 1: name/);
 }
 for (const [id, hash] of [
   ["fast-linear-phase", "c5c9d99af21ed706345252ab40f21f62f46f41650f6fc8323dc46e95ece47d5e"],

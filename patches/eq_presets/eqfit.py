@@ -194,27 +194,68 @@ def slot_patches(raw, slots):
     return patches
 
 
+NAME_IDS = {n: 174 + n for n in SLOTS}   # menu string records 175..180, every language
+NAME_MAX = 24                             # the longest stock name is 24 characters
+LANGUAGES = 21
+
+
+def check_name(n, name):
+    """A slot name: 1 to NAME_MAX printable BMP characters, no edge spaces."""
+    if not isinstance(name, str) or not name or name != name.strip():
+        raise ValueError(f'slot {n}: name must be non-empty text without leading or trailing spaces')
+    if len(name) > NAME_MAX:
+        raise ValueError(f'slot {n}: name longer than {NAME_MAX} characters')
+    if any(ord(c) < 0x20 or 0x7f <= ord(c) < 0xa0 or ord(c) > 0xffff for c in name):
+        raise ValueError(f'slot {n}: name has a control character or one outside the BMP')
+    return name
+
+
+def name_patches(raw, names):
+    """String patches that rename EQ menu items. names maps slot (1..6) to
+    the new name, written to that item's record in all 21 languages; each
+    patch expects the stock text of its own language."""
+    img = Image(raw)
+    langs = [list(img.lang(lang)) for lang in range(LANGUAGES)]
+    patches = []
+    for n in sorted(names):
+        name = check_name(n, names[n])
+        sid = NAME_IDS[n]
+        for lang in range(LANGUAGES):
+            patches.append({'name': f'eq-name-{n}-lang{lang}', 'kind': 'string',
+                            'language': lang, 'string_id': sid,
+                            'expect_text': langs[lang][sid]['text'], 'replace_text': name,
+                            'file': 'eq_presets', 'rationale': 'eq', 'gate': 'eq'})
+    return patches
+
+
 def load_config(path, raw):
     """Config JSON: {"slots": {"1": {"file": "x GraphicEQ.txt"} | {"text": "..."}
-    | {"gains": [31 ints]}}}. Returns {slot: gains} and a report."""
+    | {"gains": [31 ints]}, each optionally with "name": "..."}}.
+    A slot may carry only a name. Returns {slot: gains}, {slot: name} and
+    a report."""
     cfg = json.loads(Path(path).read_text())
     R = None
-    slots, report = {}, {}
+    slots, names, report = {}, {}, {}
     for key, spec in cfg.get('slots', {}).items():
         n = int(key)
         if n not in SLOTS:
             raise ValueError(f'slot {n}: must be 1..6')
+        if 'name' in spec:
+            names[n] = check_name(n, spec['name'])
+            report.setdefault(n, {})['name'] = names[n]
         if 'gains' in spec:
             slots[n] = [int(g) for g in spec['gains']]
-            report[n] = {'source': 'gains'}
+            report.setdefault(n, {})['source'] = 'gains'
+            continue
+        if 'text' not in spec and 'file' not in spec:
             continue
         text = spec['text'] if 'text' in spec else (Path(path).parent / spec['file']).read_text()
         R = R or band_table(raw)
         gains, rms, peak = fit(parse_curve(text), R)
         slots[n] = gains
-        report[n] = {'source': spec.get('file', 'text'), 'rms_error_db': round(rms, 3),
-                     'peak_db': round(peak, 2)}
-    return slots, report
+        report.setdefault(n, {}).update(source=spec.get('file', 'text'),
+                                        rms_error_db=round(rms, 3), peak_db=round(peak, 2))
+    return slots, names, report
 
 
 if __name__ == '__main__':
