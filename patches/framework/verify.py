@@ -83,6 +83,7 @@ import hashlib
 import importlib.util
 import json
 import os
+import struct
 import subprocess
 import sys
 import tempfile
@@ -369,7 +370,7 @@ def main():
                 else:
                     iso &= (gb == sb)
         grep = json.loads(Path(str(gout) + '.report.json').read_text())
-        ok = (iso and len(g) == n + len(pattern)
+        ok = (iso and len(g) == n + 1024     # 1,000 B + 24 B sector pad
               and grep['growth'] and grep['growth'][0]['module'] == 31
               and grep['growth'][0]['payload_bytes'] == len(pattern))
         detail = (f'all non-grown segments identical: {iso}; '
@@ -646,8 +647,9 @@ def main():
     # differ only at the theme runs, the mirrored header and
     # the trailer CRC once the growth shift is accounted for.
     FULL_DIR = HERE.parent / 'full'
-    FULL_SHA = 'db0a11d27a00295f18e4a07b9745af1564e06f66af872ec43129aa738b4fa362'
-    GROWTH_TOTAL = 6962
+    FULL_SHA = 'e72449d73db1afb85b9c801fd24812ecdf6b6580a0763b1056f41e9c8ff7b833'
+    PAYLOAD_GROWTH = 6962       # module 31 + module 24 payloads
+    GROWTH_TOTAL = 7168         # plus 206 zeros that sector-align the mirror
     if ecp is None:
         check('full build: composed image pinned, diff confined '
               'to the union of its parts, default unchanged', None,
@@ -671,7 +673,9 @@ def main():
             validate_grown(f)
             stock = STOCK.read_bytes()
             pin_ok = hashlib.sha256(f).hexdigest() == FULL_SHA \
-                and len(f) == len(stock) + GROWTH_TOTAL
+                and len(f) == len(stock) + GROWTH_TOTAL \
+                and struct.unpack_from('<I', f, 0x1F4)[0] == MIRROR_OFF + GROWTH_TOTAL \
+                and not any(f[MIRROR_OFF + PAYLOAD_GROWTH:MIRROR_OFF + GROWTH_TOTAL])
             rep = json.loads(Path(str(fout) + '.report.json').read_text())
             rep_ok = len(rep["patches_applied"]) == 66 \
                 and [t['module75_sha256'] if 'module75_sha256' in t
@@ -746,8 +750,8 @@ def main():
                           for r in runs]
             post_ok = True
             for i in range(post_end, len(u) - 4):
-                if u[i] != f[i + GROWTH_TOTAL]:
-                    j = i + GROWTH_TOTAL
+                j = i + (PAYLOAD_GROWTH if i < MIRROR_OFF else GROWTH_TOTAL)
+                if u[i] != f[j]:
                     if not any(lo <= j < hi for lo, hi in run_ranges) \
                             and not (MIRROR_OFF + GROWTH_TOTAL <= j
                                      < MIRROR_OFF + GROWTH_TOTAL + 0x200):

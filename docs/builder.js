@@ -319,7 +319,7 @@ async function build() {
         (filterPatches.length
           ? " (the Standard image " + FULL_IMAGE_SHA256.slice(0, 12) + "… plus" + filterNote.slice(1) + "). "
           : ", identical to the Standard image. ") +
-        "It is 6,962 bytes longer than stock; no longer-than-stock image has been " +
+        "It is 7,168 bytes longer than stock; no longer-than-stock image has been " +
         "installed yet. It is now selected in Install CE at the top of the page; " +
         "installing it is at your own risk.", "good");
       return;

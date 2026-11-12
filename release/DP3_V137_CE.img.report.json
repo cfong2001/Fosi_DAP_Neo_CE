@@ -3,8 +3,8 @@
  "input_file": "DP3_V137.img",
  "output_file": "DP3_V137_CE.img",
  "input_sha256": "fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cdfade5e9c6ea3bd71ac6deef",
- "output_sha256": "db0a11d27a00295f18e4a07b9745af1564e06f66af872ec43129aa738b4fa362",
- "byte_length": 13638454,
+ "output_sha256": "e72449d73db1afb85b9c801fd24812ecdf6b6580a0763b1056f41e9c8ff7b833",
+ "byte_length": 13638660,
  "header_date": "20261023",
  "patches_applied": [
   {
@@ -6531,7 +6531,7 @@
   }
  ],
  "diff_vs_stock": {
-  "bytes_changed": 4747534,
+  "bytes_changed": 4747738,
   "range_count": 428479,
   "note": "range list omitted; rebuild with patches/full/build/build_full.py for it"
  },

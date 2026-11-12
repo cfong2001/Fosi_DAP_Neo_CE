@@ -9,7 +9,7 @@ structural validation.
 | | |
 |---|---|
 | Input | `DP3_V137.img`, 13,631,492 bytes, SHA-256 `fcc1cd3e…` |
-| Output | 13,638,454 bytes, SHA-256 `db0a11d27a00295f18e4a07b9745af1564e06f66af872ec43129aa738b4fa362` |
+| Output | 13,638,660 bytes, SHA-256 `e72449d73db1afb85b9c801fd24812ecdf6b6580a0763b1056f41e9c8ff7b833` |
 | Composition | 64 byte patches, 2 transplants, 2 growth insertions, one merged gap tail, one merged theme config |
 | Default build | unchanged, still SHA-256 `92c44606…` (verify.py checks 1 to 13 pass; check 13 pins this build) |
 
@@ -158,7 +158,8 @@ module 24 code, delivered as the second growth insertion with patch 0062.
 | Module 31 growth | +6,936 |
 | Module 24 growth | +26 |
 | Ebook offset | 0 (module 30 kept intact) |
-| Final | 13,638,454 |
+| Mirror alignment pad | +206 (zeros before the header mirror, which lands at sector-aligned `0xC95C00`) |
+| Final | 13,638,660 |
 
 ### Ebook verdict
 
@@ -170,7 +171,7 @@ with Service, Key and Paint entries that the window manager calls by
 contract, and the removal checklist in
 `analysis/resident_home/resident_home.md` (menu name, window manager table
 slot, `.txt` classification, the SAVEINFO last-window index) cannot be met
-by shrinking code. The image is therefore 6,962 bytes longer than stock.
+by shrinking code. The image is therefore 7,168 bytes longer than stock.
 Whether the device's update slots accept a longer image is open until a
 hardware test.
 
@@ -308,7 +309,7 @@ the image suites on every pull request.
 
 All remaining gates need hardware:
 
-- whether the update slots accept the 13,638,454-byte image;
+- whether the update slots accept the 13,638,660-byte image;
 - theater mode on both artwork draw paths, BMP covers and the event-bit
   posting context, and whether another window ever calls artwork setup;
 - playlist playback from a real card, including the FS type 3 decline and

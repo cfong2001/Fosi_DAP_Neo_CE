@@ -146,6 +146,37 @@ def insert_once(raw, module, kind, payload):
     return bytes(out)
 
 
+SECTOR = 0x200
+# Largest sector-aligned mirror offset whose rounded transfer
+# ((len + 0x104000) & ~0xFFFFF) stays at stock's 13 MiB.
+MIRROR_CEILING = 0xCFBE00
+
+
+def align_mirror(raw):
+    """Pad zeros just before the duplicate header so its offset is a
+    multiple of 512.
+
+    The boot validator (module 1, 0x0307E2CA) reads the mirror at
+    sector (u32 @ 0x1F4) >> 9 and compares one whole sector with the
+    primary header, so an unaligned mirror fails there even though a
+    byte-offset compare passes. The pad sits in the zero run between
+    the images section and the mirror, which no header field or module
+    record addresses; only 0x1F4 moves. Identity on an aligned image.
+    """
+    fw_len = struct.unpack_from('<I', raw, FW_LEN_OFF)[0]
+    pad = -fw_len % SECTOR
+    if not pad:
+        return raw
+    if any(raw[fw_len - 64:fw_len]):
+        raise ValueError('bytes before the duplicate header are not zero')
+    out = bytearray(raw[:fw_len]) + bytes(pad) + raw[fw_len:]
+    struct.pack_into('<I', out, FW_LEN_OFF, fw_len + pad)
+    fw_len += pad
+    out[fw_len:fw_len + HEADER_LEN] = out[:HEADER_LEN]
+    struct.pack_into('<I', out, len(out) - 4, rk_crc32(out[:-4]))
+    return bytes(out)
+
+
 def apply_insertions(raw, insertions):
     """Apply (module, kind, payload) insertions sequentially.
 
@@ -156,7 +187,7 @@ def apply_insertions(raw, insertions):
     out = raw
     for module, kind, payload in insertions:
         out = insert_once(out, module, kind, payload)
-    return out
+    return align_mirror(out)
 
 
 def main():

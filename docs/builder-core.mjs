@@ -113,6 +113,7 @@ export function validatePackage(bytes, growth = 0) {
   const mirrorValid = bytes.subarray(0, 0x200)
     .every((b, i) => b === bytes[mirrorOff + i]);
   if (!mirrorValid) fail("header mirror mismatch");
+  if (mirrorOff % 0x200) fail("header mirror is not sector aligned");
   if (u32(bytes, bytes.length - 4) !== rkCrc32(bytes.subarray(0, bytes.length - 4)))
     fail("trailer CRC mismatch");
   if (bytes.length !== STOCK_SIZE + growth || mirrorOff !== 0xC94000 + growth || modules.length !== 82)
@@ -357,6 +358,24 @@ export function growModule(bytes, index, payload, maxPayload = 0x10000) {
   return out;
 }
 
+// Pad zeros just before the duplicate header so its offset is a
+// multiple of 512, as tools/insert_rebuild.py's align_mirror does. The
+// boot validator reads the mirror at sector (u32 @ 0x1F4) >> 9 and
+// compares a whole sector. The pad sits in the zero run before the
+// mirror, which no field addresses; only 0x1F4 moves.
+export function alignMirror(bytes) {
+  const fwLen = u32(bytes, 0x1F4);
+  const pad = (0x200 - fwLen % 0x200) % 0x200;
+  if (!pad) return bytes;
+  if (bytes.subarray(fwLen - 64, fwLen).some(b => b !== 0))
+    throw new Error("bytes before the duplicate header are not zero");
+  const out = new Uint8Array(bytes.length + pad);
+  out.set(bytes.subarray(0, fwLen));
+  out.set(bytes.subarray(fwLen), fwLen + pad);
+  new DataView(out.buffer).setUint32(0x1F4, fwLen + pad, true);
+  return out;
+}
+
 export function growModule31(bytes, payload) {
   return growModule(bytes, 31, payload, 7436);
 }
@@ -507,7 +526,8 @@ export async function buildFirmware(stockBytes, options, sha256Hex) {
     (options.module31Payload ? [{module: 31, payload: options.module31Payload}] : []);
   let grown = bytes;
   for (const g of growths) grown = growModule(grown, g.module, g.payload);
-  const growthTotal = growths.reduce((n, g) => n + g.payload.length, 0);
+  grown = alignMirror(grown);
+  const growthTotal = grown.length - bytes.length;
   const out = finalize(grown, BUILD_DATE, growthTotal);
   let bytesChanged = growths.length ? null : 0;
   if (bytesChanged !== null)
