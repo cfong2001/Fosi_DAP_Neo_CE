@@ -51,7 +51,7 @@ Proves, against the real stock image:
       whole-image hash. Skipped on the same condition as
       check 7.
   13. The FULL build (patches/full/, check 13 below): every
-      feature composed in one pass (67 patches, both
+      feature composed in one pass (82 patches, both
       transplants, two growth insertions, the merged gap
       tail, the merged theme config). Its whole-image hash and
       length are pinned; every segment of the composed image
@@ -634,7 +634,7 @@ def main():
               'default build unchanged', ok, detail)
 
     # -- 13. full build (patches/full/) --------------------------------
-    # One build.py pass composing every feature: 67 patches, the
+    # One build.py pass composing every feature: 82 patches, the
     # vorbis75 and opus72 transplants, two growth insertions
     # (module 31 +6,936, module 24 +26), the merged
     # 2,040-byte gap tail and the merged 938-run theme config. The
@@ -648,7 +648,7 @@ def main():
     # differ only at the theme runs, the mirrored header and
     # the trailer CRC once the growth shift is accounted for.
     FULL_DIR = HERE.parent / 'full'
-    FULL_SHA = 'e0bbb61247dc1919646f989ca098bf52fb1da9dfde161d66de983c613089d209'
+    FULL_SHA = '748d00dbf3d33ec216732a181353f13f80c9d563feb56f2429e766cc0df95566'
     PAYLOAD_GROWTH = 6962       # module 31 + module 24 payloads
     GROWTH_TOTAL = 7168         # plus 206 zeros that sector-align the mirror
     if ecp is None:
@@ -678,7 +678,7 @@ def main():
                 and struct.unpack_from('<I', f, 0x1F4)[0] == MIRROR_OFF + GROWTH_TOTAL \
                 and not any(f[MIRROR_OFF + PAYLOAD_GROWTH:MIRROR_OFF + GROWTH_TOTAL])
             rep = json.loads(Path(str(fout) + '.report.json').read_text())
-            rep_ok = len(rep["patches_applied"]) == 67 \
+            rep_ok = len(rep["patches_applied"]) == 82 \
                 and [t['module75_sha256'] if 'module75_sha256' in t
                      else t['module72_sha256']
                      for t in rep['transplants_applied']] == [
@@ -689,7 +689,7 @@ def main():
                                                   (24, 26)] \
                 and rep['tail']['payload_bytes'] == 2040 \
                 and rep['tail']['payload_sha256'] == \
-                '6d77b1102cc4a82828ed8c1670eef99de708565e95d585a58dfdeb1d01047a71'
+                '5100d0d0e4c17f08ea6ede667f3c720edb721013836a7bf6cf7bc0d942446c4c'
             imgf, imgu = rk.Image(f), rk.Image(u)
 
             def segs(img, raw):
@@ -762,7 +762,7 @@ def main():
             ok = pin_ok and rep_ok and confined and ext_ok \
                 and post_ok and default_ok
             detail = (f'whole-image pin and length (+{GROWTH_TOTAL}): '
-                      f'{pin_ok}; report pins (67 patches, both '
+                      f'{pin_ok}; report pins (82 patches, both '
                       f'transplant hashes, growths, tail): {rep_ok}; '
                       f'segment diff confined to the union of parts: '
                       f'{confined}; module 0 tail span (zero workspace '

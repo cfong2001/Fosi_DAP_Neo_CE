@@ -1,0 +1,12 @@
+# Focus mode: BL to focus_gate at 0x0307c29c
+# in the full build's merged tail. Design: patches/focus_mode/.
+name: 0125-focus-gate-progress-41
+kind: module
+module: 27
+region: code
+address: 0x307f548
+gate: stock byte precondition; validated by test_focus_mode.py under
+  emulation on the full build
+expect: e7f786fe
+replace: fcf7a8fe
+rationale: Segment gate for the first progress segment (time labels and track): see focus-gate-status-1f for the gate contract. The progress chain is gated as a unit across 0x41, 0x40 and 0x4D.

@@ -1,0 +1,18 @@
+# theater_noart.S assembled into a module 0 pocket at 0x03063cdc.
+name: 0048-pocket-theater-noart
+kind: module
+module: 0
+region: code
+address: 0x3063cdc
+gate: build refuses unless the stock bytes at the target equal
+  `expect`; the finished image must also pass the grown
+  build validator.
+expect: f0b587b01d460c9c16460f46002c04bf07b0f0bd02a9fff718fcbdf80a1060198842c4bf481b04b2bdf808100598694300eb41010091bdf90820234631463846fff792fb07b0f0bd2de9f04786b09846dde90f65ddf8389017468a46002d12bfb8f1000f
+replace: 346000b500f00bf85df804eb98f800001af044be346000f002f8bde8f88307b50b49002048760b4991f8d80210b941f2a20001e00849088808490a88824205d0088007490a6842f000720a6007bd000068340203a0320203b435020300440003fc3c0203
+rationale: A stock routine here has no caller, branch, pointer or
+  literal anywhere in core-0 code or data
+  (patches/space/census_dead.py, tier 1), and no emulation
+  suite executes it (patches/space/run_coverage.py). The
+  hooks moved here from the gap tail to make room for focus
+  mode; module 0 is resident in every window, so every
+  caller still reaches them.

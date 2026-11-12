@@ -1,4 +1,4 @@
-# Hook site: B.W to resolver_hook_primary at 0x0307c1dc
+# Hook site: B.W to resolver_hook_primary at 0x0306c878
 # in the full build's merged tail.
 name: 0041-resolver-primary-hook
 kind: module
@@ -9,7 +9,7 @@ gate: build refuses unless the stock bytes at the target equal
   `expect`; the finished image must also pass the grown
   build validator. Requires the full build's merged tail.
 expect: 2de9f047
-replace: 22f016ba
+replace: 12f064bd
 rationale: Replaces the resolver entry push.w with a B.W to the tail
   hook. While a playlist is armed and the call is mode 1 with
   the play context descriptor 0x030239B4 as out, position i

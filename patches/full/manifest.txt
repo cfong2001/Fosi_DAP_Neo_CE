@@ -53,6 +53,18 @@ patches/0116-transport-keyed-right-state-ground.patch
 patches/0117-transport-keyed-right-variants-ground.patch
 patches/0110-transport-keyed-slot0-state-ground.patch
 patches/0118-progress-knob-keyed.patch
+patches/0120-focus-init-reset-hook.patch
+patches/0121-focus-service-tick-hook.patch
+patches/0122-focus-key-hook.patch
+patches/0123-focus-geometry-hook.patch
+patches/0124-focus-gate-status-1f.patch
+patches/0125-focus-gate-progress-41.patch
+patches/0126-focus-gate-progress-40.patch
+patches/0127-focus-gate-progress-4d.patch
+patches/0128-focus-gate-transport-43.patch
+patches/0129-focus-gate-volume-19a.patch
+patches/0130-focus-title-shift-hook.patch
+patches/0131-focus-artist-shift-hook.patch
 # Theater hooks, regenerated for the merged tail (local copies):
 patches/0100-theater-setup-reset-hook.patch
 patches/0101-theater-blit-sync-a.patch
@@ -68,6 +80,9 @@ patches/0043-playlist-count-hook.patch
 patches/0044-playlist-forward-step.patch
 patches/0045-theater-noart-close.patch
 patches/0046-theater-noart-open.patch
+patches/0047-pocket-playlist-hooks.patch
+patches/0048-pocket-theater-noart.patch
+patches/0049-pocket-transport-ground.patch
 # M3U browser hook and lock-screen hook for the composed payload (local):
 patches/0040-m3u-browser-hook.patch
 patches/0033-ui-lockscreen-title.patch

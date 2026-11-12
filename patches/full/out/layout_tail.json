@@ -1,7 +1,7 @@
 {
   "tail_base": "0x307bfb4",
   "tail_bytes": 2040,
-  "tail_sha256": "6d77b1102cc4a82828ed8c1670eef99de708565e95d585a58dfdeb1d01047a71",
+  "tail_sha256": "5100d0d0e4c17f08ea6ede667f3c720edb721013836a7bf6cf7bc0d942446c4c",
   "budget": 2044,
   "pieces": [
     {
@@ -12,26 +12,26 @@
       "layout": "header 16 + 6 runs x 50 + 59 entries x 4"
     },
     {
-      "name": "playlist and theater hooks",
+      "name": "focus mode payload",
       "offset": 552,
       "address": "0x307c1dc",
-      "bytes": 368,
-      "sha256": "cef74de61098517aaa3d951486bc41d14fd5be1a3fb030b5b709dec7cc4d9245",
+      "bytes": 340,
+      "sha256": "479e1c49e92232643b0832f7a7929912298dccc93c7a80eb4fac9d76f913dc33",
       "entries": {
-        "resolver_hook_primary": "0x307c1dc",
-        "resolver_hook_companion": "0x307c1fc",
-        "resolver_hook_count": "0x307c222",
-        "resolver_hook_advance": "0x307c240",
-        "theater_noart_close": "0x307c2b4",
-        "theater_noart_open": "0x307c2c8",
-        "transport_keyed_draw": "0x307c318"
+        "focus_reset": "0x307c1dc",
+        "focus_tick": "0x307c200",
+        "focus_key": "0x307c254",
+        "focus_gate": "0x307c29c",
+        "focus_geom": "0x307c2b4",
+        "focus_title_shift": "0x307c2e0",
+        "focus_artist_shift": "0x307c308"
       }
     },
     {
       "name": "free (zeros)",
-      "offset": 920,
-      "address": "0x307c34c",
-      "bytes": 8
+      "offset": 892,
+      "address": "0x307c330",
+      "bytes": 36
     },
     {
       "name": "theater payload (reset stub + trampoline)",
@@ -54,5 +54,34 @@
       "address": "0x307c7ac",
       "bytes": 4
     }
-  ]
+  ],
+  "pockets": [
+    {
+      "source": "resolver_hook.S",
+      "address": "0x306c878",
+      "bytes": 216,
+      "patch": "0047-pocket-playlist-hooks"
+    },
+    {
+      "source": "theater_noart.S",
+      "address": "0x3063cdc",
+      "bytes": 100,
+      "patch": "0048-pocket-theater-noart"
+    },
+    {
+      "source": "transport_ground.S",
+      "address": "0x30539b4",
+      "bytes": 52,
+      "patch": "0049-pocket-transport-ground"
+    }
+  ],
+  "hook_entries": {
+    "resolver_hook_primary": "0x306c878",
+    "resolver_hook_companion": "0x306c898",
+    "resolver_hook_count": "0x306c8be",
+    "resolver_hook_advance": "0x306c8dc",
+    "theater_noart_close": "0x3063cdc",
+    "theater_noart_open": "0x3063cf0",
+    "transport_keyed_draw": "0x30539b4"
+  }
 }

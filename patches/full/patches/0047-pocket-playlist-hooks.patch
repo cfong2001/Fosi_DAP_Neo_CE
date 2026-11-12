@@ -1,0 +1,18 @@
+# resolver_hook.S assembled into a module 0 pocket at 0x0306c878.
+name: 0047-pocket-playlist-hooks
+kind: module
+module: 0
+region: code
+address: 0x306c878
+gate: build refuses unless the stock bytes at the target equal
+  `expect`; the finished image must also pass the grown
+  build validator.
+expect: 00b583b069466348fbf76bf8002818bf002003b000bd2de9f0435e4f85b088468146164669463846fbf75bf800281cbf05b0bde8f083f9f7acfebdf8064006eb4420401e6102b0fbf1f502a93846fbf748f84ff0000c002d98bfc5f1000cbdf8040006f2ff1200fb09f00cfb0401d01702ebd050421243463846faf7eafff9f7b4fe05b0bde8f0832de9f043dff8048185b089460746154669464046fbf721f800281cbf05b0bde8f083f9f772febdf8064005eb4420401e6102b0fbf1f502a94046fbf70ef8bdf804000022784302fb040105fb04f24b46
+replace: 04b4314a127832b1012b04d12f4a914201d104bc2de004bc2de9f047edf78cba04b4294a12784ab1012b07d1284a964502d0284a964501d104bc704704bc2de9f047eef704bd04b41f4a12782ab1012903d11d4a507804bc704704bc2de9f041edf740baa0891849097801b1012001287047dff854c080b200b101389cf80130984200d3581eacf802000cf59e7202eb800210880130acf804009278322302fb03c2103213680b609388b2f806c063448b6008321c312a2312f801cb01f801cb013bf9d170470000b4bf0703b439020365e00703cba60803
+rationale: A stock routine here has no caller, branch, pointer or
+  literal anywhere in core-0 code or data
+  (patches/space/census_dead.py, tier 1), and no emulation
+  suite executes it (patches/space/run_coverage.py). The
+  hooks moved here from the gap tail to make room for focus
+  mode; module 0 is resident in every window, so every
+  caller still reaches them.

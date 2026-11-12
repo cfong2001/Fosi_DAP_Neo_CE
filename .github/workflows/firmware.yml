@@ -105,6 +105,11 @@ jobs:
           python test_transport_ground.py
           python emu_bt_tail_full.py
 
+      - name: Focus mode on the full build
+        run: |
+          cd patches/focus_mode
+          FOCUS_FULL_IMAGE="$RUNNER_TEMP/dist/DP3_V137_CE.img" python test_focus_mode.py
+
       - name: Standalone theater and focus variants
         run: |
           (cd patches/theater/build && python build_theater.py && python test_theater_lifecycle.py)

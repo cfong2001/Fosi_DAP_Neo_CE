@@ -1,0 +1,12 @@
+# Focus mode: BL to focus_gate at 0x0307c29c
+# in the full build's merged tail. Design: patches/focus_mode/.
+name: 0129-focus-gate-volume-19a
+kind: module
+module: 27
+region: code
+address: 0x307f8f8
+gate: stock byte precondition; validated by test_focus_mode.py under
+  emulation on the full build
+expect: e7f7aefc
+replace: fcf7d0fc
+rationale: Segment gate for the volume readout segment: see focus-gate-status-1f for the gate contract. Volume keys wake through the key hook first, so the readout still appears on the wake paint.

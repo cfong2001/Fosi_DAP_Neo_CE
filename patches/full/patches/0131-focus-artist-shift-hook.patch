@@ -1,0 +1,12 @@
+# Focus mode: BL to focus_artist_shift at 0x0307c308
+# in the full build's merged tail. Design: patches/focus_mode/.
+name: 0131-focus-artist-shift-hook
+kind: module
+module: 27
+region: code
+address: 0x307faa8
+gate: stock byte precondition; validated by test_focus_mode.py under
+  emulation on the full build
+expect: e3f721f9
+replace: fcf72efc
+rationale: The artist rect is passed in r0 to the renderer call replaced here. While hidden the stub sets its top and bottom to the focus values 257 and 272 before tail calling the renderer, moving the artist line with the title and preserving the stock 10 px gap between them.

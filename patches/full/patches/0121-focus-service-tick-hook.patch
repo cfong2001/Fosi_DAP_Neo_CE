@@ -1,0 +1,12 @@
+# Focus mode: BL to focus_tick at 0x0307c200
+# in the full build's merged tail. Design: patches/focus_mode/.
+name: 0121-focus-service-tick-hook
+kind: module
+module: 27
+region: code
+address: 0x307e20c
+gate: stock byte precondition; validated by test_focus_mode.py under
+  emulation on the full build
+expect: e9f716f8
+replace: fdf7f8ff
+rationale: The Service handler posts the progress event 0x40 on a counter cadence while the play state is playing or paused. The focus tick stub performs that post, then does the idle accounting in OS clock ticks (100 Hz, proven from the screen-off table): wheel movement restamps activity; at 500 ticks idle it sets the hidden flag and posts 0x39 and 0x3B so the painter repaints into the focus layout.

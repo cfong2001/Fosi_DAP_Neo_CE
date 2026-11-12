@@ -1,4 +1,4 @@
-# Hook site: B.W to theater_noart_close at 0x0307c2b4
+# Hook site: B.W to theater_noart_close at 0x03063cdc
 # in the full build's merged tail.
 name: 0045-theater-noart-close
 kind: module
@@ -9,7 +9,7 @@ gate: build refuses unless the stock bytes at the target equal
   `expect`; the finished image must also pass the grown
   build validator. Requires the full build's merged tail.
 expect: 346098f8
-replace: fdf79fbc
+replace: e5f7b3b9
 rationale: The player's artwork loader skips artwork setup when the
   locator finds no picture, so the theater reset never ran and
   the background kept the previous track's color. Replaces

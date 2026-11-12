@@ -1,0 +1,12 @@
+# Focus mode: BL to focus_gate at 0x0307c29c
+# in the full build's merged tail. Design: patches/focus_mode/.
+name: 0124-focus-gate-status-1f
+kind: module
+module: 27
+region: code
+address: 0x307f510
+gate: stock byte precondition; validated by test_focus_mode.py under
+  emulation on the full build
+expect: e7f7a2fe
+replace: fcf7c4fe
+rationale: Segment gate: while hidden, the shared focus gate answers the segment event test with 0 without consuming the bit, so the status icons are not drawn over the focus layout and redraw fresh on the wake paint. While visible it tail calls the real test-and-clear.
