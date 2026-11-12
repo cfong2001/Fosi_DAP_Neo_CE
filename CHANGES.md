@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-11-12: Library title tags
+
+- Standard CE keeps the parsed title tag when saving library records. The
+  filename is copied when the title is empty or the file could not open. Refresh the library
+  after installing so existing entries pick up their tags. Browsing needs
+  no extra tag parsing or file opens.
+- Added the requested USB screen, drawing-engine and V155 porting work to
+  TODO.md, including the supplied V155 hash and initial binary findings.
+
 ## 2026-11-12: Centered artwork and a no-art tile
 
 - Album covers are centered in the normal and focus artwork boxes, with

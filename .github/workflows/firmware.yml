@@ -81,6 +81,12 @@ jobs:
           git diff --exit-code -- patches/player_ui
           python patches/player_ui/test_artwork.py
 
+      - name: Library scanner retains title tags
+        run: |
+          python patches/library_titles/build_titles.py
+          git diff --exit-code -- patches/library_titles
+          python patches/library_titles/test_titles.py
+
       - name: Redrawn Font B glyphs
         run: python patches/antialias/test_font.py
 

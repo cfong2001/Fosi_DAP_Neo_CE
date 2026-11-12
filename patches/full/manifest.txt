@@ -121,3 +121,7 @@ patches/0145-profile-commit.patch
 ../player_ui/0176-artwork-centered-box.patch
 ../player_ui/0177-artwork-formats.patch
 ../player_ui/0178-artwork-badge_fill.patch
+
+# Keep parsed titles in the scanned library database:
+../library_titles/0180-library-title-fallback.patch
+../library_titles/0181-library-title-copy-hook.patch
