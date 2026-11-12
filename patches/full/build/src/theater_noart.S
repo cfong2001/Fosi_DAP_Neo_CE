@@ -37,9 +37,9 @@
     .type theater_noart_close, %function
 theater_noart_close:
     str     r4, [r6]
-    push    {lr}
+    push    {r3, lr}
     bl      theater_default
-    pop.w   {lr}
+    pop.w   {r3, lr}
     ldrb.w  r0, [r8]
     b.w     RESUME_NA
     .size theater_noart_close, . - theater_noart_close
@@ -58,7 +58,7 @@ theater_noart_open:
  * flags after the call). */
     .type theater_default, %function
 theater_default:
-    push    {r0, r1, r2, lr}
+    push    {r0, r1, r2, r3, r4, lr}
     ldr     r1, =THEATER_STATE
     movs    r0, #0
     strb    r0, [r1, #25]          /* flags: not armed */
@@ -78,7 +78,8 @@ theater_default:
     ldr     r2, [r1]
     orr     r2, r2, #EVMASK
     str     r2, [r1]               /* repaint request */
-3:  pop     {r0, r1, r2, pc}
+3:  bl      ART_PLACEHOLDER
+    pop     {r0, r1, r2, r3, r4, pc}
     .size theater_default, . - theater_default
 
     .ltorg

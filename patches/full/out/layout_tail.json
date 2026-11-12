@@ -1,7 +1,7 @@
 {
   "tail_base": "0x307bfb4",
   "tail_bytes": 2040,
-  "tail_sha256": "5100d0d0e4c17f08ea6ede667f3c720edb721013836a7bf6cf7bc0d942446c4c",
+  "tail_sha256": "1443d354b9a388f156d23178eb302b7535e703b0e3295d8dc329cd7b71820f69",
   "budget": 2044,
   "pieces": [
     {
@@ -38,7 +38,7 @@
       "offset": 928,
       "address": "0x307c354",
       "bytes": 676,
-      "sha256": "17a558dde5b96ef305236b436e7ec593d7fbf5a3ff56d8437c168e5dd0399d69",
+      "sha256": "1bd844657064921c52c246bb60c3da2f83abc1102e7f68e99fa8cc710e1d232c",
       "trampoline": "0x307c3a8"
     },
     {
@@ -65,7 +65,7 @@
     {
       "source": "theater_noart.S",
       "address": "0x3063cdc",
-      "bytes": 100,
+      "bytes": 104,
       "patch": "0048-pocket-theater-noart"
     },
     {

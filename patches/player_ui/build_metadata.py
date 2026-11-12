@@ -32,7 +32,7 @@ def main():
  }''')
         subprocess.run(['arm-none-eabi-gcc','-mcpu=cortex-m3','-mthumb','-std=c99','-Os','-ffreestanding','-fno-builtin','-nostdlib','-Wall','-Wextra','-Werror','-Wl,-T,'+str(b/'link.ld'),str(HERE/'metadata.c'),'-o',str(b/'m.elf')],check=True)
         syms={line.split()[2]:int(line.split()[0],16) for line in subprocess.check_output(['arm-none-eabi-nm','-n',str(b/'m.elf')],text=True).splitlines() if len(line.split())==3}
-        for part,addr,limit,name in [('info',0x0307E988,0x0307ECA4,'0160-track-info'),('helper',0x0307ED60,0x0307EF4E,'0161-metadata-helpers')]:
+        for part,addr,limit,name in [('info',0x0307E988,0x0307EBA8,'0160-track-info'),('helper',0x0307ED60,0x0307EEB0,'0161-metadata-helpers')]:
             dest=b/(part+'.bin')
             subprocess.run(['arm-none-eabi-objcopy','-O','binary','--only-section=.'+part,str(b/'m.elf'),str(dest)],check=True)
             code=dest.read_bytes();assert addr+len(code)<=limit,(part,len(code),limit-addr)
