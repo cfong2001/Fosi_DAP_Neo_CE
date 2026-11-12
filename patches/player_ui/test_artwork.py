@@ -2,7 +2,7 @@
 import random
 import struct
 import unittest
-from test_typography import Typography, HERE, END
+from test_typography import Typography, HERE, REPO, END
 from build import parse_patch
 from unicorn import UC_HOOK_CODE
 from unicorn.arm_const import *
@@ -63,6 +63,29 @@ class Artwork(unittest.TestCase):
             self.assertEqual(out,source);self.assertEqual(ptr,0x03026A20);self.assertEqual(text,[])
     def test_duplicate_last_row_is_not_double_contrasted(self):
         a=self.row(r=143)[0][0][3];b=self.row(r=143)[0][0][3];self.assertEqual(a,b)
+    def test_format_badges_fit_the_firmware_font(self):
+        from rknano_image import Image
+        fw=Image((REPO/'release/DP3_V137_CE.img').read_bytes())
+        base=fw.sections['font_b']['offset']
+        def advance(ch):
+            cp=ord(ch);p=base+cp*33;rec=fw.raw[p:p+33]
+            if 65<=cp<=90 or 97<=cp<=122:
+                cols=[x for y in range(10) for x in range(16) if int.from_bytes(rec[y*2:y*2+2],'big') & (0x8000>>x)]
+                return min(cols)+max(cols)+2 if cols else 0
+            return rec[32]-128 if rec[32]>128 else 8
+        for codec,label in enumerate(('MP3','OPUS','AAC','WAV','OGG','APE','FLAC','ALAC','DFF','DSF')):
+            u=self.machine();rects=[];texts=[]
+            def hook(uc,addr,n,data):
+                if addr==0x03062CEE:
+                    rects.append(struct.unpack('<4h',uc.mem_read(uc.reg_read(UC_ARM_REG_R0),8)))
+                    texts.append(bytes(uc.mem_read(uc.reg_read(UC_ARM_REG_R2),10)).decode('utf-16le').split('\0')[0])
+                elif addr!=0x030632FA:return
+                uc.reg_write(UC_ARM_REG_PC,uc.reg_read(UC_ARM_REG_LR))
+            u.hook_add(UC_HOOK_CODE,hook);u.reg_write(UC_ARM_REG_R0,codec)
+            u.emu_start(0x03056161,END,count=10000)
+            self.assertEqual(texts,[label]);r=rects[0]
+            self.assertLessEqual(sum(map(advance,label)),r[2]-r[0])
+
     def test_placeholder_is_bounded_and_draws_codec_badge(self):
         u=self.machine();self.put(u,0x0304b4d4,6);fills=[];text=[]
         def hook(uc,addr,n,data):

@@ -66,18 +66,18 @@ typedef struct {int16_t x0,y0,x1,y1;} Rect;
 #define DRAW ((void (*)(Rect*,Rect*,const u16*,u32))0x03062CEF)
 static SEC(".text.badge_fill") void badge_fill(int x,int y,u32 color) {
     for(int r=0;r<20;r++){
-        int n=inset(r,40,20);FILL(x+n,y+r,x+39-n,y+r,color);
+        int n=inset(r,56,20);FILL(x+n,y+r,x+55-n,y+r,color);
     }
 }
 SEC(".text.badge") void art_badge(u32 id) {
     if(id>=10)return;
     int hidden=*(volatile unsigned char*)0x0302348C;
-    int x=hidden?171:148,y=hidden?174:156;
+    int x=hidden?155:132,y=hidden?174:156;
     u16 text[5];
     for(unsigned i=0;i<4;i++)text[i]=(unsigned char)formats[id][i];
     text[4]=0;
     u16 *ink=(u16*)0x0302385C,old=*ink;
     badge_fill(x,y,*(volatile u16*)0x030235B4);
     *ink=*(volatile u16*)0x030235B6;
-    Rect r={x+4,y+2,x+35,y+17};DRAW(&r,&r,text,0);*ink=old;
+    Rect r={x+4,y+2,x+51,y+17};DRAW(&r,&r,text,0);*ink=old;
 }
