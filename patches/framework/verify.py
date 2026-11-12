@@ -472,6 +472,33 @@ def main():
                          and crep['theme']['bytes_changed'] == ce_written
                          and len(crep['theme']['runs']) == len(ce['runs']))
 
+            # Code colours: the four accent/line roles rewrite exactly
+            # their eight movw sites in module 0 and nothing else.
+            cc = json.loads(
+                (THEME_DIR / 'code-colours.example.json').read_text())
+            mimg = fwbuild.Image(dimg)
+            moff, _ = mimg.module_region(0, 'code')
+            mexec = mimg.modules[0]['code_exec']
+            cc_sites = {}
+            for role, (stock_w, sites) in fwbuild.CODE_COLOUR_SITES.items():
+                for a in sites:
+                    cc_sites[moff + a - mexec] = fwbuild._theme_rgb565(
+                        cc['code_colours'][role])
+            tcc = tmp / 'theme-code.img'
+            r = run_build(['--input', str(STOCK), '--output', str(tcc),
+                           '--ecpatch-dir', str(ecp),
+                           '--theme-config',
+                           str(THEME_DIR / 'code-colours.example.json')])
+            cc_ok = r.returncode == 0 and tcc.exists()
+            if cc_ok:
+                ximg = tcc.read_bytes()
+                fp.validate(ximg)
+                content = diff_offsets(dimg, ximg) - crc
+                allowed = {o + i for o in cc_sites for i in range(4)}
+                cc_ok = (content <= allowed and len(cc_sites) == 8
+                         and all(fwbuild._movw_r0_imm(ximg[o:o + 4]) == w
+                                 for o, w in cc_sites.items()))
+
             def refuse(cfg, name):
                 p = tmp / f'theme-bad-{name}.json'
                 p.write_text(json.dumps(cfg))
@@ -492,17 +519,20 @@ def main():
             e0 = bad['runs'][0]['expect']
             bad['runs'][0]['expect'] = ('0' if e0[0] != '0' else '1') + e0[1:]
             ref_ok = refuse(bad, 'run') and ref_ok
+            ref_ok = refuse({'version': 1, 'code_colours':
+                             {'background': '#000000'}}, 'code') and ref_ok
             out = tmp / 'theme-never-recovery.img'
             rr = run_build(['--input', str(STOCK), '--output', str(out),
                             '--theme-config',
                             str(THEME_DIR / 'theme.example.json'),
                             '--recovery'])
             ref_ok = (rr.returncode != 0 and not out.exists()) and ref_ok
-            ok = default_ok and ex_ok and ce_ok and ref_ok
+            ok = default_ok and ex_ok and ce_ok and cc_ok and ref_ok
             detail = (f'default build == pinned unified hash: '
                       f'{default_ok}; example diff confined to '
                       f'resources 6-10, {2 * ex_total} bytes: {ex_ok}; '
                       f'CE mark diff == its {ce_changed} changed bytes, inside its runs: {ce_ok}; '
+                      f'code colours confined to their 8 movw sites: {cc_ok}; '
                       f'refusals hold: {ref_ok}')
         check('theme build: pinned default, confined example and CE '
               'mark diffs, refusals hold', bool(ok), detail)

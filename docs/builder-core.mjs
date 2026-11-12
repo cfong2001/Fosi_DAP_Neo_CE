@@ -148,6 +148,26 @@ function rangesOverlap(a, b) { return a[0] <= b[1] && b[0] <= a[1]; }
 
 // ---- theme step (port of build.py parse_theme_config + apply_theme)
 
+// build.py CODE_COLOUR_SITES: role -> [stock imm16, [palette routine,
+// clock painter]] movw r0 sites in module 0. Both sites or neither.
+export const CODE_COLOUR_SITES = {
+  accent_light: [0xfb20, [0x030655da, 0x03065f4a]],
+  line_light:   [0xef7d, [0x030655e2, 0x03065f52]],
+  accent_dark:  [0xf220, [0x030655f0, 0x03065f90]],
+  line_dark:    [0x1082, [0x030655f8, 0x03065f98]],
+};
+export function movwR0(word) {
+  const hw1 = 0xf240 | ((word >> 1) & 0x400) | (word >> 12);
+  const hw2 = (((word >> 8) & 7) << 12) | (word & 0xff);
+  return Uint8Array.of(hw1 & 0xff, hw1 >> 8, hw2 & 0xff, hw2 >> 8);
+}
+export function movwR0Imm(b) {
+  const hw1 = b[0] | (b[1] << 8), hw2 = b[2] | (b[3] << 8);
+  if ((hw1 & 0xfbf0) !== 0xf240 || (hw2 & 0x8f00) !== 0) return null;
+  return ((hw1 & 0xf) << 12) | (((hw1 >> 10) & 1) << 11) |
+    (((hw2 >> 12) & 7) << 8) | (hw2 & 0xff);
+}
+
 function parseThemeConfig(config) {
   if (!config || typeof config !== "object" || config.version !== 1)
     throw new Error("theme: config must be a version 1 theme document");
@@ -217,7 +237,17 @@ function parseThemeConfig(config) {
       throw new Error("theme: run expect/replace must be equal, non-zero length");
     runs.push({offset: off, expect, replace});
   }
-  return {paletteWords, resources: rules, runs};
+  const codeColours = config.code_colours ?? {};
+  if (typeof codeColours !== "object" || Array.isArray(codeColours))
+    throw new Error("theme: code_colours must be an object");
+  const codeWords = {};
+  for (const [role, value] of Object.entries(codeColours)) {
+    if (!(role in CODE_COLOUR_SITES))
+      throw new Error("theme: unknown code colour " + role + "; use " +
+        Object.keys(CODE_COLOUR_SITES).join(", "));
+    codeWords[role] = rgb565(value);
+  }
+  return {paletteWords, resources: rules, runs, codeWords};
 }
 
 function rock26Resources(bytes) {
@@ -299,6 +329,28 @@ function applyTheme(bytes, config, claimedRanges) {
     }
     recRules.push({asset: rule.id, role: rule.role, count: hits.length});
   }
+  const recCode = [];
+  const {base, modules} = parseModules(bytes);
+  const mod0 = modules[0];
+  const code0 = moduleRegion(bytes, base, modules, 0, "code");
+  for (const [role, [stock, sites]] of Object.entries(CODE_COLOUR_SITES)) {
+    if (!(role in cfg.codeWords)) continue;
+    const word = cfg.codeWords[role];
+    for (const addr of sites) {
+      const rel = addr - mod0.code_exec;
+      if (rel < 0 || rel > code0.length - 4)
+        throw new Error("theme: code colour site 0x" + addr.toString(16) +
+          " is outside module 0 code");
+      const off = code0.off + rel;
+      if (movwR0Imm(bytes.subarray(off, off + 4)) !== stock)
+        throw new Error("theme: code colour " + role + " at 0x" + addr.toString(16) +
+          ": expected movw r0, #0x" + stock.toString(16) + ", found " +
+          bytesToHex(bytes.subarray(off, off + 4)) + "; refusing");
+      claim([off, off + 3], "code colour " + role);
+      bytes.set(movwR0(word), off);
+    }
+    recCode.push({role, stock, target: word});
+  }
   const recRuns = [];
   for (const run of cfg.runs) {
     const {offset: off, expect, replace} = run;
@@ -314,10 +366,10 @@ function applyTheme(bytes, config, claimedRanges) {
     recRuns.push({file_offset: off, bytes: expect.length});
   }
   const record = {
-    resources: recRules, runs: recRuns,
+    resources: recRules, runs: recRuns, code_colours: recCode,
     pixels_changed: recRules.reduce((n, r) => n + r.count, 0),
     bytes_changed: 2 * recRules.reduce((n, r) => n + r.count, 0) +
-      recRuns.reduce((n, r) => n + r.bytes, 0),
+      recRuns.reduce((n, r) => n + r.bytes, 0) + 8 * recCode.length,
   };
   return {record, claimed};
 }
