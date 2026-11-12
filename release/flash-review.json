@@ -56,5 +56,8 @@
   "source_candidate_not_newer_than_official": true,
   "modified_code_or_resources": false,
   "release_gate": "Do not flash until a full device backup, readback-verified slot map, recovery entry and restore procedure are established on this unit.",
-  "recovery_note": "Recovery is the supplied official firmware with a newer header date; no CE code is present. Date ordering is a traced validator rule, not proof of early-boot acceptance."
+  "recovery_note": "Recovery is the supplied official firmware with a newer header date; no CE code is present. Date ordering is a traced validator rule, not proof of early-boot acceptance.",
+  "example_reference_only": true,
+  "official_source_matches_device_verified": false,
+  "full_device_backup_verified": false
 }

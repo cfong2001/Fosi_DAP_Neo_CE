@@ -25,7 +25,14 @@ safe to flash.
 Use the verified official image for the **same DP3 model and firmware
 currently installed**, retained unchanged. The tool accepts only the
 known V137 or user-supplied V155 SHA-256 and a pinned CE release image.
-For the supplied V155:
+`flash-review.json` is an offline example against the supplied V155 reference,
+not confirmation that V155 is installed on a device. For a player still on
+V137 or an earlier stock release, identify the actual installed version
+and obtain its matching official recovery source first. A verified full
+internal-flash backup is the primary way back when that source is unknown.
+Do not flash an unknown version just to discover whether recovery works.
+
+Example using the supplied V155 reference:
 
 ```sh
 python tools/prepare_flash.py \

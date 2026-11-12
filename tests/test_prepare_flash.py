@@ -21,6 +21,8 @@ class PrepareFlash(unittest.TestCase):
             self.assertEqual(before[:2],after[:2]) # year unchanged
             self.assertEqual(len(before),len(after))
         self.assertFalse(r['modified_code_or_resources'])
+        self.assertFalse(r['official_source_matches_device_verified'])
+        self.assertFalse(r['full_device_backup_verified'])
         self.assertFalse(r['prepared_candidate']['hardware_boot_verified'])
         self.assertIn('DEVICE QUALIFICATION REQUIRED',r['status'])
     def test_refuses_unknown_candidate_and_official(self):

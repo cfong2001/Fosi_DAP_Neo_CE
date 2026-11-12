@@ -78,6 +78,8 @@ def prepare(candidate,official,date=None):
             'prepared_candidate':audit(ce),'prepared_recovery':audit(recovery),
             'source_candidate_not_newer_than_official':image_date(candidate)<=image_date(official),
             'modified_code_or_resources':False,
+            'official_source_matches_device_verified':False,
+            'full_device_backup_verified':False,
             'release_gate':'Do not flash until a full device backup, readback-verified slot map, recovery entry and restore procedure are established on this unit.',
             'recovery_note':'Recovery is the supplied official firmware with a newer header date; no CE code is present. Date ordering is a traced validator rule, not proof of early-boot acceptance.'}
     return ce,recovery,report
