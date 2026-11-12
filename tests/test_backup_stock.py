@@ -46,7 +46,7 @@ class BackupStock(unittest.TestCase):
             with self.assertRaisesRegex(ValueError,'reviewed'):b.load_transport(sentinel)
     def test_bad_ranges_are_refused(self):
         raw=FakeUSB();usb=b.ReadOnly(raw)
-        for args in ((0x14,512,-1,1),(0x14,512,0,17),(0x14,1024,0,1),(0x1A,512,0,0)):
+        for args in ((0x14,512,-1,1),(0x14,1024,0xffffffff,2),(0x14,512,0,17),(0x14,1024,0,1),(0x1A,512,0,0)):
             with self.assertRaises(ValueError):usb.command(*args)
         self.assertFalse(raw.calls)
 if __name__=='__main__':unittest.main()

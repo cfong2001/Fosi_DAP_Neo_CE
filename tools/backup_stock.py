@@ -31,7 +31,7 @@ class ReadOnly:
     def command(self,opcode,length,address=0,sectors=0):
         if opcode not in ALLOWED_READS:raise ValueError('non-read Rockusb command refused')
         if opcode==0x14:
-            if not 0<=address<=0xffffffff or not 1<=sectors<=16 or length!=sectors*SECTOR:
+            if not 0<=address<=0xffffffff or not 1<=sectors<=16 or address+sectors>0x100000000 or length!=sectors*SECTOR:
                 raise ValueError('invalid bounded LBA read')
         elif (opcode,length,address,sectors) not in ((0x1A,11,0,0),(0x1B,16,0,0)):
             raise ValueError('invalid information read')
