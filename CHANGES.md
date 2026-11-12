@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-11-12: Centered artwork and a no-art tile
+
+- Album covers are centered in the normal and focus artwork boxes, with
+  rounded corners and an 18% contrast boost. Decoded source rows stay
+  untouched, including when the decoder repeats its final row.
+- The record graphic is removed. Tracks without artwork show a rounded
+  outline and music note. A rounded format badge sits on the artwork corner.
+- The theater background still derives from the original cover colors.
+
 ## 2026-11-12: Title tags and readable track information
 
 - Now Playing uses the title tag, with the filename when it is absent.

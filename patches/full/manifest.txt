@@ -110,3 +110,14 @@ patches/0145-profile-commit.patch
 ../player_ui/0161-metadata-helpers.patch
 ../player_ui/0162-track-info-entry.patch
 ../player_ui/0163-player-tag-title.patch
+
+# Centered, rounded artwork, contrast, placeholder and format badge:
+../player_ui/0170-artwork-row.patch
+../player_ui/0171-artwork-contrast.patch
+../player_ui/0172-artwork-round.patch
+../player_ui/0173-artwork-pixels.patch
+../player_ui/0174-artwork-placeholder.patch
+../player_ui/0175-artwork-badge.patch
+../player_ui/0176-artwork-centered-box.patch
+../player_ui/0177-artwork-formats.patch
+../player_ui/0178-artwork-badge_fill.patch

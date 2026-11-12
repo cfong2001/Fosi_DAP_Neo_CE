@@ -63,7 +63,7 @@ TOTAL = 2040
 # External branch targets of the hook source, in source order.
 EXTERNAL = {'RESUME_P': 0x03059DB0, 'RESUME_C': 0x0305B2C6,
             'RESUME_N': 0x03059D5C, 'RESUME_NA': 0x0307E978,
-            'FILL': 0x030632FA, 'HELPER': 0x03063A08}
+            'FILL': 0x030632FA, 'HELPER': 0x03063A08, 'ART_PLACEHOLDER': 0x0307EBA8}
 SOURCES = ('resolver_hook.S', 'theater_noart.S', 'transport_ground.S')
 # Module 0 pockets for the hooks: stock routines that nothing can reach
 # (patches/space/census_dead.py, tier 1, with the emulation coverage gate),
@@ -101,10 +101,10 @@ SITES = (
 # Filled in after the build passed the resolver and theater emulation
 # suites; the build refuses any later drift.
 EXPECTED = {
-    'resolver_sha256': '8936db72bb9775165d4fe47f111a066a717c213e5baeb94dbbb39abebaf29952',
+    'resolver_sha256': 'ffd11411541e744c75455a5260eb97db572a0056924f6b5bd324b30268c0459e',
     'focus_sha256': '479e1c49e92232643b0832f7a7929912298dccc93c7a80eb4fac9d76f913dc33',
-    'theater_sha256': '17a558dde5b96ef305236b436e7ec593d7fbf5a3ff56d8437c168e5dd0399d69',
-    'tail_sha256': '5100d0d0e4c17f08ea6ede667f3c720edb721013836a7bf6cf7bc0d942446c4c',
+    'theater_sha256': '1bd844657064921c52c246bb60c3da2f83abc1102e7f68e99fa8cc710e1d232c',
+    'tail_sha256': '1443d354b9a388f156d23178eb302b7535e703b0e3295d8dc329cd7b71820f69',
 }
 
 

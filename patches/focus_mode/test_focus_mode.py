@@ -213,6 +213,13 @@ class Machine:
         return self.r8(STATE + 8)
 
     def _hook(self, uc, addr, size, user):
+        if addr == 0x0306D13C and FULL_IMAGE:
+            # Theater samples the source before the display-only contrast mask.
+            width = uc.reg_read(UC_ARM_REG_R2)
+            ptr = struct.unpack('<I', uc.mem_read(uc.reg_read(UC_ARM_REG_SP) + 4, 4))[0]
+            if not hasattr(self, 'art_source_rows'):
+                self.art_source_rows = []
+            self.art_source_rows.append(struct.unpack(f'<{width}H', uc.mem_read(ptr, width * 2)))
         if addr == STORE:
             col = struct.unpack('<H', uc.mem_read(DSTRUCT + 8, 2))[0]
             row = struct.unpack('<H', uc.mem_read(DSTRUCT + 0xA, 2))[0]
@@ -510,6 +517,8 @@ def gate2(variant):
     for n in GATED:
         assert m.event(n), f'gated event {n:#x} was consumed'
     rects = [f[:4] for f in m.fills]
+    if FULL_IMAGE:
+        rects = [r for r in rects if not (25 <= r[0] <= r[2] <= 214 and 8 <= r[1] <= r[3] <= 197)]
     assert rects == [], f'segment fill calls leaked: {rects}'
     bad = [d for d in m.draws
            if d[1] in TRANSPORT_IDS or d[3] >= 254]
@@ -560,7 +569,8 @@ def gate3(m):
     # pending, which is the stock choreography for free.
     m.paint({0x39})
     got = tuple(m.r32(a) for a in GLOBALS)
-    assert got == (144, 144, 23, 36), f'restored globals {got}'
+    expected_x = 48 if FULL_IMAGE else 23
+    assert got == (144, 144, expected_x, 36), f'restored globals {got}'
     by_text = {text: rect for rect, text in m.renders}
     assert by_text.get('Focus Title') == (0, 198, 239, 213)
     assert by_text.get('Focus Artist') == (0, 223, 239, 238)
@@ -573,7 +583,7 @@ def gate3(m):
         'transport row did not redraw'
     row = [s for s in m.stores if 275 <= s[1] <= 307]
     assert len(row) > 1000, f'transport row stores missing: {len(row)}'
-    print(f'  wake paint: globals back to (144, 144, 23, 36), text '
+    print(f'  wake paint: globals back to {got}, text '
           f'rects stock, 0x43 consumed, progress track fill '
           f'present, {len(row)} transport stores')
     print('PASS gate 3: wake restores the full stock layout')
@@ -583,7 +593,7 @@ def gate3(m):
 
 def gate4(variant):
     def run(box, dest):
-        m = Machine(variant, modules=(0, 18, 19))
+        m = Machine(variant, modules=(0, 27, 18, 19))
         for a, v in zip(GLOBALS, (box, box, dest[0], dest[1])):
             m.w32(a, v)
         m.w32(0x030259DC, 1)
@@ -605,6 +615,8 @@ def gate4(variant):
             base = 0x030065A8 + y * 480 + dest[0] * 2
             rows.append(struct.unpack(f'<{box}H',
                                       m.u.mem_read(base, box * 2)))
+        if FULL_IMAGE:
+            rows = m.art_source_rows[:needed]
         expected, avg, mixed = port_derived_dark(rows)
         cell = m.r16(BGCELL)
         print(f'  box {box} dest {dest}: scaled height {scaled_h}, '
@@ -615,7 +627,7 @@ def gate4(variant):
         assert st[25] == 7 and m.event(0x39), 'finalize incomplete'
         return needed
     n_focus = run(190, (25, 8))
-    n_stock = run(144, (23, 36))
+    n_stock = run(144, (48 if FULL_IMAGE else 23, 36))
     assert n_focus == 38 and n_stock == 29, (n_focus, n_stock)
     print('PASS gate 4: geometry change re-arms theater sampling; '
           'rows_needed follows the new scaled height (114 -> 38 '

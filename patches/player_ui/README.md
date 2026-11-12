@@ -68,3 +68,40 @@ file-size query. They verify all seven rows, empty fields, long titles,
 suffix preservation, fractional sample rates, maximum 32-bit file size,
 register preservation and stack balance. Actual tag files and the device
 remain outside this test's scope.
+
+## Artwork compositor
+
+`build_artwork.py` emits expected-byte patches for a row compositor in
+module 0 census pockets, plus a placeholder and codec-label data in the
+unused parts of the old info painter. The normal box starts at (48,36),
+centered on a 240-pixel screen; focus retains its centered 190-pixel box.
+The scaled image is centered vertically inside the requested box. Padding
+uses the theater ground, with a symmetric radius-10 corner mask.
+
+Contrast is applied to each RGB565 component around its midpoint with a
+factor of 1.18 and saturation. The compositor builds a temporary 190-pixel
+stack row, then calls the original bitmap function. It preserves that
+function's return value. The decoder's buffer is never edited, so the
+stock duplicate final-row blit cannot apply contrast twice. The theater
+sampler still consumes the original decoder row. Requests outside the
+player boxes keep the original bitmap arguments and pointer.
+
+The no-art exits restore the background, then draw an outline tile and
+music note inside the normal or focus box. The file type appears in a
+rounded tile on the cover's lower-right corner. A badge is also drawn after
+the final decoded row, so progressive decode cannot erase it. Battery and
+status icons keep their existing draw paths. The record is removed from
+the two player backgrounds; the placeholder is drawn only when needed.
+
+```
+python patches/player_ui/build_artwork.py
+python patches/player_ui/test_artwork.py
+```
+
+The tests execute the emitted Thumb routines and check row geometry,
+independent contrast values, aspect padding, corner symmetry, bitmap
+return preservation, registers, stack and unchanged source pixels. Full
+JPEG/theater, focus and no-art suites cover the combined paths. The new
+stack row adds at most 380 bytes of pixel storage; it allocates no BSS or
+persistent state. Pocket residency retains the project's existing
+hardware-validation limitation.

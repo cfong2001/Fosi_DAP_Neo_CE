@@ -16,7 +16,7 @@ import sys
 from pathlib import Path
 
 from unicorn import Uc, UC_ARCH_ARM, UC_MODE_THUMB, UC_HOOK_CODE
-from unicorn.arm_const import (UC_ARM_REG_R0, UC_ARM_REG_R3, UC_ARM_REG_R4,
+from unicorn.arm_const import (UC_ARM_REG_R0, UC_ARM_REG_R1, UC_ARM_REG_R2, UC_ARM_REG_R3, UC_ARM_REG_R4,
                                UC_ARM_REG_R5, UC_ARM_REG_R6, UC_ARM_REG_R7,
                                UC_ARM_REG_R8, UC_ARM_REG_R9, UC_ARM_REG_SP,
                                UC_ARM_REG_LR, UC_ARM_REG_PC)
@@ -64,9 +64,14 @@ def run_exit(u, entry, background, handle=0x85):
     u.mem_write(ART_CELL, struct.pack('<I', 1))
     u.mem_write(HANDLE_CELL, struct.pack('<I', handle))
     closed = []
+    fills = []
 
     def hook(uc, address, size, data):
-        if address == CLOSE:
+        if address in (0x030632FA, 0x03062CEE):
+            if address == 0x030632FA:
+                fills.append(tuple(uc.reg_read(r) for r in (UC_ARM_REG_R0, UC_ARM_REG_R1, UC_ARM_REG_R2, UC_ARM_REG_R3)))
+            uc.reg_write(UC_ARM_REG_PC, uc.reg_read(UC_ARM_REG_LR))
+        elif address == CLOSE:
             closed.append(uc.reg_read(UC_ARM_REG_R0) & 0xFFFFFFFF)
             uc.reg_write(UC_ARM_REG_R0, 0)
             uc.reg_write(UC_ARM_REG_PC, uc.reg_read(UC_ARM_REG_LR))
@@ -80,7 +85,7 @@ def run_exit(u, entry, background, handle=0x85):
                        (UC_ARM_REG_R6, ART_CELL), (UC_ARM_REG_R8, HANDLE_CELL),
                        (UC_ARM_REG_SP, sp), (UC_ARM_REG_LR, 0xDEAD0001)):
         u.reg_write(reg, value)
-    u.emu_start(entry | 1, DONE, count=2000)
+    u.emu_start(entry | 1, DONE, count=50000)
     u.hook_del(h)
     regs = [u.reg_read(r) for r in (UC_ARM_REG_R3, UC_ARM_REG_R4,
                                      UC_ARM_REG_R5, UC_ARM_REG_R6,
@@ -96,6 +101,7 @@ def run_exit(u, entry, background, handle=0x85):
         'art': struct.unpack('<I', u.mem_read(ART_CELL, 4))[0],
         'handle': struct.unpack('<I', u.mem_read(HANDLE_CELL, 4))[0],
         'closed': closed,
+        'fills': fills,
     }
 
 
@@ -111,6 +117,7 @@ def main():
             assert got['pc'] == DONE and got['sp'] == 32, got
             assert got['regs'] == [0x33, 0x44, 0x55, 0x66, 0x77, 0x88, 0x99], got
             assert got['art'] == 0, got
+            assert got['fills'] and all(48 <= x0 <= x1 <= 191 and 36 <= y0 <= y1 <= 179 for x0,y0,x1,y1 in got['fills']), got['fills']
             assert got['background'] == default, hex(got['background'])
             assert got['event'] == 0x10 | EVMASK, hex(got['event'])
             assert got['flags'] == 0, got['flags']

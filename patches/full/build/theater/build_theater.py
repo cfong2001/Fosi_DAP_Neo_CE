@@ -42,7 +42,8 @@ from capstone import Cs, CS_ARCH_ARM, CS_MODE_THUMB, CS_OP_IMM  # noqa: E402
 
 TAIL_BASE = 0x0307C354   # default; build_tail.py passes --base
 TAIL_MAX = 2044
-BITMAP = 0x0306333E
+BITMAP = 0x0306D13C
+STOCK_BITMAP = 0x0306333E
 SETUP = 0x0308389E
 BLIT_SITES = (0x03083A72, 0x03083A7E, 0x03083B82, 0x03083B94)
 STOCK_SHA = 'fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cdfade5e9c6ea3bd71ac6deef'
@@ -407,7 +408,7 @@ def main():
         expect = site_bytes(site)
         dec = list(Cs(CS_ARCH_ARM, CS_MODE_THUMB).disasm(expect, site))
         if len(dec) != 1 or dec[0].mnemonic != 'bl' \
-                or f'{BITMAP:#x}' not in dec[0].op_str:
+                or f'{STOCK_BITMAP:#x}' not in dec[0].op_str:
             raise SystemExit(f'blit site {site:#x} is not the expected '
                              f'bitmap call: {expect.hex()}')
         patches.append({
