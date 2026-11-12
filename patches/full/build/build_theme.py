@@ -2,10 +2,10 @@
 """Merge the full build's theme config: design refresh v4 glyph
 runs (182), the browser icon extension runs (300), the CE
 splash mark runs (40), the light play-mode key runs (4) and the
-antialiased screens, dialogs, progress bar and knob runs (429), 955
-runs total.
+antialiased screens, dialogs, progress bar and knob runs (429) and the
+redrawn Font B Latin glyphs (314), 1,269 runs total.
 
-The five source configs are disjoint (the theme consumer refuses
+The six source configs are disjoint (the theme consumer refuses
 overlaps; the merge asserts it). Two outputs:
 
   theme-full.json        run offsets shifted by the full build's
@@ -53,10 +53,11 @@ def main():
     play_mode = load_runs(REPO / 'patches' / 'design_refresh_v4'
                           / 'play_mode_light' / 'play-mode-light.json')
     screens = load_runs(REPO / 'patches' / 'antialias' / 'screens-glyphs.json')
+    font = load_runs(REPO / 'patches' / 'antialias' / 'font-glyphs.json')
     print(f'v4 glyph runs: {len(v4)}; browser runs: {len(browser)}; '
           f'ce mark runs: {len(mark)}; light play-mode runs: {len(play_mode)}; '
-          f'screens runs: {len(screens)}')
-    runs = v4 + browser + mark + play_mode + screens
+          f'screens runs: {len(screens)}; font runs: {len(font)}')
+    runs = v4 + browser + mark + play_mode + screens + font
     seen = []
     for r in runs:
         off = int(r['offset'], 16) if isinstance(r['offset'], str) \

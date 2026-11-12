@@ -21,7 +21,7 @@ CE (Community Edition) is patched firmware for the Fosi Audio DAP Neo. It starts
 
 | Image | What it carries | SHA-256 |
 |---|---|---|
-| [`DP3_V137_CE.img`](release/DP3_V137_CE.img) | Standard: every feature below. 7,168 bytes longer than stock. | `e72449d73db1afb85b9c801fd24812ecdf6b6580a0763b1056f41e9c8ff7b833` |
+| [`DP3_V137_CE.img`](release/DP3_V137_CE.img) | Standard: every feature below. 7,168 bytes longer than stock. | `148446d95dfcb85afbaa2b8c13310aed4ea97db80b849f7bb4bb10612e1fa5e1` |
 | [`DP3_V137_CE_minimal.img`](release/DP3_V137_CE_minimal.img) | Minimal: audio and library fixes only, same length as stock. | `92c446066e715d74a719671d3ee643ed4b7587c94801eb6dc3893f2271ed944d` |
 | [`DP3_V137_CE_recovery.img`](release/DP3_V137_CE_recovery.img) | Stock code dated one day after CE, for going back. | `aff851b31d6eee55cbd4bb3fc0464ac79f0039ee86ae6723225ac036a157d223` |
 
@@ -43,7 +43,7 @@ Everything here is in the standard image; the minimal image has the sound and li
 - Selecting an `.m3u` file in the browser plays it as a playlist; next, previous and shuffle stay inside it (up to 59 tracks from up to 6 folders).
 - With hold on, the lock screen shows the track title and elapsed time.
 - A long press of Power turns Bluetooth on or off. The status icons are redrawn, and the boot splash carries a CE mark.
-- Icons and baked screen art are antialiased. The transport, status, battery and browser icons, the dialog cards, the low-battery and power-off screens, the CE splash mark and the progress bar carry smoothed edges in their pixels, so curves, diagonals and text no longer step. Art on a solid ground blends exactly into it. Art over the album-derived background (the transport glyphs and the progress bar and knob) blends toward a neutral grey. List and menu text still comes from the 1-bit system font. Before and after: [icons](patches/antialias/mock/icons_before_after.png), [screens](patches/antialias/mock/screens_before_after.png).
+- Icons and baked screen art are antialiased. The transport, status, battery and browser icons, the dialog cards, the low-battery and power-off screens, the CE splash mark and the progress bar carry smoothed edges in their pixels, so curves, diagonals and text no longer step. Art on a solid ground blends exactly into it. Art over the album-derived background (the transport glyphs and the progress bar and knob) blends toward a neutral grey. List and menu text is still 1-bit, since the firmware's glyph format has no grey levels, but its Latin glyphs are redrawn from Barlow SemiBold with 2-pixel stems and even spacing (Latin-1 and Latin Extended-A included; other scripts keep stock glyphs). Before and after: [icons](patches/antialias/mock/icons_before_after.png), [screens](patches/antialias/mock/screens_before_after.png), [list font](patches/antialias/mock/font_before_after.png).
 - Volume no longer freezes after two DAC errors, decoder clocks are lower, and the wheel timer wakes less often.
 
 ![Vorbis signal-to-noise per file, stock against CE](media/vorbis.png)
@@ -66,6 +66,7 @@ Every change is a patch file or a module transplant that [`patches/framework/bui
 | 300 theme runs | Browser and status icons (antialiased) | ✓ | | [`design_browser.md`](patches/design_refresh_v4/browser_icons/design_browser.md) |
 | 4 theme runs | Light-theme play-mode icons keyed, so they sit on the theater background | ✓ | | [`play_mode_light/`](patches/design_refresh_v4/play_mode_light/generate.py) |
 | 40 theme runs | CE splash mark, antialiased | ✓ | | [`theme_editor/`](patches/theme_editor/README.md) |
+| 314 theme runs | List and menu font (Font B) Latin glyphs redrawn from Barlow SemiBold | ✓ | | [`antialias/`](patches/antialias/README.md#shipped-the-list-and-menu-font) |
 | 0118, 429 theme runs | Antialiased dialog corners, low-battery icon, "Powering off…" text and progress bar; the progress knob is drawn keyed, so it sits on the theater background without a square | ✓ | | [`antialias/`](patches/antialias/README.md) |
 | 0100 to 0104, 0045, 0046 | Theater background, including the no-art reset | ✓ | | [`theater_mode.md`](patches/design_refresh_v2/theater_mode.md) |
 | 0032 | Bluetooth on a long press of Power | ✓ | | [`ui_features.md`](patches/ui_features/ui_features.md) |
