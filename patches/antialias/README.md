@@ -73,9 +73,18 @@ Fitting the firmware's layout rules (`0x030627BE`, `0x03063E06`):
   the cap, as in stock. U+00B2, U+00B3 and U+0140 do not fit and keep
   their stock glyphs.
 
-`test_font.py` checks reproducibility, that the Standard image carries
-every record, and the advance rules. Font A, the 6 x 12 font used for
-small status text, is unchanged.
+Font A, the 6 x 12 font for status and small text, gets the same
+treatment from the same generator (`generate_font.py a`): Barlow SemiBold
+at 11 px, caps on rows 2 to 9 and descenders on rows 10 and 11 as in
+stock. Its records are 32 bytes with the tail at byte 24, and the
+firmware measures its letters over rows 0 to 7. Digits keep their natural
+widths and punctuation gets no extra padding, since the 6-pixel cell has
+no room for either. Every Latin-1 and Latin Extended-A glyph fits, so
+none keeps a stock record; 314 of the 317 redrawn records differ from
+stock.
+
+`test_font.py` checks both fonts: reproducibility, that the Standard image
+carries every record, and the advance rules.
 
 ## Mockups: text options (not built)
 

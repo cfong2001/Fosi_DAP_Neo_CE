@@ -21,7 +21,7 @@ CE (Community Edition) is patched firmware for the Fosi Audio DAP Neo. It starts
 
 | Image | What it carries | SHA-256 |
 |---|---|---|
-| [`DP3_V137_CE.img`](release/DP3_V137_CE.img) | Standard: every feature below. 7,168 bytes longer than stock. | `9c68d11152b997c24d301837d6f17f118d2075b46523b23f7c1bf2a5c308e99a` |
+| [`DP3_V137_CE.img`](release/DP3_V137_CE.img) | Standard: every feature below. 7,168 bytes longer than stock. | `e0bbb61247dc1919646f989ca098bf52fb1da9dfde161d66de983c613089d209` |
 | [`DP3_V137_CE_minimal.img`](release/DP3_V137_CE_minimal.img) | Minimal: audio and library fixes only, same length as stock. | `0dfd10e23749f9b6c65499266f1a7a2ec038160b089ba0fc2ca68dcf2b24c986` |
 | [`DP3_V137_CE_recovery.img`](release/DP3_V137_CE_recovery.img) | Stock code dated one day after CE, for going back. | `aff851b31d6eee55cbd4bb3fc0464ac79f0039ee86ae6723225ac036a157d223` |
 
@@ -43,7 +43,7 @@ Everything here is in the standard image; the minimal image has the sound and li
 - Selecting an `.m3u` file in the browser plays it as a playlist; next, previous and shuffle stay inside it (up to 59 tracks from up to 6 folders).
 - With hold on, the lock screen shows the track title and elapsed time.
 - A long press of Power turns Bluetooth on or off. The status icons are redrawn, and the boot splash carries a CE mark.
-- The menu and list font is redrawn from Barlow SemiBold. It is still 1-bit, because the firmware draws text without grey levels, but strokes are two pixels wide and the spacing is even. Stock spacing let `L` run into the next letter; that is fixed. Accented Latin letters are redrawn too; other scripts keep their stock glyphs.
+- Both system fonts are redrawn from Barlow SemiBold: the menu and list font and the small font used for status text. They are still 1-bit, because the firmware draws text without grey levels, but strokes are even and the spacing is regular. Stock spacing let `L` run into the next letter; that is fixed. Accented Latin letters are redrawn too; other scripts keep their stock glyphs.
 - Icons and baked screen art are antialiased. The transport, status, battery and browser icons, the dialog cards, the low-battery and power-off screens, the CE splash mark and the progress bar carry smoothed edges in their pixels, so curves, diagonals and text no longer step. Art on a solid ground blends exactly into it. Art over the album-derived background (the transport glyphs and the progress bar and knob) blends toward a neutral grey.
 - Volume no longer freezes after two DAC errors, decoder clocks are lower, and the wheel timer wakes less often.
 
@@ -71,7 +71,7 @@ Every change is a patch file or a module transplant that [`patches/framework/bui
 | 300 theme runs | Browser and status icons (antialiased) | ✓ | | [`design_browser.md`](patches/design_refresh_v4/browser_icons/design_browser.md) |
 | 4 theme runs | Light-theme play-mode icons keyed, so they sit on the theater background | ✓ | | [`play_mode_light/`](patches/design_refresh_v4/play_mode_light/generate.py) |
 | 40 theme runs | CE splash mark, antialiased | ✓ | | [`theme_editor/`](patches/theme_editor/README.md) |
-| 314 theme runs | List and menu font (Font B) Latin glyphs redrawn from Barlow SemiBold | ✓ | | [`antialias/`](patches/antialias/README.md#shipped-the-list-and-menu-font) |
+| 628 theme runs | List and menu font (Font B) and small status font (Font A) Latin glyphs redrawn from Barlow SemiBold | ✓ | | [`antialias/`](patches/antialias/README.md#shipped-the-list-and-menu-font) |
 | 0118, 429 theme runs | Antialiased dialog corners, low-battery icon, "Powering off…" text and progress bar; the progress knob is drawn keyed, so it sits on the theater background without a square | ✓ | | [`antialias/`](patches/antialias/README.md) |
 | 0100 to 0104, 0045, 0046 | Theater background, including the no-art reset | ✓ | | [`theater_mode.md`](patches/design_refresh_v2/theater_mode.md) |
 | 0032 | Bluetooth on a long press of Power | ✓ | | [`ui_features.md`](patches/ui_features/ui_features.md) |
@@ -184,7 +184,7 @@ Every feature in the tables above is built, merged and reproduced by CI. Open wo
 2. Battery profiles: find a valid settings item and label (the proposed 0xC5 id collides with the stock brightness string), then resolve boot persistence, clock assumptions and hardware gates.
 3. Theme follow-through: decide whether to approve the palette code sites the colour census pinned, which would make code-drawn colours themeable, and check whether any window other than the player calls the shared artwork setup that theater mode hooks.
 4. Space: once the tripwire build passes, the unused module 0 code can hold focus mode (340 bytes), text smoothing for the 1-bit fonts (about 200 bytes), and the lock-screen and Bluetooth routines, which frees room in the gap tail and module 31. The browser marquee needs 6,992 bytes, more than all the pockets of 64 bytes or larger put together (5,530), so it still fits only if playlists and the lock screen leave module 31. The trade-offs are in [`patches/full/README.md`](patches/full/README.md#space-decisions-for-the-owner).
-5. Smaller items: Font A, the small 6 x 12 font for status text, keeps its stock glyphs; the FS type 3 enumeration contract (blocks M3U on those volumes), a library enumeration order, and the decoder parameter page past its two known fields.
+5. Smaller items: the FS type 3 enumeration contract (blocks M3U on those volumes), a library enumeration order, and the decoder parameter page past its two known fields.
 
 Two documents lost text to truncation in their first commits: the end of section 1.8 of [`patch_technique_and_sdk.md`](research/patch_technique_and_sdk.md) and the tail of [`vorbis_swap.md`](patches/vorbis_swap/vorbis_swap.md). No originals survive; both were reconstructed on 2026-10-31 from the project's source material and are marked at the seam. [`CHANGES.md`](CHANGES.md) records every change.
 

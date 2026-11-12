@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Checks for the redrawn Font B glyphs (generate_font.py).
+"""Checks for the redrawn Font B and Font A glyphs (generate_font.py).
 
   1. Regenerating reproduces font-glyphs.json byte for byte.
   2. The Standard image carries every redrawn record exactly, at its
@@ -38,48 +38,61 @@ def check(name, ok, detail=''):
         fails.append(name)
 
 
+EXPECT = {  # font: (section, descender rows, space advance, tabular, kept stock)
+    'b': ('font_b', (13, 14, 15), 4, True, [0xB2, 0xB3, 0x140]),
+    'a': ('font_a', (10, 11), 3, False, []),
+}
+
+
 def main():
     ce = (Path(sys.argv[1]) if len(sys.argv) > 1
           else ROOT / 'release' / 'DP3_V137_CE.img').read_bytes()
-    out = HERE / 'font-glyphs.json'
-    before = out.read_bytes()
+    outs = {f: HERE / GF.PROFILES[f].get('OUT', 'font-glyphs.json') for f in EXPECT}
+    before = {f: o.read_bytes() for f, o in outs.items()}
     gen = subprocess.run([sys.executable, str(HERE / 'generate_font.py')],
                          capture_output=True, text=True)
     if gen.returncode:
         raise SystemExit(gen.stdout + gen.stderr)
-    check('generator reproduces font-glyphs.json', out.read_bytes() == before)
+    for f, o in outs.items():
+        check(f'generator reproduces {o.name}', o.read_bytes() == before[f])
 
-    raw, glyphs, skipped = GF.build()
-    base = Image(ce).sections['font_b']['offset']
-    bad = [cp for cp, rec in glyphs.items()
-           if ce[base + cp * GF.STRIDE:base + (cp + 1) * GF.STRIDE] != rec]
-    check(f'Standard image carries all {len(glyphs)} redrawn records', not bad,
-          [hex(c) for c in bad[:5]])
-    runs = json.loads(before)['runs']
-    check('one run per changed record', len(runs) == len(glyphs), f'{len(runs)} runs')
+    for f, (section, desc_rows, space, tabular, kept) in EXPECT.items():
+        GF.use(f)
+        name = f'Font {f.upper()}'
+        raw, glyphs, skipped = GF.build()
+        base = Image(ce).sections[section]['offset']
+        bad = [cp for cp, rec in glyphs.items()
+               if ce[base + cp * GF.STRIDE:base + (cp + 1) * GF.STRIDE] != rec]
+        check(f'{name}: Standard image carries all {len(glyphs)} redrawn records', not bad,
+              [hex(c) for c in bad[:5]])
+        runs = json.loads(before[f])['runs']
+        changed = sum(1 for cp, rec in glyphs.items()
+                      if raw[GF.FONT_B + cp * GF.STRIDE:GF.FONT_B + (cp + 1) * GF.STRIDE] != rec)
+        check(f'{name}: one run per changed record', len(runs) == changed, f'{len(runs)} runs')
 
-    def ink(rec):
-        return [(x, y) for y in range(GF.ROWS) for x in range(16)
-                if int.from_bytes(rec[2 * y:2 * y + 2], 'big') & (0x8000 >> x)]
+        def ink(rec):
+            return [(x, y) for y in range(GF.ROWS) for x in range(16)
+                    if int.from_bytes(rec[2 * y:2 * y + 2], 'big') & (0x8000 >> x)]
 
-    letters = [cp for cp in glyphs if GF.ascii_letter(cp)]
-    gaps = {chr(cp): GF.advance(glyphs[cp], cp) - max(x for x, _ in ink(glyphs[cp])) - 1
-            for cp in letters}
-    wrong = {c: g for c, g in gaps.items() if not 1 <= g <= 3}
-    check(f'{len(letters)} ASCII letters: the firmware advance leaves 1 to 3 clear '
-          'columns after the ink', not wrong, wrong)
-    others = [cp for cp in glyphs if not GF.ascii_letter(cp)]
-    check(f'{len(others)} other glyphs carry an explicit tail',
-          all(glyphs[cp][32] > 0x80 for cp in others))
-    digits = {GF.advance(glyphs[c], c) for c in range(0x30, 0x3A)}
-    check('digits share one advance', len(digits) == 1, digits)
-    check('space advance is 4', GF.advance(glyphs[0x20], 0x20) == 4)
-    desc = [chr(c) for c in (0x67, 0x6A, 0x70, 0x71, 0x79)
-            if max(y for _, y in ink(glyphs[c])) not in (13, 14, 15)]
-    check('descenders g j p q y reach rows 13 to 15', not desc, desc)
-    check('only U+00B2, U+00B3 and U+0140 keep stock records',
-          sorted(cp for cp, _ in skipped) == [0xB2, 0xB3, 0x140],
-          [hex(cp) for cp, _ in skipped])
+        letters = [cp for cp in glyphs if GF.ascii_letter(cp)]
+        gaps = {chr(cp): GF.advance(glyphs[cp], cp) - max(x for x, _ in ink(glyphs[cp])) - 1
+                for cp in letters}
+        wrong = {c: g for c, g in gaps.items() if not 1 <= g <= 3}
+        check(f'{name}: {len(letters)} ASCII letters: the firmware advance leaves 1 to 3 '
+              'clear columns after the ink', not wrong, wrong)
+        others = [cp for cp in glyphs if not GF.ascii_letter(cp)]
+        check(f'{name}: {len(others)} other glyphs carry an explicit tail',
+              all(glyphs[cp][GF.TAIL] > 0x80 for cp in others))
+        if tabular:
+            digits = {GF.advance(glyphs[c], c) for c in range(0x30, 0x3A)}
+            check(f'{name}: digits share one advance', len(digits) == 1, digits)
+        check(f'{name}: space advance is {space}', GF.advance(glyphs[0x20], 0x20) == space)
+        desc = [chr(c) for c in (0x67, 0x6A, 0x70, 0x71, 0x79)
+                if max(y for _, y in ink(glyphs[c])) not in desc_rows]
+        check(f'{name}: descenders g j p q y reach rows {desc_rows[0]} to {desc_rows[-1]}',
+              not desc, desc)
+        check(f'{name}: kept-stock list is {[hex(c) for c in kept]}',
+              sorted(cp for cp, _ in skipped) == kept, [hex(cp) for cp, _ in skipped])
 
     print('FAILED: ' + ', '.join(fails) if fails else 'all checks passed')
     return 1 if fails else 0
