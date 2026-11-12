@@ -48,7 +48,7 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
 sys.path.insert(0, str(ROOT / 'tools'))
 from rknano_image import Image
-from unicorn import Uc, UC_ARCH_ARM, UC_MODE_THUMB, UC_HOOK_CODE
+from unicorn import Uc, UC_ARCH_ARM, UC_MODE_THUMB, UC_HOOK_CODE, UC_HOOK_MEM_WRITE
 from unicorn.arm_const import *
 
 STOCK_SHA = 'fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cdfade5e9c6ea3bd71ac6deef'
@@ -105,16 +105,7 @@ class Machine:
         self.real_store = real_store
 
         def hook(uc, addr, size, user):
-            if addr == STORE:
-                # record only: the store itself must execute, because
-                # it advances the display cursor after each pixel
-                # (the mode 0x10 bitmap path depends on that)
-                col = struct.unpack('<H', uc.mem_read(DSTRUCT + 8, 2))[0]
-                row = struct.unpack('<H', uc.mem_read(DSTRUCT + 0xA, 2))[0]
-                self.stores.append(
-                    (col, row, uc.reg_read(UC_ARM_REG_R0) & 0xFFFF))
-                self.store_tags.append(len(self.drawlog))
-            elif addr == DMA:
+            if addr == DMA:
                 src, dst, n = (uc.reg_read(r) for r in
                                (UC_ARM_REG_R0, UC_ARM_REG_R1, UC_ARM_REG_R2))
                 if n:
@@ -134,6 +125,19 @@ class Machine:
             elif addr == SEG_END:
                 uc.emu_stop()
         u.hook_add(UC_HOOK_CODE, hook)
+        def record_write(uc, access, address, size, value, user):
+            # Observe the physical framebuffer, including direct row writes.
+            # Host-side mem_write used for staging does not trigger this hook.
+            bank=struct.unpack('<H',uc.mem_read(0x030238B8,2))[0]
+            for base,rows,y0 in ((0x030065A8+bank*115200,240,0),
+                                 (0x0306F224+bank*38400,80,240)):
+                if base<=address and address+size<=base+rows*480:
+                    for offset in range(0,size,2):
+                        pixel=(address+offset-base)//2
+                        self.stores.append((pixel%240,pixel//240+y0,(value>>(offset*8))&0xFFFF))
+                        self.store_tags.append(len(self.drawlog))
+                    break
+        u.hook_add(UC_HOOK_MEM_WRITE, record_write)
 
     def stage(self, ids):
         """Stage descriptors and pixel data for the given resource
