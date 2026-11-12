@@ -57,7 +57,9 @@ the stock updater's **13 MiB** calculated transfer is `0xCFBE00`, which is
 for mirror movement under that particular rounding expression, not an
 approved payload budget. A useful change must also preserve the complete
 512-byte mirrored header, keep all content inside the transferred range,
-respect sector alignment, handle all dependent offsets, and produce an
+respect sector alignment (the validator reads the mirror at sector
+`len >> 9`, so an unaligned mirror fails it; the CE insertion step now pads
+to a sector boundary), handle all dependent offsets, and produce an
 image that the relevant validator accepts. The current insertion rebuild
 shifts the file trailer and grows the file; an output would need its own
 appropriate padding, length and CRC handling rather than blindly assuming

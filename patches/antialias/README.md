@@ -43,8 +43,8 @@ from the stock and release images: every changed icon at 6x.
 
 `test_screens.py` checks the art in the Standard image. It confirms the
 repoint and runs the keyed knob draw in emulation. Menu and list text is
-drawn by the firmware's 1-bit font, which cannot hold antialiasing, so it
-is unchanged. The README renders and the site simulator draw the progress
+drawn by the firmware's 1-bit font, which cannot hold antialiasing; its
+Latin glyphs are redrawn instead (below). The README renders and the site simulator draw the progress
 bar from these resources at module 27's coordinates.
 
 ## Shipped: the list and menu font

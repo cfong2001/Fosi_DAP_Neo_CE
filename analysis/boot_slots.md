@@ -136,7 +136,10 @@ Entry points are called by module 21 (at its `0x0307d384` /
    `len = (u32 @ +0x1F4 + 0x104000) & ~0xFFFFF` (0xD00000 for V137).
    Seek to the mirror offset, read 512 bytes into the scratch buffer,
    and compare them to the first header. Short-read behavior remains
-   unverified.
+   unverified. This is a byte-offset file read; the boot validator
+   above reads the mirror by sector (`len >> 9`), so an image whose
+   mirror is not 512-byte aligned passes here and fails at boot. The
+   CE build pads grown images to keep it aligned.
 3. Write to the fw2 area first. Fill the 16 KiB scratch
    (module 8 BSS at `0x030249d0`) with 0xFF and write one 16-sector
    chunk at `[0x03024340]` (chunk writer `0x0307e53c`: write via

@@ -15,7 +15,7 @@ against their pins by `.github/workflows/firmware.yml` on every change.
 
 No CE image has been flashed to a device. The images pass every offline
 check this project has: SHA-gated builds, structural validation, the
-13-check framework verifier, and Unicorn emulation of each changed code
+15-check framework verifier, and Unicorn emulation of each changed code
 path. None of that proves a device accepts, boots or plays them. You are
 the first hardware test. Proceed only if you accept the risk of needing a
 Rockusb (USB) recovery.
@@ -29,6 +29,10 @@ minimal one:
   computes a 13 MiB transfer from the header, and whether a longer image
   installs and boots correctly has not been tested
   ([`analysis/slot_reclamation/report.md`](../analysis/slot_reclamation/report.md)).
+  Its header mirror is padded onto a 512-byte sector boundary, which the
+  boot validator requires. Standard images built before 2026-11-11 (pin
+  `db0a11d2…` and earlier longer-than-stock pins) lacked that padding
+  and should not be flashed.
   The minimal image is exactly stock length, so it avoids that question.
   If the standard image does not install or boot, try the minimal one.
 - **You play WMA files.** The standard image replaces the WMA decoder with
@@ -55,6 +59,11 @@ The standard image adds:
 - Opus playback in place of WMA.
 - The CE design refresh: bare transport glyphs drawn over the background,
   redrawn browser status icons, and the CE splash mark.
+- Baked antialiasing in the icons, dialog cards, low-battery and power-off
+  screens and the progress bar; the progress knob sits on the theater
+  background without a square.
+- The list and menu font's Latin glyphs redrawn from Barlow SemiBold
+  (still 1-bit), which also fixes stock `L` overlapping the next letter.
 - Theater mode: the player background derives from the album art.
 - M3U playlists: select an `.m3u` file in the browser to play it. Up to 59
   entries in 6 folder runs; next, previous, wrap and shuffle stay in the
@@ -64,9 +73,11 @@ The standard image adds:
 - Safer track-title handling.
 
 Details and evidence: [`patches/full/README.md`](../patches/full/README.md)
-and the [README](../README.md#what-ce-changes). Focus mode and the browser
-marquee remain separate variants; neither fits the standard image without
-removing a feature above.
+and the [README](../README.md#features). Focus mode and the browser
+marquee remain separate variants. Focus mode could use the module 0 pockets
+the dead-code census found ([`patches/space/`](../patches/space/README.md))
+once a hardware tripwire build clears them; the marquee does not fit
+without removing playlists and the lock screen.
 
 ## Before you install
 
