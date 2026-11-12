@@ -7,10 +7,12 @@ module 38 `0x0307EF52..0x0307EF5C` it calls the resident memcpy with a
 The database writer then stores that title at record offset `0x400`.
 The library's display configuration already selects that field.
 
-Patch 0181 redirects only the memcpy call to a 10-byte helper in the
+Patch 0181 redirects only the memcpy call to a 16-byte helper in the
 unused resident pocket `0x0305318C..0x030531A0`. If the first title unit
-is nonzero it returns; otherwise it tail-calls the original memcpy with
-its original arguments. No file opens, parsing, allocation or additional
+is nonzero and the file opened successfully it returns; otherwise it tail-calls the original memcpy with
+its original arguments. The scanner retains the open result at `[sp]` through this call. A failed
+open can leave stale temporary tags; that case always uses the filename.
+No file opens, parsing, allocation or additional
 storage reads are added while browsing. Filename and playback-path fields
 stay unchanged. FAT and FS-type-3 paths meet before this copy; CUE entries
 keep their existing separate title handling.

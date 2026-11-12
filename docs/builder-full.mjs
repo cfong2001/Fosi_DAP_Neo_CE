@@ -670,8 +670,8 @@ export const FULL_EXTRA_PATCHES = [
   "module": 0,
   "region": "code",
   "address": 50672012,
-  "expect": "2de9f8430f1e06464ff0",
-  "replace": "03880bb901f050be7047",
+  "expect": "2de9f8430f1e06464ff000058cbfe846",
+  "replace": "009b013301d003880bb901f04dbe7047",
   "index": 105
  },
  {
@@ -11806,4 +11806,4 @@ export const FULL_THEME_RUNS = [
   "replace": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
  }
 ];
-export const FULL_IMAGE_SHA256 = "317afcac28fdbb5a37e442a2d223a311f35fee06e9c22cd204735fd1c4fef297";
+export const FULL_IMAGE_SHA256 = "638723894dfcd34011621e4ad02a449bc47eb5f463fb041e8f59a4a05b843742";

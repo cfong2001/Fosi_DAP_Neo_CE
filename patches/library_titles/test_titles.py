@@ -15,7 +15,7 @@ from unicorn.arm_const import *
 class Titles(unittest.TestCase):
     def test_actual_scanner_copy_preserves_tags_and_bounds(self):
         raw=(REPO/'DP3_V137.img').read_bytes();im=Image(raw)
-        for title,name,want in [('Tagged.flac','01_filename.flac','Tagged.flac'),('','01_filename.flac','01_filename.flac'),('T'*127,'fallback.flac','T'*127),('音楽 🎵','file.mp3','音楽 🎵'),('','','')]:
+        for title,name,want,handle in [('Tagged.flac','01_filename.flac','Tagged.flac',0),('','01_filename.flac','01_filename.flac',0),('T'*127,'fallback.flac','T'*127,0),('音楽 🎵','file.mp3','音楽 🎵',0),('','','',0),('Stale previous title','unreadable.flac','unreadable.flac',0xffffffff)]:
             u=Uc(UC_ARCH_ARM,UC_MODE_THUMB);u.mem_map(0x03000000,0x100000)
             for mod in (0,38):
                 off,n=im.module_region(mod,'code');u.mem_write(im.modules[mod]['code_exec'],raw[off:off+n])
@@ -30,11 +30,12 @@ class Titles(unittest.TestCase):
                 if record<=a<record+0x600:writes.append((a,n))
             u.hook_add(UC_HOOK_MEM_WRITE,hook)
             u.reg_write(UC_ARM_REG_R4,record);u.reg_write(UC_ARM_REG_SP,0x030EF000)
+            u.mem_write(0x030EF000,struct.pack('<I',handle))
             u.emu_start(0x0307EF53,0x0307EF60,count=10000)
             got=bytes(u.mem_read(record+0x100,256)).decode('utf-16le').split('\0')[0]
             self.assertEqual(got,want)
             self.assertTrue(all(record+0x100<=a and a+n<=record+0x200 for a,n in writes))
-            if title:self.assertEqual(writes,[])
+            if title and handle!=0xffffffff:self.assertEqual(writes,[])
             self.assertEqual(bytes(u.mem_read(record,256)),before[:256])
             self.assertEqual(bytes(u.mem_read(record+0x200,0x400)),before[0x200:])
             self.assertEqual(u.reg_read(UC_ARM_REG_R4),record)

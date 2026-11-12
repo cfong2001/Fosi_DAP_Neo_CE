@@ -3,7 +3,7 @@
  "input_file": "DP3_V137.img",
  "output_file": "DP3_V137_CE.img",
  "input_sha256": "fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cdfade5e9c6ea3bd71ac6deef",
- "output_sha256": "317afcac28fdbb5a37e442a2d223a311f35fee06e9c22cd204735fd1c4fef297",
+ "output_sha256": "638723894dfcd34011621e4ad02a449bc47eb5f463fb041e8f59a4a05b843742",
  "byte_length": 13638148,
  "header_date": "20261023",
  "patches_applied": [
@@ -1170,8 +1170,8 @@
    "region": "code",
    "cpu_address": "0x305318c",
    "file_offset": "0x2c838",
-   "old_hex": "2de9f8430f1e06464ff0",
-   "new_hex": "03880bb901f050be7047"
+   "old_hex": "2de9f8430f1e06464ff000058cbfe846",
+   "new_hex": "009b013301d003880bb901f04dbe7047"
   },
   {
    "patch": "0181-library-title-copy-hook",
@@ -14573,7 +14573,7 @@
   }
  ],
  "diff_vs_stock": {
-  "bytes_changed": 5102638,
+  "bytes_changed": 5102644,
   "range_count": 455885,
   "note": "range list omitted; rebuild with patches/full/build/build_full.py for it"
  },

@@ -24,8 +24,10 @@ def main():
     base=0x0305318C
     # r0=title destination, r1=filename source, r2=256 bytes. All are the
     # scanner's original memcpy arguments; its caller reloads volatile regs.
+    # [sp] retains FileOpen's result after FileClose; -1 must use the filename,
+    # since stock only zeroes/parses the temporary tags after a successful open.
     ks=Ks(KS_ARCH_ARM,KS_MODE_THUMB)
-    code=bytes(ks.asm('ldrh r3,[r0]; cbnz r3,done; b.w 0x03054e34; done: bx lr',base)[0])
+    code=bytes(ks.asm('ldr r3,[sp]; adds r3,#1; beq copy; ldrh r3,[r0]; cbnz r3,done; copy: b.w 0x03054e34; done: bx lr',base)[0])
     assert len(code)<=20
     patch('0180-library-title-fallback',0,base,code)
     patch('0181-library-title-copy-hook',38,0x0307EF5C,branch(0x0307EF5C,base,True))

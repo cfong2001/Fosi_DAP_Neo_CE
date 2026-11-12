@@ -3,7 +3,7 @@
 ## 2026-11-12: Library title tags
 
 - Standard CE keeps the parsed title tag when saving library records. The
-  filename is copied only when the title is empty. Refresh the library
+  filename is copied when the title is empty or the file could not open. Refresh the library
   after installing so existing entries pick up their tags. Browsing needs
   no extra tag parsing or file opens.
 - Added the requested USB screen, drawing-engine and V155 porting work to
