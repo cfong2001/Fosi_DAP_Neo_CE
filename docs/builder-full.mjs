@@ -743,6 +743,46 @@ export const FULL_EXTRA_PATCHES = [
   "expect": "6846",
   "replace": "02e0",
   "index": 112
+ },
+ {
+  "file": "0190-usb-card.patch",
+  "name": "0190-usb-card",
+  "module": 0,
+  "region": "code",
+  "address": 50724940,
+  "expect": "f04385b01d46dde90c9816460f46044606f08bfa6b486c4a50f8241004ebc40000eb400002eb001ca2f11800a94229d140f8248004eb440000ebc4004ff0c04101ebc00000220760",
+  "replace": "2de9f34184244ff00008ef270c4d0d4e694604f10f03adf8024016342a46adf8063008460223adf80080adf80470a4b2b047c62c05f13005ead102b0bde8f08104440503ef2c0603",
+  "index": 113
+ },
+ {
+  "file": "0191-usb-lines.patch",
+  "name": "0191-usb-lines",
+  "module": 0,
+  "region": "code",
+  "address": 50676740,
+  "expect": "704770477047000010b524491a2012f069f81a2002f0b9fc0221002018f0b6fd0221002018f094fdbde810401a2002f029bc10b51a2012f07df81a2002f0a5fc1a2002f04dfc0221bde81040002018f074bd10b512491b2012f044f81b2002f094fc0421002018f091fd0421002018f06ffdbde810401b2002f004bc10b51b2012f058f81b2002f080fc1b2002f028fc",
+  "replace": "550053004200200041007500640069006f00000000000000000000000000000000000000000000000000000000000000310036002d0062006900740020002f0020003400380020006b0048007a00000000000000000000000000000000000000500043004d003a002000310035003300360020006b006200700073002000730074006500720065006f00000000000000",
+  "index": 114
+ },
+ {
+  "file": "0192-usb-audio-card-hook.patch",
+  "name": "0192-usb-audio-card-hook",
+  "module": 9,
+  "region": "code",
+  "address": 50857772,
+  "expect": "e2f789fd",
+  "replace": "dff78efc",
+  "index": 115
+ },
+ {
+  "file": "0193-usb-connected-hide.patch",
+  "name": "0193-usb-connected-hide",
+  "module": 9,
+  "region": "code",
+  "address": 50857896,
+  "expect": "e2f74bfd",
+  "replace": "00bf00bf",
+  "index": 116
  }
 ];
 export const FULL_TAIL = {
@@ -11866,4 +11906,4 @@ export const FULL_THEME_RUNS = [
   "replace": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
  }
 ];
-export const FULL_IMAGE_SHA256 = "ff47214049ab5ef6c50de1e50d3bfea80ae4c1580e34ce28e23ace37cc62a1f7";
+export const FULL_IMAGE_SHA256 = "4e717adca5c06a13c2f76e981387852d64d86458d3d6eee0b405144d5fc78ac3";

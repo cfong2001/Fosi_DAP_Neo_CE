@@ -3,7 +3,7 @@
  "input_file": "DP3_V137.img",
  "output_file": "DP3_V137_CE.img",
  "input_sha256": "fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cdfade5e9c6ea3bd71ac6deef",
- "output_sha256": "ff47214049ab5ef6c50de1e50d3bfea80ae4c1580e34ce28e23ace37cc62a1f7",
+ "output_sha256": "4e717adca5c06a13c2f76e981387852d64d86458d3d6eee0b405144d5fc78ac3",
  "byte_length": 13638148,
  "header_date": "20261023",
  "patches_applied": [
@@ -1249,6 +1249,50 @@
    "file_offset": "0x3beda",
    "old_hex": "6846",
    "new_hex": "02e0"
+  },
+  {
+   "patch": "0190-usb-card",
+   "file": "0190-usb-card.patch",
+   "kind": "module",
+   "module": 0,
+   "region": "code",
+   "cpu_address": "0x306004c",
+   "file_offset": "0x396f8",
+   "old_hex": "f04385b01d46dde90c9816460f46044606f08bfa6b486c4a50f8241004ebc40000eb400002eb001ca2f11800a94229d140f8248004eb440000ebc4004ff0c04101ebc00000220760",
+   "new_hex": "2de9f34184244ff00008ef270c4d0d4e694604f10f03adf8024016342a46adf8063008460223adf80080adf80470a4b2b047c62c05f13005ead102b0bde8f08104440503ef2c0603"
+  },
+  {
+   "patch": "0191-usb-lines",
+   "file": "0191-usb-lines.patch",
+   "kind": "module",
+   "module": 0,
+   "region": "code",
+   "cpu_address": "0x3054404",
+   "file_offset": "0x2dab0",
+   "old_hex": "704770477047000010b524491a2012f069f81a2002f0b9fc0221002018f0b6fd0221002018f094fdbde810401a2002f029bc10b51a2012f07df81a2002f0a5fc1a2002f04dfc0221bde81040002018f074bd10b512491b2012f044f81b2002f094fc0421002018f091fd0421002018f06ffdbde810401b2002f004bc10b51b2012f058f81b2002f080fc1b2002f028fc",
+   "new_hex": "550053004200200041007500640069006f00000000000000000000000000000000000000000000000000000000000000310036002d0062006900740020002f0020003400380020006b0048007a00000000000000000000000000000000000000500043004d003a002000310035003300360020006b006200700073002000730074006500720065006f00000000000000"
+  },
+  {
+   "patch": "0192-usb-audio-card-hook",
+   "file": "0192-usb-audio-card-hook.patch",
+   "kind": "module",
+   "module": 9,
+   "region": "code",
+   "cpu_address": "0x308072c",
+   "file_offset": "0x82a74",
+   "old_hex": "e2f789fd",
+   "new_hex": "dff78efc"
+  },
+  {
+   "patch": "0193-usb-connected-hide",
+   "file": "0193-usb-connected-hide.patch",
+   "kind": "module",
+   "module": 9,
+   "region": "code",
+   "cpu_address": "0x30807a8",
+   "file_offset": "0x82af0",
+   "old_hex": "e2f74bfd",
+   "new_hex": "00bf00bf"
   }
  ],
  "transplants_applied": [
@@ -14639,8 +14683,8 @@
   }
  ],
  "diff_vs_stock": {
-  "bytes_changed": 5102813,
-  "range_count": 455895,
+  "bytes_changed": 5103032,
+  "range_count": 455904,
   "note": "range list omitted; rebuild with patches/full/build/build_full.py for it"
  },
  "validation": "validate_grown() passed (structural checks, layout derived from the image)",

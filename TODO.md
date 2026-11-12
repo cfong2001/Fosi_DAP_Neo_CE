@@ -2,7 +2,7 @@
 
 ## Additional requested work
 
-- [ ] Remove the “USB Connected” text from the USB screen while preserving
+- [x] Remove the “USB Connected” text from the USB screen while preserving
   connection state and USB operation.
 - [ ] Accelerate the drawing engine in a separate PR:
   - Write complete rows for box fills, opaque images, transparent images
@@ -14,6 +14,10 @@
     transparent keys, clipping edges and every supported rotation.
 - [ ] Port the features of official Fosi firmware V155 (1.5.5), in focused
   changes with validation against the supplied image.
+
+The USB audio screen also shows the descriptor-backed PCM transport format;
+see `patches/usb_screen/README.md` for host metadata limitations.
+The ranked concept catalogue is in `IMPROVEMENTS.md`.
 
 ## V155 reference and initial findings
 
