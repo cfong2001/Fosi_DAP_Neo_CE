@@ -21,7 +21,7 @@ CE (Community Edition) is patched firmware for the Fosi Audio DAP Neo. It starts
 
 | Image | What it carries | SHA-256 |
 |---|---|---|
-| [`DP3_V137_CE.img`](release/DP3_V137_CE.img) | Standard: every feature below. 6,656 bytes longer than stock. | `58e5801689bf70f8d68b730000f42ddae83dc6ff134d55a0e3d66b1af57c39f7` |
+| [`DP3_V137_CE.img`](release/DP3_V137_CE.img) | Standard: every feature below. 6,656 bytes longer than stock. | `1cd195c5a8e124b8cc38b6805df0be92bc5ab97404d2b8b5d8446d39fc50dae4` |
 | [`DP3_V137_CE_minimal.img`](release/DP3_V137_CE_minimal.img) | Minimal: audio and library fixes only, same length as stock. | `0dfd10e23749f9b6c65499266f1a7a2ec038160b089ba0fc2ca68dcf2b24c986` |
 | [`DP3_V137_CE_recovery.img`](release/DP3_V137_CE_recovery.img) | Stock code dated one day after CE, for going back. | `aff851b31d6eee55cbd4bb3fc0464ac79f0039ee86ae6723225ac036a157d223` |
 
@@ -210,3 +210,7 @@ This project is not affiliated with Fosi Audio. The stock firmware remains Fosi 
 - The leaked RKnanoD SDK is proprietary Rockchip material, used as a reference dictionary only; none of it is reproduced here.
 - The site's illustrations use the Stageshow kit by Benji Taylor (MIT), vendored in [`site/src/kit/`](site/src/kit/README.md).
 - This repository is GPL-3.0 ([`LICENSE`](LICENSE)).
+
+USB Audio now displays its actual PCM transport format; the data screen omits
+the redundant connection text. See [the improvement concepts](IMPROVEMENTS.md)
+for the ranked follow-up work and USB host-metadata dependencies.

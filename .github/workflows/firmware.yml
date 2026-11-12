@@ -51,6 +51,12 @@ jobs:
       - name: Run the framework verifier (15 checks)
         run: python patches/framework/verify.py
 
+      - name: USB audio transport card
+        run: |
+          python patches/usb_screen/build_screen.py
+          git diff --exit-code -- patches/usb_screen
+          python patches/usb_screen/test_screen.py
+
       - name: Stock Bluetooth UART set-up under emulation
         run: python tools/emu_bt_uart.py
 

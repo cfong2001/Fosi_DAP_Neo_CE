@@ -128,3 +128,9 @@ patches/0145-profile-commit.patch
 
 # Clear main-font time above the progress bar:
 ../player_ui/0155-time-clear-and-draw.patch
+
+# USB audio transport details and uncluttered data screen:
+../usb_screen/0190-usb-card.patch
+../usb_screen/0191-usb-lines.patch
+../usb_screen/0192-usb-audio-card-hook.patch
+../usb_screen/0193-usb-connected-hide.patch

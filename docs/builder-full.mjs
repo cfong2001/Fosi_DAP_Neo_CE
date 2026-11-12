@@ -693,6 +693,46 @@ export const FULL_EXTRA_PATCHES = [
   "expect": "2de9f0411646ab2251434a0a424986b01f4651f822400c9d616841f00201616041494ff000084ff4006c032a0ed2dfe802f00207",
   "replace": "07b582b0084b1b880093c388828841880088dff818c0e04702b0bde807400023dff80cc06047000000440003fb320603ef2c0603",
   "index": 107
+ },
+ {
+  "file": "0190-usb-card.patch",
+  "name": "0190-usb-card",
+  "module": 0,
+  "region": "code",
+  "address": 50716192,
+  "expect": "10b50246fff76fff002808bf10bd4a4850f822402068904218bf10bd94f82800002100f069fa00206060a060e06020616061a061e06120626062a062e0622063401e206010bd70b5",
+  "replace": "2de9f34184244ff00008ef270c4d0d4e694604f10f03adf8024016342a46adf8063008460223adf80080adf80470a4b2b047c62c05f13005ead102b0bde8f08104440503ef2c0603",
+  "index": 108
+ },
+ {
+  "file": "0191-usb-lines.patch",
+  "name": "0191-usb-lines",
+  "module": 0,
+  "region": "code",
+  "address": 50676740,
+  "expect": "704770477047000010b524491a2012f069f81a2002f0b9fc0221002018f0b6fd0221002018f094fdbde810401a2002f029bc10b51a2012f07df81a2002f0a5fc1a2002f04dfc0221bde81040002018f074bd10b512491b2012f044f81b2002f094fc0421002018f091fd0421002018f06ffdbde810401b2002f004bc10b51b2012f058f81b2002f080fc1b2002f028fc",
+  "replace": "550053004200200041007500640069006f00000000000000000000000000000000000000000000000000000000000000310036002d0062006900740020002f0020003400380020006b0048007a00000000000000000000000000000000000000500043004d003a002000310035003300360020006b006200700073002000730074006500720065006f00000000000000",
+  "index": 109
+ },
+ {
+  "file": "0192-usb-audio-card-hook.patch",
+  "name": "0192-usb-audio-card-hook",
+  "module": 9,
+  "region": "code",
+  "address": 50857772,
+  "expect": "e2f789fd",
+  "replace": "ddf778fb",
+  "index": 110
+ },
+ {
+  "file": "0193-usb-connected-hide.patch",
+  "name": "0193-usb-connected-hide",
+  "module": 9,
+  "region": "code",
+  "address": 50857896,
+  "expect": "e2f74bfd",
+  "replace": "00bf00bf",
+  "index": 111
  }
 ];
 export const FULL_TAIL = {
@@ -11816,4 +11856,4 @@ export const FULL_THEME_RUNS = [
   "replace": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
  }
 ];
-export const FULL_IMAGE_SHA256 = "58e5801689bf70f8d68b730000f42ddae83dc6ff134d55a0e3d66b1af57c39f7";
+export const FULL_IMAGE_SHA256 = "1cd195c5a8e124b8cc38b6805df0be92bc5ab97404d2b8b5d8446d39fc50dae4";
