@@ -44,3 +44,15 @@ Font A, codepage data and system defaults are byte-identical by section;
 Font B, language resources and many code modules differ. A port requires
 new call-site and state-field evidence, plus the project's normal build,
 byte-parity and emulation checks. Hardware behavior remains unverified.
+
+## Port and flash qualification status
+
+The USB and row-drawing tasks are implemented. V155 ports remain open;
+[the runtime port review](analysis/v155_port_review.md) records traced
+fields, consumers and the unresolved migration/ABI checks. Do not mark
+those features shipped based on labels alone.
+
+[The flash review](release/FLASH_REVIEW.md) includes a version-aware
+recovery preparation tool and the required device backup/recovery trial.
+Offline checks pass; hardware boot, physical geometry and recovery have
+not been verified.
