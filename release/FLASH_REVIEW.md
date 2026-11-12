@@ -105,6 +105,43 @@ including their mirrors, against the intended bytes, and preserve the
 unit's own non-firmware data. These gaps must be closed before relying
 on it for a first experimental flash.
 
+## Read-only backup helper
+
+`tools/backup_stock.py` uses only chip info (0x1B), flash info (0x1A) and
+bounded LBA reads (0x14). It has no erase, flash-write, reset or loader
+command. It imports only the exact reviewed community transport blob,
+with CRLF line endings normalized before checking; it never runs that
+file as a script. The transport currently requires Windows and the
+community Rockusb driver. This helper is unit-tested with a fake device,
+**not yet tested on physical hardware**.
+
+After recovery enumeration has been independently established, read raw
+information without changing firmware:
+
+```sh
+python tools/backup_stock.py --transport /path/to/restore-stock.py --info
+```
+
+The tool does not guess the capacity or flash-info units. Once the whole
+internal device capacity in 512-byte sectors is confirmed using
+model-specific documentation or a qualified read tool:
+
+```sh
+python tools/backup_stock.py --transport /path/to/restore-stock.py \
+  --sectors VERIFIED_SECTOR_COUNT --output /path/to/new-stock-backup
+```
+
+Replace `VERIFIED_SECTOR_COUNT` with that confirmed integer. Two separate
+read passes produce `stock-read-1.bin`, `stock-read-2.bin` and `BACKUP.json`.
+The hashes must match; a short read or disagreement leaves an INCOMPLETE
+manifest and aborts. Existing paths and unknown transport versions are
+refused. Keep both copies independently. Matching reads prove the supplied
+range was repeatable; they do not prove that the supplied sector count
+covers all internal storage or that a restore succeeds. The manifest
+keeps both capacity and restore qualification false until independently
+established. Do not use a guessed “13 MiB” or “15 MiB” firmware size as the
+whole-device capacity.
+
 ## First trial and rollback
 
 Start at low volume with expendable media and stable power. Confirm cold
