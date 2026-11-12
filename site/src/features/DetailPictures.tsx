@@ -30,7 +30,7 @@ export default function DetailPicture({theme,width,mode}:{theme:Theme;width:numb
           <rect className="detail-gap" x="212" y="0" width={s.on?'4':'16'} height="90" />
         </svg>
         <div className="detail-join"><i/><span>Track boundary</span></div>
-        <States value={s.on?'ce':'stock'} states={{stock:'Stock: about 20.5 ms of reload, reboot and DAC writes',ce:'CE: about 4.7 ms, decoder kept running'}} />
+        <States value={s.on?'ce':'stock'} states={{stock:'Stock: about 20.5 ms of reload and reboot, then 3 silenced buffers',ce:'CE: about 4.7 ms, decoder kept warm, no silenced buffers'}} />
       </div>}
     </div>}
   </Stage>

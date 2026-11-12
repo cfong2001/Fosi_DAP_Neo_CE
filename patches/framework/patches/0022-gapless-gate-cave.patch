@@ -13,7 +13,9 @@ rationale: The gate, entered from the hook at 0x0306cb2c (0021) with
   (address in the 0023 literal), which the halt routine 0x0306cb0c
   clears and the core-1 boot handshake sets; (2) the retained module
   word at 0x030515b0 (0020), masked to 7 bits, equals the requested
-  module. Then it stores module|0x80 and returns to the codec case,
+  module. Then it branches to the warm-start extension (0034), which
+  stores module|0x80, sets the monitor's start-of-track counter, and
+  returns to the codec case,
   skipping the image re-copy, the core-1 reset, the parameter-page copy
   and the ready poll; the 0x65 open exchange and the rest of load-start
   run as stock. Otherwise it records the module, re-executes the two
@@ -32,4 +34,4 @@ rationale: The gate, entered from the hook at 0x0306cb2c (0021) with
   before it ends in `pop {r4,r5,r6,pc}` at 0x03051662, so nothing falls
   through into it. Bytes: patches/gapless/tools/assemble_v2.py.
 expect: 7047704770477047704770477047704770477047704770477047704770477047
-replace: 5ff868211268aff1bc0132b10b6843405b0602e0803008607047086070b50546
+replace: 5ff868211268aff1bc0132b10b6843405b0602e0fff744bf00bf086070b50546

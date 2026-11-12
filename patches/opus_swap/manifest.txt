@@ -37,6 +37,7 @@
 ../framework/patches/0024-gapless-keep-decoder.patch
 ../framework/patches/0025-gapless-gate-tail.patch
 ../framework/patches/0026-gapless-arm.patch
+../framework/patches/0034-gapless-warm-start.patch
 ../framework/patches/0027-sortkeys-comparator-hook.patch
 ../framework/patches/0028-sortkeys-builder-a-hook.patch
 ../framework/patches/0029-sortkeys-builder-bmain-hook.patch

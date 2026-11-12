@@ -68,7 +68,7 @@ In patches/, not stacked:
 
 The scratch framework is a copy of work/patches/framework/ at framework/, with the two scratch patches added and a scratch manifest (patches/manifest_composed.txt: the default 32 patches plus 0033 and 0040). The transplant tree is copied alongside it because the build resolves transplants relative to the framework's parent. Two builds, both offline:
 
-* Ungrown equivalent (default manifest + transplants): out/ungrown.img, SHA-256 4fa813d99d6b84d871635be490f49f3a8d4f17bcb5f7ae2540edfb62d334ad4e, identical to the shipped default unified image, which pins the scratch copy's provenance.
+* Ungrown equivalent (default manifest + transplants): out/ungrown.img, SHA-256 0dfd10e23749f9b6c65499266f1a7a2ec038160b089ba0fc2ca68dcf2b24c986, identical to the shipped default unified image, which pins the scratch copy's provenance.
 * Grown (scratch manifest + --grow 31:code:payload.bin): out/grown.img, SHA-256 23a188c889823c8e78bd01101beb4eac42130a83a29c23f1ebd37ecf9807d7f5, byte length 13,638,606 = stock 13,631,492 + 7,114. **validate_grown passes**, both inside the build's finalize step and standalone on the result.
 
 Isolation (tests/check_isolation.py, modelled on verify.py check 9): every segment of all 82 modules is byte-identical between the two images except module 31 code, which is exactly the ungrown code with the payload appended and the two hook sites patched (7 of the 8 site bytes differ; patch 0033's last byte equals stock's). The build report's positional diff against stock (5,065,174 bytes) is dominated by the insertion shift and is not the meaningful comparison; the segment comparison above is.

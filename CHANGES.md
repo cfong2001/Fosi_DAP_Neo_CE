@@ -1,5 +1,22 @@
 # Changelog
 
+## 2026-11-12: gapless v3, warm start
+
+- Stock zeroes the first three decoded buffers of every track and
+  restores the volume on the fourth (the playback monitor at
+  `0x03064F7E`, counter `0x0304AD84`; Rockchip's `AudioErrorFrameNum` in
+  the SDK's `Service.c`), to hide a cold decoder's start-up output. That
+  silence, about 78 ms for MP3 and up to about 279 ms for FLAC, was most
+  of the audible gap. When the gate retains the decoder it is warm, so
+  new patch 0034 has the gate's retained path set the counter to 3: the
+  first buffer plays and the volume is restored at once.
+- The transition rig now runs the real monitor after each transition: stock
+  and every cold start zero three buffers, a warm start zeroes none
+  (FLAC, MP3, APE). Skips and codec changes keep the stock behaviour.
+- The SDK's decoder-core program (`Main2.c`) cycles file and decode
+  open/close per file without a core restart, which is the design the
+  fast path relies on; every decoder takes it cleanly in the rig.
+
 ## 2026-11-12: clock table v1 corrected against Rockchip's SDK
 
 - Rows 18 and 19 were mislabelled. Running the firmware's own extension
