@@ -43,8 +43,8 @@ Everything here is in the standard image; the minimal image has the sound and li
 - Selecting an `.m3u` file in the browser plays it as a playlist; next, previous and shuffle stay inside it (up to 59 tracks from up to 6 folders).
 - With hold on, the lock screen shows the track title and elapsed time.
 - A long press of Power turns Bluetooth on or off. The status icons are redrawn, and the boot splash carries a CE mark.
-- Menus and lists use a redrawn font. The firmware's glyphs are 1-bit, so text can't carry grey levels, but the Latin glyphs of the list and menu font are redrawn from Barlow SemiBold: 2-pixel stems, even spacing, tabular digits, and Latin-1 and Latin Extended-A accents. It also fixes a stock layout bug that let `L` overlap the next letter. Other scripts keep their stock glyphs.
-- Icons and baked screen art are antialiased. The transport, status, battery and browser icons, the dialog cards, the low-battery and power-off screens, the CE splash mark and the progress bar carry smoothed edges in their pixels, so curves and diagonals no longer step. Art on a solid ground blends exactly into it. Art over the album-derived background (the transport glyphs and the progress bar and knob) blends toward a neutral grey.
+- The menu and list font is redrawn from Barlow SemiBold. It is still 1-bit, because the firmware draws text without grey levels, but strokes are two pixels wide and the spacing is even. Stock spacing let `L` run into the next letter; that is fixed. Accented Latin letters are redrawn too; other scripts keep their stock glyphs.
+- Icons and baked screen art are antialiased. The transport, status, battery and browser icons, the dialog cards, the low-battery and power-off screens, the CE splash mark and the progress bar carry smoothed edges in their pixels, so curves, diagonals and text no longer step. Art on a solid ground blends exactly into it. Art over the album-derived background (the transport glyphs and the progress bar and knob) blends toward a neutral grey.
 - Volume no longer freezes after two DAC errors, decoder clocks are lower, and the wheel timer wakes less often.
 
 ![Stock and CE menus and file lists, set in each image's own list font](media/menus.png)
@@ -55,7 +55,7 @@ Everything here is in the standard image; the minimal image has the sound and li
 
 More figures: [transport controls in each player state](media/transport.png), [lock screen](media/lockscreen.png), [boot splash](media/splash.png), [status icons](media/browser_icons.png), [every antialiased icon](patches/antialias/mock/icons_before_after.png), [full screens](patches/antialias/mock/screens_before_after.png), [list font close-up](patches/antialias/mock/font_before_after.png).
 
-Every change is a patch file or a module transplant that [`patches/framework/build.py`](patches/framework/build.py) applies to the hash-checked stock image. The standard image composes them with [`patches/full/build/build_full.py`](patches/full/build/build_full.py), adding 6,962 bytes of code in modules 31 and 24 (plus 206 zero bytes that keep the header mirror sector-aligned) and filling 2,040 bytes of an unused gap in module 0; [`patches/full/README.md`](patches/full/README.md) maps where every byte lives.
+Every change is a patch file or a module transplant that [`patches/framework/build.py`](patches/framework/build.py) applies to the hash-checked stock image. The standard image composes them with [`patches/full/build/build_full.py`](patches/full/build/build_full.py), adding 6,962 bytes of code in modules 31 and 24, 206 bytes of padding before the header copy, and filling 2,040 bytes of an unused gap in module 0; [`patches/full/README.md`](patches/full/README.md) maps where every byte lives.
 
 | Patches | Change | Standard | Minimal | Evidence |
 |---|---|:---:|:---:|---|
@@ -103,7 +103,7 @@ On the right, a Sennheiser HD 600 curve fitted within 0.9 dB. More figures: [DAC
 Built and tested offline, but not in either image:
 
 - The browser marquee ([`browser_marquee/`](patches/browser_marquee/)): the selected file's label grows to title, artist and album and scrolls after a one-second dwell, over the file's cover. It needs 6,992 bytes in the browser's code area, which playlists and the lock screen already fill. [Emulated capture](media/marquee_v5.gif).
-- Focus mode ([`focus_mode/`](patches/focus_mode/)): the player hides its controls after five seconds and enlarges the cover. It needs 340 resident bytes, and the standard image's gap tail has 12 left. The dead-code census below finds room for it in module 0, pending a hardware check.
+- Focus mode ([`focus_mode/`](patches/focus_mode/)): the player hides its controls after five seconds and enlarges the cover. It needs 340 resident bytes; the standard image has 12 left. Unused stock code in module 0 could hold it once a hardware check clears that space (see [Building from source](#building-from-source)).
 - Battery profiles ([`power/`](patches/power/)): the apply routine and selector hooks exist, but no free settings item has been proven.
 
 ## The configuration site
@@ -132,7 +132,7 @@ SHA-256        fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cdfade5e9c6ea3bd71ac6deef
 
 | Flag | Effect |
 |---|---|
-| `--grow MODULE:SEGMENT:PATH` | Inserts a payload at the end of a module segment and recomputes every dependent offset, then pads zeros before the header mirror so it stays on a 512-byte sector boundary (the boot validator reads it by sector). Grown images validate with `tools/validate_grown.py`, which also refuses a mirror past `0xCFBE00`, the last offset that keeps the installer's 13 MiB transfer. |
+| `--grow MODULE:SEGMENT:PATH` | Inserts a payload at the end of a module segment, recomputes every dependent offset and pads the header copy onto a 512-byte sector, which the boot validator reads by sector. Grown images validate with `tools/validate_grown.py`, which also refuses a header copy past `0xCFBE00`; beyond it the installer's 13 MiB transfer would grow. |
 | `--tail PATH` | Places a resident payload of at most 2,044 bytes in the censused tail of the package gap after module 0's code. |
 | `--theme-config THEME.json` | Applies a theme from the theme studio: colour rules with their pixel counts checked against the image, plus raw byte runs. |
 | `--recovery` | Emits the recovery image: stock bytes dated one day after CE. |
@@ -141,7 +141,7 @@ SHA-256        fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cdfade5e9c6ea3bd71ac6deef
 
 The base of the package gap (exec 0x03079C14) is live runtime workspace: the file descriptor table, the directory stack and FAT driver fields live there. An earlier step placed code at the gap base and was removed; `--tail` accepts only payloads that land at exec 0x0307BFB4 or later. See [`resident_home.md`](analysis/resident_home/resident_home.md) and [`space_budget.md`](patches/framework/space_budget.md).
 
-Resident code space, not file size, limits new features: the package has about 418 KB of room under the installer's 13 MiB transfer, but every module executes at a fixed address and the resident windows are full. [`patches/space/`](patches/space/README.md) is a reachability census of module 0. It finds 8,508 bytes of stock code in 150 pockets that nothing can reach, and an emulation coverage gate in CI confirms none of it runs in any suite. Nothing uses that space yet.
+New features are limited by resident code space. The package has about 418 KB of room under the installer's 13 MiB transfer, but every module runs at a fixed address and the resident windows are full. [`patches/space/`](patches/space/README.md) maps stock code in module 0 that nothing calls: 8,508 bytes in 150 pockets, none of which runs in any emulation suite. CI checks that on every change. Nothing uses that space yet.
 
 ## Reverse engineering
 
@@ -172,7 +172,7 @@ Start with [`platform_architecture.md`](analysis/platform_architecture.md) for t
 - The slot validator boots the slot whose image has the strictly newer BCD header date; on a tie it boots slot 1. It checks a header marker and an unkeyed CRC and verifies no signature ([`boot_slots.md`](analysis/boot_slots.md)).
 - The stock installer writes the update to slot 2 and then copies slot 2 over slot 1, so after a stock-path install both slots hold CE and no stock copy remains on the device.
 - To go back, install the recovery image the same way. It is stock code dated 2026-10-24, one day after CE (2026-10-23), so the validator selects it; plain stock (2026-10-22) is older than CE and would not replace it.
-- The boot validator compares the header mirror at sector `(header length) >> 9`. Standard images built before 2026-11-11 (pin `db0a11d2…` and earlier longer-than-stock pins) left the mirror inside a sector, so that compare would likely fail and neither slot would validate. Do not flash those builds. Current builds pad the mirror onto a sector boundary, and the validators refuse an unaligned one. Minimal and recovery images are stock length and were never affected.
+- The boot validator reads the header copy by 512-byte sector. Standard images built before 2026-11-11 (pin `db0a11d2…` and earlier longer-than-stock pins) put that copy partway into a sector, so neither slot would likely validate. Do not flash them. Current builds pad the copy onto a sector boundary, and the validators refuse one that is not. The minimal and recovery images are stock length and were never affected.
 - If the player does not boot, recovery needs the Rockchip USB (Rockusb) tools. How Rockusb logical block addresses map to the validator's slot sectors is still unproven.
 - The planned safer layout keeps stock in slot 1 and CE in slot 2, so corrupting the slot 2 header falls back to stock. On such a unit the stock update flow must never run, because it would copy slot 2 over the stock fallback; keep update files off the card.
 
@@ -180,11 +180,11 @@ Start with [`platform_architecture.md`](analysis/platform_architecture.md) for t
 
 Every feature in the tables above is built, merged and reproduced by CI. Open work, in the order it unblocks other work:
 
-1. Hardware phase, in order: read back the candidate slot sectors over Rockusb before any write; confirm the standard image (longer than stock) installs and both slots validate; decode APE and DSD128 first (the clock table's unmeasured loads); a canary build for the gap tail code home; a window-cycle soak for the grown module 31 that carries playlists and the lock screen; observing the gapless transition on the system side; and a tripwire build that halts if any dead-code census pocket ever runs ([`patches/space/`](patches/space/README.md)). Checks that need only a device and headphones: unplugging headphones should pause stock ([`ui_controls.md`](analysis/ui_controls.md) §1.7), stock should turn Bluetooth off after 5 minutes unconnected, and stock's Classical, Bass Boost and Heavy Metal presets should sound like Pop, Jazz and no EQ.
+1. Hardware phase, in order: read back the candidate slot sectors over Rockusb before any write; confirm the standard image (longer than stock) installs and both slots validate; decode APE and DSD128 first (the clock table's unmeasured loads); a canary build for the gap tail code home; a window-cycle soak for the grown module 31 that carries playlists and the lock screen; observing the gapless transition on the system side; and a tripwire build that halts if any of the unused module 0 code ever runs ([`patches/space/`](patches/space/README.md)). Checks that need only a device and headphones: unplugging headphones should pause stock ([`ui_controls.md`](analysis/ui_controls.md) §1.7), stock should turn Bluetooth off after 5 minutes unconnected, and stock's Classical, Bass Boost and Heavy Metal presets should sound like Pop, Jazz and no EQ.
 2. Battery profiles: find a valid settings item and label (the proposed 0xC5 id collides with the stock brightness string), then resolve boot persistence, clock assumptions and hardware gates.
 3. Theme follow-through: decide whether to approve the palette code sites the colour census pinned, which would make code-drawn colours themeable, and check whether any window other than the player calls the shared artwork setup that theater mode hooks.
-4. Space: once the tripwire build passes, the census pockets can hold focus mode (340 bytes), a text-smoothing blitter for the 1-bit fonts (about 200 bytes), and the lock screen and Bluetooth routines, which would free contiguous tail and module 31 space. The browser marquee (6,992 bytes) is larger than every pocket of 64 bytes or more combined (5,530 bytes), so it still fits only if playlists and the lock screen leave module 31. See [`patches/full/README.md`](patches/full/README.md#space-decisions-for-the-owner).
-5. Smaller items: Font A (the 6 x 12 status font) still has its stock glyphs; the FS type 3 enumeration contract (blocks M3U on those volumes), a library enumeration order, and the decoder parameter page past its two known fields.
+4. Space: once the tripwire build passes, the unused module 0 code can hold focus mode (340 bytes), text smoothing for the 1-bit fonts (about 200 bytes), and the lock-screen and Bluetooth routines, which frees room in the gap tail and module 31. The browser marquee needs 6,992 bytes, more than all the pockets of 64 bytes or larger put together (5,530), so it still fits only if playlists and the lock screen leave module 31. The trade-offs are in [`patches/full/README.md`](patches/full/README.md#space-decisions-for-the-owner).
+5. Smaller items: Font A, the small 6 x 12 font for status text, keeps its stock glyphs; the FS type 3 enumeration contract (blocks M3U on those volumes), a library enumeration order, and the decoder parameter page past its two known fields.
 
 Two documents lost text to truncation in their first commits: the end of section 1.8 of [`patch_technique_and_sdk.md`](research/patch_technique_and_sdk.md) and the tail of [`vorbis_swap.md`](patches/vorbis_swap/vorbis_swap.md). No originals survive; both were reconstructed on 2026-10-31 from the project's source material and are marked at the seam. [`CHANGES.md`](CHANGES.md) records every change.
 
