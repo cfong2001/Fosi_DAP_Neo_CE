@@ -5,26 +5,6 @@
 // pinned). Do not edit by hand.
 export const FULL_EXTRA_PATCHES = [
  {
-  "file": "title-copy.patch",
-  "name": "player-title-bounded-copy",
-  "module": 27,
-  "region": "code",
-  "address": 50854352,
-  "expect": "adf80c70bdf80c1033f811206ab320f81120491c89b2adf80c108029f2d3",
-  "replace": "002133f8112042b17f2903d220f811200131f6e720f8117001e026e000bf",
-  "index": 39
- },
- {
-  "file": "title-suffix.patch",
-  "name": "player-title-safe-suffix",
-  "module": 27,
-  "region": "code",
-  "address": 50854458,
-  "expect": "8ab220f8127000eb410030f8081c2e2908bf20f8087c30f80a1c2e2908bf20f80a7cc7e7",
-  "replace": "20f8117005290ad300eb41000a3841882e2908bf478001882e2908bf0780c9e700bf00bf",
-  "index": 40
- },
- {
   "file": "0113-transport-keyed-info-bare-ground.patch",
   "name": "0113-transport-keyed-info-bare-ground",
   "module": 27,
@@ -32,7 +12,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50853978,
   "expect": "e3f776fe",
   "replace": "d4f7abf8",
-  "index": 41
+  "index": 39
  },
  {
   "file": "0111-transport-keyed-playpause-bare-ground.patch",
@@ -42,7 +22,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50853938,
   "expect": "e3f78afe",
   "replace": "d4f7bff8",
-  "index": 42
+  "index": 40
  },
  {
   "file": "0114-transport-keyed-plus-bare-ground.patch",
@@ -52,7 +32,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50854004,
   "expect": "e3f769fe",
   "replace": "d4f79ef8",
-  "index": 43
+  "index": 41
  },
  {
   "file": "0112-transport-keyed-quote-bare-ground.patch",
@@ -62,7 +42,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50853952,
   "expect": "e3f783fe",
   "replace": "d4f7b8f8",
-  "index": 44
+  "index": 42
  },
  {
   "file": "0115-transport-keyed-repeat-state-ground.patch",
@@ -72,7 +52,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50854020,
   "expect": "e3f761fe",
   "replace": "d4f796f8",
-  "index": 45
+  "index": 43
  },
  {
   "file": "0116-transport-keyed-right-state-ground.patch",
@@ -82,7 +62,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50854056,
   "expect": "e3f74ffe",
   "replace": "d4f784f8",
-  "index": 46
+  "index": 44
  },
  {
   "file": "0117-transport-keyed-right-variants-ground.patch",
@@ -92,7 +72,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50854128,
   "expect": "e3f72bfe",
   "replace": "d4f760f8",
-  "index": 47
+  "index": 45
  },
  {
   "file": "0110-transport-keyed-slot0-state-ground.patch",
@@ -102,7 +82,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50853894,
   "expect": "e3f7a0fe",
   "replace": "d4f7d5f8",
-  "index": 48
+  "index": 46
  },
  {
   "file": "0118-progress-knob-keyed.patch",
@@ -112,7 +92,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50853786,
   "expect": "e3f7d6fe",
   "replace": "e4f735f9",
-  "index": 49
+  "index": 47
  },
  {
   "file": "0120-focus-init-reset-hook.patch",
@@ -122,7 +102,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50844066,
   "expect": "eaf74bf8",
   "replace": "fff71bf8",
-  "index": 50
+  "index": 48
  },
  {
   "file": "0121-focus-service-tick-hook.patch",
@@ -132,7 +112,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50848268,
   "expect": "e9f716f8",
   "replace": "fdf7f8ff",
-  "index": 51
+  "index": 49
  },
  {
   "file": "0122-focus-key-hook.patch",
@@ -142,7 +122,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50858742,
   "expect": "e1f70ef8",
   "replace": "fbf7adfb",
-  "index": 52
+  "index": 50
  },
  {
   "file": "0123-focus-geometry-hook.patch",
@@ -152,7 +132,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50850014,
   "expect": "05f0d7f8",
   "replace": "fdf7e9fc",
-  "index": 53
+  "index": 51
  },
  {
   "file": "0124-focus-gate-status-1f.patch",
@@ -162,7 +142,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50853136,
   "expect": "e7f7a2fe",
   "replace": "fcf7c4fe",
-  "index": 54
+  "index": 52
  },
  {
   "file": "0125-focus-gate-progress-41.patch",
@@ -172,7 +152,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50853192,
   "expect": "e7f786fe",
   "replace": "fcf7a8fe",
-  "index": 55
+  "index": 53
  },
  {
   "file": "0126-focus-gate-progress-40.patch",
@@ -182,7 +162,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50853272,
   "expect": "e7f75efe",
   "replace": "fcf780fe",
-  "index": 56
+  "index": 54
  },
  {
   "file": "0127-focus-gate-progress-4d.patch",
@@ -192,7 +172,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50853354,
   "expect": "e7f735fe",
   "replace": "fcf757fe",
-  "index": 57
+  "index": 55
  },
  {
   "file": "0128-focus-gate-transport-43.patch",
@@ -202,7 +182,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50853814,
   "expect": "e7f74ffd",
   "replace": "fcf771fd",
-  "index": 58
+  "index": 56
  },
  {
   "file": "0129-focus-gate-volume-19a.patch",
@@ -212,7 +192,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50854136,
   "expect": "e7f7aefc",
   "replace": "fcf7d0fc",
-  "index": 59
+  "index": 57
  },
  {
   "file": "0130-focus-title-shift-hook.patch",
@@ -222,7 +202,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50854384,
   "expect": "e2f7b3ff",
   "replace": "fcf776fc",
-  "index": 60
+  "index": 58
  },
  {
   "file": "0131-focus-artist-shift-hook.patch",
@@ -232,7 +212,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50854568,
   "expect": "e3f721f9",
   "replace": "fcf72efc",
-  "index": 61
+  "index": 59
  },
  {
   "file": "0100-theater-setup-reset-hook.patch",
@@ -242,7 +222,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50870430,
   "expect": "70b50e46",
   "replace": "f8f759bd",
-  "index": 62
+  "index": 60
  },
  {
   "file": "0101-theater-blit-sync-a.patch",
@@ -252,7 +232,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50870898,
   "expect": "dff764fc",
   "replace": "f8f799fc",
-  "index": 63
+  "index": 61
  },
  {
   "file": "0102-theater-blit-sync-b.patch",
@@ -262,7 +242,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50870910,
   "expect": "dff75efc",
   "replace": "f8f793fc",
-  "index": 64
+  "index": 62
  },
  {
   "file": "0103-theater-blit-painter-a.patch",
@@ -272,7 +252,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50871170,
   "expect": "dff7dcfb",
   "replace": "f8f711fc",
-  "index": 65
+  "index": 63
  },
  {
   "file": "0104-theater-blit-painter-b.patch",
@@ -282,7 +262,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50871188,
   "expect": "dff7d3fb",
   "replace": "f8f708fc",
-  "index": 66
+  "index": 64
  },
  {
   "file": "0032-ui-bt-dispatcher-hook-tail.patch",
@@ -292,7 +272,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50732638,
   "expect": "2046bde8f09f",
   "replace": "1af0cbbb00bf",
-  "index": 67
+  "index": 65
  },
  {
   "file": "0041-resolver-primary-hook.patch",
@@ -302,7 +282,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50699692,
   "expect": "2de9f047",
   "replace": "12f064bd",
-  "index": 68
+  "index": 66
  },
  {
   "file": "0042-resolver-companion-hook.patch",
@@ -312,7 +292,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50705090,
   "expect": "2de9f047",
   "replace": "11f0e9ba",
-  "index": 69
+  "index": 67
  },
  {
   "file": "0043-playlist-count-hook.patch",
@@ -322,7 +302,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50699608,
   "expect": "2de9f041",
   "replace": "12f0b1bd",
-  "index": 70
+  "index": 68
  },
  {
   "file": "0044-playlist-forward-step.patch",
@@ -332,7 +312,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50714008,
   "expect": "a0890128",
   "replace": "0ff0a0f9",
-  "index": 71
+  "index": 69
  },
  {
   "file": "0045-theater-noart-close.patch",
@@ -342,7 +322,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50850162,
   "expect": "346098f8",
   "replace": "e5f7b3b9",
-  "index": 72
+  "index": 70
  },
  {
   "file": "0046-theater-noart-open.patch",
@@ -352,7 +332,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50850156,
   "expect": "3460bde8",
   "replace": "e5f7c0b9",
-  "index": 73
+  "index": 71
  },
  {
   "file": "0047-pocket-playlist-hooks.patch",
@@ -362,7 +342,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50776184,
   "expect": "00b583b069466348fbf76bf8002818bf002003b000bd2de9f0435e4f85b088468146164669463846fbf75bf800281cbf05b0bde8f083f9f7acfebdf8064006eb4420401e6102b0fbf1f502a93846fbf748f84ff0000c002d98bfc5f1000cbdf8040006f2ff1200fb09f00cfb0401d01702ebd050421243463846faf7eafff9f7b4fe05b0bde8f0832de9f043dff8048185b089460746154669464046fbf721f800281cbf05b0bde8f083f9f772febdf8064005eb4420401e6102b0fbf1f502a94046fbf70ef8bdf804000022784302fb040105fb04f24b46",
   "replace": "04b4314a127832b1012b04d12f4a914201d104bc2de004bc2de9f047edf78cba04b4294a12784ab1012b07d1284a964502d0284a964501d104bc704704bc2de9f047eef704bd04b41f4a12782ab1012903d11d4a507804bc704704bc2de9f041edf740baa0891849097801b1012001287047dff854c080b200b101389cf80130984200d3581eacf802000cf1fc0232f81020c2f30a000130acf80400d20a0cf13c0353f822300b600cf1bc0333f812308b600cf110021c312a2312f801cb01f801cb013bf9d17047b4bf0703b439020365e00703cba60803",
-  "index": 74
+  "index": 72
  },
  {
   "file": "0048-pocket-theater-noart.patch",
@@ -372,7 +352,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50740444,
   "expect": "f0b587b01d460c9c16460f46002c04bf07b0f0bd02a9fff718fcbdf80a1060198842c4bf481b04b2bdf808100598694300eb41010091bdf90820234631463846fff792fb07b0f0bd2de9f04786b09846dde90f65ddf8389017468a46002d12bfb8f1000f",
   "replace": "346000b500f00bf85df804eb98f800001af044be346000f002f8bde8f88307b50b49002048760b4991f8d80210b941f2a20001e00849088808490a88824205d0088007490a6842f000720a6007bd000068340203a0320203b435020300440003fc3c0203",
-  "index": 75
+  "index": 73
  },
  {
   "file": "0049-pocket-transport-ground.patch",
@@ -382,7 +362,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50674100,
   "expect": "2de9f04186b05fea000808881f4615460e46adf8080016bfb8f1010f0c240024002c02bf002006b0bde8f0815c282ad0a0f50051",
   "replace": "07b582b00a4b1b880093b0f19b03012b94bfef231f230b44084611461a4611f11f030ff090fc02b0bde8074010f012b800440003",
-  "index": 76
+  "index": 74
  },
  {
   "file": "0040-m3u-browser-hook.patch",
@@ -392,7 +372,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50847514,
   "expect": "fff76df9",
   "replace": "00f095bf",
-  "index": 77
+  "index": 75
  },
  {
   "file": "0033-ui-lockscreen-title.patch",
@@ -402,7 +382,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50849950,
   "expect": "e4f72fbf",
   "replace": "01f0d1be",
-  "index": 78
+  "index": 76
  },
  {
   "file": "0060-nav-folder-disarm.patch",
@@ -412,7 +392,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50847822,
   "expect": "01252846",
   "replace": "02f0c5bb",
-  "index": 79
+  "index": 77
  },
  {
   "file": "0061-nav-file-disarm.patch",
@@ -422,7 +402,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50848204,
   "expect": "e648d8f769ff",
   "replace": "02f013bb00bf",
-  "index": 80
+  "index": 78
  },
  {
   "file": "0062-nav-tag-disarm.patch",
@@ -432,7 +412,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50850930,
   "expect": "a5f8f2c0",
   "replace": "00f0bbb8",
-  "index": 81
+  "index": 79
  },
  {
   "file": "0140-pocket-profile-lookup.patch",
@@ -442,7 +422,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50665100,
   "expect": "10b5ca4c002120460ff0dafa0021601c0ff0d6fa0021a01c0ff0d2fa0021e01c0ff0cefa4021201d0ff0cafa0821e01d0ff0c6fa8021be480ff0c2fa0221bd480ff0befa0221bc480ff0bafa2046bde8104001210ff0b4ba30b583b00c46054669460ff01bfb6420",
   "replace": "b0f5857f03d2f0b4134d11f016bd124b1b7ca0f5857000eb8300302358430f4b1b6818440e4b18444ff6ff7303ea420212f035beb0f5857f03d230b4064c11f09ebda0f585703a225043044b1b681844044b184412f023bea032020388320203825854009a575400",
-  "index": 82
+  "index": 80
  },
  {
   "file": "0141-pocket-profile-value.patch",
@@ -452,7 +432,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50677352,
   "expect": "10b521491a2011f03bff1a2002f08bfb1a2002f005fb0221bde81040002018f065bc10b51a2011f053ff1a2002f07bfb1a2002f023fb0221bde81040002018f04abc10b511491b2011f01aff",
   "replace": "04030002020200000100bc2d02d1787d29f0e9bab5f5857f15d1aff21c0100200a783b7d9a4208d14a787b7d9a4204d18a783b7e9a4229f0d682033101300328eed129f0d1babc2d29f091ba",
-  "index": 83
+  "index": 81
  },
  {
   "file": "0146-pocket-profile-commit.patch",
@@ -462,7 +442,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50753636,
   "expect": "70b5024601200021edf7c1fedff8c0c105460c46dce900321840114008431cbf002070bd45ea030044ea0201cce90001fff732ff002070bd242824bf",
   "replace": "7338032814d20b4900eb4000014406b40878094a1075fdf773fc0099487817f0d6f806bc887817f012f9012005f0befc18f048be68460503a0320203",
-  "index": 84
+  "index": 82
  },
  {
   "file": "0142-profile-string-lookup.patch",
@@ -472,7 +452,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50737346,
   "expect": "f0b4754d",
   "replace": "eef7e3ba",
-  "index": 85
+  "index": 83
  },
  {
   "file": "0143-profile-menu-lookup.patch",
@@ -482,7 +462,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50737670,
   "expect": "30b4244c",
   "replace": "eef75bba",
-  "index": 86
+  "index": 84
  },
  {
   "file": "0144-profile-value-load.patch",
@@ -492,7 +472,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50846670,
   "expect": "bc2d08bf",
   "replace": "d6f750bd",
-  "index": 87
+  "index": 85
  },
  {
   "file": "0145-profile-commit.patch",
@@ -502,7 +482,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50854528,
   "expect": "80f05281",
   "replace": "a7f4f0aa",
-  "index": 88
+  "index": 86
  },
  {
   "file": "0150-player-time-font.patch",
@@ -512,7 +492,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50849580,
   "expect": "10b5dff844c18ab000281cbf3920adf804000fd14cf6cd404843c00c3030adf80400acfb0140c008404200eb800001eb40003030adf806003c20adf808004cf6cd405043c00c3030adf80a00acfb0210c008404200eb800002eb40003030adf80c0000244ff48070adf80e4000904bb1cb23062201a9dd20e5f700f9364804700ab010bd0723062201a9dd20e5f7f6f8",
   "replace": "10b588b01c46002818bf63210a23b1fbf3f000fb131130303031adf80000adf802103a20adf80400b2fbf3f000fb132230303032adf80600adf808200020adf80a00002c0cbf0720a720adf8100040f20010adf81200002c0cbf4820e820adf8140040f20f10adf8160004a801466a460023dff814c0e047002c02d003480021017008b010bd0000ef2c0603e4470203",
-  "index": 89
+  "index": 87
  },
  {
   "file": "0151-marquee-stamp.patch",
@@ -522,7 +502,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50671892,
   "expect": "2de9f04115460f1e0646",
   "replace": "3068a8623220a8857047",
-  "index": 90
+  "index": 88
  },
  {
   "file": "0152-marquee-dwell.patch",
@@ -532,7 +512,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50737338,
   "expect": "a0f82ca0",
   "replace": "96218185",
-  "index": 91
+  "index": 89
  },
  {
   "file": "0153-marquee-step-stamp.patch",
@@ -542,7 +522,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50737166,
   "expect": "3068a862",
   "replace": "f0f781f8",
-  "index": 92
+  "index": 90
  },
  {
   "file": "0154-play-all-albums.patch",
@@ -552,7 +532,47 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50846276,
   "expect": "50006c0061007900200041006c006c00200041006c00620075006d0000000000",
   "replace": "50006c0061007900200041006c006c00200041006c00620075006d0073000000",
+  "index": 91
+ },
+ {
+  "file": "0160-track-info.patch",
+  "name": "0160-track-info",
+  "module": 27,
+  "region": "code",
+  "address": 50850184,
+  "expect": "f04fadf5057d01208490d1483e234ff06b0b0188cf4802ac01803c20adf80800adf80a000221cc48002700eb4102b2f8582232b124f81120491c89b24029f4d31ae0022912d15520adf80c006e206f21adf814107721adf810b0adf81610adf80e00adf81200adf81800092104eb410024f811304380878024f8113004eb41014ff0ef084b808f802521adf80c824422adf80872adf80e22bdf80c303846adf80a1202227bb382a9022322460846e4f75af9adf808725720adf80a02adf80c826620adf80e02a5480168012925d002292ed0032937d0042940d005294ad0062954d007295ed0082968d0092900f0b1819ba0016802914168039181680491c1680591006964e0ffe71323cde90023a8eb00021023e4f7d1fbcbe794a1086802904868039088680490c868059008694fe091a1086802904868039088680490c8680590086944e08fa1086802904868039088680490c8680590086939e08ca0016802914168039181680491c1680591006906902ee089a0016802914168039181680491c16805910069069022e086a0016802914168039181680491c16805910069069016e083a0016802914168039181680491c1680591006906900ae080a0016802914168039181680491c16805910069069082a9022302aa0846e4f7c4f8adf808727020adf80a02dff8e0a1adf80c827f20adf80e02daf80030754d4ff47a79d3f89c10734ea5fb0120c008a5fb00c2d208524202eb820200eb4202",
+  "replace": "2de9f04f734b744c744ab4f85c601b88cdb09bb2d2f8785d714f0093ef22bf2320210020b8476f4b6f4fb3f8b630b6b29bb2a4f85c300024a046631eadf83080052b04d8dfe803f03a3a4a54919f0ca800f0f8f90823adf8083004eb840304eb43035b009bb203f12302adf80a205022323357f8041b04a8adf80c20adf80e3000f0aaf902a908460023dff860a104aad0475423adf80830e72302a9adf80c30084600230caa0134d047072cc5d10120494ba3f85c604db0bde8f08f4c4b4d49012c18bf19460b881bb10ca800f0adf9c0e749490ca800f07ff9bbe7474b4649d3f8d434092b9cbf01eb8301496af1e7002deed0d5f89c100029ead0d5f808a0baf1000fe5d04ff47a7b0ca800f06df93b4900f061f9bafbfbf9494600f065f90bfb19a20346eab1364900f055f964230a21b2fbf3f3b2fbf1fc30330380bcfbf1f301fb1c2201fb13c33032303343808280831d184633f8022d302afad000220346028018462849b5e7002db1d0eb68002baed04ff47a710ca8b3fbf1f100f034f92249a7e7224bd3f85804421ca0d003f5a02303f2d55398471e4b4ff00a09b0fbf3fa03fb1a004cf24f33984288bf0af1010abafbf9fb0ca8594600f015f9104900f009f909fb1ba100f00ef9124981e700bf004400030038020300a00403fb320603003502036cee0703ef2c060380b1040382b0040364ee070300b00403eced0703f4ed0703f6ed0703fbed070300400003a086010001ee0703",
+  "index": 92
+ },
+ {
+  "file": "0161-metadata-helpers.patch",
+  "name": "0161-metadata-helpers",
+  "module": 27,
+  "region": "code",
+  "address": 50851168,
+  "expect": "00f101004ff0480124f810b000f101004ff0020324f8101000f101004ff07a0124f8101000f1010082a924f8107002aa0846e3f7acffadf808728920adf80a02adf80c829820adf80e02daf800100020c968b1fbf9f1b1f57a7f19d3b1fbf9f0a5fb0032d208524202eb820200eb42003030adf8080001200ce0fea0016802914168039181680491c16805910069b3e664290ed3a6fb01325209a5fb02c3db085b4203eb830302eb4302303224f81020401c0a290ed3a5fb0132d208a5fb02c3db085b4203eb830302eb4302303224f81020401ca5fb0132d208524202eb820201eb4201303124f81010401c622124f810b0401c022324f81010401c732124f81010401c82a924f8107002aa0846e3f73effadf80872a220adf80a02adf80c82b120adf80e02d6484ff000080068daf7d6fa000db0f57a7f0fd3b0fbf9f1a5fb0132d208524202eb820201eb42013031",
+  "replace": "013911f8013f0bb90380704720f8023bf7e7f0b585b001ac002322460a27b1fbf7f607fb1615303504f8015b0d46092d314603f10103f2d81a4400eb430312f8011d20f8021b9842f9d10023038005b0f0bd002331f8132022b120f8132001337f2bf7d1002220f813207047054b064ab3f88410843300290cbf11461946fff7e8bf00bf00af0403f4ad04032d626974202f20002e00206b487a00206b62707300204d42005469746c650041727469737400416c62756d00466f726d6174005265736f6c7574696f6e00426974726174650053697a65004d5033004f5055530041414300574156004f47470041504500464c414300414c41430044464600445346000000556e6b6e6f776e0005ee07030bee070312ee070318ee07031fee07032aee070332ee070337ee07033bee070340ee070344ee070348ee07034cee070350ee070355ee07035aee07035eee0703",
   "index": 93
+ },
+ {
+  "file": "0162-track-info-entry.patch",
+  "name": "0162-track-info-entry",
+  "module": 27,
+  "region": "code",
+  "address": 50850182,
+  "expect": "2de9",
+  "replace": "ffe7",
+  "index": 94
+ },
+ {
+  "file": "0163-player-tag-title.patch",
+  "name": "0163-player-tag-title",
+  "module": 27,
+  "region": "code",
+  "address": 50854348,
+  "expect": "424b4348adf80c70bdf8",
+  "replace": "4348fff7fdf900f00cb8",
+  "index": 95
  }
 ];
 export const FULL_TAIL = {
@@ -8821,4 +8841,4 @@ export const FULL_THEME_RUNS = [
   "replace": "41006c00620075006d0073000000"
  }
 ];
-export const FULL_IMAGE_SHA256 = "f4f95f3203cd6d29349bdac33bf3ab65ff7c33911f89a93539ea226ee762d5d5";
+export const FULL_IMAGE_SHA256 = "8b9b1801a91a6e885c4e366c77632b08d3515d2d5578555fc5993c1689783783";

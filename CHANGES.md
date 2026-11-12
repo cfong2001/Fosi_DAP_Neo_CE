@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-11-12: Title tags and readable track information
+
+- Now Playing uses the title tag, with the filename when it is absent.
+- Track information has seven labeled rows: Title, Artist, Album, Format,
+  Resolution, Bitrate and Size. Values use readable units, and missing
+  artist/album tags show Unknown. The code fits the old painter around its
+  shared literal pool, with no new image or RAM growth.
+- Thumb emulation checks real hook execution, fallbacks, text bounds, sample
+  rate precision, size rounding and the painter register/stack contract.
+
 ## 2026-11-12: Player typography and library labels
 
 Standard CE draws time with the main font, pauses scrolling for 1.5 seconds,

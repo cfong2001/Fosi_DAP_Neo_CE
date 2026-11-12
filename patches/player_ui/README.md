@@ -32,3 +32,39 @@ into Standard CE; Minimal and recovery retain their existing behavior.
 The SDK mirror documented in `research/patch_technique_and_sdk.md` was used
 only to identify text-rendering and scrolling semantics. These routines are
 original CE code. Device rendering and timing remain untested on hardware.
+
+## Playback metadata
+
+`build_metadata.py` compiles the seven-row information painter into the old
+painter's code at `0x0307E988` and helpers at `0x0307ED60`. The shared literal
+pool at `0x0307ECA4..0x0307ED60` stays intact: the artwork setup uses it too.
+The original entry at `0x0307E986` branches across the alignment halfword.
+No module, BSS or image growth is needed.
+
+The real playback tag dispatcher (`0x03088D42`) receives `0x0304AF24` as
+its output. Its title, artist and album fields are at offsets `0x60`,
+`0x15E` and `0x25C`, confirmed by the resident parser and playback artist
+fallback. `player_title` copies at most 127 UTF-16 units into the existing
+128-unit title buffer. A tag such as `Tagged.wav` stays intact. An absent
+title uses the filename at `0x0304ADF4`, including its extension. This
+supersedes the old filename suffix-trimming pair in Standard CE only.
+
+The info painter clears its own area, then draws Title, Artist, Album,
+Format, Resolution, Bitrate and Size. Values are left aligned in clipped
+rectangles; the prior drawing color is restored. Resolution reads the
+stock codec structure's bit depth and sample rate; bitrate converts bits
+per second to kbps; size uses decimal MB rounded to one decimal. Null codec
+state and missing tags use Unknown. The codec labels retain the Standard
+image's WMA-to-Opus mapping.
+
+```
+python patches/player_ui/build_metadata.py
+python patches/player_ui/test_metadata.py
+```
+
+The tests execute both the patched title call site and the assembled info
+painter with synthetic playback state, intercepting only LCD calls and the
+file-size query. They verify all seven rows, empty fields, long titles,
+suffix preservation, fractional sample rates, maximum 32-bit file size,
+register preservation and stack balance. Actual tag files and the device
+remain outside this test's scope.

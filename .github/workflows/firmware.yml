@@ -74,6 +74,9 @@ jobs:
           python patches/player_ui/build_typography.py
           git diff --exit-code -- patches/player_ui
           python patches/player_ui/test_typography.py
+          python patches/player_ui/build_metadata.py
+          git diff --exit-code -- patches/player_ui
+          python patches/player_ui/test_metadata.py
 
       - name: Redrawn Font B glyphs
         run: python patches/antialias/test_font.py
