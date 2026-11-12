@@ -20,7 +20,7 @@ export const SECTIONS = {
   },
   "ce": {
     "file": "release/DP3_V137_CE.img",
-    "image_sha256": "e72449d73db1afb85b9c801fd24812ecdf6b6580a0763b1056f41e9c8ff7b833",
+    "image_sha256": "148446d95dfcb85afbaa2b8c13310aed4ea97db80b849f7bb4bb10612e1fa5e1",
     "offset": 9105314,
     "length": 4086176,
     "sha256": "575edb0afb1823f5d75031508dc9c2aa9b9872e38fe74e64e8717b3d8fe3975f"

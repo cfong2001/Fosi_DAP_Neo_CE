@@ -47,6 +47,36 @@ drawn by the firmware's 1-bit font, which cannot hold antialiasing, so it
 is unchanged. The README renders and the site simulator draw the progress
 bar from these resources at module 27's coordinates.
 
+## Shipped: the list and menu font
+
+[`generate_font.py`](generate_font.py) redraws the Latin glyphs of Font B
+(the 8 x 16 font used by lists, menus and titles) as data. 314 records
+change: ASCII, Latin-1 and Latin Extended-A. The firmware's glyphs are
+1-bit, so this is not antialiasing. The glyphs come from Barlow SemiBold
+at 16 px, rasterised by FreeType with hinting, so stems are 2 pixels and
+spacing is even. Other scripts keep their stock glyphs.
+
+Fitting the firmware's layout rules (`0x030627BE`, `0x03063E06`):
+
+- **Letter advance.** For ASCII letters the firmware measures the ink in
+  rows 0 to 9 only (leftmost + rightmost column + 2). Records are read
+  through a halfword byte swap (`0x03056B94`), so rows are big-endian
+  and the tail is byte 32.
+- **The stock `L` bug.** With its bar below row 9, stock's `L` advances
+  2 px and overlaps the next letter by 5. The redrawn `L` trims its bar
+  to 6 columns and shifts right until the measure clears it. `K` shifts
+  one column for the same reason.
+- **Other glyphs** get explicit tail advances: the space is 4, digits
+  share one width, and punctuation gets a column on each side.
+- **Vertical fit.** The baseline is row 12, one row above stock, so
+  descenders get rows 13 to 15. Marks on capitals sit in the rows above
+  the cap, as in stock. U+00B2, U+00B3 and U+0140 do not fit and keep
+  their stock glyphs.
+
+`test_font.py` checks reproducibility, that the Standard image carries
+every record, and the advance rules. Font A, the 6 x 12 font used for
+small status text, is unchanged.
+
 ## Mockups: text options (not built)
 
 Nothing here changes firmware. `mock.py` renders the theater now-playing

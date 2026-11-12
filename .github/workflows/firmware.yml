@@ -69,6 +69,9 @@ jobs:
       - name: Antialiased screen art and keyed progress knob
         run: python patches/antialias/test_screens.py
 
+      - name: Redrawn Font B glyphs
+        run: python patches/antialias/test_font.py
+
       - name: Module 0 dead-code census and emulation coverage gate
         run: python patches/space/run_coverage.py
 

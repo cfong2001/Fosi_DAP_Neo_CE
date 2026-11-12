@@ -1,5 +1,21 @@
 # Changelog
 
+## 2026-11-12: list and menu font, resident-space census
+
+- Font B's Latin glyphs (lists, menus, titles; 314 records) are redrawn
+  from Barlow SemiBold. They are still 1-bit, but with 2-pixel stems,
+  even spacing and tabular digits. The redraw also fixes a stock layout
+  bug: stock `L` advanced 2 px and overlapped the next letter.
+  `patches/antialias/generate_font.py`, checked by `test_font.py`.
+- `patches/space/`: a reachability census of module 0 finds 8,508 bytes
+  of stock code in 150 pockets that nothing can reach. An emulation
+  coverage gate over the Unicorn suites (now in CI) confirms that none
+  of it executes. That is enough resident room for focus mode and text
+  smoothing, pending a hardware tripwire build. The marquee still does
+  not fit.
+- The merged theme has 1,269 runs. New Standard pin `148446d9…`. Minimal
+  and recovery are unchanged.
+
 ## 2026-11-11: sector-aligned header mirror (Standard image)
 
 - Fixes a likely boot failure in the Standard image. The boot validator
