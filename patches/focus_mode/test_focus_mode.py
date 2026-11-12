@@ -61,7 +61,7 @@ import sys
 import tempfile
 from pathlib import Path
 
-from unicorn import Uc, UC_ARCH_ARM, UC_MODE_THUMB, UC_HOOK_CODE
+from unicorn import Uc, UC_ARCH_ARM, UC_MODE_THUMB, UC_HOOK_CODE, UC_HOOK_MEM_WRITE
 from unicorn.arm_const import (UC_ARM_REG_R0, UC_ARM_REG_R1, UC_ARM_REG_R2,
                                UC_ARM_REG_R3, UC_ARM_REG_R4, UC_ARM_REG_SP,
                                UC_ARM_REG_LR, UC_ARM_REG_PC)
@@ -189,6 +189,18 @@ class Machine:
         self.counts = {'keyfn': 0, 'main': 0, 'alt': 0}
         self.entries = {e['id']: e for e in self.im.images()}
         self.u.hook_add(UC_HOOK_CODE, self._hook)
+        self.u.hook_add(UC_HOOK_MEM_WRITE, self._record_write)
+
+    def _record_write(self,uc,access,address,size,value,user):
+        bank=self.r16(0x030238B8)
+        for base,rows,y0 in ((0x030065A8+bank*115200,240,0),
+                             (0x0306F224+bank*38400,80,240)):
+            if base<=address and address+size<=base+rows*480:
+                for offset in range(0,size,2):
+                    pixel=(address+offset-base)//2
+                    self.stores.append((pixel%240,pixel//240+y0,
+                                        (value>>(offset*8))&0xFFFF,len(self.fills)))
+                break
 
     # -- memory helpers
     def w32(self, a, v): self.u.mem_write(a, struct.pack('<I', v))
@@ -220,12 +232,7 @@ class Machine:
             if not hasattr(self, 'art_source_rows'):
                 self.art_source_rows = []
             self.art_source_rows.append(struct.unpack(f'<{width}H', uc.mem_read(ptr, width * 2)))
-        if addr == STORE:
-            col = struct.unpack('<H', uc.mem_read(DSTRUCT + 8, 2))[0]
-            row = struct.unpack('<H', uc.mem_read(DSTRUCT + 0xA, 2))[0]
-            self.stores.append((col, row, uc.reg_read(UC_ARM_REG_R0)
-                                & 0xFFFF, len(self.fills)))
-        elif addr == DMA:
+        if addr == DMA:
             src, dst, n = (uc.reg_read(r) for r in
                            (UC_ARM_REG_R0, UC_ARM_REG_R1, UC_ARM_REG_R2))
             self.dma.append((src, dst, n, uc.reg_read(UC_ARM_REG_LR)))

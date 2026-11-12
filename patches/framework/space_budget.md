@@ -107,3 +107,13 @@ records rather than constants.
 - Module 39's span above the sort cave: computed array bases of
   unknown extent (0x03099206, 0x0309C024) and the module's own
   live cells at its top.
+
+## USB and row drawing allocations
+
+USB card: 72 bytes at 0x0306004C and 144 bytes at 0x03054404. The
+row drawing series uses only explicitly bounded unreferenced pockets;
+`patches/drawing_engine/build_rows.py:PARTS` is the exact allocation map.
+The C routines and saved-prologue wrappers total 1430 bytes (no persistent
+RAM and no module growth). The framebuffer remains split at row 240;
+unsupported geometry and display banks resume stock. Re-run the census
+on the composed image before allocating further homes.

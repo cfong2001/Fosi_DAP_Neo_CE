@@ -224,7 +224,7 @@ test('install flow verifies, copies and downloads release images', async t => {
     const digest = await crypto.subtle.digest('SHA-256', await file.arrayBuffer());
     return {size: file.size, hash: Array.from(new Uint8Array(digest), b => b.toString(16).padStart(2, '0')).join('')};
   });
-  assert.deepEqual(written, {size: 13638148, hash: '4e717adca5c06a13c2f76e981387852d64d86458d3d6eee0b405144d5fc78ac3'});
+  assert.deepEqual(written, {size: 13638148, hash: '66d79d648bee93d71c3adfdf229434bed57b337c6f9448d3c90d82a4a10df8bf'});
 
   // Download the minimal image under the update name.
   await page.locator('#image-choices input[value=minimal]').check();
@@ -312,7 +312,7 @@ test('builder needs no local files and reproduces the release images', async t =
   assert.ok(order[0] < order[2] && order[1] < order[2], 'EQ and DAC filter sit above the features');
   // All CE features: the Standard image, Opus data loaded on demand.
   assert.ok(await page.locator('#feature-list').isHidden());
-  assert.equal(await build(), '4e717adca5c06a13c2f76e981387852d64d86458d3d6eee0b405144d5fc78ac3');
+  assert.equal(await build(), '66d79d648bee93d71c3adfdf229434bed57b337c6f9448d3c90d82a4a10df8bf');
   // Pick features starts as the Minimal image.
   await page.locator('input[name=build-base][value=custom]').check();
   assert.ok(await page.locator('#feature-list').isVisible());

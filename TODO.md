@@ -4,7 +4,7 @@
 
 - [x] Remove the “USB Connected” text from the USB screen while preserving
   connection state and USB operation.
-- [ ] Accelerate the drawing engine in a separate PR:
+- [x] Accelerate the drawing engine in a separate PR:
   - Write complete rows for box fills, opaque images, transparent images
     and screen clears.
   - Accelerate transparent images and characters outside the smoothed set.
