@@ -44,13 +44,19 @@ function paint(ctx: CanvasRenderingContext2D, state: Display) {
     ctx.stroke();text('20 Hz',28,459,29,'#abc6c9');text('20 kHz',452,459,29,'#abc6c9','right')
     text('31 bands / ±12 dB',240,522,30,'#d4e4df','center')
   } else if(mode==='theater') {
+    // CE artwork: a centered cover with rounded corners (radius 10 of 144
+    // on the device) and a rounded format badge on its lower-right corner.
     const [a,b]=COVERS[cover], gradient=ctx.createLinearGradient(100,85,380,345)
-    gradient.addColorStop(0,a);gradient.addColorStop(1,b);ctx.fillStyle=gradient;ctx.fillRect(113,70,254,240)
-    ctx.fillStyle='#f8dbad';ctx.beginPath();ctx.arc(290,192,44,0,Math.PI*2);ctx.fill()
-    text(['Evening light','Open water','Forest floor'][cover],240,358,39,'#f5f1e5','center')
-    text('Sample artwork',240,396,30,'#cddbd1','center')
-    ctx.fillStyle='#ffffff44';ctx.fillRect(28,420,424,5);ctx.fillStyle='#fff';ctx.fillRect(28,420,154,5)
-    text('01:24',28,462,26);text('04:13',452,462,26,'#d3dfd9','right')
+    gradient.addColorStop(0,a);gradient.addColorStop(1,b);ctx.fillStyle=gradient
+    ctx.save();ctx.beginPath();ctx.roundRect(113,62,254,240,18);ctx.clip();ctx.fillRect(113,62,254,240)
+    ctx.fillStyle='#f8dbad';ctx.beginPath();ctx.arc(290,184,44,0,Math.PI*2);ctx.fill();ctx.restore()
+    ctx.fillStyle='#10161a';ctx.beginPath();ctx.roundRect(258,260,99,34,17);ctx.fill()
+    text(['FLAC','MP3','OPUS'][cover],270,286,24,'#ffffff')
+    text(['Evening light','Open water','Forest floor'][cover],240,346,39,'#f5f1e5','center')
+    text('Sample artwork',240,382,30,'#cddbd1','center')
+    // Elapsed and total time sit on their own line above the progress bar.
+    text('01:24',28,422,26);text('04:13',452,422,26,'#d3dfd9','right')
+    ctx.fillStyle='#ffffff44';ctx.fillRect(28,440,424,5);ctx.fillStyle='#fff';ctx.fillRect(28,440,154,5)
     // The CE transport glyphs, drawn straight over the derived background
     // (no dark tiles behind them): previous, play, next.
     ctx.fillStyle='#f5f1e5'

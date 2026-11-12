@@ -110,3 +110,24 @@ test("progress bar is the image's own columns and knob at the player's coordinat
     assert.equal(fb[253 * WIDTH + 40], 0, "nothing above the bar area");
   }
 });
+
+// Same arithmetic as artwork.c (gain, inset) for the CE cover treatment.
+test("CE cover treatment follows the artwork compositor", async () => {
+  const {artContrast, artInset, blitCover, paintBadge, BADGE, ART} = await import("../docs/sim-core.mjs");
+  const cGain = (v, top) => { const n = 118 * v - 9 * top + 50; const q = n < 0 ? -Math.floor(-n / 100) : Math.floor(n / 100); return Math.max(0, Math.min(top, q)); };
+  for (let w = 0; w < 0x10000; w += 97)
+    assert.equal(artContrast(w), (cGain(w >> 11, 31) << 11) | (cGain((w >> 5) & 63, 63) << 5) | cGain(w & 31, 31));
+  assert.equal(artContrast(0), 0);
+  assert.equal(artContrast(0xFFFF), 0xFFFF);
+  assert.deepEqual([0, 1, 9, 10, 72, 134, 143].map(r => artInset(r, 144)), [7, 5, 0, 0, 0, 0, 7]);
+  const fb = new Uint16Array(WIDTH * HEIGHT), ground = 0x1234;
+  blitCover(fb, new Uint16Array(144 * 144).fill(0x8410), 144, ART.x, ART.y, ground);
+  assert.equal(fb[ART.y * WIDTH + ART.x + 6], ground, "masked corner");
+  assert.equal(fb[ART.y * WIDTH + ART.x + 7], artContrast(0x8410), "first pixel inside the mask");
+  assert.equal(fb[(ART.y + 143) * WIDTH + ART.x + 143 - 6], ground, "symmetric bottom-right corner");
+  assert.equal(fb[(ART.y + 143) * WIDTH + ART.x + 143 - 7], artContrast(0x8410), "inside at the mirror");
+  paintBadge(fb, 0x10A2);
+  assert.equal(fb[BADGE.y * WIDTH + BADGE.x + 7], 0x10A2);
+  assert.notEqual(fb[BADGE.y * WIDTH + BADGE.x + 6], 0x10A2);
+  assert.equal(fb[(BADGE.y + 10) * WIDTH + BADGE.x + 55], 0x10A2);
+});

@@ -31,7 +31,7 @@ The [install page](https://cfong2001.github.io/Fosi_DAP_Neo_CE/) checks the imag
 
 ## Features
 
-Everything here is in the standard image; the minimal image has the sound and library changes except Opus. Figures are rendered from the firmware images by [`tools/render_readme.py`](tools/render_readme.py): controls and icons are the firmware's own pixels, while cover art and text are drawn.
+Everything here is in the standard image; the minimal image has the sound and library changes except Opus. Figures are rendered from the firmware images by [`tools/render_readme.py`](tools/render_readme.py): controls, icons and CE's time digits are the firmware's own pixels, and CE's cover contrast, rounded corners, format badge and no-art tile follow the CE artwork routine at its coordinates. Cover art, titles and artists are drawn.
 
 ![CE player with four covers and one track without art](media/theater.png)
 

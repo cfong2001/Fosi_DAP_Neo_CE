@@ -11,7 +11,7 @@ import {LIGHT_OFFSET, DEFAULT_GROUND, PAINTER} from "./sim-data.mjs";
 
 export const WIDTH = 240, HEIGHT = 320;
 export const KEY = 0xF800;          // keyed draws skip this word
-export const ART = {x: 48, y: 36, size: 144};   // approximate cover box
+export const ART = {x: 48, y: 36, size: 144};   // CE normal box (artwork.c); stock approximate
 
 const SIGNATURE = "ROCK26IMAGERES  ";
 
@@ -106,6 +106,59 @@ export function paintProgress(fb, res, {fraction = 0, light = false, ground}) {
   // keyed: CE draws the knob through the keyed helper (patch 0118); the
   // stock knob has no 0xF800 pixels, so this is exact for both images
   draw(fb, res, 220 + off, Math.min(filled + 42, 196), 254, true);
+}
+
+// CE artwork treatment, ported from patches/player_ui/artwork.c: an 18%
+// contrast gain per RGB565 component, a radius-10 corner mask, a 2-pixel
+// rounded outline with a music note when there is no cover, and a 56x20
+// rounded badge tile at (132, 156) for the file type.
+const EDGE = [7, 5, 4, 3, 2, 2, 1, 1, 0, 0];
+export const BADGE = {x: 132, y: 156, width: 56, height: 20};
+
+export function artInset(row, height) {
+  const y = row < Math.floor(height / 2) ? row : height - 1 - row;
+  return y < 10 ? EDGE[y] : 0;
+}
+
+const gain = (v, top) => Math.max(0, Math.min(top, Math.trunc((118 * v - 9 * top + 50) / 100)));
+export const artContrast = w =>
+  (gain(w >> 11, 31) << 11) | (gain((w >> 5) & 63, 63) << 5) | gain(w & 31, 31);
+
+// A square cover in the normal box: contrast inside the rounded mask, the
+// ground outside it. The source words (the theater sample) are untouched.
+export function blitCover(fb, words, size, x, y, ground) {
+  for (let r = 0; r < size; r++) {
+    const n = artInset(r, size);
+    for (let c = 0; c < size; c++)
+      fb[(y + r) * WIDTH + x + c] = c < n || c >= size - n ? ground : artContrast(words[r * size + c]);
+  }
+}
+
+export function paintPlaceholder(fb, ink) {
+  const x = ART.x, top = ART.y, side = ART.size;
+  for (let y = 0; y < side; y++) {
+    const n = artInset(y, side);
+    if (y < 2 || y >= side - 2) fill(fb, x + n, top + y, x + side - 1 - n, top + y, ink);
+    else {
+      fill(fb, x + n, top + y, x + 1 + n, top + y, ink);
+      fill(fb, x + side - 2 - n, top + y, x + side - 1 - n, top + y, ink);
+    }
+  }
+  fill(fb, 121, 78, 125, 122, ink);
+  fill(fb, 125, 78, 139, 83, ink);
+  for (let y = 0; y < 10; y++) {
+    const n = y < 2 || y > 7 ? 3 : 0;
+    fill(fb, 108 + n, 117 + y, 125 - n, 117 + y, ink);
+  }
+}
+
+// The badge tile; its label is text, which the page sets on top.
+export function paintBadge(fb, color) {
+  const {x, y, width, height} = BADGE;
+  for (let r = 0; r < height; r++) {
+    const n = artInset(r, height);
+    fill(fb, x + n, y + r, x + width - 1 - n, y + r, color);
+  }
 }
 
 // Theater mode: the port tested against the firmware's own trampoline

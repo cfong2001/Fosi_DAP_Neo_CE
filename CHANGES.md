@@ -1,5 +1,20 @@
 # Changelog
 
+## 2026-11-12: Figures and examples show the current player
+
+- The README player and theater figures draw CE covers with the artwork
+  routine's contrast gain and radius-10 corners, the rounded format badge,
+  the outline-and-note tile for tracks without art, and `MM:SS` time in the
+  image's own Font B above the progress bar. The other figures already
+  matched the release image and render unchanged.
+- The Pages simulator's CE screen uses the same cover treatment, badge,
+  no-cover tile and time line. `tests/sim-core.test.mjs` checks the
+  contrast and corner arithmetic against `artwork.c`.
+- The site's theater illustration shows a rounded cover, a format badge and
+  time above the bar. The badge colour is taken as the theme's default
+  ground; the firmware reads it from palette cell 0, whose dark-theme value
+  is not pinned.
+
 ## 2026-11-12: Main-font time layout
 
 - Time counters sit above the progress bar, with the total counter aligned
