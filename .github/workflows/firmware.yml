@@ -51,6 +51,12 @@ jobs:
       - name: Run the framework verifier (15 checks)
         run: python patches/framework/verify.py
 
+      - name: Row drawing parity, bounds and fallback
+        run: |
+          python patches/drawing_engine/build_rows.py
+          git diff --exit-code -- patches/drawing_engine
+          python patches/drawing_engine/test_rows.py
+
       - name: USB audio transport card
         run: |
           python patches/usb_screen/build_screen.py

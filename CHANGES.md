@@ -15,7 +15,7 @@
   `0x03053EF4` and `0x0305DE20`) recolour the staged 1x6 columns from the
   ground cell before every draw: played is the inverse, unplayed 3/8 of
   the way to it, edges halved into the ground. The knob is unchanged.
-- Standard image SHA-256 `4e717adca5c06a13c2f76e981387852d64d86458d3d6eee0b405144d5fc78ac3`,
+- Standard image SHA-256 `66d79d648bee93d71c3adfdf229434bed57b337c6f9448d3c90d82a4a10df8bf`,
   same length. Minimal and recovery images are unchanged.
 - README figures, the Pages simulator and the site illustration show the
   new spacing, contrast and bar. Tests: emulated bar routine (seven

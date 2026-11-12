@@ -8,11 +8,11 @@ called out rather than hidden behind a score.
 
 | Priority | Concept | Value | Effort | Implementation / dependency |
 |---|---|---:|---:|---|
-| 1 | Remove redundant USB connection text | 3 | 1 | USB screen PR |
-| 2 | Show the actual USB PCM format and data rate | 4 | 1 | USB screen PR; source-file tags are unavailable over UAC |
-| 3 | Row-based fills, clears and opaque blits | 5 | 2 | Drawing engine work; byte-parity and bounds tests |
-| 4 | Row-based keyed sprites and unsmoothed glyphs | 4 | 2 | Drawing engine work; preserve both keys, draw modes and fallback |
-| 5 | Direct flash reads into full-screen framebuffer | 4 | 2 | Drawing engine work; preserve byte swapping and split framebuffer banks |
+| 1 | Remove redundant USB connection text | 3 | 1 | Implemented in USB screen PR |
+| 2 | Show the actual USB PCM format and data rate | 4 | 1 | Implemented in USB screen PR; source-file tags are unavailable over UAC |
+| 3 | Row-based fills, clears and opaque blits | 5 | 2 | Implemented in drawing engine PR; byte-parity and bounds tests |
+| 4 | Row-based keyed sprites and unsmoothed glyphs | 4 | 2 | Implemented in drawing engine PR; preserve both keys, draw modes and fallback |
+| 5 | Direct flash reads into full-screen framebuffer | 4 | 2 | Implemented in drawing engine PR; preserve byte swapping and split framebuffer banks |
 | 6 | V155 60/120 volume steps | 4 | 2 | Trace gain scaling, limits, persistence and UI together |
 | 7 | V155 startup autoplay toggle | 4 | 2 | Trace cold boot, resume state and USB/charge boots |
 | 8 | V155 slow/fast wheel sensitivity | 3 | 2 | Trace wheel accumulator and repeat timing; keep key debounce intact |
