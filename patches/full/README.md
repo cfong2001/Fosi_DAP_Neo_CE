@@ -9,7 +9,7 @@ structural validation.
 | | |
 |---|---|
 | Input | `DP3_V137.img`, 13,631,492 bytes, SHA-256 `fcc1cd3e…` |
-| Output | 13,638,660 bytes, SHA-256 `1241064a5d347a3ddb3939fc4b5fb84c7b8f1acdd920900200573e878351e842` |
+| Output | 13,638,660 bytes, SHA-256 `3097536635a2884fb5ec689c2ad13fce2f4afa25f86a65263c5ab2d7485775aa` |
 | Composition | 64 byte patches, 2 transplants, 2 growth insertions, one merged gap tail, one merged theme config |
 | Default build | unchanged, still SHA-256 `92c44606…` (verify.py checks 1 to 13 pass; check 13 pins this build) |
 

@@ -61,7 +61,8 @@ def main():
           f'ce mark runs: {len(mark)}; light play-mode runs: {len(play_mode)}; '
           f'screens runs: {len(screens)}; font runs: {len(font)}; '
           f'font A runs: {len(font_a)}; profile menu runs: {len(menu)}')
-    runs = v4 + browser + mark + play_mode + screens + font + font_a + menu
+    labels = load_runs(REPO / 'patches/player_ui/labels.json')
+    runs = v4 + browser + mark + play_mode + screens + font + font_a + menu + labels
     seen = []
     for r in runs:
         off = int(r['offset'], 16) if isinstance(r['offset'], str) \

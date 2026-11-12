@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-11-12: Player typography and clearer library labels
+
+Standard CE now draws playback time with its main font, pauses scrolling for
+1.5 seconds before advancing at 0.5-second intervals, and labels its English
+library entries Artists, Albums and Play All Albums. The time routine stays
+in its existing slot; a 10-byte resident helper reuses the shared marquee
+state. Thumb emulation checks the text, bounds, register preservation, timing
+fields and tick wrap. No hardware validation has been performed.
+
 ## 2026-11-12: EQ preset names
 
 - Each EQ preset slot takes an optional `name` (`--eq-presets` config and

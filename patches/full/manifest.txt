@@ -99,3 +99,10 @@ patches/0142-profile-string-lookup.patch
 patches/0143-profile-menu-lookup.patch
 patches/0144-profile-value-load.patch
 patches/0145-profile-commit.patch
+
+# Main-font time, readable scroll timing and English album action:
+../player_ui/0150-player-time-font.patch
+../player_ui/0151-marquee-stamp.patch
+../player_ui/0152-marquee-dwell.patch
+../player_ui/0153-marquee-step-stamp.patch
+../player_ui/0154-play-all-albums.patch

@@ -23,7 +23,7 @@ export const IMAGES = [
     title: "Standard",
     badge: "Recommended",
     length: 13638660,
-    sha256: "1241064a5d347a3ddb3939fc4b5fb84c7b8f1acdd920900200573e878351e842",
+    sha256: "3097536635a2884fb5ec689c2ad13fce2f4afa25f86a65263c5ab2d7485775aa",
     summary: "Every CE feature: full-precision Vorbis, gapless, natural sort, " +
       "Opus in place of WMA, the design refresh, theater mode, M3U " +
       "playlists, lock-screen track info and the Bluetooth shortcut.",
