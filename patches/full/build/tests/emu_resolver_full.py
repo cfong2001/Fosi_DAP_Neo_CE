@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Unicorn emulation for the resolver hooks in the FULL build.
 
-Adapted from patches/m3u/tail_build/emu/emu_resolver.py: the only
-layout change is the staging entry table offset (316 instead of
-616, matching the reduced 6-run staging in the merged tail). Pass
+Adapted from patches/m3u/tail_build/emu/emu_resolver.py, with the
+staging in the full build's packed layout (m3u_bridge.h: one shared
+42-byte context, run clusters and totals as arrays, 16-bit entries
+holding an 11-bit ordinal and a 5-bit run id). Pass
 --image patches/full/out/DP3_V137_CE_full.img.
 
 Method for the flag-clear / excluded-caller equivalence tests (part
@@ -22,8 +23,10 @@ reading of the walk; the resolver's own post-descend checks
 (top countA == 0, depth == 0 forces index 0) then behave as traced.
 
 Part (c) drives the primary hook with the flag set and a synthetic
-two-run playlist staged in the tail header layout, checking the
-stateless position-to-entry mapping. Sequences through the stock
+two-run playlist staged in the packed layout, checking the
+stateless position-to-entry mapping. Part (d) fills the layout to its
+caps (150 entries over 32 runs, ordinals up to 2047) and checks that
+the hook decodes every field at the edges. Sequences through the stock
 initializer and step function are in test_playlist_lifecycle.py.
 """
 import struct
@@ -191,27 +194,33 @@ class Run:
         }
 
 
+CTX_OFF, CLUS_OFF, TOTAL_OFF, ENTRIES_OFF = 16, 60, 188, 252
+SHARED_CTX = bytes(range(0x60, 0x60 + 42))
+
+
+def stage_packed(uc, runs, entries, pos=0xFFFF, resid=0):
+    """Stage a playlist in the packed layout.
+
+    runs: [(cluster, total)], entries: [(0-based ordinal, run id)]."""
+    s = bytearray(552)
+    s[0] = 1                        # flag
+    s[1] = len(entries)             # entry count
+    struct.pack_into('<H', s, 2, pos)
+    struct.pack_into('<H', s, 4, resid)
+    s[6] = len(runs)                # run count
+    s[CTX_OFF:CTX_OFF + 42] = SHARED_CTX
+    for i, (cluster, total) in enumerate(runs):
+        struct.pack_into('<I', s, CLUS_OFF + 4 * i, cluster)
+        struct.pack_into('<H', s, TOTAL_OFF + 2 * i, total)
+    for i, (ordinal, runid) in enumerate(entries):
+        struct.pack_into('<H', s, ENTRIES_OFF + 2 * i, ordinal | runid << 11)
+    uc.mem_write(STAGE, bytes(s))
+
+
 def stage_playlist(uc, pos=0xFFFF, resid=0):
-    """The synthetic two-run playlist from the brief, in tail layout."""
-    hdr = bytearray(16)
-    hdr[0] = 1                      # flag
-    hdr[1] = 3                      # entry count
-    struct.pack_into('<H', hdr, 2, pos)
-    struct.pack_into('<H', hdr, 4, resid)
-    hdr[6] = 2                      # run count
-    uc.mem_write(STAGE, bytes(hdr))
-    for i, (cluster, ca, cb) in enumerate([(DIR_A, 3, 0), (DIR_B, 1, 2)]):
-        run = bytearray(50)
-        struct.pack_into('<I', run, 0, cluster)
-        struct.pack_into('<H', run, 4, ca)
-        struct.pack_into('<H', run, 6, cb)
-        run[8:50] = ctx_bytes(cluster)
-        uc.mem_write(STAGE + 16 + i * 50, bytes(run))
-    for i, (within, runid) in enumerate([(0, 0), (2, 0), (0, 1)]):
-        ent = bytearray(4)
-        struct.pack_into('<H', ent, 0, within)
-        ent[2] = runid
-        uc.mem_write(STAGE + 316 + i * 4, bytes(ent))
+    """The synthetic two-run playlist from the brief, in packed layout."""
+    stage_packed(uc, [(DIR_A, 3 + 0), (DIR_B, 1 + 2)],
+                 [(0, 0), (2, 0), (0, 1)], pos, resid)
 
 
 def header_state(uc):
@@ -291,7 +300,7 @@ def part_b(stock_regions, tail_regions):
     stage_playlist(run.uc)
     got = run.call(R, 0, CTXDESC, TABLE_CELL, 1)
     cl, tot, ctx = desc_fields(run.uc)
-    engaged = (got['regs']['r0'] == 1 and cl == DIR_A and ctx == ctx_bytes(DIR_A)
+    engaged = (got['regs']['r0'] == 1 and cl == DIR_A and ctx == SHARED_CTX
                and run.model.log == [])
     ok_all = ok_all and engaged
     print(f'  [{"PASS" if engaged else "FAIL"}] control: flag set + '
@@ -324,12 +333,49 @@ def part_c(tail_regions):
         cl, tot, ctx = desc_fields(run.uc)
         want_tot = {DIR_A: 3, DIR_B: 3}[want_dir]
         good = (got['regs']['r0'] == want_ret and cl == want_dir
-                and tot == want_tot and ctx == ctx_bytes(want_dir)
+                and tot == want_tot and ctx == SHARED_CTX
                 and run.model.log == [])
         ok = ok and good
         print(f'  [{"PASS" if good else "FAIL"}] position {position}: '
               f'ordinal {got["regs"]["r0"]}, folder {cl:#x}')
     print(f'  part (c): {"ALL PASS" if ok else "FAILURES"}')
+    return ok
+
+
+# ------------------------------------------------------------- part (d)
+
+def part_d(tail_regions):
+    """Packed layout at its caps: 150 entries over 32 runs.
+
+    Entry i lives in run i % 32 with ordinal (i * 13) % 2048, and the
+    last entry carries the largest ordinal and run id the 16-bit entry
+    word can hold (2047, 31). Every position must return its entry's
+    ordinal + 1 and its run's cluster and total, with the shared
+    context, and positions past the end must serve entry 150.
+    """
+    print('== Part (d): packed layout at its caps ==')
+    runs = [(0x00A00000 + 0x111 * r, 100 + r) for r in range(32)]
+    entries = [((i * 13) % 2048, i % 32) for i in range(149)]
+    entries.append((2047, 31))
+    run = Run(tail_regions)
+    stage_packed(run.uc, runs, entries)
+    ok = True
+    bad = []
+    for position in list(range(1, 151)) + [151, 255, 0xFFFF]:
+        got = run.call(RESOLVER, position, CTXDESC, TABLE_CELL, 1)
+        cl, tot, ctx = desc_fields(run.uc)
+        idx = min(max(position, 1), 150) - 1
+        ordinal, rid = entries[idx]
+        good = (got['regs']['r0'] == ordinal + 1 and cl == runs[rid][0]
+                and tot == runs[rid][1] and ctx == SHARED_CTX
+                and header_state(run.uc) == (idx, ordinal + 1)
+                and run.model.log == [])
+        if not good:
+            bad.append(position)
+        ok = ok and good
+    print(f'  [{"PASS" if ok else "FAIL"}] 153 positions'
+          + (f'; failing {bad[:8]}' if bad else ''))
+    print(f'  part (d): {"ALL PASS" if ok else "FAILURES"}')
     return ok
 
 
@@ -342,9 +388,11 @@ def main():
     tail_regions = module0_regions(args.image)
     ok_b = part_b(stock_regions, tail_regions)
     ok_c = part_c(tail_regions)
+    ok_d = part_d(tail_regions)
+    ok = ok_b and ok_c and ok_d
     print()
-    print('ALL PASS' if ok_b and ok_c else 'SOME CASES FAILED')
-    return 0 if ok_b and ok_c else 1
+    print('ALL PASS' if ok else 'SOME CASES FAILED')
+    return 0 if ok else 1
 
 
 if __name__ == '__main__':

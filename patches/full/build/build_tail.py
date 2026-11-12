@@ -3,9 +3,10 @@
 
 Layout (offsets from the gap-tail base 0x0307BFB4):
 
-  0x000  M3U staging, 552 B of zeros (header 16 + 6 runs x 50 +
-         59 entries x 4; caps in src/m3u_bridge.h, ENTRIES_OFF 316 in
-         src/resolver_hook.S)
+  0x000  M3U staging, 552 B of zeros (packed layout: header 16 +
+         shared 42-byte context and 2 pad + 32 run clusters x 4 +
+         32 run totals x 2 + 150 entries x 2; caps in
+         src/m3u_bridge.h, offsets in src/resolver_hook.S)
   0x228  hooks at 0x0307C1DC, assembled from src/resolver_hook.S
          (resolver, fetch and count entry hooks, forward-step helper)
          and src/theater_noart.S (the two no-art exits); addresses
@@ -100,7 +101,7 @@ SITES = (
 # Filled in after the build passed the resolver and theater emulation
 # suites; the build refuses any later drift.
 EXPECTED = {
-    'resolver_sha256': '799f461ac88b4ab1b4f2e047c47c2a9d3d99361767e1746d204dce394d827361',
+    'resolver_sha256': '8936db72bb9775165d4fe47f111a066a717c213e5baeb94dbbb39abebaf29952',
     'focus_sha256': '479e1c49e92232643b0832f7a7929912298dccc93c7a80eb4fac9d76f913dc33',
     'theater_sha256': '17a558dde5b96ef305236b436e7ec593d7fbf5a3ff56d8437c168e5dd0399d69',
     'tail_sha256': '5100d0d0e4c17f08ea6ede667f3c720edb721013836a7bf6cf7bc0d942446c4c',
@@ -428,7 +429,7 @@ def main():
                 {'name': 'M3U staging (zeros)',
                  'offset': 0, 'address': hex(TAIL_BASE),
                  'bytes': STAGING,
-                 'layout': 'header 16 + 6 runs x 50 + 59 entries x 4'},
+                 'layout': 'header 16 + context 44 + 32 runs x 6 + 150 entries x 2'},
                 {'name': 'focus mode payload',
                  'offset': STAGING, 'address': hex(FOCUS_BASE),
                  'bytes': len(focus), 'sha256': focus_sha,

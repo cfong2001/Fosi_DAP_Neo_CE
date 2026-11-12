@@ -9,7 +9,7 @@ structural validation.
 | | |
 |---|---|
 | Input | `DP3_V137.img`, 13,631,492 bytes, SHA-256 `fcc1cd3e…` |
-| Output | 13,638,660 bytes, SHA-256 `1241064a5d347a3ddb3939fc4b5fb84c7b8f1acdd920900200573e878351e842` |
+| Output | 13,638,148 bytes, SHA-256 `69ee512a082338fb656e2730dcaa15c206e25ad47faf2d97bc64f2e5090d2140` |
 | Composition | 64 byte patches, 2 transplants, 2 growth insertions, one merged gap tail, one merged theme config |
 | Default build | unchanged, still SHA-256 `92c44606…` (verify.py checks 1 to 13 pass; check 13 pins this build) |
 
@@ -82,8 +82,8 @@ pin.
 | Theater on no-art tracks | Local patches 0045 and 0046 (module 27) and `theater_noart_close` / `theater_noart_open` in the tail |
 | Bluetooth shortcut | Hook patch 0032-tail from `patches/m3u/tail_build/patches/` and the 436-byte blob in the tail at 0x0307C5F8 |
 | M3U playlists | Module 31 growth payload (below), local patches 0040 to 0044, staging and the playlist hooks in the tail |
-| Lock screen | The 406-byte routine in the module 31 payload at 0x03080784, reached by local patch 0033 |
-| Navigation disarm stubs | Folder and file stubs in the module 31 payload at 0x0308091C, the tag stub as the module 24 growth, local patches 0060 to 0062 |
+| Lock screen | The 406-byte routine in the module 31 payload at 0x03080644, reached by local patch 0033 |
+| Navigation disarm stubs | Folder and file stubs in the module 31 payload at 0x030807DC, the tag stub as the module 24 growth, local patches 0060 to 0062 |
 | Power profiles | Local patches 0140 to 0146 (three module 0 pockets and four hook sites, from `patches/power/profiles/build_profiles.py`) and 64 runs in the merged theme config: the settings tree edits in each language and the new records' table after the image resources |
 
 ## The merged tail
@@ -94,7 +94,7 @@ lays out four occupants:
 
 | Offset | Address | Bytes | Contents |
 |---|---|---|---|
-| 0x000 | 0x0307BFB4 | 552 | Playlist staging (zeros): header 16, 6 runs of 50, 59 entries of 4 |
+| 0x000 | 0x0307BFB4 | 552 | Playlist staging (zeros), packed: header 16, shared context 42 + 2, 32 run clusters of 4, 32 run totals of 2, 150 entries of 2 |
 | 0x228 | 0x0307C1DC | 340 | Focus mode payload (`patches/focus_mode/build_focus.py`, assembled here), SHA-256 `479e1c49…` |
 | 0x37C | 0x0307C330 | 36 | Free (zeros) |
 | 0x3A0 | 0x0307C354 | 676 | Theater payload (reset stub at the base, blit trampoline at 0x0307C3A8), SHA-256 `17a558dd…` |
@@ -115,8 +115,9 @@ contiguous span focus mode needs.
 How each occupant is placed:
 
 - **Staging** stays at offset 0. The bridge, the hooks and the disarm stubs
-  address the flag and header at 0x0307BFB4. Capacity is 6 folder runs and
-  59 entries; larger playlists decline wholesale.
+  address the flag and header at 0x0307BFB4. Capacity is 32 folder runs and
+  150 entries; larger playlists decline wholesale. See "Playlist staging"
+  below for the layout.
 - **Hooks** are assembled from `build/src/resolver_hook.S`,
   `theater_noart.S` and `transport_ground.S` at 0x0307C1DC. GNU ld cannot
   branch to an absolute address, so each branch to stock code is assembled
@@ -131,21 +132,74 @@ How each occupant is placed:
 - **Bluetooth** stays at 0x0307C5F8, the address its audited build used,
   so patch 0032-tail is unchanged and the blob's pinned hash reproduces.
 
+## Playlist staging
+
+The bridge writes the playlist into the 552 bytes at 0x0307BFB4 and the
+resident resolver hook (`build/src/resolver_hook.S`, patch 0047) reads it
+during playback. The layout is defined once in `build/src/m3u_bridge.h`:
+
+| Offset | Bytes | Field |
+|---|---|---|
+| +0 | 1 | Flag, written last; the hooks act only while it is 1 |
+| +1 | 1 | Entry count |
+| +2 | 2 | Last position served (0-based entry index) |
+| +4 | 2 | Last ordinal served (1-based) |
+| +6 | 1 | Run count |
+| +7 | 9 | Zero |
+| +16 | 42 + 2 | The stock folder context the hook copies to the out descriptor at +0x1C, then 2 pad bytes |
+| +60 | 4 x 32 | Run (folder) cluster, first-use order |
+| +188 | 2 x 32 | Run total, countA + countB, written to the out descriptor at +0x08 |
+| +252 | 2 x 150 | Entry: bits 0 to 10 the 0-based ordinal among the folder's playable files, bits 11 to 15 the run id |
+
+Until this revision each run carried its own copy of the 42-byte context.
+The bridge copies that context once per import from 0x0307BF5C, so the
+copies were always identical. Storing it once, and dropping the per-entry
+flags byte that was always zero, raises the capacity from 59 entries in 6
+runs to 150 entries in 32 runs inside the same 552 bytes. The bridge also
+records each resolved entry straight into this span (the flag is clear
+while it fills) instead of keeping a 354-byte resolution log in the module
+31 payload. That removed 404 bytes; the long-name fix below added 84, so
+the payload is 320 bytes smaller than before and the image 512 bytes
+shorter (one sector less of mirror alignment).
+
+A playlist that needs more than 32 folders or 150 entries, or names a
+file past the 2,048th playable file of its folder, declines as a whole and
+the file opens with stock behaviour.
+
+Two bridge details changed with the layout:
+
+- **Long names past the BMP.** FAT stores a character outside the Basic
+  Multilingual Plane (an emoji, for example) as a UTF-16 surrogate pair.
+  The bridge compared one decoded UTF-8 code point against one UTF-16
+  unit, so such a file never resolved. It now matches the pair.
+  `host_bridge_test.c` scenario 7 covers it and fails on the old bridge.
+- **Counter mode 6 and CUE sheets.** The bridge counts each run's files
+  with the stock counter 0x0305AB0A in mode 6, the scan's mode. In that
+  mode the counter has a CUE branch: for a `.CUE` entry it calls module
+  37's parser at 0x0307D73A (module 31 code while the browser is loaded),
+  sets byte 0x0C of a directory entry to 0x55 and passes (directory
+  cluster, entry index, entry) to 0x0305B818, which by those arguments
+  writes the entry back to the card, and subtracts one from the count. The branch runs only when the caller's extension
+  table contains `CUE` (checked through 0x0305B32C). The bridge passes the
+  volume table at 0x03005714, which does not, so the branch is
+  unreachable from the import; a comment at `COUNT_MODE` in
+  `m3u_bridge.c` records the constraint.
+
 ## Module 31 window ledger
 
-Window: 7,436 bytes at 0x0307EE48 to 0x03080B54. Payload: 6,936 bytes,
-SHA-256 `010197e6…`. Spare: 500 bytes.
+Window: 7,436 bytes at 0x0307EE48 to 0x03080B54. Payload: 6,616 bytes,
+SHA-256 `3f7e09ca…`. Spare: 820 bytes.
 
 | Offset | Address | Bytes | Contents |
 |---|---|---|---|
 | 0 | 0x0307EE48 | 64 | Hook trampoline (patch 0040 target), with the playback-start exit |
-| 64 | 0x0307EE88 | 6,396 | Bridge and parser (`m3u_bridge_node_action` first); import helper at 0x0307F714 |
-| 6,460 | 0x03080784 | 406 | Lock-screen routine (`ui_lockscreen_paint`), reached by patch 0033 |
-| 6,868 | 0x0308091C | 68 | Navigation disarm stubs (folder at the base, file at 0x03080936) |
+| 64 | 0x0307EE88 | 6,076 | Bridge and parser (`m3u_bridge_node_action` first); `m3u_import` at 0x0307F6A0 |
+| 6,140 | 0x03080644 | 406 | Lock-screen routine (`ui_lockscreen_paint`), reached by patch 0033 |
+| 6,548 | 0x030807DC | 68 | Navigation disarm stubs (folder at the base, file at 0x030807F6) |
 
 `build/build_compose.py` rebuilds the payload from `build/src/`. Patch
 0033's replacement bytes differ from the compose variant's because the
-lock routine sits at a different offset here (`01f071bf` against the
+lock routine sits at a different offset here (`01f0d1be` against the
 reviewed `02f007b8`). Patch 0040's are unchanged (`00f095bf`).
 
 ## Module 32
@@ -163,11 +217,11 @@ module 24 code, delivered as the second growth insertion with patch 0062.
 | | Bytes |
 |---|---|
 | Stock | 13,631,492 |
-| Module 31 growth | +6,936 |
+| Module 31 growth | +6,616 |
 | Module 24 growth | +26 |
 | Ebook offset | 0 (module 30 kept intact) |
-| Mirror alignment pad | +206 (zeros before the header mirror, which lands at sector-aligned `0xC95C00`) |
-| Final | 13,638,660 |
+| Mirror alignment pad | +14 (zeros before the header mirror, which lands at sector-aligned `0xC95A00`) |
+| Final | 13,638,148 |
 
 ### Ebook verdict
 
@@ -179,7 +233,7 @@ with Service, Key and Paint entries that the window manager calls by
 contract, and the removal checklist in
 `analysis/resident_home/resident_home.md` (menu name, window manager table
 slot, `.txt` classification, the SAVEINFO last-window index) cannot be met
-by shrinking code. The image is therefore 7,168 bytes longer than stock.
+by shrinking code. The image is therefore 6,656 bytes longer than stock.
 Whether the device's update slots accept a longer image is open until a
 hardware test.
 
@@ -199,12 +253,12 @@ playback at position 1, which the resolver hook maps to the first entry.
 |---|---|
 | `audit_playlist_start.py` S1 to S6: non-playlist bypass, bridge decline, modeled import through the start sequence, folder, file and tag disarm | Pass |
 | `test_playlist_lifecycle.py`: start fetch, module 33 start message, initializer, next, next, wrap, previous wrap, previous, unarmed folder play, non-whitelisted fetch | Pass; the previous image fails it |
-| `emu_resolver_full.py`: twelve declined calls byte- and register-identical to stock, position mapping | Pass |
+| `emu_resolver_full.py`: twelve declined calls byte- and register-identical to stock, position mapping, and the packed layout at its caps (150 entries over 32 runs, ordinal 2047, run id 31; 153 positions) | Pass |
 
 Remaining limits are in
 [`playlist_lifecycle_findings.md`](playlist_lifecycle_findings.md): repeat
-folder mode repeats the current entry's folder, capacity is 59 entries in 6
-folder runs, and nothing has run on a card.
+folder mode repeats the current entry's folder, capacity is 150 entries in
+32 folder runs, and nothing has run on a card.
 
 ## Theater verdict
 
@@ -261,7 +315,7 @@ and the owner keeps M3U playlists and the lock screen over it.
 
 | Feature | Needs | Available | What would make room |
 |---|---|---|---|
-| Browser marquee v5 (`patches/browser_marquee/`) | 6,992 bytes in the module 31 window | 500 bytes | Remove playlists (trampoline, bridge and disarm stubs) and the lock screen from module 31, which frees 6,934 bytes |
+| Browser marquee v5 (`patches/browser_marquee/`) | 6,992 bytes in the module 31 window | 820 bytes | Remove playlists (trampoline, bridge and disarm stubs) and the lock screen from module 31, which frees 6,614 bytes |
 
 The census behind the focus figure is below. Both features remain
 standalone variants with passing suites.
@@ -286,7 +340,7 @@ resident whenever the player window is loaded.
   the module 0 key dispatcher, so it must be resident from every window;
   the playlist hooks are called from module 0; the theater payload's
   callers are in module 18, whose own segment has 3 bytes of headroom.
-- The module 31 spare (500 bytes) is the wrong residency class: loading
+- The module 31 spare (820 bytes) is the wrong residency class: loading
   the player overwrites that span.
 - A census of append slack for all 101 load segments found 96 with none.
   Module 0's span is the known gap. The core-1 spans of modules 72 and 75
@@ -331,7 +385,7 @@ the image suites on every pull request.
 
 All remaining gates need hardware:
 
-- whether the update slots accept the 13,638,660-byte image;
+- whether the update slots accept the 13,638,148-byte image;
 - theater mode on both artwork draw paths, BMP covers and the event-bit
   posting context, and whether another window ever calls artwork setup;
 - playlist playback from a real card, including the FS type 3 decline and

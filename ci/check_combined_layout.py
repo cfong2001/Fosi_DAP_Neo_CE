@@ -63,7 +63,10 @@ def validate_recorded(layout, tail):
     if max((b for a, b, n in tspans if not n.startswith('spare')), default=0) != tail['tail_bytes']:
         raise ValueError('tail emitted length mismatch')
     caps = layout['staging_caps']
-    if caps['staging_bytes'] != 16 + 50 * caps['max_runs'] + 4 * caps['max_entries']:
+    # Packed layout (m3u_bridge.h): 16-byte header, the shared 42-byte
+    # context padded to 44, u32 cluster + u16 total per run, u16 entries.
+    if caps.get('layout') != 'packed' or caps['staging_bytes'] != \
+            16 + 44 + 6 * caps['max_runs'] + 2 * caps['max_entries']:
         raise ValueError('staging cap arithmetic mismatch')
     if tail['pieces'][0]['bytes'] != caps['staging_bytes'] or tail['pieces'][0]['offset'] != 0:
         raise ValueError('staging allocation mismatch')

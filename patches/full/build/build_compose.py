@@ -8,10 +8,11 @@ Layout (exec base 0x0307EE48, room to 0x03080B54 = 7,436 bytes):
           stock folder-play sequence at 0x0307E052 instead of the
           common exit, so playback starts (see src/asm_trampoline_ext.py).
   +0x040  bridge + parser blob, linked at 0x0307EE88 with
-          m3u_bridge_node_action as its first byte. Staging caps are
-          6 runs / 59 entries (src/m3u_bridge.h), reduced from the
-          compose variant's 12 / 144 so the merged gap tail also
-          holds the theater payload.
+          m3u_bridge_node_action as its first byte. Staging uses the
+          packed layout in src/m3u_bridge.h (32 folder runs, 150
+          entries in the tail's 552-byte span); resolved entries are
+          recorded straight into the staging span, so the blob holds
+          no resolution log of its own.
   ...     zero padding to 4
   ...     lock-screen routine, relinked at its payload address
           (patch 0033's branch bytes are regenerated for that base)
@@ -29,6 +30,7 @@ import argparse
 import hashlib
 import importlib.util
 import json
+import re
 import struct
 import subprocess
 import sys
@@ -53,10 +55,24 @@ BP_BASE = EXT_BASE + TRAMP_SLOT
 # Filled in after the first build passed the parser suite and the
 # host bridge test; the build refuses any later drift.
 EXPECTED = {
-    'payload_sha256': '010197e684a8a3e3f1a0937b61fe89a7f620b48c0872e5305f781d42d9b88f05',
-    'site33': '01f071bf',
+    'payload_sha256': '3f7e09cae9658c4cf21bfc4f9be92a037051f10a74e759f2e7fd8d4c0cac2aa9',
+    'site33': '01f0d1be',
     'site40': '00f095bf',
 }
+
+
+def staging_caps():
+    """Read the staging caps from src/m3u_bridge.h, the single source."""
+    text = (SRC / 'm3u_bridge.h').read_text()
+
+    def define(name):
+        m = re.search(r'^#define\s+' + name + r'\s+(\d+)u', text, re.M)
+        if not m:
+            raise SystemExit(f'm3u_bridge.h: {name} not found')
+        return int(m.group(1))
+    return {'layout': 'packed', 'max_runs': define('M3U_STAGE_MAX_RUNS'),
+            'max_entries': define('M3U_STAGE_MAX_ENT'),
+            'staging_bytes': define('M3U_STAGE_TOTAL')}
 
 
 def run(cmd, **kw):
@@ -283,8 +299,8 @@ def main():
         '  target.',
         'Same site and contract as the compose variant\'s 0033; the\n'
         '  target moved because the full build\'s bridge+parser blob\n'
-        '  is built with reduced staging caps (6 runs / 59 entries)\n'
-        '  under the local toolchain.')
+        '  differs (packed staging layout, no resolution log in the\n'
+        '  blob) and is built under the local toolchain.')
     folder_expect = stock_bytes(31, 0x0307E04E, 4).hex()
     file_expect = stock_bytes(31, 0x0307E1CC, 6).hex()
     patch_file(
@@ -342,8 +358,7 @@ def main():
              'folder_start': hex(nsyms['folder_start']),
              'file_start': hex(nsyms['file_start'])},
         ],
-        'staging_caps': {'max_runs': 6, 'max_entries': 59,
-                         'staging_bytes': 552},
+        'staging_caps': staging_caps(),
     }
     (OUT / 'layout31.json').write_text(json.dumps(layout, indent=2) + '\n')
     print(f'payload31.bin: {len(payload)} bytes, sha256 {digest}')

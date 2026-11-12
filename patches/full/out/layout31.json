@@ -2,10 +2,10 @@
   "ext_base": "0x307ee48",
   "ext_end": "0x3080b54",
   "room": 7436,
-  "payload_bytes": 6936,
-  "payload_sha256": "010197e684a8a3e3f1a0937b61fe89a7f620b48c0872e5305f781d42d9b88f05",
-  "spare": 500,
-  "site33_replace": "01f071bf",
+  "payload_bytes": 6616,
+  "payload_sha256": "3f7e09cae9658c4cf21bfc4f9be92a037051f10a74e759f2e7fd8d4c0cac2aa9",
+  "spare": 820,
+  "site33_replace": "01f0d1be",
   "site40_replace": "00f095bf",
   "components": [
     {
@@ -18,27 +18,28 @@
       "name": "bridge + parser (m3u_bridge_node_action first)",
       "offset": 64,
       "address": "0x307ee88",
-      "bytes": 6396,
-      "m3u_import": "0x307f714"
+      "bytes": 6076,
+      "m3u_import": "0x307f6a0"
     },
     {
       "name": "lock-screen routine (ui_lockscreen_paint)",
-      "offset": 6460,
-      "address": "0x3080784",
+      "offset": 6140,
+      "address": "0x3080644",
       "bytes": 406
     },
     {
       "name": "navigation disarm stubs (folder + file)",
-      "offset": 6868,
-      "address": "0x308091c",
+      "offset": 6548,
+      "address": "0x30807dc",
       "bytes": 68,
-      "folder_start": "0x308091c",
-      "file_start": "0x3080936"
+      "folder_start": "0x30807dc",
+      "file_start": "0x30807f6"
     }
   ],
   "staging_caps": {
-    "max_runs": 6,
-    "max_entries": 59,
+    "layout": "packed",
+    "max_runs": 32,
+    "max_entries": 150,
     "staging_bytes": 552
   }
 }

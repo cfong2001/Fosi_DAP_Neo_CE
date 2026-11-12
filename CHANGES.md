@@ -1,5 +1,36 @@
 # Changelog
 
+## 2026-11-12: larger M3U playlists
+
+- Playlists hold up to 150 tracks from up to 32 folders, up from 59 tracks
+  from 6 folders, in the same 552 bytes of resident staging. Each folder
+  record used to carry its own copy of a 42-byte context that is identical
+  for every folder; the packed layout stores it once, keeps folder
+  clusters and totals as arrays, and packs each entry into 16 bits (an
+  11-bit file ordinal and a 5-bit folder id). Layout:
+  [`patches/full/README.md`](patches/full/README.md#playlist-staging).
+- The bridge records resolved entries straight into staging instead of a
+  separate 354-byte log in the module 31 payload. The payload is 6,616
+  bytes (was 6,936) and the standard image is 6,656 bytes longer than
+  stock (was 7,168).
+- Long names with a character outside the Basic Multilingual Plane, such
+  as an emoji, now resolve: FAT stores those as a UTF-16 surrogate pair,
+  and the bridge compared them one unit at a time.
+- `.m3u8` playlists are documented and tested: they import through their
+  8.3 alias, whose extension is `M3U`.
+- The stock file counter the bridge calls runs a CUE-sheet branch in
+  mode 6 that writes directory entries and calls into the module 37
+  window. The branch needs `CUE` in the caller's extension table, and the
+  bridge's table has none, so it cannot run; the constraint is now
+  recorded at the call.
+- Tests: the host bridge suite checks the packed layout field by field
+  and the caps at their edges (32 folders arm, 33 decline; 150 entries
+  arm, 151 decline), and imports a `.m3u8` with a BOM, CRLF line ends,
+  a drive-letter path and an emoji file name. `emu_resolver_full.py`
+  part (d) runs the assembled hook over a full table (150 entries, 32
+  folders, ordinal 2047, folder id 31) for 153 positions. The lifecycle
+  and start audits pass on the new image.
+
 ## 2026-11-12: EQ preset names
 
 - Each EQ preset slot takes an optional `name` (`--eq-presets` config and

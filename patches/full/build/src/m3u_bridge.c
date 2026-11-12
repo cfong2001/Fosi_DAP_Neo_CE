@@ -5,8 +5,8 @@
  * browser node whose 8.3 extension is "M3U". The bridge registers the
  * playlist file with the stock descriptor registrar, runs the parser
  * core (m3u.c) over it through the M3uFs vtable implemented below, and
- * writes the resolver staging the gap-tail hooks consume
- * (tail_build.md). Playback itself is served by those hooks; the
+ * writes the resolver staging the resident hooks consume (packed
+ * layout, m3u_bridge.h). Playback itself is served by those hooks; the
  * bridge only imports and arms.
  *
  * Filesystem model (bridge_completion.md, B1/B5 as built):
@@ -104,7 +104,16 @@ STOCK_FN(int, stock_classifier, 0x0305A15C,
  * calls the directory-stack initialiser with mode 6). Playback
  * recomputes totals against the scan database in mode 1; for an
  * unchanged card the two agree, and the card is the only side an
- * import can measure. */
+ * import can measure.
+ *
+ * Mode 6 also arms a CUE-sheet branch inside 0x0305AB0A: for a .CUE
+ * entry it calls module 37's parser at 0x0307D73A, which is module 31
+ * code while the browser is loaded, and passes a directory entry it has
+ * marked (byte 0x0C = 0x55) to 0x0305B818 with its directory cluster
+ * and index, a write back to the card. That branch is gated on "CUE" being in the
+ * table the caller passes (0x0305B32C). ACCEPT_TABLE has no CUE entry,
+ * so the branch is unreachable from here; never pass a table that
+ * contains CUE (module 38's scan table does) to stock_count_a. */
 #define COUNT_MODE 6
 
 /* ---- bridge state --------------------------------------------------- */
@@ -124,15 +133,17 @@ typedef struct BridgeCtx {
  * overwrites the dummy track's fields it writes. */
 static BridgeCtx g_ctx = { .handle = -1 };
 
-/* Resolution log: one (parent directory cluster, within-directory
- * ordinal) pair per entry the parser resolves, appended by stat() in
- * resolution order. stat_path() in m3u.c issues exactly one fs->stat
- * per resolution attempt and accepts exactly when stat returns 0 for
- * a non-directory, so the log stays aligned with the parser's track
- * order by construction. */
-static uint32_t g_log_clus[M3U_STAGE_MAX_ENT] = { 1 };
-static uint16_t g_log_idx[M3U_STAGE_MAX_ENT] = { 1 };
+/* Resolution log. stat() records each entry the parser resolves
+ * straight into the staging span, in resolution order: the folder
+ * goes into the run cluster array (first-use order) and the entry
+ * word into the entry array. The flag byte is cleared before the
+ * parser runs, so the hooks never read the span while it fills.
+ * stat_path() in m3u.c issues exactly one fs->stat per resolution
+ * attempt and accepts exactly when stat returns 0 for a non-directory,
+ * so the entries stay aligned with the parser's track order by
+ * construction. */
 static uint32_t g_log_count = 1;    /* reset to 0 at entry */
+static uint32_t g_log_runs = 1;     /* reset to 0 at entry */
 static int g_log_overflow = 1;      /* reset to 0 at entry */
 
 static M3uTrack g_dummy_track = { .duration_s = -1 };
@@ -249,6 +260,17 @@ static int lfn_match(const uint8_t *comp, uint32_t len,
         uint32_t used;
         uint32_t cp = utf8_next(comp + pos, len - pos, &used);
         pos += used;
+        if (cp > 0xFFFFu) {
+            /* FAT stores a code point past the BMP as a UTF-16
+             * surrogate pair: two LFN units for one UTF-8 sequence. */
+            if (k + 1u >= lfn_len ||
+                lfn[k] != (uint16_t)(0xD800u + ((cp - 0x10000u) >> 10)) ||
+                lfn[k + 1u] != (uint16_t)(0xDC00u + (cp & 0x3FFu))) {
+                return 0;
+            }
+            k += 2u;
+            continue;
+        }
         if (k >= lfn_len) {
             return 0;
         }
@@ -467,6 +489,35 @@ static void bridge_close(void *vctx, void *fh)
      * device manager's fixed pool and module 37's model never closes. */
 }
 
+/* Append one resolved entry to the staging span. Any cap (entries,
+ * runs, or an ordinal too large for the entry word) sets the overflow
+ * flag, and node_action then declines the whole import. */
+static void log_entry(uint32_t clus, uint32_t ordinal)
+{
+    uint8_t *stage = STAGE_PTR;
+    uint32_t id;
+    if (g_log_count >= M3U_STAGE_MAX_ENT || ordinal > M3U_STAGE_MAX_ORD) {
+        g_log_overflow = 1;
+        return;
+    }
+    for (id = 0; id < g_log_runs; id++) {
+        if (get_u32(stage + M3U_STAGE_CLUS_OFF + 4u * id) == clus) {
+            break;
+        }
+    }
+    if (id == g_log_runs) {
+        if (g_log_runs >= M3U_STAGE_MAX_RUNS) {
+            g_log_overflow = 1;
+            return;
+        }
+        put_u32(stage + M3U_STAGE_CLUS_OFF + 4u * id, clus);
+        g_log_runs++;
+    }
+    put_u16(stage + M3U_STAGE_ENT_OFF + 2u * g_log_count,
+            ordinal | (id << M3U_STAGE_ORD_BITS));
+    g_log_count++;
+}
+
 #define STAT_MAX_DEPTH 16
 
 static int bridge_stat(void *vctx, const char *path, M3uFileInfo *out)
@@ -557,13 +608,7 @@ static int bridge_stat(void *vctx, const char *path, M3uFileInfo *out)
             out->clus = cur;
             out->index = hit.ordinal;
             out->is_dir = false;
-            if (g_log_count < M3U_STAGE_MAX_ENT) {
-                g_log_clus[g_log_count] = cur;
-                g_log_idx[g_log_count] = (uint16_t)hit.ordinal;
-                g_log_count++;
-            } else {
-                g_log_overflow = 1;
-            }
+            log_entry(cur, hit.ordinal);
             return 0;
         }
     }
@@ -604,65 +649,36 @@ static const M3uFs g_fs = {
 
 /* ---- staging writer ---------------------------------------------------- */
 
-/* Group the resolution log into runs (first-use order), write runs
- * and entries in the tail_build format, and set the flag byte last.
- * Returns 1 on success; on any cap overflow returns 0 with the flag
- * still clear, so the hooks ignore whatever partial table was
- * written and the file opens with stock behaviour. */
+/* Complete the staging stat() filled: the shared context, each run's
+ * folder total, then the header, and the flag byte last. Returns 1 on
+ * success; if a counter fails or a total does not fit, returns 0 with
+ * the flag still clear, so the hooks ignore the partial table and the
+ * file opens with stock behaviour. */
 static int write_staging(void)
 {
     uint8_t *stage = STAGE_PTR;
-    uint8_t ctx42[42];
-    uint32_t run_clus[M3U_STAGE_MAX_RUNS];
-    uint32_t nruns = 0;
-    uint32_t i;
+    uint32_t id;
     int j;
 
-    for (j = 0; j < 42; j++) {
-        ctx42[j] = CTX42_PTR[j];
+    for (j = 0; j < (int)M3U_STAGE_CTX_LEN; j++) {
+        stage[M3U_STAGE_CTX_OFF + j] = CTX42_PTR[j];
     }
-    for (i = 0; i < g_log_count; i++) {
-        uint32_t clus = g_log_clus[i];
-        uint32_t id;
-        uint8_t *ent;
-        for (id = 0; id < nruns; id++) {
-            if (run_clus[id] == clus) {
-                break;
-            }
+    stage[M3U_STAGE_CTX_OFF + M3U_STAGE_CTX_LEN] = 0;
+    stage[M3U_STAGE_CTX_OFF + M3U_STAGE_CTX_LEN + 1] = 0;
+    for (id = 0; id < g_log_runs; id++) {
+        uint32_t clus = get_u32(stage + M3U_STAGE_CLUS_OFF + 4u * id);
+        int ca = stock_count_a(clus, ACCEPT_TABLE, COUNT_MODE);
+        int cb = stock_count_b(clus, COUNT_MODE);
+        if (ca < 0 || cb < 0 || ca + cb > 0xFFFF) {
+            return 0;
         }
-        if (id == nruns) {
-            int ca;
-            int cb;
-            uint8_t *run;
-            if (nruns >= M3U_STAGE_MAX_RUNS) {
-                return 0;
-            }
-            ca = stock_count_a(clus, ACCEPT_TABLE, COUNT_MODE);
-            cb = stock_count_b(clus, COUNT_MODE);
-            if (ca < 0 || cb < 0 || ca > 0xFFFF || cb > 0xFFFF) {
-                return 0;
-            }
-            run_clus[nruns] = clus;
-            run = stage + M3U_STAGE_RUNS_OFF + nruns * M3U_STAGE_RUN_LEN;
-            put_u32(run + 0, clus);
-            put_u16(run + 4, (uint32_t)ca);
-            put_u16(run + 6, (uint32_t)cb);
-            for (j = 0; j < 42; j++) {
-                run[8 + j] = ctx42[j];
-            }
-            nruns++;
-        }
-        ent = stage + M3U_STAGE_ENT_OFF + i * M3U_STAGE_ENT_LEN;
-        put_u16(ent + 0, g_log_idx[i]);
-        ent[2] = (uint8_t)id;
-        ent[3] = 0;                     /* flags: bit 0 (type-3 dir)
-                                           never set on this path     */
+        put_u16(stage + M3U_STAGE_SUM_OFF + 2u * id, (uint32_t)(ca + cb));
     }
     stage[1] = (uint8_t)g_log_count;
     put_u16(stage + 2, 0xFFFFu);        /* current position: none */
-    put_u16(stage + 4, 0);              /* last served residual */
-    stage[6] = (uint8_t)nruns;
-    for (j = 7; j < 16; j++) {
+    put_u16(stage + 4, 0);              /* last served ordinal */
+    stage[6] = (uint8_t)g_log_runs;
+    for (j = 7; j < (int)M3U_STAGE_HDR_LEN; j++) {
         stage[j] = 0;
     }
     stage[0] = 1;                       /* flag last: table complete */
@@ -687,6 +703,7 @@ int m3u_bridge_node_action(const uint8_t *node, const uint8_t *state,
 
     (void)ctx;
     g_log_count = 0;
+    g_log_runs = 0;
     g_log_overflow = 0;
 
     /* Disarm an earlier playlist even if this volume is unsupported;
