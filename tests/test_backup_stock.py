@@ -7,7 +7,7 @@ class FakeUSB:
     def __init__(self,change=False,short=False):self.calls=[];self.change=change;self.short=short;self.reads=0
     def command(self,op,n,address=0,sectors=0):
         self.calls.append((op,n,address,sectors))
-        if op==0x1A:return bytes(512)
+        if op==0x1A:return bytes(n)
         if op==0x1B:return bytes(16)
         self.reads+=1
         v=(address+(1 if self.change and self.reads>2 else 0))&255
