@@ -37,7 +37,8 @@ and label runs. `patches/full/manifest.txt` and `build_theme.py` compose them
 into Standard CE; Minimal and recovery retain their existing behavior.
 The SDK mirror documented in `research/patch_technique_and_sdk.md` was used
 only to identify text-rendering and scrolling semantics. These routines are
-original CE code. Device rendering and timing remain untested on hardware.
+original CE code. The first physical CE boot confirmed the player, custom
+settings and music playback; broader timing and window-cycle checks remain.
 
 ## Playback metadata
 
@@ -120,8 +121,9 @@ the unplayed column 3/8 of the way from the ground to the inverse, with
 rows 0 and 5 halved into the ground as the antialiased stock columns are.
 Averages use the packed RGB565 halving `((a & 0xF7DE) >> 1) + ((b &
 0xF7DE) >> 1)`. Recolouring before every draw follows each theater
-ground and theme change without new state. The knob keeps its orange
-art. A mid-grey ground (around `0x8410`) inverts to nearly the same
+ground and theme change without new state. The CE knob is an orange-filled
+selector with a contrasting, antialiased theme-aware stroke. A mid-grey
+ground (around `0x8410`) inverts to nearly the same
 grey, so the bar has little contrast there.
 
 The tests execute the stub and routine for seven grounds, including
