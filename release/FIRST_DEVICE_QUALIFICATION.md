@@ -1,6 +1,6 @@
 # First physical-device qualification
 
-**Status: backup, physical geometry and full CE write/readback verified; CE boot and recovery boot remain pending.**
+**Status: backup, physical geometry, full CE write/readback, boot and playback verified; recovery boot remains pending.**
 
 This record contains only model-level findings that can be reproduced on another
 DAP Neo. It intentionally excludes USB instance paths, disk identifiers, host
@@ -67,7 +67,11 @@ both firmware slots. The slot-local trailing 2 MiB regions were not touched.
 - Slot 1 full payload readback: matched
 - Slot 2 full payload readback: matched
 - Reset command sent only after both comparisons passed
-- Normal CE boot: pending physical confirmation
+- Normal CE boot: passed
+- Music playback: passed
+- Custom CE settings menu: passed
+- Embedded album artwork: displayed
+- Theater background: exercised with a black-derived background
 
 ## Sanitized device-derived recovery image
 
@@ -93,11 +97,11 @@ successful stock boot complete.
 
 ## Remaining qualification gates
 
-1. Confirm a normal CE boot, key response and USB mass storage.
-2. Run the hardware checklist in `release/FLASH_REVIEW.md`.
-3. Exercise the device-derived recovery package with a full write/readback and
+1. Complete the remaining hardware checklist in `release/FLASH_REVIEW.md`,
+   including longer playback, all formats, USB modes and settings persistence.
+2. Exercise the device-derived recovery package with a full write/readback and
    confirm stock boot before presenting it as a proven recovery route.
 
-Warnings about an entirely untested physical device should be removed only
-after the corresponding gates pass. Unfinished gates remain explicit in this
-draft.
+The first physical flash is complete. Documentation now reports the observed
+boot, playback, artwork and settings results directly; only specific unfinished
+checks remain labeled as such.
