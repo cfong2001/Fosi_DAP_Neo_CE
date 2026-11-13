@@ -96,9 +96,10 @@ without removing playlists and the lock screen.
 
 From the traced installer (module 8, [`analysis/boot_slots.md`](../analysis/boot_slots.md)):
 
-- It looks for a file in storage named `DP3_Vnnn` + `IMG` (nnn taken from
-  the running firmware's version) first, then the generic name
-  `RKNANOFWIMG`. Both names have **no dot and no extension**.
+- It looks for `DP3_Vnnn.IMG` (nnn taken from the running firmware's
+  version) first, then `RKNANOFW.IMG`. These are visible FAT 8.3 names;
+  the firmware compares their raw directory forms without the dot.
+  Keep the `.IMG` extension when saving or renaming the file.
 - It checks the `RKnanoFW` marker and that the mirrored header matches,
   writes the image to firmware slot 2, then copies slot 2 over slot 1.
   **After a stock-path install both slots hold CE**; no stock copy remains
@@ -111,10 +112,10 @@ official updates, with the CE file in place of the official one.
 ## Install (stock update path)
 
 1. Rename `DP3_V137_CE.img` (or `DP3_V137_CE_minimal.img`) to
-   `RKNANOFWIMG` and copy it to the root of the storage the device updates
+   `RKNANOFW.IMG` and copy it to the root of the storage the device updates
    from.
 2. Run the update the way you would for an official Fosi update.
-3. After the device restarts, **delete `RKNANOFWIMG`** from the card.
+3. After the device restarts, **delete `RKNANOFW.IMG`** from the card.
    Leaving an update file in place can rerun the installer.
 4. Test, in this order: boot to the menu, play an MP3, then a FLAC file.
    Then try APE and DSD128 if you have them (the unmeasured clock gate), an
@@ -131,7 +132,7 @@ and what you tested.
 ## Recovery
 
 - **If the device still boots and can run an update:** install
-  `DP3_V137_CE_recovery.img` the same way (renamed to `RKNANOFWIMG`). It is
+  `DP3_V137_CE_recovery.img` the same way (renamed to `RKNANOFW.IMG`). It is
   stock code dated 2026-10-24, newer than either CE image, so the validator
   selects it. Plain `DP3_V137.img` is dated 2026-10-22; it is older than CE
   and the validator would keep booting CE.

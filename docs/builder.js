@@ -64,7 +64,7 @@ function download(name, bytes) {
 }
 
 // Offer the build to the install flow at the top of the page
-// (install.mjs), which can copy it to the player as RKNANOFWIMG.
+// (install.mjs), which can copy it to the player as RKNANOFW.IMG.
 function offerToInstaller(name, result) {
   window.dispatchEvent(new CustomEvent("ce-build",
     {detail: {name, bytes: result.bytes, sha256: result.sha256}}));

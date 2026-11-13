@@ -12,9 +12,10 @@ export const DEFAULT_REPO = "cfong2001/Fosi_DAP_Neo_CE";
 export const RELEASE_REF = "main";
 export const RELEASE_DIR = "release";
 
-// The stock installer looks for this name, with no dot and no extension,
-// at the root of the player's storage (release/README.md).
-export const UPDATE_NAME = "RKNANOFWIMG";
+// Visible FAT 8.3 filename: the stock installer compares the raw 11-byte
+// directory name RKNANOFWIMG (8-byte basename + 3-byte extension).
+// Copy to the root of the player's storage (release/README.md).
+export const UPDATE_NAME = "RKNANOFW.IMG";
 
 export const IMAGES = [
   {

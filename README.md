@@ -27,7 +27,7 @@ CE (Community Edition) is patched firmware for the Fosi Audio DAP Neo. It starts
 
 Start with the standard image. Use the minimal one if the standard image does not install (no image longer than stock has been installed yet), or if you play WMA files.
 
-Complete the [flash review and recovery gates](release/FLASH_REVIEW.md) before writing anything to a player. The [install page](https://cfong2001.github.io/Fosi_DAP_Neo_CE/) checks the image's SHA-256 and copies it to the player's storage as `RKNANOFWIMG`; you then run the update on the device. To do it by hand, rename the image to `RKNANOFWIMG` (no extension), copy it to the top level of the player's storage, run the update the way you would an official Fosi update, and delete the file afterwards. [`release/README.md`](release/README.md) has the full steps, a testing order and recovery.
+Complete the [flash review and recovery gates](release/FLASH_REVIEW.md) before writing anything to a player. The [install page](https://cfong2001.github.io/Fosi_DAP_Neo_CE/) checks the image's SHA-256 and copies it to the player's storage as `RKNANOFW.IMG`; you then run the update on the device. To do it by hand, rename the image to `RKNANOFW.IMG` (including the .IMG extension), copy it to the top level of the player's storage, run the update the way you would an official Fosi update, and delete the file afterwards. [`release/README.md`](release/README.md) has the full steps, a testing order and recovery.
 
 ## Features
 
@@ -114,7 +114,7 @@ Built and tested offline, but not in either image:
 
 [cfong2001.github.io/Fosi_DAP_Neo_CE](https://cfong2001.github.io/Fosi_DAP_Neo_CE/) runs entirely in the browser; nothing is uploaded. Its source is [`docs/`](docs/).
 
-- Install: choose an image, then copy it to the player as `RKNANOFWIMG` (Chrome and Edge, through the File System Access API) or download it. Each image is fetched from `release/` and refused unless its length and SHA-256 match the pins in [`docs/install-data.mjs`](docs/install-data.mjs); a copy is read back and checked.
+- Install: choose an image, then copy it to the player as `RKNANOFW.IMG` (Chrome and Edge, through the File System Access API) or download it. Each image is fetched from `release/` and refused unless its length and SHA-256 match the pins in [`docs/install-data.mjs`](docs/install-data.mjs); a copy is read back and checked.
 - Builder: set the EQ presets, DAC filter and Bluetooth auto-off, then build either all CE features, which reproduces the standard image byte for byte, or a picked set from a grouped checklist that starts as the minimal image. The stock image can be fetched from this repository or taken from your own copy. The Opus data and the Bluetooth and lock-screen routines are embedded in the page and pinned by SHA-256.
 - Simulator: stock and CE screens side by side, drawn from each image's real resource pixels; the status icon and transport row replay what each image's player code draws, checked against emulation word for word. Dark and light themes, theater mode with your own cover art, no-media and boot-splash screens.
 - Theme studio: inspect all 456 RGB565 resources and export exact colour rules as `theme.json` for `build.py --theme-config` or the builder. The accent and divider-line colours, which the firmware sets in code, have their own controls.
