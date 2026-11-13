@@ -1,6 +1,6 @@
 # First physical-device qualification
 
-**Status: backup and physical geometry verified; recovery write/boot and CE boot remain pending.**
+**Status: backup, physical geometry and full CE write/readback verified; CE boot and recovery boot remain pending.**
 
 This record contains only model-level findings that can be reproduced on another
 DAP Neo. It intentionally excludes USB instance paths, disk identifiers, host
@@ -18,8 +18,8 @@ unit-specific data.
   `ae5627283a2f80c445b8f15155cf12c6a38c283d`
 - Backup helper: `tools/backup_stock.py`
 
-No erase, loader-download, reset or flash-write command was used for the
-findings below.
+No erase or loader-download command was used. Read-only findings were completed
+before the controlled CE write described below.
 
 ## Read-only backup result
 
@@ -56,6 +56,19 @@ relative LBA `0x64A0`. The complete 15 MiB slot regions differ after the
 13 MiB updater payload, so a recovery writer must preserve the trailing 2 MiB
 unless its contents and purpose are independently qualified.
 
+## Controlled CE write and readback
+
+After the two-pass backup and slot mapping completed, the prepared Standard CE
+candidate was written through Rockusb to the measured 13 MiB payload region of
+both firmware slots. The slot-local trailing 2 MiB regions were not touched.
+
+- Prepared package SHA-256: `244b904fb50cec8b4bf5758d4c725507c07e26196e446c3c4abbddaa0ab139f8`
+- Written 13 MiB payload SHA-256: `a1ebb27008c56ff0b4d4c33ecd5ca70c61cbdb24f287e6443f8fc8f28b8c1562`
+- Slot 1 full payload readback: matched
+- Slot 2 full payload readback: matched
+- Reset command sent only after both comparisons passed
+- Normal CE boot: pending physical confirmation
+
 ## Sanitized device-derived recovery image
 
 The identical installed slot payloads were reconstructed into a standard
@@ -80,15 +93,10 @@ successful stock boot complete.
 
 ## Remaining qualification gates
 
-1. Write only the measured 13 MiB firmware payload to both measured slots,
-   preserving each trailing 2 MiB.
-2. Read both written regions back in full and compare with the intended
-   payload before reset.
-3. Confirm a normal V1.3.2 boot, key response and USB mass storage.
-4. Flash the prepared CE candidate through the normal stock update path.
-5. Run the hardware checklist in `release/FLASH_REVIEW.md`.
-6. Exercise the device-derived recovery package and confirm stock boot before
-   presenting it as a proven recovery route.
+1. Confirm a normal CE boot, key response and USB mass storage.
+2. Run the hardware checklist in `release/FLASH_REVIEW.md`.
+3. Exercise the device-derived recovery package with a full write/readback and
+   confirm stock boot before presenting it as a proven recovery route.
 
 Warnings about an entirely untested physical device should be removed only
 after the corresponding gates pass. Unfinished gates remain explicit in this
