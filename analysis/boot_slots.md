@@ -124,7 +124,13 @@ Entry points are called by module 21 (at its `0x0307d384` /
 
 1. Find the file. The update filename template lives in module 0
    data at `0x030041a6`: `DP3_V100IMG` followed by `RKNANOFWIMG`
-   (both NUL-terminated, no dot, no extension). Digits at template
+   (both NUL-terminated FAT short directory names). The visible names
+   are `DP3_V100.IMG` and `RKNANOFW.IMG`: the dot separates the eight-byte
+   basename from the three-byte extension. The lookup at `0x0305822e`,
+   called through `0x03058cc6`, compares exactly 11 bytes against the raw
+   FAT directory entry (`0x03058294`–`0x030582a8`). The SDK
+   `Common/FileSys/file.c:FileOpenA` likewise passes the 11-byte name to
+   `FindFDTInfo`. Digits at template
    offsets 5-7 are overwritten with a 3-digit version derived from
    the halfword at SAVEINFO +0x2DB (the running firmware's version;
    +0x2D9 holds a related copy the installer updates). The installer

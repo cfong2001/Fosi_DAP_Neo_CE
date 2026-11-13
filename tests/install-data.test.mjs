@@ -38,8 +38,11 @@ test("install pins match the committed images", async () => {
   }
 });
 
-test("image ids are unique and the update name has no extension", () => {
+test("image ids are unique and the update name encodes the stock FAT short name", () => {
   assert.equal(new Set(IMAGES.map(i => i.id)).size, IMAGES.length);
   assert.ok(!IMAGES.some(i => i.id === "custom"), "custom is reserved for builds");
-  assert.equal(UPDATE_NAME, "RKNANOFWIMG");
+  const [base, extension] = UPDATE_NAME.split(".");
+  assert.equal(base.length, 8);
+  assert.equal(extension.length, 3);
+  assert.equal(base + extension, "RKNANOFWIMG");
 });

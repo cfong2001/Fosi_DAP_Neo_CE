@@ -6,6 +6,8 @@ emulation cannot prove early-boot acceptance, electrical behavior or that
 Rockusb recovery works on your unit. Do not describe this image as proven
 safe to flash.
 
+For newer model-specific evidence, see the [NeoPod flashing comparison](../analysis/neopod_flash_comparison.md). NeoPod reports working custom firmware and normal reset on a DAP Neo; this supports the flashing mechanism, while CE still needs its own hardware qualification. The comparison also corrects the visible stock-update filename to `RKNANOFW.IMG`.
+
 ## Findings from this review
 
 | Area | Finding | Disposition |

@@ -216,11 +216,11 @@ test('install flow verifies, copies and downloads release images', async t => {
   await page.locator('#copy-to-player').click();
   await page.waitForSelector('#install-status.good, #install-status.bad', {timeout: 60000});
   const status = await page.locator('#install-status').textContent();
-  assert.match(status, /Copied DP3_V137_CE\.img .* as RKNANOFWIMG .*SHA-256 matches/);
+  assert.match(status, /Copied DP3_V137_CE\.img .* as RKNANOFW\.IMG .*SHA-256 matches/);
   assert.match(fetched[0], /^https:\/\/raw\.githubusercontent\.com\/cfong2001\/Fosi_DAP_Neo_CE\/main\/release\/DP3_V137_CE\.img$/);
   const written = await page.evaluate(async () => {
     const dir = await (await navigator.storage.getDirectory()).getDirectoryHandle('player');
-    const file = await (await dir.getFileHandle('RKNANOFWIMG')).getFile();
+    const file = await (await dir.getFileHandle('RKNANOFW.IMG')).getFile();
     const digest = await crypto.subtle.digest('SHA-256', await file.arrayBuffer());
     return {size: file.size, hash: Array.from(new Uint8Array(digest), b => b.toString(16).padStart(2, '0')).join('')};
   });
@@ -232,7 +232,7 @@ test('install flow verifies, copies and downloads release images', async t => {
     page.waitForEvent('download'),
     page.locator('#download-update-name').click(),
   ]);
-  assert.equal(download.suggestedFilename(), 'RKNANOFWIMG');
+  assert.equal(download.suggestedFilename(), 'RKNANOFW.IMG');
   const saved = await fs.readFile(await download.path());
   assert.equal(require('node:crypto').createHash('sha256').update(saved).digest('hex'),
     '0dfd10e23749f9b6c65499266f1a7a2ec038160b089ba0fc2ca68dcf2b24c986');
@@ -256,7 +256,7 @@ test('install flow verifies, copies and downloads release images', async t => {
   await page.waitForFunction(() => /Copied DP3_V137_CE_builder\.img/.test(document.querySelector('#install-status').textContent));
   assert.equal(await page.evaluate(async () => {
     const dir = await (await navigator.storage.getDirectory()).getDirectoryHandle('player');
-    return (await (await dir.getFileHandle('RKNANOFWIMG')).getFile()).size;
+    return (await (await dir.getFileHandle('RKNANOFW.IMG')).getFile()).size;
   }), 4);
 
   // Links into the builder open the Advanced section.

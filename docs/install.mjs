@@ -1,5 +1,5 @@
 // Install flow at the top of index.html: choose an image, then either
-// copy it to the player's storage as RKNANOFWIMG (File System Access
+// copy it to the player's storage as RKNANOFW.IMG (File System Access
 // API, Chromium browsers) or download it.
 //
 // Nothing here writes to the player's flash. The browser only places the
@@ -203,7 +203,7 @@ async function download(asUpdateName) {
   setStatus("Saved " + name + " (" + fmt(bytes.length) + " bytes, SHA-256 " +
     image.sha256 + " verified). " + (asUpdateName
       ? "Copy it to the top level of the player's storage, then do step 3."
-      : "Rename it to " + UPDATE_NAME + " (no extension) and copy it to the " +
+      : "Rename it to " + UPDATE_NAME + " (including the .IMG extension) and copy it to the " +
         "top level of the player's storage, then do step 3."), "good");
 }
 
