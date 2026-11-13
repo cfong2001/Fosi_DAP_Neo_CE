@@ -42,7 +42,7 @@ import struct
 import sys
 from pathlib import Path
 
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
@@ -84,6 +84,12 @@ FAMILY = {
 }
 for dark_id in list(FAMILY):
     FAMILY[dark_id + 166] = FAMILY[dark_id]
+
+# These are the five state-selected transport resources.  Stock draws them
+# when the wheel moves focus across the bottom control row.  The first v4
+# pass accidentally rendered them identically to the unselected bare glyphs,
+# which removed the only visible focus cue on hardware.
+SELECTED = set(range(157, 162)) | set(range(323, 328))
 
 # Row composites: id -> (slug, [slot designs at x = 4 + 50 * k]).
 # A slot is None where the painter always overlays that slot in
@@ -199,6 +205,46 @@ def bake(ink, ground, cov):
     return w ^ 0x0020 if w == KEY else w
 
 
+def blend565(ink, under, cov):
+    """RGB565 ink over an already opaque RGB565 pixel."""
+    a, b = rgb888(ink), rgb888(under)
+    r, g, bl = (round(i * cov + j * (1 - cov)) for i, j in zip(a, b))
+    w = (r * 31 + 127) // 255 << 11 | (g * 63 + 127) // 255 << 5 | (bl * 31 + 127) // 255
+    return w ^ 0x0020 if w == KEY else w
+
+
+def selected_words(design, light):
+    """Orange focused glyph with a thin contrasting outline.
+
+    Resource 157 is also the B=2 row's base left arrow. The full build
+    remaps that base draw to bare resource 162, leaving these five resources
+    solely for the computed focused control. Keeping the focus treatment on
+    the glyph avoids the doubled/clipped circle produced when the shared
+    resource was drawn at both x=0 and x=4.
+    """
+    glyph = draw_design(design)
+    # A 17x17 max filter at 8x expands the high-resolution glyph by one
+    # output pixel on every side before the same box downsample.
+    outline_hi = glyph.img.filter(ImageFilter.MaxFilter(17))
+    om = outline_hi.resize((32, 32), Image.BOX)
+    gm = glyph.img.resize((32, 32), Image.BOX)
+    fill = ACC_LIGHT if light else ACC_DARK
+    contrast = INK_LIGHT if light else INK_DARK
+    fringe = FRINGE_LIGHT if light else FRINGE_DARK
+    words = []
+    for y in range(32):
+        for x in range(32):
+            oc, gc = (m.getpixel((x, y)) / 255 for m in (om, gm))
+            if oc < 1 / 16:
+                words.append(KEY)
+                continue
+            edge = contrast if oc >= 15 / 16 else \
+                blend565(contrast, fringe, oc)
+            words.append(fill if gc >= 15 / 16 else
+                         edge if gc < 1 / 16 else blend565(fill, edge, gc))
+    return words
+
+
 def bezier(p0, p1, p2, n=40):
     pts = []
     for i in range(n + 1):
@@ -305,8 +351,9 @@ def main():
         light = rid >= 323
         ink = (ACC_LIGHT if accent else INK_LIGHT) if light else \
               (ACC_DARK if accent else INK_DARK)
-        words = draw_design(design).finish(
-            ink, FRINGE_LIGHT if light else FRINGE_DARK)
+        words = (selected_words(design, light) if rid in SELECTED else
+                 draw_design(design).finish(
+                     ink, FRINGE_LIGHT if light else FRINGE_DARK))
         rendered[rid] = words
         e = imgs[rid]
         assert (e['width'], e['height'], e['size']) == (32, 32, 2048), rid
@@ -368,7 +415,7 @@ def main():
 
     # ---- contact sheets -------------------------------------------------
     font = ImageFont.truetype(
-        '/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf', 11)
+        str(ROOT / 'docs' / 'fonts' / 'Barlow-Regular.ttf'), 11)
 
     def tile_from_words(words):
         t = Image.new('RGB', (32, 32))

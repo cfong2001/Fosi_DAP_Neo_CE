@@ -949,63 +949,58 @@
   },
   {
    "offset": "0xb92fe0",
-   "expect": "10a210a210a228e28a01d2a0f300f300d2a08a0128e210a210a210a210a210a269a1eae0",
-   "replace": "f800f800f8005a68a244d222f220f220d222a2445a68f800f800f800f800f8008246f220"
+   "expect": "10a210a210a228e28a01d2a0f300f300d2a08a0128e210a210a210a210a210a269a1eae0f220f220f220f220f220f220eae069a110a210a210a269a1f220f220f220f220",
+   "replace": "f800f800f8005aeba554defbffffffffdefba5545aebf800f800f800f800f8008430ffffffffffffffffffffffffffffffff8430f800f800f8008430fffffffffe36f387"
   },
   {
-   "offset": "0xb93010",
-   "expect": "eae069a110a210a210a269a1",
-   "replace": "f2208246f800f800f8008246"
+   "offset": "0xb93028",
+   "expect": "f220f220f220f22069a110a228e2eae0f220f220",
+   "replace": "f387fe36ffffffff8430f8005aebfffffffff4ce"
   },
   {
-   "offset": "0xb93030",
-   "expect": "69a110a228e2eae0",
-   "replace": "8246f8005a68f220"
+   "offset": "0xb93048",
+   "expect": "f220f220eae028e2eae0f220f220",
+   "replace": "f4ceffffffff5aeba554fffffe36"
   },
   {
-   "offset": "0xb9304c",
-   "expect": "eae028e2eae0",
-   "replace": "f2205a68a244"
+   "offset": "0xb93066",
+   "expect": "f220f220a2a4f220f220f220",
+   "replace": "fe36ffffa554defbfffff387"
   },
   {
-   "offset": "0xb9306a",
-   "expect": "a2a4f220",
-   "replace": "a244d222"
+   "offset": "0xb93082",
+   "expect": "f220f220f220f220f220",
+   "replace": "f387ffffdefbffffffff"
   },
   {
-   "offset": "0xb93086",
-   "expect": "f220",
-   "replace": "d222"
+   "offset": "0xb930a0",
+   "expect": "f220f220f220f220",
+   "replace": "ffffffffffffffff"
   },
   {
-   "offset": "0xb930c0",
-   "expect": "f220",
-   "replace": "d222"
+   "offset": "0xb930bc",
+   "expect": "f220f220f220f220f220",
+   "replace": "ffffffffdefbfffff387"
   },
   {
-   "offset": "0xb930da",
-   "expect": "f220eae0",
-   "replace": "d222a244"
+   "offset": "0xb930d6",
+   "expect": "f220f220f220eae0f220f220",
+   "replace": "f387ffffdefba554fffffe36"
   },
   {
-   "offset": "0xb930f6",
-   "expect": "a2a428e2eb00",
-   "replace": "a2445a68f220"
+   "offset": "0xb930f2",
+   "expect": "f220f220a2a428e2eb00f220f220",
+   "replace": "fe36ffffa5545aebfffffffff4ce"
   },
   {
-   "offset": "0xb93110",
-   "expect": "eae028e210a269a1",
-   "replace": "f2205a68f8008246"
+   "offset": "0xb9310c",
+   "expect": "f220f220eae028e210a269a1f220f220f220f220",
+   "replace": "f4ceffffffff5aebf8008430fffffffffe36f387"
   },
   {
-   "offset": "0xb9312c",
-   "expect": "69a110a210a210a269a1eb00",
-   "replace": "8246f800f800f8008246f220"
-  },
-  {
-   "offset": "0xb93144",
-   "expect": "eae069a110a210a210a210a210a228e289e1d2a0f300f300d2a08a0128e210a210a210a2",
-   "replace": "f2208246f800f800f800f800f8005a68a244d222f220f220d222a2445a68f800f800f800"
+   "offset": "0xb93124",
+   "expect": "f220f220f220f22069a110a210a210a269a1eb00f220f220f220f220f220f220eae069a110a210a210a210a210a228e289e1d2a0f300f300d2a08a0128e210a210a210a2",
+   "replace": "f387fe36ffffffff8430f800f800f8008430ffffffffffffffffffffffffffffffff8430f800f800f800f800f8005aeba554defbffffffffdefba5545aebf800f800f800"
   },
   {
    "offset": "0xbd34d6",
@@ -2089,63 +2084,58 @@
   },
   {
    "offset": "0xc81f36",
-   "expect": "ffffffffffffff7cfd6ffbe5fb20fb40fbe5fd6fff7cfffffffffffffffffffffe13fb61",
-   "replace": "f800f800f800d637eccdf3c4fb20fb20f3c4eccdd637f800f800f800f800f800dd72fb20"
+   "expect": "ffffffffffffff7cfd6ffbe5fb20fb40fbe5fd6fff7cfffffffffffffffffffffe13fb61fb20fb20fb20fb20fb20fb20fb61fe33fffffffffffffe33fb20fb20fb20fb20",
+   "replace": "f800f800f800bdf76b2d21240000000021246b2dbdf7f800f800f800f800f8009492000000000000000000000000000000009492f800f800f80094920000000048e0c260"
   },
   {
-   "offset": "0xc81f66",
-   "expect": "fb61fe33fffffffffffffe33",
-   "replace": "fb20dd72f800f800f800dd72"
+   "offset": "0xc81f7e",
+   "expect": "fb20fb20fb20fb20fe33ffffff7cfb61fb20fb20",
+   "replace": "c26048e0000000009492f800bdf70000000089a0"
   },
   {
-   "offset": "0xc81f86",
-   "expect": "fe33ffffff7cfb61",
-   "replace": "dd72f800d637fb20"
+   "offset": "0xc81f9e",
+   "expect": "fb20fb20fb61ff7cfb20fb20fb20",
+   "replace": "89a000000000bdf76b2d000048e0"
   },
   {
-   "offset": "0xc81fa2",
-   "expect": "fb61ff7cfb20",
-   "replace": "fb20d637eccd"
+   "offset": "0xc81fbc",
+   "expect": "fb20fb20e4acfb20fb20fb20",
+   "replace": "48e000006b2d21240000c260"
   },
   {
-   "offset": "0xc81fc0",
-   "expect": "e4acfb20",
-   "replace": "eccdf3c4"
+   "offset": "0xc81fd8",
+   "expect": "fb20fb20f3a4fb20fb20",
+   "replace": "c2600000212400000000"
   },
   {
-   "offset": "0xc81fdc",
-   "expect": "f3a4",
-   "replace": "f3c4"
+   "offset": "0xc81ff6",
+   "expect": "fb20fb20fb20fb20",
+   "replace": "0000000000000000"
   },
   {
-   "offset": "0xc82016",
-   "expect": "fb20",
-   "replace": "f3c4"
+   "offset": "0xc82012",
+   "expect": "fb20fb20fb20fb20fb20",
+   "replace": "0000000021240000c260"
   },
   {
-   "offset": "0xc82030",
-   "expect": "f3a4fb20",
-   "replace": "f3c4eccd"
+   "offset": "0xc8202c",
+   "expect": "fb20fb20f3a4fb20fb20fb20",
+   "replace": "c260000021246b2d000048e0"
   },
   {
-   "offset": "0xc8204c",
-   "expect": "e4acff7cfb61",
-   "replace": "eccdd637fb20"
+   "offset": "0xc82048",
+   "expect": "fb20fb20e4acff7cfb61fb20fb20",
+   "replace": "48e000006b2dbdf70000000089a0"
   },
   {
-   "offset": "0xc82066",
-   "expect": "fb61ff7cfffffe33",
-   "replace": "fb20d637f800dd72"
+   "offset": "0xc82062",
+   "expect": "fb20fb20fb61ff7cfffffe33fb20fb20fb20fb20",
+   "replace": "89a000000000bdf7f80094920000000048e0c260"
   },
   {
-   "offset": "0xc82082",
-   "expect": "fe13fffffffffffffe33fb61",
-   "replace": "dd72f800f800f800dd72fb20"
-  },
-  {
-   "offset": "0xc8209a",
-   "expect": "fb61fe33ffffffffffffffffffffff7cfd6ffbe5fb20fb40fbe5fd6fff7cffffffffffff",
-   "replace": "fb20dd72f800f800f800f800f800d637eccdf3c4fb20fb20f3c4eccdd637f800f800f800"
+   "offset": "0xc8207a",
+   "expect": "fb20fb20fb20fb20fe13fffffffffffffe33fb61fb20fb20fb20fb20fb20fb20fb61fe33ffffffffffffffffffffff7cfd6ffbe5fb20fb40fbe5fd6fff7cffffffffffff",
+   "replace": "c26048e0000000009492f800f800f8009492000000000000000000000000000000009492f800f800f800f800f800bdf76b2d21240000000021246b2dbdf7f800f800f800"
   }
  ]
 }

@@ -625,6 +625,25 @@ def gate_d(v4):
           'rectangle outside the glyph shapes lands')
 
 
+def gate_selected_focus(v4):
+    """The B=2 resources must carry the player's visible wheel focus."""
+    for shift, accent, contrast, name in (
+            (0, 0xF220, 0xFFFF, 'dark'),
+            (166, 0xFB20, 0x0000, 'light')):
+        for rid in range(157 + shift, 162 + shift):
+            words = glyph_words(v4, rid)
+            assert all(words[i] == KEY for i in (0, 31, 992, 1023)), rid
+            assert words.count(accent) > 40, (rid, words.count(accent))
+            assert words.count(contrast) > 10, (rid, words.count(contrast))
+            # Separate supersampled circle, stroke, and glyph masks leave
+            # blended edge colors in addition to the two solid colors.
+            blends = set(words) - {KEY, accent, contrast}
+            assert len(blends) >= 3, (rid, blends)
+        print(f'(focus) PASS: {name} selected resources carry an orange '
+              'glyph, contrasting outline, keyed corners, and '
+              'supersampled edge colors')
+
+
 def poster_census():
     im = Image(RAW)
     post = 0x0306723C
@@ -670,6 +689,7 @@ def main():
     gate_b(v4)
     gate_c(v4)
     gate_d(v4)
+    gate_selected_focus(v4)
     poster_census()
     print('ALL GATES DONE')
 

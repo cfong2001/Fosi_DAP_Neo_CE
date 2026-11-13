@@ -10,6 +10,10 @@
   two-pixel contrasting stroke: white in the dark theme and black in the light
   theme. The outer circle and inner fill boundary are supersampled separately,
   baking antialiasing into both edges for cover-derived backgrounds.
+- Standard image SHA-256
+  `0f795253f0ec88372d02e9923c29e04dbf2b9081239e91194716d593e93bd0fa`;
+  its only firmware-resource changes from the preceding release are selector
+  resources 220 and 386, plus the outer package CRC.
 - Repository warnings now report the completed physical flash directly and
   retain only named checks that are still open.
 
@@ -850,3 +854,8 @@ after the redraft:
   stays open for the hardware phase. The paragraph previously
   said the build step was not landed, contradicting the same
   file's build consumer section.
+# Pending hardware verification
+
+- Restore transport focus with orange glyph fill and a thin contrasting outline.
+  Remap the shared base arrow so its second draw cannot leave a floating edge.
+- Cache the cover-derived theater color and restore it during player construction.

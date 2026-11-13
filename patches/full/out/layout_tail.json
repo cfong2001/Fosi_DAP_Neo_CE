@@ -1,7 +1,7 @@
 {
   "tail_base": "0x307bfb4",
   "tail_bytes": 2040,
-  "tail_sha256": "1443d354b9a388f156d23178eb302b7535e703b0e3295d8dc329cd7b71820f69",
+  "tail_sha256": "a0bccfe19ecc842afbe1a57ba05d26ef56ab71a4632791c36523cf67c5708e55",
   "budget": 2044,
   "pieces": [
     {
@@ -28,18 +28,25 @@
       }
     },
     {
-      "name": "free (zeros)",
+      "name": "constructor background restore",
       "offset": 892,
       "address": "0x307c330",
-      "bytes": 36
+      "bytes": 26,
+      "sha256": "d821987c09e3e20c060516756092f1ec5bb11310b781fcb137bf93d4a81eaabc"
+    },
+    {
+      "name": "free (zeros)",
+      "offset": 918,
+      "address": "0x307c34a",
+      "bytes": 6
     },
     {
       "name": "theater payload (reset stub + trampoline)",
-      "offset": 928,
-      "address": "0x307c354",
-      "bytes": 676,
-      "sha256": "1bd844657064921c52c246bb60c3da2f83abc1102e7f68e99fa8cc710e1d232c",
-      "trampoline": "0x307c3a8"
+      "offset": 924,
+      "address": "0x307c350",
+      "bytes": 680,
+      "sha256": "53dce973e3bf970ce66fd53501c0ccf23f929c5d80a4e61870bca4370447d1df",
+      "trampoline": "0x307c3a6"
     },
     {
       "name": "bluetooth blob (audited placement)",

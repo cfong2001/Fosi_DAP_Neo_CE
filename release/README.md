@@ -5,7 +5,7 @@ against their pins by `.github/workflows/firmware.yml` on every change.
 
 | File | What it is | Length | SHA-256 |
 |---|---|---|---|
-| `DP3_V137_CE.img` | **Standard.** Every composed CE feature (list below). Header date 2026-10-23. | 13,638,148 bytes (6,656 more than stock) | `66d79d648bee93d71c3adfdf229434bed57b337c6f9448d3c90d82a4a10df8bf` |
+| `DP3_V137_CE.img` | **Standard.** Every composed CE feature (list below). Header date 2026-10-23. | 13,638,148 bytes (6,656 more than stock) | `0f795253f0ec88372d02e9923c29e04dbf2b9081239e91194716d593e93bd0fa` |
 | `DP3_V137_CE_minimal.img` | **Minimal option.** The default framework set and full-precision Vorbis only. Header date 2026-10-23. | 13,631,492 bytes (same as stock) | `0dfd10e23749f9b6c65499266f1a7a2ec038160b089ba0fc2ca68dcf2b24c986` |
 | `DP3_V137_CE_recovery.img` | Unmodified stock bytes dated 2026-10-24, one day after either CE image, so the boot validator prefers it. | 13,631,492 bytes | `aff851b31d6eee55cbd4bb3fc0464ac79f0039ee86ae6723225ac036a157d223` |
 | `*.report.json` | Build reports: every patch with its address and old and new bytes, transplant hashes, validation results. The standard report summarises its byte ranges. | | |
@@ -15,30 +15,29 @@ See [FLASH_REVIEW.md](FLASH_REVIEW.md) for the current major-flaw review,
 version-aware recovery preparation and device qualification procedure. The
 bundled V137 recovery must not be assumed to supersede official V155.
 
-## Not yet tested on hardware
+## Hardware status
 
-No CE image has been flashed to a device. The images pass every offline
-check this project has: SHA-gated builds, structural validation, the
-15-check framework verifier, and Unicorn emulation of each changed code
-path. None of that proves a device accepts, boots or plays them. You are
-the first hardware test. Proceed only if you accept the risk of needing a
-Rockusb (USB) recovery.
+Standard CE has been flashed to a physical DAP Neo. Both measured 13 MiB
+firmware regions matched a complete Rockusb readback before reset; the player
+then booted, exposed its custom settings, displayed embedded album artwork and
+played an MP3. Remaining format, USB-mode, endurance and recovery-boot checks
+are tracked in [`FIRST_DEVICE_QUALIFICATION.md`](FIRST_DEVICE_QUALIFICATION.md).
 
 ## Which image
 
 Start with the standard image unless one of these applies, then use the
 minimal one:
 
-- **The standard image is 6,656 bytes longer than stock.** The installer
-  computes a 13 MiB transfer from the header, and whether a longer image
-  installs and boots correctly has not been tested
+- **The standard image is 6,656 bytes longer than stock.** Its complete
+  13 MiB transfer has been written to both measured slots, read back and
+  booted on the qualified unit
   ([`analysis/slot_reclamation/report.md`](../analysis/slot_reclamation/report.md)).
   Its header mirror is padded onto a 512-byte sector boundary, which the
   boot validator requires. Standard images built before 2026-11-11 (pin
   `db0a11d2…` and earlier longer-than-stock pins) lacked that padding
   and should not be flashed.
-  The minimal image is exactly stock length, so it avoids that question.
-  If the standard image does not install or boot, try the minimal one.
+  The minimal image is exactly stock length and remains available as the
+  smaller feature set.
 - **You play WMA files.** The standard image replaces the WMA decoder with
   Opus.
 

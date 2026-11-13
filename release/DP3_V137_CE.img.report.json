@@ -3,7 +3,7 @@
  "input_file": "DP3_V137.img",
  "output_file": "DP3_V137_CE.img",
  "input_sha256": "fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cdfade5e9c6ea3bd71ac6deef",
- "output_sha256": "66d79d648bee93d71c3adfdf229434bed57b337c6f9448d3c90d82a4a10df8bf",
+ "output_sha256": "0f795253f0ec88372d02e9923c29e04dbf2b9081239e91194716d593e93bd0fa",
  "byte_length": 13638148,
  "header_date": "20261023",
  "patches_applied": [
@@ -14947,7 +14947,7 @@
   "exec": "0x307bfb4",
   "file_offset": "0x55660",
   "payload_bytes": 2040,
-  "payload_sha256": "1443d354b9a388f156d23178eb302b7535e703b0e3295d8dc329cd7b71820f69",
+  "payload_sha256": "a0bccfe19ecc842afbe1a57ba05d26ef56ab71a4632791c36523cf67c5708e55",
   "span_bytes": 11164,
   "workspace_zone_zero_bytes": 9120,
   "code_len_old": "0x29c14",
@@ -14970,9 +14970,9 @@
  ],
  "diff_vs_stock": {
   "bytes_changed": 5104454,
-  "range_count": 455960,
+  "range_count": 455959,
   "note": "range list omitted; rebuild with patches/full/build/build_full.py for it"
  },
  "validation": "validate_grown() passed (structural checks, layout derived from the image)",
- "scope": "offline package integrity only; device acceptance and boot behaviour are hardware-phase questions"
+ "scope": "package integrity plus first-device CE write/readback, boot, settings and MP3 playback; remaining format, USB-mode, endurance and recovery checks are tracked separately"
 }

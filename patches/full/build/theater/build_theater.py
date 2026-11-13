@@ -25,7 +25,7 @@ work/theater_integration/census_*.py. Layout:
   +0x00 sum[0..2] u32 x3   +0x0C row bitmask u32 x2 (64 rows)
   +0x14 width u16          +0x16 rows_needed u16
   +0x18 rows_seen u8       +0x19 flags u8 (1 armed, 2 done, 4 latched)
-  +0x1A spare u16
+  +0x1A cached derived RGB565 colour u16
 """
 import hashlib
 import struct
@@ -83,6 +83,7 @@ RESET_ASM = [
     'strh r2, [r3, #20]',
     'strh r2, [r3, #22]',
     'strb r2, [r3, #24]',
+    'strh r2, [r3, #26]',                       # clear cached colour
     'movs r2, #1',
     'strb r2, [r3, #25]',                       # flags = armed
     *load('r3', 0x030232A0),                    # SAVEINFO
@@ -283,6 +284,7 @@ TRAMP_TAIL_ASM = [
     'movs r1, #255',
     'udiv r0, r0, r1',
     'orr r5, r5, r0',
+    'strh r5, [r2, #26]',                       # survive player constructor
     *load('r0', 0x03004400),                    # background cell
     'strh r5, [r0, #0]',
     *load('r0', 0x03023CFC),                    # event word, bit 0x19

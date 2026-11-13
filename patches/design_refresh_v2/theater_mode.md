@@ -16,9 +16,10 @@ colour finish are the ones pinned here (top third, dark mix 55
 percent toward black, light mix 75 percent toward paper, RGB565
 quantisation). Accumulator state lives at SAVEINFO+0x1C8 inside
 the verbatim block, on the census evidence recorded in the build
-README. The variant is validated under emulation end to end;
-it has not been flashed, and hardware observation of both draw
-paths remains the open gate.
+README. The variant is validated under emulation end to end and has now
+booted on hardware. Embedded artwork and the cover-derived black background
+were observed during MP3 playback; broader cover and window-path coverage
+remains.
 
 One visible artifact on the derived ground is settled, and it is
 not the mechanism's fault: the transport glyphs carry their stock

@@ -9,7 +9,7 @@ structural validation.
 | | |
 |---|---|
 | Input | `DP3_V137.img`, 13,631,492 bytes, SHA-256 `fcc1cd3e…` |
-| Output | 13,638,148 bytes, SHA-256 `66d79d648bee93d71c3adfdf229434bed57b337c6f9448d3c90d82a4a10df8bf` |
+| Output | 13,638,148 bytes, SHA-256 `0f795253f0ec88372d02e9923c29e04dbf2b9081239e91194716d593e93bd0fa` |
 | Composition | 64 byte patches, 2 transplants, 2 growth insertions, one merged gap tail, one merged theme config |
 | Default build | unchanged, still SHA-256 `92c44606…` (verify.py checks 1 to 13 pass; check 13 pins this build) |
 
@@ -102,7 +102,7 @@ lays out four occupants:
 | 0x7F8 | 0x0307C7AC | 4 | Spare zeros, not emitted |
 
 Total emitted: 2,040 of 2,044 bytes. Merged tail SHA-256
-`1443d354b9a388f156d23178eb302b7535e703b0e3295d8dc329cd7b71820f69`.
+`a0bccfe19ecc842afbe1a57ba05d26ef56ab71a4632791c36523cf67c5708e55`.
 
 The playlist, no-art and transport hooks that used to sit at 0x0307C1DC
 now live in module 0, in stock routines nothing can reach

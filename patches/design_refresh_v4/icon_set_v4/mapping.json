@@ -9,10 +9,10 @@
    "h": 32,
    "size": 2048,
    "stock_sha256": "a6aab7e0f1fe05a2eafb27b05c28d146752c4152fe083f48141a9a22019deb35",
-   "new_sha256": "14d1e6923db99901bb8da63889ae259e7758da9156ec2ddde8b7578794106e19",
+   "new_sha256": "a94847498c61ffaa5c425360436d21df9138babd033d66ea8a2c7cbbde09db53",
    "ink": "0xffff",
    "key": "0xf800",
-   "ink_pixels": 102
+   "ink_pixels": 182
   },
   {
    "id": 158,
@@ -21,10 +21,10 @@
    "h": 32,
    "size": 2048,
    "stock_sha256": "40840bb64b41ec4c7bc303ab693602a44333a7bed9db82a83ce01cb15e1a74f1",
-   "new_sha256": "7288a31562ee687f40258d2a4abfc344c8f059f282c0f0d38f8c4ab1334b948c",
+   "new_sha256": "f04fc232133b72430c7b2680f7be7459eb10b8749325cdadaff0d62ecd434e9e",
    "ink": "0xffff",
    "key": "0xf800",
-   "ink_pixels": 221
+   "ink_pixels": 337
   },
   {
    "id": 159,
@@ -33,10 +33,10 @@
    "h": 32,
    "size": 2048,
    "stock_sha256": "11b91455d99eeafa3dcf953c5a25b4fb16e115fd1c212465a57b9eeae218fddb",
-   "new_sha256": "ca25167593a249686512e9f68d2e012965d86c31554110f7a4d6121aaf553819",
+   "new_sha256": "b0eafcc252b7f68a8a9a8074274cc66f1ffb31fffc792c8b223d2985e77a9584",
    "ink": "0xffff",
    "key": "0xf800",
-   "ink_pixels": 136
+   "ink_pixels": 206
   },
   {
    "id": 160,
@@ -45,10 +45,10 @@
    "h": 32,
    "size": 2048,
    "stock_sha256": "9263924317d7a461208564829fd6afc7a12442bc46fae88908d2d633cc182075",
-   "new_sha256": "8864533af23077d6837d0ae35e082f4d7ae449b41e6d8da13a37926bc826a7ca",
+   "new_sha256": "a8079dd31092d64dcb870b652e8a564ea4528a61274696f503d46fe0d31f0e92",
    "ink": "0xffff",
    "key": "0xf800",
-   "ink_pixels": 217
+   "ink_pixels": 333
   },
   {
    "id": 161,
@@ -57,10 +57,10 @@
    "h": 32,
    "size": 2048,
    "stock_sha256": "213a87bac5ebacd2555fe07275efe03cd8c08b39baf657c73d73492f3b90e67d",
-   "new_sha256": "3bdff0c98ec81580685ed88e3abbd642b1c05a883eb90a99a78ee53f8ff7d11d",
+   "new_sha256": "d594c0f03f0d66776417f045ea764efee595f5f30802d91c644399be6e7c5325",
    "ink": "0xffff",
    "key": "0xf800",
-   "ink_pixels": 102
+   "ink_pixels": 184
   },
   {
    "id": 162,
@@ -309,10 +309,10 @@
    "h": 32,
    "size": 2048,
    "stock_sha256": "a18b0ba95ac709eef03cb5d939606bc9f028d4643384b36305970b0b8917d58f",
-   "new_sha256": "a886318433963e95c1af7cd8941d8908448f95c5b4ab3fc0122b27547d346d6b",
+   "new_sha256": "3f0cef789abfac0167457c65fe4ac167b07ba480d82b3e1f9b01dc575d182eed",
    "ink": "0x0000",
    "key": "0xf800",
-   "ink_pixels": 102
+   "ink_pixels": 182
   },
   {
    "id": 324,
@@ -321,10 +321,10 @@
    "h": 32,
    "size": 2048,
    "stock_sha256": "1b1f687168be7c574da71a0b83933caa26cdfe51b72117239620fe1c04823a9c",
-   "new_sha256": "8ae311fd53d792cde7a21be71bd484ac0fcd2c6664574e9b4c1a754fb26960b5",
+   "new_sha256": "78c12d10f452ad4ee7102c846c7d5ec4bbcaabbc7da743f97114b01a378dd223",
    "ink": "0x0000",
    "key": "0xf800",
-   "ink_pixels": 221
+   "ink_pixels": 337
   },
   {
    "id": 325,
@@ -333,10 +333,10 @@
    "h": 32,
    "size": 2048,
    "stock_sha256": "1e718e028829f2a947cf7b8c6882cbcca5f137956ac542d80c1bacdcce74fb4e",
-   "new_sha256": "386853621bd5aa544fd903ab9ebfc1a7dde7a8c53c4b7a093eab5cf65f4ea0a4",
+   "new_sha256": "9dfcba0cb2b8478a06c2d7acdd645cf163f849d302ea0043a7cbf728adb44549",
    "ink": "0x0000",
    "key": "0xf800",
-   "ink_pixels": 136
+   "ink_pixels": 206
   },
   {
    "id": 326,
@@ -345,10 +345,10 @@
    "h": 32,
    "size": 2048,
    "stock_sha256": "7407cb5e6ef2249e8a13cfb4be1ad9da62919c4fd78084e607efd75f44bafc89",
-   "new_sha256": "5577c7d95d1869655cd808529c32f67ea08f1a731ee067ff31301a5216c8091a",
+   "new_sha256": "46043e8e0d0d21fd93478316d1c9f1e05f1dd6d22e9b06bcf6ed9ffcfd8627fc",
    "ink": "0x0000",
    "key": "0xf800",
-   "ink_pixels": 217
+   "ink_pixels": 333
   },
   {
    "id": 327,
@@ -357,10 +357,10 @@
    "h": 32,
    "size": 2048,
    "stock_sha256": "1ff15102a4dbd39e73e70613b556beaa43f3a14473e88f743a5398f90e7923e2",
-   "new_sha256": "fe6e4a74d79abd808b54fe638f8222bbe5e196a58a7e85a4da2938e704634c34",
+   "new_sha256": "410b9594a16f8b6edac7452b7f527ab037514a1fb00bd1e1052973d63a6be518",
    "ink": "0x0000",
    "key": "0xf800",
-   "ink_pixels": 102
+   "ink_pixels": 184
   },
   {
    "id": 328,

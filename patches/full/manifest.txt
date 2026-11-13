@@ -69,6 +69,7 @@ patches/0101-theater-blit-sync-a.patch
 patches/0102-theater-blit-sync-b.patch
 patches/0103-theater-blit-painter-a.patch
 patches/0104-theater-blit-painter-b.patch
+patches/0105-theater-constructor-restore.patch
 # Bluetooth dispatcher hook (audited tail placement, unchanged):
 ../m3u/tail_build/patches/0032-ui-bt-dispatcher-hook-tail.patch
 # M3U resolver hooks, regenerated for the merged tail (local copies):

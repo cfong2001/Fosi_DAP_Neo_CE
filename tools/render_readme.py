@@ -60,8 +60,8 @@ DARK_GROUND = 0x10A2            # stock dark player ground (theater default)
 BG = (13, 17, 23)               # figure background
 CAPTION = (230, 230, 230)
 SUB = (150, 160, 170)
-FONT = '/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf'
-FONT_BOLD = '/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf'
+FONT = REPO / 'docs/fonts/Barlow-Regular.ttf'
+FONT_BOLD = REPO / 'docs/fonts/Barlow-SemiBold.ttf'
 TRANSPORT_IDS = [155, 156] + list(range(157, 182)) + list(range(286, 290))
 
 

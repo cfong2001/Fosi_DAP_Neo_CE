@@ -1,6 +1,6 @@
 # Boot, slot selection and the update flow (DP3_V137)
 
-> **Correction:** Later instruction-level review found errors in the slot-scan, updater mirror-seek, and device-3 subdevice-offset descriptions. See [the slot capacity investigation](slot_reclamation/report.md) before relying on this document. Physical slot geometry and recovery behavior remain unverified.
+> **Correction:** Later instruction-level review found errors in the slot-scan, updater mirror-seek, and device-3 subdevice-offset descriptions. See [the slot capacity investigation](slot_reclamation/report.md) before relying on this document. The first qualified device measured Rockusb slot bases at LBA 0 and 30720 and completed full CE readback; stock-recovery boot remains to be exercised.
 
 All addresses are CPU addresses in `DP3_V137.img` (SHA-256
 `fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cdfade5e9c6ea3bd71ac6deef`).
