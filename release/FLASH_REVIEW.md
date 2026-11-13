@@ -1,10 +1,10 @@
 # Flash review and recovery plan
 
-**Status: offline checks pass; first device qualification is still required.**
-No CE build has been booted on a physical unit. Package validation and
-emulation cannot prove early-boot acceptance, electrical behavior or that
-Rockusb recovery works on your unit. Do not describe this image as proven
-safe to flash.
+**Status: first physical flash, full slot readback, boot and music playback pass.**
+Standard CE has booted on a physical DAP Neo, played music, displayed embedded
+album artwork and exposed the custom settings. Both written 13 MiB slot regions
+matched the intended payload byte for byte before reset. Longer-duration,
+format, USB-mode and recovery-boot checks remain listed below.
 
 For newer model-specific evidence, see the [NeoPod flashing comparison](../analysis/neopod_flash_comparison.md). NeoPod reports working custom firmware and normal reset on a DAP Neo; this supports the flashing mechanism, while CE still needs its own hardware qualification. The comparison also corrects the visible stock-update filename to `RKNANOFW.IMG`.
 
@@ -19,7 +19,7 @@ For newer model-specific evidence, see the [NeoPod flashing comparison](../analy
 | Runtime placement | Row code uses bounded, censused resident pockets; no new persistent RAM or overlay growth. Stock framebuffer spans and fallback remain in use. | Stock/fast pixels, display context, ABI and write bounds pass emulation. Hardware tripwire/normal-use testing remains required for computed callers missed by static analysis. |
 | Resource reading | The stock reader takes a 32-bit byte count and breaks aligned runs into sectors. Its byte-swap loop uses a 16-bit halfword counter. | Largest direct read is 115,200 bytes / 57,600 halfwords, below counter wrap; row split prevents crossing the SRAM gap. |
 | Boot/updater changes | These PRs do not modify module 1 or the module 8 installer. | No new bootloader or flash-writing path is introduced. |
-| Recovery assumptions | The stock updater writes slot 2 and then copies it over slot 1. A second stock fallback is lost. Rockusb addresses are not proven to equal firmware-relative sectors. | Back up the complete device, verify geometry by readback, and establish real recovery before writing. Never corrupt a header as a recovery technique. |
+| Recovery geometry | The stock updater writes slot 2 and then copies it over slot 1. On the qualified unit, Rockusb slot bases are LBA 0 and 30720; both 13 MiB CE writes matched on full readback. A second stock fallback is still lost. | Preserve the complete device backup and the measured trailing 2 MiB of each slot. Full stock-recovery boot remains to be exercised. Never corrupt a header as a recovery technique. |
 | V155 migration | V155 moves shared globals, changes settings/menu state, adds library slots and changes decoder modules. | No wholesale transplant. Library migration and battery/decoder policy remain unqualified until ABI, persistence, decode vectors and device behavior are established. |
 
 ## Prepare a dated pair offline
@@ -114,8 +114,8 @@ bounded LBA reads (0x14). It has no erase, flash-write, reset or loader
 command. It imports only the exact reviewed community transport blob,
 with CRLF line endings normalized before checking; it never runs that
 file as a script. The transport currently requires Windows and the
-community Rockusb driver. This helper is unit-tested with a fake device,
-**not yet tested on physical hardware**.
+community Rockusb driver. The helper completed two matching reads of the
+qualified unit's full accessible LBA range; its fake-device tests remain in CI.
 
 After recovery enumeration has been independently established, read raw
 information without changing firmware:
