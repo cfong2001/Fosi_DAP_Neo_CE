@@ -98,6 +98,12 @@ def main():
         check(f'keyed helper draws knob {rid} as exactly its {len(expect)} non-key pixels',
               got == expect and len(m.stores) == len(expect),
               f'{len(m.stores)} stores')
+        center = art[7 * 14 + 7]
+        stroke = art[1 * 14 + 7]
+        check(f'knob {rid} keeps orange fill and contrasting stroke',
+              center == (0xF220 if rid == 220 else 0xFB20) and
+              stroke == (0xFFFF if rid == 220 else 0x0000),
+              f'center={center:#06x}, stroke={stroke:#06x}')
 
     # 4. dialog cards: key only outside the corners
     for rid in (137, 193, 203, 303, 359, 369):
