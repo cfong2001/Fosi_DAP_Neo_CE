@@ -39,7 +39,9 @@ def main():
             pockets=[(p['start'],p['end']) for p in json.loads(args.census.read_text())['candidates'] if p['tier'] in (1,2)]
             # Only the ASF-specific case is available. M4A/AAC and other
             # live format cases begin at C61A; they are never allocator space.
-            pockets.append((0x0306C5B0,0x0306C61A))
+            # The content-route repair now owns C5B0..C5F2. Only the
+            # aligned remainder is available to a future tag layout.
+            pockets.append((0x0306C5F4,0x0306C61A))
             layout={}
             # The large sequence validator occupies the now-unused ASF case.
             order=sorted(sections,key=lambda s:(s!='.text.page_sequence',-sections[s]))

@@ -36,7 +36,7 @@ class Diagnostics(unittest.TestCase):
         return uc
 
     def test_browser_capture_and_displaced_instruction(self):
-        for kind in (1, 6):
+        for kind in (0, 1, 6):
             with self.subTest(kind=kind):
                 uc = self.machine()
                 uc.mem_write(NODE + 0x4E, bytes([kind]))
@@ -47,7 +47,8 @@ class Diagnostics(unittest.TestCase):
                 for i, reg in enumerate(kept):
                     uc.reg_write(reg, 0x100 + i)
                 uc.emu_start(diagnostic.NODE_SITE | 1, diagnostic.NODE_SITE + 4, count=1000)
-                self.assertEqual(bytes(uc.mem_read(diagnostic.TRACE - 4, 12)), b'ZZZZOPU' + bytes([kind]) + b'ZZZZ')
+                extension = b'---' if kind == 0 else b'OPU'
+                self.assertEqual(bytes(uc.mem_read(diagnostic.TRACE - 4, 12)), b'ZZZZ' + extension + bytes([kind]) + b'ZZZZ')
                 self.assertEqual(uc.reg_read(UC_ARM_REG_R5), kind)
                 self.assertEqual([uc.reg_read(r) for r in kept], [0x100, 0x101, 0x102])
                 self.assertEqual(uc.reg_read(UC_ARM_REG_SP), STACK)

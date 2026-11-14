@@ -53,9 +53,14 @@ def assemble():
         pass:b.w {PROFILE};.ltorg''', ENTRY)
     capture = asm(f'''push {{r0,r1,r2,lr}};
         ldrb r5,[r4,#0x4e];ldr r0,={TRACE};
+        cmp r5,#0;bne file;
+        movw r1,#0x2d2d;strh r1,[r0];movs r1,#45;strb r1,[r0,#2];b done;
+    file:
         ldrb r1,[r4,#0x57];strb r1,[r0];
         ldrb r1,[r4,#0x58];strb r1,[r0,#1];
-        ldrb r1,[r4,#0x59];strb r1,[r0,#2];strb r5,[r0,#3];
+        ldrb r1,[r4,#0x59];strb r1,[r0,#2];
+    done:
+        strb r5,[r0,#3];
         pop.w {{r0,r1,r2,lr}};b.w {NODE_SITE+4};.ltorg''', CAPTURE)
     helpers = copy + hexcode
     assert len(entry) <= 106 and len(helpers) <= 78 and len(capture) <= 72

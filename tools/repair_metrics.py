@@ -91,6 +91,8 @@ def main():
     report['selected_glyphs']={'passed':30,'required':30,'keyed_corners':True,'antialiased_edges':True}
     playback=runpy.run_path(str(ROOT/'tests/opus_harness/test_open_path.py'))
     report['opus_open_path']=playback['check'](raw)
+    content=runpy.run_path(str(ROOT/'patches/opus_swap/test_content_route.py'))
+    report['opus_content_route']=content['check'](raw)
     render={}
     for label,image in (('stock',stock),('candidate',raw)):
         machine=painter['Machine'](image,real_store=True)

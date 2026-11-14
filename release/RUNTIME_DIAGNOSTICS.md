@@ -26,7 +26,7 @@ CE:OPU opu 06 FF FF 6F
 | --- | --- |
 | First three letters | Live resident browser audio-table extension |
 | Next three letters | Last activated browser item's short extension |
-| First hex pair | Last browser item's class: `01` audio, `06` unrecognized/all-files |
+| First hex pair | Last browser item's class: `00` directory (extension shown as `---`), `01` audio, `06` unrecognized/all-files |
 | Second hex pair | Current codec ID; `01` selects the transplanted Opus decoder |
 | Third hex pair | Raw per-open marker; its success/error semantics are not established |
 | Fourth hex pair | First byte of the captured extension: `4F` is uppercase O, `6F` lowercase o |

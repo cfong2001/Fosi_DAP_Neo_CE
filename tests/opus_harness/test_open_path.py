@@ -20,8 +20,8 @@ from rknano_image import Image
 from scenario import Scenario, CODEC, LOAD_START
 from machine import RET
 from unicorn import Uc, UC_ARCH_ARM, UC_MODE_THUMB
-from unicorn.arm_const import (UC_ARM_REG_R0, UC_ARM_REG_SP, UC_ARM_REG_LR,
-                               UC_ARM_REG_PC)
+from unicorn.arm_const import (UC_ARM_REG_R0, UC_ARM_REG_R1, UC_ARM_REG_R2,
+                               UC_ARM_REG_SP, UC_ARM_REG_LR, UC_ARM_REG_PC)
 
 
 def silence():
@@ -65,16 +65,40 @@ def browser_kind(raw):
     return uc.mem_read(uc.reg_read(UC_ARM_REG_R0), 1)[0]
 
 
+def system_route(raw, data):
+    """Run the real content probe through initialized file-API callbacks."""
+    system = Scenario(raw, ext=b'OPU', rate=48000)
+    position = 0
+    def read(machine):
+        nonlocal position
+        target, count = [machine.u.reg_read(r) for r in (UC_ARM_REG_R0, UC_ARM_REG_R1)]
+        block = data[position:position + count]
+        machine.u.mem_write(target, block)
+        position += len(block)
+        return len(block)
+    def seek(machine):
+        nonlocal position
+        offset, whence = [machine.u.reg_read(r) for r in (UC_ARM_REG_R0, UC_ARM_REG_R1)]
+        position = offset if whence == 0 else position + offset
+        return position
+    # Keep the real FileAPI registration at 0x030545F8. It installs these
+    # native entries just before the probe; supply the modeled file layer
+    # at those entries rather than leaving its function pointers null.
+    system.m.stubs[0x03058FA8] = read
+    system.m.stubs[0x030594A0] = seek
+    system.set_next_file()
+    system.m.call(LOAD_START, limit=2_000_000)
+    assert system.m.u.reg_read(UC_ARM_REG_PC) == RET, 'system open did not return'
+    return system.m.r32(CODEC), [load[0] for load in system.m.loads]
+
+
 def check(raw):
     stock = (ROOT / 'DP3_V137.img').read_bytes()
     assert browser_kind(stock) == 6, 'stock negative control must reject OPU'
     assert browser_kind(raw) == 1, 'candidate browser must admit OPU as audio'
-    system = Scenario(raw, ext=b'OPU', rate=48000)
-    system.set_next_file()
-    system.m.call(LOAD_START, limit=2_000_000)
-    assert system.m.u.reg_read(UC_ARM_REG_PC) == RET, 'system open did not return'
-    assert system.m.r32(CODEC) == 1
-    assert 72 in [load[0] for load in system.m.loads], 'Opus module was not loaded'
+    codec, loads = system_route(raw, silence())
+    assert codec == 1, f'content probe routed Opus to codec {codec}'
+    assert 72 in loads, 'Opus module was not loaded'
     import harness72 as decoder
     previous = decoder.H.WS
     with tempfile.TemporaryDirectory(prefix='ce-opus-open-') as tmp:

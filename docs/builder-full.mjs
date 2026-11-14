@@ -1723,6 +1723,36 @@ export const FULL_PATCHES = [
   "expect": "4ff4407102a8e8f75bfc",
   "replace": "4846314600f025fd52e0",
   "index": 171
+ },
+ {
+  "file": "0263-opus-content-prefix.patch",
+  "name": "0263-opus-content-prefix",
+  "module": 0,
+  "region": "code",
+  "address": 50775472,
+  "expect": "2d4802a900780028484604d01ef0d0ff002848d102e011f0b5fdf9e7402202a906f25a30fbf786ff402202ac62a906f16000fbf77fff402204f5207106f5af70fbf7",
+  "replace": "40461b30b0f5007f15d8a17e99b122461b320a4408441330b0f5007f0bd8207948b9607900f00300022804d1e07e132801d3f8f7a7bf4f20287047206870fbf75abf",
+  "index": 172
+ },
+ {
+  "file": "0264-opus-content-signature.patch",
+  "name": "0264-opus-content-signature",
+  "module": 0,
+  "region": "code",
+  "address": 50746676,
+  "expect": "104887b000f1280191e80e108de80e10d0e90e10cde904101548002141600b49c97d5df8211081600948017800291cbf",
+  "replace": "09a3082112f8010b13f801cb604501d007f04fb80139f5d14f202870502068705520a87002f0b5bf4f70757348656164",
+  "index": 173
+ },
+ {
+  "file": "0265-opus-content-hook.patch",
+  "name": "0265-opus-content-hook",
+  "module": 0,
+  "region": "code",
+  "address": 50758738,
+  "expect": "4f202870",
+  "replace": "04f0adb8",
+  "index": 174
  }
 ];
 export const FULL_TAIL = {
@@ -13137,4 +13167,4 @@ export const FULL_THEME_RUNS = [
   "replace": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
  }
 ];
-export const FULL_IMAGE_SHA256 = "ecefc49463b9d37cbc4e3a9c4d802ded397f918dff76b576eec5fc51fe58e8ec";
+export const FULL_IMAGE_SHA256 = "8a9f32fc06ed2459ffd936a9203d6df6e665b273b49fb25e1083b0b96d8c5ce0";

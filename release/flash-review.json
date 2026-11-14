@@ -1,7 +1,7 @@
 {
-  "status": "OFFLINE PACKAGE CHECKS PASSED; FULL-CARD DEVICE ACCEPTANCE PENDING",
+  "status": "CONTENT ROUTING REPAIR PASSES OFFLINE NEGATIVE CONTROLS; DEVICE ACCEPTANCE PENDING",
   "source_candidate": {
-    "sha256": "ecefc49463b9d37cbc4e3a9c4d802ded397f918dff76b576eec5fc51fe58e8ec",
+    "sha256": "8a9f32fc06ed2459ffd936a9203d6df6e665b273b49fb25e1083b0b96d8c5ce0",
     "bytes": 13639684,
     "header_date": "2026-10-23",
     "mirror_offset": "0xc96000",

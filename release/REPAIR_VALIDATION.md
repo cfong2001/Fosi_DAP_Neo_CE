@@ -14,6 +14,14 @@ APE, Ogg and other metadata dispatch code intact. Allocation is limited to the
 ASF-specific case and censused resident pockets. The protected dispatch bytes
 are checked independently of the payload hash.
 
+The native content probe is also part of the playback route. Stock
+`0x03067F50` changed any OggS stream to OGG after the extension lookup,
+so the second lookup selected Vorbis even for an admitted Opus file.
+The repair recognizes a bounded BOS OpusHead packet, selects OPU and
+retains the original final seek reset. The regression initializes the
+real file-API registration and models its reads, reproducing codec 4
+and module 75 without the repair, then codec 1 and module 72 with it.
+
 ## Short gate
 
 With Unicorn, Capstone and Keystone installed:
@@ -40,6 +48,9 @@ are modeled. Its output contains no media paths or device identifiers.
 | Selected glyph variants with orange fill, contrast and antialiasing | 30 / 30 |
 | Browser admission / codec selection for generated Opus | Audio kind 1 / module 72 |
 | Generated silence: initial PCM frames, 48 kHz stereo | 3,840 / 3,840 |
+| Native content-probe negative control / repair | Vorbis 4 / Opus 1 |
+| Malformed/non-BOS header controls retaining native Ogg routing | 6 / 6 |
+| Header-buffer boundary positions and callee-register guards | 7 / 7 |
 | Selected-control instruction ratio vs stock | At most 1.0 (currently 0.4914) |
 | Selected-control resource reads vs stock | No increase (currently 14 vs 14) |
 

@@ -84,7 +84,7 @@ STOCK_SHA256 = 'fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cdfade5e9c6ea3bd71ac6deef
 THEATER_TAIL_SHA256 = '96931a93bd197782f5efda40974ab31731c801e4231f29f44c1dfa7347c0fc78'
 BT_PAYLOAD_SHA256 = 'ce6ef701285885efb17b072df128602c3ee5da8359b7b267cd7e1ca92457cf06'
 LOCK_PAYLOAD_SHA256 = '9610d8d7995d821b4289c18e720c21c848494633d2af097e160101a23e2c92d2'
-FULL_IMAGE_SHA256 = 'ecefc49463b9d37cbc4e3a9c4d802ded397f918dff76b576eec5fc51fe58e8ec'
+FULL_IMAGE_SHA256 = '8a9f32fc06ed2459ffd936a9203d6df6e665b273b49fb25e1083b0b96d8c5ce0'
 FULL_TAIL_SHA256 = 'a0bccfe19ecc842afbe1a57ba05d26ef56ab71a4632791c36523cf67c5708e55'
 FULL_GROWTH_PINS = ((31, 'payload31.bin',
                      '3f7e09cae9658c4cf21bfc4f9be92a037051f10a74e759f2e7fd8d4c0cac2aa9'),
@@ -507,7 +507,7 @@ def main():
         line = line.split('#', 1)[0].strip()
         if line:
             full_names.append(line)
-    assert len(full_names) == 172, len(full_names)
+    assert len(full_names) == 175, len(full_names)
     full_patches = []
     for index, name in enumerate(full_names):
         patch = parse_patch(full_dir / name)

@@ -3,7 +3,7 @@
  "input_file": "DP3_V137.img",
  "output_file": "DP3_V137_CE.img",
  "input_sha256": "fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cdfade5e9c6ea3bd71ac6deef",
- "output_sha256": "ecefc49463b9d37cbc4e3a9c4d802ded397f918dff76b576eec5fc51fe58e8ec",
+ "output_sha256": "8a9f32fc06ed2459ffd936a9203d6df6e665b273b49fb25e1083b0b96d8c5ce0",
  "byte_length": 13639684,
  "header_date": "20261023",
  "patches_applied": [
@@ -1898,6 +1898,39 @@
    "file_offset": "0x45c52",
    "old_hex": "4ff4407102a8e8f75bfc",
    "new_hex": "4846314600f025fd52e0"
+  },
+  {
+   "patch": "0263-opus-content-prefix",
+   "file": "0263-opus-content-prefix.patch",
+   "kind": "module",
+   "module": 0,
+   "region": "code",
+   "cpu_address": "0x306c5b0",
+   "file_offset": "0x45c5c",
+   "old_hex": "2d4802a900780028484604d01ef0d0ff002848d102e011f0b5fdf9e7402202a906f25a30fbf786ff402202ac62a906f16000fbf77fff402204f5207106f5af70fbf7",
+   "new_hex": "40461b30b0f5007f15d8a17e99b122461b320a4408441330b0f5007f0bd8207948b9607900f00300022804d1e07e132801d3f8f7a7bf4f20287047206870fbf75abf"
+  },
+  {
+   "patch": "0264-opus-content-signature",
+   "file": "0264-opus-content-signature.patch",
+   "kind": "module",
+   "module": 0,
+   "region": "code",
+   "cpu_address": "0x3065534",
+   "file_offset": "0x3ebe0",
+   "old_hex": "104887b000f1280191e80e108de80e10d0e90e10cde904101548002141600b49c97d5df8211081600948017800291cbf",
+   "new_hex": "09a3082112f8010b13f801cb604501d007f04fb80139f5d14f202870502068705520a87002f0b5bf4f70757348656164"
+  },
+  {
+   "patch": "0265-opus-content-hook",
+   "file": "0265-opus-content-hook.patch",
+   "kind": "module",
+   "module": 0,
+   "region": "code",
+   "cpu_address": "0x3068452",
+   "file_offset": "0x41afe",
+   "old_hex": "4f202870",
+   "new_hex": "04f0adb8"
   }
  ],
  "transplants_applied": [
@@ -15636,8 +15669,8 @@
   }
  ],
  "diff_vs_stock": {
-  "bytes_changed": 4958851,
-  "range_count": 424972,
+  "bytes_changed": 4958967,
+  "range_count": 424976,
   "note": "range list omitted; rebuild with patches/full/build/build_full.py for it"
  },
  "validation": "validate_grown() passed (structural checks, layout derived from the image)",

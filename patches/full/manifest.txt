@@ -203,3 +203,6 @@ patches/0262-focus-wheel-service-hook.patch
 ../opus_swap/0253-opus-tags-opus_tags.patch
 ../opus_swap/0254-opus-tags-utf16.patch
 ../opus_swap/0255-opus-tags-dispatch.patch
+../opus_swap/0263-opus-content-prefix.patch
+../opus_swap/0264-opus-content-signature.patch
+../opus_swap/0265-opus-content-hook.patch
