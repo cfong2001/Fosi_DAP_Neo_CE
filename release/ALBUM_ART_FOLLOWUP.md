@@ -2,8 +2,8 @@
 
 The content-routing repair is merged and Opus music playback is confirmed on
 hardware. The latest playback test displayed neither the album cover nor a
-derived theater background. This follow-up does not change the working image
-until the missing artwork path is reproduced and repaired.
+derived theater background. The repaired image passes extraction and native drawing tests; device visual
+acceptance remains pending.
 
 ## Established source behavior
 
@@ -46,5 +46,37 @@ The repair gates are:
 | Regression | Existing scan, text metadata and playback gate | All current checks still pass |
 | Hardware | Same track through browser and library | Audible playback, visible cover and derived background |
 
-The initial PR supplies the inventory and scope. Firmware extraction and
-native artwork handoff remain to be implemented and tested.
+## Diagnosed repair and results
+
+Module 18's format dispatch still sent OPU (the former WMA slot) to the
+ASF picture reader. The new entry routes it to the native Ogg picture loader.
+That loader expects the seven-byte `03 vorbis` comment header; the Opus shim
+recognizes all eight bytes of `OpusTags` and adjusts the packet length without
+changing the lacing table. Non-comment packets retain the native skip offset.
+
+Large covers exposed a second defect: the loader used the page granule value
+as a continuation signal. The tested Opus header pages use zero even when
+all 255 laces are 255. The repair follows the last lace instead, on both the
+initial and subsequent comment pages. Native base64 decoding, temporary-file
+creation, JPEG decoding, row drawing and theater accumulation remain in use.
+The text parser still skips picture values; artwork has its own playback path.
+
+`patches/opus_swap/test_artwork_route.py` executes those native paths with
+modeled filesystem and LCD leaves. The short gate checks 81,814 exact copied
+bytes across two fixtures (including a multipage cover), five missing/malformed
+returns, 54 actual decoded JPEG rows and three independent theater-color
+matches. The old image reproduces missing Opus art; native Vorbis output
+remains identical. Stack, output guards and callee-saved registers are checked.
+
+The full local corpus check extracted all 201 picture blocks byte-for-byte
+from 204 files; three files had no picture. All 201 source images are readable
+baseline JPEGs. No filenames or media are included in these results.
+
+Run the short gate with:
+
+```sh
+python patches/opus_swap/test_artwork_route.py --candidate release/DP3_V137_CE.img
+```
+
+The integrated repair gate also includes these checks. Hardware must still
+confirm the cover and derived background while music plays before merging.

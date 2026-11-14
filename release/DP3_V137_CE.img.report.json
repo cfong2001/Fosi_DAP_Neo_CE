@@ -3,7 +3,7 @@
  "input_file": "DP3_V137.img",
  "output_file": "DP3_V137_CE.img",
  "input_sha256": "fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cdfade5e9c6ea3bd71ac6deef",
- "output_sha256": "8a9f32fc06ed2459ffd936a9203d6df6e665b273b49fb25e1083b0b96d8c5ce0",
+ "output_sha256": "6b6c9b503e9538a0199f67b06ffab2347a46b00493be01ff3101d14e1380079a",
  "byte_length": 13639684,
  "header_date": "20261023",
  "patches_applied": [
@@ -1931,6 +1931,105 @@
    "file_offset": "0x41afe",
    "old_hex": "4f202870",
    "new_hex": "04f0adb8"
+  },
+  {
+   "patch": "0266-opus-artwork",
+   "file": "0266-opus-artwork.patch",
+   "kind": "module",
+   "module": 0,
+   "region": "code",
+   "cpu_address": "0x306d734",
+   "file_offset": "0x46de0",
+   "old_hex": "10b54ff400610020fff7f2fc28210020fff7d2fd10210020fff7cefd7820f7f7f7f80221bde810400020fff79fbdfff775be10b50c4601460020fff7bdfd2146bde81040",
+   "new_hex": "9df81c014f2812d13a4601210df21610ebf730fc012810d1072209490df21010e7f7c0fb08b115f0fabd16f072b8032801d016f05ab816f052b816f094b800bf4a330803"
+  },
+  {
+   "patch": "0267-opus-artwork",
+   "file": "0267-opus-artwork.patch",
+   "kind": "module",
+   "module": 18,
+   "region": "code",
+   "cpu_address": "0x3083346",
+   "file_offset": "0x99778",
+   "old_hex": "384600f0",
+   "new_hex": "00f003ba"
+  },
+  {
+   "patch": "0268-opus-artwork",
+   "file": "0268-opus-artwork.patch",
+   "kind": "module",
+   "module": 18,
+   "region": "code",
+   "cpu_address": "0x308334a",
+   "file_offset": "0x9977c",
+   "old_hex": "85fc00f07cfc00f0",
+   "new_hex": "7075735461677300"
+  },
+  {
+   "patch": "0269-opus-artwork",
+   "file": "0269-opus-artwork.patch",
+   "kind": "module",
+   "module": 18,
+   "region": "code",
+   "cpu_address": "0x308380a",
+   "file_offset": "0x99c3c",
+   "old_hex": "9df81c01032805d1",
+   "new_hex": "e9f793bf00bf00bf"
+  },
+  {
+   "patch": "0270-opus-artwork",
+   "file": "0270-opus-artwork.patch",
+   "kind": "module",
+   "module": 18,
+   "region": "code",
+   "cpu_address": "0x3083352",
+   "file_offset": "0x99784",
+   "old_hex": "85fc074600f084fc044600f083fc002f",
+   "new_hex": "3a4601214ff0ff30d6f7a1f800f05eba"
+  },
+  {
+   "patch": "0271-opus-artwork",
+   "file": "0271-opus-artwork.patch",
+   "kind": "module",
+   "module": 0,
+   "region": "code",
+   "cpu_address": "0x306d7f8",
+   "file_offset": "0x46ea4",
+   "old_hex": "2de9f84f1c460a9d92460e468146ef2a88bf4ff0ef0ab4f5a07f28bf40f23f14884623b29b465246fff7adff00210846fff73afd601c0090",
+   "new_hex": "9df81c214f2a10d1082913d3a1f108029df8083173b12b4413f8013cff2b0cbf4ff0ff33002316f024b8a1f10702234616f01fb816f035b8"
+  },
+  {
+   "patch": "0272-opus-artwork",
+   "file": "0272-opus-artwork.patch",
+   "kind": "module",
+   "module": 18,
+   "region": "code",
+   "cpu_address": "0x3083866",
+   "file_offset": "0x99c98",
+   "old_hex": "ca1f2346",
+   "new_hex": "e9f7c7bf"
+  },
+  {
+   "patch": "0273-opus-artwork",
+   "file": "0273-opus-artwork.patch",
+   "kind": "module",
+   "module": 0,
+   "region": "code",
+   "cpu_address": "0x3061252",
+   "file_offset": "0x3a8fe",
+   "old_hex": "2849086840f001000860002070472448406970472348806870472148007c00f00100704710b5",
+   "new_hex": "9df8481769b10df20060084410f8010cff280cbf4ff0ff300020cdf8440721f07fbf21f0ebbd"
+  },
+  {
+   "patch": "0274-opus-artwork",
+   "file": "0274-opus-artwork.patch",
+   "kind": "module",
+   "module": 18,
+   "region": "code",
+   "cpu_address": "0x308316e",
+   "file_offset": "0x995a0",
+   "old_hex": "ddf84407",
+   "new_hex": "def770b8"
   }
  ],
  "transplants_applied": [
@@ -15669,8 +15768,8 @@
   }
  ],
  "diff_vs_stock": {
-  "bytes_changed": 4958967,
-  "range_count": 424976,
+  "bytes_changed": 4959125,
+  "range_count": 424983,
   "note": "range list omitted; rebuild with patches/full/build/build_full.py for it"
  },
  "validation": "validate_grown() passed (structural checks, layout derived from the image)",
