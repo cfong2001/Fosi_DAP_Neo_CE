@@ -69,4 +69,7 @@ transport_keyed_draw:
     b.w     HELPER
     .size transport_keyed_draw, . - transport_keyed_draw
 
+    /* GNU as otherwise uses a Thumb NOP for literal-pool alignment;
+       LLVM uses zeros. Pin the unused padding for identical source builds. */
+    .balign 4, 0
     .ltorg

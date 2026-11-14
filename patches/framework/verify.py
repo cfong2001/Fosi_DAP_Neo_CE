@@ -697,7 +697,7 @@ def main():
                         '--ecpatch-dir', str(ecp)])
         ok = rf.returncode == 0 and ru.returncode == 0 \
             and fout.exists() and uout.exists()
-        detail = (rf.stderr + ru.stderr).strip()[:160]
+        detail = (rf.stderr + ru.stderr).strip()[-4000:]
         if ok:
             f, u = fout.read_bytes(), uout.read_bytes()
             from validate_grown import validate_grown
