@@ -94,7 +94,13 @@ class Layer:
         self.d.polygon([(x * S, y * S) for x, y in pts], fill=fill)
 
     def text(self, xy, s, font_path, size, anchor):
-        f = ImageFont.truetype(font_path, size * S)
+        # The reference artifacts use Raqm shaping. Pillow silently falls
+        # back to BASIC on platforms without Raqm, changing baked pixels.
+        # Require the same engine instead of producing a different image.
+        from PIL import features
+        if not features.check_feature('raqm'):
+            raise RuntimeError('screen-art source build requires Pillow with Raqm (the reference Linux CI environment)')
+        f = ImageFont.truetype(font_path, size * S, layout_engine=ImageFont.Layout.RAQM)
         self.d.text((xy[0] * S, xy[1] * S), s, font=f, fill=255, anchor=anchor)
 
     def coverage(self):

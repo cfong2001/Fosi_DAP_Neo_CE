@@ -79,3 +79,8 @@ from already-generated browser payloads; it is not a source build.
 The original OpusTags C reader uses the pinned LLVM-MinGW 22.1.3 compiler
 in the separate Windows CI job. That job regenerates its patches and
 requires byte equality. Other payloads use the existing reference toolchain.
+
+Screen-art text uses the vendored Barlow fonts with Pillow's Raqm shaping
+engine. The generator requires Raqm explicitly; Pillow's silent BASIC
+fallback produces different baked pixels. Linux reference CI supplies
+the pinned Pillow 11.3.0 wheel with Raqm.
