@@ -1753,6 +1753,96 @@ export const FULL_PATCHES = [
   "expect": "4f202870",
   "replace": "04f0adb8",
   "index": 174
+ },
+ {
+  "file": "0266-opus-artwork.patch",
+  "name": "0266-opus-artwork",
+  "module": 0,
+  "region": "code",
+  "address": 50779956,
+  "expect": "10b54ff400610020fff7f2fc28210020fff7d2fd10210020fff7cefd7820f7f7f7f80221bde810400020fff79fbdfff775be10b50c4601460020fff7bdfd2146bde81040",
+  "replace": "9df81c014f2812d13a4601210df21610ebf730fc012810d1072209490df21010e7f7c0fb08b115f0fabd16f072b8032801d016f05ab816f052b816f094b800bf4a330803",
+  "index": 175
+ },
+ {
+  "file": "0267-opus-artwork.patch",
+  "name": "0267-opus-artwork",
+  "module": 18,
+  "region": "code",
+  "address": 50869062,
+  "expect": "384600f0",
+  "replace": "00f003ba",
+  "index": 176
+ },
+ {
+  "file": "0268-opus-artwork.patch",
+  "name": "0268-opus-artwork",
+  "module": 18,
+  "region": "code",
+  "address": 50869066,
+  "expect": "85fc00f07cfc00f0",
+  "replace": "7075735461677300",
+  "index": 177
+ },
+ {
+  "file": "0269-opus-artwork.patch",
+  "name": "0269-opus-artwork",
+  "module": 18,
+  "region": "code",
+  "address": 50870282,
+  "expect": "9df81c01032805d1",
+  "replace": "e9f793bf00bf00bf",
+  "index": 178
+ },
+ {
+  "file": "0270-opus-artwork.patch",
+  "name": "0270-opus-artwork",
+  "module": 18,
+  "region": "code",
+  "address": 50869074,
+  "expect": "85fc074600f084fc044600f083fc002f",
+  "replace": "3a4601214ff0ff30d6f7a1f800f05eba",
+  "index": 179
+ },
+ {
+  "file": "0271-opus-artwork.patch",
+  "name": "0271-opus-artwork",
+  "module": 0,
+  "region": "code",
+  "address": 50780152,
+  "expect": "2de9f84f1c460a9d92460e468146ef2a88bf4ff0ef0ab4f5a07f28bf40f23f14884623b29b465246fff7adff00210846fff73afd601c0090",
+  "replace": "9df81c214f2a10d1082913d3a1f108029df8083173b12b4413f8013cff2b0cbf4ff0ff33002316f024b8a1f10702234616f01fb816f035b8",
+  "index": 180
+ },
+ {
+  "file": "0272-opus-artwork.patch",
+  "name": "0272-opus-artwork",
+  "module": 18,
+  "region": "code",
+  "address": 50870374,
+  "expect": "ca1f2346",
+  "replace": "e9f7c7bf",
+  "index": 181
+ },
+ {
+  "file": "0273-opus-artwork.patch",
+  "name": "0273-opus-artwork",
+  "module": 0,
+  "region": "code",
+  "address": 50729554,
+  "expect": "2849086840f001000860002070472448406970472348806870472148007c00f00100704710b5",
+  "replace": "9df8481769b10df20060084410f8010cff280cbf4ff0ff300020cdf8440721f07fbf21f0ebbd",
+  "index": 182
+ },
+ {
+  "file": "0274-opus-artwork.patch",
+  "name": "0274-opus-artwork",
+  "module": 18,
+  "region": "code",
+  "address": 50868590,
+  "expect": "ddf84407",
+  "replace": "def770b8",
+  "index": 183
  }
 ];
 export const FULL_TAIL = {
@@ -13167,4 +13257,4 @@ export const FULL_THEME_RUNS = [
   "replace": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
  }
 ];
-export const FULL_IMAGE_SHA256 = "8a9f32fc06ed2459ffd936a9203d6df6e665b273b49fb25e1083b0b96d8c5ce0";
+export const FULL_IMAGE_SHA256 = "6b6c9b503e9538a0199f67b06ffab2347a46b00493be01ff3101d14e1380079a";

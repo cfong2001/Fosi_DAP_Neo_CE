@@ -33,6 +33,13 @@ another window's extension bytes. The settling test is the
 Phase E window-cycle soak, which cycles every window including
 USB and settings and verifies the extension bytes after.
 
+Standard Opus artwork adds 68 bytes at `0x0306D734`, 56 bytes at
+`0x0306D7F8` and 38 bytes at `0x03061252`, within censused resident pockets.
+Module 18's obsolete ASF artwork case supplies the Opus entry, signature
+literal and one-byte rewind (the supported Standard format replaces WMA).
+The MP3/ID3 case and the following MP4 case remain intact. These helpers
+use the existing artwork frame and temporary file; they add no persistent RAM.
+
 ## Delivery mechanisms, one per home class
 
 The optional runtime diagnostic image reserves 100 bytes at `0x0306D304`,

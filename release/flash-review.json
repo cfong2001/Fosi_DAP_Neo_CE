@@ -1,7 +1,7 @@
 {
-  "status": "STANDARD CE SCAN AND OPUS PLAYBACK CONFIRMED ON HARDWARE; ARTWORK FOLLOW-UP OPEN",
+  "status": "OPUS ARTWORK REPAIR PASSES EXTRACTION AND NATIVE DRAWING GATES; DEVICE VISUAL ACCEPTANCE PENDING",
   "source_candidate": {
-    "sha256": "8a9f32fc06ed2459ffd936a9203d6df6e665b273b49fb25e1083b0b96d8c5ce0",
+    "sha256": "6b6c9b503e9538a0199f67b06ffab2347a46b00493be01ff3101d14e1380079a",
     "bytes": 13639684,
     "header_date": "2026-10-23",
     "mirror_offset": "0xc96000",
@@ -40,7 +40,7 @@
     "both_slots_full_write_readback": true,
     "candidate_full_card_acceptance": "scan and file listing passed; Opus music playback confirmed",
     "content_route_repair_playback": true,
-    "album_art_and_theater": "not displayed on latest playback test; separate follow-up"
+    "album_art_and_theater": "latest artwork repair passes native extraction/drawing emulation; device visual check pending"
   },
   "qualification_scope": "Hardware confirmation used a date-adjusted image with the optional diagnostic readout. The byte-identical published source package itself was not flashed."
 }

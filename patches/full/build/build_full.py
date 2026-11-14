@@ -95,6 +95,7 @@ def main():
         run([PY, str(HERE / 'build_sort_extension.py')])
         run([PY, str(HERE / 'build_focus_wheel.py')])
         run([PY, str(REPO / 'patches' / 'opus_swap' / 'build_content_route.py')])
+        run([PY, str(REPO / 'patches' / 'opus_swap' / 'build_artwork_route.py')])
         run([PY, str(HERE / 'build_theme.py')])
 
     output = a.output

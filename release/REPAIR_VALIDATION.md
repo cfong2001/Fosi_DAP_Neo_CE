@@ -51,6 +51,9 @@ are modeled. Its output contains no media paths or device identifiers.
 | Native content-probe negative control / repair | Vorbis 4 / Opus 1 |
 | Malformed/non-BOS header controls retaining native Ogg routing | 6 / 6 |
 | Header-buffer boundary positions and callee-register guards | 7 / 7 |
+| Opus picture extraction, small and multipage fixtures | 81,814 exact bytes |
+| Native JPEG rows / independent theater color matches | 54 / 3 |
+| Missing or malformed artwork returns | 5 / 5 |
 | Selected-control instruction ratio vs stock | At most 1.0 (currently 0.4914) |
 | Selected-control resource reads vs stock | No increase (currently 14 vs 14) |
 

@@ -206,3 +206,12 @@ patches/0262-focus-wheel-service-hook.patch
 ../opus_swap/0263-opus-content-prefix.patch
 ../opus_swap/0264-opus-content-signature.patch
 ../opus_swap/0265-opus-content-hook.patch
+../opus_swap/0266-opus-artwork.patch
+../opus_swap/0267-opus-artwork.patch
+../opus_swap/0268-opus-artwork.patch
+../opus_swap/0269-opus-artwork.patch
+../opus_swap/0270-opus-artwork.patch
+../opus_swap/0271-opus-artwork.patch
+../opus_swap/0272-opus-artwork.patch
+../opus_swap/0273-opus-artwork.patch
+../opus_swap/0274-opus-artwork.patch
