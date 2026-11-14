@@ -38,6 +38,8 @@ are modeled. Its output contains no media paths or device identifiers.
 | Hidden wheel wake | 1 / 1 at the next player service pass |
 | Visible wheel steps accounted | 20 / 20, without artwork re-requests |
 | Selected glyph variants with orange fill, contrast and antialiasing | 30 / 30 |
+| Browser admission / codec selection for generated Opus | Audio kind 1 / module 72 |
+| Generated silence: initial PCM frames, 48 kHz stereo | 3,840 / 3,840 |
 | Selected-control instruction ratio vs stock | At most 1.0 (currently 0.4914) |
 | Selected-control resource reads vs stock | No increase (currently 14 vs 14) |
 
@@ -50,6 +52,13 @@ python patches/opus_swap/test_tags.py --native-fs \
 
 The corpus check requires Mutagen. Results are counts; filenames and metadata
 values are not written to the repository.
+
+The short gate also exercises the real browser classifier, system codec
+loader and transplanted decoder on a generated 200 ms silence file. Its
+core-1 mailbox and file RPC use the existing harness model. Passing this
+gate establishes that the image contains a working modeled route; it does
+not prove that live filesystem state, boot initialization, mailbox timing
+or physical playback match that model.
 
 ## Wheel latency: diagnosis in progress
 
@@ -75,3 +84,7 @@ Completion requires a full-card device scan, Opus playback and metadata,
 selector/theater visual checks, and a measured wheel-to-screen trace. Keep
 the PR in draft until those checks pass. Package equality and emulator gates
 do not substitute for those device observations.
+
+The optional [live diagnostic utility](RUNTIME_DIAGNOSTICS.md) exposes
+runtime classifier and codec state at a format-error popup without changing
+the playback policy.

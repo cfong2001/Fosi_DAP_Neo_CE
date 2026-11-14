@@ -116,6 +116,9 @@ jobs:
       - name: Short diagnosed-repair metric gate
         run: python tools/repair_metrics.py --candidate "$RUNNER_TEMP/dist/DP3_V137_CE.img" --output "$RUNNER_TEMP/repair-metrics.json"
 
+      - name: Runtime diagnostic utility preserves calls, buffers and inputs
+        run: python -m unittest discover -s tests -p test_runtime_diagnostics.py -v
+
       - name: Committed release images match the rebuild
         run: |
           cd release

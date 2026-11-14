@@ -34,6 +34,13 @@ USB and settings and verifies the extension bytes after.
 
 ## Delivery mechanisms, one per home class
 
+The optional runtime diagnostic image reserves 100 bytes at `0x0306D304`,
+64 at `0x030643C8`, and 40 at `0x03061638`, within censused pockets.
+Its four-byte last-browser trace is at `SAVEINFO+0x1F0` (`0x03023490`),
+immediately after the theater/focus state. These sites are not allocated
+by the normal release. The utility refuses occupied sites and preserves
+the input; see [runtime diagnostics](../../release/RUNTIME_DIAGNOSTICS.md).
+
 - In-segment caves take ordinary manifest patches. Nothing about
   them changes the image length or any module record.
 - The gap tail takes the framework's `--tail` step and nothing
