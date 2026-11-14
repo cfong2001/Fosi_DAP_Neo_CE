@@ -15,8 +15,6 @@ from artwork_harness import extract
 from build_artwork_route import edits
 from rknano_image import Image
 from repair_metrics import ogg
-from mutagen.flac import Picture
-from mutagen.oggopus import OggOpus
 from PIL import Image as PillowImage
 
 
@@ -39,10 +37,9 @@ def fixture_jpeg():
 
 
 def picture(jpeg):
-    value = Picture()
-    value.type, value.mime, value.width, value.height, value.depth = 3, 'image/jpeg', 30, 18, 24
-    value.data = jpeg
-    return value.write()
+    mime = b'image/jpeg'
+    return (struct.pack('>II', 3, len(mime)) + mime
+            + struct.pack('>6I', 0, 30, 18, 24, 0, len(jpeg)) + jpeg)
 
 
 def stream(value, vorbis=False):
@@ -101,6 +98,7 @@ def check(raw):
 
 
 def corpus(raw, directory):
+    from mutagen.oggopus import OggOpus
     result = dict(files=0, with_picture=0, without_picture=0, exact_picture_blocks=0)
     for path in directory.rglob('*'):
         if not path.is_file() or path.suffix.lower() not in ('.opus', '.opu'):
