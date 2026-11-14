@@ -147,7 +147,10 @@ serve:
     ldr     ip, =STAGE
     uxth    r0, r0
     cbz     r0, 1f
-    subs    r0, r0, #1             /* entry index t = position - 1 */
+    .inst.n 0x1e40                /* subs r0,r0,#1: entry index t.
+                                     Pin the three-operand encoding;
+                                     GNU otherwise chooses the equivalent
+                                     two-operand immediate alias. */
 1:  ldrb    r3, [ip, #1]
     cmp     r0, r3
     blo     2f
@@ -156,7 +159,7 @@ serve:
     add     r2, ip, #ENTRIES_OFF
     ldrh    r2, [r2, r0, lsl #1]   /* entry word */
     ubfx    r0, r2, #0, #11
-    adds    r0, r0, #1             /* 1-based ordinal for stock */
+    .inst.n 0x1c40                /* adds r0,r0,#1: 1-based ordinal */
     strh    r0, [ip, #4]
     lsrs    r2, r2, #11            /* run id */
     add     r3, ip, #CLUS_OFF
@@ -170,7 +173,7 @@ serve:
     movs    r3, #42
 3:  ldrb    ip, [r2], #1
     strb    ip, [r1], #1
-    subs    r3, r3, #1
+    .inst.n 0x1e5b                /* subs r3,r3,#1: copy countdown */
     bne     3b
     bx      lr
     .size serve, . - serve
