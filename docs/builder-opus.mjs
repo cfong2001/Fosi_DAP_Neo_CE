@@ -8,7 +8,7 @@ export const OPUS_PATCHES = [
   "address": 50353863,
   "expect": "574d41",
   "replace": "4f5055",
-  "index": 32
+  "index": 34
  },
  {
   "file": "opus-rename-classifier-mod0-copy2.patch",
@@ -18,7 +18,7 @@ export const OPUS_PATCHES = [
   "address": 50353906,
   "expect": "574d41",
   "replace": "4f5055",
-  "index": 33
+  "index": 35
  },
  {
   "file": "opus-rename-classifier-mod0-copy3.patch",
@@ -28,7 +28,7 @@ export const OPUS_PATCHES = [
   "address": 50353949,
   "expect": "574d41",
   "replace": "4f5055",
-  "index": 34
+  "index": 36
  },
  {
   "file": "opus-rename-classifier-mod31.patch",
@@ -38,7 +38,7 @@ export const OPUS_PATCHES = [
   "address": 50848025,
   "expect": "574d41",
   "replace": "4f5055",
-  "index": 35
+  "index": 37
  },
  {
   "file": "opus-rename-classifier-mod38.patch",
@@ -48,6 +48,6 @@ export const OPUS_PATCHES = [
   "address": 50849493,
   "expect": "574d41",
   "replace": "4f5055",
-  "index": 36
+  "index": 38
  }
 ];

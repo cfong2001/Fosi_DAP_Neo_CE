@@ -4,7 +4,10 @@
 Standard CE has booted on a physical DAP Neo, played music, displayed embedded
 album artwork and exposed the custom settings. Both written 13 MiB slot regions
 matched the intended payload byte for byte before reset. Longer-duration,
-format, USB-mode and recovery-boot checks remain listed below.
+format and USB-mode checks remain listed below. Restoring the original
+device-derived firmware has also passed complete slot readback and boot.
+The current repair candidate still needs the full-card acceptance in
+[repair validation](REPAIR_VALIDATION.md).
 
 For newer model-specific evidence, see the [NeoPod flashing comparison](../analysis/neopod_flash_comparison.md). NeoPod reports working custom firmware and normal reset on a DAP Neo; this supports the flashing mechanism, while CE still needs its own hardware qualification. The comparison also corrects the visible stock-update filename to `RKNANOFW.IMG`.
 
@@ -15,7 +18,7 @@ For newer model-specific evidence, see the [NeoPod flashing comparison](../analy
 | Firmware dates | CE is dated 2026-10-23; official V155 is 2026-11-02. The bundled V137 recovery date, 2026-10-24, is also older than V155. | Prepare a matched-date pair from the official image matching the device; do not assume the bundled recovery can replace V155. |
 | Package integrity | Both headers agree; mirror is sector aligned; outer Rockchip CRC passes; all 82 module records and six resource sections are in bounds. | Rechecked by `tools/prepare_flash.py` for every input and prepared output. |
 | Stored module overlap | Code and initialized-data payloads do not overlap in the file. | Checked separately from intentional runtime overlay reuse. |
-| Update transfer | The Standard image is 6,656 bytes longer than stock, but its rounded updater transfer remains 13 MiB. The mirror and all nonzero payload bytes are inside that transfer; omitted bytes before the outer CRC are zero padding. | This resolves the payload-truncation question at package level, not physical slot capacity or first-stage boot acceptance. |
+| Update transfer | The Standard image is 8,192 bytes longer than stock, but its rounded updater transfer remains 13 MiB. The mirror and all nonzero payload bytes are inside that transfer; omitted bytes before the outer CRC are zero padding. | Both measured 13 MiB slot writes passed full readback; prior CE builds booted. Each new candidate still needs acceptance. |
 | Runtime placement | Row code uses bounded, censused resident pockets; no new persistent RAM or overlay growth. Stock framebuffer spans and fallback remain in use. | Stock/fast pixels, display context, ABI and write bounds pass emulation. Hardware tripwire/normal-use testing remains required for computed callers missed by static analysis. |
 | Resource reading | The stock reader takes a 32-bit byte count and breaks aligned runs into sectors. Its byte-swap loop uses a 16-bit halfword counter. | Largest direct read is 115,200 bytes / 57,600 halfwords, below counter wrap; row split prevents crossing the SRAM gap. |
 | Boot/updater changes | These PRs do not modify module 1 or the module 8 installer. | No new bootloader or flash-writing path is introduced. |
@@ -88,7 +91,9 @@ flashes a device. Keep the files on the host until the gates below pass.
 
 A model-specific community tool exists:
 [danielNZ27/Fosi-Dap-Neo-firmware-restore-tool](https://github.com/danielNZ27/Fosi-Dap-Neo-firmware-restore-tool).
-It is not a Fosi-supported or locally hardware-qualified recovery path.
+It is community software, not Fosi-supported. Its transport has been used
+locally for repeatable backups, bounded slot writes and full readback;
+restoring the device-derived original firmware booted successfully.
 Its README reports holding Vol+, Vol− and OK while connecting USB and a
 Rockusb identity of 2207:262D. Treat those as community instructions to
 verify by enumeration, not proof that a black screen means recovery.

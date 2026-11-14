@@ -1,0 +1,10 @@
+# Original CE streaming OpusTags reader: .text.codepoint.
+name: 0237-opus-tags-codepoint
+kind: module
+module: 0
+region: code
+address: 0x3054bd8
+expect: 704710b5024600200ff022fbbde81040012017f046bd00002de9f04f88b0654dddf844c0c2ebc20205eb4c0302eb4202b3f9a0420794b3f9a2420094b3f9f4420494b3f9f6320ceb420205ebc20202930692d2e90245d2e90068a1f1010e00295cd00499c91705910799cf17d91703910099c9170191
+replace: f8b5064690f900000f4601211160c4b2b0f1ff3f2ddc20461546fbf7d7fc30b30146781e814201d9002422e0c1f106004ff0ff32002302fa00f0721c8443481c99420ad0d65c013306f0c007802f0dd106f03f0646ea8414f2e728602046fff79bf9002808bf4ff6fd7402e02b604ff6fd742046f8bd
+gate: stock bytes, resident census, real-card parser regression
+rationale: Parse OpusTags with bounded reads and UTF-16 output instead of entering the obsolete ASF tag reader.

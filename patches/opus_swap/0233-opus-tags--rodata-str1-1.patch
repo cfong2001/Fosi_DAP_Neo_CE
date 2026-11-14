@@ -1,0 +1,10 @@
+# Original CE streaming OpusTags reader: .rodata.str1.1.
+name: 0233-opus-tags--rodata-str1-1
+kind: module
+module: 0
+region: code
+address: 0x3052134
+expect: 704901eb8000806c70476f4bdff8b4c160b104281cbfdcf850007047704a4ff001209862b2fbf1f040b908
+replace: 4f50555348454144004f50555354414753005449544c450047454e52450041525449535400414c42554d00
+gate: stock bytes, resident census, real-card parser regression
+rationale: Parse OpusTags with bounded reads and UTF-16 output instead of entering the obsolete ASF tag reader.

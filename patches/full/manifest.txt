@@ -28,11 +28,10 @@
 ../framework/patches/0025-gapless-gate-tail.patch
 ../framework/patches/0026-gapless-arm.patch
 ../framework/patches/0034-gapless-warm-start.patch
-../framework/patches/0027-sortkeys-comparator-hook.patch
-../framework/patches/0028-sortkeys-builder-a-hook.patch
-../framework/patches/0029-sortkeys-builder-bmain-hook.patch
-../framework/patches/0030-sortkeys-builder-balt-hook.patch
-../framework/patches/0031-sortkeys-cave.patch
+patches/0027-sort-extension-comparator.patch
+patches/0028-sort-extension-builder-a.patch
+patches/0029-sort-extension-builder-bmain.patch
+patches/0030-sort-extension-builder-balt.patch
 ../framework/patches/0050-power-wheel-period-1000us.patch
 # Opus classifier renames (with the opus72 transplant below):
 ../opus_swap/opus-rename-classifier-mod0-copy1.patch
@@ -172,3 +171,35 @@ patches/0145-profile-commit.patch
 ../drawing_engine/0223-rows-hook-keyed.patch
 ../drawing_engine/0224-rows-hook-flash.patch
 ../drawing_engine/0225-rows-hook-clear.patch
+
+# Service-entry wheel wake, independent of progress repaint cadence:
+patches/0260-focus-wheel-poll.patch
+patches/0261-focus-wheel-service-wrapper.patch
+patches/0262-focus-wheel-service-hook.patch
+# Bounded OpusTags metadata reader (replaces the obsolete ASF route only):
+../opus_swap/0230-opus-tags-lead.patch
+../opus_swap/0231-opus-tags-word.patch
+../opus_swap/0232-opus-tags-comment.patch
+../opus_swap/0233-opus-tags--rodata-str1-1.patch
+../opus_swap/0234-opus-tags-headers.patch
+../opus_swap/0235-opus-tags-le32.patch
+../opus_swap/0236-opus-tags-valid_point.patch
+../opus_swap/0237-opus-tags-codepoint.patch
+../opus_swap/0238-opus-tags-exact.patch
+../opus_swap/0239-opus-tags-page.patch
+../opus_swap/0240-opus-tags-tags.patch
+../opus_swap/0241-opus-tags-next_packet.patch
+../opus_swap/0242-opus-tags-segment.patch
+../opus_swap/0243-opus-tags-equal.patch
+../opus_swap/0244-opus-tags-field.patch
+../opus_swap/0245-opus-tags-page_header.patch
+../opus_swap/0246-opus-tags-value.patch
+../opus_swap/0247-opus-tags-skip.patch
+../opus_swap/0248-opus-tags-first_page.patch
+../opus_swap/0249-opus-tags-field_album.patch
+../opus_swap/0250-opus-tags-page_sequence.patch
+../opus_swap/0251-opus-tags-store_point.patch
+../opus_swap/0252-opus-tags-transfer.patch
+../opus_swap/0253-opus-tags-opus_tags.patch
+../opus_swap/0254-opus-tags-utf16.patch
+../opus_swap/0255-opus-tags-dispatch.patch

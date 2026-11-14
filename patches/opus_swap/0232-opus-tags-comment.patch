@@ -1,0 +1,10 @@
+# Original CE streaming OpusTags reader: .text.comment.
+name: 0232-opus-tags-comment
+kind: module
+module: 0
+region: code
+address: 0x3051e00
+expect: 516ab1fbf0f0002818bf401e431cb1fbf3f3dff8e0c0634588bf401c40f4e023dff8b8c01b02ccf81430401cb1fbf0f01062704710b4314c284bdff8a4c0f0b104281ebfdcf8180010bc70472a4a4ff008105861b2fbf1f0002818bf401e411c
+replace: 2de9f04387b015468846044600260df103070df10409b5420fd0172e0dd82046394601221bf050f850b19df803003d2808d009f806000136ede7aa1b002109e000200ae001a94046324615f029f90146f0434219204610f0c5fe07b0bde8f083
+gate: stock bytes, resident census, real-card parser regression
+rationale: Parse OpusTags with bounded reads and UTF-16 output instead of entering the obsolete ASF tag reader.

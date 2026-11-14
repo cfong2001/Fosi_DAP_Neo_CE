@@ -49,7 +49,7 @@ REPO = HERE.parents[3]
 sys.path.insert(0, str(REPO / 'tools'))
 from rknano_image import Image  # noqa: E402
 
-FULL_SHA256 = '0f795253f0ec88372d02e9923c29e04dbf2b9081239e91194716d593e93bd0fa'
+FULL_SHA256 = 'ecefc49463b9d37cbc4e3a9c4d802ded397f918dff76b576eec5fc51fe58e8ec'
 TRAMP = 0x0307EE48
 BRIDGE = 0x0307EE88
 RESUME = 0x0307DF1E

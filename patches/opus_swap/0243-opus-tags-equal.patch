@@ -1,0 +1,10 @@
+# Original CE streaming OpusTags reader: .text.equal.
+name: 0243-opus-tags-equal
+kind: module
+module: 0
+region: code
+address: 0x305ba24
+expect: 2de9ff4f8bb088460446014668460e9bfcf756fc002802bf0a200fb0bde8f08f98f80000e52804bf052088f80000414600200b22
+replace: f0b513460c4683b114f8015b5db110f8016ba6f16107ffb21a2f38bf203ef6b2013bae42efd00020f0bd885cb0fa80f04009f0bd
+gate: stock bytes, resident census, real-card parser regression
+rationale: Parse OpusTags with bounded reads and UTF-16 output instead of entering the obsolete ASF tag reader.

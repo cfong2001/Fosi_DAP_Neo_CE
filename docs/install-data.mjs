@@ -23,13 +23,13 @@ export const IMAGES = [
     file: "DP3_V137_CE.img",
     title: "Standard",
     badge: "Recommended",
-    length: 13638148,
-    sha256: "0f795253f0ec88372d02e9923c29e04dbf2b9081239e91194716d593e93bd0fa",
+    length: 13639684,
+    sha256: "ecefc49463b9d37cbc4e3a9c4d802ded397f918dff76b576eec5fc51fe58e8ec",
     summary: "Every CE feature: full-precision Vorbis, gapless, natural sort, " +
       "Opus in place of WMA, the design refresh, theater mode, M3U " +
       "playlists, lock-screen track info and the Bluetooth shortcut.",
-    caveat: "6,656 bytes longer than stock. No longer-than-stock image has " +
-      "been installed yet; if this one does not install, use Minimal.",
+    caveat: "8,192 bytes longer than stock. CE has booted on hardware; " +
+      "the current scan and responsiveness repair awaits full-card acceptance.",
   },
   {
     id: "minimal",

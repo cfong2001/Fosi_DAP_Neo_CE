@@ -46,7 +46,7 @@ transport module was never imported. Called the firmware-only path, recorded
 all writes, and hashed each simulated slot's full payload.
 
 For CE SHA-256
-`0f795253f0ec88372d02e9923c29e04dbf2b9081239e91194716d593e93bd0fa`:
+`ecefc49463b9d37cbc4e3a9c4d802ded397f918dff76b576eec5fc51fe58e8ec`:
 
 - File length: 13,638,148 bytes. Transferred prefix: 13,631,488 bytes (13 MiB).
 - Omitted tail: 6,656 zero padding bytes and the four-byte outer CRC. No nonzero

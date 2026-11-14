@@ -3,7 +3,387 @@
 // the Opus renames, the merged gap tail, the growth payloads
 // and the merged theme runs at stock offsets; every payload SHA-256
 // pinned). Do not edit by hand.
-export const FULL_EXTRA_PATCHES = [
+export const FULL_PATCHES = [
+ {
+  "file": "0000-noop-selftest.patch",
+  "name": "noop-selftest",
+  "module": 0,
+  "region": "code",
+  "address": 50659328,
+  "expect": "004000038b1f0603",
+  "replace": "004000038b1f0603",
+  "index": 0
+ },
+ {
+  "file": "0001-dac-fix-branch.patch",
+  "name": "dac-fix-1-branch",
+  "module": 0,
+  "region": "code",
+  "address": 50728212,
+  "expect": "02d0",
+  "replace": "3bd0",
+  "index": 1
+ },
+ {
+  "file": "0002-dac-fix-cave.patch",
+  "name": "dac-fix-2-cave",
+  "module": 0,
+  "region": "code",
+  "address": 50728334,
+  "expect": "70477047",
+  "replace": "6870c4e7",
+  "index": 2
+ },
+ {
+  "file": "0003-clock-v1-row-05.patch",
+  "name": "clock-v1-row-05",
+  "module": 0,
+  "region": "code",
+  "address": 50829492,
+  "expect": "00d8b805006cdc02006cdc02006cdc0200d8b80500d8b805",
+  "replace": "00d8b8050000000000000000000000000044950800449508",
+  "index": 3
+ },
+ {
+  "file": "0004-clock-v1-row-06.patch",
+  "name": "clock-v1-row-06",
+  "module": 0,
+  "region": "code",
+  "address": 50829520,
+  "expect": "00c2eb0b00e1f50500e1f505c068780400c2eb0b00c2eb0b",
+  "replace": "00c2eb0b0000000000000000000000000044950800449508",
+  "index": 4
+ },
+ {
+  "file": "0005-clock-v1-row-07.patch",
+  "name": "clock-v1-row-07",
+  "module": 0,
+  "region": "code",
+  "address": 50829548,
+  "expect": "00c2eb0b80d1f00880d1f008c068780400a3e11100a3e111",
+  "replace": "00c2eb0b0000000000000000000000000044950800449508",
+  "index": 5
+ },
+ {
+  "file": "0006-clock-v1-row-08.patch",
+  "name": "clock-v1-row-08",
+  "module": 0,
+  "region": "code",
+  "address": 50829576,
+  "expect": "00c2eb0b80d1f00880d1f008c068780400a3e11100a3e111",
+  "replace": "00c2eb0b0000000000000000000000000044950800449508",
+  "index": 6
+ },
+ {
+  "file": "0007-clock-v1-row-09.patch",
+  "name": "clock-v1-row-09",
+  "module": 0,
+  "region": "code",
+  "address": 50829604,
+  "expect": "8074d21a00c2eb0b00c2eb0bc06878048074d21a8074d21a",
+  "replace": "8074d21a0000000000000000000000000044950800449508",
+  "index": 7
+ },
+ {
+  "file": "0008-clock-v1-row-10.patch",
+  "name": "clock-v1-row-10",
+  "module": 0,
+  "region": "code",
+  "address": 50829632,
+  "expect": "00c2eb0b80d1f00880d1f008c068780400a3e11100a3e111",
+  "replace": "00c2eb0b0000000000000000000000000044950800449508",
+  "index": 8
+ },
+ {
+  "file": "0009-clock-v1-row-11.patch",
+  "name": "clock-v1-row-11",
+  "module": 0,
+  "region": "code",
+  "address": 50829660,
+  "expect": "00c2eb0b80d1f00880d1f008c068780400a3e11100a3e111",
+  "replace": "00c2eb0b0000000000000000000000000044950800449508",
+  "index": 9
+ },
+ {
+  "file": "0010-clock-v1-row-14.patch",
+  "name": "clock-v1-row-14",
+  "module": 0,
+  "region": "code",
+  "address": 50829744,
+  "expect": "00a3e11100b4c40400b4c40400b4c4040084d7170084d717",
+  "replace": "00a3e111000000000000000000000000001c4e0e001c4e0e",
+  "index": 10
+ },
+ {
+  "file": "0011-clock-v1-row-15.patch",
+  "name": "clock-v1-row-15",
+  "module": 0,
+  "region": "code",
+  "address": 50829772,
+  "expect": "00a3e11100b4c40400b4c40400b4c4040084d7170084d717",
+  "replace": "00a3e111000000000000000000000000001c4e0e001c4e0e",
+  "index": 11
+ },
+ {
+  "file": "0012-clock-v1-row-16.patch",
+  "name": "clock-v1-row-16",
+  "module": 0,
+  "region": "code",
+  "address": 50829800,
+  "expect": "00a3e11100b4c40400b4c40400b4c4040084d7170084d717",
+  "replace": "00a3e111000000000000000000000000001c4e0e001c4e0e",
+  "index": 12
+ },
+ {
+  "file": "0013-clock-v1-row-17.patch",
+  "name": "clock-v1-row-17",
+  "module": 0,
+  "region": "code",
+  "address": 50829828,
+  "expect": "00389c1c00c2eb0b00c2eb0b00b4c40400389c1c00389c1c",
+  "replace": "00389c1c00000000000000000000000000389c1c00389c1c",
+  "index": 13
+ },
+ {
+  "file": "0014-clock-v1-row-18.patch",
+  "name": "clock-v1-row-18",
+  "module": 0,
+  "region": "code",
+  "address": 50829856,
+  "expect": "00389c1c00c2eb0b00c2eb0b00b4c40400389c1c00389c1c",
+  "replace": "00389c1c00000000000000000000000000389c1c00389c1c",
+  "index": 14
+ },
+ {
+  "file": "0015-clock-v1-row-19.patch",
+  "name": "clock-v1-row-19",
+  "module": 0,
+  "region": "code",
+  "address": 50829884,
+  "expect": "00389c1c00c2eb0b00c2eb0b00b4c40400389c1c00389c1c",
+  "replace": "00389c1c00000000000000000000000000882a1100882a11",
+  "index": 15
+ },
+ {
+  "file": "0016-clock-v1-row-20.patch",
+  "name": "clock-v1-row-20",
+  "module": 0,
+  "region": "code",
+  "address": 50829912,
+  "expect": "00389c1c00c2eb0b00c2eb0b00b4c40400389c1c00389c1c",
+  "replace": "00389c1c00000000000000000000000000389c1c00389c1c",
+  "index": 16
+ },
+ {
+  "file": "0017-clock-v1-row-21.patch",
+  "name": "clock-v1-row-21",
+  "module": 0,
+  "region": "code",
+  "address": 50829940,
+  "expect": "00389c1c00c2eb0b00c2eb0b00b4c40400389c1c00389c1c",
+  "replace": "00389c1c00000000000000000000000000389c1c00389c1c",
+  "index": 17
+ },
+ {
+  "file": "0018-clock-v1-row-22.patch",
+  "name": "clock-v1-row-22",
+  "module": 0,
+  "region": "code",
+  "address": 50829968,
+  "expect": "00389c1c00c2eb0b00c2eb0b00b4c40400389c1c00389c1c",
+  "replace": "00389c1c00000000000000000000000000389c1c00389c1c",
+  "index": 18
+ },
+ {
+  "file": "0019-i2c-reset-pulse.patch",
+  "name": "i2c-reset-pulse",
+  "module": 0,
+  "region": "code",
+  "address": 50725688,
+  "expect": "012004f003fb",
+  "replace": "322004f0f1fa",
+  "index": 19
+ },
+ {
+  "file": "0020-gapless-state-pair.patch",
+  "name": "gapless-0-state-pair",
+  "module": 0,
+  "region": "code",
+  "address": 50664880,
+  "expect": "7047704770477047",
+  "replace": "0000000000000000",
+  "index": 20
+ },
+ {
+  "file": "0021-gapless-gate-hook.patch",
+  "name": "gapless-1-gate-hook",
+  "module": 0,
+  "region": "code",
+  "address": 50776876,
+  "expect": "70b50546",
+  "replace": "e4f79abd",
+  "index": 21
+ },
+ {
+  "file": "0022-gapless-gate-cave.patch",
+  "name": "gapless-2-gate-cave",
+  "module": 0,
+  "region": "code",
+  "address": 50665060,
+  "expect": "7047704770477047704770477047704770477047704770477047704770477047",
+  "replace": "5ff868211268aff1bc0132b10b6843405b0602e0fff744bf00bf086070b50546",
+  "index": 22
+ },
+ {
+  "file": "0023-gapless-flag-literal.patch",
+  "name": "gapless-3-flag-literal",
+  "module": 0,
+  "region": "code",
+  "address": 50664704,
+  "expect": "70477047",
+  "replace": "38410003",
+  "index": 23
+ },
+ {
+  "file": "0024-gapless-keep-decoder.patch",
+  "name": "gapless-4-keep-decoder",
+  "module": 33,
+  "region": "code",
+  "address": 50893764,
+  "expect": "cf4810b500680a2828bf10bddfe800f0051b1b1b1b1b1b1b1b1bfff7c6ffe3f793fb01210e20c9f717f901210f20c9f713f900216e20c9f7d7f80021bde810407e20c9f7d1b8fff7b0ffbde81040e3f77bbb",
+  "replace": "cf4810b500680a2828bf10bd0446fff7ccff0db1e3f798fb7cb901210e20c9f71bf901210f20c9f717f900216e20c9f7dbf800217e20c9f7d7f810bd00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf",
+  "index": 24
+ },
+ {
+  "file": "0025-gapless-gate-tail.patch",
+  "name": "gapless-5-gate-tail",
+  "module": 0,
+  "region": "code",
+  "address": 50665092,
+  "expect": "70477047",
+  "replace": "1bf054ba",
+  "index": 25
+ },
+ {
+  "file": "0026-gapless-arm.patch",
+  "name": "gapless-6-arm",
+  "module": 0,
+  "region": "code",
+  "address": 50665078,
+  "expect": "02e0",
+  "replace": "02d1",
+  "index": 26
+ },
+ {
+  "file": "0034-gapless-warm-start.patch",
+  "name": "gapless-warm-start",
+  "module": 0,
+  "region": "code",
+  "address": 50664708,
+  "expect": "70477047704770477047704770477047",
+  "replace": "80300860032001490860704784ad0403",
+  "index": 27
+ },
+ {
+  "file": "0027-sort-extension-comparator.patch",
+  "name": "0027-sort-extension-comparator",
+  "module": 39,
+  "region": "code",
+  "address": 50845216,
+  "expect": "2de9f047",
+  "replace": "21f044bf",
+  "index": 28
+ },
+ {
+  "file": "0028-sort-extension-builder-a.patch",
+  "name": "0028-sort-extension-builder-a",
+  "module": 39,
+  "region": "code",
+  "address": 50845822,
+  "expect": "00236a4602eb430112f81300497800eb012080b205eb4301a0f1610c8880bcf1190f9cbf20388880581c83b2042be9d3",
+  "replace": "284621f06ffe00f013b800bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf",
+  "index": 29
+ },
+ {
+  "file": "0029-sort-extension-builder-bmain.patch",
+  "name": "0029-sort-extension-builder-bmain",
+  "module": 39,
+  "region": "code",
+  "address": 50846036,
+  "expect": "002304aa02eb430112f81300497800eb012080b204eb4301a0f1610c8880bcf1190f9cbf20388880581c83b2042be9d3",
+  "replace": "204621f004fe00f013b800bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf",
+  "index": 30
+ },
+ {
+  "file": "0030-sort-extension-builder-balt.patch",
+  "name": "0030-sort-extension-builder-balt",
+  "module": 39,
+  "region": "code",
+  "address": 50846194,
+  "expect": "002004ab03eb400213f81010527801eb022189b204eb4002a1f1610c9180bcf1190f9cbf20399180401c80b20428e9d3",
+  "replace": "204621f0b5fd00f013b800bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf",
+  "index": 31
+ },
+ {
+  "file": "0050-power-wheel-period-1000us.patch",
+  "name": "power-wheel-period-1000us",
+  "module": 1,
+  "region": "code",
+  "address": 50844374,
+  "expect": "4ff4c872",
+  "replace": "4ff47a72",
+  "index": 32
+ },
+ {
+  "file": "opus-rename-classifier-mod0-copy1.patch",
+  "name": "opus-rename-classifier-mod0-copy1",
+  "module": 0,
+  "region": "data",
+  "address": 50353863,
+  "expect": "574d41",
+  "replace": "4f5055",
+  "index": 33
+ },
+ {
+  "file": "opus-rename-classifier-mod0-copy2.patch",
+  "name": "opus-rename-classifier-mod0-copy2",
+  "module": 0,
+  "region": "data",
+  "address": 50353906,
+  "expect": "574d41",
+  "replace": "4f5055",
+  "index": 34
+ },
+ {
+  "file": "opus-rename-classifier-mod0-copy3.patch",
+  "name": "opus-rename-classifier-mod0-copy3",
+  "module": 0,
+  "region": "data",
+  "address": 50353949,
+  "expect": "574d41",
+  "replace": "4f5055",
+  "index": 35
+ },
+ {
+  "file": "opus-rename-classifier-mod31.patch",
+  "name": "opus-rename-classifier-mod31",
+  "module": 31,
+  "region": "code",
+  "address": 50848025,
+  "expect": "574d41",
+  "replace": "4f5055",
+  "index": 36
+ },
+ {
+  "file": "opus-rename-classifier-mod38.patch",
+  "name": "opus-rename-classifier-mod38",
+  "module": 38,
+  "region": "code",
+  "address": 50849493,
+  "expect": "574d41",
+  "replace": "4f5055",
+  "index": 37
+ },
  {
   "file": "0113-transport-keyed-info-bare-ground.patch",
   "name": "0113-transport-keyed-info-bare-ground",
@@ -12,7 +392,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50853978,
   "expect": "e3f776fe",
   "replace": "d4f7abf8",
-  "index": 39
+  "index": 38
  },
  {
   "file": "0111-transport-keyed-playpause-bare-ground.patch",
@@ -22,7 +402,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50853938,
   "expect": "e3f78afe",
   "replace": "d4f7bff8",
-  "index": 40
+  "index": 39
  },
  {
   "file": "0114-transport-keyed-plus-bare-ground.patch",
@@ -32,7 +412,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50854004,
   "expect": "e3f769fe",
   "replace": "d4f79ef8",
-  "index": 41
+  "index": 40
  },
  {
   "file": "0112-transport-keyed-quote-bare-ground.patch",
@@ -42,7 +422,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50853952,
   "expect": "e3f783fe",
   "replace": "d4f7b8f8",
-  "index": 42
+  "index": 41
  },
  {
   "file": "0115-transport-keyed-repeat-state-ground.patch",
@@ -52,7 +432,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50854020,
   "expect": "e3f761fe",
   "replace": "d4f796f8",
-  "index": 43
+  "index": 42
  },
  {
   "file": "0116-transport-keyed-right-state-ground.patch",
@@ -62,7 +442,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50854056,
   "expect": "e3f74ffe",
   "replace": "d4f784f8",
-  "index": 44
+  "index": 43
  },
  {
   "file": "0117-transport-keyed-right-variants-ground.patch",
@@ -72,7 +452,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50854128,
   "expect": "e3f72bfe",
   "replace": "d4f760f8",
-  "index": 45
+  "index": 44
  },
  {
   "file": "0110-transport-keyed-slot0-state-ground.patch",
@@ -82,7 +462,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50853894,
   "expect": "e3f7a0fe",
   "replace": "d4f7d5f8",
-  "index": 46
+  "index": 45
  },
  {
   "file": "0118-progress-knob-keyed.patch",
@@ -92,7 +472,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50853786,
   "expect": "e3f7d6fe",
   "replace": "e4f735f9",
-  "index": 47
+  "index": 46
  },
  {
   "file": "0120-focus-init-reset-hook.patch",
@@ -102,7 +482,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50844066,
   "expect": "eaf74bf8",
   "replace": "fff71bf8",
-  "index": 48
+  "index": 47
  },
  {
   "file": "0121-focus-service-tick-hook.patch",
@@ -112,7 +492,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50848268,
   "expect": "e9f716f8",
   "replace": "fdf7f8ff",
-  "index": 49
+  "index": 48
  },
  {
   "file": "0122-focus-key-hook.patch",
@@ -122,7 +502,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50858742,
   "expect": "e1f70ef8",
   "replace": "fbf7adfb",
-  "index": 50
+  "index": 49
  },
  {
   "file": "0123-focus-geometry-hook.patch",
@@ -132,7 +512,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50850014,
   "expect": "05f0d7f8",
   "replace": "fdf7e9fc",
-  "index": 51
+  "index": 50
  },
  {
   "file": "0124-focus-gate-status-1f.patch",
@@ -142,7 +522,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50853136,
   "expect": "e7f7a2fe",
   "replace": "fcf7c4fe",
-  "index": 52
+  "index": 51
  },
  {
   "file": "0125-focus-gate-progress-41.patch",
@@ -152,7 +532,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50853192,
   "expect": "e7f786fe",
   "replace": "fcf7a8fe",
-  "index": 53
+  "index": 52
  },
  {
   "file": "0126-focus-gate-progress-40.patch",
@@ -162,7 +542,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50853272,
   "expect": "e7f75efe",
   "replace": "fcf780fe",
-  "index": 54
+  "index": 53
  },
  {
   "file": "0127-focus-gate-progress-4d.patch",
@@ -172,7 +552,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50853354,
   "expect": "e7f735fe",
   "replace": "fcf757fe",
-  "index": 55
+  "index": 54
  },
  {
   "file": "0128-focus-gate-transport-43.patch",
@@ -182,7 +562,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50853814,
   "expect": "e7f74ffd",
   "replace": "fcf771fd",
-  "index": 56
+  "index": 55
  },
  {
   "file": "0129-focus-gate-volume-19a.patch",
@@ -192,7 +572,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50854136,
   "expect": "e7f7aefc",
   "replace": "fcf7d0fc",
-  "index": 57
+  "index": 56
  },
  {
   "file": "0130-focus-title-shift-hook.patch",
@@ -202,7 +582,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50854384,
   "expect": "e2f7b3ff",
   "replace": "fcf776fc",
-  "index": 58
+  "index": 57
  },
  {
   "file": "0131-focus-artist-shift-hook.patch",
@@ -212,7 +592,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50854568,
   "expect": "e3f721f9",
   "replace": "fcf72efc",
-  "index": 59
+  "index": 58
  },
  {
   "file": "0100-theater-setup-reset-hook.patch",
@@ -222,7 +602,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50870430,
   "expect": "70b50e46",
   "replace": "f8f757bd",
-  "index": 60
+  "index": 59
  },
  {
   "file": "0101-theater-blit-sync-a.patch",
@@ -232,7 +612,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50870898,
   "expect": "dff764fc",
   "replace": "f8f798fc",
-  "index": 61
+  "index": 60
  },
  {
   "file": "0102-theater-blit-sync-b.patch",
@@ -242,7 +622,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50870910,
   "expect": "dff75efc",
   "replace": "f8f792fc",
-  "index": 62
+  "index": 61
  },
  {
   "file": "0103-theater-blit-painter-a.patch",
@@ -252,7 +632,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50871170,
   "expect": "dff7dcfb",
   "replace": "f8f710fc",
-  "index": 63
+  "index": 62
  },
  {
   "file": "0104-theater-blit-painter-b.patch",
@@ -262,7 +642,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50871188,
   "expect": "dff7d3fb",
   "replace": "f8f707fc",
-  "index": 64
+  "index": 63
  },
  {
   "file": "0105-theater-constructor-restore.patch",
@@ -272,7 +652,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50844106,
   "expect": "a08001200cf0c2f8",
   "replace": "fff7b1b800bf00bf",
-  "index": 65
+  "index": 64
  },
  {
   "file": "0032-ui-bt-dispatcher-hook-tail.patch",
@@ -282,7 +662,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50732638,
   "expect": "2046bde8f09f",
   "replace": "1af0cbbb00bf",
-  "index": 66
+  "index": 65
  },
  {
   "file": "0041-resolver-primary-hook.patch",
@@ -292,7 +672,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50699692,
   "expect": "2de9f047",
   "replace": "12f064bd",
-  "index": 67
+  "index": 66
  },
  {
   "file": "0042-resolver-companion-hook.patch",
@@ -302,7 +682,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50705090,
   "expect": "2de9f047",
   "replace": "11f0e9ba",
-  "index": 68
+  "index": 67
  },
  {
   "file": "0043-playlist-count-hook.patch",
@@ -312,7 +692,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50699608,
   "expect": "2de9f041",
   "replace": "12f0b1bd",
-  "index": 69
+  "index": 68
  },
  {
   "file": "0044-playlist-forward-step.patch",
@@ -322,7 +702,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50714008,
   "expect": "a0890128",
   "replace": "0ff0a0f9",
-  "index": 70
+  "index": 69
  },
  {
   "file": "0045-theater-noart-close.patch",
@@ -332,7 +712,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50850162,
   "expect": "346098f8",
   "replace": "e5f7b3b9",
-  "index": 71
+  "index": 70
  },
  {
   "file": "0046-theater-noart-open.patch",
@@ -342,7 +722,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50850156,
   "expect": "3460bde8",
   "replace": "e5f7c0b9",
-  "index": 72
+  "index": 71
  },
  {
   "file": "0047-pocket-playlist-hooks.patch",
@@ -352,7 +732,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50776184,
   "expect": "00b583b069466348fbf76bf8002818bf002003b000bd2de9f0435e4f85b088468146164669463846fbf75bf800281cbf05b0bde8f083f9f7acfebdf8064006eb4420401e6102b0fbf1f502a93846fbf748f84ff0000c002d98bfc5f1000cbdf8040006f2ff1200fb09f00cfb0401d01702ebd050421243463846faf7eafff9f7b4fe05b0bde8f0832de9f043dff8048185b089460746154669464046fbf721f800281cbf05b0bde8f083f9f772febdf8064005eb4420401e6102b0fbf1f502a94046fbf70ef8bdf804000022784302fb040105fb04f24b46",
   "replace": "04b4314a127832b1012b04d12f4a914201d104bc2de004bc2de9f047edf78cba04b4294a12784ab1012b07d1284a964502d0284a964501d104bc704704bc2de9f047eef704bd04b41f4a12782ab1012903d11d4a507804bc704704bc2de9f041edf740baa0891849097801b1012001287047dff854c080b200b101389cf80130984200d3581eacf802000cf1fc0232f81020c2f30a000130acf80400d20a0cf13c0353f822300b600cf1bc0333f812308b600cf110021c312a2312f801cb01f801cb013bf9d17047b4bf0703b439020365e00703cba60803",
-  "index": 73
+  "index": 72
  },
  {
   "file": "0048-pocket-theater-noart.patch",
@@ -362,7 +742,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50740444,
   "expect": "f0b587b01d460c9c16460f46002c04bf07b0f0bd02a9fff718fcbdf80a1060198842c4bf481b04b2bdf808100598694300eb41010091bdf90820234631463846fff792fb07b0f0bd2de9f04786b09846dde90f65ddf8389017468a46002d12bfb8f1000f06b0bde8",
   "replace": "346008b500f00bf8bde8084098f800001af044be346000f002f8bde8f8831fb50c49002048760c4991f8d80210b941f2a20001e00949088809490a88824205d0088008490a6842f000720a601af03eff1fbd000068340203a0320203b435020300440003fc3c0203",
-  "index": 74
+  "index": 73
  },
  {
   "file": "0049-pocket-transport-ground.patch",
@@ -370,9 +750,9 @@ export const FULL_EXTRA_PATCHES = [
   "module": 0,
   "region": "code",
   "address": 50674100,
-  "expect": "2de9f04186b05fea000808881f4615460e46adf8080016bfb8f1010f0c240024002c02bf002006b0bde8f0815c282ad0a0f500511a3908bf2c2011d0a0f50051",
-  "replace": "9d2802d1002908bfa22007b582b00b4b1b880093b0f19b03012b94bfef231f230b44084611461a4611f11f030ff08bfc02b0bde8074010f00db8000000440003",
-  "index": 75
+  "expect": "2de9f04186b05fea000808881f4615460e46adf8080016bfb8f1010f0c240024002c02bf002006b0bde8f0815c282ad0a0f500511a3908bf2c2011d0a0f50051393908bf3c200bd0",
+  "replace": "9d2803d1002904d1a22002e0a22808bf9d2007b582b00b4b1b880093b0f19b03012b94bfef231f230b44084611461a4611f11f030ff087fc02b0bde8074010f009b8000000440003",
+  "index": 74
  },
  {
   "file": "0040-m3u-browser-hook.patch",
@@ -382,7 +762,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50847514,
   "expect": "fff76df9",
   "replace": "00f095bf",
-  "index": 76
+  "index": 75
  },
  {
   "file": "0033-ui-lockscreen-title.patch",
@@ -392,7 +772,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50849950,
   "expect": "e4f72fbf",
   "replace": "01f0d1be",
-  "index": 77
+  "index": 76
  },
  {
   "file": "0060-nav-folder-disarm.patch",
@@ -402,7 +782,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50847822,
   "expect": "01252846",
   "replace": "02f0c5bb",
-  "index": 78
+  "index": 77
  },
  {
   "file": "0061-nav-file-disarm.patch",
@@ -412,7 +792,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50848204,
   "expect": "e648d8f769ff",
   "replace": "02f013bb00bf",
-  "index": 79
+  "index": 78
  },
  {
   "file": "0062-nav-tag-disarm.patch",
@@ -422,7 +802,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50850930,
   "expect": "a5f8f2c0",
   "replace": "00f0bbb8",
-  "index": 80
+  "index": 79
  },
  {
   "file": "0140-pocket-profile-lookup.patch",
@@ -432,7 +812,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50665100,
   "expect": "10b5ca4c002120460ff0dafa0021601c0ff0d6fa0021a01c0ff0d2fa0021e01c0ff0cefa4021201d0ff0cafa0821e01d0ff0c6fa8021be480ff0c2fa0221bd480ff0befa0221bc480ff0bafa2046bde8104001210ff0b4ba30b583b00c46054669460ff01bfb6420",
   "replace": "b0f5857f03d2f0b4134d11f016bd124b1b7ca0f5857000eb8300302358430f4b1b6818440e4b18444ff6ff7303ea420212f035beb0f5857f03d230b4064c11f09ebda0f585703a225043044b1b681844044b184412f023bea032020388320203825854009a575400",
-  "index": 81
+  "index": 80
  },
  {
   "file": "0141-pocket-profile-value.patch",
@@ -442,7 +822,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50677352,
   "expect": "10b521491a2011f03bff1a2002f08bfb1a2002f005fb0221bde81040002018f065bc10b51a2011f053ff1a2002f07bfb1a2002f023fb0221bde81040002018f04abc10b511491b2011f01aff",
   "replace": "04030002020200000100bc2d02d1787d29f0e9bab5f5857f15d1aff21c0100200a783b7d9a4208d14a787b7d9a4204d18a783b7e9a4229f0d682033101300328eed129f0d1babc2d29f091ba",
-  "index": 82
+  "index": 81
  },
  {
   "file": "0146-pocket-profile-commit.patch",
@@ -452,7 +832,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50753636,
   "expect": "70b5024601200021edf7c1fedff8c0c105460c46dce900321840114008431cbf002070bd45ea030044ea0201cce90001fff732ff002070bd242824bf",
   "replace": "7338032814d20b4900eb4000014406b40878094a1075fdf773fc0099487817f0d6f806bc887817f012f9012005f0befc18f048be68460503a0320203",
-  "index": 83
+  "index": 82
  },
  {
   "file": "0142-profile-string-lookup.patch",
@@ -462,7 +842,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50737346,
   "expect": "f0b4754d",
   "replace": "eef7e3ba",
-  "index": 84
+  "index": 83
  },
  {
   "file": "0143-profile-menu-lookup.patch",
@@ -472,7 +852,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50737670,
   "expect": "30b4244c",
   "replace": "eef75bba",
-  "index": 85
+  "index": 84
  },
  {
   "file": "0144-profile-value-load.patch",
@@ -482,7 +862,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50846670,
   "expect": "bc2d08bf",
   "replace": "d6f750bd",
-  "index": 86
+  "index": 85
  },
  {
   "file": "0145-profile-commit.patch",
@@ -492,7 +872,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50854528,
   "expect": "80f05281",
   "replace": "a7f4f0aa",
-  "index": 87
+  "index": 86
  },
  {
   "file": "0150-player-time-font.patch",
@@ -502,7 +882,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50849580,
   "expect": "10b5dff844c18ab000281cbf3920adf804000fd14cf6cd404843c00c3030adf80400acfb0140c008404200eb800001eb40003030adf806003c20adf808004cf6cd405043c00c3030adf80a00acfb0210c008404200eb800002eb40003030adf80c0000244ff48070adf80e4000904bb1cb23062201a9dd20e5f700f9364804700ab010bd0723062201a9dd20e5f7f6f8",
   "replace": "10b588b01c46002818bf63210a23b1fbf3f000fb131130303031adf80000adf802103a20adf80400b2fbf3f000fb132230303032adf80600adf808200020adf80a00002c0cbf0720bf20adf8100040f2f000adf81200002c0cbf4820ef20adf8140040f2fd00adf8160004a801466a460023dff814c0e047002c02d003480021017008b010bd0000c1130503e4470203",
-  "index": 88
+  "index": 87
  },
  {
   "file": "0151-marquee-stamp.patch",
@@ -512,7 +892,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50671892,
   "expect": "2de9f04115460f1e0646",
   "replace": "3068a8623220a8857047",
-  "index": 89
+  "index": 88
  },
  {
   "file": "0152-marquee-dwell.patch",
@@ -522,7 +902,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50737338,
   "expect": "a0f82ca0",
   "replace": "96218185",
-  "index": 90
+  "index": 89
  },
  {
   "file": "0153-marquee-step-stamp.patch",
@@ -532,7 +912,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50737166,
   "expect": "3068a862",
   "replace": "f0f781f8",
-  "index": 91
+  "index": 90
  },
  {
   "file": "0154-play-all-albums.patch",
@@ -542,7 +922,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50846276,
   "expect": "50006c0061007900200041006c006c00200041006c00620075006d0000000000",
   "replace": "50006c0061007900200041006c006c00200041006c00620075006d0073000000",
-  "index": 92
+  "index": 91
  },
  {
   "file": "0160-track-info.patch",
@@ -552,7 +932,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50850184,
   "expect": "f04fadf5057d01208490d1483e234ff06b0b0188cf4802ac01803c20adf80800adf80a000221cc48002700eb4102b2f8582232b124f81120491c89b24029f4d31ae0022912d15520adf80c006e206f21adf814107721adf810b0adf81610adf80e00adf81200adf81800092104eb410024f811304380878024f8113004eb41014ff0ef084b808f802521adf80c824422adf80872adf80e22bdf80c303846adf80a1202227bb382a9022322460846e4f75af9adf808725720adf80a02adf80c826620adf80e02a5480168012925d002292ed0032937d0042940d005294ad0062954d007295ed0082968d0092900f0b1819ba0016802914168039181680491c1680591006964e0ffe71323cde90023a8eb00021023e4f7d1fbcbe794a1086802904868039088680490c868059008694fe091a1086802904868039088680490c8680590086944e08fa1086802904868039088680490c8680590086939e08ca0016802914168039181680491c1680591006906902ee089a0016802914168039181680491c16805910069069022e086a0016802914168039181680491c16805910069069016e083a0016802914168039181680491c1680591006906900ae080a0016802914168039181680491c16805910069069082a9022302aa0846e4f7c4f8adf808727020adf80a02dff8e0a1adf80c827f20adf80e02daf80030754d4ff47a79d3f89c10734ea5fb0120c008a5fb00c2d208524202eb820200eb4202",
   "replace": "2de9f04f734b744c744ab4f85c601b88cdb09bb2d2f8785d714f0093ef22bf2320210020b8476f4b6f4fb3f8b630b6b29bb2a4f85c300024a046631eadf83080052b04d8dfe803f03a3a4a54919f0ca800f0f8f90823adf8083004eb840304eb43035b009bb203f12302adf80a205022323357f8041b04a8adf80c20adf80e3000f0aaf902a908460023dff860a104aad0475423adf80830e72302a9adf80c30084600230caa0134d047072cc5d10120494ba3f85c604db0bde8f08f4c4b4d49012c18bf19460b881bb10ca800f0adf9c0e749490ca800f07ff9bbe7474b4649d3f8d434092b9cbf01eb8301496af1e7002deed0d5f89c100029ead0d5f808a0baf1000fe5d04ff47a7b0ca800f06df93b4900f061f9bafbfbf9494600f065f90bfb19a20346eab1364900f055f964230a21b2fbf3f3b2fbf1fc30330380bcfbf1f301fb1c2201fb13c33032303343808280831d184633f8022d302afad000220346028018462849b5e7002db1d0eb68002baed04ff47a710ca8b3fbf1f100f034f92249a7e7224bd3f85804421ca0d003f5a02303f2d55398471e4b4ff00a09b0fbf3fa03fb1a004cf24f33984288bf0af1010abafbf9fb0ca8594600f015f9104900f009f909fb1ba100f00ef9124981e700bf004400030038020300a00403fb320603003502036cee0703ef2c060380b1040382b0040364ee070300b00403eced0703f4ed0703f6ed0703fbed070300400003a086010001ee0703",
-  "index": 93
+  "index": 92
  },
  {
   "file": "0161-metadata-helpers.patch",
@@ -562,7 +942,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50851168,
   "expect": "00f101004ff0480124f810b000f101004ff0020324f8101000f101004ff07a0124f8101000f1010082a924f8107002aa0846e3f7acffadf808728920adf80a02adf80c829820adf80e02daf800100020c968b1fbf9f1b1f57a7f19d3b1fbf9f0a5fb0032d208524202eb820200eb42003030adf8080001200ce0fea0016802914168039181680491c16805910069b3e664290ed3a6fb01325209a5fb02c3db085b4203eb830302eb4302303224f81020401c0a290ed3a5fb0132d208a5fb02c3db085b4203eb830302eb4302303224f81020401ca5fb0132d208524202eb820201eb4201303124f81010401c622124f810b0401c022324f81010401c732124f81010401c82a924f8107002aa0846e3f73effadf80872a220adf80a02adf80c82b120adf80e02d6484ff000080068daf7d6fa000db0f57a7f0fd3b0fbf9f1a5fb0132d208524202eb820201eb42013031",
   "replace": "013911f8013f0bb90380704720f8023bf7e7f0b585b001ac002322460a27b1fbf7f607fb1615303504f8015b0d46092d314603f10103f2d81a4400eb430312f8011d20f8021b9842f9d10023038005b0f0bd002331f8132022b120f8132001337f2bf7d1002220f813207047054b064ab3f88410843300290cbf11461946fff7e8bf00bf00af0403f4ad04032d626974202f20002e00206b487a00206b62707300204d42005469746c650041727469737400416c62756d00466f726d6174005265736f6c7574696f6e00426974726174650053697a65004d5033004f5055530041414300574156004f47470041504500464c414300414c41430044464600445346000000556e6b6e6f776e0005ee07030bee070312ee070318ee07031fee07032aee070332ee070337ee07033bee070340ee070344ee070348ee07034cee070350ee070355ee07035aee07035eee0703",
-  "index": 94
+  "index": 93
  },
  {
   "file": "0162-track-info-entry.patch",
@@ -572,7 +952,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50850182,
   "expect": "2de9",
   "replace": "ffe7",
-  "index": 95
+  "index": 94
  },
  {
   "file": "0163-player-tag-title.patch",
@@ -582,7 +962,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50854348,
   "expect": "424b4348adf80c70bdf8",
   "replace": "4348fff7fdf900f00cb8",
-  "index": 96
+  "index": 95
  },
  {
   "file": "0170-artwork-row.patch",
@@ -592,7 +972,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50778428,
   "expect": "00eb800303ebc0006e4b42ea012103eb8000036919430161704700eb800202ebc000684a02eb80000163704700eb800202ebc000634a02eb8000026811430160704700eb800202ebc0005e4a02eb8000026811430160704700eb800101ebc000584901eb80000121c161704700eb800101ebc000534901eb800001214161704700eb800202ebc0004e4a02eb8000026811430160704700eb800202ebc000494a02eb8000026822f400620260826911438161704700eb800202ebc000414a02eb8000826922ea01018161704700eb800202ebc0003b4a02eb8000826911438161704700eb800101eb",
   "replace": "2de9f0470c4635491546d1f88c69e2b0d1f89829012bd1f8948901f58051d1f8b87cdff8bc90d1f8b41cdde96aec1cd1bef1100f19d105f1ff3abaf1bd0f14d8902e1bd1b8f1300f0fd1242a0dd1002f0bddbe4209db002907dda94205dca24203dc02eb0708a0450fdccde96aec2a462146cc4662b0bde8f0476047be2ef4d1b8f1190ff1d1082ae0e70df10c0aa31a50462a46cde900716146e5f785fe102300930123c5f1f000f11b2a46cdf804a004eb61011841c84708f1ff38a045054608d1084bd3f8d424092a03d8d3f8d404e8f7a8ff284662b0bde8f087005002033f33060300b00403",
-  "index": 97
+  "index": 96
  },
  {
   "file": "0171-artwork-contrast.patch",
@@ -602,7 +982,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50670852,
   "expect": "80010c20d6e7c1b24ff6ff7202ea0121c0f307200843704700210c20cae7704710b504464ff4c872382103200df074fa00210846fff7beff4af209013c20fff7b9ff49f6c0713a20fff7b4ff4cf602713b20fff7afff",
   "replace": "6ff0090378224b4302fb003010f1950f07db6423323090fbf3f08842a8bf084670470020704770b51f210546c00afff7e7ff3f210646c5f34510fff7e1ff1f21440105ea0100fff7dbff44eac62424b2204380b270bd",
-  "index": 98
+  "index": 97
  },
  {
   "file": "0172-artwork-round.patch",
@@ -612,7 +992,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50676488,
   "expect": "10b501220b211046fef7f2f9002101220846fef7edf9012211460020fef7e8f901220221bde810400020fef7e1b901460020",
   "replace": "0346084602ebd271b3eb610f02db013ad31a05d4092b02dc024ad05c70470020704700bf3043050307050403020201010000",
-  "index": 99
+  "index": 98
  },
  {
   "file": "0173-artwork-pixels.patch",
@@ -622,7 +1002,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50671332,
   "expect": "782888bf782040ea002044f24001084381b20420dee670476932632077726974652074696d65206f75742021200a0000693263207772697465206572726f722068617070656e20286e6f41434b2921200a0000006932632077726974",
   "replace": "2de9f0471646dde90825074688461846294601f007fa00240f4a731b03ebd373b2f8009005eb63051ffa89f900eb630a2d1ab44201dbbde8f087a24509dca54207dd38f81400fff7fefe27f814000134efe74846f9e700bf00440003",
-  "index": 100
+  "index": 99
  },
  {
   "file": "0174-artwork-placeholder.patch",
@@ -632,7 +1012,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50850728,
   "expect": "00eb8000adf8082001eb40003030adf80a006220adf80c006920adf80e007420adf810002f20adf8120098680622b0fbf9f164290ed3a6fb01204009a5fb00c2d208524202eb820200eb42003030adf814000722a5fb01c0c008a5fb00ec4feadc0cccf1000c0ceb8c0c00eb4c0c0cf1300c404224f812c000eb8000521c01eb4000303024f81200501c2e2124f810109968901cb1fbf9f209fb1211a6fb01325209a5fb02c3db085b4203eb830302eb4302303224f81020a5fb0132d208534203eb8303401c01eb430100290fd0a5fb02c34fead303c3f1000303eb830302eb430202f1300224f8102000f1010065d0",
   "replace": "2de9f04f374b0025b3f8b640a3f5807393f88c3085b0002b0bbf4ff030094ff019094ff090084ff0be080cbf2423082308eb090a2c4fa4b202930af1ff3b424641462846d5f78cfb029b012d06462b44484403dda8f10202aa4230dc19460094abeb06020135b847a845e8d17a237d224e2179200094b84753238b224e217d200094b8476ff00105062d34bf0020032005f17703c0f17d02194600946c300135b847082df0d1114bd3f8d424092a16d8d3f8d40405b0bde8f04fd7f77dba09f101021946324403930094b847039baaf1020019460094abeb0602801bc2e705b0bde8f08f00350203fb32060300b00403",
-  "index": 101
+  "index": 100
  },
  {
   "file": "0175-artwork-badge.patch",
@@ -642,7 +1022,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50684256,
   "expect": "52f82000806b012202fa01f1084070472e4a52f82000426b012303fa01f1114341637047294a52f82000026b012303fa01f1114301637047244a52f82000026b012303fa01f122ea0101016370471f4a52f82000426b012303fa01f11143416370471a4a52f82000426b012303fa01f122ea010141637047144a52f82000c26c012303fa01f11143c16470470f4a52f8202001f01f00116d01228240114021fa00f0c0b2",
   "replace": "2de9f043092887b03fd8214b002793f88c30dff88080002b0bbf84259b259c24ae241d4badf8147013f8202003eb8003adf80c205a78194eadf80e209a78db78adf81020adf81230b8f8b4202146284692b2b6f85c90fdf7a7fbb8f8b63001a9a6f85c302b1dadf804303335a31c1134adf80630adf80a403b460846084cadf8085003aaa047a6f85c9007b0bde8f0830034020300350203b0ee070300380203ef2c0603",
-  "index": 102
+  "index": 101
  },
  {
   "file": "0176-artwork-centered-box.patch",
@@ -652,7 +1032,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50850002,
   "expect": "1720",
   "replace": "3020",
-  "index": 103
+  "index": 102
  },
  {
   "file": "0177-artwork-formats.patch",
@@ -662,7 +1042,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50851504,
   "expect": "adf808104ff0010801e064280fd3a6fb00214909a5fb0132d208524202eb820201eb4201303124f8",
   "replace": "4d5033004f50555341414300574156004f47470041504500464c4143414c41434446460044534600",
-  "index": 104
+  "index": 103
  },
  {
   "file": "0178-artwork-badge_fill.patch",
@@ -672,7 +1052,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50673928,
   "expect": "10b584b00c46069994460c281ebf4ff0ff3004b010bd01290cbfa21c002203a8cde9000302ab6146002000f0a5f9bdf808102170bdf80c10617004b0",
   "replace": "2de9f34105460f4616460024dff8288014223821204600f0f3fce31905f13702121a1946009628440134c047142cefd102b0bde8f08100bffb320603",
-  "index": 105
+  "index": 104
  },
  {
   "file": "0179-artwork-bar.patch",
@@ -682,7 +1062,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50716192,
   "expect": "10b50246fff76fff002808bf10bd4a4850f822402068904218bf10bd94f82800002100f069fa00206060a060e06020616061a061e06120626062a062e0622063401e206010bd70b500240546214600f0c4fd002818bf4ff0ff34e8b2",
   "replace": "47f6ef3303ea500003ea51031844704770b5c54301460646a8b2fff7f1ff0246fff7eeff01461046fff7eaff93b20a4a3146d38193800446fff7e2ff80b2abb2d0849083a0b2d380d08313811084538150849381908470bd00490203",
-  "index": 106
+  "index": 105
  },
  {
   "file": "0183-artwork-bar_entry.patch",
@@ -692,7 +1072,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50675444,
   "expect": "2de9f041adf5007d984617460e4605466b464ff4007200214ff44030",
   "replace": "1fb50448008809f099ffbde81f40dff808c0604700440003fb320603",
-  "index": 107
+  "index": 106
  },
  {
   "file": "0182-artwork-bar-hook.patch",
@@ -702,7 +1082,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50853550,
   "expect": "e3f724fe",
   "replace": "d4f721fc",
-  "index": 108
+  "index": 107
  },
  {
   "file": "0180-library-title-fallback.patch",
@@ -712,7 +1092,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50672012,
   "expect": "2de9f8430f1e06464ff000058cbfe846",
   "replace": "009b013301d003880bb901f04dbe7047",
-  "index": 109
+  "index": 108
  },
  {
   "file": "0181-library-title-copy-hook.patch",
@@ -722,7 +1102,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50851676,
   "expect": "d5f76aff",
   "replace": "d4f716f9",
-  "index": 110
+  "index": 109
  },
  {
   "file": "0155-time-clear-and-draw.patch",
@@ -732,7 +1112,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50664384,
   "expect": "2de9f0411646ab2251434a0a424986b01f4651f822400c9d616841f00201616041494ff000084ff4006c032a0ed2dfe802f00207",
   "replace": "07b582b0084b1b880093c388828841880088dff818c0e04702b0bde807400023dff80cc06047000000440003fb320603ef2c0603",
-  "index": 111
+  "index": 110
  },
  {
   "file": "0190-letter-advance-draw.patch",
@@ -742,7 +1122,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50734652,
   "expect": "02a8",
   "replace": "02e0",
-  "index": 112
+  "index": 111
  },
  {
   "file": "0191-letter-advance-measure.patch",
@@ -752,7 +1132,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50735150,
   "expect": "6846",
   "replace": "02e0",
-  "index": 113
+  "index": 112
  },
  {
   "file": "0190-usb-card.patch",
@@ -762,7 +1142,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50724940,
   "expect": "f04385b01d46dde90c9816460f46044606f08bfa6b486c4a50f8241004ebc40000eb400002eb001ca2f11800a94229d140f8248004eb440000ebc4004ff0c04101ebc00000220760",
   "replace": "2de9f34184244ff00008ef270c4d0d4e694604f10f03adf8024016342a46adf8063008460223adf80080adf80470a4b2b047c62c05f13005ead102b0bde8f08104440503ef2c0603",
-  "index": 114
+  "index": 113
  },
  {
   "file": "0191-usb-lines.patch",
@@ -772,7 +1152,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50676740,
   "expect": "704770477047000010b524491a2012f069f81a2002f0b9fc0221002018f0b6fd0221002018f094fdbde810401a2002f029bc10b51a2012f07df81a2002f0a5fc1a2002f04dfc0221bde81040002018f074bd10b512491b2012f044f81b2002f094fc0421002018f091fd0421002018f06ffdbde810401b2002f004bc10b51b2012f058f81b2002f080fc1b2002f028fc",
   "replace": "550053004200200041007500640069006f00000000000000000000000000000000000000000000000000000000000000310036002d0062006900740020002f0020003400380020006b0048007a00000000000000000000000000000000000000500043004d003a002000310035003300360020006b006200700073002000730074006500720065006f00000000000000",
-  "index": 115
+  "index": 114
  },
  {
   "file": "0192-usb-audio-card-hook.patch",
@@ -782,7 +1162,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50857772,
   "expect": "e2f789fd",
   "replace": "dff78efc",
-  "index": 116
+  "index": 115
  },
  {
   "file": "0193-usb-connected-hide.patch",
@@ -792,7 +1172,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50857896,
   "expect": "e2f74bfd",
   "replace": "00bf00bf",
-  "index": 117
+  "index": 116
  },
  {
   "file": "0200-rows-eligible.patch",
@@ -802,7 +1182,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50729452,
   "expect": "48600020704770b50d460646144601218f20f1f7d5f901211f20f1f709fa012003f09afb00211f20f1f702fa700040ea85013548c0e900147621c160",
   "replace": "30b505460c48b0f8b840a4b284b9a0f50060d0f8cc0868b9954208d8994206d8ef2a04d8b3f5a07f2cbf0020012030bd0020fce72046fae700380203",
-  "index": 118
+  "index": 117
  },
  {
   "file": "0201-rows-row-at.patch",
@@ -812,7 +1192,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50669208,
   "expect": "086070471349086070471349086070471249086070470121072888bf002107d8",
   "replace": "f022ef2901fb02f294bf034b034b034413445800704700bfd432800112988201",
-  "index": 119
+  "index": 118
  },
  {
   "file": "0202-rows-finish-rect.patch",
@@ -822,7 +1202,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50668308,
   "expect": "00389c1cec49002804bf086e7047012808bf486e7047e94bdff89cc3",
   "replace": "0122054b80b289b2c3f8c428a3f8d808a3f8da18704700bf00300203",
-  "index": 120
+  "index": 119
  },
  {
   "file": "0203-rows-fast-fill.patch",
@@ -832,7 +1212,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50681212,
   "expect": "f04d81ea030404f0004b21f0004514464ff0000a23f0004150ea050220d054ea01021dd0c5f30a570246c5f31303c1f31300c1f30a5640f4801543f48013a7eb0608101bd64608f2fd3873eb050002d308f10108",
   "replace": "2de9f04104460e4690461f460bf030fe78b120460e4da8473146b9420bd9a7f1f0034e2b98bf7e1c20463146fcf7b4fe0120bde8f0812046fdf770f82346434501d90131e9e7069a013320f8022bf6e7113f0603",
-  "index": 121
+  "index": 120
  },
  {
   "file": "0204-rows-opaque-rows.patch",
@@ -842,7 +1222,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50702776,
   "expect": "00b513460a68dff810c483b0624522bf0e2003b000bd4ff0020c0091cde901c3fe4b0121fff788fc03b000bd00b583b04ff0000cc1f804c013460a68dff8d8c3624522bf0e2003b000bd4ff0020c0091cde901c3f14b0121fff76efc03b000bd",
   "replace": "2de9f8430e46cc181746013adff84c90631e02440546ddf82080c84731464fea47098c420ad1a4f1f1034e2b8cbf314621462846bde8f843f7f790bc2846f7f74ffe0023bb4202d1c8440131e9e738f8132020f813200133f4e700bf113f0603",
-  "index": 122
+  "index": 121
  },
  {
   "file": "0205-rows-finish-sparse.patch",
@@ -852,7 +1232,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50730104,
   "expect": "f8b514460d460646c822a2210020fef7c9fe0121009123462a4631460020fff71bfac4b20020fef7ccff2046f8bdf8b514460d460646c822a2210020fef7b2fe0121009123462a46",
   "replace": "2de9f8430c4606461d46c71803eb040911464b463a46dff82c80c0474b463a4621463046c0475db9a4f1f0014e298cbf0021012138462144bde8f843f0f72ebf0021f7e7113f0603",
-  "index": 123
+  "index": 122
  },
  {
   "file": "0206-rows-mono-rows.patch",
@@ -862,7 +1242,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50728972,
   "expect": "ca08400100eb8200174a01f00701805c01228a4042fa01f10840c0b27047114ba2f5803203eb8101002804bf0a607047012804bf0a627047022808bf0a64704742f47f020028074b03eb810104bf0a61",
   "replace": "2de9f0431746002206460c4687b0ddf8388005925d180df10809ac420ad1059b9bb1dde903120023029807b0bde8f04300f01cbacdf8009021463a46304638f8023bf1f7d9fe0134e7e707b0bde8f083",
-  "index": 124
+  "index": 123
  },
  {
   "file": "0207-rows-fast-bitmap.patch",
@@ -872,7 +1252,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50670104,
   "expect": "2548006800f00100704723480068c0f34000704720490220086070471e480068c0f3800070471c480068c0f3c00070471a48006800f00100704718480068c0f340007047154902200860704713480068c0f38000704711480068c0f3c00070470f4800687047",
   "replace": "2de9f7431d46dde90a98531eef2b0646144603d9002003b0bde8f0836b1eb3f5a07ff7d24b1e421e2b4422440ef0d2fb0028efd0b9f1100f08d12b4622463046cdf8008007f0acff0120e4e7b9f1010fe0d1102cded82b4622463046cdf800800ef0c8faf0e7",
-  "index": 125
+  "index": 124
  },
  {
   "file": "0208-rows-keyed-rows.patch",
@@ -882,7 +1262,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50741196,
   "expect": "02204860a849ff20086070472de9f0438146a64815460f46d0e900121e4687b0d0e90230ddf83880cde90430cde9021233462a4639464846fff784fffbf79effc4b2a5eb0900401cf11b491c48434310aff2550102a8cde90001954a41462046fbf7a2ff9048046007b02046bde8f0832de9f04381468d4815460f46d0e904121e4687b0d0e90630ddf83880cde90430cde9021233462a4639464846fff752fffbf76cffc4b2a5eb0900401cf11b491c48437c4943100e204860aff2bd0102a8cde900017a4a41462046fbf7",
   "replace": "2de9f04f89466ff00101002485b0009201fb00f206460192494622462546a346a2469846dde90e7341450cd9013b012b3ed84a464146009845ea440305b0bde8f04f01f03fbb3046cde90223eef73efbb446019b1844dde90223ddf800e0f44501d90131e0e737f8024b022ba64604d1b4f5784f0ad1002405e0b4f5784ffad0012b08d03cb90cf1010ce6e70e4cb4f8b6e01ffa8efe20f81ce01db12c468b46e246f0e701250a468b46e2462c46eae73db101235946504605b0bde8f04ffdf7f5b905b0bde8f08f00350203",
-  "index": 126
+  "index": 125
  },
  {
   "file": "0209-rows-fast-keyed.patch",
@@ -892,7 +1272,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50697620,
   "expect": "2de9f0470746ff20082f28bfbde8f087c7eb87102a4900eb072001eb400500212869d5f818804fea102ad5f820903a460846fff7",
   "replace": "f7b5089f0446102f02d0002003b0f0bdee2afad8b3f59f7ff7d807f01dfe0028f3d00a9801900998009020460af004fd0120ebe7",
-  "index": 127
+  "index": 126
  },
  {
   "file": "0210-rows-fast-flash.patch",
@@ -902,7 +1282,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50777600,
   "expect": "484a0029916d14bf084321ea00009065704744494a6d012303fa00f022ea0000486570473f494a6d012303fa00f01043486570473b490a6d012303fa00f022ea00000865704737490a6d012303fa00f010430865704733490a6b22ea00000863704730490a6b1043086370472d48816a41f00401816270472a490228886a0cbf40f002000020886270472648816a41f0",
   "replace": "2de9f04150ea0104164602d00020bde8f081f02afad1b3f5a07ff7d140f23f13ef2221462046f4f7e1f90028eed01548154fd0f88c522046b847069b214620461d44e5f729fcdff8448001464ff4e1322846c04731462046e5f71efc4ff41642014605f5e130c04740f23f13ef224ff49f712046b84720464ff49f71e5f74afa0120c4e700300203113f0603a7400603",
-  "index": 128
+  "index": 127
  },
  {
   "file": "0211-rows-fast-clear.patch",
@@ -912,7 +1292,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50718756,
   "expect": "2de9f0478ab089460446dde912165f485f4f9a469046a9b190e80e100df1080eaee80e10d0e90412d0e90630cde90830cde9061214b1012c",
   "replace": "07b50c4ab2f864309bb2f02b10d1b2f866309bb2b3f5a07f0ad10021009040f23f13ef220846f6f797fe03b05df804fb0020fae700380203",
-  "index": 129
+  "index": 128
  },
  {
   "file": "0212-rows-wrap-fill.patch",
@@ -922,7 +1302,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50660412,
   "expect": "0d46394951f8204002f0a6f84ff47a71b0fbf1f2e8001118491eb1fbf0f0801e",
   "replace": "1fb584b00a9c009405f09af804b00028bde81f4000d070472de9f04712f051bf",
-  "index": 130
+  "index": 129
  },
  {
   "file": "0213-rows-wrap-fg.patch",
@@ -932,7 +1312,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50662160,
   "expect": "f8b1022833d0032818bf10bd02220021084601f0e9fd02221146002001f0e4fd02220421002001f0",
   "replace": "1fb584b0074c2488009404f02ffd04b00028bde81f4000d070472de9f04712f0c3bb00005c380203",
-  "index": 131
+  "index": 130
  },
  {
   "file": "0214-rows-wrap-bitmap.patch",
@@ -942,7 +1322,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50664484,
   "expect": "2de9f0411d46ab234b434fea532c294b86b0002753f82cc02b4e0c9c4ff48068032910d2",
   "replace": "1fb584b00a9c00940b9c019401f0f2fa04b00028bde81f4000d070472de9f84f11f07dbf",
-  "index": 132
+  "index": 131
  },
  {
   "file": "0215-rows-wrap-keyed.patch",
@@ -952,7 +1332,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50664576,
   "expect": "154951f8200020210161012181607047114951f820008069c0f3001070470e4951f82000806900f0",
   "replace": "1fb584b00a9c00940b9c01940c9c029408f080f804b00028bde81f4000d070472de9f05f12f04cb9",
-  "index": 133
+  "index": 132
  },
  {
   "file": "0216-rows-wrap-flash.patch",
@@ -962,7 +1342,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50668100,
   "expect": "2c48806d704770b42c4e2a4cb6fbf2f3d4f808c0284dbcfbf2f2d0b101281cbf70bc7047",
   "replace": "1fb584b00a9c00941af0d8fd04b00028bde81f4000d07047002a14bf002b704711f0f2b8",
-  "index": 134
+  "index": 133
  },
  {
   "file": "0217-rows-wrap-clear.patch",
@@ -972,7 +1352,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50662356,
   "expect": "f8b1022833d0032818bf10bd00221146104601f087fd002202211046",
   "replace": "1fb584b00df024fe04b00028bde81f4000d0704770b5064613f0d3b9",
-  "index": 135
+  "index": 134
  },
  {
   "file": "0218-rows-mono-line.patch",
@@ -982,7 +1362,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50671108,
   "expect": "704710b5d9b24ff6ff7404ea0121c3f3072348f280021943914302201143fff749ffcbb204ea0323c1f3072148f280021943914304201143fff73cff00213a20fff738ff00213b20fff734ff00213c20fff730ff0021bde810403e202ae745f22262811a90422bd00ddcb0f5fa5f19d0b0eb620019d0a0f54070cf3819d0b0f5",
   "replace": "2de9f84f98461b4b9146b3f8604007460e46fff73ffc4ff0010a00224ff4004ca4b20a9ddff850e0c4f3400304f003044a4501d1bde8f88f4cfa02f101ea0801002914bf4ff0010b4ff0000b01d1012c0ed00a495b4518bf7146098820f81210e96801b9ae60d119c5e90016c5f80ca00132dde7003802035c3802035e380203",
-  "index": 136
+  "index": 135
  },
  {
   "file": "0219-rows-finish-keyed.patch",
@@ -992,7 +1372,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50747024,
   "expect": "10b5182001f0e0fd012818bf10bdedf7c7ffc9490020486010bd10b50020faf730fc002808bf10bdfff7a9fa1b2001f0cbfd012818bf10bdedf778ff002818bf10bd182001f0b2fdbc480068f1f765fc",
   "replace": "2de9f8430f4606461d46441c07f1010911464b462246dff82c80c04722464b4639463046c047ea0703d50122064bc3f8c428ab0703d5054ba4b2a3f8d840bde8f88300bf113f06030030020300380203",
-  "index": 137
+  "index": 136
  },
  {
   "file": "0220-rows-hook-fill.patch",
@@ -1002,7 +1382,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50737914,
   "expect": "2de9f047",
   "replace": "edf79fb8",
-  "index": 138
+  "index": 137
  },
  {
   "file": "0221-rows-hook-fg.patch",
@@ -1012,7 +1392,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50737844,
   "expect": "2de9f047",
   "replace": "edf72cbc",
-  "index": 139
+  "index": 138
  },
  {
   "file": "0222-rows-hook-bitmap.patch",
@@ -1022,7 +1402,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50737982,
   "expect": "2de9f84f",
   "replace": "eef771b8",
-  "index": 140
+  "index": 139
  },
  {
   "file": "0223-rows-hook-keyed.patch",
@@ -1032,7 +1412,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50739004,
   "expect": "2de9f05f",
   "replace": "edf7a0be",
-  "index": 141
+  "index": 140
  },
  {
   "file": "0224-rows-hook-flash.patch",
@@ -1042,7 +1422,7 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50738244,
   "expect": "002a14bf002b7047",
   "replace": "eef7febe00bf00bf",
-  "index": 142
+  "index": 141
  },
  {
   "file": "0225-rows-hook-clear.patch",
@@ -1052,7 +1432,297 @@ export const FULL_EXTRA_PATCHES = [
   "address": 50741138,
   "expect": "70b50646",
   "replace": "ecf71fbe",
+  "index": 142
+ },
+ {
+  "file": "0260-focus-wheel-poll.patch",
+  "name": "0260-focus-wheel-poll",
+  "module": 0,
+  "region": "code",
+  "address": 50660492,
+  "expect": "0120704770b524490023164651f82040236051f8205002f077f84ff47a71b0fbf1f1f0000144491eb1fbf0f0801e0028bcbf0020",
+  "replace": "10b50a4c0a480068616888420dd0606016f047f92060207a38b100202072392016f0c6fe3b2016f0c3fe10bd843402037c310203",
   "index": 143
+ },
+ {
+  "file": "0261-focus-wheel-service-wrapper.patch",
+  "name": "0261-focus-wheel-service-wrapper",
+  "module": 0,
+  "region": "code",
+  "address": 50663916,
+  "expect": "8c6800f024ff024600232046294603f0c9fd70bd",
+  "replace": "2de90f50fff74cf9bde80f502de9f0432cf0efbe",
+  "index": 144
+ },
+ {
+  "file": "0262-focus-wheel-service-hook.patch",
+  "name": "0262-focus-wheel-service-hook",
+  "module": 27,
+  "region": "code",
+  "address": 50847706,
+  "expect": "2de9f043",
+  "replace": "d3f707b9",
+  "index": 145
+ },
+ {
+  "file": "0230-opus-tags-lead.patch",
+  "name": "0230-opus-tags-lead",
+  "module": 0,
+  "region": "code",
+  "address": 50660772,
+  "expect": "012070472a4951f820000021016001207047284a00b501211154c0b2fff7ebfd2549487000bd",
+  "replace": "a0f1c2011e293cbf0120704700f0f001e02904bf02207047a0f1f0010020052938bf03207047",
+  "index": 146
+ },
+ {
+  "file": "0231-opus-tags-word.patch",
+  "name": "0231-opus-tags-word",
+  "module": 0,
+  "region": "code",
+  "address": 50663884,
+  "expect": "70b50025022824bf4ff0ff34254608d2002808bf1e4902d0012808bf1d49",
+  "replace": "1cb50c4601a904221bf078fe28b101a801f05cfd206001201cbd00201cbd",
+  "index": 147
+ },
+ {
+  "file": "0232-opus-tags-comment.patch",
+  "name": "0232-opus-tags-comment",
+  "module": 0,
+  "region": "code",
+  "address": 50667008,
+  "expect": "516ab1fbf0f0002818bf401e431cb1fbf3f3dff8e0c0634588bf401c40f4e023dff8b8c01b02ccf81430401cb1fbf0f01062704710b4314c284bdff8a4c0f0b104281ebfdcf8180010bc70472a4a4ff008105861b2fbf1f0002818bf401e411c",
+  "replace": "2de9f04387b015468846044600260df103070df10409b5420fd0172e0dd82046394601221bf050f850b19df803003d2808d009f806000136ede7aa1b002109e000200ae001a94046324615f029f90146f0434219204610f0c5fe07b0bde8f083",
+  "index": 148
+ },
+ {
+  "file": "0233-opus-tags--rodata-str1-1.patch",
+  "name": "0233-opus-tags--rodata-str1-1",
+  "module": 0,
+  "region": "code",
+  "address": 50667828,
+  "expect": "704901eb8000806c70476f4bdff8b4c160b104281cbfdcf850007047704a4ff001209862b2fbf1f040b908",
+  "replace": "4f50555348454144004f50555354414753005449544c450047454e52450041525449535400414c42554d00",
+  "index": 149
+ },
+ {
+  "file": "0234-opus-tags-headers.patch",
+  "name": "0234-opus-tags-headers",
+  "module": 0,
+  "region": "code",
+  "address": 50670628,
+  "expect": "fbe70820f9e7042834bf204920490022032898bf4a647047042834bf1b491c49086c10f0010f1cbf01220a647047042834bf164916490a6c12f0010f08bf7047486801220a647047042834bf0f491049096c7047042834bf0c480d48016c11f0010f1cbf012101647047042838bf074a02d3074a",
+  "replace": "10b586b0044603f0a3f858b3204604f0abfb38b30df10501204613221af042f900b312490df10500082208f0e9fec8b19df80d1000200f2915d89df80e1091b1204603f00bfe68b10df10501204608221af028f930b106490df10500082208f0cffe00e0002006b010bd00bf342105033d210503",
+  "index": 150
+ },
+ {
+  "file": "0235-opus-tags-le32.patch",
+  "name": "0235-opus-tags-le32",
+  "module": 0,
+  "region": "code",
+  "address": 50670744,
+  "expect": "001fc0b2",
+  "replace": "00687047",
+  "index": 151
+ },
+ {
+  "file": "0236-opus-tags-valid_point.patch",
+  "name": "0236-opus-tags-valid_point",
+  "module": 0,
+  "region": "code",
+  "address": 50675568,
+  "expect": "ba480168ba4801604ff0e02189694160704730b4b5484ff0e02c0168dcf81820b348036840688b4208bf811a09d0dcf81440c91aa21a1044dcf81420491e01fb",
+  "replace": "b0b50e4a00244ff480350240b2f5584218bf01220023b0f5881f38bf0124022908bf4ff40065012908bf8025a84228bf012304ea03001040b0bd00bf00f81f00",
+  "index": 152
+ },
+ {
+  "file": "0237-opus-tags-codepoint.patch",
+  "name": "0237-opus-tags-codepoint",
+  "module": 0,
+  "region": "code",
+  "address": 50678744,
+  "expect": "704710b5024600200ff022fbbde81040012017f046bd00002de9f04f88b0654dddf844c0c2ebc20205eb4c0302eb4202b3f9a0420794b3f9a2420094b3f9f4420494b3f9f6320ceb420205ebc20202930692d2e90245d2e90068a1f1010e00295cd00499c91705910799cf17d91703910099c9170191",
+  "replace": "f8b5064690f900000f4601211160c4b2b0f1ff3f2ddc20461546fbf7d7fc30b30146781e814201d9002422e0c1f106004ff0ff32002302fa00f0721c8443481c99420ad0d65c013306f0c007802f0dd106f03f0646ea8414f2e728602046fff79bf9002808bf4ff6fd7402e02b604ff6fd742046f8bd",
+  "index": 153
+ },
+ {
+  "file": "0238-opus-tags-exact.patch",
+  "name": "0238-opus-tags-exact",
+  "module": 0,
+  "region": "code",
+  "address": 50679048,
+  "expect": "f04f204ddde909c905eb4c03c2ebc20202eb42020ceb420205ebc20bb3f9a0a2b3f9a282b3f9f472b3f9f66255f832404d1edbf80830002918bf47f6ff7e19d0",
+  "replace": "70b504460c4815460e468047d4e90101401a85420bd82268084b304629469847a84204d1a0682844a060012070bd012084f81e01002070bde1110603a98f0503",
+  "index": 154
+ },
+ {
+  "file": "0239-opus-tags-page.patch",
+  "name": "0239-opus-tags-page",
+  "module": 0,
+  "region": "code",
+  "address": 50683252,
+  "expect": "012101fa00f3124900228b62ca624ff4807303fa00f008604a60104670470d490868002208654a657047012101fa00f3074900228b62ca6240f2011303fa00f008604a6010467047",
+  "replace": "10b588b00df105011b220446fef7c2ffb8b10df1050008f02bf990b10df10501204611f021fb0146002059b19df81f206083a28332b104f11e012046fef7aaff00e0002008b010bd",
+  "index": 155
+ },
+ {
+  "file": "0240-opus-tags-tags.patch",
+  "name": "0240-opus-tags-tags",
+  "module": 0,
+  "region": "code",
+  "address": 50684572,
+  "expect": "4ff0e020c06920f07f407047fe4951f820000721c0f88810002141600121c0f8a8107047f84a002952f8200013bf4029016100204ff0ff3070470909b1fbf2f1f14b53f82000c26842f08002c260cab20260c1f307214160c16821f08001c1600020",
+  "replace": "feb50d4602a90446faf792ff00b3029a20460021002616f009fed0b101a92046faf786ffa0b161680198b0eb910f0fd8471c02ae013f0ed020463146faf778ff30b1029a20462946fbf78cfd0028f1d100263046febd94f81e01b0fa80f04609f7e7",
+  "index": 156
+ },
+ {
+  "file": "0241-opus-tags-next_packet.patch",
+  "name": "0241-opus-tags-next_packet",
+  "module": 0,
+  "region": "code",
+  "address": 50686080,
+  "expect": "042834bf0d480e484821fef7ecba042834bf0a4a0a4a0c3202eb0010026842ea013101607047042834bf044904490c3101eb00100068c0f30230",
+  "replace": "10b50446228b3ab994f81d0160b9204600f07cfd30b1228b2046002116f014fb0028efd1002010bd0020606184f81d012046bde8104000f069bd",
+  "index": 157
+ },
+ {
+  "file": "0242-opus-tags-segment.patch",
+  "name": "0242-opus-tags-segment",
+  "module": 0,
+  "region": "code",
+  "address": 50688908,
+  "expect": "70b5fb4eadf5007d3089b17ad6f8132001fb0200d6f8231045184ff400716846fdf75bfd7068002400289cbf0df5007d70bd",
+  "replace": "10b50446408ba18b884204d12046fef7ebfc60b1608b411c2044807f61832083ff3818bf012084f81d01012010bd002010bd",
+  "index": 158
+ },
+ {
+  "file": "0243-opus-tags-equal.patch",
+  "name": "0243-opus-tags-equal",
+  "module": 0,
+  "region": "code",
+  "address": 50706980,
+  "expect": "2de9ff4f8bb088460446014668460e9bfcf756fc002802bf0a200fb0bde8f08f98f80000e52804bf052088f80000414600200b22",
+  "replace": "f0b513460c4683b114f8015b5db110f8016ba6f16107ffb21a2f38bf203ef6b2013bae42efd00020f0bd885cb0fa80f04009f0bd",
+  "index": 159
+ },
+ {
+  "file": "0244-opus-tags-field.patch",
+  "name": "0244-opus-tags-field",
+  "module": 0,
+  "region": "code",
+  "address": 50714836,
+  "expect": "c2eb821303eb0223094a02eb43021062916100207047c2eb821303eb0223044a02eb4302136a0360906908600020704768ab0703",
+  "replace": "70b50e460949044615463046fef7a0f810b104f1600070bd054930462a46fef797f8002818bf04f5af7070bd4621050352210503",
+  "index": 160
+ },
+ {
+  "file": "0245-opus-tags-page_header.patch",
+  "name": "0245-opus-tags-page_header",
+  "module": 0,
+  "region": "code",
+  "address": 50716644,
+  "expect": "0068704770b505463c483d4900240068884205d00020fff7baffa84288bf0124",
+  "replace": "10b50446f4f756fe0449884211bf00202079b0fa80f0400910bd00bf4f676753",
+  "index": 161
+ },
+ {
+  "file": "0246-opus-tags-value.patch",
+  "name": "0246-opus-tags-value",
+  "module": 0,
+  "region": "code",
+  "address": 50736100,
+  "expect": "f04f0c46d7b01d46fe4917460368609a406801f1080ac1e90530002a08bf608813d0baf82400b4f906100128b4f90200a1eb00010cbf0c39103901ebd17100eb610018bfaaf8160001d1",
+  "replace": "f0b5adf5fe7d14460546a1b108880e4688b92746b4f5fe7f6946284628bf4ff4fe773a460af05ef968b1694630463a460af024fbe41b2846002122460af052f90df5fe7df0bd0020fae7",
+  "index": 162
+ },
+ {
+  "file": "0247-opus-tags-skip.patch",
+  "name": "0247-opus-tags-skip",
+  "module": 0,
+  "region": "code",
+  "address": 50737596,
+  "expect": "374a0146107c884218bf11747047dff8c8c0acf80c00acf80e10bcf80600002807bfacf81020acf81230acf81030acf8",
+  "replace": "b0b5044608480d468047d4e90110091a8d4284bf0020b0bd2268044b28440021a06098470120b0bde1110603a1940503",
+  "index": 163
+ },
+ {
+  "file": "0248-opus-tags-first_page.patch",
+  "name": "0248-opus-tags-first_page",
+  "module": 0,
+  "region": "code",
+  "address": 50742168,
+  "expect": "0a46d4498b8cd449012b096810d000ebc00001eb800014462025001d2a462146eff7d1fd29462046bde87040f2f7e6bb",
+  "replace": "70b505464879002400f0030002280dd101f10e000e46eef773fce86006f11200eef76efc85f81f4101242861204670bd",
+  "index": 164
+ },
+ {
+  "file": "0249-opus-tags-field_album.patch",
+  "name": "0249-opus-tags-field_album",
+  "module": 0,
+  "region": "code",
+  "address": 50753696,
+  "expect": "4ff0ff30704770b5024601200021edf7a0fedff880c104460d46dce9003218401140084304bf4ff0ff3070bd23ea040022ea0501cce90001fff710ff002070bd",
+  "replace": "70b50e460c49054614463046f4f7bafc10b105f5177070bd084930462246f4f7b1fc10b105f25a3070bd284631462246bde87040f6f7febb592105034c210503",
+  "index": 165
+ },
+ {
+  "file": "0250-opus-tags-page_sequence.patch",
+  "name": "0250-opus-tags-page_sequence",
+  "module": 0,
+  "region": "code",
+  "address": 50754524,
+  "expect": "0e2824d2dfe800f007090b0d0f11131517191b1d1f2124a0704726a0704728a070472aa070472ba070472ca070472da070472ea070472fa0704730a0704731a0704733a0704733a0704734a07047",
+  "replace": "b0b5054690f81f010c4628b128462146bde8b040fcf7d2bf04f10e00ebf74efce968884211d104f11200ebf747fc296901318842296108d169696079b1fa81f14909484000f00100b0bd0020b0bd",
+  "index": 166
+ },
+ {
+  "file": "0251-opus-tags-store_point.patch",
+  "name": "0251-opus-tags-store_point",
+  "module": 0,
+  "region": "code",
+  "address": 50757388,
+  "expect": "10b501210846eaf783fb01210220eaf77ffb0a20fcf710fd00210120eaf778fb00210220eaf774fbbde810404ff4fa60",
+  "replace": "b1f5803f0bd337220b4662f39f23064a43801144054a02eb9121022200e0012201801046704700bf0000ff0300d8ffff",
+  "index": 167
+ },
+ {
+  "file": "0252-opus-tags-transfer.patch",
+  "name": "0252-opus-tags-transfer",
+  "module": 0,
+  "region": "code",
+  "address": 50777800,
+  "expect": "4a68012303fa00f022ea00004860704712494a68012303fa00f01043486070470e498a68012303fa00f022ea0000886070470a498a68012303fa00f01043886070470648016821f00201016070470348016841f00201016070470000",
+  "replace": "f8b515460c4606462db3378b47b996f81d01f0b93046eaf755fad0b1378bc7b1bd4238bf2f46304634b121463a46e7f707ff70b13c4404e03946f6f75bf9002450b1308bed1bc01b3083706938447061dae7002400e001242046f8bd",
+  "index": 168
+ },
+ {
+  "file": "0253-opus-tags-opus_tags.patch",
+  "name": "0253-opus-tags-opus_tags",
+  "module": 0,
+  "region": "code",
+  "address": 50778104,
+  "expect": "00eb80000029144a02eb001004bfc0687047012904bf40697047022904bfc0697047032914bf0020406a704700eb80000029094a02eb001004bf80687047012904bf00697047022904bf80697047032914bf0020006a7047",
+  "replace": "70b5c8b00c460546002069460022b2f5907f02d088540132f9e70d4928460095884701210b4b019000202a4600268df81f11002198476846e5f7f8fd20b168462146e9f72ff90646304648b070bd00bfd5450503a1940503",
+  "index": 169
+ },
+ {
+  "file": "0254-opus-tags-utf16.patch",
+  "name": "0254-opus-tags-utf16",
+  "module": 0,
+  "region": "code",
+  "address": 50778720,
+  "expect": "800202ebc000264a02eb8000026822f0c00211430160704700eb800202ebc0001f4a02eb80000160704700eb800202ebc0001b4a02eb80000268114301607047",
+  "replace": "2de9f84315460e4681460027e8460024a54210d97d2f0ed83019291b4246e7f7abfc40b101460098044409eb4700faf73dfe0744ece7002029f81700bde8f883",
+  "index": 170
+ },
+ {
+  "file": "0255-opus-tags-dispatch.patch",
+  "name": "0255-opus-tags-dispatch",
+  "module": 0,
+  "region": "code",
+  "address": 50775462,
+  "expect": "4ff4407102a8e8f75bfc",
+  "replace": "4846314600f025fd52e0",
+  "index": 171
  }
 ];
 export const FULL_TAIL = {
@@ -1072,6 +1742,12 @@ export const FULL_GROWTHS = [
   "length": 26,
   "sha256": "7b80afb308d276a4d0012cd4302f7a5f2a1c5192a1f2e70d3f23867e195a942a",
   "hex": "03b44bf6b470c0f207304ff00001017003bca5f8f2c0fff738bf"
+ },
+ {
+  "module": 39,
+  "length": 1052,
+  "sha256": "f388c301f6ad4f16d00eaf8e10d565998768cb90b1938c4f32ffc7201afbc3b9",
+  "hex": "2de9f04104460d460026a05ba95b012809d0012907d088424ad846d3002841d0b61c082ef1d3208900f06bf80646288900f067f807464ef2ec18c0f20738d8f80800b0420ed0314640f20100c0f2030040f200124ff28c23c0f20733c8f702f8c8f80860d8f80c00b8420ed0394640f20100c0f2030040f200124ff28c33c0f20733c7f7efffc8f80c704ff28c20c0f207304ff28c31c0f2073100f044f8002803db05dc0120bde8f0810020bde8f0810220bde8f0812de9f04f0446a08900f020f8014640f20100c0f2030040f200124ff28c23c0f20733c7f7c4ff4ef2ec18c0f207386ff00000c8f80800c8f80c0020464ff28c21c0f2073100f03ff8bde8f08f43f29c21c0f20231096844f2ec72c0f20232d2f804c0614449021268891801ebc020704770b58eb06c4607ad0e460146204600f037f82846314600f033f8204600f08af80646284600f086f816f1010f00d1002610f1010f00d10020864205d807d3002eebd1002000f005b8012000f002b86ff000000eb070bd30b587b00446684600f00ff8241d0425684600f064f810f1010f00d100202080a41c6d1ef4d107b030bd00b5016011f5807242606ff0000282600022c2600a460b46d0f804c062450bd2b2f800c0bcf1000f06d0921cbcf1200ff2d01346fff7f0bf436001684268914205d20b88202b02d1891cfff7f8bf01608c464268521a0a2a2bd3bcf8003000f091f8542925d1d0f800c0bcf8023000f089f848291dd1d0f800c0bcf8043000f081f8452915d1d0f800c0bcf80630202b0fd1d0f800c00cf1080243689a4208d2b2f800c0bcf1200f02d1921cfff7f6bf026000bd00b5816811f1010f05d06ff000028260084600f05cb8c168012903d0022906d000f013b80221c160006900f050b88169002908d0491e816141690a88891c4161104600f044b80021c16001684268914216d20b88002b13d0b3f13002092a13d900f036f8012b06d003689b1c03608260084600f02cb803689b1c0360fff7e5bf6ff0000000f023b80a4643689a4206d21388303b092b02d8921cfff7f6bf0b46b3f800c0bcf1300f06d113f1020c944502d26346fff7f4bfd11a490801618161436102600122c260012000f000b800bd19466ff000020023b1f1610cbcf1190f01d820397047b1f5407cbcf16f0f01d80123704740f2521c614503d040f2531c614502d14f2145227047b1f1c00cbcf13f0f15d84ff64803c0f209335fea4c0c63441a78002a07d011465a78002a01d16ff00002002370476ff00002002370477047410041004100410041004100414543004500450045004500490049004900490000004e004f004f004f004f004f0000004f005500550055005500590000005353410041004100410041004100414543004500450045004500490049004900490000004e004f004f004f004f004f0000004f005500550055005500590000005900"
  }
 ];
 export const FULL_THEME_RUNS = [
@@ -1197,28 +1873,78 @@ export const FULL_THEME_RUNS = [
  },
  {
   "offset": 11958254,
-  "expect": "10a210a210a210a210a210a210a210a210a210a220c2612199a1c1e0e200ea20ea20e200c1e099a1612120c210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a230e299a1e220f220f220f220f220f220f220f220f220f220f220e22099a130e210a210a210a210a210a210a210a210a210a210a210a210a210a210a220c28981ea20f220f220f220f220f220f220f220f220f220f220f220f220f220f220ea20898120c210a210a210a210a210a210a210a210a210a210a210a230e2c9e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c9e030e210a210a210a210a210a210a210a210a210a238e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0038e210a210a210a210a210a210a210a230e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0030e210a210a210a210a210a220c2c9e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c9e020c210a210a210a210a28981f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f4aef2e4f220f220f220f220f220f220898110a210a210a230e2ea20f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220ffffff9df510f282f220f220f220f220ea2030e210a210a299a1f220f220f220f220f220f220f220f220f3a8fd71fe97ff5bff5bff5bff5bff5bff5bff5bff5bffffffffffffff5bf2e4f220f220f220f22099a110a220c2e220f220f220f220f220f220f220f282fe35ffffffffffffff5bff5bff5bff5bff5bff5bff5bff5bffffffffffffff5bf346f220f220f220f220e22020c26121f220f220f220f220f220f220f282ff5bfffffef9f3a8f282f220f220f220f220f220f220f220f220fffffffff510f220f220f220f220f220f220f220612199a1f220f220f220f220f220f220fdd3fffffd71f220f220f220f220f220f220f220f220f220f220f220f510f2e4f220f220f220f220f220f220f220f22099a1c1e0f220f220f220f220f220f2e4ffffff5bf220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c1e0e200f220f220f220f220f220fdd3fffff3a8f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220e200ea20f220f220f220f220f220fe97fffff282f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220ea20ea20f220f220f220f220f220ff5bff5bf220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220ea20e200f220f220f220f220f220fe97fffff282f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220e200c1e0f220f220f220f220f220fd71fffff3a8f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f4aef4aef220f220f220f220f220c1e099a1f220f220f220f220f220f3a8fffffef9f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220ff9dfe97f220f220f220f220f22099a16121f220f220f220f220f220f220fe35fffffd71f220f220f220f220f220f220f220f220f220f220f220f220f220f40afffffd71f220f220f220f220f220612120c2e220f220f220f220f220f220f282ff5bffffff5bf3a8f282f220f220f220f220f220f220f220f220f220f3a8ff5bfffff2e4f220f220f220f220e22020c210a299a1f220f220f220f220f220f220f282fdd3ffffffffffffff5bff5bff5bff5bff5bff5bff5bff5bff9dffffff9df4aef220f220f220f220f22099a110a210a230e2ea20f220f220f220f220f220f220f220f2e4fdd3fe97ff5bff5bff5bff5bff5bff5bff5bff5bfef9fd71f2e4f220f220f220f220f220ea2030e210a210a210a28981f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220898110a210a210a210a220c2c9e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c9e020c210a210a210a210a210a230e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0030e210a210a210a210a210a210a210a238e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0038e210a210a210a210a210a210a210a210a210a230e2c9e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c9e030e210a210a210a210a210a210a210a210a210a210a210a220c28981ea20f220f220f220f220f220f220f220f220f220f220f220f220f220f220ea20898120c210a210a210a210a210a210a210a210a210a210a210a210a210a210a230e299a1e220f220f220f220f220f220f220f220f220f220f220e22099a130e210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a220c2612199a1c1e0e200ea20ea20e200c1e099a1612120c210a210a210a210a210a210a210a210a210a210a2",
-  "replace": "f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800738e6b6df800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800a534ffff8410f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8005acb73ce8430dedbffffffff94b2f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8009cd3dedbffffffffffffffffffffffffffffad55f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8008410ef5dffffffffffffffffffffffffffffffffffffffffc618f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800a534ffffffffffffffffffffffffffffffffffffffffffffffffffffd6ba5aebf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800a534ffffffffffffffffffffffffef9def9dffffffffffffffffffffc6388c715acbf800f800f800f800f800f800f800f800f800f800f800f800f800f8008410ffffffffffffffffffffbe176b8df800d69affffef9dbdf78430f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800ef5dffffffffffffffff8430f800f800f800a5547beff800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8009cd3ffffffffffffffff8430f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800dedbffffffffffffbe17f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8005acbffffffffffffffff6b8df800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80073ceffffffffffffef9df800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8008430ffffffffffffd6baf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8008430ffffffffffffd6baf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80073ceffffffffffffef9df800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8005acbffffffffffffffff6b8df800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800dedbffffffffffffbe17f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8009cd3ffffffffffffffff8430f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800ef5dffffffffffffffff8430f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8008410ffffffffffffffffffffbe176b8df800f800f800f8006b8dbe17ffffd6ba5acbf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800a534ffffffffffffffffffffffffef9dd6bad6baef9dffffffffffffffffa554f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800a534ffffffffffffffffffffffffffffffffffffffffffffffffffffb596f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8008410ef5dffffffffffffffffffffffffffffffffffffffffe75c630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8009cd3dedbffffffffffffffffffffffffdedb9cd3f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8005acb73ce8430843073ce5acbf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800"
+  "expect": "10a210a210a210a210a210a210a210a210a210a220c2612199a1c1e0e200ea20ea20e200c1e099a1612120c210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a230e299a1e220f220f220f220f220f220f220f220f220f220f220e22099a130e210a210a210a210a210a210a210a210a210a210a210a210a210a210a220c28981ea20f220f220f220f220f220f220f220f220f220f220f220f220f220f220ea20898120c210a210a210a210a210a210a210a210a210a210a210a230e2c9e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c9e030e210a210a210a210a210a210a210a210a210a238e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0038e210a210a210a210a210a210a210a230e2da00f220f220f220f220f220f220f220f220",
+  "replace": "f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80073aed69ace796b6df800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800a534feb8fed9ffff8410f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8005acb73ce8430dedbf50ff220fe36ffff94b2f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8009cd3dedbffffff7dfe77fe15f346f220f220fd92ffffad55f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8008410ef5dfffffd71f346"
+ },
+ {
+  "offset": 11958614,
+  "expect": "f220f220f220f220f220f220f220da0030e210a210a210a210a210a220c2c9e0f220f220f220f220f220f220f220",
+  "replace": "f4ceffffc618f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800a534fffffe36f2c3"
+ },
+ {
+  "offset": 11958680,
+  "expect": "f220f220f220f220f220f220f220c9e020c210a210a210a210a28981f220f220f220f220f220f220",
+  "replace": "f40affffd6ba5aebf800f800f800f800f800f800f800f800f800f800f800f800f800a534fffff50f"
+ },
+ {
+  "offset": 11958744,
+  "expect": "f4aef2e4f220f220f220f220f220f220898110a210a210a230e2ea20f220f220f220f220f220",
+  "replace": "f220f387ff7ca534f800f800f800f800f800f800f800f800f800f800f800f8008410fffff50f"
+ },
+ {
+  "offset": 11958794,
+  "expect": "f220f220",
+  "replace": "f2a2f2a2"
+ },
+ {
+  "offset": 11958808,
+  "expect": "ffffff9df510f282f220f220f220f220ea2030e210a210a299a1f220f220f220f220f220f220f220f220f3a8fd71fe97ff5bff5bff5bff5bff5bff5bff5bff5bffffffffffffff5bf2e4f220f220f220f22099a110a220c2e220f220f220f220f220f220f220f282fe35ffffffffffffff5bff5bff5bff5bff5bff5bff5bff5bffffffffffffff5bf346f220f220f220f220e22020c26121f220f220f220f220f220f220f282ff5bfffffef9f3a8f282f220f220f220f220f220f220f220f220fffffffff510f220f220f220f220f220f220f220612199a1f220f220f220f220f220f220fdd3fffffd71f220f220f220f220f220f220f220f220f220f220f220f510f2e4f220f220f220f220f220f220f220f22099a1c1e0f220f220f220f220f220f2e4ffffff5bf220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c1e0e200f220f220f220f220f220fdd3fffff3a8f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220e200ea20f220f220f220f220f220fe97fffff282f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220ea20ea20f220f220f220f220f220ff5bff5bf220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220ea20e200f220f220f220f220f220fe97fffff282f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220e200c1e0f220f220f220f220f220fd71fffff3a8f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f4aef4aef220f220f220f220f220c1e099a1f220f220f220f220f220f3a8fffffef9f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220ff9dfe97f220f220f220f220f22099a16121f220f220f220f220f220f220fe35fffffd71f220f220f220f220f220f220f220f220f220f220f220f220f220f40afffffd71f220f220f220f220f220612120c2e220f220f220f220f220f220f282ff5bffffff5bf3a8f282f220f220f220f220f220f220f220f220f220f3a8ff5bfffff2e4f220f220f220f220e22020c210a299a1f220f220f220f220f220f220f282fdd3ffffffffffffff5bff5bff5bff5bff5bff5bff5bff5bff9dffffff9df4aef220f220f220f220f22099a110a210a230e2ea20f220f220f220f220f220f220f220f2e4fdd3fe97ff5bff5bff5bff5bff5bff5bff5bff5bfef9fd71f2e4f220f220f220f220f220ea2030e210a210a210a28981f220f220f220f220f220f220",
+  "replace": "f3eafdd3ff7da534f800f800f800f800f800f800f800f800f800f800f800f800ef5dfe36f220f220f220f220f220f42bfed9fffff388f220f2a2f42bfe15ffffffffc6388c715acbf800f800f800f800f800f800f800f800f800f800f8009cd3fffff2c3f220f220f220f220fe15ffffbe17fffff4effe77ffffef9dbdf78430f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800dedbfd71f220f220f220f220fe15ffff8430f800d69ad69aad957beff800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8005acbfffff346f220f220f220f42bffff8430f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80073ceff7df220f220f220f220fed9be17f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8008430fe77f220f220f220f2a2ffff6b8df800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8008c71fe15f220f220f220f387ef9df800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8008c71fe15f220f220f220f387ef9df800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8008430fe77f220f220f220f2a2ffff6b8df800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80073ceff7df220f220f220f220fed9be17f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8005acbfffff346f220f220f220f42bffff8430f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800dedbfd71f220f220f220f220fe15ffff8430f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8009cd3fffff2c3f220f220f220f220fe15ffffbe176b8df800f8006b8dbe17ffffffffffffd6ba5acbf800f800f800f800f800f800f800f800f800f800f800f800f800ef5dfe36f220f220f220f220f220f42bfed9ffffef9def9dfffffed9f42bf220f387ff7da554f800f800f800f800f800f800f800f800f800f800f800f800f8008410fffff50ff220f220f220f220f220f220f2a2f387f387f2a2f220f220f220f220f4efbdd7f800f800f800f800f800f800f800f800f800f800f800f800f800f800a534fffff50f"
+ },
+ {
+  "offset": 11959834,
+  "expect": "f220f220f220f220f220f220f220898110a210a210a210a220c2c9e0f220f220f220f220f220f220f220",
+  "replace": "f48dbdd7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800a534fffffe36f2c3"
+ },
+ {
+  "offset": 11959896,
+  "expect": "f220f220f220f220f220f220f220c9e020c210a210a210a210a210a230e2da00f220f220f220f220f220f220f220f220",
+  "replace": "f2c4ff3bb596f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8008410ef5dfffffd71f346"
+ },
+ {
+  "offset": 11959956,
+  "expect": "f220f220f220f220f220f220f220f220da0030e210a210a210a210a210a210a210a238e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0038e210a210a210a210a210a210a210a210a210a230e2c9e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c9e030e210a210a210a210a210a210a210a210a210a210a210a220c28981ea20f220f220f220f220f220f220f220f220f220f220f220f220f220f220ea20898120c210a210a210a210a210a210a210a210a210a210a210a210a210a210a230e299a1e220f220f220f220f220f220f220f220f220f220f220e22099a130e210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a220c2612199a1c1e0e200ea20ea20e200c1e099a1612120c210a210a210a210a210a210a210a210a210a210a2",
+  "replace": "f346fd71ffffe75c630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8009cd3dedbffffff7dfe77fe15fe15fe77ff7dffffdedb9cd3f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8005acb73ce84308c718c71843073ce5acbf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800"
  },
  {
   "offset": 11960302,
-  "expect": "10a210a210a210a210a210a210a210a210a210a220c2612199a1c1e0e200ea20ea20e200c1e099a1612120c210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a230e299a1e220f220f220f220f220f220f220f220f220f220f220e22099a130e210a210a210a210a210a210a210a210a210a210a210a210a210a210a220c28981ea20f220f220f220f220f220f220f220f220f220f220f220f220f220f220ea20898120c210a210a210a210a210a210a210a210a210a210a210a230e2c9e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c9e030e210a210a210a210a210a210a210a210a210a238e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0038e210a210a210a210a210a210a210a230e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0030e210a210a210a210a210a220c2c9e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c9e020c210a210a210a210a28981f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220898110a210a210a230e2ea20f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220ea2030e210a210a299a1f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f22099a110a220c2e220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220e22020c26121f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220612199a1f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f22099a1c1e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c1e0e200f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220e200ea20f220f220f220f220f220fd10ff5bff5bff5bff5bff5bff5bff5bff5bff5bff5bff5bff5bff5bff5bff5bff5bff5bff5bfd10f220f220f220f220f220ea20ea20f220f220f220f220f220fd10ff5bff5bff5bff5bff5bff5bff5bff5bff5bff5bff5bff5bff5bff5bff5bff5bff5bff5bfd10f220f220f220f220f220ea20e200f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220e200c1e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c1e099a1f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f22099a16121f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220612120c2e220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220e22020c210a299a1f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f22099a110a210a230e2ea20f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220ea2030e210a210a210a28981f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220898110a210a210a210a220c2c9e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c9e020c210a210a210a210a210a230e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0030e210a210a210a210a210a210a210a238e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0038e210a210a210a210a210a210a210a210a210a230e2c9e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c9e030e210a210a210a210a210a210a210a210a210a210a210a220c28981ea20f220f220f220f220f220f220f220f220f220f220f220f220f220f220ea20898120c210a210a210a210a210a210a210a210a210a210a210a210a210a210a230e299a1e220f220f220f220f220f220f220f220f220f220f220e22099a130e210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a220c2612199a1c1e0e200ea20ea20e200c1e099a1612120c210a210a210a210a210a210a210a210a210a210a2",
-  "replace": "f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8007befef5dffffffffffffffffffffffffffffffffffffffffffffffffef9d8c71f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800ef5dfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800ef9dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff52aaf800f800f800f800f800f800f800f800f800f800f800f800f800f800f8008c71ffffffffffffffffffffffffffffffffffffffffffffffffffffffff9d13f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800630c630c630c630c630c630c630c630c630c630c630c630c52aaf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800"
+  "expect": "10a210a210a210a210a210a210a210a210a210a220c2612199a1c1e0e200ea20ea20e200c1e099a1612120c210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a230e299a1e220f220f220f220f220f220f220f220f220f220f220e22099a130e210a210a210a210a210a210a210a210a210a210a210a210a210a210a220c28981ea20f220f220f220f220f220f220f220f220f220f220f220f220f220f220ea20898120c210a210a210a210a210a210a210a210a210a210a210a230e2c9e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c9e030e210a210a210a210a210a210a210a210a210a238e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0038e210a210a210a210a210a210a210a230e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0030e210a210a210a210a210a220c2c9e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c9e020c210a210a210a210a28981f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220898110a210a210a230e2ea20f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220ea2030e210a210a299a1f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f22099a110a220c2e220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220e22020c26121f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220612199a1f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f22099a1c1e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c1e0e200f220f220f220f220f220f220f220f220f220",
+  "replace": "f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8007befef5dffffffffffffffffffffffffffffffffffffffffffffffffffffffffef9d8c71f800f800f800f800f800f800f800f800f800f800f800f800f800f800ef5dfe77f2c3"
+ },
+ {
+  "offset": 11961242,
+  "expect": "f220f220f220f220f220f220f220f220f220e200ea20f220f220f220f220f220fd10ff5bff5bff5bff5bff5bff5bff5bff5bff5bff5bff5bff5bff5bff5bff5bff5bff5bff5bfd10f220f220f220f220f220ea20ea20f220f220f220f220f220fd10ff5bff5bff5bff5bff5bff5bff5bff5bff5bff5bff5bff5bff5bff5bff5bff5bff5bff5bfd10f220f220f220f220f220ea20e200f220f220f220f220f220f220f220f220",
+  "replace": "f2a2fdd4fffff800f800f800f800f800f800f800f800f800f800f800f800f800f800fffff2c3f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220ffff630cf800f800f800f800f800f800f800f800f800f800f800f800f800fffff2a2f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220ff9d630cf800f800f800f800f800f800f800f800f800f800f800f800f800ef9dfdd4"
+ },
+ {
+  "offset": 11961436,
+  "expect": "f220f220f220f220f220f220f220f220e200c1e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c1e099a1f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f22099a16121f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220612120c2e220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220e22020c210a299a1f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f22099a110a210a230e2ea20f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220ea2030e210a210a210a28981f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220898110a210a210a210a220c2c9e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c9e020c210a210a210a210a210a230e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0030e210a210a210a210a210a210a210a238e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0038e210a210a210a210a210a210a210a210a210a230e2c9e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c9e030e210a210a210a210a210a210a210a210a210a210a210a220c28981ea20f220f220f220f220f220f220f220f220f220f220f220f220f220f220ea20898120c210a210a210a210a210a210a210a210a210a210a210a210a210a210a230e299a1e220f220f220f220f220f220f220f220f220f220f220e22099a130e210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a220c2612199a1c1e0e200ea20ea20e200c1e099a1612120c210a210a210a210a210a210a210a210a210a210a2",
+  "replace": "fd30ffff52aaf800f800f800f800f800f800f800f800f800f800f800f800f8008c71ffffffffff3bff3bff3bff3bff3bff3bff3bff3bff3bff3bff3bff3bff9dffff9d13f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800630c630c630c630c630c630c630c630c630c630c630c630c630c630c52aaf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800"
  },
  {
   "offset": 11962350,
   "expect": "10a210a210a210a210a210a210a210a210a210a220c2612199a1c1e0e200ea20ea20e200c1e099a1612120c210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a230e299a1e220f220f220f220f220f220f220f220f220f220f220e22099a130e210a210a210a210a210a210a210a210a210a210a210a210a210a210a220c28981ea20f220f220f220f220f220f220f220f220f220f220f220f220f220f220ea20898120c210a210a210a210a210a210a210a210a210a210a210a230e2c9e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c9e030e210a210a210a210a210a210a210a210a210a238e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0038e210a210a210a210a210a210a210a230e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0030e210a210a210a210a210a220c2c9e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c9e020c210a210a210a210a28981f220f220f220f220f282f3a8f44cf44cf44cf44cf44cf44cf44cf44cf44cf44cf44cf44cf44cf44cf3a8f282f220f220f220f220898110a210a210a230e2ea20f220f220f220f44cff5bffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff9df4aef220f220f220ea2030e210a210a299a1f220f220f220f3a8ffffff5bf4aef44cf44cf44cf44cf44cf44cf44cf44cf44cf44cf44cf44cf44cf44cf4aeff5bfffff2e4f220f220f22099a110a220c2e220f220f220f220fdd3fffff282",
-  "replace": "f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8009245da21f220f220f220f220f220f220f220f220f220f220f220f220f220f220da219a45f800f800f800f800f800f800f800f800f800f800f800f800f800a244f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220ba43f800f800f800f800f800f800f800f800f800f800f8006a67f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f2207a46f800f800f800f800f800f800f800f800f800f8009245f220f220"
+  "replace": "f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80094b2e71cffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe75ca514f800f800f800f800f800f800f800f800f800f800f800ad55fffffd92f305f220f220f220f220f220f220f220f220f220f220f220f220f220f220f2c4fd30ffffbe17f800f800f800f800f800f800f800f800f8006b4dfffff4cef220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f42bffff8410f800f800f800f800f800f800f800f8009cf3fefaf220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220fe36b596f800f800f800f800f800f800f800f800a534fd51f220f220"
  },
  {
   "offset": 11963038,
   "expect": "f2e4fffffe35f220f220f220e22020c26121f220f220f220f220ff5bff5bf220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220ff5bfef9f220f220f220f220612199a1f220f220f220f220ff5bff5bf220f220f220f220f220ff5bff5bfd10f220f220f220ff5bff5bfd10f220f220f220f220ff5bff5bf220f220f220f22099a1c1e0f220f220f220f220ff5bff5bf220f220f220f220f220ff5bffffff5bf220f220f220ff5bffffff5bf220f220f220f220ff5bff5bf220f220f220f220c1e0e200f220f220f220f220ff5bff5bf220f220f220f220f220f220ff5bff5bf220f220f220f220ff5bff5bf220f220f220f220ff5bff5bf220f220f220f220e200ea20f220f220f220f220ff5bff5bf220f220f220f220f220f2e4ff9dfe97f220f220f220f2e4ff9dfe97f220f220f220f220ff5bff5bf220f220f220f220ea20ea20f220f220f220f220ff5bff5b",
-  "replace": "f220f220aa44f800f800f800f800f800f800f800f800f800f8009a44f220f220f220f220f220ba239a449a44ea21f220f220f220ca229a449a44da21f220f220f220f220b243f800f800f800f800f800f800f800f800f800f8009a44f220f220f220f220f2207247f800f800f220f220f220f2208a45f800f800e221f220f220f220f220b243f800f800f800f800f800f800f800f800f800f8009a44f220f220f220f220f2205a68f8006a67f220f220f220f2207a47f800f800f220f220f220f220f220b243f800f800f800f800f800f800f800f800f800f8009a44f220f220f220f220ea21f800f8008246f220f220f220f2206268f8006a47f220f220f220f220f220b243f800f800f800f800f800f800f800f800f800f8009a44f220f220f220f220d22262686268a244f220f220f220f220626862689245f220f220f220f220f220b243f800f800f800f800f800f800f800f800f800f8009a44f220"
+  "replace": "f220f220f48dbdd7f800f800f800f800f800f800f800f800a534f50ff220f220f220f220f220f3eaf50ff50ff282f220f220f220f388f50ff50ff2c4f220f220f220f220f44cbdd7f800f800f800f800f800f800f800f800a534f50ff220f220f220f220f220fe98dedbfffff220f220f220f220fdb3dedbfffff2c3f220f220f220f220f44cbdd7f800f800f800f800f800f800f800f800a534f50ff220f220f220f220f220ff7cad75fefaf220f220f220f220fe77b596fffff220f220f220f220f220f44cbdd7f800f800f800f800f800f800f800f800a534f50ff220f220f220f220f282ffffb5d6fe15f220f220f220f220ff1abdf7fed9f220f220f220f220f220f44cbdd7f800f800f800f800f800f800f800f800a534f50ff220f220f220f220f325ff3bff3bf4eff220f220f220f220ff1aff3bfd92f220f220f220f220f220f44cbdd7f800f800f800f800f800f800f800f800a534f50ff220"
  },
  {
   "offset": 11963398,
   "expect": "fffffffff4aef220f220f220fffffffff4aef220f220f220f220ff5bff5bf220f220f220f220ea20e200f220f220f220f220ff5bff5b",
-  "replace": "f220f220f220f220f220f220f220f220f220f220f220f220f220f220b243f800f800f800f800f800f800f800f800f800f8009a44f220"
+  "replace": "f220f220f220f220f220f220f220f220f220f220f220f220f220f220f44cbdd7f800f800f800f800f800f800f800f800a534f50ff220"
  },
  {
   "offset": 11963462,
@@ -1228,117 +1954,122 @@ export const FULL_THEME_RUNS = [
  {
   "offset": 11963488,
   "expect": "ff5bff5bf220f220f220f220e200c1e0f220f220f220f220fef9ff5b",
-  "replace": "f220b243f800f800f800f800f800f800f800f800f800f8009a44f220"
+  "replace": "f220f44cbdd7f800f800f800f800f800f800f800f800a534f50ff220"
  },
  {
   "offset": 11963552,
   "expect": "ff5bff5bf220f220f220f220c1e099a1f220f220f220f220fe35fffff2e4",
-  "replace": "f220b243f800f800f800f800f800f800f800f800f800f8008a46f220f220"
+  "replace": "f220f44cbdd7f800f800f800f800f800f800f800f800a534fdd3f220f220"
  },
  {
   "offset": 11963614,
-  "expect": "f282fffffdd3f220f220f220f22099a16121f220f220f220f220f2e4fffffef9f4aef44cf44cf2e4f220f220f2e4f44cf44cf44cf44cf44cf44cf44cf44cf4aeff5bfffff3a8f220f220f220f220612120c2e220f220f220f220f220f4aeff9dfffffffffffffef9f220fd10ffffffffffffffffffffffffffffffffffffffffff5bf44cf220f220f220f220e22020c210a299a1f220f220f220f220f220f282f3a8f44cff9dff9dfdd3ffffff5bf44cf44cf44cf44cf44cf44cf44cf44cf3a8f282f220f220f220f220f22099a110a210a230e2ea20f220f220f220f220f220f220f220ff5bfffffffffdd3f2e4f220f220f220f220f220f220f220f220f220f220f220f220f220f220ea2030e210a210a210a28981f220f220f220f220f220f220f220fef9fffffd10f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220898110a210a210a210a220c2c9e0f220f220f220f220f220f220f2e4f2e4f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c9e020c210a210a210a210a210a230e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0030e210a210a210a210a210a210a210a238e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0038e210a210a210a210a210a210a210a210a210a230e2c9e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c9e030e210a210a210a210a210a210a210a210a210a210a210a220c28981ea20f220f220f220f220f220f220f220f220f220f220f220f220f220f220ea20898120c210a210a210a210a210a210a210a210a210a210a210a210a210a210a230e299a1e220f220f220f220f220f220f220f220f220f220f220e22099a130e210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a220c2612199a1c1e0e200ea20ea20e200c1e099a1612120c210a210a210a210a210a210a210a210a210a210a2",
-  "replace": "f220f2209a44f800f800f800f800f800f800f800f800f800f8005268e221f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f2206268f800f800f800f800f800f800f800f800f800f800f8007247ea21f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f2208246f800f800f800f800f800f800f800f800f800f800f800f800f8005a689a45b243f220f220f220f220f220f220c222b243b243b243b243b243b2439a446268f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f220f220f220f220f2209245f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f220f220f220e2216a47f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f220f220c2235a68f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f2209a44f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8007a46f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800"
+  "expect": "f282fffffdd3f220f220f220f22099a16121f220f220f220f220f2e4fffffef9f4aef44cf44cf2e4f220f220f2e4f44cf44cf44cf44cf44cf44cf44cf44cf4aeff5bfffff3a8f220f220f220f220612120c2e220f220f220f220f220f4aeff9dfffffffffffffef9f220fd10ffffffffffffffffffffffffffffffffffffffffff5bf44cf220f220f220f220e22020c210a299a1f220f220f220f220f220f282f3a8f44cff9dff9dfdd3ffffff5bf44cf44c",
+  "replace": "f220f220f50fbdd7f800f800f800f800f800f800f800f8008c71ff9df2a2f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220ff3ba534f800f800f800f800f800f800f800f80052aaef9dfe98f282f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220fe15ffff632cf800f800f800f800f800f800f800f800f80073aef79eff7cfd30f44cf220f220f220f220f220f220f3a8"
+ },
+ {
+  "offset": 11963804,
+  "expect": "f3a8f282f220f220f220f220f22099a110a210a230e2ea20f220f220f220f220f220f220f220ff5bfffffffffdd3f2e4f220f220f220f220f220f220f220f220f220f220f220f220f220f220ea2030e210a210a210a28981f220f220f220f220f220f220f220fef9fffffd10f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220898110a210a210a210a220c2c9e0f220f220f220f220f220f220f2e4f2e4f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c9e020c210a210a210a210a210a230e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0030e210a210a210a210a210a210a210a238e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0038e210a210a210a210a210a210a210a210a210a230e2c9e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c9e030e210a210a210a210a210a210a210a210a210a210a210a220c28981ea20f220f220f220f220f220f220f220f220f220f220f220f220f220f220ea20898120c210a210a210a210a210a210a210a210a210a210a210a210a210a210a230e299a1e220f220f220f220f220f220f220f220f220f220f220e22099a130e210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a220c2612199a1c1e0e200ea20ea20e200c1e099a1612120c210a210a210a210a210a210a210a210a210a210a2",
+  "replace": "f50fff3bffff8430f800f800f800f800f800f800f800f800f800f800f8005aeb9d13bdd7fffff220f220f220f220f220fd72ffffce79bdd7bdd7bdd7bdd7bdd7bdd7a534632cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800fffff220f220f220f2c3fed9ffff94d2f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800fffff220f220f3c9ff7def5d6b8df800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800fffff220f50fffffce595acbf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800fffffe56ffffa534f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800bdd7bdd77beff800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800"
  },
  {
   "offset": 11964398,
   "expect": "10a210a210a210a210a210a210a210a210a210a220c2612199a1c1e0e200ea20ea20e200c1e099a1612120c210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a230e299a1e220f220f220f220f220f220f220f220f220f220f220e22099a130e210a210a210a210a210a210a210a210a210a210a210a210a210a210a220c28981ea20f220f220f220f220f220f220f220f220f220f220f220f220f220f220ea20898120c210a210a210a210a210a210a210a210a210a210a210a230e2c9e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c9e030e210a210a210a210a210a210a210a210a210a238e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0038e210a210a210a210a210a210a210a230e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0030e210a210a210a210a210a220c2c9e0f220f220f220f220f220f220f220f220f3a8f510fe35fef9fef9fe97fd71f3a8f220f220f220f220f220f220f220f220c9e020c210a210a210a210a28981f220f220f220f220f220f220f220f346fe97ffffffffffffff5bff5bfffffffffffffe97f2e4f220f220f220f220f220f220f220898110a210a210a230e2ea20f220f220f220f220f220f220f44cff9dfffffdd3f3a8f220f220f220f220f3a8fdd3fffffffff4aef220f220f220f220f220f220ea2030e210a210a299a1f220f220f220f220f220f220f4aeffffff5bf3a8",
-  "replace": "f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8006a678a469a449a4492456a47f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8009245da21f220f220f220f220f220f220e2219a445268f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8006a47da21f220f220f220f220f220f220f220f220f220f220e2217a46f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8008246f220f220f220f220f220f220f220f220f220f220f220f220f220f2209245f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8006a47f220f220f220f220"
+  "replace": "f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8006b4d8c71a534a534a534a53494b26b8df800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8009cd3e75cfffffefafdd3f50ff50ffd92fed9ffffef7da53452aaf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8006b8de75cfffffd71f2c4f220f220f220f220f220f220f2a3f50fff9def9d7beff800f800f800f800f800f800f800f800f800f800f800f800f800f800f8008430fffffed9f2c4f220f220f220f220f220f220f220f220f220f220f2a2fe56ffff9cd3f800f800f800f800f800f800f800f800f800f800f800f800f8006b8dfffffe15f220f220f220f220f220f220f220f220f220f220f220f220f220f220fd71ffff8410f800f800f800f800f800f800f800f800f800f800f800f800e75cfed9f220f220f220f220"
  },
  {
   "offset": 11965014,
   "expect": "f346ff5bfffff44cf220f220f220f220f220f22099a110a220c2e220f220f220f220f220f220f2e4ffffff5bf2e4f220f220f220f220f220f220f220f220f220f220f2e4ff5bff9df346f220f220f220f220f220e22020c26121f220f220f220f220f220f220fe97fffff346f220f220f220f220f220f346f346f220f220f220f220f220f3a8fffffe97f220f220f220f220f220f220612199a1f220f220f220f220f220f3a8fffffdd3",
-  "replace": "f220f220f220f2207a46f800f800f800f800f800f800f800f800f800f800f800f800f800f800da21f220f220f220f220f220f220d22262686268d222f220f220f220f220f220f220ea215a68f800f800f800f800f800f800f800f800f800f800f800f8009245f220f220f220f220f220f220f2209245f800f8009245f220f220f220f220f220f220f220aa44f800f800f800f800f800f800f800f800f800f800f800f800da21f220f220"
+  "replace": "f220f220f220f220fe36f79e5aebf800f800f800f800f800f800f800f800f800f8009cd3fffff2c4f220f220f220f220f220f220f326ff3bff3bf326f220f220f220f220f220f220f282ff7cad95f800f800f800f800f800f800f800f800f800f800e75cfd71f220f220f220f220f220f220f220fd92ef7def7dfd92f220f220f220f220f220f220f220f4adfffff800f800f800f800f800f800f800f800f8006b4dfffff2c4f220f220"
  },
  {
   "offset": 11965194,
   "expect": "f220fe35fef9f220",
-  "replace": "ba43f800f800ba43"
+  "replace": "f3eafffffffff3ea"
  },
  {
   "offset": 11965212,
   "expect": "fdd3fffff3a8f220f220f220f220f22099a1c1e0f220f220f220f220f220fd71fffff3a8",
-  "replace": "f220f220f220f800f800f800f800f800f800f800f800f800f800f8006a67f220f220f220"
+  "replace": "f220f220f220ffff8410f800f800f800f800f800f800f800f8008c71fefaf220f220f220"
  },
  {
-  "offset": 11965260,
-  "expect": "f2e4f282",
-  "replace": "da21da21"
+  "offset": 11965262,
+  "expect": "f282",
+  "replace": "f2e4"
  },
  {
   "offset": 11965276,
   "expect": "f3a8fffff510f220f220f220f220f220c1e0e200f220f220f220f220f220fe97ffff",
-  "replace": "f220f220f2207a46f800f800f800f800f800f800f800f800f800f8008a46f220f220"
+  "replace": "f220f220f220fe36a534f800f800f800f800f800f800f800f800a534fdd3f220f220"
  },
  {
   "offset": 11965324,
   "expect": "f220f220",
-  "replace": "d222ca22"
+  "replace": "f326f387"
  },
  {
   "offset": 11965342,
   "expect": "fffffe35f220f220f220f220f220e200ea20f220f220f220f220f220fef9ff5b",
-  "replace": "f220f2209a44f800f800f800f800f800f800f800f800f800f8009a44f220f220"
+  "replace": "f220f220f50fbdd7f800f800f800f800f800f800f800f800a534f50ff220f220"
  },
  {
   "offset": 11965386,
   "expect": "f220fd10fd10f220",
-  "replace": "ea21f800f800da21"
+  "replace": "f282fffffffff305"
  },
  {
   "offset": 11965406,
   "expect": "ff5bfef9f220f220f220f220f220ea20ea20f220f220f220f220f220fef9ff5b",
-  "replace": "f220f220b243f800f800f800f800f800f800f800f800f800f8009a44f220f220"
+  "replace": "f220f220f44cbdd7f800f800f800f800f800f800f800f800a534f50ff220f220"
  },
  {
   "offset": 11965450,
   "expect": "f220ff5bff5bf220",
-  "replace": "da21f800f800ca22"
+  "replace": "f2c4f79ee71cf388"
  },
  {
   "offset": 11965470,
   "expect": "ff5bfef9f220f220f220f220f220ea20e200f220f220f220f220f220fe35ffff",
-  "replace": "f220f220b243f800f800f800f800f800f800f800f800f800f8009245f220f220"
+  "replace": "f220f220f44cbdd7f800f800f800f800f800f800f800f800a534fd92f220f220"
  },
  {
   "offset": 11965514,
   "expect": "f220ff5bff5bf220",
-  "replace": "da21f800f800ca22"
+  "replace": "f2c4e75cd69af388"
  },
  {
   "offset": 11965534,
   "expect": "fffffe97f220f220f220f220f220e200c1e0f220f220f220f220f220f510fffff3a8",
-  "replace": "f220f220a244f800f800f800f800f800f800f800f800f800f8006a47f220f220f220"
+  "replace": "f220f220f4cebdd7f800f800f800f800f800f800f800f80094b2fed9f220f220f220"
  },
  {
   "offset": 11965578,
   "expect": "f220ff5bff5bf220",
-  "replace": "da21f800f800ca22"
+  "replace": "f2c4e75cd69af388"
  },
  {
   "offset": 11965596,
   "expect": "f3a8fffffd71f220f220f220f220f220c1e099a1f220f220f220f220f220f3a8fffffdd3",
-  "replace": "f220f220f2208246f800f800f800f800f800f800f800f800f800f800f800e221f220f220"
+  "replace": "f220f220f220fe15ad55f800f800f800f800f800f800f800f8006b8dfffff2a3f220f220"
  },
  {
   "offset": 11965642,
   "expect": "f220ff5bfef9f220",
-  "replace": "da21f800f800ca22"
+  "replace": "f2c4f79ee71cf388"
  },
  {
   "offset": 11965660,
   "expect": "fdd3fffff3a8f220f220f220f220f22099a16121f220f220f220f220f220f220fe97fffff3a8f220f220f220f220f220f346f346f220f220f220f220f220f346fffffe97f220f220f220f220f220f220612120c2e220f220f220f220f220f220f346ff9dff5bf2e4f220f220f220f220f220f220f220f220f220f220f2e4ff5bfffff2e4f220f220f220f220f220e22020c210a299a1f220f220f220f220f220f220f44cffffff5bf346",
-  "replace": "f220f220f2205268f800f800f800f800f800f800f800f800f800f800f8009a44f220f220f220f220f220f220f220ea21f800f800da21f220f220f220f220f220f220f220b243f800f800f800f800f800f800f800f800f800f800f800f8005268e221f220f220f220f220f220f220f220d222ca22f220f220f220f220f220f220f220f2206268f800f800f800f800f800f800f800f800f800f800f800f800f8007a46f220f220f220f220"
+  "replace": "f220f220f220ff9d8430f800f800f800f800f800f800f800f800f800ef7df50ff220f220f220f220f220f220f220f282fffffffff305f220f220f220f220f220f220f220f44cffff52aaf800f800f800f800f800f800f800f800f800a534ff9df2a2f220f220f220f220f220f220f220f326f387f220f220f220f220f220f220f220f220ff3bbdd7f800f800f800f800f800f800f800f800f800f80052aaef9dfe56f220f220f220f220"
  },
  {
   "offset": 11965846,
   "expect": "f3a8ff5bfffff4aef220f220f220f220f220f22099a110a210a230e2ea20f220f220f220f220f220f220f4aefffffffffdd3f3a8f220f220f220f220f3a8fdd3ffffff9df44cf220f220f220f220f220f220ea2030e210a210a210a28981f220f220f220f220f220f220f220f2e4fe97ffffffffffffff5bff5bfffffffffffffe97f346f220f220f220f220f220f220f220898110a210a210a210a220c2c9e0f220f220f220f220f220f220f220f220f3a8fd71fe97fef9fef9fe35f510f3a8f220f220f220f220f220f220f220f220c9e020c210a210a210a210a210a230e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0030e210a210a210a210a210a210a210a238e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0038e210a210a210a210a210a210a210a210a210a230e2c9e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c9e030e210a210a210a210a210a210a210a210a210a210a210a220c28981ea20f220f220f220f220f220f220f220f220f220f220f220f220f220f220ea20898120c210a210a210a210a210a210a210a210a210a210a210a210a210a210a230e299a1e220f220f220f220f220f220f220f220f220f220f220e22099a130e210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a220c2612199a1c1e0e200ea20ea20e200c1e099a1612120c210a210a210a210a210a210a210a210a210a210a2",
-  "replace": "f220f220f220f2208a45f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8009245f220f220f220f220f220f220f220f220f220f220f220f220f220f220aa44f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8007a46ea21f220f220f220f220f220f220f220f220f220f220f2208a45f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8005a68aa44f220f220f220f220f220f220f220f220b2436268f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8007a469a44b243b243a24482465268f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800"
+  "replace": "f220f220f220f220fdb3ffff632cf800f800f800f800f800f800f800f800f800f800f8007beffffffd71f220f220f220f220f220f220f220f220f220f220f220f220f220f220f4adffff9492f800f800f800f800f800f800f800f800f800f800f800f800f8009cd3fffffe36f282f220f220f220f220f220f220f220f220f220f220f220fdb3ffffad95f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8008410f79eff7cf4adf220f220f220f220f220f220f220f220f44cff3bffff9492f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8005aebad95fffffffffe36f50ff44cf44cf4cefe15ff9dffffbdd7632cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8008410a534bdd7bdd7bdd7bdd7ad55843052aaf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800"
  },
  {
   "offset": 11966446,
   "expect": "10a210a210a210a210a210a210a210a210a210a220c2612199a1c1e0e200ea20ea20e200c1e099a1612120c210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a230e299a1e220f220f220f220f220f220f220f220f220f220f220e22099a130e210a210a210a210a210a210a210a210a210a210a210a210a210a210a220c28981ea20f220f220f220f220f220f220f220f220f220f220f220f220f220f220ea20898120c210a210a210a210a210a210a210a210a210a210a210a230e2c9e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c9e030e210a210a210a210a210a210a210a210a210a238e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0038e210a210a210a210a210a210a210a230e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0030e210a210a210a210a210a220c2c9e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c9e020c210a210a210a210a28981f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220898110a210a210a230e2ea20f220f220f220f220f220f220f510fffffffffffff510f220f220f220f220f510fffffffffffff510f220f220f220f220f220f220ea2030e210a210a299a1f220f220f220f220f220f220f220fffffffffffffffffffff220f220f220f220fffffffffffffffffffff220f220f220f220f220f220f22099a110a220c2e220f220f220f220f220f220f220f220fffffffffffffffffffff220f220f220f220fffffffffffffffffffff220f220f220f220f220f220f220e22020c26121f220f220f220f220f220f220f220f220fffffffffffffffffffff220f220f220f220fffffffffffffffffffff220f220f220f220f220f220f220f220612199a1f220f220f220f220f220f220f220f220fffffffffffffffffffff220f220f220f220fffffffffffffffffffff220f220f220f220f220f220f220f22099a1c1e0f220f220f220f220f220f220f220f220fffffffffffffffffffff220f220f220f220fffffffffffffffffffff220f220f220f220f220f220f220f220c1e0e200f220f220f220f220f220f220f220f220fffffffffffffffffffff220f220f220f220fffffffffffffffffffff220f220f220f220f220f220f220f220e200ea20f220f220f220f220f220f220f220f220fffffffffffffffffffff220f220f220f220fffffffffffffffffffff220f220f220f220f220f220f220f220ea20ea20f220f220f220f220f220f220f220f220fffffffffffffffffffff220f220f220f220fffffffffffffffffffff220f220f220f220f220f220f220f220ea20e200f220f220f220f220f220f220f220f220fffffffffffffffffffff220f220f220f220fffffffffffffffffffff220f220f220f220f220f220f220f220e200c1e0f220f220f220f220f220f220f220f220fffffffffffffffffffff220f220f220f220fffffffffffffffffffff220f220f220f220f220f220f220f220c1e099a1f220f220f220f220f220f220f220f220fffffffffffffffffffff220f220f220f220fffffffffffffffffffff220f220f220f220f220f220f220f22099a16121f220f220f220f220f220f220f220f220fffffffffffffffffffff220f220f220f220fffffffffffffffffffff220f220f220f220f220f220f220f220612120c2e220f220f220f220f220f220f220f220fffffffffffffffffffff220f220f220f220fffffffffffffffffffff220f220f220f220f220f220f220e22020c210a299a1f220f220f220f220f220f220f220fffffffffffffffffffff220f220f220f220fffffffffffffffffffff220f220f220f220f220f220f22099a110a210a230e2ea20f220f220f220f220f220f220f510fffffffffffff510f220f220f220f220f510fffffffffffff510f220f220f220f220f220f220ea2030e210a210a210a28981f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220898110a210a210a210a220c2c9e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c9e020c210a210a210a210a210a230e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0030e210a210a210a210a210a210a210a238e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0038e210a210a210a210a210a210a210a210a210a230e2c9e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c9e030e210a210a210a210a210a210a210a210a210a210a210a220c28981ea20f220f220f220f220f220f220f220f220f220f220f220f220f220f220ea20898120c210a210a210a210a210a210a210a210a210a210a210a210a210a210a230e299a1e220f220f220f220f220f220f220f220f220f220f220e22099a130e210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a220c2612199a1c1e0e200ea20ea20e200c1e099a1612120c210a210a210a210a210a210a210a210a210a210a2",
-  "replace": "f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8008c719d135aebf800f800f800f80052aa9cd394b2f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800b5b6ffffffffef7d52aaf800f800f800defbffffffffce59f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800ffffffffffffffff8c71f800f80073aeffffffffffffffff5b0bf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800ffffffffffffffff8c71f800f80073ceffffffffffffffff630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800ffffffffffffffff8c71f800f80073ceffffffffffffffff630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800ffffffffffffffff8c71f800f80073ceffffffffffffffff630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800ffffffffffffffff8c71f800f80073ceffffffffffffffff630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800ffffffffffffffff8c71f800f80073ceffffffffffffffff630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800ffffffffffffffff8c71f800f80073ceffffffffffffffff630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800ffffffffffffffff8c71f800f80073ceffffffffffffffff630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800ffffffffffffffff8c71f800f80073ceffffffffffffffff630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800ffffffffffffffff8c71f800f80073ceffffffffffffffff630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800ffffffffffffffff8c71f800f80073ceffffffffffffffff630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800ffffffffffffffff8c71f800f80073ceffffffffffffffff630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800ffffffffffffffff8c71f800f80073ceffffffffffffffff630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800ffffffffffffffff8c71f800f80073ceffffffffffffffff630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800ffffffffffffffff8c71f800f80073ceffffffffffffffff630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800ffffffffffffffff8c71f800f80073ceffffffffffffffff630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800c618ffffffffffff5aebf800f800f800ef5dffffffffdedbf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800a514b5b66b4df800f800f800f800630cad75ad555acbf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800"
+  "replace": "f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8008c71a534a5349d135aebf800f80052aa9cd3a534a53494b2f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800b5b6fffffdd4fd30ff7cef7d52aaf800defbff9dfd71fd92ffffce59f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800fffff48df220f220f2a3ff9d8c7173aefffff325f220f220f3c9ffff5b0bf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800fffff220f220f220f220fdd48c7173cefe98f220f220f220f220ff5c630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800fffff220f220f220f220fdd38c7173cefe77f220f220f220f220ff3b630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800fffff220f220f220f220fdd38c7173cefe77f220f220f220f220ff3b630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800fffff220f220f220f220fdd38c7173cefe77f220f220f220f220ff3b630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800fffff220f220f220f220fdd38c7173cefe77f220f220f220f220ff3b630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800fffff220f220f220f220fdd38c7173cefe77f220f220f220f220ff3b630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800fffff220f220f220f220fdd38c7173cefe77f220f220f220f220ff3b630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800fffff220f220f220f220fdd38c7173cefe77f220f220f220f220ff3b630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800fffff220f220f220f220fdd38c7173cefe77f220f220f220f220ff3b630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800fffff220f220f220f220fdd38c7173cefe77f220f220f220f220ff3b630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800fffff220f220f220f220fdd38c7173cefe77f220f220f220f220ff3b630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800fffff220f220f220f220fdd38c7173cefe77f220f220f220f220ff3b630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800fffff220f220f220f220fdd38c7173cefe77f220f220f220f220ff3b630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800fffff220f220f220f220fdd38c7173cefe77f220f220f220f220ff3b630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800fffff220f220f220f220fdd38c7173cefe77f220f220f220f220ff3b630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800fffff220f220f220f220fdd38c7173cefe77f220f220f220f220ff3b630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800fffff40af220f220f220ff7c8c7173cefffff2c3f220f220f346ffff630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800c618fffffd30f48dfefaffff5aebf800ef5dff3bf4aef4ceff7ddedbf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800a514bdd7bdd7b5b66b4df800f800630cad75bdd7bdd7ad555acbf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800"
  },
  {
   "offset": 11968494,
@@ -1402,23 +2133,173 @@ export const FULL_THEME_RUNS = [
  },
  {
   "offset": 11972590,
-  "expect": "10a210a210a210a210a210a210a210a210a210a220c2612199a1c1e0e200ea20ea20e200c1e099a1612120c210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a230e299a1e220f220f220f220f220f220f220f220f220f220f220e22099a130e210a210a210a210a210a210a210a210a210a210a210a210a210a210a220c28981ea20f220f220f220f220f220f220f220f220f220f220f220f220f220f220ea20898120c210a210a210a210a210a210a210a210a210a210a210a230e2c9e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c9e030e210a210a210a210a210a210a210a210a210a238e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0038e210a210a210a210a210a210a210a230e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0030e210a210a210a210a210a220c2c9e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c9e020c210a210a210a210a28981f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f4aef2e4f220f220f220f220f220f220898110a210a210a230e2ea20f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220ffffff9df510f282f220f220f220f220ea2030e210a210a299a1f220f220f220f220f220f220f220f220f3a8fd71fe97ff5bff5bff5bff5bff5bff5bff5bff5bffffffffffffff5bf2e4f220f220f220f22099a110a220c2e220f220f220f220f220f220f220f282fe35ffffffffffffff5bff5bff5bff5bff5bff5bff5bff5bffffffffffffff5bf346f220f220f220f220e22020c26121f220f220f220f220f220f220f282ff5bfffffef9f3a8f282f220f220f220f220f220f220f220f220fffffffff510f220f220f220f220f220f220f220612199a1f220f220f220f220f220f220fdd3fffffd71f220f220f220f220f220f220f220f220f220f220f220f510f2e4f220f220f220f220f220f220f220f22099a1c1e0f220f220f220f220f220f2e4ffffff5bf220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c1e0e200f220f220f220f220f220fdd3fffff3a8f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220e200ea20f220f220f220f220f220fe97fffff282f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220ea20ea20f220f220f220f220f220ff5bff5bf220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220ea20e200f220f220f220f220f220fe97fffff282f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220e200c1e0f220f220f220f220f220fd71fffff3a8f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f4aef4aef220f220f220f220f220c1e099a1f220f220f220f220f220f3a8fffffef9f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220ff9dfe97f220f220f220f220f22099a16121f220f220f220f220f220f220fe35fffffd71f220f220f220f220f220f220f220f220f220f220f220f220f220f40afffffd71f220f220f220f220f220612120c2e220f220f220f220f220f220f282ff5bffffff5bf3a8f282f220f220f220f220f220f220f220f220f220f3a8ff5bfffff2e4f220f220f220f220e22020c210a299a1f220f220f220f220f220f220f282fdd3ffffffffffffff5bff5bff5bff5bff5bff5bff5bff5bff9dffffff9df4aef220f220f220f220f22099a110a210a230e2ea20f220f220f220f220f220f220f220f2e4fdd3fe97ff5bff5bff5bff5bff5bff5bff5bff5bfef9fd71f2e4f220f220f220f220f220ea2030e210a210a210a28981f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220898110a210a210a210a220c2c9e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c9e020c210a210a210a210a210a230e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0030e210a210a210a210a210a210a210a238e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0038e210a210a210a210a210a210a210a210a210a230e2c9e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c9e030e210a210a210a210a210a210a210a210a210a210a210a220c28981ea20f220f220f220f220f220f220f220f220f220f220f220f220f220f220ea20898120c210a210a210a210a210a210a210a210a210a210a210a210a210a210a230e299a1e220f220f220f220f220f220f220f220f220f220f220e22099a130e210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a220c2612199a1c1e0e200ea20ea20e200c1e099a1612120c210a210a210a210a210a210a210a210a210a210a2",
-  "replace": "f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800738e6b6df800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800a534ffff8410f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8005acb73ce8430dedbffffffff94b2f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8009cd3dedbffffffffffffffffffffffffffffad55f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8008410ef5dffffffffffffffffffffffffffffffffffffffffc618f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800a534ffffffffffffffffffffffffffffffffffffffffffffffffffffd6ba5aebf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800a534ffffffffffffffffffffffffef9def9dffffffffffffffffffffc6388c715acbf800f800f800f800f800f800f800f800f800f800f800f800f800f8008410ffffffffffffffffffffbe176b8df800d69affffef9dbdf78430f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800ef5dffffffffffffffff8430f800f800f800a5547beff800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8009cd3ffffffffffffffff8430f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800dedbffffffffffffbe17f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8005acbffffffffffffffff6b8df800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80073ceffffffffffffef9df800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8008430ffffffffffffd6baf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8008430ffffffffffffd6baf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80073ceffffffffffffef9df800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8005acbffffffffffffffff6b8df800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800dedbffffffffffffbe17f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8009cd3ffffffffffffffff8430f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800ef5dffffffffffffffff8430f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8008410ffffffffffffffffffffbe176b8df800f800f800f8006b8dbe17ffffd6ba5acbf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800a534ffffffffffffffffffffffffef9dd6bad6baef9dffffffffffffffffa554f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800a534ffffffffffffffffffffffffffffffffffffffffffffffffffffb596f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8008410ef5dffffffffffffffffffffffffffffffffffffffffe75c630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8009cd3dedbffffffffffffffffffffffffdedb9cd3f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8005acb73ce8430843073ce5acbf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800"
+  "expect": "10a210a210a210a210a210a210a210a210a210a220c2612199a1c1e0e200ea20ea20e200c1e099a1612120c210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a230e299a1e220f220f220f220f220f220f220f220f220f220f220e22099a130e210a210a210a210a210a210a210a210a210a210a210a210a210a210a220c28981ea20f220f220f220f220f220f220f220f220f220f220f220f220f220f220ea20898120c210a210a210a210a210a210a210a210a210a210a210a230e2c9e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c9e030e210a210a210a210a210a210a210a210a210a238e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0038e210a210a210a210a210a210a210a230e2da00f220f220f220f220f220f220f220f220",
+  "replace": "f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80073aed69ace796b6df800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800a534feb8fed9ffff8410f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8005acb73ce8430dedbf50ff220fe36ffff94b2f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8009cd3dedbffffff7dfe77fe15f346f220f220fd92ffffad55f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8008410ef5dfffffd71f346"
+ },
+ {
+  "offset": 11972950,
+  "expect": "f220f220f220f220f220f220f220da0030e210a210a210a210a210a220c2c9e0f220f220f220f220f220f220f220",
+  "replace": "f4ceffffc618f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800a534fffffe36f2c3"
+ },
+ {
+  "offset": 11973016,
+  "expect": "f220f220f220f220f220f220f220c9e020c210a210a210a210a28981f220f220f220f220f220f220",
+  "replace": "f40affffd6ba5aebf800f800f800f800f800f800f800f800f800f800f800f800f800a534fffff50f"
+ },
+ {
+  "offset": 11973080,
+  "expect": "f4aef2e4f220f220f220f220f220f220898110a210a210a230e2ea20f220f220f220f220f220",
+  "replace": "f220f387ff7ca534f800f800f800f800f800f800f800f800f800f800f800f8008410fffff50f"
+ },
+ {
+  "offset": 11973130,
+  "expect": "f220f220",
+  "replace": "f2a2f2a2"
+ },
+ {
+  "offset": 11973144,
+  "expect": "ffffff9df510f282f220f220f220f220ea2030e210a210a299a1f220f220f220f220f220f220f220f220f3a8fd71fe97ff5bff5bff5bff5bff5bff5bff5bff5bffffffffffffff5bf2e4f220f220f220f22099a110a220c2e220f220f220f220f220f220f220f282fe35ffffffffffffff5bff5bff5bff5bff5bff5bff5bff5bffffffffffffff5bf346f220f220f220f220e22020c26121f220f220f220f220f220f220f282ff5bfffffef9f3a8f282f220f220f220f220f220f220f220f220fffffffff510f220f220f220f220f220f220f220612199a1f220f220f220f220f220f220fdd3fffffd71f220f220f220f220f220f220f220f220f220f220f220f510f2e4f220f220f220f220f220f220f220f22099a1c1e0f220f220f220f220f220f2e4ffffff5bf220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c1e0e200f220f220f220f220f220fdd3fffff3a8f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220e200ea20f220f220f220f220f220fe97fffff282f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220ea20ea20f220f220f220f220f220ff5bff5bf220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220ea20e200f220f220f220f220f220fe97fffff282f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220e200c1e0f220f220f220f220f220fd71fffff3a8f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f4aef4aef220f220f220f220f220c1e099a1f220f220f220f220f220f3a8fffffef9f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220ff9dfe97f220f220f220f220f22099a16121f220f220f220f220f220f220fe35fffffd71f220f220f220f220f220f220f220f220f220f220f220f220f220f40afffffd71f220f220f220f220f220612120c2e220f220f220f220f220f220f282ff5bffffff5bf3a8f282f220f220f220f220f220f220f220f220f220f3a8ff5bfffff2e4f220f220f220f220e22020c210a299a1f220f220f220f220f220f220f282fdd3ffffffffffffff5bff5bff5bff5bff5bff5bff5bff5bff9dffffff9df4aef220f220f220f220f22099a110a210a230e2ea20f220f220f220f220f220f220f220f2e4fdd3fe97ff5bff5bff5bff5bff5bff5bff5bff5bfef9fd71f2e4f220f220f220f220f220ea2030e210a210a210a28981f220f220f220f220f220f220",
+  "replace": "f3eafdd3ff7da534f800f800f800f800f800f800f800f800f800f800f800f800ef5dfe36f220f220f220f220f220f42bfed9fffff388f220f2a2f42bfe15ffffffffc6388c715acbf800f800f800f800f800f800f800f800f800f800f8009cd3fffff2c3f220f220f220f220fe15ffffbe17fffff4effe77ffffef9dbdf78430f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800dedbfd71f220f220f220f220fe15ffff8430f800d69ad69aad957beff800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8005acbfffff346f220f220f220f42bffff8430f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80073ceff7df220f220f220f220fed9be17f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8008430fe77f220f220f220f2a2ffff6b8df800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8008c71fe15f220f220f220f387ef9df800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8008c71fe15f220f220f220f387ef9df800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8008430fe77f220f220f220f2a2ffff6b8df800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80073ceff7df220f220f220f220fed9be17f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8005acbfffff346f220f220f220f42bffff8430f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800dedbfd71f220f220f220f220fe15ffff8430f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8009cd3fffff2c3f220f220f220f220fe15ffffbe176b8df800f8006b8dbe17ffffffffffffd6ba5acbf800f800f800f800f800f800f800f800f800f800f800f800f800ef5dfe36f220f220f220f220f220f42bfed9ffffef9def9dfffffed9f42bf220f387ff7da554f800f800f800f800f800f800f800f800f800f800f800f800f8008410fffff50ff220f220f220f220f220f220f2a2f387f387f2a2f220f220f220f220f4efbdd7f800f800f800f800f800f800f800f800f800f800f800f800f800f800a534fffff50f"
+ },
+ {
+  "offset": 11974170,
+  "expect": "f220f220f220f220f220f220f220898110a210a210a210a220c2c9e0f220f220f220f220f220f220f220",
+  "replace": "f48dbdd7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800a534fffffe36f2c3"
+ },
+ {
+  "offset": 11974232,
+  "expect": "f220f220f220f220f220f220f220c9e020c210a210a210a210a210a230e2da00f220f220f220f220f220f220f220f220",
+  "replace": "f2c4ff3bb596f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8008410ef5dfffffd71f346"
+ },
+ {
+  "offset": 11974292,
+  "expect": "f220f220f220f220f220f220f220f220da0030e210a210a210a210a210a210a210a238e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0038e210a210a210a210a210a210a210a210a210a230e2c9e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c9e030e210a210a210a210a210a210a210a210a210a210a210a220c28981ea20f220f220f220f220f220f220f220f220f220f220f220f220f220f220ea20898120c210a210a210a210a210a210a210a210a210a210a210a210a210a210a230e299a1e220f220f220f220f220f220f220f220f220f220f220e22099a130e210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a220c2612199a1c1e0e200ea20ea20e200c1e099a1612120c210a210a210a210a210a210a210a210a210a210a2",
+  "replace": "f346fd71ffffe75c630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8009cd3dedbffffff7dfe77fe15fe15fe77ff7dffffdedb9cd3f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8005acb73ce84308c718c71843073ce5acbf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800"
  },
  {
   "offset": 11974638,
-  "expect": "10a210a210a210a210a210a210a210a210a210a220c2612199a1c1e0e200ea20ea20e200c1e099a1612120c210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a230e299a1e220f220f220f220f220f220f220f220f220f220f220e22099a130e210a210a210a210a210a210a210a210a210a210a210a210a210a210a220c28981ea20f220f220f220f220f220f220f220f220f220f220f220f220f220f220ea20898120c210a210a210a210a210a210a210a210a210a210a210a230e2c9e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c9e030e210a210a210a210a210a210a210a210a210a238e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0038e210a210a210a210a210a210a210a230e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0030e210a210a210a210a210a220c2c9e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c9e020c210a210a210a210a28981f220f220f220f220f220f220f220f4aef2e4f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220898110a210a210a230e2ea20f220f220f220f220f220f220f220ffffff9df510f282f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220ea2030e210a210a299a1f220f220f220f220f282f510fe97ff5bffffffffffffff5bf2e4f220f220f220fd10ff5bff5bff5bff5bfe97f4aef220f220f220f220f22099a110a220c2e220f220f220f220f220ff5bffffff9dff5bffffffffffffff5bf346f220f220f220fd10ff5bff5bff5bff5bff9dffffff5bf282f220f220f220e22020c26121f220f220f220f220f4aefffffd10f220f220fffffffff510f220f220f220f220f220f220f220f220f220f220f220fd10fffff510f220f220f220f220612199a1f220f220f220f220fe97ff9df220f220f220f510f2e4f220f220f220f220f220f220f220f220f220f220f220f220f220ff9dfe97f220f220f220f22099a1c1e0f220f220f220f220ff5bff5bf220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220ff5bff5bf220f220f220f220c1e0e200f220f220f220f220ff5bff5bf220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220ff5bff5bf220f220f220f220e200ea20f220f220f220f220ff5bff5bf220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220ff5bff5bf220f220f220f220ea20ea20f220f220f220f220ff5bff5bf220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220ff5bff5bf220f220f220f220ea20e200f220f220f220f220ff5bff5bf220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220ff5bff5bf220f220f220f220e200c1e0f220f220f220f220ff5bff5bf220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220ff5bff5bf220f220f220f220c1e099a1f220f220f220f220fe97ff9df220f220f220f220f220f220f220f220f220f220f220f220f220f2e4f510f220f220f220ff9dfe97f220f220f220f22099a16121f220f220f220f220f510fffffd10f220f220f220f220f220f220f220f220f220f220f220f510fffffffff220f220fd10fffff4aef220f220f220f220612120c2e220f220f220f220f282ff5bffffff9dff5bff5bff5bff5bfd10f220f220f220f346ff5bffffffffffffff5bff9dffffff5bf220f220f220f220e22020c210a299a1f220f220f220f220f220f4aefe97ff5bff5bff5bff5bfd10f220f220f220f2e4ff5bffffffffffffff5bfe97f510f282f220f220f220f22099a110a210a230e2ea20f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f282f510ff9dfffff220f220f220f220f220f220f220ea2030e210a210a210a28981f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f2e4f4aef220f220f220f220f220f220f220898110a210a210a210a220c2c9e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c9e020c210a210a210a210a210a230e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0030e210a210a210a210a210a210a210a238e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0038e210a210a210a210a210a210a210a210a210a230e2c9e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c9e030e210a210a210a210a210a210a210a210a210a210a210a220c28981ea20f220f220f220f220f220f220f220f220f220f220f220f220f220f220ea20898120c210a210a210a210a210a210a210a210a210a210a210a210a210a210a230e299a1e220f220f220f220f220f220f220f220f220f220f220e22099a130e210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a220c2612199a1c1e0e200ea20ea20e200c1e099a1612120c210a210a210a210a210a210a210a210a210a210a2",
-  "replace": "f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800bdd7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8005acb73ce8430843073ce5acb73ceffffad75f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8009cd3dedbfffffffffffffffffffffffff79effffffff738ef800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8008410ef5dffffffffffffffffffffffffffffffffffffffffffffdefbf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800a534ffffffffffffffffffffffffffffffffffffffffffffffffffffffffa514f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800a534ffffffffffffffffffffffffef9dd6bad6baffffffffffffffffffffffffffff634cf800f800f800f800f800f800f800f800f800f800f800f800f8008410ffffffffffffffffffffbe176b8df800f800f800e73cffffffffffffffffffffffffd6baf800f800f800f800f800f800f800f800f800f800f800f800f800ef5dffffffffffffffff8430f800f800f800f8006b6dbdd7bdd7bdd7bdd7a534a534a534a534630cf800f800f800f800f800f800f800f800f800f800f8009cd3ffffffffffffffff8430f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800ce79ffffffffffffbe17f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800b5b6ffffffffffff6b4df800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8005aebc658e71c9492f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8009492e71cc6585aebf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8006b4dffffffffffffb5b6f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800be17ffffffffffffce79f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8008430ffffffffffffffff9cd3f800f800f800f800f800f800f800f800f800f800f800630ca534a534a534a534bdd7bdd7bdd7bdd76b6df800f800f800f8008430ffffffffffffffffef5df800f800f800f800f800f800f800f800f800f800f800f800f800d6baffffffffffffffffffffffffe73cf800f800f8006b8dbe17ffffffffffffffffffff8410f800f800f800f800f800f800f800f800f800f800f800f800f800634cffffffffffffffffffffffffffffd6bad6baef9dffffffffffffffffffffffffa534f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800a514ffffffffffffffffffffffffffffffffffffffffffffffffffffffffa534f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800defbffffffffffffffffffffffffffffffffffffffffffffef5d8410f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800738efffffffff79effffffffffffffffffffffffdedb9cd3f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800ad75ffff73ce5acb73ce8430843073ce5acbf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800bdd7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800"
+  "expect": "10a210a210a210a210a210a210a210a210a210a220c2612199a1c1e0e200ea20ea20e200c1e099a1612120c210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a230e299a1e220f220f220f220f220f220f220f220f220f220f220e22099a130e210a210a210a210a210a210a210a210a210a210a210a210a210a210a220c28981ea20f220f220f220f220f220f220f220f220f220f220f220f220f220f220ea20898120c210a210a210a210a210a210a210a210a210a210a210a230e2c9e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c9e030e210a210a210a210a210a210a210a210a210a238e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0038e210a210a210a210a210a210a210a230e2da00f220f220f220f220f220f220f220f220",
+  "replace": "f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800d69affffe75cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8005acb73ce84308c718c7184309492fffff44cffffad75f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8009cd3dedbffffff7dfe77fe15fe15fe77ff7dfe77f220f4ceffff738ef800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8008410ef5dfffffd71f346"
+ },
+ {
+  "offset": 11974996,
+  "expect": "f220f220f220f220f220f220f220f220da0030e210a210a210a210a210a220c2c9e0f220f220f220f220f220f220f220",
+  "replace": "f282f220f220feb8defbf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800a534fffffe36f2c3"
+ },
+ {
+  "offset": 11975066,
+  "expect": "f220f220f220f220f220f220c9e020c210a210a210a210a28981f220f220f220f220f220f220f220f4aef2e4",
+  "replace": "f326ffffa514f800f800f800f800f800f800f800f800f800f800f800f800f800a534fffff50ff220f220f220"
+ },
+ {
+  "offset": 11975132,
+  "expect": "f220f220f220f220f220f220898110a210a210a230e2ea20f220f220f220f220f220f220f220ffffff9df510f282f220f220f220",
+  "replace": "fd30ffff634cf800f800f800f800f800f800f800f800f800f800f8008410fffff50ff220f220f220f220f220f220f2a2f387f387"
+ },
+ {
+  "offset": 11975198,
+  "expect": "f220f220f220f220f220ea2030e210a210a299a1f220f220f220f220f282f510fe97ff5bffffffffffffff5bf2e4f220f220f220fd10ff5bff5bff5bff5bfe97f4aef220f220f220f220f22099a110a220c2e220f220f220f220f220ff5bffffff9dff5bffffffffffffff5bf346f220f220f220fd10ff5bff5bff5bff5bff9dffffff5bf282f220f220f220e22020c26121f220f220f220f220f4aefffffd10f220f220fffffffff510f220f220f220f220f220f220f220f220f220f220f220fd10fffff510f220f220f220f220612199a1f220f220f220f220fe97ff9df220f220f220f510f2e4f220f220f220f220f220f220f220f220f220f220f220f220f220ff9dfe97f220f220f220f22099a1c1e0f220f220f220f220ff5bff5bf220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220ff5bff5bf220f220f220f220c1e0e200f220f220f220f220ff5bff5bf220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220ff5bff5bf220f220f220f220e200ea20f220f220f220f220ff5bff5bf220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220ff5bff5bf220f220f220f220ea20ea20f220f220f220f220ff5bff5bf220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220ff5bff5bf220f220f220f220ea20e200f220f220f220f220ff5bff5bf220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220ff5bff5bf220f220f220f220e200c1e0f220f220f220f220ff5bff5bf220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220ff5bff5bf220f220f220f220c1e099a1f220f220f220f220fe97ff9df220f220f220f220f220f220f220f220f220f220f220f220f220f2e4f510f220f220f220ff9dfe97f220f220f220f22099a16121f220f220f220f220f510fffffd10f220f220f220f220f220f220f220f220f220f220f220f510fffffffff220f220fd10fffff4aef220f220f220f220612120c2e220f220f220f220f282ff5bffffff9dff5bff5bff5bff5bfd10f220f220f220f346ff5bffffffffffffff5bff9dffffff5bf220f220f220f220e22020c210a299a1f220f220f220f220f220f4aefe97ff5bff5bff5bff5bfd10f220f220f220f2e4ff5bffffffffffffff5bfe97f510f282f220f220f220f22099a110a210a230e2ea20f220f220f220f220f220",
+  "replace": "ff1ad6baf800f800f800f800f800f800f800f800f800f800f800ef5dfe36f220f220f220f220f220f42bfed9fffffffffffff2e4f220f220f220f220f220f220f387ffff8430f800f800f800f800f800f800f800f800f8009cd3fffff2c3f220f220f220f220fe15ffffbe176b8da534fed9f44cf44cf44cf44cf50ff50ff50ff50fff3b8c71f800f800f800f800f800f800f800f800f800ce79fd71f220f220f220f220fe15ffff8430f800f8008c71d69ac658bdd7bdd7bdd7bdd7a534a534a534a5346b6df800f800f800f800f800f800f800f800f800d69af3a8f220f220f220f42bffff8430f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800d69af48df220f220f220fefabe17f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800b5b6ff7cf3e9f305fdb3ffff6b4df800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8005aebc658e75ce75ce71c9492f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8009492e71ce75ce75cc6585aebf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8006b4dfffffdb3f305f3e9ff7cb5b6f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800be17fefaf220f220f220f48dd69af800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8008430fffff42bf220f220f220f3a8d69af800f800f800f800f800f800f800f800f8006b6da534a534a534a534bdd7bdd7bdd7bdd7c658d69a8c71f800f8008430fffffe15f220f220f220f220fd71ce79f800f800f800f800f800f800f800f800f8008c71ff3bf50ff50ff50ff50ff44cf44cf44cf44cfed9a5346b8dbe17fffffe15f220f220f220f220f2c3ffff9cd3f800f800f800f800f800f800f800f800f8008430fffff387f220f220f220f220f220f220f2e4fffffffffffffed9f42bf220f220f220f220f220fe36ef5df800f800f800f800f800f800f800f800f800f800f800d6baff1a"
+ },
+ {
+  "offset": 11976140,
+  "expect": "f220f220f220f282f510ff9dfffff220f220f220f220f220f220f220ea2030e210a210a210a28981f220f220f220f220f220f220",
+  "replace": "f387f387f2a2f220f220f220f220f220f220f50fffff8410f800f800f800f800f800f800f800f800f800f800f800634cfffffd30"
+ },
+ {
+  "offset": 11976214,
+  "expect": "f2e4f4aef220f220f220f220f220f220f220898110a210a210a210a220c2c9e0f220f220f220f220f220f220",
+  "replace": "f220f220f220f50fffffa534f800f800f800f800f800f800f800f800f800f800f800f800f800a514fffff326"
+ },
+ {
+  "offset": 11976280,
+  "expect": "f220f220f220f220f220f220f220c9e020c210a210a210a210a210a230e2da00f220f220f220f220f220f220f220f220",
+  "replace": "f2c3fe36ffffa534f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800defbfeb8f220f220f282"
+ },
+ {
+  "offset": 11976340,
+  "expect": "f220f220f220f220f220f220f220f220da0030e210a210a210a210a210a210a210a238e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0038e210a210a210a210a210a210a210a210a210a230e2c9e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c9e030e210a210a210a210a210a210a210a210a210a210a210a220c28981ea20f220f220f220f220f220f220f220f220f220f220f220f220f220f220ea20898120c210a210a210a210a210a210a210a210a210a210a210a210a210a210a230e299a1e220f220f220f220f220f220f220f220f220f220f220e22099a130e210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a220c2612199a1c1e0e200ea20ea20e200c1e099a1612120c210a210a210a210a210a210a210a210a210a210a2",
+  "replace": "f346fd71ffffef5d8410f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800738efffff4cef220fe77ff7dfe77fe15fe15fe77ff7dffffdedb9cd3f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800ad75fffff44cffff949284308c718c71843073ce5acbf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800e75cffffd69af800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800"
  },
  {
   "offset": 11976686,
-  "expect": "10a210a210a210a210a210a210a210a210a210a220c2612199a1c1e0e200ea20ea20e200c1e099a1612120c210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a230e299a1e220f220f220f220f220f220f220f220f220f220f220e22099a130e210a210a210a210a210a210a210a210a210a210a210a210a210a210a220c28981ea20f220f220f220f220f220f220f220f220f220f220f220f220f220f220ea20898120c210a210a210a210a210a210a210a210a210a210a210a230e2c9e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c9e030e210a210a210a210a210a210a210a210a210a238e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0038e210a210a210a210a210a210a210a230e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0030e210a210a210a210a210a220c2c9e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c9e020c210a210a210a210a28981f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f4aef2e4f220f220f220f220f220f220898110a210a210a230e2ea20f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220ffffff9df510f282f220f220f220f220ea2030e210a210a299a1f220f220f220f220f220f220f220f220f3a8fd71fe97ff5bff5bff5bff5bff5bff5bff5bff5bffffffffffffff5bf2e4f220f220f220f22099a110a220c2e220f220f220f220f220f220f220f282fe35ffffffffffffff5bff5bff5bff5bff5bff5bff5bff5bffffffffffffff5bf346f220f220f220f220e22020c26121f220f220f220f220f220f220f282ff5bfffffef9f3a8f282f220f220f220f220f220f220f220f220fffffffff510f220f220f220f220f220f220f220612199a1f220f220f220f220f220f220fdd3fffffd71f220f220f220f220f220f220f2e4f282f220f220f220f510f2e4f220f220f220f220f220f220f220f22099a1c1e0f220f220f220f220f220f2e4ffffff5bf220f220f220f220f220f220f44cff5bfe97f220f220f220f220f220f220f220f220f220f220f220f220f220c1e0e200f220f220f220f220f220fdd3fffff3a8f220f220f220f220f220f4aefffffffffe97f220f220f220f220f220f220f220f220f220f220f220f220f220e200ea20f220f220f220f220f220fe97fffff282f220f220f220f220f220f4aefd10fe97fe97f220f220f220f220f220f220f220f220f220f220f220f220f220ea20ea20f220f220f220f220f220ff5bff5bf220f220f220f220f220f220f220f220fe97fe97f220f220f220f220f220f220f220f220f220f220f220f220f220ea20e200f220f220f220f220f220fe97fffff282f220f220f220f220f220f220f220fe97fe97f220f220f220f220f220f220f220f220f220f220f220f220f220e200c1e0f220f220f220f220f220fd71fffff3a8f220f220f220f220f220f220f220fe97fe97f220f220f220f220f220f220f4aef4aef220f220f220f220f220c1e099a1f220f220f220f220f220f3a8fffffef9f220f220f220f220f220f220f220fe97fe35f220f220f220f220f220f220ff9dfe97f220f220f220f220f22099a16121f220f220f220f220f220f220fe35fffffd71f220f220f220f220f220f220f282f2e4f220f220f220f220f220f40afffffd71f220f220f220f220f220612120c2e220f220f220f220f220f220f282ff5bffffff5bf3a8f282f220f220f220f220f220f220f220f220f220f3a8ff5bfffff2e4f220f220f220f220e22020c210a299a1f220f220f220f220f220f220f282fdd3ffffffffffffff5bff5bff5bff5bff5bff5bff5bff5bff9dffffff9df4aef220f220f220f220f22099a110a210a230e2ea20f220f220f220f220f220f220f220f2e4fdd3fe97ff5bff5bff5bff5bff5bff5bff5bff5bfef9fd71f2e4f220f220f220f220f220ea2030e210a210a210a28981f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220898110a210a210a210a220c2c9e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c9e020c210a210a210a210a210a230e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0030e210a210a210a210a210a210a210a238e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0038e210a210a210a210a210a210a210a210a210a230e2c9e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c9e030e210a210a210a210a210a210a210a210a210a210a210a220c28981ea20f220f220f220f220f220f220f220f220f220f220f220f220f220f220ea20898120c210a210a210a210a210a210a210a210a210a210a210a210a210a210a230e299a1e220f220f220f220f220f220f220f220f220f220f220e22099a130e210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a220c2612199a1c1e0e200ea20ea20e200c1e099a1612120c210a210a210a210a210a210a210a210a210a210a2",
-  "replace": "f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800738e6b6df800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800a534ffff8410f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8005acb73ce8430dedbffffffff94b2f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8009cd3dedbffffffffffffffffffffffffffffad55f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8008410ef5dffffffffffffffffffffffffffffffffffffffffc618f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800a534ffffffffffffffffffffffffffffffffffffffffffffffffffffd6ba5aebf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800a534ffffffffffffffffffffffffef9def9dffffffffffffffffffffc6388c715acbf800f800f800f800f800f800f800f800f800f800f800f800f800f8008410ffffffffffffffffffffbe176b8df800d69affffef9dbdf78430f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800ef5dffffffffffffffff8430f800f800f800a5547beff800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8009cd3ffffffffffffffff8430f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800dedbffffffffffffbe17f800f800f800f8007befb596ad75f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8005acbffffffffffffffff6b8df800f800f8005b0bef9dfffffffff800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80073ceffffffffffffef9df800f800f800f8009d13ef9dfffffffff800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8008430ffffffffffffd6baf800f800f800f800f800f800ef5dfffff800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8008430ffffffffffffd6baf800f800f800f800f800f800e75cfffff800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80073ceffffffffffffef9df800f800f800f800f800f800e75cfffff800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8005acbffffffffffffffff6b8df800f800f800f800f800e75cfffff800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800dedbffffffffffffbe17f800f800f800f800f800b596c638f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8009cd3ffffffffffffffff8430f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800ef5dffffffffffffffff8430f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8008410ffffffffffffffffffffbe176b8df800f800f800f8006b8dbe17ffffd6ba5acbf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800a534ffffffffffffffffffffffffef9dd6bad6baef9dffffffffffffffffa554f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800a534ffffffffffffffffffffffffffffffffffffffffffffffffffffb596f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8008410ef5dffffffffffffffffffffffffffffffffffffffffe75c630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8009cd3dedbffffffffffffffffffffffffdedb9cd3f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8005acb73ce8430843073ce5acbf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800"
+  "expect": "10a210a210a210a210a210a210a210a210a210a220c2612199a1c1e0e200ea20ea20e200c1e099a1612120c210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a230e299a1e220f220f220f220f220f220f220f220f220f220f220e22099a130e210a210a210a210a210a210a210a210a210a210a210a210a210a210a220c28981ea20f220f220f220f220f220f220f220f220f220f220f220f220f220f220ea20898120c210a210a210a210a210a210a210a210a210a210a210a230e2c9e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c9e030e210a210a210a210a210a210a210a210a210a238e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0038e210a210a210a210a210a210a210a230e2da00f220f220f220f220f220f220f220f220",
+  "replace": "f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80073aed69ace796b6df800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800a534feb8fed9ffff8410f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8005acb73ce8430dedbf50ff220fe36ffff94b2f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8009cd3dedbffffff7dfe77fe15f346f220f220fd92ffffad55f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8008410ef5dfffffd71f346"
+ },
+ {
+  "offset": 11977046,
+  "expect": "f220f220f220f220f220f220f220da0030e210a210a210a210a210a220c2c9e0f220f220f220f220f220f220f220",
+  "replace": "f4ceffffc618f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800a534fffffe36f2c3"
+ },
+ {
+  "offset": 11977112,
+  "expect": "f220f220f220f220f220f220f220c9e020c210a210a210a210a28981f220f220f220f220f220f220",
+  "replace": "f40affffd6ba5aebf800f800f800f800f800f800f800f800f800f800f800f800f800a534fffff50f"
+ },
+ {
+  "offset": 11977176,
+  "expect": "f4aef2e4f220f220f220f220f220f220898110a210a210a230e2ea20f220f220f220f220f220",
+  "replace": "f220f387ff7ca534f800f800f800f800f800f800f800f800f800f800f800f8008410fffff50f"
+ },
+ {
+  "offset": 11977226,
+  "expect": "f220f220",
+  "replace": "f2a2f2a2"
+ },
+ {
+  "offset": 11977240,
+  "expect": "ffffff9df510f282f220f220f220f220ea2030e210a210a299a1f220f220f220f220f220f220f220f220f3a8fd71fe97ff5bff5bff5bff5bff5bff5bff5bff5bffffffffffffff5bf2e4f220f220f220f22099a110a220c2e220f220f220f220f220f220f220f282fe35ffffffffffffff5bff5bff5bff5bff5bff5bff5bff5bffffffffffffff5bf346f220f220f220f220e22020c26121f220f220f220f220f220f220f282ff5bfffffef9f3a8f282f220f220f220f220f220f220f220f220fffffffff510f220f220f220f220f220f220f220612199a1f220f220f220f220f220f220fdd3fffffd71f220f220f220f220f220f220f2e4f282f220f220f220f510f2e4f220f220f220f220f220f220f220f22099a1c1e0f220f220f220f220f220f2e4ffffff5bf220f220f220f220f220f220f44cff5bfe97f220f220f220f220f220f220f220f220f220f220f220f220f220c1e0e200f220f220f220f220f220fdd3fffff3a8f220f220f220f220f220f4aefffffffffe97f220f220f220f220f220f220f220f220f220f220f220f220f220e200ea20f220f220f220f220f220fe97fffff282f220f220f220f220f220f4aefd10fe97fe97f220f220f220f220f220f220f220f220f220f220f220f220f220ea20ea20f220f220f220f220f220ff5bff5bf220f220f220f220f220f220f220f220fe97fe97f220f220f220f220f220f220f220f220f220f220f220f220f220ea20e200f220f220f220f220f220fe97fffff282f220f220f220f220f220f220f220fe97fe97f220f220f220f220f220f220f220f220f220f220f220f220f220e200c1e0f220f220f220f220f220fd71fffff3a8f220f220f220f220f220f220f220fe97fe97f220f220f220f220f220f220f4aef4aef220f220f220f220f220c1e099a1f220f220f220f220f220f3a8fffffef9f220f220f220f220f220f220f220fe97fe35f220f220f220f220f220f220ff9dfe97f220f220f220f220f22099a16121f220f220f220f220f220f220fe35fffffd71f220f220f220f220f220f220f282f2e4f220f220f220f220f220f40afffffd71f220f220f220f220f220612120c2e220f220f220f220f220f220f282ff5bffffff5bf3a8f282f220f220f220f220f220f220f220f220f220f3a8ff5bfffff2e4f220f220f220f220e22020c210a299a1f220f220f220f220f220f220f282fdd3ffffffffffffff5bff5bff5bff5bff5bff5bff5bff5bff9dffffff9df4aef220f220f220f220f22099a110a210a230e2ea20f220f220f220f220f220f220f220f2e4fdd3fe97ff5bff5bff5bff5bff5bff5bff5bff5bfef9fd71f2e4f220f220f220f220f220ea2030e210a210a210a28981f220f220f220f220f220f220",
+  "replace": "f3eafdd3ff7da534f800f800f800f800f800f800f800f800f800f800f800f800ef5dfe36f220f220f220f220f220f42bfed9fffff388f220f2a2f42bfe15ffffffffc6388c715acbf800f800f800f800f800f800f800f800f800f800f8009cd3fffff2c3f220f220f220f220fe15ffffbe17fffff4effe77ffffef9dbdf78430f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800dedbfd71f220f220f220f220fe15ffff84307befffffffffffffd6baf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8005acbfffff346f220f220f220f42bffff84305b0bef9dfe77f48df4aefffff800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80073ceff7df220f220f220f220fed9be17f800d69aff5cf2a2f220f220fffff800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8008430fe77f220f220f220f2a2ffff6b8df800e75cfd30f2a2f220f220fffff800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8008c71fe15f220f220f220f387ef9df800f800b5b6ef9dfffff2c3f220fffff800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8008c71fe15f220f220f220f387ef9df800f800f800f800ef5df2c4f220fffff800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8008430fe77f220f220f220f2a2ffff6b8df800f800f800e75cf2c4f220fffff800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80073ceff7df220f220f220f220fed9be17f800f800f800e75cf2c4f220fffff800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8005acbfffff346f220f220f220f42bffff8430f800f800e75cf48df3eafffff800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800dedbfd71f220f220f220f220fe15ffff8430f800b596e75ce75cc638f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8009cd3fffff2c3f220f220f220f220fe15ffffbe176b8df800f8006b8dbe17ffffffffffffd6ba5acbf800f800f800f800f800f800f800f800f800f800f800f800f800ef5dfe36f220f220f220f220f220f42bfed9ffffef9def9dfffffed9f42bf220f387ff7da554f800f800f800f800f800f800f800f800f800f800f800f800f8008410fffff50ff220f220f220f220f220f220f2a2f387f387f2a2f220f220f220f220f4efbdd7f800f800f800f800f800f800f800f800f800f800f800f800f800f800a534fffff50f"
+ },
+ {
+  "offset": 11978266,
+  "expect": "f220f220f220f220f220f220f220898110a210a210a210a220c2c9e0f220f220f220f220f220f220f220",
+  "replace": "f48dbdd7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800a534fffffe36f2c3"
+ },
+ {
+  "offset": 11978328,
+  "expect": "f220f220f220f220f220f220f220c9e020c210a210a210a210a210a230e2da00f220f220f220f220f220f220f220f220",
+  "replace": "f2c4ff3bb596f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8008410ef5dfffffd71f346"
+ },
+ {
+  "offset": 11978388,
+  "expect": "f220f220f220f220f220f220f220f220da0030e210a210a210a210a210a210a210a238e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0038e210a210a210a210a210a210a210a210a210a230e2c9e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c9e030e210a210a210a210a210a210a210a210a210a210a210a220c28981ea20f220f220f220f220f220f220f220f220f220f220f220f220f220f220ea20898120c210a210a210a210a210a210a210a210a210a210a210a210a210a210a230e299a1e220f220f220f220f220f220f220f220f220f220f220e22099a130e210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a220c2612199a1c1e0e200ea20ea20e200c1e099a1612120c210a210a210a210a210a210a210a210a210a210a2",
+  "replace": "f346fd71ffffe75c630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8009cd3dedbffffff7dfe77fe15fe15fe77ff7dffffdedb9cd3f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8005acb73ce84308c718c71843073ce5acbf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800"
  },
  {
   "offset": 11978734,
-  "expect": "10a210a210a210a210a210a210a210a210a210a220c2612199a1c1e0e200ea20ea20e200c1e099a1612120c210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a230e299a1e220f220f220f220f220f220f220f220f220f220f220e22099a130e210a210a210a210a210a210a210a210a210a210a210a210a210a210a220c28981ea20f220f220f220f220f220f220f220f220f220f220f220f220f220f220ea20898120c210a210a210a210a210a210a210a210a210a210a210a230e2c9e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c9e030e210a210a210a210a210a210a210a210a210a238e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0038e210a210a210a210a210a210a210a230e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0030e210a210a210a210a210a220c2c9e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c9e020c210a210a210a210a28981f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f4aef2e4f220f220f220f220f220f220898110a210a210a230e2ea20f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220ffffff9df510f282f220f220f220f220ea2030e210a210a299a1f220f220f220f2e4fef9ff5bfef9fdd3f2e4f220f220f220f220f220f282f510fef9ff5bff5bffffffffffffff5bf2e4f220f220f220f22099a110a220c2e220f220f220f220f2e4fef9ff5bff9dffffff9df3a8f220f220f220f2e4ff5bffffffffff5bff5bffffffffffffff5bf346f220f220f220f220e22020c26121f220f220f220f220f220f220f220f220f44cffffff9df282f220f220fdd3fffffd10f282f220f220fffffffff510f220f220f220f220f220f220f220612199a1f220f220f220f220f220f220f220f220f220f4aeff9df2e4f220f44cfffffdd3f220f220f220f220f510f2e4f220f220f220f220f220f220f220f22099a1c1e0f220f220f220f220f220f220f220f220f220f220f220f220f282ff5bff9df2e4f220f220f220f220f220f220f220f220f220f220f220f220f220f220c1e0e200f220f220f220f220f220f220f220f220f220f220f220f220fd71fffffd10f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220e200ea20f220f220f220f220f220f220f220f220f220f220f220f2e4ffffff5bf220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220ea20ea20f220f220f220f220f220f220f220f220f220f220f220ff5bfffff2e4f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220ea20e200f220f220f220f220f220f220f220f220f220f220fd10fffffd10f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220e200c1e0f220f220f220f220f220f220f220f220f220f2e4ffffff5bf220f220f40af2e4f220f220f220f220f220f220f220f220f220f220f220f220f220f220c1e099a1f220f220f220f220f220f220f220f220f220ff5bfffff3a8f220f220fffffe97f220f220f220f220f4aef2e4f220f220f220f220f220f220f220f22099a16121f220f220f220f220f220f220f220f282fdd3fffffd71f220f220f220fd71fffffdd3f282f220f220ffffff9df510f282f220f220f220f220f220f220612120c2e220f220f220f220f2e4fef9ff5bfffffffffef9f282f220f220f220f282fef9ffffffffff5bff5bffffffffffffff5bf2e4f220f220f220f220e22020c210a299a1f220f220f220f2e4fef9ff5bfef9f510f282f220f220f220f220f220f220f44cfe97ff5bff5bffffffffffffff5bf346f220f220f220f22099a110a210a230e2ea20f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220fffffffff510f220f220f220f220f220ea2030e210a210a210a28981f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f510f2e4f220f220f220f220f220f220898110a210a210a210a220c2c9e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c9e020c210a210a210a210a210a230e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0030e210a210a210a210a210a210a210a238e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0038e210a210a210a210a210a210a210a210a210a230e2c9e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c9e030e210a210a210a210a210a210a210a210a210a210a210a220c28981ea20f220f220f220f220f220f220f220f220f220f220f220f220f220f220ea20898120c210a210a210a210a210a210a210a210a210a210a210a210a210a210a230e299a1e220f220f220f220f220f220f220f220f220f220f220e22099a130e210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a220c2612199a1c1e0e200ea20ea20e200c1e099a1612120c210a210a210a210a210a210a210a210a210a210a2",
-  "replace": "f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800a534e75cce79b5968430f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8007beffffffffffffffffffffff79eb596632cf800f800f800f800f800f800f800f8008430738ef800f800f800f800f800f800f800f800f800f800f800f800f8007befffffffffffffffffffffffffffffffffb5b652aaf800f800f800f800f800f800a534ffffc618632cf800f800f800f800f800f800f800f800f800f800f800f800a534ef5dffffffffffffffffffffffffffffef5d8430f800f800f800f8005b0bef7dffffffffffffb5b65aebf800f800f800f800f800f800f800f800f800f800f800f8005aeb8410bdd7ffffffffffffffffffffffffb5d6f800f800f800d6bafffffffffffffffffffff79e6b8df800f800f800f800f800f800f800f800f800f800f800f800f800f8005aebad55ffffffffffffffffffffd6ba52aaad55ffffffffffffffffffffc638632cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8005b0bce79ffffffffffffffffef7dffffffffffffffffc6586b6df800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800a534ffffffffffffffffffffffffffffad55f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8008430ffffffffffffffffffffce79f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8008430ffffffffffffffffffffce79f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800a534ffffffffffffffffffffffffffffad55f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8005b0bce79ffffffffffffffffef7dffffffffffffffffc618632cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8005aebad55ffffffffffffffffffffd6ba52aaad55ffffffffffffffffffffb5b65aebf800f800f800f800f800f800f800f800f800f800f800f8005aeb8410bdd7ffffffffffffffffffffffffb5d6f800f800f800d6bafffffffffffffffffffff79e6b8df800f800f800f800f800f800f800f800f800a534ef5dffffffffffffffffffffffffffffef5d8430f800f800f800f8005b0bef7dffffffffffffc638632cf800f800f800f800f800f800f800f800f8007befffffffffffffffffffffffffffffffffb5b652aaf800f800f800f800f800f800a534ffffc6586b6df800f800f800f800f800f800f800f800f800f800f8007beffffffffffffffffffffff79eb596632cf800f800f800f800f800f800f800f800843073cef800f800f800f800f800f800f800f800f800f800f800f800f800f800a534e75cce79b5968430f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800"
+  "expect": "10a210a210a210a210a210a210a210a210a210a220c2612199a1c1e0e200ea20ea20e200c1e099a1612120c210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a230e299a1e220f220f220f220f220f220f220f220f220f220f220e22099a130e210a210a210a210a210a210a210a210a210a210a210a210a210a210a220c28981ea20f220f220f220f220f220f220f220f220f220f220f220f220f220f220ea20898120c210a210a210a210a210a210a210a210a210a210a210a230e2c9e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c9e030e210a210a210a210a210a210a210a210a210a238e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0038e210a210a210a210a210a210a210a230e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0030e210a210a210a210a210a220c2c9e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c9e020c210a210a210a210a28981f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f4aef2e4f220f220f220f220f220f220898110a210a210a230e2ea20f220f220",
+  "replace": "f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800a534e75ce75ce75cce79b5968430f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8007beffffff50ff2c4f3a8f48dfe15fffff79eb596632cf800f800f800f800f800f8008c71d69ac638738ef800f800f800f800f800f800f800f800f800f800f8008c71fe56"
+ },
+ {
+  "offset": 11979266,
+  "expect": "f220f220f220f220f220f220f220f220f220f220f220ffffff9df510f282f220f220f220f220ea2030e210a210a299a1f220f220f220f2e4fef9ff5bfef9fdd3f2e4f220f220f220f220f220f282f510fef9ff5bff5bffffffffffffff5bf2e4f220f220f220f22099a110a220c2e220f220f220f220f2e4fef9ff5bff9dffffff9df3a8f220f220f220f2e4ff5bffffffffff5bff5bffffffffffffff5bf346f220f220f220f220e22020c26121f220f220f220f220f220f220f220f220f44cffffff9df282f220f220fdd3fffffd10f282f220f220fffffffff510f220f220f220f220f220f220f220612199a1f220f220f220f220f220f220f220f220f220f4aeff9df2e4f220f44cfffffdd3f220f220f220f220f510f2e4f220f220f220f220f220f220f220f22099a1c1e0f220f220f220f220f220f220f220f220f220f220f220f220f282ff5bff9df2e4f220f220f220f220f220f220f220f220f220f220f220f220f220f220c1e0e200f220f220f220f220f220f220f220f220f220f220f220f220fd71fffffd10",
+  "replace": "f282f48dff3bffffb5b652aaf800f800f800f800a534fe15feb8ffffc618632cf800f800f800f800f800f800f800f800f8008c71fe56f220f220f220f220f220f220f220f220f48dff9def5d8430f800f8005b0bef7df50ff220f40aff3bffffb5b65aebf800f800f800f800f800f800f8007beffffff50ff2c3f220f220f220f220f220f220f220f2c3fe15ffffb5d652aad6baff5cf2a3f220f220f220f48dff7cffff8c71f800f800f800f800f800f800f800a534ef5dffffff7cfe36f44cf220f220f220f220f220f220f46cffffef9dfffff387f220f220f220f220f220f282fed9bdd7f800f800f800f800f800f800f800f800f8005aeb8410bdd7ffffff7cf4cef220f220f220f220f220f387ff9df4cef220f220f220f220f220f3eaff3bffff9cf3f800f800f800f800f800f800f800f800f800f800f800f8005aebad55ffffff5cf3a8f220f220f220f220f2a3f220f220f220f220f3e9fed9ffffc638632cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f8005b0bce79fffff50ff220"
+ },
+ {
+  "offset": 11979674,
+  "expect": "f220f220f220f220f220f220f220f220f220e200ea20f220f220f220f220f220f220f220f220f220f220f220f2e4ffffff5bf220",
+  "replace": "f4ceffffc6586b6df800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800a534fffffe15"
+ },
+ {
+  "offset": 11979736,
+  "expect": "f220f220f220f220f220f220f220f220f220f220ea20ea20f220f220f220f220f220f220f220f220f220f220f220ff5bfffff2e4f220",
+  "replace": "f3a8ffffad55f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800a534fffffe15"
+ },
+ {
+  "offset": 11979800,
+  "expect": "f220f220f220f220f220f220f220f220f220f220ea20e200f220f220f220f220f220f220f220f220f220f220fd10fffffd10f220",
+  "replace": "f3a8ffffad55f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8005b0bce79fffff50f"
+ },
+ {
+  "offset": 11979866,
+  "expect": "f220f220f220f220f220f220f220f220f220e200c1e0f220f220f220f220f220f220f220f220f220f2e4ffffff5bf220f220f40af2e4f220f220f220f220f220f220f220f220f220f220f220f220f220f220c1e099a1f220f220f220f220f220f220f220f220f220ff5bfffff3a8f220f220fffffe97f220f220f220f220f4aef2e4f220f220f220f220f220f220f220f22099a16121f220f220f220f220f220f220f220f282fdd3fffffd71f220f220f220fd71fffffdd3f282f220f220ffffff9df510f282f220f220f220f220f220f220612120c2e220f220f220f220f2e4fef9ff5bfffffffffef9f282f220f220f220f282fef9ffffffffff5bff5bffffffffffffff5bf2e4f220f220f220f220e22020c210a299a1f220f220f220f2e4fef9ff5bfef9f510f282f220f220f220f220f220f220f44cfe97ff5bff5bffffffffffffff5bf346f220f220f220f22099a110a210a230e2ea20f220f220",
+  "replace": "f4ceffffc618632cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f8005aebad55ffffff5cf3a8f220f220f220f220f2a3f220f220f220f220f40aff3bffffb5b65aebf800f800f800f800f800f800f800f800f800f8005aeb8410bdd7ffffff7cf4cef220f220f220f220f220f387ff9df4cef220f220f220f220f220f48dff7cffff8c71f800f800f800f800f800f800f800a534ef5dffffff7cfe36f44cf220f220f220f220f220f220f46cffffef9dfffff387f220f220f220f220f220f282fed9bdd7f800f800f800f800f800f8007beffffff50ff2c3f220f220f220f220f220f220f220f2c3fe15ffffb5d652aad6baff5cf2a3f220f220f220f3eaff3bffff9cf3f800f800f800f800f800f8008c71fe56f220f220f220f220f220f220f220f220f48dff9def5d8430f800f8005b0bef7df50ff220f3e9fed9ffffc638632cf800f800f800f800f800f800f8008c71fe56"
+ },
+ {
+  "offset": 11980226,
+  "expect": "f220f220f220f220f220f220f220f220f220f220f220fffffffff510f220f220f220f220f220ea2030e210a210a210a28981f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f510f2e4f220f220f220f220f220f220898110a210a210a210a220c2c9e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c9e020c210a210a210a210a210a230e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0030e210a210a210a210a210a210a210a238e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0038e210a210a210a210a210a210a210a210a210a230e2c9e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c9e030e210a210a210a210a210a210a210a210a210a210a210a220c28981ea20f220f220f220f220f220f220f220f220f220f220f220f220f220f220ea20898120c210a210a210a210a210a210a210a210a210a210a210a210a210a210a230e299a1e220f220f220f220f220f220f220f220f220f220f220e22099a130e210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a220c2612199a1c1e0e200ea20ea20e200c1e099a1612120c210a210a210a210a210a210a210a210a210a210a2",
+  "replace": "f282f48dff3bffffb5b652aaf800f800f800f800a534fe15fe77ffffc6586b6df800f800f800f800f800f800f800f800f8007beffffff50ff2c4f3a8f48dfe15fffff79eb596632cf800f800f800f800f800f8008c71d69ac63873cef800f800f800f800f800f800f800f800f800f800f800f800a534e75ce75ce75cce79b5968430f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800"
  },
  {
   "offset": 11980782,
@@ -1467,8 +2348,28 @@ export const FULL_THEME_RUNS = [
  },
  {
   "offset": 11995118,
-  "expect": "10a210a210a210a210a210a210a210a210a210a220c2612199a1c1e0e200ea20ea20e200c1e099a1612120c210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a230e299a1e220f220f220f220f220f220f220f220f220f220f220e22099a130e210a210a210a210a210a210a210a210a210a210a210a210a210a210a220c28981ea20f220f220f220f220f220f220f220f220f220f220f220f220f220f220ea20898120c210a210a210a210a210a210a210a210a210a210a210a230e2c9e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c9e030e210a210a210a210a210a210a210a210a210a238e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0038e210a210a210a210a210a210a210a230e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0030e210a210a210a210a210a220c2c9e0f220f220f220f220f220f220f220f220f220f220f220fd10fd10f220f220f220f220f220f220f220f220f220f220f220c9e020c210a210a210a210a28981f220f220f220f220f220f220f220f220f220f220f220f220ff5bff5bf220f220f220f220f220f220f220f220f220f220f220f220898110a210a210a230e2ea20f220f220f220f220f220f220f220f220f220f220f220f220ff5bff5bf220f220f220f220f220f220f220f220f220f220f220f220ea2030e210a210a299a1f220f220f220f220f220f220f220f220f220f220f220f220f220ff5bff5bf220f220f220f220f220f220f220f220f220f220f220f220f22099a110a220c2e220f220f220f220f220f220f220f220f220f220f220f220f220f220ff5bff5bf220f220f220f220f220f220f220f220f220f220f220f220f220e22020c26121f220f220f220f220f220f220f220f220f220f220f220f220f220f220ff5bff5bf220f220f220f220f220f220f220f220f220f220f220f220f220f220612199a1f220f220f220f220f220f220f220f220f220f220f220f220f220f220ff5bff5bf220f220f220f220f220f220f220f220f220f220f220f220f220f22099a1c1e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220ff5bff5bf220f220f220f220f220f220f220f220f220f220f220f220f220f220c1e0e200f220f220f220f220f220f220f220f220f220f220f220f220f220f220ff5bff5bf220f220f220f220f220f220f220f220f220f220f220f220f220f220e200ea20f220f220f220f220f220fd10ff5bff5bff5bff5bff5bff5bff5bff5bffffffffff5bff5bff5bff5bff5bff5bff5bff5bfd10f220f220f220f220f220ea20ea20f220f220f220f220f220fd10ff5bff5bff5bff5bff5bff5bff5bff5bffffffffff5bff5bff5bff5bff5bff5bff5bff5bfd10f220f220f220f220f220ea20e200f220f220f220f220f220f220f220f220f220f220f220f220f220f220ff5bff5bf220f220f220f220f220f220f220f220f220f220f220f220f220f220e200c1e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220ff5bff5bf220f220f220f220f220f220f220f220f220f220f220f220f220f220c1e099a1f220f220f220f220f220f220f220f220f220f220f220f220f220f220ff5bff5bf220f220f220f220f220f220f220f220f220f220f220f220f220f22099a16121f220f220f220f220f220f220f220f220f220f220f220f220f220f220ff5bff5bf220f220f220f220f220f220f220f220f220f220f220f220f220f220612120c2e220f220f220f220f220f220f220f220f220f220f220f220f220f220ff5bff5bf220f220f220f220f220f220f220f220f220f220f220f220f220e22020c210a299a1f220f220f220f220f220f220f220f220f220f220f220f220f220ff5bff5bf220f220f220f220f220f220f220f220f220f220f220f220f22099a110a210a230e2ea20f220f220f220f220f220f220f220f220f220f220f220f220ff5bff5bf220f220f220f220f220f220f220f220f220f220f220f220ea2030e210a210a210a28981f220f220f220f220f220f220f220f220f220f220f220f220ff5bff5bf220f220f220f220f220f220f220f220f220f220f220f220898110a210a210a210a220c2c9e0f220f220f220f220f220f220f220f220f220f220f220fd10fd10f220f220f220f220f220f220f220f220f220f220f220c9e020c210a210a210a210a210a230e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0030e210a210a210a210a210a210a210a238e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0038e210a210a210a210a210a210a210a210a210a230e2c9e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c9e030e210a210a210a210a210a210a210a210a210a210a210a220c28981ea20f220f220f220f220f220f220f220f220f220f220f220f220f220f220ea20898120c210a210a210a210a210a210a210a210a210a210a210a210a210a210a230e299a1e220f220f220f220f220f220f220f220f220f220f220e22099a130e210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a220c2612199a1c1e0e200ea20ea20e200c1e099a1612120c210a210a210a210a210a210a210a210a210a210a2",
-  "replace": "f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80052aa9cf39d135b0bf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800d6baffffffffe75cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800ffffffffffffffff630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800ffffffffffffffff630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800ffffffffffffffff630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800ffffffffffffffff630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800ffffffffffffffff630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800ffffffffffffffff630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80052aad6baffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffdefb630cf800f800f800f800f800f800f800f800f800f800f800f8009cf3ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffb596f800f800f800f800f800f800f800f800f800f800f800f8009d13ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffb5b6f800f800f800f800f800f800f800f800f800f800f800f8005b0be75cffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffef5d632cf800f800f800f800f800f800f800f800f800f800f800f800f800f800630c630c630c630c630c630cffffffffffffffff73ae630c630c630c630c630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800ffffffffffffffff630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800ffffffffffffffff630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800ffffffffffffffff630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800ffffffffffffffff630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800ffffffffffffffff630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800defbffffffffef5df800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800630cb596b5b6632cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800"
+  "expect": "10a210a210a210a210a210a210a210a210a210a220c2612199a1c1e0e200ea20ea20e200c1e099a1612120c210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a230e299a1e220f220f220f220f220f220f220f220f220f220f220e22099a130e210a210a210a210a210a210a210a210a210a210a210a210a210a210a220c28981ea20f220f220f220f220f220f220f220f220f220f220f220f220f220f220ea20898120c210a210a210a210a210a210a210a210a210a210a210a230e2c9e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c9e030e210a210a210a210a210a210a210a210a210a238e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0038e210a210a210a210a210a210a210a230e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0030e210a210a210a210a210a220c2c9e0f220f220f220f220f220f220f220f220f220f220f220fd10fd10f220f220f220f220f220f220f220f220f220f220f220c9e020c210a210a210a210a28981f220f220f220f220f220f220f220f220f220f220f220f220ff5bff5bf220f220f220f220f220f220f220f220f220f220f220f220898110a210a210a230e2ea20f220f220f220f220f220f220f220f220f220f220f220f220ff5bff5bf220f220f220f220f220f220f220f220f220f220f220f220ea2030e210a210a299a1f220f220f220f220f220f220f220f220f220f220f220f220f220ff5bff5bf220f220f220f220f220f220f220f220f220f220f220f220f22099a110a220c2e220f220f220f220f220f220f220f220f220f220f220f220f220f220ff5bff5bf220f220f220f220f220f220f220f220f220f220f220f220f220e22020c26121f220f220f220f220f220f220f220f220f220f220f220f220f220f220ff5bff5bf220f220f220f220f220f220f220f220f220f220f220f220f220f220612199a1f220f220f220f220f220f220f220f220f220f220f220f220f220f220ff5bff5bf220f220f220f220f220f220f220f220f220f220f220f220f220f22099a1c1e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220ff5bff5bf220f220f220f220f220f220f220f220f220f220f220f220f220f220c1e0e200f220f220f220f220f220f220f220",
+  "replace": "f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80052aa9cf3a534a5349d135b0bf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800d6baff9dfd51fd30ff5ce75cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800fffff387f220f220f2c4ffff630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800fffff220f220f220f220ff3b630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800fffff220f220f220f220ff3b630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800fffff220f220f220f220ff3b630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800fffff220f220f220f220ff3b630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800fffff220f220f220f220ff3b630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80052aad6bafffffffffffffffffffffffffffff220f220f220f220ff3bffffffffffffffffffffffffdefb630cf800f800f800f800f800f800f800f800f800f8009cf3ff9df387"
+ },
+ {
+  "offset": 11996044,
+  "expect": "ff5bff5b",
+  "replace": "f220f220"
+ },
+ {
+  "offset": 11996062,
+  "expect": "f220f220f220f220f220f220f220e200ea20f220f220f220f220f220fd10ff5bff5bff5bff5bff5bff5bff5bff5bffffffffff5bff5bff5bff5bff5bff5bff5bff5bfd10f220f220f220f220f220ea20ea20f220f220f220f220f220fd10ff5bff5bff5bff5bff5bff5bff5bff5bffffffffff5bff5bff5bff5bff5bff5bff5bff5bfd10f220f220f220f220f220ea20e200f220f220f220f220f220f220f220",
+  "replace": "f325ff3bb596f800f800f800f800f800f800f800f800f800f800a534fd51f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f48dbdd7f800f800f800f800f800f800f800f800f800f800a534fd30f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f48dbdd7f800f800f800f800f800f800f800f800f800f8009d13ff5cf2c4"
+ },
+ {
+  "offset": 11996236,
+  "expect": "ff5bff5b",
+  "replace": "f220f220"
+ },
+ {
+  "offset": 11996254,
+  "expect": "f220f220f220f220f220f220f220e200c1e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220ff5bff5bf220f220f220f220f220f220f220f220f220f220f220f220f220f220c1e099a1f220f220f220f220f220f220f220f220f220f220f220f220f220f220ff5bff5bf220f220f220f220f220f220f220f220f220f220f220f220f220f22099a16121f220f220f220f220f220f220f220f220f220f220f220f220f220f220ff5bff5bf220f220f220f220f220f220f220f220f220f220f220f220f220f220612120c2e220f220f220f220f220f220f220f220f220f220f220f220f220f220ff5bff5bf220f220f220f220f220f220f220f220f220f220f220f220f220e22020c210a299a1f220f220f220f220f220f220f220f220f220f220f220f220f220ff5bff5bf220f220f220f220f220f220f220f220f220f220f220f220f22099a110a210a230e2ea20f220f220f220f220f220f220f220f220f220f220f220f220ff5bff5bf220f220f220f220f220f220f220f220f220f220f220f220ea2030e210a210a210a28981f220f220f220f220f220f220f220f220f220f220f220f220ff5bff5bf220f220f220f220f220f220f220f220f220f220f220f220898110a210a210a210a220c2c9e0f220f220f220f220f220f220f220f220f220f220f220fd10fd10f220f220f220f220f220f220f220f220f220f220f220c9e020c210a210a210a210a210a230e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0030e210a210a210a210a210a210a210a238e2da00f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220da0038e210a210a210a210a210a210a210a210a210a230e2c9e0f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220f220c9e030e210a210a210a210a210a210a210a210a210a210a210a220c28981ea20f220f220f220f220f220f220f220f220f220f220f220f220f220f220ea20898120c210a210a210a210a210a210a210a210a210a210a210a210a210a210a230e299a1e220f220f220f220f220f220f220f220f220f220f220e22099a130e210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a210a220c2612199a1c1e0e200ea20ea20e200c1e099a1612120c210a210a210a210a210a210a210a210a210a210a2",
+  "replace": "f2c3ff3bb5b6f800f800f800f800f800f800f800f800f800f8005b0be75cffffff3bff3bff3bff3bff3bff3bf220f220f220f220fe98ff3bff3bff3bff3bff3bffffef5d632cf800f800f800f800f800f800f800f800f800f800f800f800630c630c630c630c630c630cfffff220f220f220f220ff3b73ae630c630c630c630c630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800fffff220f220f220f220ff3b630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800fffff220f220f220f220ff3b630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800fffff220f220f220f220ff3b630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800fffff220f220f220f220ff3b630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800fffff325f220f220f2c3ffff630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800defbff3bf48df48dff3bef5df800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800630cb596bdd7bdd7b5b6632cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800"
  },
  {
   "offset": 12894020,
@@ -1582,28 +2483,78 @@ export const FULL_THEME_RUNS = [
  },
  {
   "offset": 12937028,
-  "expect": "ffffffffffffffffffffffffffffffffffffffffffbdfe54fd0cfc06fb62fb20fb20fb62fc06fd0cfe54ffbdffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff5bfcecfb41fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb41fcecff5bffffffffffffffffffffffffffffffffffffffffffffffffffffffffffdefd4efb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd4effdeffffffffffffffffffffffffffffffffffffffffffffff5bfbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ff5bffffffffffffffffffffffffffffffffffffff3afb82fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb82ff3affffffffffffffffffffffffffffff5bfb82fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb82ff5bffffffffffffffffffffffdefbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ffdefffffffffffffffffd4efb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd8ffba4fb20fb20fb20fb20fb20fb20fd4effffffffffffff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ffffffdefd90fb41fb20fb20fb20fb20fb20ff5bfffffffffcecfb20fb20fb20fb20fb20fb20fb20fb20fc48fe13fef9ff5bff7bff7bff7bff7bff7bff7bff7bffffffffffffff7bfc06fb20fb20fb20fb20fcecffffffbdfb41fb20fb20fb20fb20fb20fb20fb61fe55ffffffffffffff7cff7bff7bff7bff7bff7bff7bff7bffffffffffffff7bfc06fb20fb20fb20fb20fb41ffbdfe54fb20fb20fb20fb20fb20fb20fb62ff3afffffe96fc27fb20fb20fb20fb20fb20fb20fb20fb20fb20ffffffdefd90fb41fb20fb20fb20fb20fb20fb20fe54fd0cfb20fb20fb20fb20fb20fb20fe96fffffdd1fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd8ffba4fb20fb20fb20fb20fb20fb20fb20fb20fd0cfc06fb20fb20fb20fb20fb20fc47fffffeb7fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fc06fb62fb20fb20fb20fb20fb20fdf2fffffc47fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb62fb20fb20fb20fb20fb20fb20fef8ffbdfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff3aff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb62fb20fb20fb20fb20fb20fed8ffdefb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb62fc06fb20fb20fb20fb20fb20fdf2fffffc47fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd4efd4efb20fb20fb20fb20fb20fc06fd0cfb20fb20fb20fb20fb20fc27fffffeb7fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ffbdfef8fb20fb20fb20fb20fb20fd0cfe54fb20fb20fb20fb20fb20fb20fe55fffffdd1fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fc26fffffdf2fb20fb20fb20fb20fb20fe54ffbdfb41fb20fb20fb20fb20fb20fb61ff3afffffe96fc27fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fc89ff7cffdffbe5fb20fb20fb20fb20fb41ffbdfffffcecfb20fb20fb20fb20fb20fb20fb82fed8ffffffffffffff7cff7bff7bff7bff7bff7bff7bff7bffbefffffffffd0cfb20fb20fb20fb20fb20fcecffffffffff5bfb20fb20fb20fb20fb20fb20fb20fb20fc68fe13fef9ff5bff7bff7bff7bff7bff7bff7bff7bfef9fe12fc05fb20fb20fb20fb20fb20fb20ff5bfffffffffffffd4efb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd4effffffffffffffffffdefbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ffdeffffffffffffffffffffff5bfb82fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb82ff5bffffffffffffffffffffffffffffff3afb82fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb82ff3affffffffffffffffffffffffffffffffffffff5bfbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ff5bffffffffffffffffffffffffffffffffffffffffffffffdefd4efb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd4effdeffffffffffffffffffffffffffffffffffffffffffffffffffffffffff5bfcecfb41fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb41fcecff5bffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffbdfe54fd0cfc06fb62fb20fb20fb62fc06fd0cfe54ffbdffffffffffffffffffffffffffffffffffffffff",
-  "replace": "f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800a534ad55f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8006b4d00009492f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800c6189cf394922965000000007beff800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80073ae29650000000000000000000000000000630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800949218c300000000000000000000000000000000000000004a29f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8006b4d00000000000000000000000000000000000000000000000000003186bdf7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8006b4d000000000000000000000000108210820000000000000000000042088410c618f800f800f800f800f800f800f800f800f800f800f800f800f800f8009492000000000000000000004a49ad35f80031a6000010824a699492f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80018c300000000000000008c71f800f800f8006b2d9cd3f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80073ae00000000000000008c71f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80029650000000000004a49f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800c6180000000000000000ad35f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8009cf30000000000001082f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80094920000000000003186f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80094920000000000003186f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8009cf30000000000001082f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800c6180000000000000000ad35f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80029650000000000004a49f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80073ae00000000000000008c71f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80018c300000000000000008c71f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8009492000000000000000000004a49ad35f800f800f800f800ad354a4900003186c618f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8006b4d000000000000000000000000108231863186108200000000000000006b2df800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8006b4d00000000000000000000000000000000000000000000000000005acbf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800949218c3000000000000000000000000000000000000000018c3bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80073ae2965000000000000000000000000296573aef800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800c6189cf3949294929cf3c618f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800"
+  "expect": "ffffffffffffffffffffffffffffffffffffffffffbdfe54fd0cfc06fb62fb20fb20fb62fc06fd0cfe54ffbdffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff5bfcecfb41fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb41fcecff5bffffffffffffffffffffffffffffffffffffffffffffffffffffffffffdefd4efb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd4effdeffffffffffffffffffffffffffffffffffffffffffffff5bfbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ff5bffffffffffffffffffffffffffffffffffffff3afb82fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb82ff3affffffffffffffffffffffffffffff5bfb82fb20fb20fb20fb20fb20fb20fb20fb20",
+  "replace": "f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800a51431a639c7ad55f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8006b4d38a030a000009492f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800c6189cf39492296581a0fb2048e000007beff800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80073ae29650000104040c05100ca80fb20fb2069400000630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800949218c300007160ca80"
+ },
+ {
+  "offset": 12937388,
+  "expect": "fb20fb20fb20fb20fb20fb20fb20fb82ff5bffffffffffffffffffffffdefbc4fb20fb20fb20fb20fb20fb20fb20",
+  "replace": "89a000004a29f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8006b4d000048e0e2c0"
+ },
+ {
+  "offset": 12937454,
+  "expect": "fb20fb20fb20fb20fb20fb20fb20fbc4ffdefffffffffffffffffd4efb20fb20fb20fb20fb20fb20",
+  "replace": "aa2000003186bdf7f800f800f800f800f800f800f800f800f800f800f800f800f8006b4d000081a0"
+ },
+ {
+  "offset": 12937518,
+  "expect": "fd8ffba4fb20fb20fb20fb20fb20fb20fd4effffffffffffff5bfb20fb20fb20fb20fb20fb20",
+  "replace": "fb20c26018406b4df800f800f800f800f800f800f800f800f800f800f800f8009492000081a0"
+ },
+ {
+  "offset": 12937568,
+  "expect": "fb20fb20",
+  "replace": "eae0eae0"
+ },
+ {
+  "offset": 12937582,
+  "expect": "ffffffdefd90fb41fb20fb20fb20fb20fb20ff5bfffffffffcecfb20fb20fb20fb20fb20fb20fb20fb20fc48fe13fef9ff5bff7bff7bff7bff7bff7bff7bff7bffffffffffffff7bfc06fb20fb20fb20fb20fcecffffffbdfb41fb20fb20fb20fb20fb20fb20fb61fe55ffffffffffffff7cff7bff7bff7bff7bff7bff7bff7bffffffffffffff7bfc06fb20fb20fb20fb20fb41ffbdfe54fb20fb20fb20fb20fb20fb20fb62ff3afffffe96fc27fb20fb20fb20fb20fb20fb20fb20fb20fb20ffffffdefd90fb41fb20fb20fb20fb20fb20fb20fe54fd0cfb20fb20fb20fb20fb20fb20fe96fffffdd1fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd8ffba4fb20fb20fb20fb20fb20fb20fb20fb20fd0cfc06fb20fb20fb20fb20fb20fc47fffffeb7fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fc06fb62fb20fb20fb20fb20fb20fdf2fffffc47fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb62fb20fb20fb20fb20fb20fb20fef8ffbdfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff3aff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb62fb20fb20fb20fb20fb20fed8ffdefb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb62fc06fb20fb20fb20fb20fb20fdf2fffffc47fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd4efd4efb20fb20fb20fb20fb20fc06fd0cfb20fb20fb20fb20fb20fc27fffffeb7fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ffbdfef8fb20fb20fb20fb20fb20fd0cfe54fb20fb20fb20fb20fb20fb20fe55fffffdd1fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fc26fffffdf2fb20fb20fb20fb20fb20fe54ffbdfb41fb20fb20fb20fb20fb20fb61ff3afffffe96fc27fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fc89ff7cffdffbe5fb20fb20fb20fb20fb41ffbdfffffcecfb20fb20fb20fb20fb20fb20fb82fed8ffffffffffffff7cff7bff7bff7bff7bff7bff7bff7bffbefffffffffd0cfb20fb20fb20fb20fb20fcecffffffffff5bfb20fb20fb20fb20fb20fb20fb20fb20fc68fe13fef9ff5bff7bff7bff7bff7bff7bff7bff7bfef9fe12fc05fb20fb20fb20fb20fb20fb20ff5bfffffffffffffd4efb20fb20fb20fb20fb20fb20",
+  "replace": "aa20612010406b4df800f800f800f800f800f800f800f800f800f800f800f80018c348e0fb20fb20fb20fb20fb20a20030a00000ba60fb20eae0a20051000000000042088410c618f800f800f800f800f800f800f800f800f800f800f80073ae0000e2c0fb20fb20fb20fb20510000004a49000081a040e0000010824a699492f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80029657160fb20fb20fb20fb20510000008c71f80031a631a65acb9cd3f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800c6180000ca80fb20fb20fb20a20000008c71f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8009cf31040fb20fb20fb20fb2030a04a49f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800949240c0fb20fb20fb20eae00000ad35f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80084105100fb20fb20fb20c2601082f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80084105100fb20fb20fb20c2601082f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800949240c0fb20fb20fb20eae00000ad35f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8009cf31040fb20fb20fb20fb2030a04a49f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800c6180000ca80fb20fb20fb20a20000008c71f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80029657160fb20fb20fb20fb20510000008c71f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80073ae0000e2c0fb20fb20fb20fb20510000004a49ad35f800f800ad354a490000000000003186c618f800f800f800f800f800f800f800f800f800f800f800f800f80018c348e0fb20fb20fb20fb20fb20a20030a0000010821082000030a0a200fb20c26010406b2df800f800f800f800f800f800f800f800f800f800f800f800f8009492000081a0fb20fb20fb20fb20fb20fb20eae0c260c260eae0fb20fb20fb20fb2081a0528af800f800f800f800f800f800f800f800f800f800f800f800f800f8006b4d000081a0"
+ },
+ {
+  "offset": 12938608,
+  "expect": "fb20fb20fb20fb20fb20fb20fb20fd4effffffffffffffffffdefbc4fb20fb20fb20fb20fb20fb20fb20",
+  "replace": "91c0528af800f800f800f800f800f800f800f800f800f800f800f800f800f800f8006b4d000048e0e2c0"
+ },
+ {
+  "offset": 12938670,
+  "expect": "fb20fb20fb20fb20fb20fb20fb20fbc4ffdeffffffffffffffffffffff5bfb82fb20fb20fb20fb20fb20fb20fb20fb20",
+  "replace": "dac020605acbf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800949218c300007160ca80"
+ },
+ {
+  "offset": 12938730,
+  "expect": "fb20fb20fb20fb20fb20fb20fb20fb20fb82ff5bffffffffffffffffffffffffffffff3afb82fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb82ff3affffffffffffffffffffffffffffffffffffff5bfbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ff5bffffffffffffffffffffffffffffffffffffffffffffffdefd4efb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd4effdeffffffffffffffffffffffffffffffffffffffffffffffffffffffffff5bfcecfb41fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb41fcecff5bffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffbdfe54fd0cfc06fb62fb20fb20fb62fc06fd0cfe54ffbdffffffffffffffffffffffffffffffffffffffff",
+  "replace": "ca807160000018c3bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80073ae29650000104040c05100510040c010400000296573aef800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800c6189cf394928410841094929cf3c618f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800"
  },
  {
   "offset": 12939076,
-  "expect": "ffffffffffffffffffffffffffffffffffffffffffbdfe54fd0cfc06fb62fb20fb20fb62fc06fd0cfe54ffbdffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff5bfcecfb41fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb41fcecff5bffffffffffffffffffffffffffffffffffffffffffffffffffffffffffdefd4efb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd4effdeffffffffffffffffffffffffffffffffffffffffffffff5bfbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ff5bffffffffffffffffffffffffffffffffffffff3afb82fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb82ff3affffffffffffffffffffffffffffff5bfb82fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb82ff5bffffffffffffffffffffffdefbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ffdefffffffffffffffffd4efb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd4effffffffffffff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff5bfffffffffcecfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fcecffffffbdfb41fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb41ffbdfe54fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fe54fd0cfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd0cfc06fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fc06fb62fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb62fb20fb20fb20fb20fb20fb20fdd1ff7bff7bff7bff7bff7bff7bff7bff7bff7bff7bff7bff7bff7bff7bff7bff7bff7bff7bfdd1fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fdd1ff7bff7bff7bff7bff7bff7bff7bff7bff7bff7bff7bff7bff7bff7bff7bff7bff7bff7bfdd1fb20fb20fb20fb20fb20fb20fb62fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb62fc06fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fc06fd0cfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd0cfe54fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fe54ffbdfb41fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb41ffbdfffffcecfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fcecffffffffff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff5bfffffffffffffd4efb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd4effffffffffffffffffdefbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ffdeffffffffffffffffffffff5bfb82fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb82ff5bffffffffffffffffffffffffffffff3afb82fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb82ff3affffffffffffffffffffffffffffffffffffff5bfbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ff5bffffffffffffffffffffffffffffffffffffffffffffffdefd4efb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd4effdeffffffffffffffffffffffffffffffffffffffffffffffffffffffffff5bfcecfb41fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb41fcecff5bffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffbdfe54fd0cfc06fb62fb20fb20fb62fc06fd0cfe54ffbdffffffffffffffffffffffffffffffffffffffff",
-  "replace": "f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8009cd318c300000000000000000000000000000000000000000000000010828c31f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80018c3000000000000000000000000000000000000000000000000000000000000f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8001082000000000000000000000000000000000000000000000000000000000000c638f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8008c3100000000000000000000000000000000000000000000000000000000736ef800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800bdb7bdb7bdb7bdb7bdb7bdb7bdb7bdb7bdb7bdb7bdb7bdb7c638f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800"
+  "expect": "ffffffffffffffffffffffffffffffffffffffffffbdfe54fd0cfc06fb62fb20fb20fb62fc06fd0cfe54ffbdffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff5bfcecfb41fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb41fcecff5bffffffffffffffffffffffffffffffffffffffffffffffffffffffffffdefd4efb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd4effdeffffffffffffffffffffffffffffffffffffffffffffff5bfbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ff5bffffffffffffffffffffffffffffffffffffff3afb82fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb82ff3affffffffffffffffffffffffffffff5bfb82fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb82ff5bffffffffffffffffffffffdefbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ffdefffffffffffffffffd4efb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd4effffffffffffff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff5bfffffffffcecfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fcecffffffbdfb41fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb41ffbdfe54fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fe54fd0cfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd0cfc06fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fc06fb62fb20fb20fb20fb20fb20fb20fb20fb20fb20",
+  "replace": "f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8009cd318c30000000000000000000000000000000000000000000000000000000010828c31f800f800f800f800f800f800f800f800f800f800f800f800f800f80018c340e0e2c0"
+ },
+ {
+  "offset": 12940016,
+  "expect": "fb20fb20fb20fb20fb20fb20fb20fb20fb20fb62fb20fb20fb20fb20fb20fb20fdd1ff7bff7bff7bff7bff7bff7bff7bff7bff7bff7bff7bff7bff7bff7bff7bff7bff7bff7bfdd1fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fdd1ff7bff7bff7bff7bff7bff7bff7bff7bff7bff7bff7bff7bff7bff7bff7bff7bff7bff7bfdd1fb20fb20fb20fb20fb20fb20fb62fb20fb20fb20fb20fb20fb20fb20fb20",
+  "replace": "eae059200000f800f800f800f800f800f800f800f800f800f800f800f800f800f8000000e2c0fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb200000bdb7f800f800f800f800f800f800f800f800f800f800f800f800f8000000eae0fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb201020bdb7f800f800f800f800f800f800f800f800f800f800f800f800f80010825920"
+ },
+ {
+  "offset": 12940210,
+  "expect": "fb20fb20fb20fb20fb20fb20fb20fb20fb62fc06fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fc06fd0cfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd0cfe54fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fe54ffbdfb41fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb41ffbdfffffcecfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fcecffffffffff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff5bfffffffffffffd4efb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd4effffffffffffffffffdefbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ffdeffffffffffffffffffffff5bfb82fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb82ff5bffffffffffffffffffffffffffffff3afb82fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb82ff3affffffffffffffffffffffffffffffffffffff5bfbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ff5bffffffffffffffffffffffffffffffffffffffffffffffdefd4efb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd4effdeffffffffffffffffffffffffffffffffffffffffffffffffffffffffff5bfcecfb41fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb41fcecff5bffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffbdfe54fd0cfc06fb62fb20fb20fb62fc06fd0cfe54ffbdffffffffffffffffffffffffffffffffffffffff",
+  "replace": "79800000c638f800f800f800f800f800f800f800f800f800f800f800f800f8008c310000000020602060206020602060206020602060206020602060206010200000736ef800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800bdb7bdb7bdb7bdb7bdb7bdb7bdb7bdb7bdb7bdb7bdb7bdb7bdb7bdb7c638f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800"
  },
  {
   "offset": 12941124,
   "expect": "ffffffffffffffffffffffffffffffffffffffffffbdfe54fd0cfc06fb62fb20fb20fb62fc06fd0cfe54ffbdffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff5bfcecfb41fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb41fcecff5bffffffffffffffffffffffffffffffffffffffffffffffffffffffffffdefd4efb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd4effdeffffffffffffffffffffffffffffffffffffffffffffff5bfbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ff5bffffffffffffffffffffffffffffffffffffff3afb82fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb82ff3affffffffffffffffffffffffffffff5bfb82fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb82ff5bffffffffffffffffffffffdefbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ffdefffffffffffffffffd4efb20fb20fb20fb20fb82fc89fcecfcecfcecfcecfcecfcecfcecfcecfcecfcecfcecfcecfcecfcecfc89fb82fb20fb20fb20fb20fd4effffffffffffff5bfb20fb20fb20fb20fd0cffdeffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffdefd0cfb20fb20fb20fb20ff5bfffffffffcecfb20fb20fb20fc47ffffff1afd4efcecfcecfcecfcecfcecfcecfcecfcecfcecfcecfcecfcecfcecfcecfd6fff9cfffffc47fb20fb20fb20fcecffffffbdfb41fb20fb20fb20fe75fffffb82",
-  "replace": "f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800e52ff3a4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20f383e4edf800f800f800f800f800f800f800f800f800f800f800f800f800ecccfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ec49f800f800f800f800f800f800f800f800f800f800f800ddf5fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20dd92f800f800f800f800f800f800f800f800f800f800e50efb20fb20"
+  "replace": "f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8007bef2104000000000000000000000000000000000000000000000000000000000000000018c36b6df800f800f800f800f800f800f800f800f800f800f800630c00006940d2a0fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20dac0798000004a49f800f800f800f800f800f800f800f800f800ad75000089a0fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20a20000009492f800f800f800f800f800f800f800f800738e2880fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb2048e05acbf800f800f800f800f800f800f800f8006b4d7160fb20fb20"
  },
  {
   "offset": 12941812,
   "expect": "fc06fffffe55fb20fb20fb20fb41ffbdfe54fb20fb20fb20fb20ff3aff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff7cff3afb20fb20fb20fb20fe54fd0cfb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fb20ff7bff7bfdd1fb20fb20fb20ff7bff7bfdd1fb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fd0cfc06fb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fb20ff7bffffff5bfb20fb20fb20ff7bffffff5bfb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fc06fb62fb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fb62fb20fb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fb20fba3ffbefef8fb20fb20fb20fba3ffbefef8fb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff5bff5b",
-  "replace": "fb20fb20ec8bf800f800f800f800f800f800f800f800f800f800e4cdfb20fb20fb20fb20fb20ec28e4cde4cdfb62fb20fb20fb20f406e4cde4cdf383fb20fb20fb20fb20ec6af800f800f800f800f800f800f800f800f800f800e4cdfb20fb20fb20fb20fb20ddb4f800f800fb20fb20fb20fb20e530f800f800f383fb20fb20fb20fb20ec6af800f800f800f800f800f800f800f800f800f800e4cdfb20fb20fb20fb20fb20d637f800ddf5fb20fb20fb20fb20ddb3f800f800fb20fb20fb20fb20fb20ec6af800f800f800f800f800f800f800f800f800f800e4cdfb20fb20fb20fb20fb62f800f800dd72fb20fb20fb20fb20de16f800ddf5fb20fb20fb20fb20fb20ec6af800f800f800f800f800f800f800f800f800f800e4cdfb20fb20fb20fb20f3c4de17de17eccdfb20fb20fb20fb20de16de17e52ffb20fb20fb20fb20fb20ec6af800f800f800f800f800f800f800f800f800f800e4cdfb20"
+  "replace": "fb20fb2091c0528af800f800f800f800f800f800f800f8006b4d81a0fb20fb20fb20fb20fb20aa2081a081a0eae0fb20fb20fb20ba6081a081a0dac0fb20fb20fb20fb209a00528af800f800f800f800f800f800f800f8006b4d81a0fb20fb20fb20fb20fb2038c029650000fb20fb20fb20fb20614029650000e2c0fb20fb20fb20fb209a00528af800f800f800f800f800f800f800f8006b4d81a0fb20fb20fb20fb20fb20184062ec2880fb20fb20fb20fb2040e05acb0000fb20fb20fb20fb20fb209a00528af800f800f800f800f800f800f800f8006b4d81a0fb20fb20fb20fb20eae00000528a5100fb20fb20fb20fb2028804a6930a0fb20fb20fb20fb20fb209a00528af800f800f800f800f800f800f800f8006b4d81a0fb20fb20fb20fb20d2a02060206081a0fb20fb20fb20fb20288020606940fb20fb20fb20fb20fb209a00528af800f800f800f800f800f800f800f8006b4d81a0fb20"
  },
  {
   "offset": 12942172,
   "expect": "ffdffffffd0cfb20fb20fb20ffdffffffd0cfb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fb20fb62fb20fb20fb20fb20ff5bff5b",
-  "replace": "fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ec6af800f800f800f800f800f800f800f800f800f800e4cdfb20"
+  "replace": "fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb209a00528af800f800f800f800f800f800f800f8006b4d81a0fb20"
  },
  {
   "offset": 12942236,
@@ -1613,117 +2564,117 @@ export const FULL_THEME_RUNS = [
  {
   "offset": 12942262,
   "expect": "ff5bff5bfb20fb20fb20fb20fb62fc06fb20fb20fb20fb20ff3aff5b",
-  "replace": "fb20ec6af800f800f800f800f800f800f800f800f800f800e4cdfb20"
+  "replace": "fb209a00528af800f800f800f800f800f800f800f8006b4d81a0fb20"
  },
  {
   "offset": 12942326,
   "expect": "ff7bff3afb20fb20fb20fb20fc06fd0cfb20fb20fb20fb20fe55ffdffb62",
-  "replace": "fb20ec6af800f800f800f800f800f800f800f800f800f800e550fb20fb20"
+  "replace": "fb209a00528af800f800f800f800f800f800f800f8006b4d6120fb20fb20"
  },
  {
   "offset": 12942388,
   "expect": "fb62fffffe54fb20fb20fb20fb20fd0cfe54fb20fb20fb20fb20fc47ffffff1afd4efcecfcecfbe5fb20fb20fbc4fcecfcecfcecfcecfcecfcecfcecfcecfd4eff1afffffc27fb20fb20fb20fb20fe54ffbdfb41fb20fb20fb20fb20fd0cffdeffffffffffffff19fb20fcecffdeffffffffffffffffffffffffffffffffffffffdefd0cfb20fb20fb20fb20fb41ffbdfffffcecfb20fb20fb20fb20fb20fb82fc89fcecff9dff7cfe34ffffff3afd0cfcecfcecfcecfcecfcecfcecfcecfc89fb82fb20fb20fb20fb20fb20fcecffffffffff5bfb20fb20fb20fb20fb20fb20fb20fb20ff5bfffffffffe34fb41fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff5bfffffffffffffd4efb20fb20fb20fb20fb20fb20fb20ff1affdefcecfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd4effffffffffffffffffdefbc4fb20fb20fb20fb20fb20fb20fbe5fbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ffdeffffffffffffffffffffff5bfb82fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb82ff5bffffffffffffffffffffffffffffff3afb82fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb82ff3affffffffffffffffffffffffffffffffffffff5bfbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ff5bffffffffffffffffffffffffffffffffffffffffffffffdefd4efb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd4effdeffffffffffffffffffffffffffffffffffffffffffffffffffffffffff5bfcecfb41fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb41fcecff5bffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffbdfe54fd0cfc06fb62fb20fb20fb62fc06fd0cfe54ffbdffffffffffffffffffffffffffffffffffffffff",
-  "replace": "fb20fb20e4cdf800f800f800f800f800f800f800f800f800f800d658fb62fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20de16f800f800f800f800f800f800f800f800f800f800f800ddb4fb62fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20e571f800f800f800f800f800f800f800f800f800f800f800f800f800d637e4eeec6afb20fb20fb20fb20fb20fb20f407ec6aec6aec6aec6aec6aec6ae4cdde16f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800fb20fb20fb20fb20fb20e52ff800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800fb20fb20fb20f383ddd5f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800fb20fb20f427d658f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800fb20e4cdf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800dd93f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800"
+  "replace": "fb20fb2081a0528af800f800f800f800f800f800f800f80084101020eae0fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb2020606b4df800f800f800f800f800f800f800f800c638108238c0eae0fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb2051000000b596f800f800f800f800f800f800f800f800f800a5141062184079809a00fb20fb20fb20fb20fb20fb20ba409a009a009a009a009a009a0081a0206000008c71f800f800f800f800f800f800f800f800f800f800f800bdf7736e528a0000fb20fb20fb20fb20fb206960000039c7528a528a528a528a528a528a6b4db596f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8000000fb20fb20fb20e2c030a000007bcff800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8000000fb20fb20b240104018c3ad35f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8000000fb2081a0000039e7c618f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800000048e000006b4df800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800528a528a9cb3f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800"
  },
  {
   "offset": 12943172,
   "expect": "ffffffffffffffffffffffffffffffffffffffffffbdfe54fd0cfc06fb62fb20fb20fb62fc06fd0cfe54ffbdffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff5bfcecfb41fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb41fcecff5bffffffffffffffffffffffffffffffffffffffffffffffffffffffffffdefd4efb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd4effdeffffffffffffffffffffffffffffffffffffffffffffff5bfbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ff5bffffffffffffffffffffffffffffffffffffff3afb82fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb82ff3affffffffffffffffffffffffffffff5bfb82fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb82ff5bffffffffffffffffffffffdefbc4fb20fb20fb20fb20fb20fb20fb20fb20fc27fdd2fef8ff3aff3afef8fdd1fc27fb20fb20fb20fb20fb20fb20fb20fb20fbc4ffdefffffffffffffffffd4efb20fb20fb20fb20fb20fb20fb20fc06fed7ffffffffffffff9dff9dfffffffffffffed7fc06fb20fb20fb20fb20fb20fb20fb20fd4effffffffffffff5bfb20fb20fb20fb20fb20fb20fb20fcecfffffffffe96fc89fb20fb20fb20fb20fc89fe96ffffffdffcebfb20fb20fb20fb20fb20fb20fb20ff5bfffffffffcecfb20fb20fb20fb20fb20fb20fcecffffff9dfc68",
-  "replace": "f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800ddf5e550e4cde4cde52fddd5f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800e50ef383fb20fb20fb20fb20fb20fb20fb62e4cdd658f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800ddd5f383fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb62dd93f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800e571fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20e50ef800f800f800f800f800f800f800f800f800f800f800f800f800f800f800ddd5fb20fb20fb20fb20"
+  "replace": "f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800ad7584106b4d6b4d6b4d6b4d7befad35f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80073ae18c300002880612081a081a0694030a0000010a26b4dc638f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800ad3518c300007160dac0fb20fb20fb20fb20fb20fb20e2c081a0102010829cb3f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8008c71000030a0dac0fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20eae048e0000073aef800f800f800f800f800f800f800f800f800f800f800f800f800ad3500005100fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20716000009492f800f800f800f800f800f800f800f800f800f800f800f80018c330a0fb20fb20fb20fb20"
  },
  {
   "offset": 12943788,
   "expect": "fc68ff9dfffffcecfb20fb20fb20fb20fb20fb20fcecffffffbdfb41fb20fb20fb20fb20fb20fc26ffffff9dfbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ff9dffdffc06fb20fb20fb20fb20fb20fb41ffbdfe54fb20fb20fb20fb20fb20fb20fed8fffffc47fb20fb20fb20fb20fb20fc48fc48fb20fb20fb20fb20fb20fc47fffffed8fb20fb20fb20fb20fb20fb20fe54fd0cfb20fb20fb20fb20fb20fc06fffffe54",
-  "replace": "fb20fb20fb20fb20dd92f800f800f800f800f800f800f800f800f800f800f800f800f800f800f383fb20fb20fb20fb20fb20fb20f3c5de17de17f3c5fb20fb20fb20fb20fb20fb20fb62d637f800f800f800f800f800f800f800f800f800f800f800f800e50efb20fb20fb20fb20fb20fb20fb20e52ff800f800e52ffb20fb20fb20fb20fb20fb20fb20ecabf800f800f800f800f800f800f800f800f800f800f800f800f383fb20fb20"
+  "replace": "fb20fb20fb20fb2048e01062bdf7f800f800f800f800f800f800f800f800f800f80073ae0000dac0fb20fb20fb20fb20fb20fb20ca8020602060ca80fb20fb20fb20fb20fb20fb20eae018405acbf800f800f800f800f800f800f800f800f800f80018c37160fb20fb20fb20fb20fb20fb20fb20694010a210a26940fb20fb20fb20fb20fb20fb20fb2091c00000f800f800f800f800f800f800f800f800f800ad750000dac0fb20fb20"
  },
  {
   "offset": 12943968,
   "expect": "fb20fed8fed8fb20",
-  "replace": "ec28f800f800ec28"
+  "replace": "aa2000000000aa20"
  },
  {
   "offset": 12943986,
   "expect": "fe55fffffc06fb20fb20fb20fb20fb20fd0cfc06fb20fb20fb20fb20fb20fdb0fffffc47",
-  "replace": "fb20fb20fb20f800f800f800f800f800f800f800f800f800f800f800ddf5fb20fb20fb20"
+  "replace": "fb20fb20fb2000009492f800f800f800f800f800f800f800f80084102880fb20fb20fb20"
  },
  {
   "offset": 12944034,
   "expect": "fb82fb82",
-  "replace": "f3a4f3a4"
+  "replace": "daa0daa0"
  },
  {
   "offset": 12944050,
   "expect": "fc47fffffd90fb20fb20fb20fb20fb20fc06fb62fb20fb20fb20fb20fb20feb7ffdf",
-  "replace": "fb20fb20fb20dd92f800f800f800f800f800f800f800f800f800f800e550fb20fb20"
+  "replace": "fb20fb20fb2048e06b4df800f800f800f800f800f800f800f8006b4d6120fb20fb20"
  },
  {
   "offset": 12944098,
   "expect": "fb20fb20",
-  "replace": "f3c5f3e6"
+  "replace": "ca80c260"
  },
  {
   "offset": 12944116,
   "expect": "fffffe96fb20fb20fb20fb20fb20fb62fb20fb20fb20fb20fb20fb20ff19ff7c",
-  "replace": "fb20fb20e4cdf800f800f800f800f800f800f800f800f800f800e4cdfb20fb20"
+  "replace": "fb20fb2081a0528af800f800f800f800f800f800f800f8006b4d81a0fb20fb20"
  },
  {
   "offset": 12944160,
   "expect": "fb20fdd1fdd1fb20",
-  "replace": "fb62f800f800f3a4"
+  "replace": "eae000000000d2a0"
  },
  {
   "offset": 12944180,
   "expect": "ff7cff19fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff19ff7c",
-  "replace": "fb20fb20ec6af800f800f800f800f800f800f800f800f800f800e4cdfb20fb20"
+  "replace": "fb20fb209a00528af800f800f800f800f800f800f800f8006b4d81a0fb20fb20"
  },
  {
   "offset": 12944224,
   "expect": "fb20ff5bff5bfb20",
-  "replace": "f383f800f800f406"
+  "replace": "dac010622104ba60"
  },
  {
   "offset": 12944244,
   "expect": "ff9cff19fb20fb20fb20fb20fb20fb20fb62fb20fb20fb20fb20fb20fe96fffffb40",
-  "replace": "fb20fb20ec6af800f800f800f800f800f800f800f800f800f800e52ffb20fb20fb20"
+  "replace": "fb20fb209a00528af800f800f800f800f800f800f800f8006b4d6940fb20fb20fb20"
  },
  {
   "offset": 12944288,
   "expect": "fb20ff5bff5bfb20",
-  "replace": "f383f800f800f406"
+  "replace": "dac018c331a6ba60"
  },
  {
   "offset": 12944306,
   "expect": "fb41fffffe96fb20fb20fb20fb20fb20fb62fc06fb20fb20fb20fb20fb20fdb0fffffc68",
-  "replace": "fb20fb20fb20ecccf800f800f800f800f800f800f800f800f800f800ddd5fb20fb20fb20"
+  "replace": "fb20fb20fb2089a0528af800f800f800f800f800f800f800f8007bef30a0fb20fb20fb20"
  },
  {
   "offset": 12944352,
   "expect": "fb20ff5bff5bfb20",
-  "replace": "f383f800f800f406"
+  "replace": "dac018c331a6ba60"
  },
  {
   "offset": 12944370,
   "expect": "fc68fffffdb0fb20fb20fb20fb20fb20fc06fd0cfb20fb20fb20fb20fb20fc27fffffe55",
-  "replace": "fb20fb20fb20e571f800f800f800f800f800f800f800f800f800f800f800fb62fb20fb20"
+  "replace": "fb20fb20fb205100630cf800f800f800f800f800f800f800f800ad350000e2c0fb20fb20"
  },
  {
   "offset": 12944416,
   "expect": "fb20ff3aff3afb20",
-  "replace": "f383f800f800f406"
+  "replace": "dac010622104ba60"
  },
  {
   "offset": 12944434,
   "expect": "fe75fffffc26fb20fb20fb20fb20fb20fd0cfe54fb20fb20fb20fb20fb20fb20fef8fffffc47fb20fb20fb20fb20fb20fc48fc47fb20fb20fb20fb20fb20fc47fffffed8fb20fb20fb20fb20fb20fb20fe54ffbdfb41fb20fb20fb20fb20fb20fc06ffdfff9dfbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ff9dffdffc06fb20fb20fb20fb20fb20fb41ffbdfffffcecfb20fb20fb20fb20fb20fb20fcecffffff9dfc47",
-  "replace": "fb20fb20fb20d658f800f800f800f800f800f800f800f800f800f800f800e4cdfb20fb20fb20fb20fb20fb20fb20fb62f800f800f3a4fb20fb20fb20fb20fb20fb20fb20ec6af800f800f800f800f800f800f800f800f800f800f800f800d658fb62fb20fb20fb20fb20fb20fb20fb20f3c5f3e6fb20fb20fb20fb20fb20fb20fb20fb20de16f800f800f800f800f800f800f800f800f800f800f800f800f800dd93fb20fb20fb20fb20"
+  "replace": "fb20fb20fb2010208c71f800f800f800f800f800f800f800f800f80010a281a0fb20fb20fb20fb20fb20fb20fb20eae000000000d2a0fb20fb20fb20fb20fb20fb20fb209a000000c638f800f800f800f800f800f800f800f800f8006b4d1020eae0fb20fb20fb20fb20fb20fb20fb20ca80c260fb20fb20fb20fb20fb20fb20fb20fb202060528af800f800f800f800f800f800f800f800f800f800c638108248e0fb20fb20fb20fb20"
  },
  {
   "offset": 12944620,
   "expect": "fc47ff9dfffffcebfb20fb20fb20fb20fb20fb20fcecffffffffff5bfb20fb20fb20fb20fb20fb20fb20fcecfffffffffe55fc89fb20fb20fb20fb20fc89fe75fffffffffcecfb20fb20fb20fb20fb20fb20fb20ff5bfffffffffffffd4efb20fb20fb20fb20fb20fb20fb20fc47ff19ffffffffffffff9dff9dfffffffffffffef9fc47fb20fb20fb20fb20fb20fb20fb20fd4effffffffffffffffffdefbc4fb20fb20fb20fb20fb20fb20fb20fb20fc27fdd2fef8ff3bff3afef8fdd1fc26fb20fb20fb20fb20fb20fb20fb20fb20fbc4ffdeffffffffffffffffffffff5bfb82fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb82ff5bffffffffffffffffffffffffffffff3afb82fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb82ff3affffffffffffffffffffffffffffffffffffff5bfbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ff5bffffffffffffffffffffffffffffffffffffffffffffffdefd4efb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd4effdeffffffffffffffffffffffffffffffffffffffffffffffffffffffffff5bfcecfb41fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb41fcecff5bffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffbdfe54fd0cfc06fb62fb20fb20fb62fc06fd0cfe54ffbdffffffffffffffffffffffffffffffffffffffff",
-  "replace": "fb20fb20fb20fb20e530f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800e50efb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ecabf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800dd92fb62fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20e530f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800d637ecabfb20fb20fb20fb20fb20fb20fb20fb20ec6ade16f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800dd92e4cdec6aec6aeccce571d658f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800"
+  "replace": "fb20fb20fb20fb2061400000b596f800f800f800f800f800f800f800f800f800f800f8009cb300007160fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb2091c000008410f800f800f800f800f800f800f800f800f800f800f800f800f80073ae000048e0eae0fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20614000005acbf800f800f800f800f800f800f800f800f800f800f800f800f800f800f80094921062184091c0fb20fb20fb20fb20fb20fb20fb20fb209a00206000008410f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800bdf75acb0000000048e081a09a009a0089a0510010200000528ab596f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80094926b4d528a528a528a528a630c8c71c638f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800"
  },
  {
   "offset": 12945220,
   "expect": "ffffffffffffffffffffffffffffffffffffffffffbdfe54fd0cfc06fb62fb20fb20fb62fc06fd0cfe54ffbdffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff5bfcecfb41fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb41fcecff5bffffffffffffffffffffffffffffffffffffffffffffffffffffffffffdefd4efb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd4effdeffffffffffffffffffffffffffffffffffffffffffffff5bfbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ff5bffffffffffffffffffffffffffffffffffffff3afb82fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb82ff3affffffffffffffffffffffffffffff5bfb82fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb82ff5bffffffffffffffffffffffdefbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ffdefffffffffffffffffd4efb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd4effffffffffffff5bfb20fb20fb20fb20fb20fb20fb20fdd1fffffffffffffdd1fb20fb20fb20fb20fdd1fffffffffffffdd1fb20fb20fb20fb20fb20fb20fb20ff5bfffffffffcecfb20fb20fb20fb20fb20fb20fb20fffffffffffffffffffffb20fb20fb20fb20fffffffffffffffffffffb20fb20fb20fb20fb20fb20fb20fcecffffffbdfb41fb20fb20fb20fb20fb20fb20fb20fffffffffffffffffffffb20fb20fb20fb20fffffffffffffffffffffb20fb20fb20fb20fb20fb20fb20fb41ffbdfe54fb20fb20fb20fb20fb20fb20fb20fb20fffffffffffffffffffffb20fb20fb20fb20fffffffffffffffffffffb20fb20fb20fb20fb20fb20fb20fb20fe54fd0cfb20fb20fb20fb20fb20fb20fb20fb20fffffffffffffffffffffb20fb20fb20fb20fffffffffffffffffffffb20fb20fb20fb20fb20fb20fb20fb20fd0cfc06fb20fb20fb20fb20fb20fb20fb20fb20fffffffffffffffffffffb20fb20fb20fb20fffffffffffffffffffffb20fb20fb20fb20fb20fb20fb20fb20fc06fb62fb20fb20fb20fb20fb20fb20fb20fb20fffffffffffffffffffffb20fb20fb20fb20fffffffffffffffffffffb20fb20fb20fb20fb20fb20fb20fb20fb62fb20fb20fb20fb20fb20fb20fb20fb20fb20fffffffffffffffffffffb20fb20fb20fb20fffffffffffffffffffffb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fffffffffffffffffffffb20fb20fb20fb20fffffffffffffffffffffb20fb20fb20fb20fb20fb20fb20fb20fb20fb62fb20fb20fb20fb20fb20fb20fb20fb20fffffffffffffffffffffb20fb20fb20fb20fffffffffffffffffffffb20fb20fb20fb20fb20fb20fb20fb20fb62fc06fb20fb20fb20fb20fb20fb20fb20fb20fffffffffffffffffffffb20fb20fb20fb20fffffffffffffffffffffb20fb20fb20fb20fb20fb20fb20fb20fc06fd0cfb20fb20fb20fb20fb20fb20fb20fb20fffffffffffffffffffffb20fb20fb20fb20fffffffffffffffffffffb20fb20fb20fb20fb20fb20fb20fb20fd0cfe54fb20fb20fb20fb20fb20fb20fb20fb20fffffffffffffffffffffb20fb20fb20fb20fffffffffffffffffffffb20fb20fb20fb20fb20fb20fb20fb20fe54ffbdfb41fb20fb20fb20fb20fb20fb20fb20fffffffffffffffffffffb20fb20fb20fb20fffffffffffffffffffffb20fb20fb20fb20fb20fb20fb20fb41ffbdfffffcecfb20fb20fb20fb20fb20fb20fb20fffffffffffffffffffffb20fb20fb20fb20fffffffffffffffffffffb20fb20fb20fb20fb20fb20fb20fcecffffffffff5bfb20fb20fb20fb20fb20fb20fb20fdd1fffffffffffffdd1fb20fb20fb20fb20fdd1fffffffffffffdd1fb20fb20fb20fb20fb20fb20fb20ff5bfffffffffffffd4efb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd4effffffffffffffffffdefbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ffdeffffffffffffffffffffff5bfb82fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb82ff5bffffffffffffffffffffffffffffff3afb82fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb82ff3affffffffffffffffffffffffffffffffffffff5bfbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ff5bffffffffffffffffffffffffffffffffffffffffffffffdefd4efb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd4effdeffffffffffffffffffffffffffffffffffffffffffffffffffffffffff5bfcecfb41fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb41fcecff5bffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffbdfe54fd0cfc06fb62fb20fb20fb62fc06fd0cfe54ffbdffffffffffffffffffffffffffffffffffffffff",
-  "replace": "f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8008c31736ebdf7f800f800f800f800c63873ae7beff800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8005aab0000000010a2c638f800f800f80021240000000039e7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80000000000000000008c31f800f800a5140000000000000000bdd7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80000000000000000008410f800f8009cf30000000000000000bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80000000000000000008410f800f8009cf30000000000000000bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80000000000000000008410f800f8009cf30000000000000000bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80000000000000000008410f800f8009cf30000000000000000bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80000000000000000008410f800f8009cf30000000000000000bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80000000000000000008410f800f8009cf30000000000000000bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80000000000000000008410f800f8009cf30000000000000000bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80000000000000000008410f800f8009cf30000000000000000bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80000000000000000008410f800f8009cf30000000000000000bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80000000000000000008410f800f8009cf30000000000000000bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80000000000000000008410f800f8009cf30000000000000000bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80000000000000000008410f800f8009cf30000000000000000bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80000000000000000008410f800f8009cf30000000000000000bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80000000000000000008410f800f8009cf30000000000000000bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80000000000000000008410f800f8009cf30000000000000000bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8004a29000000000000bdf7f800f800f80018c3000000002965f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8006b6d5aabad75f800f800f800f800bdb75aeb630cc618f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800"
+  "replace": "f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8008c316b4d6b4d736ebdf7f800f800c63873ae6b4d6b4d7beff800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8005aab000059207980184010a2c638f8002124102071606940000039e7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800000091e0fb20fb20e2c010208c31a5140000d2a0fb20fb20b2400000bdd7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8000000fb20fb20fb20fb20592084109cf338c0fb20fb20fb20fb201860bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8000000fb20fb20fb20fb20612084109cf340c0fb20fb20fb20fb202060bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8000000fb20fb20fb20fb20612084109cf340c0fb20fb20fb20fb202060bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8000000fb20fb20fb20fb20612084109cf340c0fb20fb20fb20fb202060bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8000000fb20fb20fb20fb20612084109cf340c0fb20fb20fb20fb202060bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8000000fb20fb20fb20fb20612084109cf340c0fb20fb20fb20fb202060bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8000000fb20fb20fb20fb20612084109cf340c0fb20fb20fb20fb202060bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8000000fb20fb20fb20fb20612084109cf340c0fb20fb20fb20fb202060bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8000000fb20fb20fb20fb20612084109cf340c0fb20fb20fb20fb202060bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8000000fb20fb20fb20fb20612084109cf340c0fb20fb20fb20fb202060bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8000000fb20fb20fb20fb20612084109cf340c0fb20fb20fb20fb202060bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8000000fb20fb20fb20fb20612084109cf340c0fb20fb20fb20fb202060bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8000000fb20fb20fb20fb20612084109cf340c0fb20fb20fb20fb202060bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8000000fb20fb20fb20fb20612084109cf340c0fb20fb20fb20fb202060bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8000000fb20fb20fb20fb20612084109cf340c0fb20fb20fb20fb202060bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8000000fb20fb20fb20fb20612084109cf340c0fb20fb20fb20fb202060bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8000000aa20fb20fb20fb20184084109cf30000e2c0fb20fb20ca800000bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8004a290000798091e028800000bdf7f80018c3206089c089a010402965f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8006b6d528a528a5aabad75f800f800bdb75aeb528a528a630cc618f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800"
  },
  {
   "offset": 12947268,
@@ -1787,23 +2738,173 @@ export const FULL_THEME_RUNS = [
  },
  {
   "offset": 12951364,
-  "expect": "ffffffffffffffffffffffffffffffffffffffffffbdfe54fd0cfc06fb62fb20fb20fb62fc06fd0cfe54ffbdffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff5bfcecfb41fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb41fcecff5bffffffffffffffffffffffffffffffffffffffffffffffffffffffffffdefd4efb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd4effdeffffffffffffffffffffffffffffffffffffffffffffff5bfbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ff5bffffffffffffffffffffffffffffffffffffff3afb82fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb82ff3affffffffffffffffffffffffffffff5bfb82fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb82ff5bffffffffffffffffffffffdefbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ffdefffffffffffffffffd4efb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd8ffba4fb20fb20fb20fb20fb20fb20fd4effffffffffffff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ffffffdefd90fb41fb20fb20fb20fb20fb20ff5bfffffffffcecfb20fb20fb20fb20fb20fb20fb20fb20fc48fe13fef9ff5bff7bff7bff7bff7bff7bff7bff7bffffffffffffff7bfc06fb20fb20fb20fb20fcecffffffbdfb41fb20fb20fb20fb20fb20fb20fb61fe55ffffffffffffff7cff7bff7bff7bff7bff7bff7bff7bffffffffffffff7bfc06fb20fb20fb20fb20fb41ffbdfe54fb20fb20fb20fb20fb20fb20fb62ff3afffffe96fc27fb20fb20fb20fb20fb20fb20fb20fb20fb20ffffffdefd90fb41fb20fb20fb20fb20fb20fb20fe54fd0cfb20fb20fb20fb20fb20fb20fe96fffffdd1fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd8ffba4fb20fb20fb20fb20fb20fb20fb20fb20fd0cfc06fb20fb20fb20fb20fb20fc47fffffeb7fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fc06fb62fb20fb20fb20fb20fb20fdf2fffffc47fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb62fb20fb20fb20fb20fb20fb20fef8ffbdfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff3aff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb62fb20fb20fb20fb20fb20fed8ffdefb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb62fc06fb20fb20fb20fb20fb20fdf2fffffc47fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd4efd4efb20fb20fb20fb20fb20fc06fd0cfb20fb20fb20fb20fb20fc27fffffeb7fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ffbdfef8fb20fb20fb20fb20fb20fd0cfe54fb20fb20fb20fb20fb20fb20fe55fffffdd1fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fc26fffffdf2fb20fb20fb20fb20fb20fe54ffbdfb41fb20fb20fb20fb20fb20fb61ff3afffffe96fc27fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fc89ff7cffdffbe5fb20fb20fb20fb20fb41ffbdfffffcecfb20fb20fb20fb20fb20fb20fb82fed8ffffffffffffff7cff7bff7bff7bff7bff7bff7bff7bffbefffffffffd0cfb20fb20fb20fb20fb20fcecffffffffff5bfb20fb20fb20fb20fb20fb20fb20fb20fc68fe13fef9ff5bff7bff7bff7bff7bff7bff7bff7bfef9fe12fc05fb20fb20fb20fb20fb20fb20ff5bfffffffffffffd4efb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd4effffffffffffffffffdefbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ffdeffffffffffffffffffffff5bfb82fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb82ff5bffffffffffffffffffffffffffffff3afb82fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb82ff3affffffffffffffffffffffffffffffffffffff5bfbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ff5bffffffffffffffffffffffffffffffffffffffffffffffdefd4efb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd4effdeffffffffffffffffffffffffffffffffffffffffffffffffffffffffff5bfcecfb41fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb41fcecff5bffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffbdfe54fd0cfc06fb62fb20fb20fb62fc06fd0cfe54ffbdffffffffffffffffffffffffffffffffffffffff",
-  "replace": "f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800a534ad55f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8006b4d00009492f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800c6189cf394922965000000007beff800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80073ae29650000000000000000000000000000630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800949218c300000000000000000000000000000000000000004a29f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8006b4d00000000000000000000000000000000000000000000000000003186bdf7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8006b4d000000000000000000000000108210820000000000000000000042088410c618f800f800f800f800f800f800f800f800f800f800f800f800f800f8009492000000000000000000004a49ad35f80031a6000010824a699492f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80018c300000000000000008c71f800f800f8006b2d9cd3f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80073ae00000000000000008c71f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80029650000000000004a49f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800c6180000000000000000ad35f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8009cf30000000000001082f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80094920000000000003186f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80094920000000000003186f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8009cf30000000000001082f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800c6180000000000000000ad35f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80029650000000000004a49f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80073ae00000000000000008c71f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80018c300000000000000008c71f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8009492000000000000000000004a49ad35f800f800f800f800ad354a4900003186c618f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8006b4d000000000000000000000000108231863186108200000000000000006b2df800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8006b4d00000000000000000000000000000000000000000000000000005acbf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800949218c3000000000000000000000000000000000000000018c3bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80073ae2965000000000000000000000000296573aef800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800c6189cf3949294929cf3c618f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800"
+  "expect": "ffffffffffffffffffffffffffffffffffffffffffbdfe54fd0cfc06fb62fb20fb20fb62fc06fd0cfe54ffbdffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff5bfcecfb41fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb41fcecff5bffffffffffffffffffffffffffffffffffffffffffffffffffffffffffdefd4efb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd4effdeffffffffffffffffffffffffffffffffffffffffffffff5bfbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ff5bffffffffffffffffffffffffffffffffffffff3afb82fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb82ff3affffffffffffffffffffffffffffff5bfb82fb20fb20fb20fb20fb20fb20fb20fb20",
+  "replace": "f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800a51431a639c7ad55f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8006b4d38a030a000009492f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800c6189cf39492296581a0fb2048e000007beff800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80073ae29650000104040c05100ca80fb20fb2069400000630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800949218c300007160ca80"
+ },
+ {
+  "offset": 12951724,
+  "expect": "fb20fb20fb20fb20fb20fb20fb20fb82ff5bffffffffffffffffffffffdefbc4fb20fb20fb20fb20fb20fb20fb20",
+  "replace": "89a000004a29f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8006b4d000048e0e2c0"
+ },
+ {
+  "offset": 12951790,
+  "expect": "fb20fb20fb20fb20fb20fb20fb20fbc4ffdefffffffffffffffffd4efb20fb20fb20fb20fb20fb20",
+  "replace": "aa2000003186bdf7f800f800f800f800f800f800f800f800f800f800f800f800f8006b4d000081a0"
+ },
+ {
+  "offset": 12951854,
+  "expect": "fd8ffba4fb20fb20fb20fb20fb20fb20fd4effffffffffffff5bfb20fb20fb20fb20fb20fb20",
+  "replace": "fb20c26018406b4df800f800f800f800f800f800f800f800f800f800f800f8009492000081a0"
+ },
+ {
+  "offset": 12951904,
+  "expect": "fb20fb20",
+  "replace": "eae0eae0"
+ },
+ {
+  "offset": 12951918,
+  "expect": "ffffffdefd90fb41fb20fb20fb20fb20fb20ff5bfffffffffcecfb20fb20fb20fb20fb20fb20fb20fb20fc48fe13fef9ff5bff7bff7bff7bff7bff7bff7bff7bffffffffffffff7bfc06fb20fb20fb20fb20fcecffffffbdfb41fb20fb20fb20fb20fb20fb20fb61fe55ffffffffffffff7cff7bff7bff7bff7bff7bff7bff7bffffffffffffff7bfc06fb20fb20fb20fb20fb41ffbdfe54fb20fb20fb20fb20fb20fb20fb62ff3afffffe96fc27fb20fb20fb20fb20fb20fb20fb20fb20fb20ffffffdefd90fb41fb20fb20fb20fb20fb20fb20fe54fd0cfb20fb20fb20fb20fb20fb20fe96fffffdd1fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd8ffba4fb20fb20fb20fb20fb20fb20fb20fb20fd0cfc06fb20fb20fb20fb20fb20fc47fffffeb7fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fc06fb62fb20fb20fb20fb20fb20fdf2fffffc47fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb62fb20fb20fb20fb20fb20fb20fef8ffbdfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff3aff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb62fb20fb20fb20fb20fb20fed8ffdefb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb62fc06fb20fb20fb20fb20fb20fdf2fffffc47fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd4efd4efb20fb20fb20fb20fb20fc06fd0cfb20fb20fb20fb20fb20fc27fffffeb7fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ffbdfef8fb20fb20fb20fb20fb20fd0cfe54fb20fb20fb20fb20fb20fb20fe55fffffdd1fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fc26fffffdf2fb20fb20fb20fb20fb20fe54ffbdfb41fb20fb20fb20fb20fb20fb61ff3afffffe96fc27fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fc89ff7cffdffbe5fb20fb20fb20fb20fb41ffbdfffffcecfb20fb20fb20fb20fb20fb20fb82fed8ffffffffffffff7cff7bff7bff7bff7bff7bff7bff7bffbefffffffffd0cfb20fb20fb20fb20fb20fcecffffffffff5bfb20fb20fb20fb20fb20fb20fb20fb20fc68fe13fef9ff5bff7bff7bff7bff7bff7bff7bff7bfef9fe12fc05fb20fb20fb20fb20fb20fb20ff5bfffffffffffffd4efb20fb20fb20fb20fb20fb20",
+  "replace": "aa20612010406b4df800f800f800f800f800f800f800f800f800f800f800f80018c348e0fb20fb20fb20fb20fb20a20030a00000ba60fb20eae0a20051000000000042088410c618f800f800f800f800f800f800f800f800f800f800f80073ae0000e2c0fb20fb20fb20fb20510000004a49000081a040e0000010824a699492f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80029657160fb20fb20fb20fb20510000008c71f80031a631a65acb9cd3f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800c6180000ca80fb20fb20fb20a20000008c71f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8009cf31040fb20fb20fb20fb2030a04a49f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800949240c0fb20fb20fb20eae00000ad35f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80084105100fb20fb20fb20c2601082f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80084105100fb20fb20fb20c2601082f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800949240c0fb20fb20fb20eae00000ad35f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8009cf31040fb20fb20fb20fb2030a04a49f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800c6180000ca80fb20fb20fb20a20000008c71f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80029657160fb20fb20fb20fb20510000008c71f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80073ae0000e2c0fb20fb20fb20fb20510000004a49ad35f800f800ad354a490000000000003186c618f800f800f800f800f800f800f800f800f800f800f800f800f80018c348e0fb20fb20fb20fb20fb20a20030a0000010821082000030a0a200fb20c26010406b2df800f800f800f800f800f800f800f800f800f800f800f800f8009492000081a0fb20fb20fb20fb20fb20fb20eae0c260c260eae0fb20fb20fb20fb2081a0528af800f800f800f800f800f800f800f800f800f800f800f800f800f8006b4d000081a0"
+ },
+ {
+  "offset": 12952944,
+  "expect": "fb20fb20fb20fb20fb20fb20fb20fd4effffffffffffffffffdefbc4fb20fb20fb20fb20fb20fb20fb20",
+  "replace": "91c0528af800f800f800f800f800f800f800f800f800f800f800f800f800f800f8006b4d000048e0e2c0"
+ },
+ {
+  "offset": 12953006,
+  "expect": "fb20fb20fb20fb20fb20fb20fb20fbc4ffdeffffffffffffffffffffff5bfb82fb20fb20fb20fb20fb20fb20fb20fb20",
+  "replace": "dac020605acbf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800949218c300007160ca80"
+ },
+ {
+  "offset": 12953066,
+  "expect": "fb20fb20fb20fb20fb20fb20fb20fb20fb82ff5bffffffffffffffffffffffffffffff3afb82fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb82ff3affffffffffffffffffffffffffffffffffffff5bfbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ff5bffffffffffffffffffffffffffffffffffffffffffffffdefd4efb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd4effdeffffffffffffffffffffffffffffffffffffffffffffffffffffffffff5bfcecfb41fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb41fcecff5bffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffbdfe54fd0cfc06fb62fb20fb20fb62fc06fd0cfe54ffbdffffffffffffffffffffffffffffffffffffffff",
+  "replace": "ca807160000018c3bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80073ae29650000104040c05100510040c010400000296573aef800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800c6189cf394928410841094929cf3c618f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800"
  },
  {
   "offset": 12953412,
-  "expect": "ffffffffffffffffffffffffffffffffffffffffffbdfe54fd0cfc06fb62fb20fb20fb62fc06fd0cfe54ffbdffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff5bfcecfb41fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb41fcecff5bffffffffffffffffffffffffffffffffffffffffffffffffffffffffffdefd4efb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd4effdeffffffffffffffffffffffffffffffffffffffffffffff5bfbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ff5bffffffffffffffffffffffffffffffffffffff3afb82fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb82ff3affffffffffffffffffffffffffffff5bfb82fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb82ff5bffffffffffffffffffffffdefbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ffdefffffffffffffffffd4efb20fb20fb20fb20fb20fb20fb20fd8ffba4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd4effffffffffffff5bfb20fb20fb20fb20fb20fb20fb20fb20ffffffdefd90fb41fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff5bfffffffffcecfb20fb20fb20fb20fb41fdd1fef9ff7bffffffffffffff7bfc06fb20fb20fb20fdd1ff7bff7bff7bff7bfef9fdb1fb41fb20fb20fb20fb20fcecffffffbdfb41fb20fb20fb20fb41ff3affffffdeff7bffffffffffffff7bfc06fb20fb20fb20fdd1ff7bff7bff7bff7bffdeffffff3afb41fb20fb20fb20fb41ffbdfe54fb20fb20fb20fb20fdb0fffffdd2fb20fb20ffffffdefd90fb41fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fdf2fffffd90fb20fb20fb20fb20fe54fd0cfb20fb20fb20fb20fed8ffbefb20fb20fb20fd8ffba4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb40ffdefed8fb20fb20fb20fb20fd0cfc06fb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fc06fb62fb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fb62fb20fb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fb20fb62fb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fb62fc06fb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fc06fd0cfb20fb20fb20fb20fed8ffbefb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fba4fd8ffb20fb20fb20ffbefed8fb20fb20fb20fb20fd0cfe54fb20fb20fb20fb20fdb0fffffdd1fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb41fd90ffdefffffb20fb20fdd1fffffd90fb20fb20fb20fb20fe54ffbdfb41fb20fb20fb20fb41ff3bffffffdeff7bff7bff7bff7cfdd1fb20fb20fb20fc06ff7bffffffffffffff7bffdeffffff3afb41fb20fb20fb20fb41ffbdfffffcecfb20fb20fb20fb20fb41fdd1fef9ff7bff7bff7bff7bfdd1fb20fb20fb20fc06ff7bffffffffffffff7bfef9fdb1fb41fb20fb20fb20fb20fcecffffffffff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb41fd90ffdefffffb20fb20fb20fb20fb20fb20fb20fb20ff5bfffffffffffffd4efb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fba4fd8ffb20fb20fb20fb20fb20fb20fb20fd4effffffffffffffffffdefbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ffdeffffffffffffffffffffff5bfb82fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb82ff5bffffffffffffffffffffffffffffff3afb82fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb82ff3affffffffffffffffffffffffffffffffffffff5bfbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ff5bffffffffffffffffffffffffffffffffffffffffffffffdefd4efb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd4effdeffffffffffffffffffffffffffffffffffffffffffffffffffffffffff5bfcecfb41fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb41fcecff5bffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffbdfe54fd0cfc06fb62fb20fb20fb62fc06fd0cfe54ffbdffffffffffffffffffffffffffffffffffffffff",
-  "replace": "f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800528af800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800c6189cf3949294929cf3c6189cf3000062ecf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80073ae2965000000000000000000000000106200000000a534f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800949218c3000000000000000000000000000000000000000000002945f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8006b4d000000000000000000000000000000000000000000000000000000006b6df800f800f800f800f800f800f800f800f800f800f800f800f800f800f8006b4d0000000000000000000000001082318631860000000000000000000000000000b596f800f800f800f800f800f800f800f800f800f800f800f800f8009492000000000000000000004a49ad35f800f800f80020e40000000000000000000000003186f800f800f800f800f800f800f800f800f800f800f800f800f80018c300000000000000008c71f800f800f800f800ad55528a528a528a528a6b4d6b4d6b4d6b4dbdb7f800f800f800f800f800f800f800f800f800f800f80073ae00000000000000008c71f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80039c70000000000004a49f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8005aab000000000000ad75f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800bdf7420821048410f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800841021044208bdf7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800ad750000000000005aabf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8004a4900000000000039c7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8008c71000000000000000073aef800f800f800f800f800f800f800f800f800f800f800bdb76b4d6b4d6b4d6b4d528a528a528a528aad55f800f800f800f8008c71000000000000000018c3f800f800f800f800f800f800f800f800f800f800f800f800f800318600000000000000000000000020e4f800f800f800ad354a49000000000000000000009492f800f800f800f800f800f800f800f800f800f800f800f800f800b59600000000000000000000000000003186318610820000000000000000000000006b4df800f800f800f800f800f800f800f800f800f800f800f800f800f800f8006b6d000000000000000000000000000000000000000000000000000000006b4df800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80029450000000000000000000000000000000000000000000018c39492f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800a534000000001062000000000000000000000000296573aef800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80062ec00009cf3c6189cf3949294929cf3c618f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800528af800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800"
+  "expect": "ffffffffffffffffffffffffffffffffffffffffffbdfe54fd0cfc06fb62fb20fb20fb62fc06fd0cfe54ffbdffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff5bfcecfb41fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb41fcecff5bffffffffffffffffffffffffffffffffffffffffffffffffffffffffffdefd4efb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd4effdeffffffffffffffffffffffffffffffffffffffffffffff5bfbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ff5bffffffffffffffffffffffffffffffffffffff3afb82fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb82ff3affffffffffffffffffffffffffffff5bfb82fb20fb20fb20fb20fb20fb20fb20fb20",
+  "replace": "f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80031a6000018c3f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800c6189cf39492841084109492841000009a00000062ecf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80073ae29650000104040c05100510040c0104040c0fb2089c00000a534f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800949218c300007160ca80"
+ },
+ {
+  "offset": 12953770,
+  "expect": "fb20fb20fb20fb20fb20fb20fb20fb20fb82ff5bffffffffffffffffffffffdefbc4fb20fb20fb20fb20fb20fb20fb20",
+  "replace": "eae0fb20fb2038a02945f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8006b4d000048e0e2c0"
+ },
+ {
+  "offset": 12953840,
+  "expect": "fb20fb20fb20fb20fb20fb20fbc4ffdefffffffffffffffffd4efb20fb20fb20fb20fb20fb20fb20fd8ffba4",
+  "replace": "ca8000006b6df800f800f800f800f800f800f800f800f800f800f800f800f8006b4d000081a0fb20fb20fb20"
+ },
+ {
+  "offset": 12953906,
+  "expect": "fb20fb20fb20fb20fb20fb20fd4effffffffffffff5bfb20fb20fb20fb20fb20fb20fb20fb20ffffffdefd90fb41fb20fb20fb20",
+  "replace": "79800000b596f800f800f800f800f800f800f800f800f800f800f8009492000081a0fb20fb20fb20fb20fb20fb20eae0c260c260"
+ },
+ {
+  "offset": 12953972,
+  "expect": "fb20fb20fb20fb20fb20fb20ff5bfffffffffcecfb20fb20fb20fb20fb41fdd1fef9ff7bffffffffffffff7bfc06fb20fb20fb20fdd1ff7bff7bff7bff7bfef9fdb1fb41fb20fb20fb20fb20fcecffffffbdfb41fb20fb20fb20fb41ff3affffffdeff7bffffffffffffff7bfc06fb20fb20fb20fdd1ff7bff7bff7bff7bffdeffffff3afb41fb20fb20fb20fb41ffbdfe54fb20fb20fb20fb20fdb0fffffdd2fb20fb20ffffffdefd90fb41fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fdf2fffffd90fb20fb20fb20fb20fe54fd0cfb20fb20fb20fb20fed8ffbefb20fb20fb20fd8ffba4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb40ffdefed8fb20fb20fb20fb20fd0cfc06fb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fc06fb62fb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fb62fb20fb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fb20fb62fb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fb62fc06fb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fc06fd0cfb20fb20fb20fb20fed8ffbefb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fba4fd8ffb20fb20fb20ffbefed8fb20fb20fb20fb20fd0cfe54fb20fb20fb20fb20fdb0fffffdd1fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb41fd90ffdefffffb20fb20fdd1fffffd90fb20fb20fb20fb20fe54ffbdfb41fb20fb20fb20fb41ff3bffffffdeff7bff7bff7bff7cfdd1fb20fb20fb20fc06ff7bffffffffffffff7bffdeffffff3afb41fb20fb20fb20fb41ffbdfffffcecfb20fb20fb20fb20fb41fdd1fef9ff7bff7bff7bff7bfdd1fb20fb20fb20fc06ff7bffffffffffffff7bfef9fdb1fb41fb20fb20fb20fb20fcecffffffffff5bfb20fb20fb20fb20fb20fb20",
+  "replace": "28803186f800f800f800f800f800f800f800f800f800f800f80018c348e0fb20fb20fb20fb20fb20a20030a0000000000000daa0fb20fb20fb20fb20fb20fb20c26000009492f800f800f800f800f800f800f800f800f80073ae0000e2c0fb20fb20fb20fb20510000004a49ad356b4d30a09a009a009a009a0081a081a081a081a020608410f800f800f800f800f800f800f800f800f80039c77160fb20fb20fb20fb20510000008c71f800f800841031a64208528a528a528a528a6b4d6b4d6b4d6b4dad55f800f800f800f800f800f800f800f800f80031a6ba40fb20fb20fb20a20000008c71f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80031a691e0fb20fb20fb2028804a49f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8005aab1840b240d2a061400000ad75f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800bdf7420818c318c321048410f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8008410210418c318c34208bdf7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800ad7500006140d2a0b24018405aabf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8004a492880fb20fb20fb2091e031a6f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8008c710000a200fb20fb20fb20ba4031a6f800f800f800f800f800f800f800f800f800ad556b4d6b4d6b4d6b4d528a528a528a528a420831a68410f800f8008c7100005100fb20fb20fb20fb20716039c7f800f800f800f800f800f800f800f800f8008410206081a081a081a081a09a009a009a009a0030a06b4dad354a4900005100fb20fb20fb20fb20e2c0000073aef800f800f800f800f800f800f800f800f80094920000c260fb20fb20fb20fb20fb20fb20daa000000000000030a0a200fb20fb20fb20fb20fb2048e018c3f800f800f800f800f800f800f800f800f800f800f80031862880"
+ },
+ {
+  "offset": 12954914,
+  "expect": "fb20fb20fb20fb41fd90ffdefffffb20fb20fb20fb20fb20fb20fb20fb20ff5bfffffffffffffd4efb20fb20fb20fb20fb20fb20",
+  "replace": "c260c260eae0fb20fb20fb20fb20fb20fb2081a000009492f800f800f800f800f800f800f800f800f800f800f800b59600007980"
+ },
+ {
+  "offset": 12954988,
+  "expect": "fba4fd8ffb20fb20fb20fb20fb20fb20fb20fd4effffffffffffffffffdefbc4fb20fb20fb20fb20fb20fb20",
+  "replace": "fb20fb20fb2081a000006b4df800f800f800f800f800f800f800f800f800f800f800f800f8006b6d0000ca80"
+ },
+ {
+  "offset": 12955054,
+  "expect": "fb20fb20fb20fb20fb20fb20fb20fbc4ffdeffffffffffffffffffffff5bfb82fb20fb20fb20fb20fb20fb20fb20fb20",
+  "replace": "e2c048e000006b4df800f800f800f800f800f800f800f800f800f800f800f800f800f800f800294538a0fb20fb20eae0"
+ },
+ {
+  "offset": 12955114,
+  "expect": "fb20fb20fb20fb20fb20fb20fb20fb20fb82ff5bffffffffffffffffffffffffffffff3afb82fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb82ff3affffffffffffffffffffffffffffffffffffff5bfbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ff5bffffffffffffffffffffffffffffffffffffffffffffffdefd4efb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd4effdeffffffffffffffffffffffffffffffffffffffffffffffffffffffffff5bfcecfb41fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb41fcecff5bffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffbdfe54fd0cfc06fb62fb20fb20fb62fc06fd0cfe54ffbdffffffffffffffffffffffffffffffffffffffff",
+  "replace": "ca807160000018c39492f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800a534000089c0fb2040c0104040c05100510040c010400000296573aef800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80062ec00009a000000841094928410841094929cf3c618f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80018c3000031a6f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800"
  },
  {
   "offset": 12955460,
-  "expect": "ffffffffffffffffffffffffffffffffffffffffffbdfe54fd0cfc06fb62fb20fb20fb62fc06fd0cfe54ffbdffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff5bfcecfb41fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb41fcecff5bffffffffffffffffffffffffffffffffffffffffffffffffffffffffffdefd4efb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd4effdeffffffffffffffffffffffffffffffffffffffffffffff5bfbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ff5bffffffffffffffffffffffffffffffffffffff3afb82fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb82ff3affffffffffffffffffffffffffffff5bfb82fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb82ff5bffffffffffffffffffffffdefbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ffdefffffffffffffffffd4efb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd8ffba4fb20fb20fb20fb20fb20fb20fd4effffffffffffff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ffffffdefd90fb41fb20fb20fb20fb20fb20ff5bfffffffffcecfb20fb20fb20fb20fb20fb20fb20fb20fc48fe13fef9ff5bff7bff7bff7bff7bff7bff7bff7bffffffffffffff7bfc06fb20fb20fb20fb20fcecffffffbdfb41fb20fb20fb20fb20fb20fb20fb61fe55ffffffffffffff7cff7bff7bff7bff7bff7bff7bff7bffffffffffffff7bfc06fb20fb20fb20fb20fb41ffbdfe54fb20fb20fb20fb20fb20fb20fb62ff3afffffe96fc27fb20fb20fb20fb20fb20fb20fb20fb20fb20ffffffdefd90fb41fb20fb20fb20fb20fb20fb20fe54fd0cfb20fb20fb20fb20fb20fb20fe96fffffdd1fb20fb20fb20fb20fb20fb20fb83fb62fb20fb20fb20fd8ffba4fb20fb20fb20fb20fb20fb20fb20fb20fd0cfc06fb20fb20fb20fb20fb20fc47fffffeb7fb20fb20fb20fb20fb20fb20fccaffbefe96fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fc06fb62fb20fb20fb20fb20fb20fdf2fffffc47fb20fb20fb20fb20fb20fd4efffffffffed7fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb62fb20fb20fb20fb20fb20fb20fef8ffbdfb20fb20fb20fb20fb20fb20fd0cfdb0fef9fed7fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff3aff5bfb20fb20fb20fb20fb20fb20fb20fb20fed7fed7fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb62fb20fb20fb20fb20fb20fed8ffdefb20fb20fb20fb20fb20fb20fb20fb20fed7fed7fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb62fc06fb20fb20fb20fb20fb20fdf2fffffc47fb20fb20fb20fb20fb20fb20fb20fed7fed7fb20fb20fb20fb20fb20fb20fd4efd4efb20fb20fb20fb20fb20fc06fd0cfb20fb20fb20fb20fb20fc27fffffeb7fb20fb20fb20fb20fb20fb20fb20fe96fe96fb20fb20fb20fb20fb20fb20ffbdfef8fb20fb20fb20fb20fb20fd0cfe54fb20fb20fb20fb20fb20fb20fe55fffffdd1fb20fb20fb20fb20fb20fb20fb62fb62fb20fb20fb20fb20fb20fc26fffffdf2fb20fb20fb20fb20fb20fe54ffbdfb41fb20fb20fb20fb20fb20fb61ff3afffffe96fc27fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fc89ff7cffdffbe5fb20fb20fb20fb20fb41ffbdfffffcecfb20fb20fb20fb20fb20fb20fb82fed8ffffffffffffff7cff7bff7bff7bff7bff7bff7bff7bffbefffffffffd0cfb20fb20fb20fb20fb20fcecffffffffff5bfb20fb20fb20fb20fb20fb20fb20fb20fc68fe13fef9ff5bff7bff7bff7bff7bff7bff7bff7bfef9fe12fc05fb20fb20fb20fb20fb20fb20ff5bfffffffffffffd4efb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd4effffffffffffffffffdefbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ffdeffffffffffffffffffffff5bfb82fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb82ff5bffffffffffffffffffffffffffffff3afb82fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb82ff3affffffffffffffffffffffffffffffffffffff5bfbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ff5bffffffffffffffffffffffffffffffffffffffffffffffdefd4efb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd4effdeffffffffffffffffffffffffffffffffffffffffffffffffffffffffff5bfcecfb41fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb41fcecff5bffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffbdfe54fd0cfc06fb62fb20fb20fb62fc06fd0cfe54ffbdffffffffffffffffffffffffffffffffffffffff",
-  "replace": "f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800a534ad55f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8006b4d00009492f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800c6189cf394922965000000007beff800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80073ae29650000000000000000000000000000630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800949218c300000000000000000000000000000000000000004a29f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8006b4d00000000000000000000000000000000000000000000000000003186bdf7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8006b4d000000000000000000000000108210820000000000000000000042088410c618f800f800f800f800f800f800f800f800f800f800f800f800f800f8009492000000000000000000004a49ad35f80031a6000010824a699492f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80018c300000000000000008c71f800f800f8006b2d9cd3f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80073ae00000000000000008c71f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80029650000000000004a49f800f800f800f8009cd35acb5aebf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800c6180000000000000000ad35f800f800f800bdd7108200000000f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8009cf30000000000001082f800f800f800f800736e108200000000f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80094920000000000003186f800f800f800f800f800f80018c30000f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80094920000000000003186f800f800f800f800f800f80018c30000f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8009cf30000000000001082f800f800f800f800f800f80018c30000f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800c6180000000000000000ad35f800f800f800f800f80018c30000f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80029650000000000004a49f800f800f800f800f8005acb4208f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80073ae00000000000000008c71f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80018c300000000000000008c71f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8009492000000000000000000004a49ad35f800f800f800f800ad354a4900003186c618f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8006b4d000000000000000000000000108231863186108200000000000000006b2df800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8006b4d00000000000000000000000000000000000000000000000000005acbf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800949218c3000000000000000000000000000000000000000018c3bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80073ae2965000000000000000000000000296573aef800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800c6189cf3949294929cf3c618f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800"
+  "expect": "ffffffffffffffffffffffffffffffffffffffffffbdfe54fd0cfc06fb62fb20fb20fb62fc06fd0cfe54ffbdffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff5bfcecfb41fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb41fcecff5bffffffffffffffffffffffffffffffffffffffffffffffffffffffffffdefd4efb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd4effdeffffffffffffffffffffffffffffffffffffffffffffff5bfbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ff5bffffffffffffffffffffffffffffffffffffff3afb82fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb82ff3affffffffffffffffffffffffffffff5bfb82fb20fb20fb20fb20fb20fb20fb20fb20",
+  "replace": "f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800a51431a639c7ad55f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8006b4d38a030a000009492f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800c6189cf39492296581a0fb2048e000007beff800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80073ae29650000104040c05100ca80fb20fb2069400000630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800949218c300007160ca80"
+ },
+ {
+  "offset": 12955820,
+  "expect": "fb20fb20fb20fb20fb20fb20fb20fb82ff5bffffffffffffffffffffffdefbc4fb20fb20fb20fb20fb20fb20fb20",
+  "replace": "89a000004a29f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8006b4d000048e0e2c0"
+ },
+ {
+  "offset": 12955886,
+  "expect": "fb20fb20fb20fb20fb20fb20fb20fbc4ffdefffffffffffffffffd4efb20fb20fb20fb20fb20fb20",
+  "replace": "aa2000003186bdf7f800f800f800f800f800f800f800f800f800f800f800f800f8006b4d000081a0"
+ },
+ {
+  "offset": 12955950,
+  "expect": "fd8ffba4fb20fb20fb20fb20fb20fb20fd4effffffffffffff5bfb20fb20fb20fb20fb20fb20",
+  "replace": "fb20c26018406b4df800f800f800f800f800f800f800f800f800f800f800f8009492000081a0"
+ },
+ {
+  "offset": 12956000,
+  "expect": "fb20fb20",
+  "replace": "eae0eae0"
+ },
+ {
+  "offset": 12956014,
+  "expect": "ffffffdefd90fb41fb20fb20fb20fb20fb20ff5bfffffffffcecfb20fb20fb20fb20fb20fb20fb20fb20fc48fe13fef9ff5bff7bff7bff7bff7bff7bff7bff7bffffffffffffff7bfc06fb20fb20fb20fb20fcecffffffbdfb41fb20fb20fb20fb20fb20fb20fb61fe55ffffffffffffff7cff7bff7bff7bff7bff7bff7bff7bffffffffffffff7bfc06fb20fb20fb20fb20fb41ffbdfe54fb20fb20fb20fb20fb20fb20fb62ff3afffffe96fc27fb20fb20fb20fb20fb20fb20fb20fb20fb20ffffffdefd90fb41fb20fb20fb20fb20fb20fb20fe54fd0cfb20fb20fb20fb20fb20fb20fe96fffffdd1fb20fb20fb20fb20fb20fb20fb83fb62fb20fb20fb20fd8ffba4fb20fb20fb20fb20fb20fb20fb20fb20fd0cfc06fb20fb20fb20fb20fb20fc47fffffeb7fb20fb20fb20fb20fb20fb20fccaffbefe96fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fc06fb62fb20fb20fb20fb20fb20fdf2fffffc47fb20fb20fb20fb20fb20fd4efffffffffed7fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb62fb20fb20fb20fb20fb20fb20fef8ffbdfb20fb20fb20fb20fb20fb20fd0cfdb0fef9fed7fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff3aff5bfb20fb20fb20fb20fb20fb20fb20fb20fed7fed7fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb62fb20fb20fb20fb20fb20fed8ffdefb20fb20fb20fb20fb20fb20fb20fb20fed7fed7fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb62fc06fb20fb20fb20fb20fb20fdf2fffffc47fb20fb20fb20fb20fb20fb20fb20fed7fed7fb20fb20fb20fb20fb20fb20fd4efd4efb20fb20fb20fb20fb20fc06fd0cfb20fb20fb20fb20fb20fc27fffffeb7fb20fb20fb20fb20fb20fb20fb20fe96fe96fb20fb20fb20fb20fb20fb20ffbdfef8fb20fb20fb20fb20fb20fd0cfe54fb20fb20fb20fb20fb20fb20fe55fffffdd1fb20fb20fb20fb20fb20fb20fb62fb62fb20fb20fb20fb20fb20fc26fffffdf2fb20fb20fb20fb20fb20fe54ffbdfb41fb20fb20fb20fb20fb20fb61ff3afffffe96fc27fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fc89ff7cffdffbe5fb20fb20fb20fb20fb41ffbdfffffcecfb20fb20fb20fb20fb20fb20fb82fed8ffffffffffffff7cff7bff7bff7bff7bff7bff7bff7bffbefffffffffd0cfb20fb20fb20fb20fb20fcecffffffffff5bfb20fb20fb20fb20fb20fb20fb20fb20fc68fe13fef9ff5bff7bff7bff7bff7bff7bff7bff7bfef9fe12fc05fb20fb20fb20fb20fb20fb20ff5bfffffffffffffd4efb20fb20fb20fb20fb20fb20",
+  "replace": "aa20612010406b4df800f800f800f800f800f800f800f800f800f800f800f80018c348e0fb20fb20fb20fb20fb20a20030a00000ba60fb20eae0a20051000000000042088410c618f800f800f800f800f800f800f800f800f800f800f80073ae0000e2c0fb20fb20fb20fb20510000004a49000081a040e0000010824a699492f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80029657160fb20fb20fb20fb20510000008c719cd30000000000003166f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800c6180000ca80fb20fb20fb20a20000008c71bdd7108240e091c089c00000f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8009cf31040fb20fb20fb20fb2030a04a49f80031a61860eae0fb20fb200000f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800949240c0fb20fb20fb20eae00000ad35f80018c37980eae0fb20fb200000f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80084105100fb20fb20fb20c2601082f800f8005aab10820000e2c0fb200000f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80084105100fb20fb20fb20c2601082f800f800f800f80018c3dac0fb200000f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800949240c0fb20fb20fb20eae00000ad35f800f800f80018c3dac0fb200000f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8009cf31040fb20fb20fb20fb2030a04a49f800f800f80018c3dac0fb200000f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800c6180000ca80fb20fb20fb20a20000008c71f800f80018c391c0aa200000f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80029657160fb20fb20fb20fb20510000008c71f8005acb18c318c34208f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80073ae0000e2c0fb20fb20fb20fb20510000004a49ad35f800f800ad354a490000000000003186c618f800f800f800f800f800f800f800f800f800f800f800f800f80018c348e0fb20fb20fb20fb20fb20a20030a0000010821082000030a0a200fb20c26010406b2df800f800f800f800f800f800f800f800f800f800f800f800f8009492000081a0fb20fb20fb20fb20fb20fb20eae0c260c260eae0fb20fb20fb20fb2081a0528af800f800f800f800f800f800f800f800f800f800f800f800f800f8006b4d000081a0"
+ },
+ {
+  "offset": 12957040,
+  "expect": "fb20fb20fb20fb20fb20fb20fb20fd4effffffffffffffffffdefbc4fb20fb20fb20fb20fb20fb20fb20",
+  "replace": "91c0528af800f800f800f800f800f800f800f800f800f800f800f800f800f800f8006b4d000048e0e2c0"
+ },
+ {
+  "offset": 12957102,
+  "expect": "fb20fb20fb20fb20fb20fb20fb20fbc4ffdeffffffffffffffffffffff5bfb82fb20fb20fb20fb20fb20fb20fb20fb20",
+  "replace": "dac020605acbf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800949218c300007160ca80"
+ },
+ {
+  "offset": 12957162,
+  "expect": "fb20fb20fb20fb20fb20fb20fb20fb20fb82ff5bffffffffffffffffffffffffffffff3afb82fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb82ff3affffffffffffffffffffffffffffffffffffff5bfbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ff5bffffffffffffffffffffffffffffffffffffffffffffffdefd4efb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd4effdeffffffffffffffffffffffffffffffffffffffffffffffffffffffffff5bfcecfb41fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb41fcecff5bffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffbdfe54fd0cfc06fb62fb20fb20fb62fc06fd0cfe54ffbdffffffffffffffffffffffffffffffffffffffff",
+  "replace": "ca807160000018c3bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80073ae29650000104040c05100510040c010400000296573aef800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800c6189cf394928410841094929cf3c618f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800"
  },
  {
   "offset": 12957508,
-  "expect": "ffffffffffffffffffffffffffffffffffffffffffbdfe54fd0cfc06fb62fb20fb20fb62fc06fd0cfe54ffbdffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff5bfcecfb41fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb41fcecff5bffffffffffffffffffffffffffffffffffffffffffffffffffffffffffdefd4efb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd4effdeffffffffffffffffffffffffffffffffffffffffffffff5bfbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ff5bffffffffffffffffffffffffffffffffffffff3afb82fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb82ff3affffffffffffffffffffffffffffff5bfb82fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb82ff5bffffffffffffffffffffffdefbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ffdefffffffffffffffffd4efb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd8ffba4fb20fb20fb20fb20fb20fb20fd4effffffffffffff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ffffffdefd90fb41fb20fb20fb20fb20fb20ff5bfffffffffcecfb20fb20fb20fbe5ff3aff7bff19fdf2fbe4fb20fb20fb20fb20fb20fb40fd4efef9ff5bff7bffffffffffffff7bfc06fb20fb20fb20fb20fcecffffffbdfb41fb20fb20fb20fbe5ff3aff7bffbdffffffdefc68fb20fb20fb20fb62ff1affffffffff7cff7bffffffffffffff7bfc06fb20fb20fb20fb20fb41ffbdfe54fb20fb20fb20fb20fb20fb20fb20fb20fccaffbeff9dfb41fb20fb20fe54fffffe13fb82fb20fb20ffffffdefd90fb41fb20fb20fb20fb20fb20fb20fe54fd0cfb20fb20fb20fb20fb20fb20fb20fb20fb20fd0cffdefc05fb20fc89fffffe96fb20fb20fb20fb20fd8ffba4fb20fb20fb20fb20fb20fb20fb20fb20fd0cfc06fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb41ff7cffbefba3fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fc06fb62fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fdf2fffffd2dfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb62fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fc27fffffef8fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff3afffffbe5fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb62fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd6ffffffdb0fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb62fc06fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ffdfff5bfb40fb20fcebfbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fc06fd0cfb20fb20fb20fb20fb20fb20fb20fb20fb20fed8fffffc47fb20fb20ffffff19fb20fb20fb20fb20fd8ffba4fb20fb20fb20fb20fb20fb20fb20fb20fd0cfe54fb20fb20fb20fb20fb20fb20fb20fb41fe13fffffe13fb20fb20fb20fdf2fffffe12fb61fb20fb20ffffffdefd90fb41fb20fb20fb20fb20fb20fb20fe54ffbdfb41fb20fb20fb20fbe5ff3aff7cfffffffffed8fb41fb20fb20fb20fb41fed8ffffffffff7cff7bffffffffffffff7bfc06fb20fb20fb20fb20fb41ffbdfffffcecfb20fb20fb20fbe5ff3aff5bfef9fd8ffb41fb20fb20fb20fb20fb20fb40fd6efef9ff7bff7bffffffffffffff7bfc06fb20fb20fb20fb20fcecffffffffff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ffffffdefd90fb41fb20fb20fb20fb20fb20ff5bfffffffffffffd4efb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd8ffba4fb20fb20fb20fb20fb20fb20fd4effffffffffffffffffdefbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ffdeffffffffffffffffffffff5bfb82fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb82ff5bffffffffffffffffffffffffffffff3afb82fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb82ff3affffffffffffffffffffffffffffffffffffff5bfbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ff5bffffffffffffffffffffffffffffffffffffffffffffffdefd4efb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd4effdeffffffffffffffffffffffffffffffffffffffffffffffffffffffffff5bfcecfb41fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb41fcecff5bffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffbdfe54fd0cfc06fb62fb20fb20fb62fc06fd0cfe54ffbdffffffffffffffffffffffffffffffffffffffff",
-  "replace": "f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8006b4d18c339c75acb9492f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8009cb30000000000000000000010625acbb596f800f800f800f800f800f800f800f8009492a534f800f800f800f800f800f800f800f800f800f800f800f800f8009cb30000000000000000000000000000000052aac638f800f800f800f800f800f8006b4d00004a29b596f800f800f800f800f800f800f800f800f800f800f800f8006b4d18c3000000000000000000000000000018c38c71f800f800f800f800bdd710a200000000000052aabdf7f800f800f800f800f800f800f800f800f800f800f800f800bdf79492528a000000000000000000000000528af800f800f8003186000000000000000000001062ad35f800f800f800f800f800f800f800f800f800f800f800f800f800f800bdf7630c000000000000000000003186c638630c000000000000000000004208b596f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800bdd739c7000000000000000010a200000000000000004208ad55f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8006b4d0000000000000000000000000000630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8008c710000000000000000000039c7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8008c710000000000000000000039c7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8006b4d0000000000000000000000000000630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800bdd739c7000000000000000010a200000000000000004a29b596f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800bdf7630c000000000000000000003186c638630c0000000000000000000052aabdf7f800f800f800f800f800f800f800f800f800f800f800f800bdf79492528a000000000000000000000000528af800f800f8003186000000000000000000001062ad35f800f800f800f800f800f800f800f800f8006b4d18c3000000000000000000000000000018c38c71f800f800f800f800bdd710a20000000000004208b596f800f800f800f800f800f800f800f800f8009cb30000000000000000000000000000000052aac638f800f800f800f800f800f8006b4d00004208ad55f800f800f800f800f800f800f800f800f800f800f8009cb30000000000000000000010625acbb596f800f800f800f800f800f800f800f80094929cf3f800f800f800f800f800f800f800f800f800f800f800f800f800f8006b4d18c339c75acb9492f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800"
+  "expect": "ffffffffffffffffffffffffffffffffffffffffffbdfe54fd0cfc06fb62fb20fb20fb62fc06fd0cfe54ffbdffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff5bfcecfb41fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb41fcecff5bffffffffffffffffffffffffffffffffffffffffffffffffffffffffffdefd4efb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd4effdeffffffffffffffffffffffffffffffffffffffffffffff5bfbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ff5bffffffffffffffffffffffffffffffffffffff3afb82fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb82ff3affffffffffffffffffffffffffffff5bfb82fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb82ff5bffffffffffffffffffffffdefbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ffdefffffffffffffffffd4efb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd8ffba4fb20fb20fb20fb20fb20fb20fd4effffffffffffff5bfb20fb20fb20",
+  "replace": "f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8006b4d18c318c318c339c75acb9492f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8009cb3000081a0dac0ba4091c05100000010625acbb596f800f800f800f800f800f800841031a64208a534f800f800f800f800f800f800f800f800f800f800f800841048e0"
+ },
+ {
+  "offset": 12958040,
+  "expect": "fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ffffffdefd90fb41fb20fb20fb20fb20fb20ff5bfffffffffcecfb20fb20fb20fbe5ff3aff7bff19fdf2fbe4fb20fb20fb20fb20fb20fb40fd4efef9ff5bff7bffffffffffffff7bfc06fb20fb20fb20fb20fcecffffffbdfb41fb20fb20fb20fbe5ff3aff7bffbdffffffdefc68fb20fb20fb20fb62ff1affffffffff7cff7bffffffffffffff7bfc06fb20fb20fb20fb20fb41ffbdfe54fb20fb20fb20fb20fb20fb20fb20fb20fccaffbeff9dfb41fb20fb20fe54fffffe13fb82fb20fb20ffffffdefd90fb41fb20fb20fb20fb20fb20fb20fe54fd0cfb20fb20fb20fb20fb20fb20fb20fb20fb20fd0cffdefc05fb20fc89fffffe96fb20fb20fb20fb20fd8ffba4fb20fb20fb20fb20fb20fb20fb20fb20fd0cfc06fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb41ff7cffbefba3fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fc06fb62fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fdf2fffffd2d",
+  "replace": "eae091c02060000052aac638f800f800f800f8006b4d510038a000004a29b596f800f800f800f800f800f800f800f800f800841048e0fb20fb20fb20fb20fb20fb20fb20fb2091e0102018c38c71f800f800bdd710a281a0fb20aa202060000052aabdf7f800f800f800f800f800f800f8009cb3000081a0e2c0fb20fb20fb20fb20fb20fb20fb20e2c051000000528ac63831861860e2c0fb20fb20fb2091e0184000008410f800f800f800f800f800f800f8006b4d18c30000184048e09a00fb20fb20fb20fb20fb20fb2099e0000010820000c260fb20fb20fb20fb20fb20eae030a0528af800f800f800f800f800f800f800f800f800bdf79492528a0000184089a0fb20fb20fb20fb20fb20c260102089a0fb20fb20fb20fb20fb20aa2020600000738ef800f800f800f800f800f800f800f800f800f800f800f800bdf7630c00001860ba40fb20fb20fb20fb20e2c0fb20fb20fb20fb20b24030a000004208b596f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800bdd739c7000081a0fb20"
+ },
+ {
+  "offset": 12958448,
+  "expect": "fb20fb20fb20fb20fb20fb20fb20fb20fb20fb62fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fc27fffffef8fb20",
+  "replace": "89a000004208ad55f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8006b4d00005100"
+ },
+ {
+  "offset": 12958510,
+  "expect": "fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff3afffffbe5fb20",
+  "replace": "ba400000630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8006b4d00005100"
+ },
+ {
+  "offset": 12958574,
+  "expect": "fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb62fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd6ffffffdb0fb20",
+  "replace": "ba400000630cf800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800bdd739c7000081a0"
+ },
+ {
+  "offset": 12958640,
+  "expect": "fb20fb20fb20fb20fb20fb20fb20fb20fb20fb62fc06fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ffdfff5bfb40fb20fcebfbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fc06fd0cfb20fb20fb20fb20fb20fb20fb20fb20fb20fed8fffffc47fb20fb20ffffff19fb20fb20fb20fb20fd8ffba4fb20fb20fb20fb20fb20fb20fb20fb20fd0cfe54fb20fb20fb20fb20fb20fb20fb20fb41fe13fffffe13fb20fb20fb20fdf2fffffe12fb61fb20fb20ffffffdefd90fb41fb20fb20fb20fb20fb20fb20fe54ffbdfb41fb20fb20fb20fbe5ff3aff7cfffffffffed8fb41fb20fb20fb20fb41fed8ffffffffff7cff7bffffffffffffff7bfc06fb20fb20fb20fb20fb41ffbdfffffcecfb20fb20fb20fbe5ff3aff5bfef9fd8ffb41fb20fb20fb20fb20fb20fb40fd6efef9ff7bff7bffffffffffffff7bfc06fb20fb20fb20fb20fcecffffffffff5bfb20fb20fb20",
+  "replace": "89a000004a29b596f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800bdf7630c00001860ba40fb20fb20fb20fb20e2c0fb20fb20fb20fb20aa202060000052aabdf7f800f800f800f800f800f800f800f800f800f800bdf79492528a0000184089a0fb20fb20fb20fb20fb20c260102089a0fb20fb20fb20fb20fb2091e0184000008410f800f800f800f800f800f800f8006b4d18c30000184048e09a00fb20fb20fb20fb20fb20fb2099e0000010820000c260fb20fb20fb20fb20fb20eae030a0528af800f800f800f800f800f8009cb3000081a0e2c0fb20fb20fb20fb20fb20fb20fb20e2c051000000528ac63831861860e2c0fb20fb20fb20aa2020600000738ef800f800f800f800f800f800841048e0fb20fb20fb20fb20fb20fb20fb20fb2091e0102018c38c71f800f800bdd710a281a0fb20b24030a000004208b596f800f800f800f800f800f800f800841048e0"
+ },
+ {
+  "offset": 12959000,
+  "expect": "fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ffffffdefd90fb41fb20fb20fb20fb20fb20ff5bfffffffffffffd4efb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd8ffba4fb20fb20fb20fb20fb20fb20fd4effffffffffffffffffdefbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ffdeffffffffffffffffffffff5bfb82fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb82ff5bffffffffffffffffffffffffffffff3afb82fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb82ff3affffffffffffffffffffffffffffffffffffff5bfbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ff5bffffffffffffffffffffffffffffffffffffffffffffffdefd4efb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd4effdeffffffffffffffffffffffffffffffffffffffffffffffffffffffffff5bfcecfb41fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb41fcecff5bffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffbdfe54fd0cfc06fb62fb20fb20fb62fc06fd0cfe54ffbdffffffffffffffffffffffffffffffffffffffff",
+  "replace": "eae091c02060000052aac638f800f800f800f8006b4d510040c000004208ad55f800f800f800f800f800f800f800f800f8009cb3000081a0dac0ba4091c05100000010625acbb596f800f800f800f800f800f800841031a642089cf3f800f800f800f800f800f800f800f800f800f800f800f8006b4d18c318c318c339c75acb9492f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800"
  },
  {
   "offset": 12959556,
@@ -1852,8 +2953,28 @@ export const FULL_THEME_RUNS = [
  },
  {
   "offset": 12973892,
-  "expect": "ffffffffffffffffffffffffffffffffffffffffffbdfe54fd0cfc06fb62fb20fb20fb62fc06fd0cfe54ffbdffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff5bfcecfb41fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb41fcecff5bffffffffffffffffffffffffffffffffffffffffffffffffffffffffffdefd4efb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd4effdeffffffffffffffffffffffffffffffffffffffffffffff5bfbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ff5bffffffffffffffffffffffffffffffffffffff3afb82fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb82ff3affffffffffffffffffffffffffffff5bfb82fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb82ff5bffffffffffffffffffffffdefbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fdd1fdd1fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ffdefffffffffffffffffd4efb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd4effffffffffffff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff5bfffffffffcecfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fcecffffffbdfb41fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb41ffbdfe54fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fe54fd0cfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd0cfc06fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fc06fb62fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb62fb20fb20fb20fb20fb20fb20fdd1ff7bff7bff7bff7bff7bff7bff7bff7bffffffffff7bff7bff7bff7bff7bff7bff7bff7bfdd1fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fdd1ff7bff7bff7bff7bff7bff7bff7bff7bffffffffff7bff7bff7bff7bff7bff7bff7bff7bfdd1fb20fb20fb20fb20fb20fb20fb62fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb62fc06fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fc06fd0cfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd0cfe54fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fe54ffbdfb41fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb41ffbdfffffcecfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fcecffffffffff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff5bfffffffffffffd4efb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd4effffffffffffffffffdefbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fdd1fdd1fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ffdeffffffffffffffffffffff5bfb82fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb82ff5bffffffffffffffffffffffffffffff3afb82fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb82ff3affffffffffffffffffffffffffffffffffffff5bfbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ff5bffffffffffffffffffffffffffffffffffffffffffffffdefd4efb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd4effdeffffffffffffffffffffffffffffffffffffffffffffffffffffffffff5bfcecfb41fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb41fcecff5bffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffbdfe54fd0cfc06fb62fb20fb20fb62fc06fd0cfe54ffbdffffffffffffffffffffffffffffffffffffffff",
-  "replace": "f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800c638738e736ebdd7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80031860000000018c3f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8000000000000000000bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8000000000000000000bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8000000000000000000bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8000000000000000000bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8000000000000000000bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8000000000000000000bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800c638318600000000000000000000000000000000000000000000000000000000000000002124bdb7f800f800f800f800f800f800f800f800f800f800f800f800738e0000000000000000000000000000000000000000000000000000000000000000000000005acbf800f800f800f800f800f800f800f800f800f800f800f800736e0000000000000000000000000000000000000000000000000000000000000000000000005aabf800f800f800f800f800f800f800f800f800f800f800f800bdd718c3000000000000000000000000000000000000000000000000000000000000000018c3b596f800f800f800f800f800f800f800f800f800f800f800f800f800f800bdb7bdb7bdb7bdb7bdb7bdb70000000000000000a514bdb7bdb7bdb7bdb7bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8000000000000000000bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8000000000000000000bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8000000000000000000bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8000000000000000000bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8000000000000000000bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f80021240000000018c3f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800bdb75acb5aabb596f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800"
+  "expect": "ffffffffffffffffffffffffffffffffffffffffffbdfe54fd0cfc06fb62fb20fb20fb62fc06fd0cfe54ffbdffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff5bfcecfb41fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb41fcecff5bffffffffffffffffffffffffffffffffffffffffffffffffffffffffffdefd4efb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd4effdeffffffffffffffffffffffffffffffffffffffffffffff5bfbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ff5bffffffffffffffffffffffffffffffffffffff3afb82fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb82ff3affffffffffffffffffffffffffffff5bfb82fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb82ff5bffffffffffffffffffffffdefbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fdd1fdd1fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ffdefffffffffffffffffd4efb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd4effffffffffffff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff5bfffffffffcecfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fcecffffffbdfb41fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb41ffbdfe54fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fe54fd0cfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd0cfc06fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fc06fb62fb20fb20fb20fb20fb20fb20fb20",
+  "replace": "f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800c638738e6b4d6b4d736ebdd7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8003186102071607980186018c3f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8000000c260fb20fb20dac00000bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8000000fb20fb20fb20fb202060bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8000000fb20fb20fb20fb202060bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8000000fb20fb20fb20fb202060bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8000000fb20fb20fb20fb202060bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8000000fb20fb20fb20fb202060bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800c63831860000000000000000000000000000fb20fb20fb20fb2020600000000000000000000000002124bdb7f800f800f800f800f800f800f800f800f800f800738e1020c260"
+ },
+ {
+  "offset": 12974818,
+  "expect": "ff5bff5b",
+  "replace": "fb20fb20"
+ },
+ {
+  "offset": 12974836,
+  "expect": "fb20fb20fb20fb20fb20fb20fb20fb62fb20fb20fb20fb20fb20fb20fdd1ff7bff7bff7bff7bff7bff7bff7bff7bffffffffff7bff7bff7bff7bff7bff7bff7bff7bfdd1fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fdd1ff7bff7bff7bff7bff7bff7bff7bff7bffffffffff7bff7bff7bff7bff7bff7bff7bff7bfdd1fb20fb20fb20fb20fb20fb20fb62fb20fb20fb20fb20fb20fb20fb20",
+  "replace": "d2a020605acbf800f800f800f800f800f800f800f800f800f8006b4d7160fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb2091c0528af800f800f800f800f800f800f800f800f800f8006b4d7980fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb2091e0528af800f800f800f800f800f800f800f800f800f800736e1860dac0"
+ },
+ {
+  "offset": 12975010,
+  "expect": "ff5bff5b",
+  "replace": "fb20fb20"
+ },
+ {
+  "offset": 12975028,
+  "expect": "fb20fb20fb20fb20fb20fb20fb20fb62fc06fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fc06fd0cfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd0cfe54fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fe54ffbdfb41fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb41ffbdfffffcecfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fcecffffffffff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff5bfffffffffffffd4efb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20ff5bff5bfb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd4effffffffffffffffffdefbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fdd1fdd1fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ffdeffffffffffffffffffffff5bfb82fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb82ff5bffffffffffffffffffffffffffffff3afb82fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb82ff3affffffffffffffffffffffffffffffffffffff5bfbc4fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fbc4ff5bffffffffffffffffffffffffffffffffffffffffffffffdefd4efb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fd4effdeffffffffffffffffffffffffffffffffffffffffffffffffffffffffff5bfcecfb41fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fb41fcecff5bffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffbdfe54fd0cfc06fb62fb20fb20fb62fc06fd0cfe54ffbdffffffffffffffffffffffffffffffffffffffff",
+  "replace": "e2c020605aabf800f800f800f800f800f800f800f800f800f800bdd718c30000206020602060206020602060fb20fb20fb20fb2038c020602060206020602060000018c3b596f800f800f800f800f800f800f800f800f800f800f800f800bdb7bdb7bdb7bdb7bdb7bdb70000fb20fb20fb20fb202060a514bdb7bdb7bdb7bdb7bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8000000fb20fb20fb20fb202060bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8000000fb20fb20fb20fb202060bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8000000fb20fb20fb20fb202060bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8000000fb20fb20fb20fb202060bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8000000d2a0fb20fb20e2c00000bdb7f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f8002124206091c091e0206018c3f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800bdb75acb528a528a5aabb596f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800f800"
  },
  {
   "offset": 11123414,
@@ -12036,4 +13157,4 @@ export const FULL_THEME_RUNS = [
   "replace": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
  }
 ];
-export const FULL_IMAGE_SHA256 = "0f795253f0ec88372d02e9923c29e04dbf2b9081239e91194716d593e93bd0fa";
+export const FULL_IMAGE_SHA256 = "ecefc49463b9d37cbc4e3a9c4d802ded397f918dff76b576eec5fc51fe58e8ec";

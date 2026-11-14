@@ -1,10 +1,10 @@
-# Transport ground and base-arrow remap.
+# Transport focus and ground mapping.
 name: 0049-pocket-transport-ground
 kind: module
 module: 0
 region: code
 address: 0x30539b4
-gate: Stock bytes and emulator regression checks.
-expect: 2de9f04186b05fea000808881f4615460e46adf8080016bfb8f1010f0c240024002c02bf002006b0bde8f0815c282ad0a0f500511a3908bf2c2011d0a0f50051
-replace: 9d2802d1002908bfa22007b582b00b4b1b880093b0f19b03012b94bfef231f230b44084611461a4611f11f030ff08bfc02b0bde8074010f00db8000000440003
-rationale: Clear the draw rectangle and remap the shared base arrow to its bare resource before drawing the focused glyph.
+gate: Stock-byte precondition; transport focus and no-ghost regressions.
+expect: 2de9f04186b05fea000808881f4615460e46adf8080016bfb8f1010f0c240024002c02bf002006b0bde8f0815c282ad0a0f500511a3908bf2c2011d0a0f50051393908bf3c200bd0
+replace: 9d2803d1002904d1a22002e0a22808bf9d2007b582b00b4b1b880093b0f19b03012b94bfef231f230b44084611461a4611f11f030ff087fc02b0bde8074010f009b8000000440003
+rationale: Draw the base arrow bare, map both focused left arrows to the selected resource, clear each draw rectangle, then use the keyed glyph path.

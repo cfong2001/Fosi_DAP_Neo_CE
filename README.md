@@ -21,11 +21,11 @@ CE (Community Edition) is patched firmware for the Fosi Audio DAP Neo. It starts
 
 | Image | What it carries | SHA-256 |
 |---|---|---|
-| [`DP3_V137_CE.img`](release/DP3_V137_CE.img) | Standard: every feature below. 6,656 bytes longer than stock. | `0f795253f0ec88372d02e9923c29e04dbf2b9081239e91194716d593e93bd0fa` |
+| [`DP3_V137_CE.img`](release/DP3_V137_CE.img) | Standard: every feature below. 8,192 bytes longer than stock. | `ecefc49463b9d37cbc4e3a9c4d802ded397f918dff76b576eec5fc51fe58e8ec` |
 | [`DP3_V137_CE_minimal.img`](release/DP3_V137_CE_minimal.img) | Minimal: audio and library fixes only, same length as stock. | `0dfd10e23749f9b6c65499266f1a7a2ec038160b089ba0fc2ca68dcf2b24c986` |
 | [`DP3_V137_CE_recovery.img`](release/DP3_V137_CE_recovery.img) | Stock code dated one day after CE, for going back. | `aff851b31d6eee55cbd4bb3fc0464ac79f0039ee86ae6723225ac036a157d223` |
 
-Start with the standard image. Use the minimal one if the standard image does not install (no image longer than stock has been installed yet), or if you play WMA files.
+Standard CE has been installed and booted on hardware. The current scan and responsiveness repair still needs full-card acceptance; see [repair validation](release/REPAIR_VALIDATION.md). Minimal retains WMA support.
 
 Complete the [flash review and recovery gates](release/FLASH_REVIEW.md) before writing anything to a player. The [install page](https://cfong2001.github.io/Fosi_DAP_Neo_CE/) checks the image's SHA-256 and copies it to the player's storage as `RKNANOFW.IMG`; you then run the update on the device. To do it by hand, rename the image to `RKNANOFW.IMG` (including the .IMG extension), copy it to the top level of the player's storage, run the update the way you would an official Fosi update, and delete the file afterwards. [`release/README.md`](release/README.md) has the full steps, a testing order and recovery.
 

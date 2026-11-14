@@ -36,10 +36,17 @@ transport_keyed_draw:
        the base draw bare by substituting its identical bare resource 162;
        resource 157 can then carry the orange focused-glyph treatment. */
     cmp     r0, #157
-    bne     1f
+    bne     2f
     cmp     r1, #0
+    bne     1f
+    movs    r0, #162
+    b       1f
+2:
+    /* The second page's focused left arrow shares the bare resource ID.
+       Only the computed draw passes it here, so reuse selected arrow 157. */
+    cmp     r0, #162
     it      eq
-    moveq   r0, #162
+    moveq   r0, #157
 1:
     push    {r0, r1, r2, lr}
     sub     sp, #8

@@ -13,12 +13,10 @@ from cover art, so a neutral fringe is the target that stays clean on
 any ground (patches/antialias/mock/grounds.png compares the choices).
 
 Meanings follow the stock resources (see icon_set_v3/mapping.json
-and the stock contact sheets): keycap and bare presentations of
-one meaning get the same bare glyph. Ink is the palette foreground
-(0xFFFF on the dark set, 0x0000 on the light set); the accent is
-kept only on the two icons the stock bare row itself draws in the
-accent (quote and info: dark 178/179 and 165/166, light 344/345
-and 331/332), in the theme accent (0xF220 dark, 0xFB20 light).
+and the stock contact sheets). Selected states use an orange glyph
+with a contrasting outline and supersampled edges; unselected states
+use the palette foreground. The shared bare left arrow stays unselected;
+the full-build draw wrapper maps focused uses to the selected resource.
 Every other pixel is 0xF800, the surround resource 286 uses with
 the keyed helper.
 
@@ -89,7 +87,8 @@ for dark_id in list(FAMILY):
 # when the wheel moves focus across the bottom control row.  The first v4
 # pass accidentally rendered them identically to the unselected bare glyphs,
 # which removed the only visible focus cue on hardware.
-SELECTED = set(range(157, 162)) | set(range(323, 328))
+SELECTED_DARK = set(range(157, 162)) | set(range(163, 168)) | set(range(170, 174)) | {181}
+SELECTED = SELECTED_DARK | {rid + 166 for rid in SELECTED_DARK}
 
 # Row composites: id -> (slug, [slot designs at x = 4 + 50 * k]).
 # A slot is None where the painter always overlays that slot in

@@ -2,6 +2,13 @@
 
 ## Status: built, experimental and opt-in
 
+Standard CE now includes these keyed glyphs with orange selected states,
+contrasting outlines and baked antialiasing. Its draw wrapper clears the
+previous glyph and distinguishes the shared base arrow from the focused
+arrow on both transport pages. The historical experiments below describe
+the earlier unselected art; current selection checks live in
+`test_keyed_transport.py` and `tools/repair_metrics.py`.
+
 The transport glyphs are transparent now, through the route the
 earlier negative result pointed at: the painter's transport draw
 calls are repointed to the keyed helper, and the glyph family is

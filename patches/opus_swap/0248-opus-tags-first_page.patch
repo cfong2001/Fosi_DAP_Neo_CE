@@ -1,0 +1,10 @@
+# Original CE streaming OpusTags reader: .text.first_page.
+name: 0248-opus-tags-first_page
+kind: module
+module: 0
+region: code
+address: 0x3064398
+expect: 0a46d4498b8cd449012b096810d000ebc00001eb800014462025001d2a462146eff7d1fd29462046bde87040f2f7e6bb
+replace: 70b505464879002400f0030002280dd101f10e000e46eef773fce86006f11200eef76efc85f81f4101242861204670bd
+gate: stock bytes, resident census, real-card parser regression
+rationale: Parse OpusTags with bounded reads and UTF-16 output instead of entering the obsolete ASF tag reader.

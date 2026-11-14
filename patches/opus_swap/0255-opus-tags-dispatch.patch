@@ -1,0 +1,10 @@
+# Original CE streaming OpusTags reader: dispatch.
+name: 0255-opus-tags-dispatch
+kind: module
+module: 0
+region: code
+address: 0x306c5a6
+expect: 4ff4407102a8e8f75bfc
+replace: 4846314600f025fd52e0
+gate: stock bytes, resident census, real-card parser regression
+rationale: Parse OpusTags with bounded reads and UTF-16 output instead of entering the obsolete ASF tag reader.

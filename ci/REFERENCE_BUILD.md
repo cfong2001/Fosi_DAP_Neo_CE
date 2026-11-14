@@ -46,7 +46,7 @@ cp patches/full/out/layout31.json /tmp/ce-recorded-layout31.json
 node ci/verify_composed_artifacts.mjs /tmp/ce-recorded-layout31.json
 ```
 
-The 6,532-byte module-31 SHA-256 must be
+The 6,616-byte module-31 SHA-256 must be
 `3f7e09cae9658c4cf21bfc4f9be92a037051f10a74e759f2e7fd8d4c0cac2aa9`.
 With local decoder inputs, build the complete recorded composition, using an
 output path that does not already exist:
@@ -61,8 +61,8 @@ sha256sum /absolute/path/to/new-ce-image.img
 The full build prints a large byte-diff report to the log. For the current
 recorded composition, the 2,040-byte merged tail SHA-256 must be
 `a0bccfe19ecc842afbe1a57ba05d26ef56ab71a4632791c36523cf67c5708e55`,
-and the 13,638,148-byte image SHA-256 must be
-`0f795253f0ec88372d02e9923c29e04dbf2b9081239e91194716d593e93bd0fa`.
+and the 13,639,684-byte image SHA-256 must be
+`ecefc49463b9d37cbc4e3a9c4d802ded397f918dff76b576eec5fc51fe58e8ec`.
 These are regression pins for this revision, not permanent hashes for future
 changes. Any intentional source or artifact change requires review, updated
 pins and regenerated browser data, meaningful behavioral regression tests,
@@ -75,3 +75,7 @@ builds every image through `ci/build_release.sh`; see
 [`release/README.md`](../release/README.md). The separate
 [`CACHED_IMAGE.md`](CACHED_IMAGE.md) procedure reproduces a recorded binary
 from already-generated browser payloads; it is not a source build.
+
+The original OpusTags C reader uses the pinned LLVM-MinGW 22.1.3 compiler
+in the separate Windows CI job. That job regenerates its patches and
+requires byte equality. Other payloads use the existing reference toolchain.

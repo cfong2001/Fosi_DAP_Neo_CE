@@ -53,7 +53,7 @@
 //       the merged theme runs), with the page's embedded Opus data
 //       (docs/builder-opus-data.mjs; DAP_NEO_OPUS_DATA overrides it):
 //         build_full.py (one build.py pass)
-//         0f795253f0ec88372d02e9923c29e04dbf2b9081239e91194716d593e93bd0fa
+//         ecefc49463b9d37cbc4e3a9c4d802ded397f918dff76b576eec5fc51fe58e8ec
 //   standalone lock screen (the embedded 406-byte reference-toolchain
 //   routine in a module 31 extension, plus patch 0033):
 //         build.py --no-transplants --manifest <framework manifest plus
@@ -75,7 +75,7 @@ import {THEATER_PATCHES, THEATER_TAIL} from "../docs/builder-theater.mjs";
 import {BT_PATCH, LOCK_PATCH, PLAYLIST_PATCHES, TITLE_PATCHES, bluetoothTail, lockscreenPayload, playlistPayloads, combineTails, theaterTail, combineWithTheater} from "../docs/builder-experimental.mjs";
 import {OPUS_DATA} from "../docs/builder-opus-data.mjs";
 import {BT_PAYLOAD, LOCK_PAYLOAD} from "../docs/builder-payloads.mjs";
-import {FULL_EXTRA_PATCHES, FULL_TAIL, FULL_GROWTHS, FULL_THEME_RUNS, FULL_IMAGE_SHA256} from "../docs/builder-full.mjs";
+import {FULL_PATCHES, FULL_TAIL, FULL_GROWTHS, FULL_THEME_RUNS, FULL_IMAGE_SHA256} from "../docs/builder-full.mjs";
 import {bandTable, parseCurve, fit, slotPatches, namePatches} from "../docs/eq-core.mjs";
 import {DAC_FILTERS, dacFilterPatches} from "../docs/builder-dacfilter.mjs";
 import {BT_AUTO_OFF, btAutoOffPatches} from "../docs/builder-btautooff.mjs";
@@ -131,11 +131,10 @@ for (const [patch, path] of [
 // with their source patch files (the full build's own copies where
 // the merged tail or the composed payload moved a branch target).
 const fullManifest = (await readFile(new URL("../patches/full/manifest.txt", import.meta.url), "utf8"))
-  .split("\n").map(line => line.split("#")[0].trim()).filter(Boolean)
-  .filter(entry => !entry.startsWith("../framework/patches/") && !entry.startsWith("../opus_swap/"));
-assert.equal(fullManifest.length, FULL_EXTRA_PATCHES.length);
+  .split("\n").map(line => line.split("#")[0].trim()).filter(Boolean);
+assert.equal(fullManifest.length, FULL_PATCHES.length);
 for (const [patch, path] of fullManifest.map((entry, i) =>
-    [FULL_EXTRA_PATCHES[i], "../patches/full/" + entry])) {
+    [FULL_PATCHES[i], "../patches/full/" + entry])) {
   const source = await readFile(new URL(path, import.meta.url), "utf8");
   const field = name => source.match(new RegExp("^" + name + ":\\s*(\\S+)", "m"))?.[1];
   assert.equal(patch.address, Number(field("address")));
@@ -143,17 +142,18 @@ for (const [patch, path] of fullManifest.map((entry, i) =>
   assert.equal(patch.expect, field("expect").toLowerCase());
   assert.equal(patch.replace, field("replace").toLowerCase());
 }
-assert.equal(FULL_EXTRA_PATCHES.length, 105);
+assert.equal(FULL_PATCHES.length, 172);
 assert.equal(FULL_TAIL.length, 2040);
 assert.equal(FULL_TAIL.sha256,
   "a0bccfe19ecc842afbe1a57ba05d26ef56ab71a4632791c36523cf67c5708e55");
 assert.deepEqual(FULL_GROWTHS.map(g => [g.module, g.length, g.sha256]), [
   [31, 6616, "3f7e09cae9658c4cf21bfc4f9be92a037051f10a74e759f2e7fd8d4c0cac2aa9"],
   [24, 26, "7b80afb308d276a4d0012cd4302f7a5f2a1c5192a1f2e70d3f23867e195a942a"],
+  [39, 1052, "f388c301f6ad4f16d00eaf8e10d565998768cb90b1938c4f32ffc7201afbc3b9"],
 ]);
-assert.equal(FULL_THEME_RUNS.length, 2192);
+assert.equal(FULL_THEME_RUNS.length, 2281);
 assert.equal(FULL_IMAGE_SHA256,
-  "0f795253f0ec88372d02e9923c29e04dbf2b9081239e91194716d593e93bd0fa");
+  "ecefc49463b9d37cbc4e3a9c4d802ded397f918dff76b576eec5fc51fe58e8ec");
 for (const g of FULL_GROWTHS)
   assert.equal(await sha256Hex(hexToBytes(g.hex)), g.sha256);
 assert.equal(await sha256Hex(hexToBytes(FULL_TAIL.hex)), FULL_TAIL.sha256);
@@ -247,11 +247,11 @@ assert.throws(() => dacFilterPatches("bogus"), /unknown DAC filter/);
     {groups: allGroups, patchGroups: PATCH_GROUPS, vorbis: VORBIS75, opus, opusPatches: OPUS_PATCHES},
     "ffb9f5fc72c612afc7ee6717444069a98d1fa6c9774b2a2cada848ef01f93fb6"]);
   cases.push(["(m) everything build: all features in one image",
-    {groups: allGroups, patchGroups: PATCH_GROUPS, vorbis: VORBIS75,
-     opus, opusPatches: OPUS_PATCHES,
+    {groups: new Set(), patchGroups: [], vorbis: VORBIS75,
+     opus, opusPatches: [],
      themeConfig: {version: 1, runs: FULL_THEME_RUNS},
      tailPayload: hexToBytes(FULL_TAIL.hex),
-     extraPatches: FULL_EXTRA_PATCHES,
+     extraPatches: FULL_PATCHES,
      growths: FULL_GROWTHS.map(g => ({module: g.module,
                                       payload: hexToBytes(g.hex)}))},
     FULL_IMAGE_SHA256]);

@@ -75,7 +75,8 @@ def main():
     for (s1, e1), (s2, e2) in zip(seen, seen[1:]):
         assert e1 <= s2, f'runs overlap: {s1:#x}..{e1:#x} vs {s2:#x}..{e2:#x}'
     growth = (len((OUT / 'payload31.bin').read_bytes())
-              + len((OUT / 'tag24.bin').read_bytes()))
+              + len((OUT / 'tag24.bin').read_bytes())
+              + len((OUT / 'sort39.bin').read_bytes()))
     print(f'growth delta: {growth} bytes')
 
     def shifted(delta):

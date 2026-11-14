@@ -630,12 +630,13 @@ def gate_selected_focus(v4):
     for shift, accent, contrast, name in (
             (0, 0xF220, 0xFFFF, 'dark'),
             (166, 0xFB20, 0x0000, 'light')):
-        for rid in range(157 + shift, 162 + shift):
+        selected = list(range(157,162)) + list(range(163,168)) + list(range(170,174)) + [181]
+        for rid in (i + shift for i in selected):
             words = glyph_words(v4, rid)
             assert all(words[i] == KEY for i in (0, 31, 992, 1023)), rid
             assert words.count(accent) > 40, (rid, words.count(accent))
             assert words.count(contrast) > 10, (rid, words.count(contrast))
-            # Separate supersampled circle, stroke, and glyph masks leave
+            # Separate supersampled stroke and glyph masks leave
             # blended edge colors in addition to the two solid colors.
             blends = set(words) - {KEY, accent, contrast}
             assert len(blends) >= 3, (rid, blends)

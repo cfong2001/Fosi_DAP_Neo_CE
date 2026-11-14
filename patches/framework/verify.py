@@ -678,9 +678,9 @@ def main():
     # differ only at the theme runs, the mirrored header and
     # the trailer CRC once the growth shift is accounted for.
     FULL_DIR = HERE.parent / 'full'
-    FULL_SHA = '0f795253f0ec88372d02e9923c29e04dbf2b9081239e91194716d593e93bd0fa'
-    PAYLOAD_GROWTH = 6642       # module 31 + module 24 payloads
-    GROWTH_TOTAL = 6656         # plus 14 zeros that sector-align the mirror
+    FULL_SHA = 'ecefc49463b9d37cbc4e3a9c4d802ded397f918dff76b576eec5fc51fe58e8ec'
+    PAYLOAD_GROWTH = 7694       # module 31 + module 24 + module 39 payloads
+    GROWTH_TOTAL = 8192         # sector-aligned mirror
     if ecp is None:
         check('full build: composed image pinned, diff confined '
               'to the union of its parts, default unchanged', None,
@@ -708,7 +708,7 @@ def main():
                 and struct.unpack_from('<I', f, 0x1F4)[0] == MIRROR_OFF + GROWTH_TOTAL \
                 and not any(f[MIRROR_OFF + PAYLOAD_GROWTH:MIRROR_OFF + GROWTH_TOTAL])
             rep = json.loads(Path(str(fout) + '.report.json').read_text())
-            rep_ok = len(rep["patches_applied"]) == 143 \
+            rep_ok = len(rep["patches_applied"]) == 172 \
                 and [t['module75_sha256'] if 'module75_sha256' in t
                      else t['module72_sha256']
                      for t in rep['transplants_applied']] == [
@@ -716,7 +716,7 @@ def main():
                     '6a7d50d2647c6623181e3cbbc16a13d2bd9a8724559d62c84f25b83ae8cbb07d'] \
                 and [(g['module'], g['payload_bytes'])
                      for g in rep['growth']] == [(31, 6616),
-                                                  (24, 26)] \
+                                                  (24, 26), (39, 1052)] \
                 and rep['tail']['payload_bytes'] == 2040 \
                 and rep['tail']['payload_sha256'] == \
                 'a0bccfe19ecc842afbe1a57ba05d26ef56ab71a4632791c36523cf67c5708e55'
@@ -744,7 +744,12 @@ def main():
                     allow(key, p['address'] - base,
                           p['address'] - base + len(p['replace']))
             payloads = {(31, 'code'): FULL_DIR / 'out' / 'payload31.bin',
-                        (24, 'code'): FULL_DIR / 'out' / 'tag24.bin'}
+                        (24, 'code'): FULL_DIR / 'out' / 'tag24.bin',
+                        (39, 'code'): FULL_DIR / 'out' / 'sort39.bin'}
+            # The legacy reference used live sort scratch as code. Standard
+            # restores the stock zeros there and uses its explicit extension.
+            sort_base = sf[(39, 'code')][1]
+            allow((39, 'code'), 0x0309F000-sort_base, 0x0309F000-sort_base+1052)
             for key, path in payloads.items():
                 allow(key, len(su[key][2]),
                       len(su[key][2]) + path.stat().st_size)
