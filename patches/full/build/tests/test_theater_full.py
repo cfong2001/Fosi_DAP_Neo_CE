@@ -52,7 +52,7 @@ from pathlib import Path
 from unicorn import Uc, UC_ARCH_ARM, UC_MODE_THUMB, UC_HOOK_CODE
 from unicorn.arm_const import (UC_ARM_REG_R0, UC_ARM_REG_R1, UC_ARM_REG_R2,
                                UC_ARM_REG_R3, UC_ARM_REG_PC, UC_ARM_REG_SP,
-                               UC_ARM_REG_LR)
+                               UC_ARM_REG_LR, UC_ARM_REG_R4)
 
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parents[3]
@@ -165,7 +165,8 @@ class Player:
         mask = struct.unpack_from('<II', b, 12)
         width, needed = struct.unpack_from('<HH', b, 20)
         return {'sums': sums, 'mask': mask, 'width': width,
-                'needed': needed, 'seen': b[24], 'flags': b[25]}
+                'needed': needed, 'seen': b[24], 'flags': b[25],
+                'cached': struct.unpack_from('<H', b, 26)[0]}
 
     def _hook(self, uc, addr, size, user):
         if addr == 0x03058FA8:                      # file read
@@ -259,7 +260,8 @@ def scenario_painter(raw, width, height, scaled_height, light):
     st = p.state()
     assert p.r16(BGCELL) == default, \
         f'reset stub: cell {p.r16(BGCELL):#x} != theme default {default:#x}'
-    assert st['flags'] == 1 and st['sums'] == (0, 0, 0) and st['seen'] == 0, st
+    assert st['flags'] == 1 and st['sums'] == (0, 0, 0) \
+        and st['seen'] == 0 and st['cached'] == 0, st
     returns = [p.call(0x03083B36) for _ in range(scaled_height)]
     assert len(p.blits) == scaled_height, (returns, len(p.blits))
     check_blits_from_trampoline(p)
@@ -274,7 +276,8 @@ def scenario_painter(raw, width, height, scaled_height, light):
     assert cell == expected, (cell, expected)
     assert p.r32(EVWORD) & EVMASK, 'event bit 0x39 not set'
     assert st['flags'] == 7 and st['seen'] == needed \
-        and st['width'] == width and st['needed'] == needed, st
+        and st['width'] == width and st['needed'] == needed \
+        and st['cached'] == expected, st
     sums = [0, 0, 0]
     for row in rows:
         for w in row:
@@ -299,7 +302,8 @@ def scenario_track_change(raw):
     assert p.setup() == 1
     st = p.state()
     assert p.r16(BGCELL) == default, 'track change did not restore default'
-    assert st['flags'] == 1 and st['sums'] == (0, 0, 0) and st['seen'] == 0, st
+    assert st['flags'] == 1 and st['sums'] == (0, 0, 0) \
+        and st['seen'] == 0 and st['cached'] == 0, st
     for _ in range(18):
         p.call(0x03083B36)
     assert p.r16(BGCELL) == expected, 're-armed accumulation did not repeat'
@@ -348,6 +352,44 @@ def scenario_no_art(raw):
     st = p.state()
     assert st['seen'] == 0 and p.r16(BGCELL) == 0x10A2, st
     print('  no-art: no rows accumulated, default left in place')
+
+
+def scenario_constructor_restore(raw):
+    """The constructor guard restores art color only after sampling done."""
+    im = Image(raw)
+    u = Uc(UC_ARCH_ARM, UC_MODE_THUMB)
+    u.mem_map(0x03000000, 0x100000)
+    for module in (0, 27):
+        m = im.modules[module]
+        for kind in ('code', 'data'):
+            off, size = im.module_region(module, kind)
+            if size:
+                u.mem_write(m[kind + '_exec'], raw[off:off + size])
+    restore = next(p for p in _LAYOUT['pieces']
+                   if p['name'] == 'constructor background restore')
+    entry = int(restore['address'], 16)
+    object_addr = 0x03026000
+
+    def hook(uc, addr, size, user):
+        if addr == 0x0307D1CE:
+            uc.reg_write(UC_ARM_REG_PC, END)
+    u.hook_add(UC_HOOK_CODE, hook)
+
+    def run(flags, cached, stock_color):
+        u.mem_write(STATE + 25, bytes([flags]) + struct.pack('<H', cached))
+        u.mem_write(object_addr + 4, b'\x00\x00')
+        for reg, value in ((UC_ARM_REG_R0, stock_color),
+                           (UC_ARM_REG_R4, object_addr),
+                           (UC_ARM_REG_SP, 0x030F0000),
+                           (UC_ARM_REG_LR, END | 1)):
+            u.reg_write(reg, value)
+        u.emu_start(entry | 1, END, count=100)
+        return struct.unpack('<H', u.mem_read(object_addr + 4, 2))[0]
+
+    assert run(7, 0x6B4D, 0x10A2) == 0x6B4D
+    assert run(1, 0, 0x10A2) == 0x10A2
+    print('  constructor guard: cached artwork color survives late window '
+          'construction; unsampled/no-art state keeps the theme default')
 
 
 # ------------------------------------------------ accumulate cross-check
@@ -535,6 +577,8 @@ def main():
     print('PASS lifecycle: sync consumer, dark, 30x18')
     scenario_no_art(raw)
     print('PASS lifecycle: no-art setup leaves the theme default')
+    scenario_constructor_restore(raw)
+    print('PASS lifecycle: constructor restores cached theater color')
     scenario_portrait(raw)
     print('PASS lifecycle: portrait uses art width without padding')
     crosscheck_accumulate(raw)

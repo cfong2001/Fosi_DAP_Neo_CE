@@ -12,9 +12,9 @@ Layout (offsets from the gap-tail base 0x0307BFB4):
          and src/theater_noart.S (the two no-art exits); addresses
          are read from the ELF
          zeros up to the theater payload
-  0x3A0  theater payload, 676 B at 0x0307C354 (reset stub at the base,
+  0x39C  theater payload, 680 B at 0x0307C350 (reset stub at the base,
          blit trampoline after it), assembled by theater/build_theater.py
-         with --base 0x0307C354
+         with --base 0x0307C350
   0x644  Bluetooth blob, 436 B at 0x0307C5F8, its audited address;
          byte-identical to the ui_features build (pin below), so
          patch 0032-tail is used unchanged
@@ -53,11 +53,11 @@ REPO = FULL.parents[1]
 TAIL_BASE = 0x0307BFB4
 STAGING = 552
 RES_BASE = TAIL_BASE + STAGING          # 0x0307C1DC
-THEATER_LEN = 676
+THEATER_LEN = 680
 BT_BASE = 0x0307C5F8
 BT_LEN = 436
 BT_SHA256 = 'ce6ef701285885efb17b072df128602c3ee5da8359b7b267cd7e1ca92457cf06'
-THEATER_BASE = BT_BASE - THEATER_LEN    # 0x0307C354
+THEATER_BASE = BT_BASE - THEATER_LEN    # 0x0307C350
 TOTAL = 2040
 
 # External branch targets of the hook source, in source order.
@@ -75,7 +75,9 @@ POCKET_PATCHES = {'resolver_hook.S': '0047-pocket-playlist-hooks',
                   'theater_noart.S': '0048-pocket-theater-noart',
                   'transport_ground.S': '0049-pocket-transport-ground'}
 FOCUS_BASE = RES_BASE                   # focus payload where the hooks were
-FOCUS_MAX = THEATER_BASE - RES_BASE     # 376 B
+RESTORE_BASE = RES_BASE + 340           # 0x0307C330, after pinned focus blob
+FOCUS_MAX = RESTORE_BASE - RES_BASE
+RESTORE_MAX = THEATER_BASE - RESTORE_BASE
 V4_PATCHES = REPO / 'patches' / 'design_refresh_v4' / 'patches'
 # The eight v4 transport repoints, retargeted to transport_keyed_draw.
 TRANSPORT = ('transport-keyed-slot0-state', 'transport-keyed-playpause-bare',
@@ -101,16 +103,31 @@ SITES = (
 # Filled in after the build passed the resolver and theater emulation
 # suites; the build refuses any later drift.
 EXPECTED = {
-    'resolver_sha256': 'ffd11411541e744c75455a5260eb97db572a0056924f6b5bd324b30268c0459e',
+    'resolver_sha256': 'ee24042f1f595212f15675dfff6fb6a06325a72f202f6266df544c8169e39aaf',
     'focus_sha256': '479e1c49e92232643b0832f7a7929912298dccc93c7a80eb4fac9d76f913dc33',
-    'theater_sha256': '1bd844657064921c52c246bb60c3da2f83abc1102e7f68e99fa8cc710e1d232c',
-    'tail_sha256': '1443d354b9a388f156d23178eb302b7535e703b0e3295d8dc329cd7b71820f69',
+    'restore_sha256': 'd821987c09e3e20c060516756092f1ec5bb11310b781fcb137bf93d4a81eaabc',
+    'theater_sha256': '53dce973e3bf970ce66fd53501c0ccf23f929c5d80a4e61870bca4370447d1df',
+    'tail_sha256': 'a0bccfe19ecc842afbe1a57ba05d26ef56ab71a4632791c36523cf67c5708e55',
 }
 
 
 def run(*args, **kw):
-    return subprocess.run(args, check=True, text=True,
-                          capture_output=True, **kw).stdout
+    result = subprocess.run(args, text=True, capture_output=True, **kw)
+    if result.returncode:
+        raise RuntimeError(f'{args[0]} failed:\n{result.stderr}')
+    return result.stdout
+
+
+def arm_tools():
+    """Use the reference GNU tools when present, otherwise LLVM's ARM target."""
+    if shutil.which('arm-none-eabi-gcc'):
+        return (['arm-none-eabi-gcc'], 'arm-none-eabi-nm',
+                'arm-none-eabi-objcopy')
+    needed = ('clang', 'llvm-nm', 'llvm-objcopy')
+    if not all(shutil.which(x) for x in needed):
+        raise RuntimeError('ARM GNU toolchain or clang/LLVM tools required')
+    return (['clang', '--target=arm-none-eabi'],
+            'llvm-nm', 'llvm-objcopy')
 
 
 def branch(site, target, link=False):
@@ -137,6 +154,7 @@ def build_hooks(scratch):
     pattern = re.compile(r'\b(b\.w|bl)(\s+)(' + '|'.join(EXTERNAL) + r')\b')
     flags = ['-mcpu=cortex-m3', '-mthumb', '-Os', '-ffreestanding',
              '-fno-builtin', '-nostdlib', '-Wall', '-Wextra', '-Werror']
+    cc, nm, objcopy = arm_tools()
     objs, orders, seen = [], {}, []
     for src, base, end in POCKETS:
         text = (SRC / src).read_text()
@@ -147,14 +165,14 @@ def build_hooks(scratch):
         text = pattern.sub(lambda m: f'{m.group(1)}{m.group(2)}.', text)
         asm, obj = scratch / f'{src}.S', scratch / f'{src}.o'
         asm.write_text(text)
-        run('arm-none-eabi-gcc', *flags, '-c', str(asm), '-o', str(obj))
+        run(*cc, *flags, '-c', str(asm), '-o', str(obj))
         objs.append(obj)
     if sorted(seen) != sorted(EXTERNAL):
         raise ValueError(f'each external target must appear once: {seen}')
     sections = '\n'.join(
         f' .p{i} {base:#x} : {{ *{Path(src).stem}.S.o(.text .text.*) }}\n'
         f' ASSERT(. <= {end:#x}, "{src} overflows its pocket")'
-        for i, (src, base, end) in enumerate(POCKETS))
+        for i, (src, base, end) in sorted(enumerate(POCKETS), key=lambda item: item[1][1]))
     ld, elf = scratch / 'hooks.ld', scratch / 'hooks.elf'
     ld.write_text(f'''SECTIONS {{
 {sections}
@@ -165,12 +183,12 @@ def build_hooks(scratch):
  ASSERT(SIZEOF(.bss) == 0, "hooks require BSS")
 }}
 ''')
-    run('arm-none-eabi-gcc', *flags, '-T', str(ld), *map(str, objs), '-o', str(elf),
+    run(*cc, *(['-fuse-ld=lld'] if cc[0] == 'clang' else []), *flags, '-T', str(ld), *map(str, objs), '-o', str(elf),
         cwd=str(scratch))
-    if run('arm-none-eabi-nm', '-u', str(elf)).strip():
+    if run(nm, '-u', str(elf)).strip():
         raise ValueError('hooks have undefined symbols')
     symbols = {}
-    for line in run('arm-none-eabi-nm', '-n', str(elf)).splitlines():
+    for line in run(nm, '-n', str(elf)).splitlines():
         parts = line.split()
         if len(parts) == 3 and parts[1] == 'T':
             symbols[parts[2]] = int(parts[0], 16)
@@ -178,7 +196,7 @@ def build_hooks(scratch):
     out = {}
     for i, (src, base, end) in enumerate(POCKETS):
         raw = scratch / f'p{i}.bin'
-        run('arm-none-eabi-objcopy', '-O', 'binary', '-j', f'.p{i}', str(elf), str(raw))
+        run(objcopy, '-O', 'binary', '-j', f'.p{i}', str(elf), str(raw))
         code = bytearray(raw.read_bytes())
         placeholders = [x for x in decoder.disasm(bytes(code), base)
                         if x.mnemonic in ('b.w', 'bl') and x.op_str == f'#0x{x.address:x}']
@@ -217,6 +235,40 @@ def build_focus():
     if len(payload) > FOCUS_MAX:
         raise ValueError(f'focus payload {len(payload)} > {FOCUS_MAX}')
     return payload, entries, bf
+
+
+def build_theater_restore():
+    """Constructor guard in the 28-byte gap between focus and theater.
+
+    The player constructor has already selected the stock theme default in
+    r0.  If artwork sampling completed first, replace that value with the
+    cached derived colour; then replay the displaced store/movs and return to
+    the constructor's following BL.
+    """
+    from keystone import Ks, KS_ARCH_ARM, KS_MODE_THUMB, KS_MODE_V8
+    from capstone import Cs, CS_ARCH_ARM, CS_MODE_THUMB
+    source = '''
+        movw r1, #0x3468
+        movt r1, #0x0302
+        ldrb r2, [r1, #25]
+        tst r2, #2
+        beq restore_store
+        ldrh r0, [r1, #26]
+    restore_store:
+        strh r0, [r4, #4]
+        movs r0, #1
+        b.w 0x0307D1CE
+    '''
+    code, _ = Ks(KS_ARCH_ARM, KS_MODE_THUMB | KS_MODE_V8).asm(
+        source, addr=RESTORE_BASE)
+    payload = bytes(code)
+    if len(payload) > RESTORE_MAX:
+        raise ValueError(f'theater restore {len(payload)} > {RESTORE_MAX}')
+    insns = list(Cs(CS_ARCH_ARM, CS_MODE_THUMB).disasm(payload, RESTORE_BASE))
+    if not insns or insns[-1].mnemonic != 'b.w' \
+            or insns[-1].op_str != '#0x307d1ce':
+        raise ValueError('theater restore continuation audit failed')
+    return payload
 
 
 def patch_file(name, title, module, address, expect, replace, gate,
@@ -298,6 +350,10 @@ def main():
         focus, focus_entries, bf = build_focus()
         focus_sha = hashlib.sha256(focus).hexdigest()
         print(f'focus: {len(focus)} bytes at {FOCUS_BASE:#x}, sha256 {focus_sha}')
+        restore = build_theater_restore()
+        restore_sha = hashlib.sha256(restore).hexdigest()
+        print(f'theater restore: {len(restore)} bytes at {RESTORE_BASE:#x}, '
+              f'sha256 {restore_sha}')
 
         # ---- theater below the Bluetooth blob ------------------------
         r = subprocess.run([sys.executable,
@@ -340,6 +396,8 @@ def main():
         # ---- merge ----------------------------------------------------
         tail = bytearray(TOTAL)
         tail[STAGING:STAGING + len(focus)] = focus
+        tail[RESTORE_BASE - TAIL_BASE:
+             RESTORE_BASE - TAIL_BASE + len(restore)] = restore
         tail[THEATER_BASE - TAIL_BASE:
              THEATER_BASE - TAIL_BASE + len(theater)] = theater
         tail[BT_BASE - TAIL_BASE:BT_BASE - TAIL_BASE + len(bt)] = bt
@@ -349,6 +407,7 @@ def main():
         if EXPECTED['tail_sha256'] is not None:
             assert res_sha == EXPECTED['resolver_sha256'], 'hooks drift'
             assert focus_sha == EXPECTED['focus_sha256'], 'focus drift'
+            assert restore_sha == EXPECTED['restore_sha256'], 'restore drift'
             assert th_sha == EXPECTED['theater_sha256'], 'theater drift'
             assert tail_sha == EXPECTED['tail_sha256'], 'tail drift'
         (OUT / 'tail-full.bin').write_bytes(tail)
@@ -371,6 +430,10 @@ def main():
                 '  mode; module 0 is resident in every window, so every\n'
                 '  caller still reaches them.')
 
+        gate = ('build refuses unless the stock bytes at the target equal\n'
+                '  `expect`; the finished image must also pass the grown\n'
+                '  build validator. Requires the full build\'s merged tail.')
+
         # ---- focus mode hook sites (module 27) -----------------------
         for k, (num, name, site, target, _note) in enumerate(bf.PATCH_DEFS):
             mo = sim.module_region(27, 'code')[0] + site - sim.modules[27]['code_exec']
@@ -384,10 +447,28 @@ def main():
                 '  emulation on the full build',
                 bf.RATIONALES[name])
 
+        # The constructor can run after artwork decode and overwrite the
+        # derived background.  Replace its store/movs/call prefix with a
+        # branch to the guard; the guard replays store/movs and resumes at
+        # the original call.
+        site = 0x0307D1CA
+        mo = sim.module_region(27, 'code')[0] + site - sim.modules[27]['code_exec']
+        expect = stock[mo:mo + 8]
+        if expect.hex() != 'a08001200cf0c2f8':
+            raise ValueError(f'constructor site drift: {expect.hex()}')
+        patch_file(
+            '0105-theater-constructor-restore',
+            f'# Theater background constructor guard at {RESTORE_BASE:#010x}.',
+            27, site, expect.hex(),
+            (branch(site, RESTORE_BASE) + bytes.fromhex('00bf00bf')).hex(),
+            gate,
+            'If artwork sampling completed before the player window is\n'
+            '  constructed, restore the cached derived RGB565 colour instead\n'
+            '  of letting the constructor overwrite it with the theme default.\n'
+            '  Otherwise preserve the stock-selected value. The helper replays\n'
+            '  the displaced store and movs before resuming at 0x0307D1CE.')
+
         # ---- hook site patches ----------------------------------------
-        gate = ('build refuses unless the stock bytes at the target equal\n'
-                '  `expect`; the finished image must also pass the grown\n'
-                '  build validator. Requires the full build\'s merged tail.')
         for name, module, site, expect, symbol, link in SITES:
             target = symbols[symbol]
             kind = 'BL' if link else 'B.W'
@@ -437,7 +518,15 @@ def main():
                 {'name': 'free (zeros)',
                  'offset': STAGING + len(focus),
                  'address': hex(RES_BASE + len(focus)),
-                 'bytes': THEATER_BASE - RES_BASE - len(focus)},
+                 'bytes': RESTORE_BASE - RES_BASE - len(focus)},
+                {'name': 'constructor background restore',
+                 'offset': RESTORE_BASE - TAIL_BASE,
+                 'address': hex(RESTORE_BASE), 'bytes': len(restore),
+                 'sha256': restore_sha},
+                {'name': 'free (zeros)',
+                 'offset': RESTORE_BASE - TAIL_BASE + len(restore),
+                 'address': hex(RESTORE_BASE + len(restore)),
+                 'bytes': THEATER_BASE - RESTORE_BASE - len(restore)},
                 {'name': 'theater payload (reset stub + trampoline)',
                  'offset': THEATER_BASE - TAIL_BASE,
                  'address': hex(THEATER_BASE), 'bytes': len(theater),

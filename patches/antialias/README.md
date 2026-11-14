@@ -37,7 +37,10 @@ from the stock and release images: every changed icon at 6x.
   `../theme_editor/ce-mark.json`.
 - **Progress bar columns** (187, 188, 353, 354): softened top and bottom
   rows. These are the 1x6 columns module 27 repeats along the bar.
-- **Progress knob** (220, 386): a keyed disc. Patch
+- **Progress knob / selector** (220, 386): an orange-filled keyed disc with
+  a two-pixel contrasting stroke (white in the dark theme, black in the light
+  theme). The outer edge and the fill/stroke boundary are both supersampled,
+  so their antialiasing is baked into the resource. Patch
   `../full/patches/0118` draws it through the keyed helper, so it no longer
   sits in its stock dark square over a theater ground.
 

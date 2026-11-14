@@ -92,6 +92,9 @@ def main():
         if len((OUT / 'tag24.bin').read_bytes()) != 26:
             raise SystemExit('tag stub length changed')
         run([PY, str(HERE / 'build_tail.py')])
+        run([PY, str(HERE / 'build_sort_extension.py')])
+        run([PY, str(HERE / 'build_focus_wheel.py')])
+        run([PY, str(REPO / 'patches' / 'opus_swap' / 'build_content_route.py')])
         run([PY, str(HERE / 'build_theme.py')])
 
     output = a.output
@@ -103,6 +106,7 @@ def main():
          '--ecpatch-dir', str(a.ecpatch_dir),
          '--grow', f'31:code:{OUT / "payload31.bin"}',
          '--grow', f'24:code:{OUT / "tag24.bin"}',
+         '--grow', f'39:code:{OUT / "sort39.bin"}',
          '--tail', str(OUT / 'tail-full.bin'),
          '--theme-config', str(OUT / 'theme-full.json')]
         + (['--dac-filter', a.dac_filter] if a.dac_filter else [])

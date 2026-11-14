@@ -1,0 +1,10 @@
+# Original CE streaming OpusTags reader: .text.transfer.
+name: 0252-opus-tags-transfer
+kind: module
+module: 0
+region: code
+address: 0x306cec8
+expect: 4a68012303fa00f022ea00004860704712494a68012303fa00f01043486070470e498a68012303fa00f022ea0000886070470a498a68012303fa00f01043886070470648016821f00201016070470348016841f00201016070470000
+replace: f8b515460c4606462db3378b47b996f81d01f0b93046eaf755fad0b1378bc7b1bd4238bf2f46304634b121463a46e7f707ff70b13c4404e03946f6f75bf9002450b1308bed1bc01b3083706938447061dae7002400e001242046f8bd
+gate: stock bytes, resident census, real-card parser regression
+rationale: Parse OpusTags with bounded reads and UTF-16 output instead of entering the obsolete ASF tag reader.

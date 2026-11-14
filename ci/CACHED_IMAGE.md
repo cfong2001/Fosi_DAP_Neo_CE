@@ -3,9 +3,10 @@
 This is an offline binary-reproduction check for the payloads already
 embedded in the browser builder. It **does not compile the corresponding
 source** or prove that the embedded code corresponds to the current source.
-The combined image has known unresolved theater, playlist and redraw defects;
-a matching hash does not make it ready to install. Device capacity, firmware
-updates, playback and recovery remain unverified on hardware.
+The cached build is a reproduction mechanism rather than a hardware test.
+Standard CE has completed a full slot write/readback, boot and MP3 playback on
+a physical DAP Neo; remaining format, USB-mode, endurance and recovery checks
+are tracked in `release/FIRST_DEVICE_QUALIFICATION.md`.
 
 Prerequisites: Node.js and Python 3, the pinned stock V137 image and the local
 decoder inputs used by `patches/opus_swap/transplant.py`. Generate local Opus

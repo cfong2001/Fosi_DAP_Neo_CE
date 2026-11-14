@@ -46,7 +46,7 @@ cp patches/full/out/layout31.json /tmp/ce-recorded-layout31.json
 node ci/verify_composed_artifacts.mjs /tmp/ce-recorded-layout31.json
 ```
 
-The 6,532-byte module-31 SHA-256 must be
+The 6,616-byte module-31 SHA-256 must be
 `3f7e09cae9658c4cf21bfc4f9be92a037051f10a74e759f2e7fd8d4c0cac2aa9`.
 With local decoder inputs, build the complete recorded composition, using an
 output path that does not already exist:
@@ -60,9 +60,9 @@ sha256sum /absolute/path/to/new-ce-image.img
 
 The full build prints a large byte-diff report to the log. For the current
 recorded composition, the 2,040-byte merged tail SHA-256 must be
-`1443d354b9a388f156d23178eb302b7535e703b0e3295d8dc329cd7b71820f69`,
-and the 13,638,148-byte image SHA-256 must be
-`66d79d648bee93d71c3adfdf229434bed57b337c6f9448d3c90d82a4a10df8bf`.
+`a0bccfe19ecc842afbe1a57ba05d26ef56ab71a4632791c36523cf67c5708e55`,
+and the 13,639,684-byte image SHA-256 must be
+`8a9f32fc06ed2459ffd936a9203d6df6e665b273b49fb25e1083b0b96d8c5ce0`.
 These are regression pins for this revision, not permanent hashes for future
 changes. Any intentional source or artifact change requires review, updated
 pins and regenerated browser data, meaningful behavioral regression tests,
@@ -75,3 +75,12 @@ builds every image through `ci/build_release.sh`; see
 [`release/README.md`](../release/README.md). The separate
 [`CACHED_IMAGE.md`](CACHED_IMAGE.md) procedure reproduces a recorded binary
 from already-generated browser payloads; it is not a source build.
+
+The original OpusTags C reader uses the pinned LLVM-MinGW 22.1.3 compiler
+in the separate Windows CI job. That job regenerates its patches and
+requires byte equality. Other payloads use the existing reference toolchain.
+
+Screen-art text uses the vendored Barlow fonts with Pillow's Raqm shaping
+engine. The generator requires Raqm explicitly; Pillow's silent BASIC
+fallback produces different baked pixels. Linux reference CI supplies
+the pinned Pillow 11.3.0 wheel with Raqm.

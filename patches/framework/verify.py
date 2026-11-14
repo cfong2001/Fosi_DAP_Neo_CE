@@ -678,9 +678,9 @@ def main():
     # differ only at the theme runs, the mirrored header and
     # the trailer CRC once the growth shift is accounted for.
     FULL_DIR = HERE.parent / 'full'
-    FULL_SHA = '66d79d648bee93d71c3adfdf229434bed57b337c6f9448d3c90d82a4a10df8bf'
-    PAYLOAD_GROWTH = 6642       # module 31 + module 24 payloads
-    GROWTH_TOTAL = 6656         # plus 14 zeros that sector-align the mirror
+    FULL_SHA = '8a9f32fc06ed2459ffd936a9203d6df6e665b273b49fb25e1083b0b96d8c5ce0'
+    PAYLOAD_GROWTH = 7694       # module 31 + module 24 + module 39 payloads
+    GROWTH_TOTAL = 8192         # sector-aligned mirror
     if ecp is None:
         check('full build: composed image pinned, diff confined '
               'to the union of its parts, default unchanged', None,
@@ -697,7 +697,7 @@ def main():
                         '--ecpatch-dir', str(ecp)])
         ok = rf.returncode == 0 and ru.returncode == 0 \
             and fout.exists() and uout.exists()
-        detail = (rf.stderr + ru.stderr).strip()[:160]
+        detail = (rf.stderr + ru.stderr).strip()[-4000:]
         if ok:
             f, u = fout.read_bytes(), uout.read_bytes()
             from validate_grown import validate_grown
@@ -708,7 +708,7 @@ def main():
                 and struct.unpack_from('<I', f, 0x1F4)[0] == MIRROR_OFF + GROWTH_TOTAL \
                 and not any(f[MIRROR_OFF + PAYLOAD_GROWTH:MIRROR_OFF + GROWTH_TOTAL])
             rep = json.loads(Path(str(fout) + '.report.json').read_text())
-            rep_ok = len(rep["patches_applied"]) == 143 \
+            rep_ok = len(rep["patches_applied"]) == 175 \
                 and [t['module75_sha256'] if 'module75_sha256' in t
                      else t['module72_sha256']
                      for t in rep['transplants_applied']] == [
@@ -716,10 +716,10 @@ def main():
                     '6a7d50d2647c6623181e3cbbc16a13d2bd9a8724559d62c84f25b83ae8cbb07d'] \
                 and [(g['module'], g['payload_bytes'])
                      for g in rep['growth']] == [(31, 6616),
-                                                  (24, 26)] \
+                                                  (24, 26), (39, 1052)] \
                 and rep['tail']['payload_bytes'] == 2040 \
                 and rep['tail']['payload_sha256'] == \
-                '1443d354b9a388f156d23178eb302b7535e703b0e3295d8dc329cd7b71820f69'
+                'a0bccfe19ecc842afbe1a57ba05d26ef56ab71a4632791c36523cf67c5708e55'
             imgf, imgu = rk.Image(f), rk.Image(u)
 
             def segs(img, raw):
@@ -744,7 +744,12 @@ def main():
                     allow(key, p['address'] - base,
                           p['address'] - base + len(p['replace']))
             payloads = {(31, 'code'): FULL_DIR / 'out' / 'payload31.bin',
-                        (24, 'code'): FULL_DIR / 'out' / 'tag24.bin'}
+                        (24, 'code'): FULL_DIR / 'out' / 'tag24.bin',
+                        (39, 'code'): FULL_DIR / 'out' / 'sort39.bin'}
+            # The legacy reference used live sort scratch as code. Standard
+            # restores the stock zeros there and uses its explicit extension.
+            sort_base = sf[(39, 'code')][1]
+            allow((39, 'code'), 0x0309F000-sort_base, 0x0309F000-sort_base+1052)
             for key, path in payloads.items():
                 allow(key, len(su[key][2]),
                       len(su[key][2]) + path.stat().st_size)
@@ -792,7 +797,7 @@ def main():
             ok = pin_ok and rep_ok and confined and ext_ok \
                 and post_ok and default_ok
             detail = (f'whole-image pin and length (+{GROWTH_TOTAL}): '
-                      f'{pin_ok}; report pins (143 patches, both '
+                      f'{pin_ok}; report pins (175 patches, both '
                       f'transplant hashes, growths, tail): {rep_ok}; '
                       f'segment diff confined to the union of parts: '
                       f'{confined}; module 0 tail span (zero workspace '

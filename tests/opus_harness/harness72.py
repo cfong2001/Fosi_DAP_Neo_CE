@@ -61,9 +61,10 @@ import struct
 import sys
 from pathlib import Path
 
-WS = Path.home() / 'workspace/fosi-dap-neo'
-sys.path.insert(0, str(WS / 'work/harness'))
+ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT / 'patches/harness'))
 import harness as H  # noqa: E402
+WS = H.WS
 
 # ---- module 72 constants (0-based core-1 code view / absolute data VAs) ----
 SEND_CMD, SEND_PARAM, PRINTF = 0x103E0, 0x1040C, 0x902

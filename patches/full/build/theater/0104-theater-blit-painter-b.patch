@@ -8,4 +8,4 @@ address: 0x3083b94
 gate: stock byte precondition; variant-only patch, never in the default manifest; validated by test_theater_lifecycle.py under emulation
 rationale: Bitmap call in the artwork row consumer repointed to the theater trampoline in the gap tail. The trampoline calls the stock bitmap function with the original arguments and stack layout, then samples the rendered row into the top-third average when armed.
 expect: dff7d3fb
-replace: f8f708fc
+replace: f8f707fc

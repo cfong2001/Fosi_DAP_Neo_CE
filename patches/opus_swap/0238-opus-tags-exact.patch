@@ -1,0 +1,10 @@
+# Original CE streaming OpusTags reader: .text.exact.
+name: 0238-opus-tags-exact
+kind: module
+module: 0
+region: code
+address: 0x3054d08
+expect: f04f204ddde909c905eb4c03c2ebc20202eb42020ceb420205ebc20bb3f9a0a2b3f9a282b3f9f472b3f9f66255f832404d1edbf80830002918bf47f6ff7e19d0
+replace: 70b504460c4815460e468047d4e90101401a85420bd82268084b304629469847a84204d1a0682844a060012070bd012084f81e01002070bde1110603a98f0503
+gate: stock bytes, resident census, real-card parser regression
+rationale: Parse OpusTags with bounded reads and UTF-16 output instead of entering the obsolete ASF tag reader.

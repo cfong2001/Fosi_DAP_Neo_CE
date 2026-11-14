@@ -1,0 +1,10 @@
+# Original CE streaming OpusTags reader: .text.skip.
+name: 0247-opus-tags-skip
+kind: module
+module: 0
+region: code
+address: 0x30631bc
+expect: 374a0146107c884218bf11747047dff8c8c0acf80c00acf80e10bcf80600002807bfacf81020acf81230acf81030acf8
+replace: b0b5044608480d468047d4e90110091a8d4284bf0020b0bd2268044b28440021a06098470120b0bde1110603a1940503
+gate: stock bytes, resident census, real-card parser regression
+rationale: Parse OpusTags with bounded reads and UTF-16 output instead of entering the obsolete ASF tag reader.

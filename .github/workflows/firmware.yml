@@ -113,6 +113,12 @@ jobs:
       - name: Build the release set
         run: bash ci/build_release.sh "$RUNNER_TEMP/dist"
 
+      - name: Short diagnosed-repair metric gate
+        run: python tools/repair_metrics.py --candidate "$RUNNER_TEMP/dist/DP3_V137_CE.img" --output "$RUNNER_TEMP/repair-metrics.json"
+
+      - name: Runtime diagnostic utility preserves calls, buffers and inputs
+        run: python -m unittest discover -s tests -p test_runtime_diagnostics.py -v
+
       - name: Committed release images match the rebuild
         run: |
           cd release
@@ -161,10 +167,38 @@ jobs:
           retention-days: 30
           if-no-files-found: error
 
+  opus-tags-source:
+    name: Verify OpusTags source with pinned LLVM 22.1.3
+    runs-on: windows-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install assembly verification tools
+        run: python -m pip install capstone==5.0.7 keystone-engine==0.9.2
+      - name: Install hash-pinned LLVM reference compiler
+        shell: pwsh
+        run: |
+          $archive = Join-Path $env:RUNNER_TEMP 'llvm-mingw-reference.zip'
+          $target = Join-Path $env:RUNNER_TEMP 'llvm-mingw-reference'
+          if (Test-Path -LiteralPath $target) { throw 'Reference directory already exists' }
+          Invoke-WebRequest 'https://github.com/mstorsjo/llvm-mingw/releases/download/20260407/llvm-mingw-20260407-ucrt-x86_64.zip' -OutFile $archive
+          if ((Get-FileHash -LiteralPath $archive -Algorithm SHA256).Hash.ToLower() -ne '3fc6e54b5f1102089d4d37095ba49f7b24e22290da78178b514a86b3126c6d9e') { throw 'LLVM archive hash mismatch' }
+          Expand-Archive -LiteralPath $archive -DestinationPath $target
+          $compiler = @(Get-ChildItem -LiteralPath $target -Filter clang.exe -Recurse)
+          if ($compiler.Count -ne 1) { throw 'Expected exactly one reference compiler' }
+          $compiler[0].DirectoryName | Out-File -FilePath $env:GITHUB_PATH -Append
+      - name: Rebuild and compare committed OpusTags patches
+        run: |
+          python patches/opus_swap/build_tags.py
+          git diff --exit-code -- patches/opus_swap
+
   release:
     name: Publish GitHub release
     if: startsWith(github.ref, 'refs/tags/v')
-    needs: build
+    needs: [build, opus-tags-source]
     runs-on: ubuntu-24.04
     permissions:
       contents: write

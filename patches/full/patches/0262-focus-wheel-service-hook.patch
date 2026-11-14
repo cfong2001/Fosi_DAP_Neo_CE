@@ -1,0 +1,10 @@
+# Player wheel responsiveness: service-hook.
+name: 0262-focus-wheel-service-hook
+kind: module
+module: 27
+region: code
+address: 0x307dfda
+expect: 2de9f043
+replace: d3f707b9
+gate: stock bytes; service-entry wheel wake and ABI regression
+rationale: Detect wheel changes on every player service pass. Wake hidden controls immediately without waiting for the progress repaint cadence; preserve stock progress timing and original service prologue.

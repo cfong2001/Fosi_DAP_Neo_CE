@@ -1,0 +1,10 @@
+# Player wheel responsiveness: poll.
+name: 0260-focus-wheel-poll
+kind: module
+module: 0
+region: code
+address: 0x305048c
+expect: 0120704770b524490023164651f82040236051f8205002f077f84ff47a71b0fbf1f1f0000144491eb1fbf0f0801e0028bcbf0020
+replace: 10b50a4c0a480068616888420dd0606016f047f92060207a38b100202072392016f0c6fe3b2016f0c3fe10bd843402037c310203
+gate: stock bytes; service-entry wheel wake and ABI regression
+rationale: Detect wheel changes on every player service pass. Wake hidden controls immediately without waiting for the progress repaint cadence; preserve stock progress timing and original service prologue.

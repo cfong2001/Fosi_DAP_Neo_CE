@@ -1,0 +1,10 @@
+# Original CE streaming OpusTags reader: .text.page_sequence.
+name: 0250-opus-tags-page_sequence
+kind: module
+module: 0
+region: code
+address: 0x30673dc
+expect: 0e2824d2dfe800f007090b0d0f11131517191b1d1f2124a0704726a0704728a070472aa070472ba070472ca070472da070472ea070472fa0704730a0704731a0704733a0704733a0704734a07047
+replace: b0b5054690f81f010c4628b128462146bde8b040fcf7d2bf04f10e00ebf74efce968884211d104f11200ebf747fc296901318842296108d169696079b1fa81f14909484000f00100b0bd0020b0bd
+gate: stock bytes, resident census, real-card parser regression
+rationale: Parse OpusTags with bounded reads and UTF-16 output instead of entering the obsolete ASF tag reader.

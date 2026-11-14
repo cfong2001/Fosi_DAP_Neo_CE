@@ -1,0 +1,10 @@
+# Opus content routing: signature.
+name: 0264-opus-content-signature
+kind: module
+module: 0
+region: code
+address: 0x3065534
+expect: 104887b000f1280191e80e108de80e10d0e90e10cde904101548002141600b49c97d5df8211081600948017800291cbf
+replace: 09a3082112f8010b13f801cb604501d007f04fb80139f5d14f202870502068705520a87002f0b5bf4f70757348656164
+gate: stock bytes; content-detector Opus/Vorbis negative control, read bounds and codec-loader regression
+rationale: The stock file-content probe overwrites OPU with OGG for every OggS stream. Recognize a bounded BOS OpusHead packet before that overwrite; retain native Vorbis detection and the original final seek reset. Requires Standard CE OpusTags routing, which releases the ASF-specific tag case.

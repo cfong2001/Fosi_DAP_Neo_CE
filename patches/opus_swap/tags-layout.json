@@ -1,0 +1,102 @@
+{
+  ".text.page_sequence": {
+    "address": 50754524,
+    "bytes": 78
+  },
+  ".text.codepoint": {
+    "address": 50678744,
+    "bytes": 118
+  },
+  ".text.headers": {
+    "address": 50670628,
+    "bytes": 116
+  },
+  ".text.tags": {
+    "address": 50684572,
+    "bytes": 98
+  },
+  ".text.comment": {
+    "address": 50667008,
+    "bytes": 96
+  },
+  ".text.transfer": {
+    "address": 50777800,
+    "bytes": 92
+  },
+  ".text.opus_tags": {
+    "address": 50778104,
+    "bytes": 88
+  },
+  ".text.value": {
+    "address": 50736100,
+    "bytes": 74
+  },
+  ".text.page": {
+    "address": 50683252,
+    "bytes": 72
+  },
+  ".text.exact": {
+    "address": 50679048,
+    "bytes": 64
+  },
+  ".text.field_album": {
+    "address": 50753696,
+    "bytes": 64
+  },
+  ".text.utf16": {
+    "address": 50778720,
+    "bytes": 64
+  },
+  ".text.valid_point": {
+    "address": 50675568,
+    "bytes": 64
+  },
+  ".text.next_packet": {
+    "address": 50686080,
+    "bytes": 58
+  },
+  ".text.equal": {
+    "address": 50706980,
+    "bytes": 52
+  },
+  ".text.field": {
+    "address": 50714836,
+    "bytes": 52
+  },
+  ".text.segment": {
+    "address": 50688908,
+    "bytes": 50
+  },
+  ".text.first_page": {
+    "address": 50742168,
+    "bytes": 48
+  },
+  ".text.skip": {
+    "address": 50737596,
+    "bytes": 48
+  },
+  ".text.store_point": {
+    "address": 50757388,
+    "bytes": 48
+  },
+  ".rodata.str1.1": {
+    "address": 50667828,
+    "bytes": 43
+  },
+  ".text.lead": {
+    "address": 50660772,
+    "bytes": 38
+  },
+  ".text.page_header": {
+    "address": 50716644,
+    "bytes": 32
+  },
+  ".text.word": {
+    "address": 50663884,
+    "bytes": 30
+  },
+  ".text.le32": {
+    "address": 50670744,
+    "bytes": 4
+  }
+}

@@ -1,5 +1,22 @@
 # Changelog
 
+## 2026-11-13: First device flash and outlined orange selector
+
+- Standard CE was written to both measured firmware slots on a physical DAP
+  Neo. Complete 13 MiB readback of each slot matched before reset. The player
+  booted, played music, displayed embedded album artwork and exposed the custom
+  settings.
+- The progress-position selector keeps the CE orange fill and gains a
+  two-pixel contrasting stroke: white in the dark theme and black in the light
+  theme. The outer circle and inner fill boundary are supersampled separately,
+  baking antialiasing into both edges for cover-derived backgrounds.
+- Standard image SHA-256
+  `8a9f32fc06ed2459ffd936a9203d6df6e665b273b49fb25e1083b0b96d8c5ce0`;
+  its only firmware-resource changes from the preceding release are selector
+  resources 220 and 386, plus the outer package CRC.
+- Repository warnings now report the completed physical flash directly and
+  retain only named checks that are still open.
+
 ## 2026-11-12: Letter spacing, stronger cover contrast, inverted progress bar
 
 - Letters in both system fonts advance by their drawn width. Stock
@@ -837,3 +854,8 @@ after the redraft:
   stays open for the hardware phase. The paragraph previously
   said the build step was not landed, contradicting the same
   file's build consumer section.
+# Pending hardware verification
+
+- Restore transport focus with orange glyph fill and a thin contrasting outline.
+  Remap the shared base arrow so its second draw cannot leave a floating edge.
+- Cache the cover-derived theater color and restore it during player construction.

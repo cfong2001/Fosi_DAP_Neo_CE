@@ -14,7 +14,7 @@ import {PRESETS} from "./builder-presets.mjs";
 import {THEATER_PATCHES, THEATER_TAIL} from "./builder-theater.mjs";
 import {BT_PATCH, LOCK_PATCH, TITLE_PATCHES, bluetoothTail, lockscreenPayload, combineTails, theaterTail, combineWithTheater} from "./builder-experimental.mjs";
 import {BT_PAYLOAD, LOCK_PAYLOAD} from "./builder-payloads.mjs";
-import {FULL_EXTRA_PATCHES, FULL_TAIL, FULL_GROWTHS, FULL_THEME_RUNS, FULL_IMAGE_SHA256} from "./builder-full.mjs";
+import {FULL_PATCHES, FULL_TAIL, FULL_GROWTHS, FULL_THEME_RUNS, FULL_IMAGE_SHA256} from "./builder-full.mjs";
 import {sha256} from "./theme-core.mjs";
 import {githubUrl, repoFromLocation} from "./repo.mjs";
 import {SLOTS, NAME_MAX, bandTable, parseCurve, fit, slotPatches, namePatches} from "./eq-core.mjs";
@@ -317,12 +317,12 @@ async function build() {
   try {
     if (mode() === "all") {
       const result = await buildFirmware(firmware.bytes,
-        {groups: new Set(PATCH_GROUPS.map(g => g.id)),
-         patchGroups: PATCH_GROUPS, vorbis: VORBIS75, opus: await opusData(),
-         opusPatches: OPUS_PATCHES,
+        {groups: new Set(),
+         patchGroups: [], vorbis: VORBIS75, opus: await opusData(),
+         opusPatches: [],
          themeConfig: {version: 1, runs: FULL_THEME_RUNS},
          tailPayload: await fullTailPayload(),
-         extraPatches: [...FULL_EXTRA_PATCHES, ...filterPatches],
+         extraPatches: [...FULL_PATCHES, ...filterPatches],
          growths: await fullGrowthPayloads()},
         sha256);
       download("DP3_V137_CE_full.img", result.bytes);
@@ -331,8 +331,8 @@ async function build() {
         (filterPatches.length
           ? " (the Standard image " + FULL_IMAGE_SHA256.slice(0, 12) + "… plus" + filterNote.slice(1) + "). "
           : ", identical to the Standard image. ") +
-        "It is 6,656 bytes longer than stock; no longer-than-stock image has been " +
-        "installed yet. It is now selected in Install CE at the top of the page; " +
+        "It is " + (result.bytes.length - firmware.bytes.length).toLocaleString() +
+        " bytes longer than stock. It is now selected in Install CE at the top of the page; " +
         "installing it is at your own risk.", "good");
       return;
     }

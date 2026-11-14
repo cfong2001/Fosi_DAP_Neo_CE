@@ -1,0 +1,10 @@
+# Original CE streaming OpusTags reader: .text.le32.
+name: 0235-opus-tags-le32
+kind: module
+module: 0
+region: code
+address: 0x3052c98
+expect: 001fc0b2
+replace: 00687047
+gate: stock bytes, resident census, real-card parser regression
+rationale: Parse OpusTags with bounded reads and UTF-16 output instead of entering the obsolete ASF tag reader.

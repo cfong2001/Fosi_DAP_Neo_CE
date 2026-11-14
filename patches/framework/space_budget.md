@@ -12,12 +12,13 @@ outside the homes listed here.
 | Home | Capacity | Occupants | Spare |
 |---|---|---|---|
 | Module 0 stub-farm caves | about 84 B of verified-dead stub slots | DAC fix trampoline (14 B, patch 0002), gapless gate, its tail, core-1 flag literal and state (48 B, patches 0020 to 0026), gapless warm start (16 B at 0x03051504, patch 0034) | 14 B: the old three scraps (4 + 2 + 2), 0x030514FE (2 B) and 0x03051514 to 0x03051517 (4 B) |
-| Module 39 sort cave (0x0309F000) | 1,196 B | Natural sort blob, 1,052 B (patch 0031) | about 140 B |
-| Gap tail (exec 0x0307BFB4 to 0x0307C7B0) | 2,044 B | Full build: M3U staging 552 B (zeros), focus mode 340 B, theater 676 B, Bluetooth toggle 436 B | 40 B (36 free after focus, 4 spare) |
-| Module 31 segment extension (exec 0x0307EE48 to 0x03080B54) | 7,436 B | Browser-hook trampoline 64 B (patch 0040), M3U bridge plus parser linked together 6,644 B, lock-screen routine 406 B (patch 0033) | 322 B |
+| Former module 39 sort cave (0x0309F000) | Not available | Inside a live 64 KiB scratch array cleared by stock library initialization | No code may be allocated here |
+| Module 39 explicit code extension (0x0309F4AC) | 1,052 B | Standard natural-sort prefix builder, comparator and fold table | Fully allocated |
+| Gap tail (exec 0x0307BFB4 to 0x0307C7B0) | 2,044 B | Full build: M3U staging 552 B, focus 340 B, constructor restore 26 B, theater 680 B, Bluetooth 436 B, alignment 6 B | 4 B |
+| Module 31 segment extension (exec 0x0307EE48 to 0x03080B54) | 7,436 B | Combined pinned browser/playlist/lock-screen/navigation payload, 6,616 B | 820 B |
 | Module 32 segment extension (exec 0x030804AC to 0x03080B54) | 1,704 B | Unused. The earlier battery-profile blob (540 B, `patches/power/build/`) was never stacked; the power profile item now lives in module 0 pockets | 1,704 B |
 | Module 0 dead-code pockets ([`patches/space/`](../space/README.md)) | 8,508 B in 150 pockets, largest 256 B; 5,530 B in pockets of 64 B or more | Playlist hooks (216 B at 0x0306C878), theater no-art exits (100 B at 0x03063CDC), transport ground wrapper (52 B at 0x030539B4), power profile lookups (104 B at 0x0305168C), value hook and presets (76 B at 0x03054668), commit hook (60 B at 0x03067064); patches 0047 to 0049 and 0140, 0141, 0146 in the full build | about 7,900 B; a hardware tripwire build is still the proof |
-| SAVEINFO verbatim block (+0x1C7 to +0x2D5) | about 270 B of settings space | Nothing: the power profiles store no state of their own | about 270 B |
+| SAVEINFO verbatim block (+0x1C7 to +0x2D5) | about 270 B of settings space | Theater at +0x1C8 (28 B), focus at +0x1E4 (12 B), optional browser diagnostic at +0x1F0 (4 B); profiles use stock settings only | Preserve these explicit owners |
 | Image resource padding (after the images section, before the header mirror) | 4,592 B | Power profile records: four 58-byte headers and 84 label slots of 48 B (4,264 B) | 328 B |
 
 The two segment extensions overlap in exec space: the module 31
@@ -33,6 +34,18 @@ Phase E window-cycle soak, which cycles every window including
 USB and settings and verifies the extension bytes after.
 
 ## Delivery mechanisms, one per home class
+
+The optional runtime diagnostic image reserves 100 bytes at `0x0306D304`,
+64 at `0x030643C8`, and 56 at `0x03061638`, within censused pockets.
+Its four-byte last-browser trace is at `SAVEINFO+0x1F0` (`0x03023490`),
+immediately after the theater/focus state. These sites are not allocated
+by the normal release. The utility refuses occupied sites and preserves
+the input; see [runtime diagnostics](../../release/RUNTIME_DIAGNOSTICS.md).
+
+Standard's Opus content detector also owns 66 bytes in the released ASF
+tag case at `0x0306C5B0` and 48 bytes at `0x03065534`. These are code,
+not tag-parser allocator space. The bounded checks preserve the native
+Vorbis route and final seek reset.
 
 - In-segment caves take ordinary manifest patches. Nothing about
   them changes the image length or any module record.

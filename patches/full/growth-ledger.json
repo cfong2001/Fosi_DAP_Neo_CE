@@ -10,6 +10,11 @@
       "module": 24,
       "length": 26,
       "sha256": "7b80afb308d276a4d0012cd4302f7a5f2a1c5192a1f2e70d3f23867e195a942a"
+    },
+    {
+      "module": 39,
+      "length": 1052,
+      "sha256": "f388c301f6ad4f16d00eaf8e10d565998768cb90b1938c4f32ffc7201afbc3b9"
     }
   ]
 }

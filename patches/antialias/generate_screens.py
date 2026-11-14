@@ -17,9 +17,10 @@ draw code changes. Every target keeps its stock size and byte length.
                  its white ground
   CE mark        the splash mark on 127 (black) and 293 (white), smooth
                  text in the accent; written to ../theme_editor/ce-mark.json
-  progress knob  220 (dark) and 386 (light) as a keyed disc with a soft
-                 edge; patches/full/patches/0118 draws it through the keyed
-                 helper, so the cover-derived ground shows around it
+  progress knob  220 (dark) and 386 (light) as an orange keyed disc with a
+                 contrasting theme-aware stroke. Both circle boundaries are
+                 supersampled; patches/full/patches/0118 draws it through the
+                 keyed helper, so the cover-derived ground shows around it
                  instead of the stock art's baked dark square
   progress bar   the 1x6 columns the player repeats along the bar, 187/188
                  (dark) and 353/354 (light): the top and bottom rows are
@@ -93,7 +94,13 @@ class Layer:
         self.d.polygon([(x * S, y * S) for x, y in pts], fill=fill)
 
     def text(self, xy, s, font_path, size, anchor):
-        f = ImageFont.truetype(font_path, size * S)
+        # The reference artifacts use Raqm shaping. Pillow silently falls
+        # back to BASIC on platforms without Raqm, changing baked pixels.
+        # Require the same engine instead of producing a different image.
+        from PIL import features
+        if not features.check_feature('raqm'):
+            raise RuntimeError('screen-art source build requires Pillow with Raqm (the reference Linux CI environment)')
+        f = ImageFont.truetype(font_path, size * S, layout_engine=ImageFont.Layout.RAQM)
         self.d.text((xy[0] * S, xy[1] * S), s, font=f, fill=255, anchor=anchor)
 
     def coverage(self):
@@ -209,19 +216,26 @@ def progress_column(r, ink, ground):
         r.set(0, y, ink if c == 1 else blend(ink, target, c))
 
 
-def knob(r, ink, ground):
-    """The 14x14 progress knob as a keyed disc: outside the disc is the
-    key, the edge blends toward a neutral grey as bright as the theme
-    ground. Drawn keyed by patch 0118 (full build), over the bar area the
-    player has just refilled with the ground."""
-    disc = Layer(14, 14)
-    disc.d.ellipse([0, 0, 14 * S - 1, 14 * S - 1], fill=255)
-    cov = disc.coverage()
+def knob(r, fill, stroke, ground):
+    """The 14x14 CE progress selector: orange fill, a two-pixel contrasting
+    stroke and a keyed exterior. The outer circle and the fill/stroke circle
+    are separately supersampled, so antialiasing is baked into both edges.
+    Drawn keyed by patch 0118 over the cover-derived player ground."""
+    outer = Layer(14, 14)
+    outer.d.ellipse([0, 0, 14 * S - 1, 14 * S - 1], fill=255)
+    inner = Layer(14, 14)
+    inner.d.ellipse([2 * S, 2 * S, 12 * S - 1, 12 * S - 1], fill=255)
+    outer_cov, inner_cov = outer.coverage(), inner.coverage()
     target = neutral(ground)
     for y in range(14):
         for x in range(14):
-            c = cov[y][x]
-            r.set(x, y, KEY if c < 1 / 16 else ink if c >= 15 / 16 else blend(ink, target, c))
+            oc, ic = outer_cov[y][x], inner_cov[y][x]
+            if oc < 1 / 16:
+                pixel = KEY
+            else:
+                edge = stroke if oc >= 15 / 16 else blend(stroke, target, oc)
+                pixel = fill if ic >= 15 / 16 else edge if ic < 1 / 16 else blend(fill, edge, ic)
+            r.set(x, y, pixel)
 
 
 def main():
@@ -230,9 +244,10 @@ def main():
     E = {e['id']: e for e in FW(raw).images()}
     out = {}
 
-    for rid, ink, ground in ((220, 0xF220, 0x7222), (386, 0xFB20, 0xBEFA)):
+    for rid, fill, stroke, ground in ((220, 0xF220, 0xFFFF, 0x7222),
+                                      (386, 0xFB20, 0x0000, 0xBEFA)):
         out[rid] = r = Res(raw, E[rid])
-        knob(r, ink, ground)
+        knob(r, fill, stroke, ground)
 
     for rid, (card, behind) in CARDS.items():
         out[rid] = r = Res(raw, E[rid])

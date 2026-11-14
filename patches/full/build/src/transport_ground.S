@@ -31,6 +31,23 @@
     .global transport_keyed_draw
     .type transport_keyed_draw, %function
 transport_keyed_draw:
+    /* In B>=2 the first painter call uses 157 at x=0 for the base left
+       arrow, while the computed focus call uses the same id at x=4. Keep
+       the base draw bare by substituting its identical bare resource 162;
+       resource 157 can then carry the orange focused-glyph treatment. */
+    cmp     r0, #157
+    bne     2f
+    cmp     r1, #0
+    bne     1f
+    movs    r0, #162
+    b       1f
+2:
+    /* The second page's focused left arrow shares the bare resource ID.
+       Only the computed draw passes it here, so reuse selected arrow 157. */
+    cmp     r0, #162
+    it      eq
+    moveq   r0, #157
+1:
     push    {r0, r1, r2, lr}
     sub     sp, #8
     ldr     r3, =GROUND
@@ -52,4 +69,7 @@ transport_keyed_draw:
     b.w     HELPER
     .size transport_keyed_draw, . - transport_keyed_draw
 
+    /* GNU as otherwise uses a Thumb NOP for literal-pool alignment;
+       LLVM uses zeros. Pin the unused padding for identical source builds. */
+    .balign 4, 0
     .ltorg

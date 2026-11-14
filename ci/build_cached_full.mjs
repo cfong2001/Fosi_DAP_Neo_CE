@@ -6,7 +6,7 @@ import {buildFirmware, hexToBytes} from '../docs/builder-core.mjs';
 import {PATCH_GROUPS} from '../docs/builder-data.mjs';
 import {VORBIS75} from '../docs/builder-vorbis.mjs';
 import {OPUS_PATCHES} from '../docs/builder-opus.mjs';
-import {FULL_EXTRA_PATCHES, FULL_TAIL, FULL_GROWTHS, FULL_THEME_RUNS, FULL_IMAGE_SHA256} from '../docs/builder-full.mjs';
+import {FULL_PATCHES, FULL_TAIL, FULL_GROWTHS, FULL_THEME_RUNS, FULL_IMAGE_SHA256} from '../docs/builder-full.mjs';
 import {writeNewOutput} from './exclusive_output.mjs';
 
 const args = process.argv.slice(2);
@@ -30,14 +30,14 @@ for (const growth of FULL_GROWTHS) {
   growths.push({module: growth.module, payload});
 }
 const result = await buildFirmware(stock, {
-  groups: new Set(PATCH_GROUPS.map(group => group.id)),
-  patchGroups: PATCH_GROUPS,
+  groups: new Set(),
+  patchGroups: [],
   vorbis: VORBIS75,
   opus,
-  opusPatches: OPUS_PATCHES,
+  opusPatches: [],
   themeConfig: {version: 1, runs: FULL_THEME_RUNS},
   tailPayload: tail,
-  extraPatches: FULL_EXTRA_PATCHES,
+  extraPatches: FULL_PATCHES,
   growths,
 }, sha256);
 if (result.sha256 !== FULL_IMAGE_SHA256)

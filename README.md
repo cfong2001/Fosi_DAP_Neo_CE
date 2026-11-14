@@ -2,7 +2,7 @@
 
 CE (Community Edition) is patched firmware for the Fosi Audio DAP Neo. It starts from the stock V137 update image and changes what the player draws, how it decodes and sorts music, and what it can play. Every change is a byte patch or module transplant with tests behind it, and CI rebuilds the release images from source on every change.
 
-> **Not yet tested on hardware.** No CE image has been flashed to a device. Each change passes host tests and Unicorn emulation of the firmware's own code, which is evidence, not proof. Read [Safety and recovery](#safety-and-recovery) before you install anything.
+> **Flashed and running on physical hardware.** Standard CE has booted on a DAP Neo, played music, displayed embedded album artwork and exposed its custom settings. Both 13 MiB firmware regions matched a complete Rockusb readback before reboot. Read [Safety and recovery](#safety-and-recovery) for the measured backup and rollback limits.
 
 ![Stock player beside the CE player](media/player.png)
 
@@ -21,11 +21,11 @@ CE (Community Edition) is patched firmware for the Fosi Audio DAP Neo. It starts
 
 | Image | What it carries | SHA-256 |
 |---|---|---|
-| [`DP3_V137_CE.img`](release/DP3_V137_CE.img) | Standard: every feature below. 6,656 bytes longer than stock. | `66d79d648bee93d71c3adfdf229434bed57b337c6f9448d3c90d82a4a10df8bf` |
+| [`DP3_V137_CE.img`](release/DP3_V137_CE.img) | Standard: every feature below. 8,192 bytes longer than stock. | `8a9f32fc06ed2459ffd936a9203d6df6e665b273b49fb25e1083b0b96d8c5ce0` |
 | [`DP3_V137_CE_minimal.img`](release/DP3_V137_CE_minimal.img) | Minimal: audio and library fixes only, same length as stock. | `0dfd10e23749f9b6c65499266f1a7a2ec038160b089ba0fc2ca68dcf2b24c986` |
 | [`DP3_V137_CE_recovery.img`](release/DP3_V137_CE_recovery.img) | Stock code dated one day after CE, for going back. | `aff851b31d6eee55cbd4bb3fc0464ac79f0039ee86ae6723225ac036a157d223` |
 
-Start with the standard image. Use the minimal one if the standard image does not install (no image longer than stock has been installed yet), or if you play WMA files.
+Standard CE has been installed and booted on hardware. The current scan and responsiveness repair still needs full-card acceptance; see [repair validation](release/REPAIR_VALIDATION.md). Minimal retains WMA support.
 
 Complete the [flash review and recovery gates](release/FLASH_REVIEW.md) before writing anything to a player. The [install page](https://cfong2001.github.io/Fosi_DAP_Neo_CE/) checks the image's SHA-256 and copies it to the player's storage as `RKNANOFW.IMG`; you then run the update on the device. To do it by hand, rename the image to `RKNANOFW.IMG` (including the .IMG extension), copy it to the top level of the player's storage, run the update the way you would an official Fosi update, and delete the file afterwards. [`release/README.md`](release/README.md) has the full steps, a testing order and recovery.
 
@@ -175,21 +175,21 @@ Start with [`platform_architecture.md`](analysis/platform_architecture.md) for t
 Read the [current flash review and recovery plan](release/FLASH_REVIEW.md) first.
 The bundled V137 recovery is older than official V155; use the offline
 preparation tool to produce a correctly dated recovery from the official
-firmware matching your device. First-flash device qualification remains open.
+firmware matching your device. The first-flash qualification record is in [`release/FIRST_DEVICE_QUALIFICATION.md`](release/FIRST_DEVICE_QUALIFICATION.md).
 
-- Nothing here has been tested on hardware. Treat every image as unproven.
+- Standard CE has been flashed, read back in full, booted and used for music playback on a physical DAP Neo. Features not exercised by that first session retain their specific hardware caveats.
 - The slot validator boots the slot whose image has the strictly newer BCD header date; on a tie it boots slot 1. It checks a header marker and an unkeyed CRC and verifies no signature ([`boot_slots.md`](analysis/boot_slots.md)).
 - The stock installer writes the update to slot 2 and then copies slot 2 over slot 1, so after a stock-path install both slots hold CE and no stock copy remains on the device.
 - To go back, install the recovery image the same way. It is stock code dated 2026-10-24, one day after CE (2026-10-23), so the validator selects it; plain stock (2026-10-22) is older than CE and would not replace it.
 - The boot validator reads the header copy by 512-byte sector. Standard images built before 2026-11-11 (pin `db0a11d2…` and earlier longer-than-stock pins) put that copy partway into a sector, so neither slot would likely validate. Do not flash them. Current builds pad the copy onto a sector boundary, and the validators refuse one that is not. The minimal and recovery images are stock length and were never affected.
-- If the player does not boot, recovery needs the Rockchip USB (Rockusb) tools. How Rockusb logical block addresses map to the validator's slot sectors is still unproven.
+- If the player does not boot, recovery uses Rockchip USB (Rockusb). On the qualified unit, slot 1 begins at LBA 0 and slot 2 at LBA 30720; both 13 MiB CE payloads were written and read back byte-for-byte. Full stock-recovery boot is still to be exercised.
 - The proposed dual-image layout keeps stock in one slot and CE in the other. Its physical map and fallback are unverified; never corrupt a slot header as a recovery method. On such a unit the stock update flow must never run, because it would copy slot 2 over the stock fallback; keep update files off the card.
 
 ## Status and open work
 
 Every feature in the tables above is built, merged and reproduced by CI. Open work, in the order it unblocks other work:
 
-1. Hardware phase, in order: read back the candidate slot sectors over Rockusb before any write; confirm the standard image (longer than stock) installs and both slots validate; decode APE and DSD128 first (the clock table's unmeasured loads); a canary build for the gap tail code home; a window-cycle soak for the grown module 31 that carries playlists and the lock screen; observing the gapless transition on the system side; and a tripwire build that halts if any of the unused module 0 code ever runs ([`patches/space/`](patches/space/README.md)). Checks that need only a device and headphones: unplugging headphones should pause stock ([`ui_controls.md`](analysis/ui_controls.md) §1.7), stock should turn Bluetooth off after 5 minutes unconnected, and stock's Classical, Bass Boost and Heavy Metal presets should sound like Pop, Jazz and no EQ.
+1. Hardware phase: the complete accessible flash was read twice, the measured slots were written and read back in full, and Standard CE booted and played an MP3 with embedded artwork. Next, decode APE and DSD128 (the clock table's unmeasured loads); a canary build for the gap tail code home; a window-cycle soak for the grown module 31 that carries playlists and the lock screen; observing the gapless transition on the system side; and a tripwire build that halts if any of the unused module 0 code ever runs ([`patches/space/`](patches/space/README.md)). Checks that need only a device and headphones: unplugging headphones should pause stock ([`ui_controls.md`](analysis/ui_controls.md) §1.7), stock should turn Bluetooth off after 5 minutes unconnected, and stock's Classical, Bass Boost and Heavy Metal presets should sound like Pop, Jazz and no EQ.
 2. Power profiles on hardware: confirm the new item draws and selects in the settings list, and measure what each profile saves. Clock and wheel-timer levers stay out of the profiles until their effects are measured, since lowering decoder clocks below Rockchip's figures is not safe.
 3. Theme follow-through: background and text are still resource-only, because the palette routine loads them from one shared register pair and swaps it per scheme; and check whether any window other than the player calls the shared artwork setup that theater mode hooks.
 4. Space: the playlist, theater no-art and transport hooks (368 bytes) and the power profile code (240 bytes) now live in unused stock code in module 0, which freed the gap tail for focus mode. The rest of that unused code can hold text smoothing for the 1-bit fonts (about 200 bytes) and the lock-screen and Bluetooth routines. A tripwire build on hardware is still the proof those pockets are dead. The browser marquee needs 6,992 bytes, more than all the pockets of 64 bytes or larger put together (5,530), so it still fits only if playlists and the lock screen leave module 31. The trade-offs are in [`patches/full/README.md`](patches/full/README.md#space-decisions-for-the-owner).

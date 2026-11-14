@@ -1,6 +1,6 @@
 # Dual-slot operation and the road to standalone firmware, Fosi DAP Neo (DP3_V137)
 
-> **Correction:** Later instruction-level review found errors in the slot-scan, updater mirror-seek, and device-3 subdevice-offset descriptions. See [the slot capacity investigation](slot_reclamation/report.md) before relying on this document. Physical slot geometry and recovery behavior remain unverified.
+> **Correction:** Later instruction-level review found errors in the slot-scan, updater mirror-seek, and device-3 subdevice-offset descriptions. See [the slot capacity investigation](slot_reclamation/report.md) before relying on this document. The first qualified device measured Rockusb slot bases at LBA 0 and 30720 and completed full CE readback; stock-recovery boot remains to be exercised.
 
 Plan built on the Phase 2 mechanics in `boot_slots.md`,
 `core1_loader_protocol.md`, `modules_round2.md`, and

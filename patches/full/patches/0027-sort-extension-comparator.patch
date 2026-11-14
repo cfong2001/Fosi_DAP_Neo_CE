@@ -1,0 +1,10 @@
+# Natural-sort hook into explicit module 39 extension.
+name: 0027-sort-extension-comparator
+kind: module
+module: 39
+region: code
+address: 0x307d620
+expect: 2de9f047
+replace: 21f044bf
+gate: stock-byte precondition; sort-buffer lifecycle regression
+rationale: Keep natural-sort code beyond all live scratch buffers, which are cleared during every library rebuild. Requires the module 39 code extension.

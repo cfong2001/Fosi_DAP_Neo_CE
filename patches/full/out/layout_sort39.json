@@ -1,0 +1,8 @@
+{
+  "base": "0x309f4ac",
+  "bytes": 1052,
+  "sha256": "f388c301f6ad4f16d00eaf8e10d565998768cb90b1938c4f32ffc7201afbc3b9",
+  "stock_scratch_end": "0x309f4ac",
+  "comparator": "0x309f4ac",
+  "prefix_builder": "0x309f562"
+}

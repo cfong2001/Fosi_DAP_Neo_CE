@@ -1,0 +1,10 @@
+# Opus content routing: hook.
+name: 0265-opus-content-hook
+kind: module
+module: 0
+region: code
+address: 0x3068452
+expect: 4f202870
+replace: 04f0adb8
+gate: stock bytes; content-detector Opus/Vorbis negative control, read bounds and codec-loader regression
+rationale: The stock file-content probe overwrites OPU with OGG for every OggS stream. Recognize a bounded BOS OpusHead packet before that overwrite; retain native Vorbis detection and the original final seek reset. Requires Standard CE OpusTags routing, which releases the ASF-specific tag case.

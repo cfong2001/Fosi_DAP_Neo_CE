@@ -1,0 +1,10 @@
+# Opus content routing: prefix.
+name: 0263-opus-content-prefix
+kind: module
+module: 0
+region: code
+address: 0x306c5b0
+expect: 2d4802a900780028484604d01ef0d0ff002848d102e011f0b5fdf9e7402202a906f25a30fbf786ff402202ac62a906f16000fbf77fff402204f5207106f5af70fbf7
+replace: 40461b30b0f5007f15d8a17e99b122461b320a4408441330b0f5007f0bd8207948b9607900f00300022804d1e07e132801d3f8f7a7bf4f20287047206870fbf75abf
+gate: stock bytes; content-detector Opus/Vorbis negative control, read bounds and codec-loader regression
+rationale: The stock file-content probe overwrites OPU with OGG for every OggS stream. Recognize a bounded BOS OpusHead packet before that overwrite; retain native Vorbis detection and the original final seek reset. Requires Standard CE OpusTags routing, which releases the ASF-specific tag case.

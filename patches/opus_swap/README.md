@@ -1,10 +1,11 @@
 # Opus decoder transplant (module 72)
 
-Status: **opt-in**. This transplant is not in the default build,
-and the five classifier rename patches that complete it are not
-in the default manifest. Do not enable it by halves: the
-transplant and the renames are a matched set (see the
-matched-set rules in manifest.txt and transplants.txt here).
+Standard CE includes this transplant, the five classifier renames,
+the bounded OpusTags reader and the content-routing repair. The
+framework's default/Minimal build retains WMA. The older standalone
+variant below is a component build and does not include all Standard
+metadata and routing repairs. Do not enable the decoder and renames
+by halves; they remain a matched set.
 
 ## What it does
 
@@ -30,10 +31,14 @@ data, one in module 31 code, one in module 38 code. Slot 3 of
 the classifier then matches `OPU`, which is the extension the
 FAT layer's 8.3 alias carries for `.opus` files, so files keep
 their `.opus` names and reach module 72 through the stock
-selection path. Nothing else on the system side changes: the
-per-codec stub family is codec-agnostic, module 33's open path
-and parameter page are codec-generic, and Opus inherits the WMA
-clock rows. The donor's measured cost for this plug-in build
+selection path. This admission check is not the final codec decision:
+stock content detector `0x03067F50` reads the file and overwrites the
+extension before the second codec lookup in module 34. Its original
+OggS case changed Opus to OGG, selecting Vorbis. Standard's patches
+0263–0265 recognize a bounded BOS `OpusHead` packet and retain OPU;
+Vorbis stays on OGG, and the original final seek-to-zero is preserved.
+The per-codec stub family and parameter page remain codec-generic,
+and Opus inherits the WMA clock rows. The donor's measured cost for this plug-in build
 (about 33 million instructions per second of audio for typical
 music, at most 56 million for the worst case) fits the clock v1
 rows with headroom.
@@ -66,11 +71,9 @@ transplant's claimed ranges overlap any byte patch.
 - **WMA playback is removed.** `.wma` files stop matching every
   classifier copy, so they disappear from the library scan and
   the browser.
-- Opus files show no tags and no cover art yet: the tag
-  dispatch for slot 3 still points at the ASF readers, and
-  redirecting it to the resident Ogg reader is follow-on work,
-  as is the player's format label. Playback does not depend on
-  any of these.
+- Standard's streaming reader stores title, artist, album and genre
+  in bounded UTF-16 fields. Large artwork comments are skipped;
+  extracting Opus artwork is separate from this text-metadata reader.
 
 ## Gates before this can become the default
 
@@ -80,9 +83,14 @@ transplant's claimed ranges overlap any byte patch.
   ffmpeg/libopus, with the efficiency measurement (instructions
   per second of audio, transplanted Opus versus stock WMA)
   recorded.
-- Phase E (hardware): the underrun gate gains the worst-case
-  file (2.5 ms frames at 256 kbps), and the no-content-sniffer
-  finding gets its first-flash check.
+- The system-open regression must initialize the real file API and
+  execute its content probe. The old extension-only harness missed
+  this probe and incorrectly selected Opus while hardware selected
+  Vorbis. The negative control now loads module 75; the repaired
+  case loads module 72 from the same generated file.
+- Phase E (hardware): successful playback, metadata and the
+  worst-case underrun gate (2.5 ms frames at 256 kbps) remain
+  separate device acceptance requirements.
 
 `patches/framework/verify.py` pins the transplanted module
 hash and proves the variant's diff stays confined to module

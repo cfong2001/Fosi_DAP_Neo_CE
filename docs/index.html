@@ -24,7 +24,7 @@
 <section class="card install" id="install" aria-labelledby="install-title">
 <div class="install-intro">
 <h2 id="install-title"><span class="section-index">01 / Get started</span>Install CE firmware</h2>
-<p class="note warn"><strong>Not yet tested on hardware.</strong> No CE image has been installed on a device; every check so far is offline (emulation, host tests, image validation). You would be the first hardware test. Back up your music and read <a href="#going-back">Going back to stock</a> first. If the player stops booting, recovery needs the Rockchip USB (Rockusb) tools.</p>
+<p class="note warn"><strong>Standard CE has completed its first physical-device test.</strong> Both 13 MiB firmware regions matched on full readback before reset, then the player booted, showed the custom settings, displayed embedded artwork and played music. Back up your music and read <a href="#going-back">Going back to stock</a> first. Remaining format, USB-mode, endurance and recovery checks are still in progress.</p>
 <details class="seg" id="going-back"><summary>Going back to stock</summary>
 <p class="note">If the player still boots and can run an update, install <strong>Back to stock</strong> the same way. It is stock code dated one day after CE, so the player prefers it. Plain stock <code>DP3_V137.img</code> is older than CE and the player would keep booting CE. If the player does not boot, recovery needs the Rockchip USB (Rockusb) tools; see <code>release/README.md</code> in the repository.</p>
 </details>

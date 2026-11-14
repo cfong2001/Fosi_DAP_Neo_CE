@@ -1,0 +1,10 @@
+# Original CE streaming OpusTags reader: .text.store_point.
+name: 0251-opus-tags-store_point
+kind: module
+module: 0
+region: code
+address: 0x3067f0c
+expect: 10b501210846eaf783fb01210220eaf77ffb0a20fcf710fd00210120eaf778fb00210220eaf774fbbde810404ff4fa60
+replace: b1f5803f0bd337220b4662f39f23064a43801144054a02eb9121022200e0012201801046704700bf0000ff0300d8ffff
+gate: stock bytes, resident census, real-card parser regression
+rationale: Parse OpusTags with bounded reads and UTF-16 output instead of entering the obsolete ASF tag reader.

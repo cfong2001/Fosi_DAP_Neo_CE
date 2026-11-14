@@ -1,0 +1,10 @@
+# Player wheel responsiveness: service-wrapper.
+name: 0261-focus-wheel-service-wrapper
+kind: module
+module: 0
+region: code
+address: 0x30511ec
+expect: 8c6800f024ff024600232046294603f0c9fd70bd
+replace: 2de90f50fff74cf9bde80f502de9f0432cf0efbe
+gate: stock bytes; service-entry wheel wake and ABI regression
+rationale: Detect wheel changes on every player service pass. Wake hidden controls immediately without waiting for the progress repaint cadence; preserve stock progress timing and original service prologue.

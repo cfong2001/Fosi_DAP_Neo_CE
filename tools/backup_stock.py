@@ -36,7 +36,7 @@ class ReadOnly:
         elif (opcode,length,address,sectors) not in ((0x1A,11,0,0),(0x1B,16,0,0)):
             raise ValueError('invalid information read')
         raw=self._usb.command(opcode,length,address,sectors)
-        expected=512 if opcode==0x1A else length
+        expected=length
         if len(raw)!=expected:raise ValueError(f'short information/data read: {len(raw)} / {expected}')
         return raw
 
