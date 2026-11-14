@@ -797,7 +797,7 @@ def main():
             ok = pin_ok and rep_ok and confined and ext_ok \
                 and post_ok and default_ok
             detail = (f'whole-image pin and length (+{GROWTH_TOTAL}): '
-                      f'{pin_ok}; report pins (143 patches, both '
+                      f'{pin_ok}; report pins (172 patches, both '
                       f'transplant hashes, growths, tail): {rep_ok}; '
                       f'segment diff confined to the union of parts: '
                       f'{confined}; module 0 tail span (zero workspace '

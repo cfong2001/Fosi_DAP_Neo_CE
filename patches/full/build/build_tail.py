@@ -103,7 +103,7 @@ SITES = (
 # Filled in after the build passed the resolver and theater emulation
 # suites; the build refuses any later drift.
 EXPECTED = {
-    'resolver_sha256': '4fc7e9ecf78c1e0fffdd8e4f011c23b79e8fb1868e45222570aab7d046dd28d0',
+    'resolver_sha256': 'ee24042f1f595212f15675dfff6fb6a06325a72f202f6266df544c8169e39aaf',
     'focus_sha256': '479e1c49e92232643b0832f7a7929912298dccc93c7a80eb4fac9d76f913dc33',
     'restore_sha256': 'd821987c09e3e20c060516756092f1ec5bb11310b781fcb137bf93d4a81eaabc',
     'theater_sha256': '53dce973e3bf970ce66fd53501c0ccf23f929c5d80a4e61870bca4370447d1df',
