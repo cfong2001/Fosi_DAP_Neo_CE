@@ -1,5 +1,5 @@
 {
-  "status": "CONTENT ROUTING REPAIR PASSES OFFLINE NEGATIVE CONTROLS; DEVICE ACCEPTANCE PENDING",
+  "status": "STANDARD CE SCAN AND OPUS PLAYBACK CONFIRMED ON HARDWARE; ARTWORK FOLLOW-UP OPEN",
   "source_candidate": {
     "sha256": "8a9f32fc06ed2459ffd936a9203d6df6e665b273b49fb25e1083b0b96d8c5ce0",
     "bytes": 13639684,
@@ -29,7 +29,7 @@
   },
   "source_candidate_not_newer_than_official": true,
   "modified_code_or_resources": false,
-  "release_gate": "Backup, recovery and slot geometry are established. This candidate still requires full-card scan, Opus playback/metadata, selector/theater and wheel latency acceptance.",
+  "release_gate": "The content-route repaired code booted and played music on hardware after both slots passed full readback. Album art and theater background remain a separate follow-up; continuous wheel latency remains unmeasured.",
   "recovery_note": "Recovery is the supplied official firmware with a newer header date; no CE code is present. Date ordering is a traced validator rule, not proof of early-boot acceptance.",
   "example_reference_only": true,
   "official_source_matches_device_verified": false,
@@ -38,6 +38,9 @@
     "prior_ce_boot_and_custom_settings": true,
     "original_firmware_restore_and_boot": true,
     "both_slots_full_write_readback": true,
-    "candidate_full_card_acceptance": "pending"
-  }
+    "candidate_full_card_acceptance": "scan and file listing passed; Opus music playback confirmed",
+    "content_route_repair_playback": true,
+    "album_art_and_theater": "not displayed on latest playback test; separate follow-up"
+  },
+  "qualification_scope": "Hardware confirmation used a date-adjusted image with the optional diagnostic readout. The byte-identical published source package itself was not flashed."
 }

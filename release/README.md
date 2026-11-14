@@ -23,6 +23,11 @@ then booted, exposed its custom settings, displayed embedded album artwork and
 played an MP3. Remaining format, USB-mode, endurance and recovery-boot checks
 are tracked in [`FIRST_DEVICE_QUALIFICATION.md`](FIRST_DEVICE_QUALIFICATION.md).
 
+The content-route repaired Standard code also booted and played Opus music
+on hardware on 2026-11-14. That test used the optional diagnostic readout
+and a newer header date; both written slots passed full readback. Album art
+and the theater background were absent in this test and remain a follow-up.
+
 ## Which image
 
 Start with the standard image unless one of these applies, then use the

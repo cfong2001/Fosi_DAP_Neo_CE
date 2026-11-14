@@ -91,10 +91,12 @@ artwork. The progress cadence remains unchanged. Scheduler and physical
 display latency still require device measurement, especially for continuous
 movement while the controls are already visible.
 
-Completion requires a full-card device scan, Opus playback and metadata,
-selector/theater visual checks, and a measured wheel-to-screen trace. Keep
-the PR in draft until those checks pass. Package equality and emulator gates
-do not substitute for those device observations.
+On 2026-11-14, hardware testing confirmed the repaired image boots and plays
+Opus music after full readback of both written slots. Full-card scanning and
+file listing had also passed. Album art and the theater background were absent
+on the latest playback test and are tracked separately. Continuous wheel
+latency still needs device measurement. These remaining checks do not negate
+the confirmed scan and playback repair; emulator counts are not device timing.
 
 The optional [live diagnostic utility](RUNTIME_DIAGNOSTICS.md) exposes
 runtime classifier and codec state at a format-error popup without changing
