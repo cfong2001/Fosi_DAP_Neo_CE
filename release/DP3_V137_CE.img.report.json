@@ -6607,15 +6607,9 @@
    },
    {
     "file_offset": "0xb94dee",
-    "bytes": 68,
-    "old_hex": "10a210a210a228e28a01d2a0f300f300d2a08a0128e210a210a210a210a210a269a1eae0f220f220f220f220f220f220eae069a110a210a210a269a1f220f220f220f220",
-    "new_hex": "f800f800f8005aeba554defbffffffffdefba5545aebf800f800f800f800f8008430ffffffffffffffffffffffffffffffff8430f800f800f8008430fffffffffe36f387"
-   },
-   {
-    "file_offset": "0xb94e36",
-    "bytes": 20,
-    "old_hex": "f220f220f220f22069a110a228e2eae0f220f220",
-    "new_hex": "f387fe36ffffffff8430f8005aebfffffffff4ce"
+    "bytes": 92,
+    "old_hex": "10a210a210a228e28a01d2a0f300f300d2a08a0128e210a210a210a210a210a269a1eae0f220f220f220f220f220f220eae069a110a210a210a269a1f220f220f220f220f220f220f220f220f220f22069a110a228e2eae0f220f220",
+    "new_hex": "f800f800f8005aeba554defbffffffffdefba5545aebf800f800f800f800f8008430ffffffffffffffffffffffffffffffff8430f800f800f8008430fffffffffe36f387f220f220f387fe36ffffffff8430f8005aebfffffffff4ce"
    },
    {
     "file_offset": "0xb94e56",
@@ -6661,15 +6655,9 @@
    },
    {
     "file_offset": "0xb94f1a",
-    "bytes": 20,
-    "old_hex": "f220f220eae028e210a269a1f220f220f220f220",
-    "new_hex": "f4ceffffffff5aebf8008430fffffffffe36f387"
-   },
-   {
-    "file_offset": "0xb94f32",
-    "bytes": 68,
-    "old_hex": "f220f220f220f22069a110a210a210a269a1eb00f220f220f220f220f220f220eae069a110a210a210a210a210a228e289e1d2a0f300f300d2a08a0128e210a210a210a2",
-    "new_hex": "f387fe36ffffffff8430f800f800f8008430ffffffffffffffffffffffffffffffff8430f800f800f800f800f8005aeba554defbffffffffdefba5545aebf800f800f800"
+    "bytes": 92,
+    "old_hex": "f220f220eae028e210a269a1f220f220f220f220f220f220f220f220f220f22069a110a210a210a269a1eb00f220f220f220f220f220f220eae069a110a210a210a210a210a228e289e1d2a0f300f300d2a08a0128e210a210a210a2",
+    "new_hex": "f4ceffffffff5aebf8008430fffffffffe36f387f220f220f387fe36ffffffff8430f800f800f8008430ffffffffffffffffffffffffffffffff8430f800f800f800f800f8005aeba554defbffffffffdefba5545aebf800f800f800"
    },
    {
     "file_offset": "0xbd52e4",
@@ -7969,15 +7957,9 @@
    },
    {
     "file_offset": "0xc83d44",
-    "bytes": 68,
-    "old_hex": "ffffffffffffff7cfd6ffbe5fb20fb40fbe5fd6fff7cfffffffffffffffffffffe13fb61fb20fb20fb20fb20fb20fb20fb61fe33fffffffffffffe33fb20fb20fb20fb20",
-    "new_hex": "f800f800f800bdf76b2d21240000000021246b2dbdf7f800f800f800f800f8009492000000000000000000000000000000009492f800f800f80094920000000048e0c260"
-   },
-   {
-    "file_offset": "0xc83d8c",
-    "bytes": 20,
-    "old_hex": "fb20fb20fb20fb20fe33ffffff7cfb61fb20fb20",
-    "new_hex": "c26048e0000000009492f800bdf70000000089a0"
+    "bytes": 92,
+    "old_hex": "ffffffffffffff7cfd6ffbe5fb20fb40fbe5fd6fff7cfffffffffffffffffffffe13fb61fb20fb20fb20fb20fb20fb20fb61fe33fffffffffffffe33fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fe33ffffff7cfb61fb20fb20",
+    "new_hex": "f800f800f800bdf76b2d21240000000021246b2dbdf7f800f800f800f800f8009492000000000000000000000000000000009492f800f800f80094920000000048e0c260fb20fb20c26048e0000000009492f800bdf70000000089a0"
    },
    {
     "file_offset": "0xc83dac",
@@ -8023,15 +8005,9 @@
    },
    {
     "file_offset": "0xc83e70",
-    "bytes": 20,
-    "old_hex": "fb20fb20fb61ff7cfffffe33fb20fb20fb20fb20",
-    "new_hex": "89a000000000bdf7f80094920000000048e0c260"
-   },
-   {
-    "file_offset": "0xc83e88",
-    "bytes": 68,
-    "old_hex": "fb20fb20fb20fb20fe13fffffffffffffe33fb61fb20fb20fb20fb20fb20fb20fb61fe33ffffffffffffffffffffff7cfd6ffbe5fb20fb40fbe5fd6fff7cffffffffffff",
-    "new_hex": "c26048e0000000009492f800f800f8009492000000000000000000000000000000009492f800f800f800f800f800bdf76b2d21240000000021246b2dbdf7f800f800f800"
+    "bytes": 92,
+    "old_hex": "fb20fb20fb61ff7cfffffe33fb20fb20fb20fb20fb20fb20fb20fb20fb20fb20fe13fffffffffffffe33fb61fb20fb20fb20fb20fb20fb20fb61fe33ffffffffffffffffffffff7cfd6ffbe5fb20fb40fbe5fd6fff7cffffffffffff",
+    "new_hex": "89a000000000bdf7f80094920000000048e0c260fb20fb20c26048e0000000009492f800f800f8009492000000000000000000000000000000009492f800f800f800f800f800bdf76b2d21240000000021246b2dbdf7f800f800f800"
    },
    {
     "file_offset": "0x373974",
@@ -15626,7 +15602,7 @@
   ],
   "code_colours": [],
   "pixels_changed": 0,
-  "bytes_changed": 309833
+  "bytes_changed": 309849
  },
  "tail": {
   "exec": "0x307bfb4",
