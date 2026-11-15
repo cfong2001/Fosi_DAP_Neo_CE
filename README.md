@@ -6,6 +6,9 @@ CE (Community Edition) is patched firmware for the Fosi Audio DAP Neo. It starts
 
 ![Stock player beside the CE player](media/player.png)
 
+<img width="3000" height="4000" alt="43685" src="https://github.com/user-attachments/assets/ace329eb-5f2d-4ff1-ab70-3687fd7c0e25" />
+<img width="3000" height="4000" alt="43684" src="https://github.com/user-attachments/assets/50edbfa9-f8a5-46ea-8dc8-c997382609b5" />
+
 - [Install](#install)
 - [Features](#features)
 - [Build options and variants](#build-options-and-variants)
