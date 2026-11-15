@@ -1,0 +1,10 @@
+# Player artwork view must repaint the active theater ground.
+name: 0275-player-theater-ground
+kind: module
+module: 27
+region: code
+address: 0x0307efa6
+expect: 50b1
+replace: 00bf
+gate: Stock-byte precondition; full-screen player repaint and no-event negative controls.
+rationale: The artwork view selects resource 138 (304 in light mode), a fixed solid ground, while metadata view fills from the active ground cell. Use the existing native full-screen fill for both views so theater color reaches the background as well as segment erases. No state or new code home is added.

@@ -25,7 +25,7 @@ if hashlib.sha256(raw).hexdigest() != 'fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cd
 im = Image(raw)
 
 
-def run(post_redraw, media_state, color):
+def run(post_redraw, view_mode, color):
     u = Uc(UC_ARCH_ARM, UC_MODE_THUMB)
     u.mem_map(0x03000000, 0x100000)
     for i in (0, 27):
@@ -35,7 +35,7 @@ def run(post_redraw, media_state, color):
     if post_redraw:
         addr = event_base + (0x39 // 32) * 4
         u.mem_write(addr, struct.pack('<I', 1 << (0x39 % 32)))
-    u.mem_write(0x030232a0 + 0x1a, bytes([media_state]))
+    u.mem_write(0x030232a0 + 0x1a, bytes([view_mode]))
     u.mem_write(0x03004400, struct.pack('<H', color))
     u.reg_write(UC_ARM_REG_SP, 0x030f0000)
     calls = []
@@ -66,7 +66,7 @@ def main():
     calls, title = run(True, 0, 0x1357)
     assert not [args for addr, args in calls if addr == 0x030632fa]
     assert [args[0] for addr, args in calls if addr == 0x03063700] == [138] and title
-    print('PASS: posted redraw reads the current ground and schedules title; no-media draws stock image')
+    print('PASS: posted redraw reads the current ground and schedules title; artwork view draws fixed image')
 
 
 if __name__ == '__main__':

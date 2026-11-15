@@ -54,6 +54,7 @@ are modeled. Its output contains no media paths or device identifiers.
 | Opus picture extraction, small and multipage fixtures | 81,814 exact bytes |
 | Native JPEG rows / independent theater color matches | 54 / 3 |
 | Missing or malformed artwork returns | 5 / 5 |
+| Full-screen theater coverage across repaint cases | 76,800 pixels / 16 cases |
 | Selected-control instruction ratio vs stock | At most 1.0 (currently 0.4914) |
 | Selected-control resource reads vs stock | No increase (currently 14 vs 14) |
 

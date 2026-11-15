@@ -11,7 +11,7 @@
   theme. The outer circle and inner fill boundary are supersampled separately,
   baking antialiasing into both edges for cover-derived backgrounds.
 - Standard image SHA-256
-  `6b6c9b503e9538a0199f67b06ffab2347a46b00493be01ff3101d14e1380079a`;
+  `1513df4d9b10f4fb81d8b6aa520fa3e439d271e859df561df3faa2e0fad13edb`;
   its only firmware-resource changes from the preceding release are selector
   resources 220 and 386, plus the outer package CRC.
 - Repository warnings now report the completed physical flash directly and

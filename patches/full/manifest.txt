@@ -215,3 +215,4 @@ patches/0262-focus-wheel-service-hook.patch
 ../opus_swap/0272-opus-artwork.patch
 ../opus_swap/0273-opus-artwork.patch
 ../opus_swap/0274-opus-artwork.patch
+../opus_swap/0275-player-theater-ground.patch

@@ -1843,6 +1843,16 @@ export const FULL_PATCHES = [
   "expect": "ddf84407",
   "replace": "def770b8",
   "index": 183
+ },
+ {
+  "file": "0275-player-theater-ground.patch",
+  "name": "0275-player-theater-ground",
+  "module": 27,
+  "region": "code",
+  "address": 50851750,
+  "expect": "50b1",
+  "replace": "00bf",
+  "index": 184
  }
 ];
 export const FULL_TAIL = {
@@ -13257,4 +13267,4 @@ export const FULL_THEME_RUNS = [
   "replace": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
  }
 ];
-export const FULL_IMAGE_SHA256 = "6b6c9b503e9538a0199f67b06ffab2347a46b00493be01ff3101d14e1380079a";
+export const FULL_IMAGE_SHA256 = "1513df4d9b10f4fb81d8b6aa520fa3e439d271e859df561df3faa2e0fad13edb";

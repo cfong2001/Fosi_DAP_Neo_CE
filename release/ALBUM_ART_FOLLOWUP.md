@@ -2,8 +2,8 @@
 
 The content-routing repair is merged and Opus music playback is confirmed on
 hardware. The latest playback test displayed neither the album cover nor a
-derived theater background. The repaired image passes extraction and native drawing tests; device visual
-acceptance remains pending.
+derived theater background. The repaired image passes extraction and native drawing tests; hardware now confirms the cover appears and music plays. Full-screen theater
+repaint is repaired separately below and awaits its device check.
 
 ## Established source behavior
 
@@ -80,3 +80,23 @@ python patches/opus_swap/test_artwork_route.py --candidate release/DP3_V137_CE.i
 
 The integrated repair gate also includes these checks. Hardware must still
 confirm the cover and derived background while music plays before merging.
+
+## Full-screen ground repaint
+
+Hardware confirmed that covers appear and music continues, but only control
+surrounds and the progress area changed color. The player painter branches on
+`SAVEINFO+0x1A`: metadata view fills from the live ground cell, while artwork
+view copies background resource 138 (304 for light mode). In the current
+Standard image those resources are uniform, fixed-color 240 by 320 bitmaps.
+The previously named “no-media” control in the stock repaint research was
+actually this artwork-view branch. A correct color cell did not imply that
+the main background was painted with it.
+
+Patch 0275 removes only that conditional branch, allowing both views to use
+the existing native full-screen fill. No helper code or persistent RAM is
+added. `test_player_ground.py` executes the real repaint/event code and models
+the display leaves: the legacy artwork view paints zero pixels with the
+derived color, whereas the repair covers all 76,800 pixels in 16 view, theme,
+visibility and color cases. The no-event path draws nothing, and title repaint
+scheduling is preserved. The focus suite now explicitly requires the full
+background fill while continuing to reject leaked control segment fills.

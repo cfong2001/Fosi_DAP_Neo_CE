@@ -3,7 +3,7 @@
  "input_file": "DP3_V137.img",
  "output_file": "DP3_V137_CE.img",
  "input_sha256": "fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cdfade5e9c6ea3bd71ac6deef",
- "output_sha256": "6b6c9b503e9538a0199f67b06ffab2347a46b00493be01ff3101d14e1380079a",
+ "output_sha256": "1513df4d9b10f4fb81d8b6aa520fa3e439d271e859df561df3faa2e0fad13edb",
  "byte_length": 13639684,
  "header_date": "20261023",
  "patches_applied": [
@@ -2030,6 +2030,17 @@
    "file_offset": "0x995a0",
    "old_hex": "ddf84407",
    "new_hex": "def770b8"
+  },
+  {
+   "patch": "0275-player-theater-ground",
+   "file": "0275-player-theater-ground.patch",
+   "kind": "module",
+   "module": 27,
+   "region": "code",
+   "cpu_address": "0x307efa6",
+   "file_offset": "0x898a0",
+   "old_hex": "50b1",
+   "new_hex": "00bf"
   }
  ],
  "transplants_applied": [

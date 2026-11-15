@@ -525,6 +525,8 @@ def gate2(variant):
         assert m.event(n), f'gated event {n:#x} was consumed'
     rects = [f[:4] for f in m.fills]
     if FULL_IMAGE:
+        assert rects.count((0, 0, 239, 319)) == 1, 'theater full-screen repaint missing'
+        rects = [r for r in rects if r != (0, 0, 239, 319)]
         rects = [r for r in rects if not (25 <= r[0] <= r[2] <= 214 and 8 <= r[1] <= r[3] <= 197)]
     assert rects == [], f'segment fill calls leaked: {rects}'
     bad = [d for d in m.draws
