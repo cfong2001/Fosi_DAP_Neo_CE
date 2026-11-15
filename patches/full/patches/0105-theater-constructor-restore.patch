@@ -1,10 +1,16 @@
-# Theater background constructor guard at 0x0307C330.
+# Theater background constructor guard at 0x0307c330.
 name: 0105-theater-constructor-restore
 kind: module
 module: 27
 region: code
 address: 0x307d1ca
-gate: Stock-byte precondition and full-build validation.
+gate: build refuses unless the stock bytes at the target equal
+  `expect`; the finished image must also pass the grown
+  build validator. Requires the full build's merged tail.
 expect: a08001200cf0c2f8
 replace: fff7b1b800bf00bf
-rationale: Restore the cached derived RGB565 color after the player constructor when artwork sampling has completed; otherwise preserve the stock theme default.
+rationale: If artwork sampling completed before the player window is
+  constructed, restore the cached derived RGB565 colour instead
+  of letting the constructor overwrite it with the theme default.
+  Otherwise preserve the stock-selected value. The helper replays
+  the displaced store and movs before resuming at 0x0307D1CE.
