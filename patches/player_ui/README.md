@@ -138,3 +138,19 @@ JPEG/theater, focus and no-art suites cover the combined paths. The new
 stack row adds at most 380 bytes of pixel storage; it allocates no BSS or
 persistent state. Pocket residency retains the project's existing
 hardware-validation limitation.
+
+## Progress-band restoration and full-player fill
+
+The progress redraw owns the background gaps across y=240..274 as well as
+its original bar rectangle. The helper restores five gap rectangles, keeps
+both time-label rectangles intact, recolors the cached columns and then runs
+the original bar erase. A dirty-frame regression checks 4,360 restored gap
+pixels and 1,610 untouched label pixels; pixels outside the band stay intact.
+
+The full-player fill has a separate bounded word-burst path at 0x03052D5C.
+It writes both physical surfaces using eight pixels per loop, retains native
+display-context behavior and falls back on unsupported bank/rotation. Its
+measured work is 28,854 instructions versus 466,651 for the prior row fill,
+with identical framebuffer bytes, context and preserved-register ABI. This
+is an instruction reduction, not a measured device speedup. The gap helper
+at 0x03052F40 uses reserved trailing space; neither adds persistent RAM.

@@ -216,3 +216,6 @@ patches/0262-focus-wheel-service-hook.patch
 ../opus_swap/0273-opus-artwork.patch
 ../opus_swap/0274-opus-artwork.patch
 ../opus_swap/0275-player-theater-ground.patch
+../player_ui/0276-progress-gap-restore.patch
+../player_ui/0277-player-full-fill.patch
+../player_ui/0278-player-full-fill-hook.patch

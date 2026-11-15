@@ -3,7 +3,7 @@
  "input_file": "DP3_V137.img",
  "output_file": "DP3_V137_CE.img",
  "input_sha256": "fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cdfade5e9c6ea3bd71ac6deef",
- "output_sha256": "5f2216c7b30ddfe7ca4ef0119b1d8f1f771bc0ea9250cfaf8f6b0b0202acd3fc",
+ "output_sha256": "08054971d2a5ef837c5186a8b31e20f720bedbc1ddb41978885b0f4e32d105c9",
  "byte_length": 13639684,
  "header_date": "20261023",
  "patches_applied": [
@@ -1181,8 +1181,8 @@
    "region": "code",
    "cpu_address": "0x3053ef4",
    "file_offset": "0x2d5a0",
-   "old_hex": "2de9f041adf5007d984617460e4605466b464ff4007200214ff44030",
-   "new_hex": "1fb50448008809f099ffbde81f40dff808c0604700440003fb320603"
+   "old_hex": "2de9f041adf5007d984617460e4605466b464ff4007200214ff44030869c13f0fdfabdf8",
+   "new_hex": "1fb505480088dff814c0e047bde81f40dff80cc06047000000440003412f0503fb320603"
   },
   {
    "patch": "0182-artwork-bar-hook",
@@ -2041,6 +2041,39 @@
    "file_offset": "0x898a0",
    "old_hex": "50b1",
    "new_hex": "00bf"
+  },
+  {
+   "patch": "0276-progress-gap-restore",
+   "file": "0276-progress-gap-restore.patch",
+   "kind": "module",
+   "module": 0,
+   "region": "code",
+   "cpu_address": "0x3052f40",
+   "file_offset": "0x2c5ec",
+   "old_hex": "65206e6f74207375636365737321200a0000000001215a20fff728bb00215a20fff724bb10b501215a20fff71ffb0120fff7f9fb0020fff7fffb012011f0d0fc0120fff7f9fbbde81040012011f0c8bc",
+   "new_hex": "70b582b006460af073ff009606a4052520886188a288e388083410f0cef9013df6d102b070bd00bf0000f0000600fd004900f000be00fd000000fe0027001201ca00fe00ef00120128000d01c9001201"
+  },
+  {
+   "patch": "0277-player-full-fill",
+   "file": "0277-player-full-fill.patch",
+   "kind": "module",
+   "module": 0,
+   "region": "code",
+   "cpu_address": "0x3052d5c",
+   "file_offset": "0x2c408",
+   "old_hex": "40613e20fff7aaff4ff2f7711420fff7a5ff00211220fff7a1ff00210820fff79dff00211620fff799ff00210c20fff795ff00210e20fff791ff4ff6fe611820fff78cff20210320fff788ff44f240010420fff783ff14b3",
+   "new_hex": "70b5124e3488e4b97469d4b9bdf8104044ea044411f0cef82146224623460c4841f620451ec0013dfcd10a4840f660151ec0013dfcd10120f06000203084708470bdbde8704010f0aaba00bfb8380203a865000324f20603"
+  },
+  {
+   "patch": "0278-player-full-fill-hook",
+   "file": "0278-player-full-fill-hook.patch",
+   "kind": "module",
+   "module": 27,
+   "region": "code",
+   "cpu_address": "0x307efb8",
+   "file_offset": "0x898b2",
+   "old_hex": "e4f79ff9",
+   "new_hex": "d3f7d0fe"
   }
  ],
  "transplants_applied": [
@@ -15779,7 +15812,7 @@
   }
  ],
  "diff_vs_stock": {
-  "bytes_changed": 4959092,
+  "bytes_changed": 4959269,
   "range_count": 424981,
   "note": "range list omitted; rebuild with patches/full/build/build_full.py for it"
  },

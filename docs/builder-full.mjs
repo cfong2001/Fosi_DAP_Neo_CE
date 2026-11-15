@@ -1070,8 +1070,8 @@ export const FULL_PATCHES = [
   "module": 0,
   "region": "code",
   "address": 50675444,
-  "expect": "2de9f041adf5007d984617460e4605466b464ff4007200214ff44030",
-  "replace": "1fb50448008809f099ffbde81f40dff808c0604700440003fb320603",
+  "expect": "2de9f041adf5007d984617460e4605466b464ff4007200214ff44030869c13f0fdfabdf8",
+  "replace": "1fb505480088dff814c0e047bde81f40dff80cc06047000000440003412f0503fb320603",
   "index": 106
  },
  {
@@ -1853,6 +1853,36 @@ export const FULL_PATCHES = [
   "expect": "50b1",
   "replace": "00bf",
   "index": 184
+ },
+ {
+  "file": "0276-progress-gap-restore.patch",
+  "name": "0276-progress-gap-restore",
+  "module": 0,
+  "region": "code",
+  "address": 50671424,
+  "expect": "65206e6f74207375636365737321200a0000000001215a20fff728bb00215a20fff724bb10b501215a20fff71ffb0120fff7f9fb0020fff7fffb012011f0d0fc0120fff7f9fbbde81040012011f0c8bc",
+  "replace": "70b582b006460af073ff009606a4052520886188a288e388083410f0cef9013df6d102b070bd00bf0000f0000600fd004900f000be00fd000000fe0027001201ca00fe00ef00120128000d01c9001201",
+  "index": 185
+ },
+ {
+  "file": "0277-player-full-fill.patch",
+  "name": "0277-player-full-fill",
+  "module": 0,
+  "region": "code",
+  "address": 50670940,
+  "expect": "40613e20fff7aaff4ff2f7711420fff7a5ff00211220fff7a1ff00210820fff79dff00211620fff799ff00210c20fff795ff00210e20fff791ff4ff6fe611820fff78cff20210320fff788ff44f240010420fff783ff14b3",
+  "replace": "70b5124e3488e4b97469d4b9bdf8104044ea044411f0cef82146224623460c4841f620451ec0013dfcd10a4840f660151ec0013dfcd10120f06000203084708470bdbde8704010f0aaba00bfb8380203a865000324f20603",
+  "index": 186
+ },
+ {
+  "file": "0278-player-full-fill-hook.patch",
+  "name": "0278-player-full-fill-hook",
+  "module": 27,
+  "region": "code",
+  "address": 50851768,
+  "expect": "e4f79ff9",
+  "replace": "d3f7d0fe",
+  "index": 187
  }
 ];
 export const FULL_TAIL = {
@@ -13267,4 +13297,4 @@ export const FULL_THEME_RUNS = [
   "replace": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
  }
 ];
-export const FULL_IMAGE_SHA256 = "5f2216c7b30ddfe7ca4ef0119b1d8f1f771bc0ea9250cfaf8f6b0b0202acd3fc";
+export const FULL_IMAGE_SHA256 = "08054971d2a5ef837c5186a8b31e20f720bedbc1ddb41978885b0f4e32d105c9";

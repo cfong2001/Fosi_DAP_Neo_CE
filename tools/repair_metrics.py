@@ -99,6 +99,8 @@ def main():
     report['player_ground']=ground['check'](raw)
     feedback=runpy.run_path(str(ROOT/'patches/opus_swap/test_theater_feedback.py'))
     report['theater_feedback']=feedback['check'](raw)
+    repaint=runpy.run_path(str(ROOT/'patches/player_ui/test_player_repaint.py'))
+    report['player_repaint']=repaint['check'](raw)
     render={}
     for label,image in (('stock',stock),('candidate',raw)):
         machine=painter['Machine'](image,real_store=True)

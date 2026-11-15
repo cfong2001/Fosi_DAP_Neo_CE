@@ -239,7 +239,7 @@ class Machine:
             if n:
                 uc.mem_write(dst, bytes(uc.mem_read(src, n)))
             uc.reg_write(UC_ARM_REG_PC, uc.reg_read(UC_ARM_REG_LR))
-        elif addr == FILL:
+        elif addr == FILL or (addr == 0x03052D5C and FULL_IMAGE):
             sp = uc.reg_read(UC_ARM_REG_SP)
             self.fills.append(tuple(
                 uc.reg_read(r) for r in (UC_ARM_REG_R0, UC_ARM_REG_R1,

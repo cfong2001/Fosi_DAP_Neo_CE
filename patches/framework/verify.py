@@ -678,7 +678,7 @@ def main():
     # differ only at the theme runs, the mirrored header and
     # the trailer CRC once the growth shift is accounted for.
     FULL_DIR = HERE.parent / 'full'
-    FULL_SHA = '5f2216c7b30ddfe7ca4ef0119b1d8f1f771bc0ea9250cfaf8f6b0b0202acd3fc'
+    FULL_SHA = '08054971d2a5ef837c5186a8b31e20f720bedbc1ddb41978885b0f4e32d105c9'
     PAYLOAD_GROWTH = 7694       # module 31 + module 24 + module 39 payloads
     GROWTH_TOTAL = 8192         # sector-aligned mirror
     if ecp is None:
@@ -708,7 +708,7 @@ def main():
                 and struct.unpack_from('<I', f, 0x1F4)[0] == MIRROR_OFF + GROWTH_TOTAL \
                 and not any(f[MIRROR_OFF + PAYLOAD_GROWTH:MIRROR_OFF + GROWTH_TOTAL])
             rep = json.loads(Path(str(fout) + '.report.json').read_text())
-            rep_ok = len(rep["patches_applied"]) == 185 \
+            rep_ok = len(rep["patches_applied"]) == 188 \
                 and [t['module75_sha256'] if 'module75_sha256' in t
                      else t['module72_sha256']
                      for t in rep['transplants_applied']] == [
@@ -797,7 +797,7 @@ def main():
             ok = pin_ok and rep_ok and confined and ext_ok \
                 and post_ok and default_ok
             detail = (f'whole-image pin and length (+{GROWTH_TOTAL}): '
-                      f'{pin_ok}; report pins (185 patches, both '
+                      f'{pin_ok}; report pins (188 patches, both '
                       f'transplant hashes, growths, tail): {rep_ok}; '
                       f'segment diff confined to the union of parts: '
                       f'{confined}; module 0 tail span (zero workspace '

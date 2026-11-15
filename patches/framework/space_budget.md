@@ -40,6 +40,12 @@ literal and one-byte rewind (the supported Standard format replaces WMA).
 The MP3/ID3 case and the following MP4 case remain intact. These helpers
 use the existing artwork frame and temporary file; they add no persistent RAM.
 
+Player repaint helpers own 88 bytes at `0x03052D5C` and 80 bytes at
+`0x03052F40`. The contrast and artwork-pixel build limits now stop before
+those trailing areas; the existing bar-entry slot grows from 28 to 36 bytes.
+The helpers allocate no persistent data and preserve the two native surface
+spans. Their code and framebuffer bounds are independently checked.
+
 ## Delivery mechanisms, one per home class
 
 The optional runtime diagnostic image reserves 100 bytes at `0x0306D304`,

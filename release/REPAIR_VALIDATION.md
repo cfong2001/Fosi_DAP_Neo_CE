@@ -56,6 +56,8 @@ are modeled. Its output contains no media paths or device identifiers.
 | Missing or malformed artwork returns | 5 / 5 |
 | Full-screen theater coverage across repaint cases | 76,800 pixels / 16 cases |
 | Same-cover repaint feedback | Settles after 1; no pending repaint |
+| Progress-gap restoration / preserved label pixels | 4,360 / 1,610 |
+| Full-fill instruction ratio, identical buffers/context | 0.0618 |
 | Selected-control instruction ratio vs stock | At most 1.0 (currently 0.4914) |
 | Selected-control resource reads vs stock | No increase (currently 14 vs 14) |
 

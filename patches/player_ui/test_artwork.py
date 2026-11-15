@@ -13,6 +13,7 @@ class Artwork(unittest.TestCase):
         for pattern in ('016*.patch','017*.patch','018*.patch'):
             for p in HERE.glob(pattern):
                 r=parse_patch(p);u.mem_write(r['address'],r['replace'])
+        extra=parse_patch(HERE/'0276-progress-gap-restore.patch');u.mem_write(extra['address'],extra['replace'])
         return u
     def put(self,u,addr,value):u.mem_write(addr,struct.pack('<I',value))
     @staticmethod
@@ -110,11 +111,13 @@ class Artwork(unittest.TestCase):
                     calls.append(([uc.reg_read(r) for r in regs],uc.reg_read(UC_ARM_REG_SP),
                                   struct.unpack('<I',uc.mem_read(uc.reg_read(UC_ARM_REG_SP),4))[0],
                                   uc.reg_read(UC_ARM_REG_LR)))
-                    uc.emu_stop()
+                    if len(calls)==6:uc.emu_stop()
+                    else:uc.reg_write(UC_ARM_REG_PC,uc.reg_read(UC_ARM_REG_LR))
             u.hook_add(UC_HOOK_CODE,hook);u.reg_write(UC_ARM_REG_LR,END|1)
             u.emu_start(0x03053EF5,END,count=2000)
-            self.assertEqual(len(calls),1,'the ground fill still runs')
-            args,sp2,colour,lr=calls[0]
+            self.assertEqual(len(calls),6,'five gaps and the original ground fill run')
+            self.assertEqual([tuple(c[0][:4]) for c in calls[:5]],[(0,240,6,253),(73,240,190,253),(0,254,39,274),(202,254,239,274),(40,269,201,274)])
+            args,sp2,colour,lr=calls[-1]
             self.assertEqual((args,sp2,colour,lr),([0x28,0xFE,0xC9,0x10C,0x1234],sp,ground,END|1),
                              'fill gets the original arguments, stack and return address')
             inv=~ground&0xFFFF;mid=half(inv,ground);track=half(mid,half(mid,ground))

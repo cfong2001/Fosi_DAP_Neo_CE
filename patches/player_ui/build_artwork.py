@@ -16,9 +16,9 @@ from build_theater import branch
 
 # Resident routines use census pockets; UI-only draws fit the old info painter.
 PARTS=(('row',0,0x0306D13C,0x0306D23C,170),
-       ('contrast',0,0x03052D04,0x03052DBE,171),
+       ('contrast',0,0x03052D04,0x03052D5C,171),
        ('round',0,0x03054308,0x03054342,172),
-       ('pixels',0,0x03052EE4,0x03052FA8,173),
+       ('pixels',0,0x03052EE4,0x03052F40,173),
        ('placeholder',27,0x0307EBA8,0x0307ECA4,174),
        ('badge',0,0x03056160,0x0305622C,175),
        ('formats',27,0x0307EEB0,0x0307EF4E,177),
@@ -75,4 +75,5 @@ def main():
         changes(off,old,new)
     (HERE/'artwork-resources.json').write_text(json.dumps({'version':1,'runs':runs},indent=1)+'\n')
     print('artwork resource runs',len(runs))
+    subprocess.run([sys.executable,str(HERE/'build_player_repaint.py')],check=True)
 if __name__=='__main__':main()

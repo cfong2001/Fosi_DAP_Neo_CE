@@ -1,7 +1,7 @@
 {
-  "status": "ARTWORK AND FULL-SCREEN COLOR CONFIRMED; REPAINT FEEDBACK REPAIR PASSES OFFLINE GATES",
+  "status": "REPAINT LOOP FIX IMPROVES HARDWARE RESPONSE; PROGRESS-GAP AND BURST-FILL ACCEPTANCE PENDING",
   "source_candidate": {
-    "sha256": "5f2216c7b30ddfe7ca4ef0119b1d8f1f771bc0ea9250cfaf8f6b0b0202acd3fc",
+    "sha256": "08054971d2a5ef837c5186a8b31e20f720bedbc1ddb41978885b0f4e32d105c9",
     "bytes": 13639684,
     "header_date": "2026-10-23",
     "mirror_offset": "0xc96000",
@@ -40,7 +40,7 @@
     "both_slots_full_write_readback": true,
     "candidate_full_card_acceptance": "scan and file listing passed; Opus music playback confirmed",
     "content_route_repair_playback": true,
-    "album_art_and_theater": "cover and full-screen color confirmed; repaint-loop/partial erase repair awaits device acceptance"
+    "album_art_and_theater": "cover/full-screen color and faster dial response confirmed; explicit progress-gap restoration and faster full fill await device check"
   },
   "qualification_scope": "Hardware confirmation used a date-adjusted image with the optional diagnostic readout. The byte-identical published source package itself was not flashed."
 }

@@ -123,3 +123,20 @@ art-request cycles and still has a repaint pending. The repair settles after
 one background repaint with none pending, and never resets the displayed color
 during resampling. A different generated cover still updates the color and
 requests a repaint. This quantifies removal of the loop, not device latency.
+
+## Remaining progress-band gaps and fill work
+
+Hardware confirmed improved dial response after removing the repaint loop,
+but the progress-area gaps remained dark. The progress painter only erased
+its 162 by 15 bar rectangle, and the time painter erased its two label boxes.
+The new gap helper explicitly restores the intervening background rectangles
+on each progress redraw without erasing labels, the bar or transport controls.
+The dirty-frame negative control leaves 4,360 gap pixels black; the repaired
+path restores them while preserving 1,610 label pixels and all outside pixels.
+
+A dedicated full-player fill also replaces per-pixel row work with word
+bursts across the native 240-row and 80-row surfaces. Native execution checks
+all 76,800 pixels, all 40 display-context bytes, write bounds, the stack and
+callee-saved registers, plus rotated-display fallback parity. Work drops from
+466,651 to 28,854 instructions (ratio 0.0618). Actual display-transfer and
+user-perceived timing remain device acceptance items.
