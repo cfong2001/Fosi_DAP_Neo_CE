@@ -6,8 +6,10 @@ album artwork and exposed the custom settings. Both written 13 MiB slot regions
 matched the intended payload byte for byte before reset. Longer-duration,
 format and USB-mode checks remain listed below. Restoring the original
 device-derived firmware has also passed complete slot readback and boot.
-The current repair candidate still needs the full-card acceptance in
-[repair validation](REPAIR_VALIDATION.md).
+The current Standard code has passed full-card scanning, Opus playback, artwork,
+theater background, progress-gap and continuous dial acceptance; see
+[repair validation](REPAIR_VALIDATION.md). Small status-bar black rectangles and
+residual fill staging remain follow-ups.
 
 For newer model-specific evidence, see the [NeoPod flashing comparison](../analysis/neopod_flash_comparison.md). NeoPod reports working custom firmware and normal reset on a DAP Neo; this supports the flashing mechanism, while CE still needs its own hardware qualification. The comparison also corrects the visible stock-update filename to `RKNANOFW.IMG`.
 
@@ -22,7 +24,7 @@ For newer model-specific evidence, see the [NeoPod flashing comparison](../analy
 | Runtime placement | Row code uses bounded, censused resident pockets; no new persistent RAM or overlay growth. Stock framebuffer spans and fallback remain in use. | Stock/fast pixels, display context, ABI and write bounds pass emulation. Hardware tripwire/normal-use testing remains required for computed callers missed by static analysis. |
 | Resource reading | The stock reader takes a 32-bit byte count and breaks aligned runs into sectors. Its byte-swap loop uses a 16-bit halfword counter. | Largest direct read is 115,200 bytes / 57,600 halfwords, below counter wrap; row split prevents crossing the SRAM gap. |
 | Boot/updater changes | These PRs do not modify module 1 or the module 8 installer. | No new bootloader or flash-writing path is introduced. |
-| Recovery geometry | The stock updater writes slot 2 and then copies it over slot 1. On the qualified unit, Rockusb slot bases are LBA 0 and 30720; both 13 MiB CE writes matched on full readback. A second stock fallback is still lost. | Preserve the complete device backup and the measured trailing 2 MiB of each slot. Full stock-recovery boot remains to be exercised. Never corrupt a header as a recovery technique. |
+| Recovery geometry | The stock updater writes slot 2 and then copies it over slot 1. On the qualified unit, Rockusb slot bases are LBA 0 and 30720; both 13 MiB CE writes matched on full readback. A second stock fallback is still lost. | Preserve the complete device backup and the measured trailing 2 MiB of each slot. Device-derived stock recovery write, full readback and boot have passed. Never corrupt a header as a recovery technique. |
 | V155 migration | V155 moves shared globals, changes settings/menu state, adds library slots and changes decoder modules. | No wholesale transplant. Library migration and battery/decoder policy remain unqualified until ABI, persistence, decode vectors and device behavior are established. |
 
 ## Prepare a dated pair offline
@@ -172,3 +174,36 @@ loss across reboots. Hardware endurance and USB protocol tests follow.
 
 Record the outcome and backup identifiers before changing the hardware
 status from “not run.” Passing CI does not waive these device gates.
+
+## Repeating the qualified Rockusb procedure
+
+The following is the observed procedure for the qualified DAP Neo, not a
+replacement for measuring another unit's map. The current Standard release
+was tested through Rockusb; merely copying an image to USB storage does not
+perform a Rockusb flash.
+
+1. Preserve the two-pass full accessible-range backup, matching stock recovery
+   and exact candidate. Check package hashes, mirrored headers, CRC and rounded
+   transfer size with the preparation tools above. A newer dated candidate needs
+   a recovery image newer still; the bundled October recovery cannot supersede
+   every later private or official image.
+2. Remove the media card. Unplug USB, use the physical reset button, then hold
+   **Vol+ + Vol- + OK** while reconnecting a data cable. Keep holding through
+   writing and verification. Recovery entry is intermittent on the tested unit.
+   Require an active Rockusb interface and repeatable reads of both slot headers;
+   USB mass storage or an unknown-device warning is not recovery.
+3. Use a bounded, reviewed writer with the unit's measured geometry. On the
+   qualified map, write only the 13 MiB updater region at LBA 0 and LBA 30720,
+   preserving the trailing 2 MiB in each reserved slot and all other storage.
+   The upstream restore script alone does not supply the required full verification.
+4. Read every written byte in each slot and compare against the exact intended
+   payload. Send reset only after both comparisons pass. If USB disconnects during
+   a write, treat the update as incomplete: re-enter recovery, check stable reads,
+   complete the bounded update and verify both slots before normal boot.
+5. Release the buttons, unplug USB, reinsert the card and use the **physical reset
+   button** to start. A software reset alone did not reliably restart this unit.
+   Check scanning, audible Opus playback through both library and browser, covers,
+   theater color, progress gaps and continuous dial movement.
+
+Keep full backups and unit-specific records locally. Public evidence should use
+aggregate outcomes and release hashes, without device identifiers or media data.

@@ -140,3 +140,19 @@ all 76,800 pixels, all 40 display-context bytes, write bounds, the stack and
 callee-saved registers, plus rotated-display fallback parity. Work drops from
 466,651 to 28,854 instructions (ratio 0.0618). Actual display-transfer and
 user-perceived timing remain device acceptance items.
+
+## Device acceptance - 2026-11-15
+
+After complete byte-for-byte readback of both written 13 MiB slots, hardware
+confirmed embedded artwork, full-screen theater color, removal of the progress
+band's black gaps, faster full-screen fill and responsive continuous dial input.
+The tested code corresponds to Standard release SHA-256
+`08054971d2a5ef837c5186a8b31e20f720bedbc1ddb41978885b0f4e32d105c9`;
+the device test used a newer header date and the optional diagnostic readout.
+This is qualitative timing acceptance; no physical millisecond measurement is claimed.
+
+Small black rectangles remain in the top status bar. The transport surround
+also still changes color before the rest of the screen, although the delay is
+much improved. These are follow-up work. Further optimizations must compare
+complete framebuffer bytes and observable display state against this accepted
+baseline before release.

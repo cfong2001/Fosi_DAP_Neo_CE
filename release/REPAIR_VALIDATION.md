@@ -78,11 +78,11 @@ gate establishes that the image contains a working modeled route; it does
 not prove that live filesystem state, boot initialization, mailbox timing
 or physical playback match that model.
 
-## Wheel latency: diagnosis in progress
+## Wheel latency: device acceptance
 
 A reproduced artwork-completion / full-repaint feedback loop is now repaired.
 The sequence settles after one background repaint instead of continuing to
-request artwork. Visible delay remains a device acceptance check. The short gate
+request artwork. Hardware confirmed responsive continuous dial movement after the repaint and fill repairs. The short gate
 counts instructions, resource reads and framebuffer stores for the same
 selected-control states in stock and CE. Current CE counts are about 49% of
 stock's instructions, with 14 resource reads in each image. These are emulator
@@ -102,9 +102,11 @@ movement while the controls are already visible.
 
 On 2026-11-14, hardware testing confirmed the repaired image boots and plays
 Opus music after full readback of both written slots. Full-card scanning and
-file listing had also passed. Album art and the theater background were absent
-on the latest playback test and are tracked separately. Continuous wheel
-latency still needs device measurement. These remaining checks do not negate
+file listing had also passed. That earlier playback test preceded the artwork repair. On 2026-11-15, device
+acceptance also confirmed embedded artwork, full-screen theater color, repaired
+progress gaps, faster background fill and improved continuous wheel response.
+Small status-bar black rectangles and residual fill staging remain follow-ups.
+Physical latency in milliseconds has not been measured. These remaining checks do not negate
 the confirmed scan and playback repair; emulator counts are not device timing.
 
 The optional [live diagnostic utility](RUNTIME_DIAGNOSTICS.md) exposes

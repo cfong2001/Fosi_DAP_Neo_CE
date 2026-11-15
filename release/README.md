@@ -25,8 +25,9 @@ are tracked in [`FIRST_DEVICE_QUALIFICATION.md`](FIRST_DEVICE_QUALIFICATION.md).
 
 The content-route repaired Standard code also booted and played Opus music
 on hardware on 2026-11-14. That test used the optional diagnostic readout
-and a newer header date; both written slots passed full readback. Album art
-and the theater background were absent in this test and remain a follow-up.
+and a newer header date; both written slots passed full readback. On 2026-11-15, the current Standard code also passed embedded artwork, full-screen
+theater color, progress-gap and continuous dial acceptance. Small black boxes in
+the top status bar and residual background-fill staging remain follow-ups.
 
 ## Which image
 
@@ -140,14 +141,19 @@ and what you tested.
   stock code dated 2026-10-24, newer than either CE image, so the validator
   selects it. Plain `DP3_V137.img` is dated 2026-10-22; it is older than CE
   and the validator would keep booting CE.
-- **If the device does not boot:** recovery needs the Rockchip USB
-  (Rockusb) path. The mapping between Rockusb addresses and the validator's
-  slot sectors is **not yet proven** (README, Safety and recovery). Read
-  back before you write anything.
+- **If the device does not boot:** use the measured Rockusb procedure in
+  [FLASH_REVIEW.md](FLASH_REVIEW.md#repeating-the-qualified-rockusb-procedure).
+  Recovery entry on the qualified unit uses reset, then Vol+ + Vol- + OK while
+  reconnecting USB and holding through verification. Both 13 MiB payloads were
+  written and fully read back; the trailing slot-local data was preserved.
+  Restoring the device-derived stock firmware also passed readback and boot.
+  Another unit still requires its own backup and map verification.
 
-The planned dual-slot layout, with stock kept in slot 1 as a software
-fallback, needs Rockusb writes to slot 2 only. That procedure is not ready:
-it depends on the same unproven sector mapping.
+After verification, unplug USB and use the physical reset button to start;
+software reset alone was unreliable. If a dated candidate is newer than the
+bundled recovery, prepare a matching recovery newer than that candidate first.
+The stock installer replaces both slots; a separately retained stock fallback
+slot is not part of this qualified procedure.
 
 ## Rebuild it yourself
 
