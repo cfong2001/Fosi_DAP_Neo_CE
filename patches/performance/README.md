@@ -10,7 +10,7 @@ run in memory and are not flash candidates.
 
 | Path | Baseline | Experiment / next step | Equality gate |
 | --- | --- | --- | --- |
-| Opus metadata Unicode conversion | ASCII fixture: 19,471 instructions | ASCII fast path: 16,489 (-15.3%); long title: 13,461 to 10,815 (-19.7%) | All 1,366 record bytes identical in nine cases; same native file/sector read counts; stack, record guards and watchdog checks pass |
+| Opus metadata Unicode conversion | ASCII fixture: 19,471 instructions | ASCII fast path: 16,489 (-15.3%); long title: 13,461 to 10,815 (-19.7%) | All 1,366 record bytes identical in eleven cases; same native file/sector read counts; stack, record guards and watchdog checks pass |
 | Metadata key scanning / storage | Unknown key length 5: 23 file reads; length 24: 41 reads | Byte-at-a-time key reads are a measured I/O target. Prototype bounded segment-aware batching, then compare read counts and malformed returns | Exact records, packet/segment boundaries, first-value policy, bounded stack and watchdog interval |
 | Natural sorting | Unequal prefix: 16 instructions, zero DB reads. Numeric cold: 1,175 instructions / two reads; warm: 1,157 / zero reads | Existing two-entry cache removes reads but barely reduces transform work. Profile repeated normalization before choosing cache or comparator changes | Entire sorted records and comparator results; accents, articles, numbers, buffer initialization and cache invalidation |
 | Input service | Hidden wake: 44 instructions; 20 continuous visible steps cause zero art requests | Preserve the inexpensive wake path; measure idle passes and timer callbacks before changing polling | Identical consumed wheel counts, event sequence, volatile registers and debounce behavior |

@@ -55,6 +55,8 @@ def check(raw):
     overrides,size=prototype()
     fixtures=[('ascii',opus([('TITLE','A long ASCII title '*12),('ARTIST','Artist'),('ALBUM','Album'),('GENRE','Genre')])),
               ('unicode',opus([('TITLE','Title 音楽 🎵'),('ARTIST','Beyonce\u0301'),('ALBUM','Album'),('GENRE','Genre')])),
+              ('unicode-only',opus([('TITLE','\u97f3\u697d'*60)])),
+              ('boundary-surrogate',opus([('TITLE','x'*125+'\U0001f3b5')])),
               ('embedded-nul',opus([('TITLE','Before\0After')])),
               ('long',opus([('TITLE','x'*600)])),
               ('large-art',opus([('TITLE','Title'),('METADATA_BLOCK_PICTURE','x'*70000),('ARTIST','Artist')]))]
