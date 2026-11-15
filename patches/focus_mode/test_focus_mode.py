@@ -609,7 +609,7 @@ def gate4(variant):
         m.w16(BGCELL, 0xBEEF)
         assert m.call(0x0308389E, r0=1, r1=0) == 1
         st = m.u.mem_read(TSTATE, 28)
-        assert m.r16(BGCELL) == 0x10A2, 'setup did not restore default'
+        assert m.r16(BGCELL) == (0xBEEF if FULL_IMAGE else 0x10A2), 'setup ground policy mismatch'
         assert st[25] == 1, f'sampling not re-armed: flags {st[25]}'
         scaled_h = m.r16(CTX + 0x18)
         for _ in range(scaled_h):

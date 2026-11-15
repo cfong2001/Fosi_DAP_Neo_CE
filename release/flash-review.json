@@ -1,7 +1,7 @@
 {
-  "status": "ARTWORK DISPLAY CONFIRMED; FULL-SCREEN THEATER REPAINT REPAIR PASSES OFFLINE GATES",
+  "status": "ARTWORK AND FULL-SCREEN COLOR CONFIRMED; REPAINT FEEDBACK REPAIR PASSES OFFLINE GATES",
   "source_candidate": {
-    "sha256": "1513df4d9b10f4fb81d8b6aa520fa3e439d271e859df561df3faa2e0fad13edb",
+    "sha256": "5f2216c7b30ddfe7ca4ef0119b1d8f1f771bc0ea9250cfaf8f6b0b0202acd3fc",
     "bytes": 13639684,
     "header_date": "2026-10-23",
     "mirror_offset": "0xc96000",
@@ -40,7 +40,7 @@
     "both_slots_full_write_readback": true,
     "candidate_full_card_acceptance": "scan and file listing passed; Opus music playback confirmed",
     "content_route_repair_playback": true,
-    "album_art_and_theater": "album cover and continuing playback confirmed; full-screen ground repair awaits device check"
+    "album_art_and_theater": "cover and full-screen color confirmed; repaint-loop/partial erase repair awaits device acceptance"
   },
   "qualification_scope": "Hardware confirmation used a date-adjusted image with the optional diagnostic readout. The byte-identical published source package itself was not flashed."
 }

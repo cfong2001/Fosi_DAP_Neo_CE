@@ -97,6 +97,8 @@ def main():
     report['opus_artwork']=artwork['check'](raw)
     ground=runpy.run_path(str(ROOT/'patches/opus_swap/test_player_ground.py'))
     report['player_ground']=ground['check'](raw)
+    feedback=runpy.run_path(str(ROOT/'patches/opus_swap/test_theater_feedback.py'))
+    report['theater_feedback']=feedback['check'](raw)
     render={}
     for label,image in (('stock',stock),('candidate',raw)):
         machine=painter['Machine'](image,real_store=True)

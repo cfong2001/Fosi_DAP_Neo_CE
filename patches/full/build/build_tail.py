@@ -106,8 +106,8 @@ EXPECTED = {
     'resolver_sha256': 'ee24042f1f595212f15675dfff6fb6a06325a72f202f6266df544c8169e39aaf',
     'focus_sha256': '479e1c49e92232643b0832f7a7929912298dccc93c7a80eb4fac9d76f913dc33',
     'restore_sha256': 'd821987c09e3e20c060516756092f1ec5bb11310b781fcb137bf93d4a81eaabc',
-    'theater_sha256': '53dce973e3bf970ce66fd53501c0ccf23f929c5d80a4e61870bca4370447d1df',
-    'tail_sha256': 'a0bccfe19ecc842afbe1a57ba05d26ef56ab71a4632791c36523cf67c5708e55',
+    'theater_sha256': 'cc8ac25ec178cc5e9ed41ed1c067e3649a9a55e15d6181f717f84d20925763af',
+    'tail_sha256': '794659ecade723737fe5f09fab9efdf904b0b3c1e4336e055a65f08fcf20e0e4',
 }
 
 
@@ -501,6 +501,10 @@ def main():
                 '  with the surround in the ground colour, then draws the\n'
                 '  glyph keyed.')
 
+        import runpy
+        theater_source = runpy.run_path(str(HERE / 'theater' / 'build_theater.py'))
+        reset_body, _ = theater_source['assemble'](theater_source['RESET_ASM'], THEATER_BASE)
+        trampoline = THEATER_BASE + len(reset_body) + 4
         hooks = {s: hex(symbols[s]) for _, _, _, _, s, _ in SITES}
         hooks['transport_keyed_draw'] = hex(wrapper)
         layout = {
@@ -531,7 +535,7 @@ def main():
                  'offset': THEATER_BASE - TAIL_BASE,
                  'address': hex(THEATER_BASE), 'bytes': len(theater),
                  'sha256': th_sha,
-                 'trampoline': hex(THEATER_BASE + 0x54)},
+                 'trampoline': hex(trampoline)},
                 {'name': 'bluetooth blob (audited placement)',
                  'offset': BT_BASE - TAIL_BASE, 'address': hex(BT_BASE),
                  'bytes': len(bt), 'sha256': BT_SHA256},
@@ -545,6 +549,8 @@ def main():
                 for src, (base, code) in pockets.items()],
             'hook_entries': hooks,
         }
+        # Empty alignment gaps are not recorded extents.
+        layout['pieces'] = [piece for piece in layout['pieces'] if piece['bytes'] > 0]
         (OUT / 'layout_tail.json').write_text(
             json.dumps(layout, indent=2) + '\n')
 

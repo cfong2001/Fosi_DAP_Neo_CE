@@ -7,7 +7,7 @@ from rknano_image import Image
 from unicorn import *
 from unicorn.arm_const import *
 
-def extract(raw,data,decode=False):
+def extract(raw,data,decode=False,observe=None):
  im=Image(raw);u=Uc(UC_ARCH_ARM,UC_MODE_THUMB);u.mem_map(0x03000000,0x100000)
  for m in (0,18,19):
   for kind in ('code','data'):
@@ -55,5 +55,6 @@ def extract(raw,data,decode=False):
   assert call(0x308389e,7,0)==1,'native JPEG setup failed'
   for _ in range(18):call(0x3083b36)
   ground=struct.unpack('<H',u.mem_read(0x3004400,2))[0]
+  if observe is not None:return observe(u,call,blits,files)
   return blits,ground
  return u.reg_read(UC_ARM_REG_R0),struct.unpack('<I',u.mem_read(0x30d0008,4))[0],files[2],calls

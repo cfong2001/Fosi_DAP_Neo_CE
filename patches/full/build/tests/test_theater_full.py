@@ -23,7 +23,7 @@ Assertions: the background cell 0x03004400 ends at the derived
 RGB565 an independent Python port of frame_average.c (little
 endian) plus the docs/theater-core.mjs mix computes from the rows
 the bitmap hook observed; the repaint event bit is set; a second
-setup restores the theme default; a no-art setup leaves the
+setup preserves the displayed color; no-art fallback restores the
 default; the stock double-blit of the last row does not corrupt
 the average.
 
@@ -258,8 +258,7 @@ def scenario_painter(raw, width, height, scaled_height, light):
     p.u.mem_write(BGCELL, struct.pack('<H', 0xBEEF))   # pre-dirtied cell
     assert p.setup() == 1
     st = p.state()
-    assert p.r16(BGCELL) == default, \
-        f'reset stub: cell {p.r16(BGCELL):#x} != theme default {default:#x}'
+    assert p.r16(BGCELL) == 0xBEEF, 'setup changed the displayed ground before sampling'
     assert st['flags'] == 1 and st['sums'] == (0, 0, 0) \
         and st['seen'] == 0 and st['cached'] == 0, st
     returns = [p.call(0x03083B36) for _ in range(scaled_height)]
@@ -301,13 +300,13 @@ def scenario_track_change(raw):
     p.cursor = 0
     assert p.setup() == 1
     st = p.state()
-    assert p.r16(BGCELL) == default, 'track change did not restore default'
+    assert p.r16(BGCELL) == expected, 'resampling reset the displayed ground'
     assert st['flags'] == 1 and st['sums'] == (0, 0, 0) \
         and st['seen'] == 0 and st['cached'] == 0, st
     for _ in range(18):
         p.call(0x03083B36)
     assert p.r16(BGCELL) == expected, 're-armed accumulation did not repeat'
-    print('  track change: default restored, state cleared, '
+    print('  track change: displayed color retained, state cleared, '
           'second accumulation reproduced the derived cell')
 
 
@@ -345,7 +344,26 @@ def scenario_no_art(raw):
     st = p.state()
     print(f'  no-art: setup returned {ret}, cell {cell:#06x}, state {st}, '
           f'blits {len(p.blits)}')
-    assert cell == 0x10A2, 'reset stub did not restore the theme default'
+    assert cell == 0xBEEF, 'failed setup changed the ground before caller fallback'
+    # Execute the real module-27 no-art exit and resident restore helper.
+    # The placeholder itself has independent drawing tests.
+    image = Image(raw)
+    for kind in ('code', 'data'):
+        offset, size = image.module_region(27, kind)
+        p.u.mem_write(image.modules[27][kind + '_exec'], raw[offset:offset + size])
+    def placeholder(uc, address, size, user):
+        uc.reg_write(UC_ARM_REG_PC, uc.reg_read(UC_ARM_REG_LR))
+    p.u.hook_add(UC_HOOK_CODE, placeholder, begin=0x0307EBA8, end=0x0307EBA8)
+    sp = 0x030EFE00
+    p.u.mem_write(sp, struct.pack('<8I', 0, 0, 0, 0, 0, 0, 0, END | 1))
+    p.u.reg_write(UC_ARM_REG_R4, 0)
+    from unicorn.arm_const import UC_ARM_REG_R6
+    p.u.reg_write(UC_ARM_REG_R6, 0x030D1000)
+    p.u.reg_write(UC_ARM_REG_SP, sp)
+    p.u.emu_start(0x0307E96D, END, count=10000)
+    assert p.u.reg_read(UC_ARM_REG_PC) == END
+    assert p.r16(BGCELL) == 0x10A2, 'no-art caller failed to restore the theme default'
+    assert p.state()['flags'] == 0
     for _ in range(3):
         p.call(0x03083B36)
         p.call(0x0308399C, 1)
@@ -576,7 +594,7 @@ def main():
     scenario_sync(raw)
     print('PASS lifecycle: sync consumer, dark, 30x18')
     scenario_no_art(raw)
-    print('PASS lifecycle: no-art setup leaves the theme default')
+    print('PASS lifecycle: no-art caller restores the theme default')
     scenario_constructor_restore(raw)
     print('PASS lifecycle: constructor restores cached theater color')
     scenario_portrait(raw)

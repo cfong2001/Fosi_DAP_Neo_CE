@@ -678,7 +678,7 @@ def main():
     # differ only at the theme runs, the mirrored header and
     # the trailer CRC once the growth shift is accounted for.
     FULL_DIR = HERE.parent / 'full'
-    FULL_SHA = '1513df4d9b10f4fb81d8b6aa520fa3e439d271e859df561df3faa2e0fad13edb'
+    FULL_SHA = '5f2216c7b30ddfe7ca4ef0119b1d8f1f771bc0ea9250cfaf8f6b0b0202acd3fc'
     PAYLOAD_GROWTH = 7694       # module 31 + module 24 + module 39 payloads
     GROWTH_TOTAL = 8192         # sector-aligned mirror
     if ecp is None:
@@ -719,7 +719,7 @@ def main():
                                                   (24, 26), (39, 1052)] \
                 and rep['tail']['payload_bytes'] == 2040 \
                 and rep['tail']['payload_sha256'] == \
-                'a0bccfe19ecc842afbe1a57ba05d26ef56ab71a4632791c36523cf67c5708e55'
+                '794659ecade723737fe5f09fab9efdf904b0b3c1e4336e055a65f08fcf20e0e4'
             imgf, imgu = rk.Image(f), rk.Image(u)
 
             def segs(img, raw):

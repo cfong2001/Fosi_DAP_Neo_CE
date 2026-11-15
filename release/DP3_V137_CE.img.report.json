@@ -3,7 +3,7 @@
  "input_file": "DP3_V137.img",
  "output_file": "DP3_V137_CE.img",
  "input_sha256": "fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cdfade5e9c6ea3bd71ac6deef",
- "output_sha256": "1513df4d9b10f4fb81d8b6aa520fa3e439d271e859df561df3faa2e0fad13edb",
+ "output_sha256": "5f2216c7b30ddfe7ca4ef0119b1d8f1f771bc0ea9250cfaf8f6b0b0202acd3fc",
  "byte_length": 13639684,
  "header_date": "20261023",
  "patches_applied": [
@@ -676,7 +676,7 @@
    "cpu_address": "0x3083a72",
    "file_offset": "0x99ea4",
    "old_hex": "dff764fc",
-   "new_hex": "f8f798fc"
+   "new_hex": "f8f783fc"
   },
   {
    "patch": "theater-blit-sync-b",
@@ -687,7 +687,7 @@
    "cpu_address": "0x3083a7e",
    "file_offset": "0x99eb0",
    "old_hex": "dff75efc",
-   "new_hex": "f8f792fc"
+   "new_hex": "f8f77dfc"
   },
   {
    "patch": "theater-blit-painter-a",
@@ -698,7 +698,7 @@
    "cpu_address": "0x3083b82",
    "file_offset": "0x99fb4",
    "old_hex": "dff7dcfb",
-   "new_hex": "f8f710fc"
+   "new_hex": "f8f7fbfb"
   },
   {
    "patch": "theater-blit-painter-b",
@@ -709,7 +709,7 @@
    "cpu_address": "0x3083b94",
    "file_offset": "0x99fc6",
    "old_hex": "dff7d3fb",
-   "new_hex": "f8f707fc"
+   "new_hex": "f8f7f2fb"
   },
   {
    "patch": "0105-theater-constructor-restore",
@@ -15751,7 +15751,7 @@
   "exec": "0x307bfb4",
   "file_offset": "0x55660",
   "payload_bytes": 2040,
-  "payload_sha256": "a0bccfe19ecc842afbe1a57ba05d26ef56ab71a4632791c36523cf67c5708e55",
+  "payload_sha256": "794659ecade723737fe5f09fab9efdf904b0b3c1e4336e055a65f08fcf20e0e4",
   "span_bytes": 11164,
   "workspace_zone_zero_bytes": 9120,
   "code_len_old": "0x29c14",
@@ -15779,8 +15779,8 @@
   }
  ],
  "diff_vs_stock": {
-  "bytes_changed": 4959125,
-  "range_count": 424983,
+  "bytes_changed": 4959092,
+  "range_count": 424981,
   "note": "range list omitted; rebuild with patches/full/build/build_full.py for it"
  },
  "validation": "validate_grown() passed (structural checks, layout derived from the image)",

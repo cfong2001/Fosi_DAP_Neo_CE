@@ -55,6 +55,7 @@ are modeled. Its output contains no media paths or device identifiers.
 | Native JPEG rows / independent theater color matches | 54 / 3 |
 | Missing or malformed artwork returns | 5 / 5 |
 | Full-screen theater coverage across repaint cases | 76,800 pixels / 16 cases |
+| Same-cover repaint feedback | Settles after 1; no pending repaint |
 | Selected-control instruction ratio vs stock | At most 1.0 (currently 0.4914) |
 | Selected-control resource reads vs stock | No increase (currently 14 vs 14) |
 
@@ -77,7 +78,9 @@ or physical playback match that model.
 
 ## Wheel latency: diagnosis in progress
 
-The reported visible delay remains an acceptance blocker. The short gate
+A reproduced artwork-completion / full-repaint feedback loop is now repaired.
+The sequence settles after one background repaint instead of continuing to
+request artwork. Visible delay remains a device acceptance check. The short gate
 counts instructions, resource reads and framebuffer stores for the same
 selected-control states in stock and CE. Current CE counts are about 49% of
 stock's instructions, with 14 resource reads in each image. These are emulator

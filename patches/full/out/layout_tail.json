@@ -1,7 +1,7 @@
 {
   "tail_base": "0x307bfb4",
   "tail_bytes": 2040,
-  "tail_sha256": "a0bccfe19ecc842afbe1a57ba05d26ef56ab71a4632791c36523cf67c5708e55",
+  "tail_sha256": "794659ecade723737fe5f09fab9efdf904b0b3c1e4336e055a65f08fcf20e0e4",
   "budget": 2044,
   "pieces": [
     {
@@ -45,8 +45,8 @@
       "offset": 924,
       "address": "0x307c350",
       "bytes": 680,
-      "sha256": "53dce973e3bf970ce66fd53501c0ccf23f929c5d80a4e61870bca4370447d1df",
-      "trampoline": "0x307c3a6"
+      "sha256": "cc8ac25ec178cc5e9ed41ed1c067e3649a9a55e15d6181f717f84d20925763af",
+      "trampoline": "0x307c37c"
     },
     {
       "name": "bluetooth blob (audited placement)",
@@ -78,7 +78,7 @@
     {
       "source": "transport_ground.S",
       "address": "0x30539b4",
-      "bytes": 52,
+      "bytes": 72,
       "patch": "0049-pocket-transport-ground"
     }
   ],

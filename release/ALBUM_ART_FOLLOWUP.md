@@ -100,3 +100,26 @@ derived color, whereas the repair covers all 76,800 pixels in 16 view, theme,
 visibility and color cases. The no-event path draws nothing, and title repaint
 scheduling is preserved. The focus suite now explicitly requires the full
 background fill while continuing to reject leaked control segment fills.
+
+## Repaint feedback and responsiveness
+
+The player could continuously decode and repaint an unchanged cover. Native
+artwork completion unconditionally posted full repaint 0x39; the real repaint
+then posted artwork request 0x3B. Setup restored the dark default before every
+new sample, so partial erases could use the default between derived-color
+updates. This repeated work is a confirmed cause of avoidable decode/paint
+load; physical wheel-to-screen timing still needs acceptance.
+
+The full build now retains the displayed ground during sampling and posts a
+background repaint only when the newly derived RGB565 value differs. The
+constructor and no-art caller retain their separate default-color behavior.
+The theater slot remains 680 bytes, with 644 bytes of executable payload and
+36 reserved zero bytes; Bluetooth placement and the total tail stay fixed.
+
+`test_theater_feedback.py` closes the actual native event sequence instead of
+ending at the color store. Its historical payload is rebuilt and checked
+against its independent SHA-256 pin. That control performs three repaint /
+art-request cycles and still has a repaint pending. The repair settles after
+one background repaint with none pending, and never resets the displayed color
+during resampling. A different generated cover still updates the color and
+requests a repaint. This quantifies removal of the loop, not device latency.

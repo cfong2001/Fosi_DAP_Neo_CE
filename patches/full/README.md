@@ -9,7 +9,7 @@ full-card device acceptance remains required for the latest revision.
 | | |
 |---|---|
 | Input | `DP3_V137.img`, 13,631,492 bytes, SHA-256 `fcc1cd3e…` |
-| Output | 13,639,684 bytes, SHA-256 `1513df4d9b10f4fb81d8b6aa520fa3e439d271e859df561df3faa2e0fad13edb` |
+| Output | 13,639,684 bytes, SHA-256 `5f2216c7b30ddfe7ca4ef0119b1d8f1f771bc0ea9250cfaf8f6b0b0202acd3fc` |
 | Composition | 185 byte patches, 2 transplants, 3 growth insertions, one merged gap tail, one merged theme config |
 | Default build | unchanged, still SHA-256 `92c44606…` (verify.py checks 1 to 13 pass; check 13 pins this build) |
 
@@ -102,7 +102,7 @@ lays out four occupants:
 | 0x7F8 | 0x0307C7AC | 4 | Spare zeros, not emitted |
 
 Total emitted: 2,040 of 2,044 bytes. Merged tail SHA-256
-`a0bccfe19ecc842afbe1a57ba05d26ef56ab71a4632791c36523cf67c5708e55`.
+`794659ecade723737fe5f09fab9efdf904b0b3c1e4336e055a65f08fcf20e0e4`.
 
 The playlist, no-art and transport hooks that used to sit at 0x0307C1DC
 now live in module 0, in stock routines nothing can reach

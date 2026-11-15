@@ -60,9 +60,9 @@ sha256sum /absolute/path/to/new-ce-image.img
 
 The full build prints a large byte-diff report to the log. For the current
 recorded composition, the 2,040-byte merged tail SHA-256 must be
-`a0bccfe19ecc842afbe1a57ba05d26ef56ab71a4632791c36523cf67c5708e55`,
+`794659ecade723737fe5f09fab9efdf904b0b3c1e4336e055a65f08fcf20e0e4`,
 and the 13,639,684-byte image SHA-256 must be
-`1513df4d9b10f4fb81d8b6aa520fa3e439d271e859df561df3faa2e0fad13edb`.
+`5f2216c7b30ddfe7ca4ef0119b1d8f1f771bc0ea9250cfaf8f6b0b0202acd3fc`.
 These are regression pins for this revision, not permanent hashes for future
 changes. Any intentional source or artifact change requires review, updated
 pins and regenerated browser data, meaningful behavioral regression tests,
