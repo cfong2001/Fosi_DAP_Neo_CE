@@ -36,6 +36,8 @@ def check(raw):
         results.append(dict(resource=rid, width=e['width'], height=e['height'],
                             black_pixels=black, stock_dark_pixels=dark,
                             changed_pixels=sum(c != GROUND for c in pixels.values())))
+    assert [row['black_pixels'] for row in results[:3]] == [28,88,102], 'native negative-control counts changed'
+    assert all(row['black_pixels']==0 for row in results[3:]), 'indicator baseline changed'
     return dict(baseline_sha256=BASELINE, native_draw_cases=len(results),
                 resources=results, live_status_writer_identified=False,
                 release_image_modified=False)
