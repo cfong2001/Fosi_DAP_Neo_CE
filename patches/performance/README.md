@@ -21,7 +21,8 @@ run in memory and are not flash candidates.
 The metadata ASCII prototype grows its function from 64 to 82 bytes. It runs
 at an emulator-only scratch address, not a qualified code home. Placement and
 source-to-patch integration are required before proposing it for the release.
-Two malformed UTF-8 cases cost 12 and three extra instructions respectively;
+The Unicode-only fixture costs 360 extra instructions (+1.7%); two malformed
+UTF-8 cases cost 12 and three extra instructions respectively;
 this is recorded rather than hidden by an average. No storage-read saving is
 claimed for the ASCII conversion change.
 
