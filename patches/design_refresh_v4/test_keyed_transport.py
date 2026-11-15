@@ -116,7 +116,7 @@ class Machine:
                                      uc.reg_read(UC_ARM_REG_R0),
                                      uc.reg_read(UC_ARM_REG_R1),
                                      uc.reg_read(UC_ARM_REG_R2)))
-            elif addr == FILL:
+            elif addr in (FILL, 0x03052D5C):
                 sp = uc.reg_read(UC_ARM_REG_SP)
                 self.drawlog.append(('fill',) + tuple(
                     uc.reg_read(r) for r in (UC_ARM_REG_R0, UC_ARM_REG_R1,

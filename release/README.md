@@ -5,7 +5,7 @@ against their pins by `.github/workflows/firmware.yml` on every change.
 
 | File | What it is | Length | SHA-256 |
 |---|---|---|---|
-| `DP3_V137_CE.img` | **Standard.** Every composed CE feature (list below). Header date 2026-10-23. | 13,639,684 bytes (8,192 more than stock) | `8a9f32fc06ed2459ffd936a9203d6df6e665b273b49fb25e1083b0b96d8c5ce0` |
+| `DP3_V137_CE.img` | **Standard.** Every composed CE feature (list below). Header date 2026-10-23. | 13,639,684 bytes (8,192 more than stock) | `08054971d2a5ef837c5186a8b31e20f720bedbc1ddb41978885b0f4e32d105c9` |
 | `DP3_V137_CE_minimal.img` | **Minimal option.** The default framework set and full-precision Vorbis only. Header date 2026-10-23. | 13,631,492 bytes (same as stock) | `0dfd10e23749f9b6c65499266f1a7a2ec038160b089ba0fc2ca68dcf2b24c986` |
 | `DP3_V137_CE_recovery.img` | Unmodified stock bytes dated 2026-10-24, one day after either CE image, so the boot validator prefers it. | 13,631,492 bytes | `aff851b31d6eee55cbd4bb3fc0464ac79f0039ee86ae6723225ac036a157d223` |
 | `*.report.json` | Build reports: every patch with its address and old and new bytes, transplant hashes, validation results. The standard report summarises its byte ranges. | | |
@@ -25,8 +25,9 @@ are tracked in [`FIRST_DEVICE_QUALIFICATION.md`](FIRST_DEVICE_QUALIFICATION.md).
 
 The content-route repaired Standard code also booted and played Opus music
 on hardware on 2026-11-14. That test used the optional diagnostic readout
-and a newer header date; both written slots passed full readback. Album art
-and the theater background were absent in this test and remain a follow-up.
+and a newer header date; both written slots passed full readback. On 2026-11-15, the current Standard code also passed embedded artwork, full-screen
+theater color, progress-gap and continuous dial acceptance. Small black boxes in
+the top status bar and residual background-fill staging remain follow-ups.
 
 ## Which image
 
@@ -140,14 +141,19 @@ and what you tested.
   stock code dated 2026-10-24, newer than either CE image, so the validator
   selects it. Plain `DP3_V137.img` is dated 2026-10-22; it is older than CE
   and the validator would keep booting CE.
-- **If the device does not boot:** recovery needs the Rockchip USB
-  (Rockusb) path. The mapping between Rockusb addresses and the validator's
-  slot sectors is **not yet proven** (README, Safety and recovery). Read
-  back before you write anything.
+- **If the device does not boot:** use the measured Rockusb procedure in
+  [FLASH_REVIEW.md](FLASH_REVIEW.md#repeating-the-qualified-rockusb-procedure).
+  Recovery entry on the qualified unit uses reset, then Vol+ + Vol- + OK while
+  reconnecting USB and holding through verification. Both 13 MiB payloads were
+  written and fully read back; the trailing slot-local data was preserved.
+  Restoring the device-derived stock firmware also passed readback and boot.
+  Another unit still requires its own backup and map verification.
 
-The planned dual-slot layout, with stock kept in slot 1 as a software
-fallback, needs Rockusb writes to slot 2 only. That procedure is not ready:
-it depends on the same unproven sector mapping.
+After verification, unplug USB and use the physical reset button to start;
+software reset alone was unreliable. If a dated candidate is newer than the
+bundled recovery, prepare a matching recovery newer than that candidate first.
+The stock installer replaces both slots; a separately retained stock fallback
+slot is not part of this qualified procedure.
 
 ## Rebuild it yourself
 

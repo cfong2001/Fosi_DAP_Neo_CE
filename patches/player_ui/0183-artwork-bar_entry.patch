@@ -5,6 +5,6 @@ module: 0
 region: code
 address: 0x3053ef4
 gate: pinned stock bytes; artwork compositor Unicorn regression suite
-expect: 2de9f041adf5007d984617460e4605466b464ff4007200214ff44030
-replace: 1fb50448008809f099ffbde81f40dff808c0604700440003fb320603
+expect: 2de9f041adf5007d984617460e4605466b464ff4007200214ff44030869c13f0fdfabdf8
+replace: 1fb505480088dff814c0e047bde81f40dff80cc06047000000440003412f0503fb320603
 rationale: Original row compositor or player-only drawing in audited stock code slots, with no new persistent RAM.

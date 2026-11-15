@@ -73,7 +73,8 @@ transplant's claimed ranges overlap any byte patch.
   the browser.
 - Standard's streaming reader stores title, artist, album and genre
   in bounded UTF-16 fields. Large artwork comments are skipped;
-  extracting Opus artwork is separate from this text-metadata reader.
+  playback artwork uses the separately repaired native Ogg picture loader.
+  See [artwork qualification](../../release/ALBUM_ART_FOLLOWUP.md).
 
 ## Gates before this can become the default
 

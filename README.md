@@ -24,11 +24,11 @@ CE (Community Edition) is patched firmware for the Fosi Audio DAP Neo. It starts
 
 | Image | What it carries | SHA-256 |
 |---|---|---|
-| [`DP3_V137_CE.img`](release/DP3_V137_CE.img) | Standard: every feature below. 8,192 bytes longer than stock. | `8a9f32fc06ed2459ffd936a9203d6df6e665b273b49fb25e1083b0b96d8c5ce0` |
+| [`DP3_V137_CE.img`](release/DP3_V137_CE.img) | Standard: every feature below. 8,192 bytes longer than stock. | `08054971d2a5ef837c5186a8b31e20f720bedbc1ddb41978885b0f4e32d105c9` |
 | [`DP3_V137_CE_minimal.img`](release/DP3_V137_CE_minimal.img) | Minimal: audio and library fixes only, same length as stock. | `0dfd10e23749f9b6c65499266f1a7a2ec038160b089ba0fc2ca68dcf2b24c986` |
 | [`DP3_V137_CE_recovery.img`](release/DP3_V137_CE_recovery.img) | Stock code dated one day after CE, for going back. | `aff851b31d6eee55cbd4bb3fc0464ac79f0039ee86ae6723225ac036a157d223` |
 
-Standard CE has been installed and booted on hardware. The current scan and responsiveness repair still needs full-card acceptance; see [repair validation](release/REPAIR_VALIDATION.md). Minimal retains WMA support.
+Standard CE has been installed and booted on hardware. Full-card scanning, Opus playback, embedded covers, full-screen theater color, progress-gap restoration and improved continuous dial response have passed device acceptance; see [repair validation](release/REPAIR_VALIDATION.md). Minimal retains WMA support.
 
 Complete the [flash review and recovery gates](release/FLASH_REVIEW.md) before writing anything to a player. The [install page](https://cfong2001.github.io/Fosi_DAP_Neo_CE/) checks the image's SHA-256 and copies it to the player's storage as `RKNANOFW.IMG`; you then run the update on the device. To do it by hand, rename the image to `RKNANOFW.IMG` (including the .IMG extension), copy it to the top level of the player's storage, run the update the way you would an official Fosi update, and delete the file afterwards. [`release/README.md`](release/README.md) has the full steps, a testing order and recovery.
 

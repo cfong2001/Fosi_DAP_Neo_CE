@@ -86,18 +86,9 @@ RESET_ASM = [
     'strh r2, [r3, #26]',                       # clear cached colour
     'movs r2, #1',
     'strb r2, [r3, #25]',                       # flags = armed
-    *load('r3', 0x030232A0),                    # SAVEINFO
-    'ldrb r2, [r3, #0x2d8]',                    # theme selector
-    'cmp r2, #0',
-    'bne rst_light',
-    'movw r2, #0x10a2',                         # dark default
-    'b rst_store',
-    'rst_light:',
-    *load('r3', 0x030235B4),                    # palette cell 0
-    'ldrh r2, [r3, #0]',
-    'rst_store:',
-    *load('r3', 0x03004400),                    # background cell
-    'strh r2, [r3, #0]',
+    # Retain the displayed ground while a replacement cover is sampled.
+    # Restoring the default here makes every same-cover repaint change
+    # color again and feeds the repaint -> decode -> repaint loop.
     'pop {r2, r3}',
     # A plain branch back into setup at 0x030838A2 is appended by
     # fixup: the hook site uses B (not BL), so lr still holds
@@ -286,11 +277,15 @@ TRAMP_TAIL_ASM = [
     'orr r5, r5, r0',
     'strh r5, [r2, #26]',                       # survive player constructor
     *load('r0', 0x03004400),                    # background cell
+    'ldrh r1, [r0]',
+    'cmp r1, r5',
+    'beq color_unchanged',
     'strh r5, [r0, #0]',
     *load('r0', 0x03023CFC),                    # event word, bit 0x19
     'ldr r1, [r0, #0]',
     'orr r1, r1, #0x02000000',
     'str r1, [r0, #0]',
+    'color_unchanged:',
     'ldrb r0, [r2, #25]',
     'orr r0, r0, #2',
     'strb r0, [r2, #25]',                       # done
@@ -379,6 +374,10 @@ def main():
           f'{tramp_entry:#x}, bitmap BL at {bl_site:#x}')
     print(f'round-trip: {len(insns)} instructions verified')
 
+    # Preserve the audited slot and Bluetooth placement. Padding is never executed.
+    if len(payload) > 680:
+        raise SystemExit('full theater slot exceeded')
+    payload = payload.ljust(680, b'\0')
     (HERE / 'theater_tail.bin').write_bytes(payload)
 
     def site_bytes(addr):
@@ -401,8 +400,8 @@ def main():
                       'keeps setup\'s own return address) to the '
                       'theater reset stub in the gap tail, which '
                       're-executes both, clears the accumulator state '
-                      'at SAVEINFO+0x1C8, arms sampling, restores the '
-                      'player background cell to the theme default and '
+                      'at SAVEINFO+0x1C8 and arms sampling without '
+                      'changing the currently displayed background, then '
                       'branches back to the third setup instruction.'),
     }]
     names = ['sync-a', 'sync-b', 'painter-a', 'painter-b']

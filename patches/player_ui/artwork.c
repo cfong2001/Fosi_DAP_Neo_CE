@@ -109,9 +109,11 @@ __attribute__((naked,section(".text.bar_entry"))) void bar_fill(void) {
         "push {r0-r4, lr}\n"
         "ldr r0, =0x03004400\n"
         "ldrh r0, [r0]\n"
-        "bl bar_recolor\n"
+        "ldr ip, =0x03052F41\n"
+        "blx ip\n"
         "pop {r0-r4, lr}\n"
         "ldr ip, =0x030632FB\n"
         "bx ip\n"
+        ".hword 0\n"
         ".ltorg\n");
 }

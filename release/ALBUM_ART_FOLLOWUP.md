@@ -1,0 +1,158 @@
+# Opus album art and theater background
+
+The content-routing repair is merged and Opus music playback is confirmed on
+hardware. The latest playback test displayed neither the album cover nor a
+derived theater background. The repaired image passes extraction and native drawing tests; hardware now confirms the cover appears and music plays. Full-screen theater
+repaint is repaired separately below and awaits its device check.
+
+## Established source behavior
+
+`patches/opus_swap/opus_tags.c` maps only TITLE, ARTIST, ALBUM and GENRE.
+`comment()` passes unknown keys to `value()` without a destination, which
+streams past their contents. This includes METADATA_BLOCK_PICTURE. This is
+a confirmed omission in that parser; it does not establish whether a separate
+playback artwork loader also needs repair.
+
+The theater lifecycle test supplies decoded rows and verifies the derived
+RGB565 color. It therefore cannot establish that embedded Opus picture bytes
+reach the native JPEG loader. Missing art and an unchanged background must be
+measured at separate stages before changing color computation.
+
+## Short measurements
+
+Run `python tools/audit_opus_artwork.py /path/to/local/media` with Mutagen
+installed. It opens files read-only and emits only aggregate picture counts,
+including JPEG/PNG signatures, malformed blocks and missing pictures. It does
+not validate JPEG decoding or the device path. No music or private tag data
+is committed. Synthetic classifier tests run with:
+
+```sh
+python -m unittest discover -s tests -p test_opus_artwork_inventory.py
+```
+
+The initial local inventory found 204 readable Opus files: 201 carried picture
+blocks with JPEG signatures, three had no picture, and none had malformed or
+oversized picture blocks. Thus absent source artwork cannot explain the whole
+corpus. These are signature checks, not a claim that all JPEGs decode on device.
+
+The repair gates are:
+
+| Stage | Measurement | Success |
+|---|---|---|
+| Extraction | Generated Opus picture payload vs original bytes | Exact match, including multipage comments |
+| Bounds | Invalid base64, truncated picture lengths, oversized values | Bounded rejection, intact guards and stack |
+| Native drawing | Extracted supported JPEG reaches native loader and row consumer | Nonzero decoded rows; no placeholder fallback |
+| Theater | White, colored and no-art fixtures | Independent RGB565 reference match and no stale previous-track color |
+| Regression | Existing scan, text metadata and playback gate | All current checks still pass |
+| Hardware | Same track through browser and library | Audible playback, visible cover and derived background |
+
+## Diagnosed repair and results
+
+Module 18's format dispatch still sent OPU (the former WMA slot) to the
+ASF picture reader. The new entry routes it to the native Ogg picture loader.
+That loader expects the seven-byte `03 vorbis` comment header; the Opus shim
+recognizes all eight bytes of `OpusTags` and adjusts the packet length without
+changing the lacing table. Non-comment packets retain the native skip offset.
+
+Large covers exposed a second defect: the loader used the page granule value
+as a continuation signal. The tested Opus header pages use zero even when
+all 255 laces are 255. The repair follows the last lace instead, on both the
+initial and subsequent comment pages. Native base64 decoding, temporary-file
+creation, JPEG decoding, row drawing and theater accumulation remain in use.
+The text parser still skips picture values; artwork has its own playback path.
+
+`patches/opus_swap/test_artwork_route.py` executes those native paths with
+modeled filesystem and LCD leaves. The short gate checks 81,814 exact copied
+bytes across two fixtures (including a multipage cover), five missing/malformed
+returns, 54 actual decoded JPEG rows and three independent theater-color
+matches. The old image reproduces missing Opus art; native Vorbis output
+remains identical. Stack, output guards and callee-saved registers are checked.
+
+The full local corpus check extracted all 201 picture blocks byte-for-byte
+from 204 files; three files had no picture. All 201 source images are readable
+baseline JPEGs. No filenames or media are included in these results.
+
+Run the short gate with:
+
+```sh
+python patches/opus_swap/test_artwork_route.py --candidate release/DP3_V137_CE.img
+```
+
+The integrated repair gate also includes these checks. Hardware must still
+confirm the cover and derived background while music plays before merging.
+
+## Full-screen ground repaint
+
+Hardware confirmed that covers appear and music continues, but only control
+surrounds and the progress area changed color. The player painter branches on
+`SAVEINFO+0x1A`: metadata view fills from the live ground cell, while artwork
+view copies background resource 138 (304 for light mode). In the current
+Standard image those resources are uniform, fixed-color 240 by 320 bitmaps.
+The previously named “no-media” control in the stock repaint research was
+actually this artwork-view branch. A correct color cell did not imply that
+the main background was painted with it.
+
+Patch 0275 removes only that conditional branch, allowing both views to use
+the existing native full-screen fill. No helper code or persistent RAM is
+added. `test_player_ground.py` executes the real repaint/event code and models
+the display leaves: the legacy artwork view paints zero pixels with the
+derived color, whereas the repair covers all 76,800 pixels in 16 view, theme,
+visibility and color cases. The no-event path draws nothing, and title repaint
+scheduling is preserved. The focus suite now explicitly requires the full
+background fill while continuing to reject leaked control segment fills.
+
+## Repaint feedback and responsiveness
+
+The player could continuously decode and repaint an unchanged cover. Native
+artwork completion unconditionally posted full repaint 0x39; the real repaint
+then posted artwork request 0x3B. Setup restored the dark default before every
+new sample, so partial erases could use the default between derived-color
+updates. This repeated work is a confirmed cause of avoidable decode/paint
+load; physical wheel-to-screen timing still needs acceptance.
+
+The full build now retains the displayed ground during sampling and posts a
+background repaint only when the newly derived RGB565 value differs. The
+constructor and no-art caller retain their separate default-color behavior.
+The theater slot remains 680 bytes, with 644 bytes of executable payload and
+36 reserved zero bytes; Bluetooth placement and the total tail stay fixed.
+
+`test_theater_feedback.py` closes the actual native event sequence instead of
+ending at the color store. Its historical payload is rebuilt and checked
+against its independent SHA-256 pin. That control performs three repaint /
+art-request cycles and still has a repaint pending. The repair settles after
+one background repaint with none pending, and never resets the displayed color
+during resampling. A different generated cover still updates the color and
+requests a repaint. This quantifies removal of the loop, not device latency.
+
+## Remaining progress-band gaps and fill work
+
+Hardware confirmed improved dial response after removing the repaint loop,
+but the progress-area gaps remained dark. The progress painter only erased
+its 162 by 15 bar rectangle, and the time painter erased its two label boxes.
+The new gap helper explicitly restores the intervening background rectangles
+on each progress redraw without erasing labels, the bar or transport controls.
+The dirty-frame negative control leaves 4,360 gap pixels black; the repaired
+path restores them while preserving 1,610 label pixels and all outside pixels.
+
+A dedicated full-player fill also replaces per-pixel row work with word
+bursts across the native 240-row and 80-row surfaces. Native execution checks
+all 76,800 pixels, all 40 display-context bytes, write bounds, the stack and
+callee-saved registers, plus rotated-display fallback parity. Work drops from
+466,651 to 28,854 instructions (ratio 0.0618). Actual display-transfer and
+user-perceived timing remain device acceptance items.
+
+## Device acceptance - 2026-11-15
+
+After complete byte-for-byte readback of both written 13 MiB slots, hardware
+confirmed embedded artwork, full-screen theater color, removal of the progress
+band's black gaps, faster full-screen fill and responsive continuous dial input.
+The tested code corresponds to Standard release SHA-256
+`08054971d2a5ef837c5186a8b31e20f720bedbc1ddb41978885b0f4e32d105c9`;
+the device test used a newer header date and the optional diagnostic readout.
+This is qualitative timing acceptance; no physical millisecond measurement is claimed.
+
+Small black rectangles remain in the top status bar. The transport surround
+also still changes color before the rest of the screen, although the delay is
+much improved. These are follow-up work. Further optimizations must compare
+complete framebuffer bytes and observable display state against this accepted
+baseline before release.

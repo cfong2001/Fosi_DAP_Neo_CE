@@ -2,7 +2,7 @@
  * Theater mode: restore the theme background when a track has no artwork.
  *
  * The theater reset stub runs inside artwork setup (module 18, 0x0308389E),
- * so it restores the theme default only when setup is called. The player's
+ * and retains the displayed color until sampling completes. The player's
  * artwork loader in module 27 skips setup on two exits:
  *
  *   0x0307E96C  the audio file did not open
@@ -15,7 +15,7 @@
  * cell changed, posts the same repaint event bit the trampoline's finalize
  * posts (0x03023CFC, bit 0x02000000).
  *
- * The theme default rule is the reset stub's: 0x10A2 for the dark theme
+ * The theme default rule is: 0x10A2 for the dark theme
  * (SAVEINFO+0x2D8 == 0), else palette cell 0 at 0x030235B4.
  */
     .syntax unified

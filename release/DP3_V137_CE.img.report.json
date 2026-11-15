@@ -3,7 +3,7 @@
  "input_file": "DP3_V137.img",
  "output_file": "DP3_V137_CE.img",
  "input_sha256": "fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cdfade5e9c6ea3bd71ac6deef",
- "output_sha256": "8a9f32fc06ed2459ffd936a9203d6df6e665b273b49fb25e1083b0b96d8c5ce0",
+ "output_sha256": "08054971d2a5ef837c5186a8b31e20f720bedbc1ddb41978885b0f4e32d105c9",
  "byte_length": 13639684,
  "header_date": "20261023",
  "patches_applied": [
@@ -676,7 +676,7 @@
    "cpu_address": "0x3083a72",
    "file_offset": "0x99ea4",
    "old_hex": "dff764fc",
-   "new_hex": "f8f798fc"
+   "new_hex": "f8f783fc"
   },
   {
    "patch": "theater-blit-sync-b",
@@ -687,7 +687,7 @@
    "cpu_address": "0x3083a7e",
    "file_offset": "0x99eb0",
    "old_hex": "dff75efc",
-   "new_hex": "f8f792fc"
+   "new_hex": "f8f77dfc"
   },
   {
    "patch": "theater-blit-painter-a",
@@ -698,7 +698,7 @@
    "cpu_address": "0x3083b82",
    "file_offset": "0x99fb4",
    "old_hex": "dff7dcfb",
-   "new_hex": "f8f710fc"
+   "new_hex": "f8f7fbfb"
   },
   {
    "patch": "theater-blit-painter-b",
@@ -709,7 +709,7 @@
    "cpu_address": "0x3083b94",
    "file_offset": "0x99fc6",
    "old_hex": "dff7d3fb",
-   "new_hex": "f8f707fc"
+   "new_hex": "f8f7f2fb"
   },
   {
    "patch": "0105-theater-constructor-restore",
@@ -1181,8 +1181,8 @@
    "region": "code",
    "cpu_address": "0x3053ef4",
    "file_offset": "0x2d5a0",
-   "old_hex": "2de9f041adf5007d984617460e4605466b464ff4007200214ff44030",
-   "new_hex": "1fb50448008809f099ffbde81f40dff808c0604700440003fb320603"
+   "old_hex": "2de9f041adf5007d984617460e4605466b464ff4007200214ff44030869c13f0fdfabdf8",
+   "new_hex": "1fb505480088dff814c0e047bde81f40dff80cc06047000000440003412f0503fb320603"
   },
   {
    "patch": "0182-artwork-bar-hook",
@@ -1931,6 +1931,149 @@
    "file_offset": "0x41afe",
    "old_hex": "4f202870",
    "new_hex": "04f0adb8"
+  },
+  {
+   "patch": "0266-opus-artwork",
+   "file": "0266-opus-artwork.patch",
+   "kind": "module",
+   "module": 0,
+   "region": "code",
+   "cpu_address": "0x306d734",
+   "file_offset": "0x46de0",
+   "old_hex": "10b54ff400610020fff7f2fc28210020fff7d2fd10210020fff7cefd7820f7f7f7f80221bde810400020fff79fbdfff775be10b50c4601460020fff7bdfd2146bde81040",
+   "new_hex": "9df81c014f2812d13a4601210df21610ebf730fc012810d1072209490df21010e7f7c0fb08b115f0fabd16f072b8032801d016f05ab816f052b816f094b800bf4a330803"
+  },
+  {
+   "patch": "0267-opus-artwork",
+   "file": "0267-opus-artwork.patch",
+   "kind": "module",
+   "module": 18,
+   "region": "code",
+   "cpu_address": "0x3083346",
+   "file_offset": "0x99778",
+   "old_hex": "384600f0",
+   "new_hex": "00f003ba"
+  },
+  {
+   "patch": "0268-opus-artwork",
+   "file": "0268-opus-artwork.patch",
+   "kind": "module",
+   "module": 18,
+   "region": "code",
+   "cpu_address": "0x308334a",
+   "file_offset": "0x9977c",
+   "old_hex": "85fc00f07cfc00f0",
+   "new_hex": "7075735461677300"
+  },
+  {
+   "patch": "0269-opus-artwork",
+   "file": "0269-opus-artwork.patch",
+   "kind": "module",
+   "module": 18,
+   "region": "code",
+   "cpu_address": "0x308380a",
+   "file_offset": "0x99c3c",
+   "old_hex": "9df81c01032805d1",
+   "new_hex": "e9f793bf00bf00bf"
+  },
+  {
+   "patch": "0270-opus-artwork",
+   "file": "0270-opus-artwork.patch",
+   "kind": "module",
+   "module": 18,
+   "region": "code",
+   "cpu_address": "0x3083352",
+   "file_offset": "0x99784",
+   "old_hex": "85fc074600f084fc044600f083fc002f",
+   "new_hex": "3a4601214ff0ff30d6f7a1f800f05eba"
+  },
+  {
+   "patch": "0271-opus-artwork",
+   "file": "0271-opus-artwork.patch",
+   "kind": "module",
+   "module": 0,
+   "region": "code",
+   "cpu_address": "0x306d7f8",
+   "file_offset": "0x46ea4",
+   "old_hex": "2de9f84f1c460a9d92460e468146ef2a88bf4ff0ef0ab4f5a07f28bf40f23f14884623b29b465246fff7adff00210846fff73afd601c0090",
+   "new_hex": "9df81c214f2a10d1082913d3a1f108029df8083173b12b4413f8013cff2b0cbf4ff0ff33002316f024b8a1f10702234616f01fb816f035b8"
+  },
+  {
+   "patch": "0272-opus-artwork",
+   "file": "0272-opus-artwork.patch",
+   "kind": "module",
+   "module": 18,
+   "region": "code",
+   "cpu_address": "0x3083866",
+   "file_offset": "0x99c98",
+   "old_hex": "ca1f2346",
+   "new_hex": "e9f7c7bf"
+  },
+  {
+   "patch": "0273-opus-artwork",
+   "file": "0273-opus-artwork.patch",
+   "kind": "module",
+   "module": 0,
+   "region": "code",
+   "cpu_address": "0x3061252",
+   "file_offset": "0x3a8fe",
+   "old_hex": "2849086840f001000860002070472448406970472348806870472148007c00f00100704710b5",
+   "new_hex": "9df8481769b10df20060084410f8010cff280cbf4ff0ff300020cdf8440721f07fbf21f0ebbd"
+  },
+  {
+   "patch": "0274-opus-artwork",
+   "file": "0274-opus-artwork.patch",
+   "kind": "module",
+   "module": 18,
+   "region": "code",
+   "cpu_address": "0x308316e",
+   "file_offset": "0x995a0",
+   "old_hex": "ddf84407",
+   "new_hex": "def770b8"
+  },
+  {
+   "patch": "0275-player-theater-ground",
+   "file": "0275-player-theater-ground.patch",
+   "kind": "module",
+   "module": 27,
+   "region": "code",
+   "cpu_address": "0x307efa6",
+   "file_offset": "0x898a0",
+   "old_hex": "50b1",
+   "new_hex": "00bf"
+  },
+  {
+   "patch": "0276-progress-gap-restore",
+   "file": "0276-progress-gap-restore.patch",
+   "kind": "module",
+   "module": 0,
+   "region": "code",
+   "cpu_address": "0x3052f40",
+   "file_offset": "0x2c5ec",
+   "old_hex": "65206e6f74207375636365737321200a0000000001215a20fff728bb00215a20fff724bb10b501215a20fff71ffb0120fff7f9fb0020fff7fffb012011f0d0fc0120fff7f9fbbde81040012011f0c8bc",
+   "new_hex": "70b582b006460af073ff009606a4052520886188a288e388083410f0cef9013df6d102b070bd00bf0000f0000600fd004900f000be00fd000000fe0027001201ca00fe00ef00120128000d01c9001201"
+  },
+  {
+   "patch": "0277-player-full-fill",
+   "file": "0277-player-full-fill.patch",
+   "kind": "module",
+   "module": 0,
+   "region": "code",
+   "cpu_address": "0x3052d5c",
+   "file_offset": "0x2c408",
+   "old_hex": "40613e20fff7aaff4ff2f7711420fff7a5ff00211220fff7a1ff00210820fff79dff00211620fff799ff00210c20fff795ff00210e20fff791ff4ff6fe611820fff78cff20210320fff788ff44f240010420fff783ff14b3",
+   "new_hex": "70b5124e3488e4b97469d4b9bdf8104044ea044411f0cef82146224623460c4841f620451ec0013dfcd10a4840f660151ec0013dfcd10120f06000203084708470bdbde8704010f0aaba00bfb8380203a865000324f20603"
+  },
+  {
+   "patch": "0278-player-full-fill-hook",
+   "file": "0278-player-full-fill-hook.patch",
+   "kind": "module",
+   "module": 27,
+   "region": "code",
+   "cpu_address": "0x307efb8",
+   "file_offset": "0x898b2",
+   "old_hex": "e4f79ff9",
+   "new_hex": "d3f7d0fe"
   }
  ],
  "transplants_applied": [
@@ -15641,7 +15784,7 @@
   "exec": "0x307bfb4",
   "file_offset": "0x55660",
   "payload_bytes": 2040,
-  "payload_sha256": "a0bccfe19ecc842afbe1a57ba05d26ef56ab71a4632791c36523cf67c5708e55",
+  "payload_sha256": "794659ecade723737fe5f09fab9efdf904b0b3c1e4336e055a65f08fcf20e0e4",
   "span_bytes": 11164,
   "workspace_zone_zero_bytes": 9120,
   "code_len_old": "0x29c14",
@@ -15669,8 +15812,8 @@
   }
  ],
  "diff_vs_stock": {
-  "bytes_changed": 4958967,
-  "range_count": 424976,
+  "bytes_changed": 4959269,
+  "range_count": 424981,
   "note": "range list omitted; rebuild with patches/full/build/build_full.py for it"
  },
  "validation": "validate_grown() passed (structural checks, layout derived from the image)",

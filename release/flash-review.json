@@ -1,7 +1,7 @@
 {
-  "status": "STANDARD CE SCAN AND OPUS PLAYBACK CONFIRMED ON HARDWARE; ARTWORK FOLLOW-UP OPEN",
+  "status": "REPAINT LOOP FIX IMPROVES HARDWARE RESPONSE; PROGRESS-GAP AND BURST-FILL ACCEPTANCE PENDING",
   "source_candidate": {
-    "sha256": "8a9f32fc06ed2459ffd936a9203d6df6e665b273b49fb25e1083b0b96d8c5ce0",
+    "sha256": "08054971d2a5ef837c5186a8b31e20f720bedbc1ddb41978885b0f4e32d105c9",
     "bytes": 13639684,
     "header_date": "2026-10-23",
     "mirror_offset": "0xc96000",
@@ -40,7 +40,7 @@
     "both_slots_full_write_readback": true,
     "candidate_full_card_acceptance": "scan and file listing passed; Opus music playback confirmed",
     "content_route_repair_playback": true,
-    "album_art_and_theater": "not displayed on latest playback test; separate follow-up"
+    "album_art_and_theater": "cover/full-screen color and faster dial response confirmed; explicit progress-gap restoration and faster full fill await device check"
   },
   "qualification_scope": "Hardware confirmation used a date-adjusted image with the optional diagnostic readout. The byte-identical published source package itself was not flashed."
 }

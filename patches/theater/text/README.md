@@ -99,7 +99,7 @@ The player checks event `0x24` and test-clears `0x39` and `0x2F` at
 `SAVEINFO+0x1A` is nonzero, it reads the current ground from `0x03004400`
 and fills the screen at `0x0307EFA8`–`0x0307EFB8`. The same full-paint
 path posts event `0x3A`; the subsequent handler posts title event `0x4A`.
-When `SAVEINFO+0x1A` is zero, the player draws stock no-media image 138
+When `SAVEINFO+0x1A` is zero, stock draws the fixed background image 138 for artwork view
 instead. Partial redraws use rectangle fills to erase old text, so
 removing those fills without a replacement dirty-region strategy leaves
 stale pixels. Merely writing the ground cell does not itself establish
@@ -108,7 +108,7 @@ that a player repaint is scheduled.
 `emu_player_redraw.py` exercises this control flow with the stock event-bit
 routines and intercepted display calls. It posts `0x39`, checks that two
 different values in `0x03004400` reach the fill and that title event
-`0x4A` is set, and checks the no-media and no-event paths. It does not
+`0x4A` is set, and checks the artwork-view and no-event paths. It does not
 model task scheduling, the physical panel, or concurrency:
 
 ```

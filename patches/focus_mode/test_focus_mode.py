@@ -239,7 +239,7 @@ class Machine:
             if n:
                 uc.mem_write(dst, bytes(uc.mem_read(src, n)))
             uc.reg_write(UC_ARM_REG_PC, uc.reg_read(UC_ARM_REG_LR))
-        elif addr == FILL:
+        elif addr == FILL or (addr == 0x03052D5C and FULL_IMAGE):
             sp = uc.reg_read(UC_ARM_REG_SP)
             self.fills.append(tuple(
                 uc.reg_read(r) for r in (UC_ARM_REG_R0, UC_ARM_REG_R1,
@@ -525,6 +525,8 @@ def gate2(variant):
         assert m.event(n), f'gated event {n:#x} was consumed'
     rects = [f[:4] for f in m.fills]
     if FULL_IMAGE:
+        assert rects.count((0, 0, 239, 319)) == 1, 'theater full-screen repaint missing'
+        rects = [r for r in rects if r != (0, 0, 239, 319)]
         rects = [r for r in rects if not (25 <= r[0] <= r[2] <= 214 and 8 <= r[1] <= r[3] <= 197)]
     assert rects == [], f'segment fill calls leaked: {rects}'
     bad = [d for d in m.draws
@@ -607,7 +609,7 @@ def gate4(variant):
         m.w16(BGCELL, 0xBEEF)
         assert m.call(0x0308389E, r0=1, r1=0) == 1
         st = m.u.mem_read(TSTATE, 28)
-        assert m.r16(BGCELL) == 0x10A2, 'setup did not restore default'
+        assert m.r16(BGCELL) == (0xBEEF if FULL_IMAGE else 0x10A2), 'setup ground policy mismatch'
         assert st[25] == 1, f'sampling not re-armed: flags {st[25]}'
         scaled_h = m.r16(CTX + 0x18)
         for _ in range(scaled_h):

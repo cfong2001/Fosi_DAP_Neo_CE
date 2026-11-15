@@ -1,6 +1,6 @@
 # First physical-device qualification
 
-**Status: backup, physical geometry, full CE write/readback, boot and playback verified; recovery boot remains pending.**
+**Status: backup, physical geometry, full CE write/readback, boot and playback verified; device-derived stock recovery write/readback and boot also verified.**
 
 This record contains only model-level findings that can be reproduced on another
 DAP Neo. It intentionally excludes USB instance paths, disk identifiers, host
@@ -87,20 +87,21 @@ trailing data.
 - Mirrored header: `0xC94000`
 - Stored segments audited: 108
 - Header, bounds, mirror and outer CRC checks: passed
-- Recovery write/readback: pending
-- Recovery boot: pending
+- Recovery write/readback: passed (subsequent troubleshooting baseline)
+- Recovery boot: passed; stock boot and MP3 playback confirmed
 
 This is a device-derived V1.3.2 recovery package, not a vendor-distributed
-download. Its code and resources have not been changed. It must remain labeled
-unqualified until a full firmware-region write, full readback comparison and
-successful stock boot complete.
+download. Its code and resources have not been changed. A subsequent full firmware-region restore passed complete readback and stock
+boot. This establishes recovery on the qualified unit, not compatibility of
+an unrelated dump with another unit.
 
 ## Remaining qualification gates
 
 1. Complete the remaining hardware checklist in `release/FLASH_REVIEW.md`,
    including longer playback, all formats, USB modes and settings persistence.
-2. Exercise the device-derived recovery package with a full write/readback and
-   confirm stock boot before presenting it as a proven recovery route.
+2. Follow up the small top-status-bar black rectangles and residual staged
+   background color update; the current artwork, progress-gap and dial repairs
+   passed device acceptance on 2026-11-15.
 
 The first physical flash is complete. Documentation now reports the observed
 boot, playback, artwork and settings results directly; only specific unfinished

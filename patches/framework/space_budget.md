@@ -14,7 +14,7 @@ outside the homes listed here.
 | Module 0 stub-farm caves | about 84 B of verified-dead stub slots | DAC fix trampoline (14 B, patch 0002), gapless gate, its tail, core-1 flag literal and state (48 B, patches 0020 to 0026), gapless warm start (16 B at 0x03051504, patch 0034) | 14 B: the old three scraps (4 + 2 + 2), 0x030514FE (2 B) and 0x03051514 to 0x03051517 (4 B) |
 | Former module 39 sort cave (0x0309F000) | Not available | Inside a live 64 KiB scratch array cleared by stock library initialization | No code may be allocated here |
 | Module 39 explicit code extension (0x0309F4AC) | 1,052 B | Standard natural-sort prefix builder, comparator and fold table | Fully allocated |
-| Gap tail (exec 0x0307BFB4 to 0x0307C7B0) | 2,044 B | Full build: M3U staging 552 B, focus 340 B, constructor restore 26 B, theater 680 B, Bluetooth 436 B, alignment 6 B | 4 B |
+| Gap tail (exec 0x0307BFB4 to 0x0307C7B0) | 2,044 B | Full build: M3U staging 552 B, focus 340 B, constructor restore 26 B, theater slot 680 B (644 code + 36 reserved zeros), Bluetooth 436 B, alignment 6 B | 4 B |
 | Module 31 segment extension (exec 0x0307EE48 to 0x03080B54) | 7,436 B | Combined pinned browser/playlist/lock-screen/navigation payload, 6,616 B | 820 B |
 | Module 32 segment extension (exec 0x030804AC to 0x03080B54) | 1,704 B | Unused. The earlier battery-profile blob (540 B, `patches/power/build/`) was never stacked; the power profile item now lives in module 0 pockets | 1,704 B |
 | Module 0 dead-code pockets ([`patches/space/`](../space/README.md)) | 8,508 B in 150 pockets, largest 256 B; 5,530 B in pockets of 64 B or more | Playlist hooks (216 B at 0x0306C878), theater no-art exits (100 B at 0x03063CDC), transport ground wrapper (52 B at 0x030539B4), power profile lookups (104 B at 0x0305168C), value hook and presets (76 B at 0x03054668), commit hook (60 B at 0x03067064); patches 0047 to 0049 and 0140, 0141, 0146 in the full build | about 7,900 B; a hardware tripwire build is still the proof |
@@ -32,6 +32,19 @@ segment, stock bytes plus extension, so no window ever executes
 another window's extension bytes. The settling test is the
 Phase E window-cycle soak, which cycles every window including
 USB and settings and verifies the extension bytes after.
+
+Standard Opus artwork adds 68 bytes at `0x0306D734`, 56 bytes at
+`0x0306D7F8` and 38 bytes at `0x03061252`, within censused resident pockets.
+Module 18's obsolete ASF artwork case supplies the Opus entry, signature
+literal and one-byte rewind (the supported Standard format replaces WMA).
+The MP3/ID3 case and the following MP4 case remain intact. These helpers
+use the existing artwork frame and temporary file; they add no persistent RAM.
+
+Player repaint helpers own 88 bytes at `0x03052D5C` and 80 bytes at
+`0x03052F40`. The contrast and artwork-pixel build limits now stop before
+those trailing areas; the existing bar-entry slot grows from 28 to 36 bytes.
+The helpers allocate no persistent data and preserve the two native surface
+spans. Their code and framebuffer bounds are independently checked.
 
 ## Delivery mechanisms, one per home class
 
