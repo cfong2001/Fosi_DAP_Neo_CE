@@ -1,9 +1,12 @@
 **Standard CE is running on physical hardware.** A DAP Neo completed two
-matching full-range backups, a full write/readback of both 13 MiB firmware
-regions, normal boot, custom-settings display, embedded-artwork display and
-MP3 playback. Read the install and recovery guide in `release/README.md`
-before using any file; remaining format, USB-mode, endurance and recovery
-checks are listed there.
+matching full-range backups, a full Rockusb write/readback of both 13 MiB
+firmware regions, normal boot and custom-settings display. The current
+Standard image also passed full-card scanning, Opus playback, embedded
+covers, theater color, progress-gap and continuous dial acceptance.
+Restoring that player's own stock firmware passed readback and boot. The
+copy-a-file stock update path has not yet been run with CE on hardware.
+Read the install and recovery guide in `release/README.md` before using any
+file; remaining format, USB-mode and endurance checks are listed there.
 
 | File | Use |
 |---|---|

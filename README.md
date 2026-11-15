@@ -28,9 +28,14 @@ CE (Community Edition) is patched firmware for the Fosi Audio DAP Neo. It starts
 | [`DP3_V137_CE_minimal.img`](release/DP3_V137_CE_minimal.img) | Minimal: audio and library fixes only, same length as stock. | `0dfd10e23749f9b6c65499266f1a7a2ec038160b089ba0fc2ca68dcf2b24c986` |
 | [`DP3_V137_CE_recovery.img`](release/DP3_V137_CE_recovery.img) | Stock code dated one day after CE, for going back. | `aff851b31d6eee55cbd4bb3fc0464ac79f0039ee86ae6723225ac036a157d223` |
 
-Standard CE has been installed and booted on hardware. Full-card scanning, Opus playback, embedded covers, full-screen theater color, progress-gap restoration and improved continuous dial response have passed device acceptance; see [repair validation](release/REPAIR_VALIDATION.md). Minimal retains WMA support.
+Standard CE has been installed and booted on hardware. Full-card scanning, Opus playback, embedded covers, full-screen theater color, progress-gap restoration and improved continuous dial response have passed device acceptance; see [repair validation](release/REPAIR_VALIDATION.md). Small black boxes in the top status bar remain a known follow-up. Minimal retains WMA support.
 
-Complete the [flash review and recovery gates](release/FLASH_REVIEW.md) before writing anything to a player. The [install page](https://cfong2001.github.io/Fosi_DAP_Neo_CE/) checks the image's SHA-256 and copies it to the player's storage as `RKNANOFW.IMG`; you then run the update on the device. To do it by hand, rename the image to `RKNANOFW.IMG` (including the .IMG extension), copy it to the top level of the player's storage, run the update the way you would an official Fosi update, and delete the file afterwards. [`release/README.md`](release/README.md) has the full steps, a testing order and recovery.
+Complete the [flash review and recovery gates](release/FLASH_REVIEW.md) before writing anything to a player. There are two ways to install:
+
+- **Stock update (copy a file).** The [install page](https://cfong2001.github.io/Fosi_DAP_Neo_CE/) checks the image's SHA-256 and copies it to the player's storage as `RKNANOFW.IMG`; you then run the update on the device. To do it by hand, rename the image to `RKNANOFW.IMG` (including the .IMG extension), copy it to the top level of the player's storage, run the update the way you would an official Fosi update, and delete the file afterwards. This follows the traced stock installer but has not yet been run with CE on hardware.
+- **Rockusb (the hardware-tested path).** Every CE install on hardware so far was written over Rockchip USB to both measured firmware slots, then read back in full before reset. The [qualified procedure](release/FLASH_REVIEW.md#repeating-the-qualified-rockusb-procedure) needs a full backup of your own player first; its slot map was measured on one unit.
+
+[`release/README.md`](release/README.md) has the full steps, a testing order and recovery.
 
 ## Features
 
