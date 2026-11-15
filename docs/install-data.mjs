@@ -28,8 +28,8 @@ export const IMAGES = [
     summary: "Every CE feature: full-precision Vorbis, gapless, natural sort, " +
       "Opus in place of WMA, the design refresh, theater mode, M3U " +
       "playlists, lock-screen track info and the Bluetooth shortcut.",
-    caveat: "8,192 bytes longer than stock. CE has booted on hardware; " +
-      "the current scan and responsiveness repair awaits full-card acceptance.",
+    caveat: "8,192 bytes longer than stock. Booted, scanned a full card and " +
+      "played Opus with album art on hardware.",
   },
   {
     id: "minimal",

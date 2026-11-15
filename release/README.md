@@ -10,6 +10,7 @@ against their pins by `.github/workflows/firmware.yml` on every change.
 | `DP3_V137_CE_recovery.img` | Unmodified stock bytes dated 2026-10-24, one day after either CE image, so the boot validator prefers it. | 13,631,492 bytes | `aff851b31d6eee55cbd4bb3fc0464ac79f0039ee86ae6723225ac036a157d223` |
 | `*.report.json` | Build reports: every patch with its address and old and new bytes, transplant hashes, validation results. The standard report summarises its byte ranges. | | |
 | `SHA256SUMS` | Hashes of the three images. | | |
+| `DP3_V132_device_recovery.img` | Stock V1.3.2 rebuilt from the qualified unit's own slots (header date 2026-09-20). Restored over Rockusb on that unit; older than CE, so the stock installer would not select it. Not in `SHA256SUMS`; details in [`FIRST_DEVICE_QUALIFICATION.md`](FIRST_DEVICE_QUALIFICATION.md#sanitized-device-derived-recovery-image). | 13,631,492 bytes | `2e8167df18c6c49d0e734647f7169d986a373f97d4d77de66d649b10650db6af` |
 
 See [FLASH_REVIEW.md](FLASH_REVIEW.md) for the current major-flaw review,
 version-aware recovery preparation and device qualification procedure. The
@@ -20,8 +21,13 @@ bundled V137 recovery must not be assumed to supersede official V155.
 Standard CE has been flashed to a physical DAP Neo. Both measured 13 MiB
 firmware regions matched a complete Rockusb readback before reset; the player
 then booted, exposed its custom settings, displayed embedded album artwork and
-played an MP3. Remaining format, USB-mode, endurance and recovery-boot checks
-are tracked in [`FIRST_DEVICE_QUALIFICATION.md`](FIRST_DEVICE_QUALIFICATION.md).
+played an MP3. Restoring the player's own stock firmware over Rockusb also
+passed full readback and booted. Remaining format, USB-mode and endurance
+checks are tracked in [`FIRST_DEVICE_QUALIFICATION.md`](FIRST_DEVICE_QUALIFICATION.md).
+
+All of these hardware installs used Rockusb. The stock update path below
+(copy `RKNANOFW.IMG`, run the update on the player) follows the traced
+installer but has not yet been run with CE on hardware.
 
 The content-route repaired Standard code also booted and played Opus music
 on hardware on 2026-11-14. That test used the optional diagnostic readout
@@ -93,9 +99,16 @@ without removing playlists and the lock screen.
 
 1. **Check the hash.** `sha256sum -c SHA256SUMS` in this directory.
    Never install an image whose hash does not match.
-2. **Back up your card.** Copy your music somewhere safe.
-3. **Know your way back.** Keep `DP3_V137_CE_recovery.img` and the stock
-   `DP3_V137.img` with you, and read the recovery section below first.
+2. **Check the installed version.** The bundled recovery is V137 dated
+   2026-10-24. If the player runs newer official firmware (V155 is dated
+   2026-11-02), that recovery cannot replace it; prepare a matched pair with
+   `tools/prepare_flash.py` first ([FLASH_REVIEW.md](FLASH_REVIEW.md#prepare-a-dated-pair-offline)).
+3. **Back up your card.** Copy your music somewhere safe.
+4. **Know your way back.** Keep `DP3_V137_CE_recovery.img` and the stock
+   `DP3_V137.img` with you, and read the recovery section below first. If
+   you may need Rockusb recovery, take a two-pass full backup with
+   `tools/backup_stock.py` before installing; an update image is not a
+   backup of your player.
 
 ## How the stock installer finds an update
 
@@ -127,9 +140,20 @@ official updates, with the CE file in place of the official one.
    Ogg Vorbis file, two same-format tracks in a row (the next must start promptly), a
    track skip within one format, and a
    library rescan (natural sort). On the standard image also try an Opus
-   file, a track with album art and one without (theater), an `.m3u`
-   playlist with next and previous, the hold switch (lock screen), and a
-   long press of Power (Bluetooth).
+   file, a track with album art and one without (theater), the progress bar
+   and continuous dial movement, an `.m3u` playlist with next and previous,
+   the hold switch (lock screen), and a long press of Power (Bluetooth).
+
+## Install (Rockusb, hardware-tested path)
+
+This is how CE was installed on the qualified unit. Follow
+[Repeating the qualified Rockusb procedure](FLASH_REVIEW.md#repeating-the-qualified-rockusb-procedure)
+step by step. In short: take and compare a two-pass full backup, remove the
+card, enter recovery (physical reset, then hold Vol+ + Vol- + OK while
+reconnecting USB), write only the 13 MiB updater region of each slot,
+compare a full readback of both slots, then unplug and use the physical
+reset button. The slot addresses (LBA 0 and 30720) were measured on one
+unit; confirm them against your own backup before writing.
 
 Please report results, good or bad, as a GitHub issue with the image hash
 and what you tested.

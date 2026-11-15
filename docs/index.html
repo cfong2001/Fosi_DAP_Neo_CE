@@ -24,9 +24,9 @@
 <section class="card install" id="install" aria-labelledby="install-title">
 <div class="install-intro">
 <h2 id="install-title"><span class="section-index">01 / Get started</span>Install CE firmware</h2>
-<p class="note warn"><strong>Standard CE has completed its first physical-device test.</strong> Both 13 MiB firmware regions matched on full readback before reset, then the player booted, showed the custom settings, displayed embedded artwork and played music. Back up your music and read <a href="#going-back">Going back to stock</a> first. Remaining format, USB-mode, endurance and recovery checks are still in progress.</p>
+<p class="note warn"><strong>Standard CE runs on a physical DAP Neo.</strong> It booted, scanned a full card, played MP3 and Opus, showed embedded covers and the theater background, and passed the progress-bar and dial checks. Restoring stock firmware on that player also passed. That player was written over Rockchip USB (Rockusb); the copy-a-file update below follows the traced stock installer but has not yet been run with CE on hardware. Back up your music and read <a href="#going-back">Going back to stock</a> first. Format, USB-mode and endurance checks are still in progress.</p>
 <details class="seg" id="going-back"><summary>Going back to stock</summary>
-<p class="note">If the player still boots and can run an update, install <strong>Back to stock</strong> the same way. It is stock code dated one day after CE, so the player prefers it. Plain stock <code>DP3_V137.img</code> is older than CE and the player would keep booting CE. If the player does not boot, recovery needs the Rockchip USB (Rockusb) tools; see <code>release/README.md</code> in the repository.</p>
+<p class="note">If the player still boots and can run an update, install <strong>Back to stock</strong> the same way. It is stock code dated one day after CE, so the player prefers it. Plain stock <code>DP3_V137.img</code> is older than CE and the player would keep booting CE. If your player runs firmware newer than V137 (for example V155), this file cannot replace it; prepare a matching recovery first as described in <code>release/FLASH_REVIEW.md</code>. If the player does not boot, recovery uses Rockusb: hold Vol+, Vol− and OK while reconnecting USB, then write and fully read back both firmware slots. That procedure, measured on one player, is in <code>release/FLASH_REVIEW.md</code>; take a full backup of your own player before relying on it.</p>
 </details>
 </div>
 <ol class="steps">
@@ -39,7 +39,7 @@
 <p class="note">Connect the player to this computer with USB so its storage shows up as a drive.</p>
 <div class="button-row">
 <button class="button main" type="button" id="copy-to-player">Copy to player…</button>
-<button class="button" type="button" id="download-update-name">Download as <span id="update-name">RKNANOFWIMG</span></button>
+<button class="button" type="button" id="download-update-name">Download as <span id="update-name">RKNANOFW.IMG</span></button>
 <button class="button ghost" type="button" id="download-image">Download .img</button>
 </div>
 <p class="note" id="copy-support"></p>
@@ -48,7 +48,7 @@
 <details class="seg"><summary>Manual install and direct links</summary>
 <ol class="plain">
 <li>Download an image and check it: <code>sha256sum -c SHA256SUMS</code>. Never install an image whose hash does not match.</li>
-<li>Rename it to <code>RKNANOFWIMG</code>, with no dot and no extension.</li>
+<li>Rename it to <code>RKNANOFW.IMG</code>, keeping the <code>.IMG</code> extension.</li>
 <li>Copy it to the top level of the storage the player updates from.</li>
 </ol>
 <ul class="plain" id="direct-links"></ul>
@@ -58,8 +58,8 @@
 <h3><span class="step-num">3</span> Run the update on the player</h3>
 <ol class="plain">
 <li>Eject the player safely, then start the update the way you would for an official Fosi update.</li>
-<li>After it restarts, connect it again and <strong>delete <code>RKNANOFWIMG</code></strong>. A leftover update file can run the installer again.</li>
-<li>Test in this order: boot to the menu, play an MP3, then a FLAC. Then APE and DSD128 if you have them, an Ogg Vorbis file, two same-format tracks in a row (the second must start promptly), a skip within one format and a library rescan. On Standard also try an Opus file, a track with and without album art, an <code>.m3u</code> playlist, the hold switch and a long press of Power.</li>
+<li>After it restarts, connect it again and <strong>delete <code>RKNANOFW.IMG</code></strong>. A leftover update file can run the installer again.</li>
+<li>Test in this order: boot to the menu, play an MP3, then a FLAC. Then APE and DSD128 if you have them, an Ogg Vorbis file, two same-format tracks in a row (the second must start promptly), a skip within one format and a library rescan. On Standard also try an Opus file, a track with and without album art, the progress bar and continuous dial movement, an <code>.m3u</code> playlist, the hold switch and a long press of Power.</li>
 </ol>
 <p class="note">The stock installer writes both firmware slots, so no stock copy stays on the player after an install. Please report results, good or bad, as a GitHub issue with the image hash and what you tested.</p>
 </li>
