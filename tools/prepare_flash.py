@@ -13,6 +13,27 @@ OFFICIAL={
  'fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cdfade5e9c6ea3bd71ac6deef':'V137',
  '4713a2eb4b523d49ad003ac2df159c1c596339aef1a9a060e6ea6bbbf18e1332':'V155',
 }
+
+POWER_RESTART_POLL = 0x03067CF4
+POWER_RESTART_STOCK = bytes.fromhex(
+    '0a20 fcf725fe f9f799fc 0028 f8d1 0024 f9f794fc 0028 fad0 641c 0a2c f8d9'
+)
+POWER_RESTART_DEBOUNCED = bytes.fromhex(
+    '0024 '      # movs r4, #0          Keep waiting for the first release.
+    '0a20 '      # poll: movs r0, #10
+    'fcf724fe '  # bl 0x03064944        Stock 10 ms delay.
+    'f9f798fc '  # bl 0x03061630        Read the active-high Power button.
+    '20b1 '      # cbz r0, released
+    '002c '      # cmp r4, #0
+    'f7d0 '      # beq poll
+    '013c '      # subs r4, #1
+    'f5d1 '      # bne poll
+    '02e0 '      # b 0x03067D12          Stock reset with arguments (0, 0).
+    '0b24 '      # released: movs r4, #11
+    'f2e7 '      # b poll
+    '00bf'       # nop
+)
+
 def digest(raw):return hashlib.sha256(raw).hexdigest()
 def image_date(raw):
     year,day=struct.unpack_from('<HH',raw)
@@ -64,7 +85,22 @@ def release_pins():
         h,name=line.split();pins[h]=name.lstrip('*')
     return pins
 
-def prepare(candidate,official,date=None):
+def debounce_power_restart(raw):
+    image = Image(raw)
+    code_offset, code_size = image.module_region(0, 'code')
+    relative = POWER_RESTART_POLL - image.modules[0]['code_exec']
+    offset = code_offset + relative
+    end = offset + len(POWER_RESTART_STOCK)
+    if (not 0 <= relative <= code_size - len(POWER_RESTART_STOCK)
+            or raw[offset:end] != POWER_RESTART_STOCK):
+        raise ValueError('unexpected shutdown power-button polling code')
+    output = bytearray(raw)
+    output[offset:end] = POWER_RESTART_DEBOUNCED
+    struct.pack_into('<I', output, len(output) - 4, rk_crc32(output[:-4]))
+    return bytes(output)
+
+
+def prepare(candidate,official,date=None,*,debounce_power_on=False):
     if digest(candidate) not in release_pins():raise ValueError('candidate is not one of the pinned CE release images')
     if digest(official) not in OFFICIAL:raise ValueError('official recovery source is not a verified DP3 V137/V155 image')
     c=audit(candidate);o=audit(official)
@@ -73,15 +109,24 @@ def prepare(candidate,official,date=None):
     if build<=latest:raise ValueError('candidate date must be newer than both input images')
     recovery_date=build+dt.timedelta(days=1)
     ce=redated(candidate,build);recovery=redated(official,recovery_date)
+    if debounce_power_on:
+        ce = debounce_power_restart(ce)
     report={'status':'OFFLINE CHECKS PASSED; DEVICE QUALIFICATION REQUIRED',
             'source_candidate':c,'source_official':{**o,'version':OFFICIAL[digest(official)]},
             'prepared_candidate':audit(ce),'prepared_recovery':audit(recovery),
             'source_candidate_not_newer_than_official':image_date(candidate)<=image_date(official),
-            'modified_code_or_resources':False,
+            'modified_code_or_resources':debounce_power_on,
             'official_source_matches_device_verified':False,
             'full_device_backup_verified':False,
             'release_gate':'Do not flash until a full device backup, readback-verified slot map, recovery entry and restore procedure are established on this unit.',
             'recovery_note':'Recovery is the supplied official firmware with a newer header date; no CE code is present. Date ordering is a traced validator rule, not proof of early-boot acceptance.'}
+    if debounce_power_on:
+        report['candidate_patch'] = {
+            'module': 0,
+            'address': hex(POWER_RESTART_POLL),
+            'bytes': len(POWER_RESTART_DEBOUNCED),
+            'behavior': 'After release, require eleven consecutive Power samples 10 ms apart.',
+        }
     return ce,recovery,report
 
 def main():
@@ -89,11 +134,14 @@ def main():
     p.add_argument('--candidate',type=Path,default=ROOT/'release/DP3_V137_CE.img')
     p.add_argument('--official',type=Path,required=True,help='verified official image matching the firmware/model currently on the device')
     p.add_argument('--date',help='YYYYMMDD, strictly newer than both inputs; otherwise next day after the newer input')
+    p.add_argument('--debounce-power-on', action='store_true',
+                   help='apply the post-shutdown Power button fix to the CE candidate')
     p.add_argument('--output',type=Path,required=True,help='new directory; existing paths are refused')
     a=p.parse_args()
     if a.output.exists() or a.output.is_symlink():p.error('output already exists')
     date=dt.datetime.strptime(a.date,'%Y%m%d').date() if a.date else None
-    ce,recovery,report=prepare(a.candidate.read_bytes(),a.official.read_bytes(),date)
+    ce,recovery,report=prepare(a.candidate.read_bytes(),a.official.read_bytes(),date,
+                               debounce_power_on=a.debounce_power_on)
     a.output.mkdir(parents=True,exist_ok=False)
     for name,raw in (('DP3_CE_candidate.img',ce),('DP3_official_recovery.img',recovery)):
         with (a.output/name).open('xb') as f:f.write(raw)
