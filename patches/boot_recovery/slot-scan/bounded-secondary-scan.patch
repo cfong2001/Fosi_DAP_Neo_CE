@@ -1,0 +1,50 @@
+# 0307e2f8 str.w r4, [sp, #0x408]
+# 0307e2fc mov.w r8, #0x14
+# 0307e300 cbz r4, #0x307e364
+# 0307e302 add r3, sp, #0x200
+# 0307e304 movs r2, #1
+# 0307e306 mov r1, r4
+# 0307e308 mov.w r0, #0x30000
+# 0307e30c bl #0x30678ca
+# 0307e310 cbnz r0, #0x307e352
+# 0307e312 movs r2, #8
+# 0307e314 add.w r1, sp, #0x400
+# 0307e318 add.w r0, r7, #0x1f8
+# 0307e31c bl #0x3054ebe
+# 0307e320 cbnz r0, #0x307e352
+# 0307e322 ldr.w r0, [r7, #0x1f4]
+# 0307e326 cbz r0, #0x307e352
+# 0307e328 lsls r1, r0, #0x17
+# 0307e32a bne #0x307e352
+# 0307e32c adds.w r1, r4, r0, lsr #9
+# 0307e330 bhs #0x307e352
+# 0307e332 mov r3, sp
+# 0307e334 movs r2, #1
+# 0307e336 mov.w r0, #0x30000
+# 0307e33a bl #0x30678ca
+# 0307e33e cbnz r0, #0x307e352
+# 0307e340 mov.w r2, #0x200
+# 0307e344 mov r1, sp
+# 0307e346 add r0, sp, #0x200
+# 0307e348 bl #0x3054ebe
+# 0307e34c cbnz r0, #0x307e352
+# 0307e34e movs r6, #1
+# 0307e350 b #0x307e370
+# 0307e352 cmp r5, #1
+# 0307e354 ite eq
+# 0307e356 addeq.w r4, r4, #0x800
+# 0307e35a subne.w r4, r4, #0x800
+# 0307e35e subs.w r8, r8, #1
+# 0307e362 bne #0x307e300
+# 0307e364 b #0x307e36a
+# 0307e366 nop 
+# 0307e368 nop 
+name: bounded-secondary-scan
+kind: module
+module: 1
+region: code
+address: 0x0307e2f8
+expect: 4ff00008bcb180ab012221464ff44030e9f7dffa08220df5806107f5fc70d6f7d2fd68b1012d0cbf04f50064a4f5006408f10108e6e7b8f1140f1ad2e4b918e0d7f8f4016b4604eb502101224ff44030e9f7bffa4ff40072694680a8d6f7b3fd002808bf0126e6d0214640a0eff7c4fae1e7
+replace: cdf808444ff0140884b380ab012221464ff44030e9f7ddfaf8b908220df5806107f5fc70d6f7cffdb8b9d7f8f401a0b1c10512d114eb50210fd26b4601224ff44030e9f7c6fa40b94ff40072694680a8d6f7b9fd08b901260ee0012d0cbf04f50064a4f50064b8f10108cdd101e000bf00bf
+rationale: Bound the secondary scan to twenty probes and continue past missing, unreadable or mismatched headers.
+gate: Stock-byte precondition and Unicorn execution.
