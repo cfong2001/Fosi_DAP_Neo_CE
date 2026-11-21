@@ -1,0 +1,12 @@
+# Module 8 shares this return for the named and generic update files.
+# r4 is the install result. r0 is the delete result on both cleanup paths.
+# File-open failures arrive here with r4 = -1 and still return -1.
+name: update-cleanup-status
+kind: module
+module: 8
+region: code
+address: 0x0307E87A
+expect: 2046
+replace: 2043
+rationale: Report success only when the slot installation and source-file deletion both succeed.
+gate: Stock instruction precondition and installer/disposition emulation.
