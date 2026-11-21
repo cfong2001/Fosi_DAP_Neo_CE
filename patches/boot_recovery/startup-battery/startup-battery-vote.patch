@@ -33,9 +33,9 @@
 # 0307da0c b #0x307da0c
 # 0307da0e ldr r0, [r7, #4]
 # 0307da10 b #0x307da18
-# 0307da12 nop 
-# 0307da14 nop 
-# 0307da16 nop 
+# 0307da12 nop
+# 0307da14 nop
+# 0307da16 nop
 name: startup-battery-vote
 kind: module
 module: 1
