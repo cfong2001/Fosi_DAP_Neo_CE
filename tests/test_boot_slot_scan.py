@@ -18,7 +18,7 @@ class SlotScan(unittest.TestCase):
         cls.patched, _ = apply_boot_patches(cls.stock, ('slot-scan',))
 
     def validate(self, raw, *, primary=True, secondary=False, bad_mirror=False,
-                 read_fails=False, false_header=False):
+                 failed_header_read=False, failed_mirror_read=False, false_header=False):
         cpu = machine(raw, 1)
         header = raw[:512]
         mirror = Image(raw).u32(0x1F4) >> 9
@@ -28,6 +28,8 @@ class SlotScan(unittest.TestCase):
             sectors.update({SECONDARY: newer, SECONDARY + mirror: newer})
         if bad_mirror:
             sectors.update({FIRST_CANDIDATE: newer, FIRST_CANDIDATE + mirror: b'\xFE' * 512})
+        if failed_mirror_read:
+            sectors[FIRST_CANDIDATE] = header
         if false_header:
             zero_mirror = newer[:0x1F4] + word(0) + newer[0x1F8:]
             sectors[FIRST_CANDIDATE] = zero_mirror
@@ -38,8 +40,9 @@ class SlotScan(unittest.TestCase):
             reads.append(sector)
             if len(reads) == 34:
                 cpu.emu_stop()
-            if read_fails and sector == FIRST_CANDIDATE:
-                return -1  # Leave the previous primary mirror in the buffer.
+            if ((failed_header_read and sector == FIRST_CANDIDATE)
+                    or (failed_mirror_read and sector == FIRST_CANDIDATE + mirror)):
+                return -1  # Leave the previous header in the destination buffer.
             cpu.mem_write(cpu.reg_read(UC_ARM_REG_R3), sectors.get(sector, bytes(512)))
             return 0
 
@@ -62,7 +65,7 @@ class SlotScan(unittest.TestCase):
 
     def test_broken_first_candidate_does_not_hide_valid_later_slot(self):
         self.assertEqual(self.validate(self.stock, secondary=True, bad_mirror=True)[1], 0)
-        for case in ('bad_mirror', 'read_fails', 'false_header'):
+        for case in ('bad_mirror', 'failed_header_read', 'failed_mirror_read', 'false_header'):
             with self.subTest(case=case):
                 self.assertEqual(self.validate(self.patched, secondary=True, **{case: True})[:3],
                                  (True, 1, SECONDARY))

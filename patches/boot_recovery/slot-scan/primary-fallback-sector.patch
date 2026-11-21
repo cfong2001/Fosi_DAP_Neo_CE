@@ -1,9 +1,9 @@
 # 0307e3b4 ldr.w r0, [sp, #0x408]
 # 0307e3b8 str.w r0, [sl]
-# 0307e3bc nop 
-# 0307e3be nop 
-# 0307e3c0 nop 
-# 0307e3c2 nop 
+# 0307e3bc nop
+# 0307e3be nop
+# 0307e3c0 nop
+# 0307e3c2 nop
 name: primary-fallback-sector
 kind: module
 module: 1

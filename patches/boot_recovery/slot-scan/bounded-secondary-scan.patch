@@ -37,8 +37,8 @@
 # 0307e35e subs.w r8, r8, #1
 # 0307e362 bne #0x307e300
 # 0307e364 b #0x307e36a
-# 0307e366 nop 
-# 0307e368 nop 
+# 0307e366 nop
+# 0307e368 nop
 name: bounded-secondary-scan
 kind: module
 module: 1
