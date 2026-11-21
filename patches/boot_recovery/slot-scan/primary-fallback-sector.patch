@@ -1,0 +1,15 @@
+# 0307e3b4 ldr.w r0, [sp, #0x408]
+# 0307e3b8 str.w r0, [sl]
+# 0307e3bc nop
+# 0307e3be nop
+# 0307e3c0 nop
+# 0307e3c2 nop
+name: primary-fallback-sector
+kind: module
+module: 1
+region: code
+address: 0x0307e3b4
+expect: d9f8f40100f582100bea5020caf80000
+replace: ddf80804caf8000000bf00bf00bf00bf
+rationale: Use the original candidate sector for primary fallback even after secondary mirror reads overwrite the header buffer.
+gate: Stock-byte precondition and Unicorn execution.
