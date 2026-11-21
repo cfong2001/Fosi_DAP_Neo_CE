@@ -1,0 +1,47 @@
+# 0307d9bc ldr r0, [r5]
+# 0307d9be uxth r0, r0
+# 0307d9c0 movw r1, #0x1388
+# 0307d9c4 muls r0, r1, r0
+# 0307d9c6 lsrs r0, r0, #0xa
+# 0307d9c8 movw r1, #0xce4
+# 0307d9cc cmp r0, r1
+# 0307d9ce it lo
+# 0307d9d0 addlo.w r8, r8, #1
+# 0307d9d4 adds r6, #1
+# 0307d9d6 str r0, [r7, #4]
+# 0307d9d8 cmp r6, #0x12
+# 0307d9da blo #0x307d990
+# 0307d9dc ldr r2, [pc, #0x68]
+# 0307d9de movs r1, #0
+# 0307d9e0 strh r1, [r7]
+# 0307d9e2 ldrh r1, [r7]
+# 0307d9e4 ldrh.w r3, [r2, r1, lsl #1]
+# 0307d9e8 cmp r3, r0
+# 0307d9ea bhi #0x307d9f4
+# 0307d9ec adds r1, #1
+# 0307d9ee strh r1, [r7]
+# 0307d9f0 cmp r1, #4
+# 0307d9f2 blo #0x307d9e2
+# 0307d9f4 bl #0x30535bc
+# 0307d9f8 cbnz r0, #0x307da0e
+# 0307d9fa cmp.w r8, #9
+# 0307d9fe blo #0x307da0e
+# 0307da00 movs r0, #0xc8
+# 0307da02 bl #0x3064944
+# 0307da06 movs r0, #0
+# 0307da08 bl #0x30613be
+# 0307da0c b #0x307da0c
+# 0307da0e ldr r0, [r7, #4]
+# 0307da10 b #0x307da18
+# 0307da12 nop
+# 0307da14 nop
+# 0307da16 nop
+name: startup-battery-vote
+kind: module
+module: 1
+region: code
+address: 0x0307d9bc
+expect: 286840f6c4110004c00b4843800a761c7860122eded31d4aa7f80080398832f81130834204d8491c89b239800429f5d3d5f7e6fd00280cbf0121002140f6e4427868904234bf01220022114206d0c820e6f79aff0020e3f7d4fcfee7
+replace: 286880b241f288314843800a40f6e441884238bf08f1010801367860122ed9d31a4a00213980398832f81130834203d8013139800429f6d3d5f7e2fd48b9b8f1090f06d3c820e6f79fff0020e3f7d9fcfee7786802e000bf00bf00bf
+rationale: Require at least nine of the existing eighteen samples below 3300 mV before cutting power on battery during startup.
+gate: Stock-byte precondition and Unicorn execution.
