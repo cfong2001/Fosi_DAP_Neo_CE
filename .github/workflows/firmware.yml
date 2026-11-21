@@ -119,6 +119,11 @@ jobs:
       - name: Runtime diagnostic utility preserves calls, buffers and inputs
         run: python -m unittest discover -s tests -p test_runtime_diagnostics.py -v
 
+      - name: Boot repair regressions and preparation checks
+        run: |
+          python -m unittest discover -s tests -p 'test_boot_*.py' -v
+          python -m unittest discover -s tests -p test_prepare_flash.py -v
+
       - name: Committed release images match the rebuild
         run: |
           cd release

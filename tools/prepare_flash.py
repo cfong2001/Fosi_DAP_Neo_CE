@@ -3,12 +3,14 @@
 import argparse
 import datetime as dt
 import hashlib
+import importlib.util
 import json
 from pathlib import Path
 import struct
 from rknano_image import Image,rk_crc32
 from firmware_patch import bcd_date
 ROOT=Path(__file__).resolve().parents[1]
+BOOT_PATCH_DIR = ROOT / 'patches' / 'boot_recovery'
 OFFICIAL={
  'fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cdfade5e9c6ea3bd71ac6deef':'V137',
  '4713a2eb4b523d49ad003ac2df159c1c596339aef1a9a060e6ea6bbbf18e1332':'V155',
@@ -100,7 +102,24 @@ def debounce_power_restart(raw):
     return bytes(output)
 
 
-def prepare(candidate,official,date=None,*,debounce_power_on=False):
+def apply_boot_patches(raw, names):
+    manifests = {p.parent.name: p for p in BOOT_PATCH_DIR.glob('*/manifest.txt')}
+    if unknown := set(names) - manifests.keys():
+        raise ValueError('unknown boot patch: ' + ', '.join(sorted(unknown)))
+    spec = importlib.util.spec_from_file_location(
+        'firmware_build', ROOT / 'patches' / 'framework' / 'build.py')
+    framework = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(framework)
+
+    patches = [patch for name in dict.fromkeys(names)
+               for patch in framework.load_manifest(manifests[name])]
+    patched, edits = framework.apply_patches(raw, patches)
+    output = bytearray(patched)
+    struct.pack_into('<I', output, len(output) - 4, rk_crc32(output[:-4]))
+    return bytes(output), edits
+
+
+def prepare(candidate,official,date=None,*,debounce_power_on=False,boot_patches=()):
     if digest(candidate) not in release_pins():raise ValueError('candidate is not one of the pinned CE release images')
     if digest(official) not in OFFICIAL:raise ValueError('official recovery source is not a verified DP3 V137/V155 image')
     c=audit(candidate);o=audit(official)
@@ -111,11 +130,13 @@ def prepare(candidate,official,date=None,*,debounce_power_on=False):
     ce=redated(candidate,build);recovery=redated(official,recovery_date)
     if debounce_power_on:
         ce = debounce_power_restart(ce)
+    if boot_patches:
+        ce, boot_patch_edits = apply_boot_patches(ce, boot_patches)
     report={'status':'OFFLINE CHECKS PASSED; DEVICE QUALIFICATION REQUIRED',
             'source_candidate':c,'source_official':{**o,'version':OFFICIAL[digest(official)]},
             'prepared_candidate':audit(ce),'prepared_recovery':audit(recovery),
             'source_candidate_not_newer_than_official':image_date(candidate)<=image_date(official),
-            'modified_code_or_resources':debounce_power_on,
+            'modified_code_or_resources':debounce_power_on or bool(boot_patches),
             'official_source_matches_device_verified':False,
             'full_device_backup_verified':False,
             'release_gate':'Do not flash until a full device backup, readback-verified slot map, recovery entry and restore procedure are established on this unit.',
@@ -127,6 +148,8 @@ def prepare(candidate,official,date=None,*,debounce_power_on=False):
             'bytes': len(POWER_RESTART_DEBOUNCED),
             'behavior': 'After release, require eleven consecutive Power samples 10 ms apart.',
         }
+    if boot_patches:
+        report['boot_patches'] = boot_patch_edits
     return ce,recovery,report
 
 def main():
@@ -136,12 +159,15 @@ def main():
     p.add_argument('--date',help='YYYYMMDD, strictly newer than both inputs; otherwise next day after the newer input')
     p.add_argument('--debounce-power-on', action='store_true',
                    help='apply the post-shutdown Power button fix to the CE candidate')
+    p.add_argument('--boot-patch', action='append', default=[],
+                   choices=sorted(p.parent.name for p in BOOT_PATCH_DIR.glob('*/manifest.txt')),
+                   help='apply an opt-in boot repair to the CE candidate (repeatable)')
     p.add_argument('--output',type=Path,required=True,help='new directory; existing paths are refused')
     a=p.parse_args()
     if a.output.exists() or a.output.is_symlink():p.error('output already exists')
     date=dt.datetime.strptime(a.date,'%Y%m%d').date() if a.date else None
     ce,recovery,report=prepare(a.candidate.read_bytes(),a.official.read_bytes(),date,
-                               debounce_power_on=a.debounce_power_on)
+                               debounce_power_on=a.debounce_power_on,boot_patches=a.boot_patch)
     a.output.mkdir(parents=True,exist_ok=False)
     for name,raw in (('DP3_CE_candidate.img',ce),('DP3_official_recovery.img',recovery)):
         with (a.output/name).open('xb') as f:f.write(raw)
