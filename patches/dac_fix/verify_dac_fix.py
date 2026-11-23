@@ -15,9 +15,9 @@ from rknano_image import Image, rk_crc32
 OUT = Path(__file__).resolve().parent / 'DP3_V137_dacfix.img'
 EDITS = [
     dict(name='branch', address=0x03060d14,
-         expect=bytes.fromhex('02d0'), replace=bytes.fromhex('3bd0')),
-    dict(name='cave', address=0x03060d8e,
-         expect=bytes.fromhex('70477047'), replace=bytes.fromhex('6870c4e7')),
+         expect=bytes.fromhex('02d0'), replace=bytes.fromhex('3cd0')),
+    dict(name='cave', address=0x03060d90,
+         expect=bytes.fromhex('70477047'), replace=bytes.fromhex('6870c3e7')),
 ]
 stock = (WS / 'DP3_V137.img').read_bytes()
 assert hashlib.sha256(stock).hexdigest() == fp.STOCK_SHA256, 'stock SHA drift'
@@ -68,13 +68,16 @@ md = Cs(CS_ARCH_ARM, CS_MODE_THUMB | CS_MODE_LITTLE_ENDIAN)
 def dis(a, b):
     return {i.address: f'{i.mnemonic} {i.op_str}' for i in md.disasm(code[a-BASE:b-BASE], a)}
 tail = dis(0x03060d12, 0x03060d22)
-assert tail[0x03060d14] == 'beq #0x3060d8e', tail[0x03060d14]
+assert tail[0x03060d14] == 'beq #0x3060d90', tail[0x03060d14]
 cave = dis(0x03060d8e, 0x03060d9c)
-assert cave[0x03060d8e] == 'strb r0, [r5, #1]', cave[0x03060d8e]
-assert cave[0x03060d90] == 'b #0x3060d1c', cave[0x03060d90]
-for a in (0x03060d92, 0x03060d94, 0x03060d96, 0x03060d98, 0x03060d9a):
+# 0x03060d8e is a live no-op: shutdown (0x03067cd8) and the software reset
+# (0x030536c4) call it, so it must stay `bx lr`.
+assert cave[0x03060d8e] == 'bx lr', cave[0x03060d8e]
+assert cave[0x03060d90] == 'strb r0, [r5, #1]', cave[0x03060d90]
+assert cave[0x03060d92] == 'b #0x3060d1c', cave[0x03060d92]
+for a in (0x03060d94, 0x03060d96, 0x03060d98, 0x03060d9a):
     assert cave[a] == 'bx lr', (a, cave[a])   # remaining stubs untouched, incl. the referenced pair d98/d9a
-print('[ok] disassembly: beq -> cave; cave = strb r0,[r5,#1] ; b 0x03060d1c; stubs d92..d9a intact')
+print('[ok] disassembly: beq -> cave; d8e stub intact; cave = strb r0,[r5,#1] ; b 0x03060d1c; stubs d94..d9a intact')
 
 OUT.write_bytes(combined)
 print(f'[ok] wrote {OUT} sha256={hashlib.sha256(combined).hexdigest()}')

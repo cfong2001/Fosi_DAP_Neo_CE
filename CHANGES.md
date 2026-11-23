@@ -1,5 +1,57 @@
 # Changelog
 
+## 2026-11-22: Status bar on the theater ground
+
+- With a cover-derived background, three status bar items still showed
+  dark surrounds: the volume speaker (8 by 14 at (10, 7), black corners),
+  the Bluetooth icon (18 by 18 at (176, 5), even with Bluetooth off) and a
+  blank cell after the track counter (9 by 12, whenever the total has fewer
+  than four digits). Each carried a fixed background in its pixels.
+- The player's Bluetooth icon resources (284/285, light 450/451) now key
+  their surround, and the music window draws them through a wrapper that
+  fills the icon rectangle with the ground cell, then draws keyed
+  (patches 0279/0280, census pocket `0x03063C4A`). Other windows keep
+  their black-surround icon.
+- The player's track counter fills its field with the ground cell and drops
+  its trailing blank cells before the stock sprite string draw (patches
+  0281/0282, census pocket `0x03062EB8`). This also removes the dark grey
+  cell stock shows in the light theme. Resource 259 is unchanged for other
+  windows.
+- The volume speaker (resource 133, light 299) keys its surround. The
+  player draws it keyed straight after its full-screen ground fill; the
+  shared status routine draws it through a wrapper that fills the icon with
+  the ground cell in the music window and with the stock surround colour
+  elsewhere (patches 0283 to 0285, census pocket `0x0306944E`), so other
+  windows are unchanged.
+- `patches/status_bar/test_status_bar.py` runs the real routines under
+  emulation: off leaves only the ground, on then off leaves no ink, the
+  counter erases stale digits, the default dark ground equals stock and
+  other windows are drawn as stock. Not yet verified on hardware.
+- Standard image SHA-256
+  `ae274fee624c3aa80cfc1e0cadf1214e20bbe479015b2f82e609d4214ca9ab00`;
+  Minimal is unchanged.
+
+## 2026-11-22: Power off stays off
+
+- Holding Power showed the power-off screen, then the player restarted or
+  hung instead of switching off. The DAC error-counter fix (patches 0001 and
+  0002) had placed its 4-byte trampoline at `0x03060D8E`, the first `bx lr`
+  of the padding after `dac_read`. That stub is not free: module 0 calls it
+  as a no-op from the shutdown routine (`0x03067CD8`, before the power-hold
+  GPIO is released) and from the software reset (`0x030536C4`). Shutdown
+  therefore ran `dac_write`'s epilogue on its own frame and returned through
+  a stale stack word. The trampoline moves two bytes to `0x03060D90`
+  (unreferenced across all 82 modules) and `0x03060D8E` stays `bx lr`.
+  The DAC counter behaviour is unchanged.
+- `tests/test_shutdown_noop_stub.py` pins the stub and its two callers in
+  every release image and runs the shutdown tail under emulation through
+  the power-hold call; it fails on the previous images.
+- Standard image SHA-256
+  `175d4aff14407d7ddab3733fe7a57e25801d2082ca34ce0335af5d813d5f2c87`,
+  Minimal `43476a08ace9e4fbf942bfcab2bbd5eea2e3554ac7a7c7cf60f9770d29700565`.
+  Each differs from the preceding image in those 7 code bytes and the outer
+  CRC. Not yet verified on hardware.
+
 ## 2026-11-13: First device flash and outlined orange selector
 
 - Standard CE was written to both measured firmware slots on a physical DAP

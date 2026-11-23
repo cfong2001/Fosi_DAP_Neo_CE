@@ -22,6 +22,12 @@
       "evidence": "In the everything build the eight keyed transport draws fill their rectangle with the ground cell before drawing (patches 0110-0117). test_transport_ground.py shows 0 ghost pixels after segment-only repaints at the centre (B=0) and the computed slot (B=2); the standalone v4 build leaves 58 and 34. The standalone v4 variant keeps the direct repoints and their documented ghosting."
     },
     {
+      "id": "status_bar_ground",
+      "name": "Player status bar on the theater ground",
+      "status": {"source_review": "verified", "emulation": "verified", "combined_build": "verified", "hardware": "not_run"},
+      "evidence": "In the everything build the player's Bluetooth icon (resources 284/285, light 450/451, surround keyed) is drawn through a wrapper that fills its 18 by 18 rectangle with the ground cell before the keyed draw (patches 0279/0280), and the track counter's field is filled with the ground cell and its trailing blank cells are dropped (patches 0281/0282); the volume speaker (resources 133/299, surround keyed) is drawn keyed by the player after its full-screen ground fill, and by the shared status routine through a wrapper that fills its rectangle with the ground cell in the music window and with the stock surround elsewhere (patches 0283-0285). test_status_bar.py passes on the composed image: Bluetooth off leaves only the ground, on then off leaves no ink, the counter field ends as ground plus digits after stale ink, the speaker shows only its ink on the ground, the default dark ground equals stock apart from the speaker's surround, and other windows are drawn as stock; stock shows all three boxes. Not yet observed on hardware."
+    },
+    {
       "id": "focus",
       "name": "Focus mode",
       "status": {"source_review": "incomplete", "emulation": "verified", "combined_build": "not_run", "hardware": "not_run"},

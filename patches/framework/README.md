@@ -40,9 +40,9 @@ the wheel timer period patch, and the 0000 no-op self-test fixture) plus the tra
 ranges overlap a byte patch's, and verify.py check 7 proves the
 combined image equals the disjoint union of its parts. The current
 unified image (dated 2026-10-23) has SHA-256
-`0dfd10e23749f9b6c65499266f1a7a2ec038160b089ba0fc2ca68dcf2b24c986`
-and a 71,533-byte diff vs stock (1,400 framework + 70,139 Vorbis, minus
-6 shared date/mirror/CRC bytes).
+`43476a08ace9e4fbf942bfcab2bbd5eea2e3554ac7a7c7cf60f9770d29700565`
+and a 71,533-byte diff vs stock (1,399 framework + 70,139 Vorbis, minus
+5 shared date/mirror/CRC bytes).
 
 Paths are portable. No tool hard-codes a workspace. Resolution order
 is CLI flag > environment > discovery (see `tools/fosi_paths.py`):

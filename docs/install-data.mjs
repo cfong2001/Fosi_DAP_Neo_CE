@@ -24,7 +24,7 @@ export const IMAGES = [
     title: "Standard",
     badge: "Recommended",
     length: 13639684,
-    sha256: "08054971d2a5ef837c5186a8b31e20f720bedbc1ddb41978885b0f4e32d105c9",
+    sha256: "ae274fee624c3aa80cfc1e0cadf1214e20bbe479015b2f82e609d4214ca9ab00",
     summary: "Every CE feature: full-precision Vorbis, gapless, natural sort, " +
       "Opus in place of WMA, the design refresh, theater mode, M3U " +
       "playlists, lock-screen track info and the Bluetooth shortcut.",
@@ -37,7 +37,7 @@ export const IMAGES = [
     title: "Minimal",
     badge: "Stock length",
     length: 13631492,
-    sha256: "0dfd10e23749f9b6c65499266f1a7a2ec038160b089ba0fc2ca68dcf2b24c986",
+    sha256: "43476a08ace9e4fbf942bfcab2bbd5eea2e3554ac7a7c7cf60f9770d29700565",
     summary: "Audio and library fixes only: full-precision Vorbis, gapless, " +
       "natural sort, decoder clocks and the DAC error counter. Keeps WMA.",
     caveat: "Same length as stock. Use it if Standard does not install or " +

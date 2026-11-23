@@ -219,3 +219,13 @@ patches/0262-focus-wheel-service-hook.patch
 ../player_ui/0276-progress-gap-restore.patch
 ../player_ui/0277-player-full-fill.patch
 ../player_ui/0278-player-full-fill-hook.patch
+
+# Player status bar on the current ground: Bluetooth icon, track
+# counter blank cells and volume speaker (patches/status_bar):
+../status_bar/0279-bt-status-ground.patch
+../status_bar/0280-bt-status-keyed-hook.patch
+../status_bar/0281-counter-ground.patch
+../status_bar/0282-counter-ground-hook.patch
+../status_bar/0283-volume-icon-ground.patch
+../status_bar/0284-volume-icon-player-hook.patch
+../status_bar/0285-volume-icon-status-hook.patch

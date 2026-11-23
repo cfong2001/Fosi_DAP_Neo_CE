@@ -62,7 +62,7 @@ The full build prints a large byte-diff report to the log. For the current
 recorded composition, the 2,040-byte merged tail SHA-256 must be
 `794659ecade723737fe5f09fab9efdf904b0b3c1e4336e055a65f08fcf20e0e4`,
 and the 13,639,684-byte image SHA-256 must be
-`08054971d2a5ef837c5186a8b31e20f720bedbc1ddb41978885b0f4e32d105c9`.
+`ae274fee624c3aa80cfc1e0cadf1214e20bbe479015b2f82e609d4214ca9ab00`.
 These are regression pins for this revision, not permanent hashes for future
 changes. Any intentional source or artifact change requires review, updated
 pins and regenerated browser data, meaningful behavioral regression tests,
