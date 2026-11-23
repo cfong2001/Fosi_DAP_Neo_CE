@@ -15,7 +15,8 @@ def feedback(raw):
   for kind in ('code','data'):
    o,n=im.module_region(27,kind);u.mem_write(im.modules[27][kind+'_exec'],raw[o:o+n])
   def skip(u,a,n,_):u.reg_write(UC_ARM_REG_PC,u.reg_read(UC_ARM_REG_LR))
-  for a in (0x306354a,0x3063700,0x3063642):u.hook_add(UC_HOOK_CODE,skip,begin=a,end=a)
+  # 0x3063a08: keyed helper, the player's speaker draw (status bar patch 0284)
+  for a in (0x306354a,0x3063a08,0x3063700,0x3063642):u.hook_add(UC_HOOK_CODE,skip,begin=a,end=a)
   grounds=[];repaints=0
   for _ in range(3):
    events=struct.unpack('<I',u.mem_read(0x3023cfc,4))[0]

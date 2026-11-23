@@ -1,5 +1,36 @@
 # Changelog
 
+## 2026-11-22: Status bar on the theater ground
+
+- With a cover-derived background, three status bar items still showed
+  dark surrounds: the volume speaker (8 by 14 at (10, 7), black corners),
+  the Bluetooth icon (18 by 18 at (176, 5), even with Bluetooth off) and a
+  blank cell after the track counter (9 by 12, whenever the total has fewer
+  than four digits). Each carried a fixed background in its pixels.
+- The player's Bluetooth icon resources (284/285, light 450/451) now key
+  their surround, and the music window draws them through a wrapper that
+  fills the icon rectangle with the ground cell, then draws keyed
+  (patches 0279/0280, census pocket `0x03063C4A`). Other windows keep
+  their black-surround icon.
+- The player's track counter fills its field with the ground cell and drops
+  its trailing blank cells before the stock sprite string draw (patches
+  0281/0282, census pocket `0x03062EB8`). This also removes the dark grey
+  cell stock shows in the light theme. Resource 259 is unchanged for other
+  windows.
+- The volume speaker (resource 133, light 299) keys its surround. The
+  player draws it keyed straight after its full-screen ground fill; the
+  shared status routine draws it through a wrapper that fills the icon with
+  the ground cell in the music window and with the stock surround colour
+  elsewhere (patches 0283 to 0285, census pocket `0x0306944E`), so other
+  windows are unchanged.
+- `patches/status_bar/test_status_bar.py` runs the real routines under
+  emulation: off leaves only the ground, on then off leaves no ink, the
+  counter erases stale digits, the default dark ground equals stock and
+  other windows are drawn as stock. Not yet verified on hardware.
+- Standard image SHA-256
+  `ae274fee624c3aa80cfc1e0cadf1214e20bbe479015b2f82e609d4214ca9ab00`;
+  Minimal is unchanged.
+
 ## 2026-11-22: Power off stays off
 
 - Holding Power showed the power-off screen, then the player restarted or

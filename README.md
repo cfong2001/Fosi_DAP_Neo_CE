@@ -24,11 +24,11 @@ CE (Community Edition) is patched firmware for the Fosi Audio DAP Neo. It starts
 
 | Image | What it carries | SHA-256 |
 |---|---|---|
-| [`DP3_V137_CE.img`](release/DP3_V137_CE.img) | Standard: every feature below. 8,192 bytes longer than stock. | `175d4aff14407d7ddab3733fe7a57e25801d2082ca34ce0335af5d813d5f2c87` |
+| [`DP3_V137_CE.img`](release/DP3_V137_CE.img) | Standard: every feature below. 8,192 bytes longer than stock. | `ae274fee624c3aa80cfc1e0cadf1214e20bbe479015b2f82e609d4214ca9ab00` |
 | [`DP3_V137_CE_minimal.img`](release/DP3_V137_CE_minimal.img) | Minimal: audio and library fixes only, same length as stock. | `43476a08ace9e4fbf942bfcab2bbd5eea2e3554ac7a7c7cf60f9770d29700565` |
 | [`DP3_V137_CE_recovery.img`](release/DP3_V137_CE_recovery.img) | Stock code dated one day after CE, for going back. | `aff851b31d6eee55cbd4bb3fc0464ac79f0039ee86ae6723225ac036a157d223` |
 
-Standard CE has been installed and booted on hardware. Full-card scanning, Opus playback, embedded covers, full-screen theater color, progress-gap restoration and improved continuous dial response have passed device acceptance; see [repair validation](release/REPAIR_VALIDATION.md). Small black boxes in the top status bar remain a known follow-up. Minimal retains WMA support.
+Standard CE has been installed and booted on hardware. Full-card scanning, Opus playback, embedded covers, full-screen theater color, progress-gap restoration and improved continuous dial response have passed device acceptance; see [repair validation](release/REPAIR_VALIDATION.md). The volume speaker, the Bluetooth icon and the blank cell after the track counter, which showed as small dark boxes in the top status bar, are now drawn on the theater ground ([status bar](patches/status_bar/README.md)); that change is not yet verified on hardware. Minimal retains WMA support.
 
 Complete the [flash review and recovery gates](release/FLASH_REVIEW.md) before writing anything to a player. There are two ways to install:
 

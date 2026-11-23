@@ -5,7 +5,7 @@ against their pins by `.github/workflows/firmware.yml` on every change.
 
 | File | What it is | Length | SHA-256 |
 |---|---|---|---|
-| `DP3_V137_CE.img` | **Standard.** Every composed CE feature (list below). Header date 2026-10-23. | 13,639,684 bytes (8,192 more than stock) | `175d4aff14407d7ddab3733fe7a57e25801d2082ca34ce0335af5d813d5f2c87` |
+| `DP3_V137_CE.img` | **Standard.** Every composed CE feature (list below). Header date 2026-10-23. | 13,639,684 bytes (8,192 more than stock) | `ae274fee624c3aa80cfc1e0cadf1214e20bbe479015b2f82e609d4214ca9ab00` |
 | `DP3_V137_CE_minimal.img` | **Minimal option.** The default framework set and full-precision Vorbis only. Header date 2026-10-23. | 13,631,492 bytes (same as stock) | `43476a08ace9e4fbf942bfcab2bbd5eea2e3554ac7a7c7cf60f9770d29700565` |
 | `DP3_V137_CE_recovery.img` | Unmodified stock bytes dated 2026-10-24, one day after either CE image, so the boot validator prefers it. | 13,631,492 bytes | `aff851b31d6eee55cbd4bb3fc0464ac79f0039ee86ae6723225ac036a157d223` |
 | `*.report.json` | Build reports: every patch with its address and old and new bytes, transplant hashes, validation results. The standard report summarises its byte ranges. | | |
@@ -32,8 +32,11 @@ installer but has not yet been run with CE on hardware.
 The content-route repaired Standard code also booted and played Opus music
 on hardware on 2026-11-14. That test used the optional diagnostic readout
 and a newer header date; both written slots passed full readback. On 2026-11-15, the current Standard code also passed embedded artwork, full-screen
-theater color, progress-gap and continuous dial acceptance. Small black boxes in
-the top status bar and residual background-fill staging remain follow-ups.
+theater color, progress-gap and continuous dial acceptance. The small dark boxes in
+the top status bar (the volume speaker, the Bluetooth icon and the track
+counter's blank cell) are
+now drawn on the theater ground, pending a device check; residual
+background-fill staging remains a follow-up.
 
 ## Which image
 

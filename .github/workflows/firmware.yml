@@ -146,6 +146,11 @@ jobs:
           python test_transport_ground.py
           python emu_bt_tail_full.py
 
+      - name: Player status bar on the ground (Bluetooth icon, counter)
+        run: |
+          python patches/status_bar/build_status_bar.py
+          git diff --exit-code -- patches/status_bar
+          python patches/status_bar/test_status_bar.py "$RUNNER_TEMP/dist/DP3_V137_CE.img"
       - name: Focus mode on the full build
         run: |
           cd patches/focus_mode

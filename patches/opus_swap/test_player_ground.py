@@ -43,7 +43,9 @@ def repaint(raw, view, color, event=True, hidden=False, light=False):
             # selection is real, and its pixels are independently checked below.
             pixels[:] = [0xFFFF if light else 0x10A2] * len(pixels)
         machine.reg_write(UC_ARM_REG_PC, machine.reg_read(UC_ARM_REG_LR))
-    for address in (0x030632FA, 0x03052D5C, 0x03063700, 0x0306354A, 0x03063642):
+    # 0x03063A08 is the keyed helper: the player's speaker draw (status bar
+    # patch 0284) uses it in place of DrawImageAt (0x0306354A).
+    for address in (0x030632FA, 0x03052D5C, 0x03063700, 0x0306354A, 0x03063A08, 0x03063642):
         u.hook_add(UC_HOOK_CODE, hook, begin=address, end=address)
     u.emu_start(0x0307EF7B, 0x0307F084, count=20000)
     assert u.reg_read(UC_ARM_REG_PC) == 0x0307F084

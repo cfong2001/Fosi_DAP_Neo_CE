@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Merge the full build's theme config: design refresh v4 glyph
 runs (182), the browser icon extension runs (300), the CE
-splash mark runs (40), the light play-mode key runs (4) and the
+splash mark runs (40), the light play-mode key runs (4), the
+status bar key runs (6) and the
 antialiased screens, dialogs, progress bar and knob runs (429) and the
 redrawn Font B Latin glyphs (314), Font A Latin glyphs (314) and the
 power profile menu records (64), 1,647 runs total.
@@ -63,7 +64,9 @@ def main():
           f'font A runs: {len(font_a)}; profile menu runs: {len(menu)}')
     labels = load_runs(REPO / 'patches/player_ui/labels.json')
     artwork = load_runs(REPO / 'patches/player_ui/artwork-resources.json')
-    runs = v4 + browser + mark + play_mode + screens + font + font_a + menu + labels + artwork
+    bt_status = load_runs(REPO / 'patches/status_bar/status-key.json')
+    runs = (v4 + browser + mark + play_mode + screens + font + font_a + menu
+            + labels + artwork + bt_status)
     seen = []
     for r in runs:
         off = int(r['offset'], 16) if isinstance(r['offset'], str) \
