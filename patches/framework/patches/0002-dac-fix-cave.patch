@@ -3,13 +3,15 @@ name: dac-fix-2-cave
 kind: module
 module: 0
 region: code
-address: 0x03060d8e
+address: 0x03060d90
 gate: build refuses unless the 4 stock bytes at the target equal `expect`;
   the finished image must also pass firmware_patch.validate()
 rationale: Reset trampoline in the alignment padding after dac_read.
-  0x03060d8e sits in a 14-byte run of `bx lr` filler; an exhaustive scan
-  of all 82 modules (BL/B.W targets and literal words) shows zero
-  references to 0x03060d8e..0x03060d96. The pad's last two stubs
+  0x03060d90 sits in a 14-byte run of `bx lr` filler. The first stub,
+  0x03060d8e, is NOT free: module 0 calls it as a no-op from the shutdown
+  routine (0x03067cd8) and the software reset (0x030536c4), so it stays
+  `bx lr`. A scan of all 82 modules (BL/B/B.W targets, literal words and
+  data pointers) shows zero references to 0x03060d90..0x03060d97. The pad's last two stubs
   (0x03060d98 / 0x03060d9a) ARE referenced as no-op returns by modules
   11 and 61 and are deliberately left byte-identical. Entered only from
   the patched success branch (part 1) with r0 == 0 (successful transfer
@@ -18,4 +20,4 @@ rationale: Reset trampoline in the alignment padding after dac_read.
   branch then rejoins the stock tail at 0x03060d1c (movs r0, #0; bus
   release; return transfer result).
 expect: 70477047
-replace: 6870c4e7
+replace: 6870c3e7

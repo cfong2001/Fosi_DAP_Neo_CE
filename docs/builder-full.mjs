@@ -21,7 +21,7 @@ export const FULL_PATCHES = [
   "region": "code",
   "address": 50728212,
   "expect": "02d0",
-  "replace": "3bd0",
+  "replace": "3cd0",
   "index": 1
  },
  {
@@ -29,9 +29,9 @@ export const FULL_PATCHES = [
   "name": "dac-fix-2-cave",
   "module": 0,
   "region": "code",
-  "address": 50728334,
+  "address": 50728336,
   "expect": "70477047",
-  "replace": "6870c4e7",
+  "replace": "6870c3e7",
   "index": 2
  },
  {
@@ -13297,4 +13297,4 @@ export const FULL_THEME_RUNS = [
   "replace": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
  }
 ];
-export const FULL_IMAGE_SHA256 = "08054971d2a5ef837c5186a8b31e20f720bedbc1ddb41978885b0f4e32d105c9";
+export const FULL_IMAGE_SHA256 = "175d4aff14407d7ddab3733fe7a57e25801d2082ca34ce0335af5d813d5f2c87";

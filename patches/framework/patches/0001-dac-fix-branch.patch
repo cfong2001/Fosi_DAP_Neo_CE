@@ -10,9 +10,9 @@ gate: build refuses unless the 2 stock bytes at the target equal `expect`;
 rationale: dac_write's success branch. Stock branches on a zero transfer
   result straight to the shared tail at 0x03060d1c, skipping the failure
   increment at 0x03060d16. The patch keeps the same condition and register
-  state but detours through the reset trampoline at 0x03060d8e (part 2),
+  state but detours through the reset trampoline at 0x03060d90 (part 2),
   which zeroes the DAC error counter (0x0300411e) so it counts
   consecutive failures instead of session-lifetime failures. Only the
   branch target changes; the second byte (0xd0) is identical.
 expect: 02d0
-replace: 3bd0
+replace: 3cd0

@@ -30,7 +30,7 @@ export const PATCH_GROUPS = [
     "region": "code",
     "address": 50728212,
     "expect": "02d0",
-    "replace": "3bd0",
+    "replace": "3cd0",
     "index": 1
    },
    {
@@ -38,9 +38,9 @@ export const PATCH_GROUPS = [
     "name": "dac-fix-2-cave",
     "module": 0,
     "region": "code",
-    "address": 50728334,
+    "address": 50728336,
     "expect": "70477047",
-    "replace": "6870c4e7",
+    "replace": "6870c3e7",
     "index": 2
    }
   ]
