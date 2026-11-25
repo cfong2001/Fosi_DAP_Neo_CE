@@ -16,7 +16,7 @@ from unicorn.arm_const import *
 END=0x030EF000
 RECORD=0x030D0000
 
-def parse(data,watchdog=True,raw=None,apply_patches=True,native_fs=False,extension=b'OPU',metrics=None):
+def parse(data,watchdog=True,raw=None,apply_patches=True,native_fs=False,extension=b'OPU',metrics=None,code_overrides=()):
     if raw is None:raw=(ROOT/'release/DP3_V137_CE.img').read_bytes()
     im=Image(raw)
     u=Uc(UC_ARCH_ARM,UC_MODE_THUMB);u.mem_map(0x03000000,0x100000)
@@ -25,6 +25,7 @@ def parse(data,watchdog=True,raw=None,apply_patches=True,native_fs=False,extensi
         off,n=im.module_region(0,kind);u.mem_write(im.modules[0][kind+'_exec'],raw[off:off+n])
     for name in (HERE/'tags-manifest.txt').read_text().splitlines() if apply_patches else ():
         row=parse_patch(HERE/name);u.mem_write(row['address'],row['replace'])
+    for address,code in code_overrides:u.mem_write(address,code)
     u.mem_write(RECORD-8,b'Z'*8);u.mem_write(RECORD+0x556,b'Z'*8)
     assert len(extension)==3
     u.mem_write(0x030D1000,extension)
@@ -99,6 +100,9 @@ def parse(data,watchdog=True,raw=None,apply_patches=True,native_fs=False,extensi
     assert bytes(u.mem_read(RECORD-8,8))==b'Z'*8
     assert bytes(u.mem_read(RECORD+0x556,8))==b'Z'*8
     if len(data)>1000 and extension==b'OPU':assert kicks>0,'reader did not service the hardware watchdog'
+    if metrics is not None:
+        import hashlib
+        metrics['record_sha256']=hashlib.sha256(bytes(u.mem_read(RECORD,0x556))).hexdigest()
     if metrics is not None:metrics.update(instructions=instructions,sector_read_calls=sectors,
                                         file_read_calls=read_calls,watchdog_reloads=kicks,
                                         stack_restored=True,record_guards_intact=True)
