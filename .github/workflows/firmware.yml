@@ -105,6 +105,11 @@ jobs:
       - name: Module 0 dead-code census and emulation coverage gate
         run: python patches/space/run_coverage.py
 
+      - name: No patch overwrites stock code that is still called
+        run: |
+          python -m unittest discover -s tests -p test_patch_xref_audit.py -v
+          python -m unittest discover -s tests -p test_shutdown_noop_stub.py -v
+
       - name: Simulator data matches the emulated painter
         run: |
           python tools/gen_sim_data.py
