@@ -151,6 +151,12 @@ jobs:
           cd patches/focus_mode
           FOCUS_FULL_IMAGE="$RUNNER_TEMP/dist/DP3_V137_CE.img" python test_focus_mode.py
 
+      - name: Wheel acceleration on the full build
+        run: |
+          python patches/wheel_accel/build_wheel_accel.py
+          git diff --exit-code -- patches/wheel_accel
+          python patches/wheel_accel/test_wheel_accel.py
+
       - name: Power profile item on the full build
         run: |
           cd patches/power/profiles
