@@ -10,9 +10,9 @@
   system-disk reads through the same buffers, tagged with bit 31 so a
   system sector never matches a data sector. Every device write clears
   the tags first. The stock single retry of a failed system read is kept.
-- In emulation, one browser wheel step makes 55 glyph reads, which cost
-  57 sector reads before and 26 after. Now Playing text costs 164 before
-  and 80 after. These are sector-read counts, not milliseconds.
+- In emulation, one browser wheel step makes 247 glyph reads, which cost
+  274 sector reads before and 141 after. These are sector-read counts,
+  not milliseconds.
 - Standard image SHA-256
   `b91485f76ab11d12fd42305f37adf2cca02168f40c831d009ac13099cbca5830`.
   Minimal is unchanged. Not yet verified on hardware.
