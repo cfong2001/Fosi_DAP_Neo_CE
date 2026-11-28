@@ -130,6 +130,22 @@ def _channel(name, sum_off, slot, light_const):
     ]
 
 
+# The posted repaint fills the whole screen and requests the cover again,
+# so rows below the sampled third would only be overwritten. Moving the
+# row cursor to the last row ends the stock sync loop (and the painter's
+# next call) as a natural end would. Each setup reloads module 19 and
+# resets the cursor, as after the stock key-press exit.
+ABORT_ASM = [
+    'abort_decode:',
+    *load('r0', 0x03026CA0),                    # player ctx
+    *load('r3', 0x030259D4),                    # module 18 row base
+    'ldr r1, [r0, #0x18]',                      # scaled height
+    'ldr r3, [r3, #0x0c]',
+    'add r1, r1, r3',
+    'subs r1, r1, #1',
+    'str r1, [r0, #0x2c]',                      # last row; caller adds 1
+]
+
 TRAMP_TAIL_ASM = [
     'add sp, #8',
     'mov r4, r0',                               # preserve bitmap return
@@ -285,6 +301,7 @@ TRAMP_TAIL_ASM = [
     'ldr r1, [r0, #0]',
     'orr r1, r1, #0x02000000',
     'str r1, [r0, #0]',
+    *ABORT_ASM,
     'color_unchanged:',
     'ldrb r0, [r2, #25]',
     'orr r0, r0, #2',

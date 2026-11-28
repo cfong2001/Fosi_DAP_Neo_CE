@@ -1,7 +1,7 @@
 {
   "tail_base": "0x307bfb4",
   "tail_bytes": 2040,
-  "tail_sha256": "794659ecade723737fe5f09fab9efdf904b0b3c1e4336e055a65f08fcf20e0e4",
+  "tail_sha256": "863091103f09afa3c3cce50989ba2fae4b644085c5db36df5caf409d5901025a",
   "budget": 2044,
   "pieces": [
     {
@@ -45,7 +45,7 @@
       "offset": 924,
       "address": "0x307c350",
       "bytes": 680,
-      "sha256": "cc8ac25ec178cc5e9ed41ed1c067e3649a9a55e15d6181f717f84d20925763af",
+      "sha256": "3aea3b86d295d541b90e7148915009b19a97d78163faea2405824e2ebfa40b3c",
       "trampoline": "0x307c37c"
     },
     {

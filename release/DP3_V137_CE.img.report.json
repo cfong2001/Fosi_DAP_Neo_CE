@@ -3,7 +3,7 @@
  "input_file": "DP3_V137.img",
  "output_file": "DP3_V137_CE.img",
  "input_sha256": "fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cdfade5e9c6ea3bd71ac6deef",
- "output_sha256": "175d4aff14407d7ddab3733fe7a57e25801d2082ca34ce0335af5d813d5f2c87",
+ "output_sha256": "3a3f947194ce63c5165499f94b8987b048d117d2f2e061dd1197748ad1e69649",
  "byte_length": 13639684,
  "header_date": "20261023",
  "patches_applied": [
@@ -2074,6 +2074,61 @@
    "file_offset": "0x898b2",
    "old_hex": "e4f79ff9",
    "new_hex": "d3f7d0fe"
+  },
+  {
+   "patch": "0279-scaler-multiply",
+   "file": "0279-scaler-multiply.patch",
+   "kind": "module",
+   "module": 0,
+   "region": "code",
+   "cpu_address": "0x306d8ce",
+   "file_offset": "0x46f7a",
+   "old_hex": "10b582b28bb2000c090c00fb01f4584302fb01005a43110c01eb0441084410bd",
+   "new_hex": "a0fb0101000c40ea0140704700bf00bf00bf00bf00bf00bf00bf00bf00bf00bf"
+  },
+  {
+   "patch": "0280-scaler-channel-r",
+   "file": "0280-scaler-channel-r.patch",
+   "kind": "module",
+   "module": 19,
+   "region": "code",
+   "cpu_address": "0x3087780",
+   "file_offset": "0x9dc66",
+   "old_hex": "cdf7b3fd6ff00f02cdf77efdcdf719fecdf7d1fd",
+   "new_hex": "000c07e000bf00bf00bf00bf00bf00bf00bf00bf"
+  },
+  {
+   "patch": "0281-scaler-channel-g",
+   "file": "0281-scaler-channel-g.patch",
+   "kind": "module",
+   "module": 19,
+   "region": "code",
+   "cpu_address": "0x30877e8",
+   "file_offset": "0x9dcce",
+   "old_hex": "cdf77ffd6ff00f02cdf74afdcdf7e5fdcdf79dfd",
+   "new_hex": "000c07e000bf00bf00bf00bf00bf00bf00bf00bf"
+  },
+  {
+   "patch": "0282-scaler-channel-b",
+   "file": "0282-scaler-channel-b.patch",
+   "kind": "module",
+   "module": 19,
+   "region": "code",
+   "cpu_address": "0x3087850",
+   "file_offset": "0x9dd36",
+   "old_hex": "cdf74bfd6ff00f02cdf716fd06e0",
+   "new_hex": "000c0fe000bf00bf00bf00bf00bf"
+  },
+  {
+   "patch": "0283-scaler-channel-b-tail",
+   "file": "0283-scaler-channel-b-tail.patch",
+   "kind": "module",
+   "module": 19,
+   "region": "code",
+   "cpu_address": "0x308786c",
+   "file_offset": "0x9dd52",
+   "old_hex": "cdf7a9fdcdf761fd",
+   "new_hex": "00bf00bf00bf00bf"
   }
  ],
  "transplants_applied": [
@@ -15784,7 +15839,7 @@
   "exec": "0x307bfb4",
   "file_offset": "0x55660",
   "payload_bytes": 2040,
-  "payload_sha256": "794659ecade723737fe5f09fab9efdf904b0b3c1e4336e055a65f08fcf20e0e4",
+  "payload_sha256": "863091103f09afa3c3cce50989ba2fae4b644085c5db36df5caf409d5901025a",
   "span_bytes": 11164,
   "workspace_zone_zero_bytes": 9120,
   "code_len_old": "0x29c14",
@@ -15812,8 +15867,8 @@
   }
  ],
  "diff_vs_stock": {
-  "bytes_changed": 4959269,
-  "range_count": 424981,
+  "bytes_changed": 4959326,
+  "range_count": 424983,
   "note": "range list omitted; rebuild with patches/full/build/build_full.py for it"
  },
  "validation": "validate_grown() passed (structural checks, layout derived from the image)",

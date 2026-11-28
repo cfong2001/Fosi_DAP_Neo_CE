@@ -124,6 +124,12 @@ jobs:
           python -m unittest discover -s tests -p 'test_boot_*.py' -v
           python -m unittest discover -s tests -p test_prepare_flash.py -v
 
+      - name: Cover decode parity and work counts
+        run: |
+          python patches/player_ui/build_artwork_scaler.py
+          git diff --exit-code -- patches/player_ui
+          python patches/player_ui/test_cover_decode.py "$RUNNER_TEMP/dist/DP3_V137_CE.img"
+
       - name: Committed release images match the rebuild
         run: |
           cd release

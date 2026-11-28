@@ -19,7 +19,13 @@ def extract(raw,data,decode=False,observe=None):
   if a not in (0x3058fa8,0x30594a0,0x30545d4,0x3058e8e,0x305c86a,0x305c822,0x305ca1c,0x306d8f0,0x30611e0,0x3058cc6,0x3067870,0x306333e):return
   args=[u.reg_read(r) for r in (UC_ARM_REG_R0,UC_ARM_REG_R1,UC_ARM_REG_R2,UC_ARM_REG_R3)];v=0
   if a==0x3058cc6:positions[2]=0;v=2
-  elif a==0x3067870:v=0
+  elif a==0x3067870:
+   # Overlay loader: copy the module's segments and clear its BSS, so a
+   # later setup sees the fresh module 19 a reload gives on hardware.
+   m=im.modules[args[0]]
+   for kind in ('code','data'):
+    o,n=im.module_region(args[0],kind);u.mem_write(m[kind+'_exec'],raw[o:o+n])
+   u.mem_write(m['bss_exec'],bytes(m['bss_len']))
   elif a==0x306333e:
    mode,ptr=struct.unpack('<II',u.mem_read(u.reg_read(UC_ARM_REG_SP),8));assert mode==16
    blits.append(struct.unpack('<%dH'%args[2],u.mem_read(ptr,args[2]*2)));v=0
