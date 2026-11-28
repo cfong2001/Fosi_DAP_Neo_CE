@@ -151,6 +151,13 @@ jobs:
           cd patches/focus_mode
           FOCUS_FULL_IMAGE="$RUNNER_TEMP/dist/DP3_V137_CE.img" python test_focus_mode.py
 
+      - name: Idle repaint parity on the full build
+        run: |
+          python patches/idle_redraw/build_idle_redraw.py
+          git diff --exit-code -- patches/idle_redraw
+          python patches/idle_redraw/test_idle_redraw.py "$RUNNER_TEMP/dist/DP3_V137_CE.img"
+          git diff --exit-code -- patches/idle_redraw
+
       - name: Power profile item on the full build
         run: |
           cd patches/power/profiles

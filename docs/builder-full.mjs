@@ -1883,6 +1883,56 @@ export const FULL_PATCHES = [
   "expect": "e4f79ff9",
   "replace": "d3f7d0fe",
   "index": 187
+ },
+ {
+  "file": "0350-idle-redraw-fingerprint.patch",
+  "name": "0350-idle-redraw-fingerprint",
+  "module": 0,
+  "region": "code",
+  "address": 50671504,
+  "expect": "10b5fff716fc002808bf10bdbde81040fff701bcfff7fcbb0120af4908707047ad49002008707047",
+  "replace": "064a1188064b1b8841ea0341054b704701b5fff7f5ff196101bd00bf243902034a310203e4470203",
+  "index": 188
+ },
+ {
+  "file": "0351-idle-redraw-tick-gate.patch",
+  "name": "0351-idle-redraw-tick-gate",
+  "module": 0,
+  "region": "code",
+  "address": 50742710,
+  "expect": "4f4a1088032828bf7047002808bf7047401e0004000c08bf108000210123d36040f23f109180d0807047",
+  "replace": "10b5eef7eafc1c462069884208d1e188062905d0d2f8a010012901d0f8f7fcb94d20bde8104002f02ebe",
+  "index": 189
+ },
+ {
+  "file": "0352-idle-redraw-tick-gate-position.patch",
+  "name": "0352-idle-redraw-tick-gate-position",
+  "module": 0,
+  "region": "code",
+  "address": 50710990,
+  "expect": "70b5e6490546e64ed1f81b10891ca9429cbf304670bde3490978002908bf40f6f57104d001290cbf4ff6",
+  "replace": "09490968d1e900209321a0fb01010023f8f7d7f9e168884208bf10bd4d20bde810400af024bc78ad0403",
+  "index": 190
+ },
+ {
+  "file": "0353-idle-redraw-tick-hook.patch",
+  "name": "0353-idle-redraw-tick-hook",
+  "module": 27,
+  "region": "code",
+  "address": 50853308,
+  "expect": "e7f73efe",
+  "replace": "e4f7fbff",
+  "index": 191
+ },
+ {
+  "file": "0354-idle-redraw-store-hook.patch",
+  "name": "0354-idle-redraw-store-hook",
+  "module": 27,
+  "region": "code",
+  "address": 50853526,
+  "expect": "c9f81000",
+  "replace": "d3f783fc",
+  "index": 192
  }
 ];
 export const FULL_TAIL = {
@@ -13297,4 +13347,4 @@ export const FULL_THEME_RUNS = [
   "replace": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
  }
 ];
-export const FULL_IMAGE_SHA256 = "175d4aff14407d7ddab3733fe7a57e25801d2082ca34ce0335af5d813d5f2c87";
+export const FULL_IMAGE_SHA256 = "6751ee88fc55ee674ab49a8a21f13a3da8c17784f798ef4d29fe6b1358dd86ab";

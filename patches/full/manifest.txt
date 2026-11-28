@@ -219,3 +219,9 @@ patches/0262-focus-wheel-service-hook.patch
 ../player_ui/0276-progress-gap-restore.patch
 ../player_ui/0277-player-full-fill.patch
 ../player_ui/0278-player-full-fill-hook.patch
+# Idle repaint: skip the per-second bar and transport repaint when nothing moved:
+../idle_redraw/0350-idle-redraw-fingerprint.patch
+../idle_redraw/0351-idle-redraw-tick-gate.patch
+../idle_redraw/0352-idle-redraw-tick-gate-position.patch
+../idle_redraw/0353-idle-redraw-tick-hook.patch
+../idle_redraw/0354-idle-redraw-store-hook.patch
