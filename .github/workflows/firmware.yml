@@ -105,6 +105,9 @@ jobs:
       - name: Module 0 dead-code census and emulation coverage gate
         run: python patches/space/run_coverage.py
 
+      - name: System-disk read cache returns disk bytes and keeps the stock retry
+        run: python -m unittest discover -s patches/sysdisk_cache -p test_sysdisk_cache.py -v
+
       - name: Simulator data matches the emulated painter
         run: |
           python tools/gen_sim_data.py
