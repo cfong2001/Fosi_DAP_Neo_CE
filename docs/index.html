@@ -49,7 +49,7 @@
 <ol class="plain">
 <li>Download an image and check it: <code>sha256sum -c SHA256SUMS</code>. Never install an image whose hash does not match.</li>
 <li>Rename it to <code>RKNANOFW.IMG</code>, keeping the <code>.IMG</code> extension.</li>
-<li>Copy it to the top level of the storage the player updates from.</li>
+<li>Delete any <code>.IMG</code> file already on <strong>DAP Sys</strong>, then copy it to the top level of DAP Sys. DAP Sys is the player's internal system drive. It appears next to the music card when you choose USB Data Copy. Do not put it on the music card.</li>
 </ol>
 <ul class="plain" id="direct-links"></ul>
 </details>
@@ -57,8 +57,9 @@
 <li class="step">
 <h3><span class="step-num">3</span> Run the update on the player</h3>
 <ol class="plain">
-<li>Eject the player safely, then start the update the way you would for an official Fosi update.</li>
-<li>After it restarts, connect it again and <strong>delete <code>RKNANOFW.IMG</code></strong>. A leftover update file can run the installer again.</li>
+<li>Charge the player. Eject both drives safely and unplug the cable.</li>
+<li>Hold the orange side button until the player powers off, then hold it again to power on. It shows the automatic update screen and starts normally when the update ends. Do not press anything while it runs. These are the steps <a href="https://support.fosiaudio.com/products/dapneo">Fosi publishes</a> for its own updates.</li>
+<li>Connect it again and <strong>delete <code>RKNANOFW.IMG</code></strong> from DAP Sys. A leftover update file can run the installer again.</li>
 <li>Test in this order: boot to the menu, play an MP3, then a FLAC. Then APE and DSD128 if you have them, an Ogg Vorbis file, two same-format tracks in a row (the second must start promptly), a skip within one format and a library rescan. On Standard also try an Opus file, a track with and without album art, the progress bar and continuous dial movement, an <code>.m3u</code> playlist, the hold switch and a long press of Power.</li>
 </ol>
 <p class="note">The stock installer writes both firmware slots, so no stock copy stays on the player after an install. Please report results, good or bad, as a GitHub issue with the image hash and what you tested.</p>

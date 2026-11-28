@@ -99,9 +99,10 @@ without removing playlists and the lock screen.
 
 1. **Check the hash.** `sha256sum -c SHA256SUMS` in this directory.
    Never install an image whose hash does not match.
-2. **Check the installed version.** The bundled recovery is V137 dated
-   2026-10-24. If the player runs newer official firmware (V155 is dated
-   2026-11-02), that recovery cannot replace it; prepare a matched pair with
+2. **Check the installed version** under System Settings, Product Info. The
+   bundled recovery is V137 dated 2026-10-24. If the player runs newer
+   official firmware (V155 is dated 2026-11-02, V161 2026-11-12, V162
+   2026-11-17), that recovery cannot replace it; prepare a matched pair with
    `tools/prepare_flash.py` first ([FLASH_REVIEW.md](FLASH_REVIEW.md#prepare-a-dated-pair-offline)).
 3. **Back up your card.** Copy your music somewhere safe.
 4. **Know your way back.** Keep `DP3_V137_CE_recovery.img` and the stock
@@ -123,19 +124,32 @@ From the traced installer (module 8, [`analysis/boot_slots.md`](../analysis/boot
   **After a stock-path install both slots hold CE**; no stock copy remains
   on the device.
 
-What opens the update screen (a menu item, or detection of the file at
-boot) has not been traced. Use the same procedure Fosi provides for
-official updates, with the CE file in place of the official one.
+The versioned name is searched first, so an official `DP3_Vnnn.IMG` left on
+the drive can be installed instead of CE. Remove every `.IMG` file from DAP
+Sys before copying CE.
+
+Fosi's published procedure
+([support page](https://support.fosiaudio.com/products/dapneo), checked
+2026-11-28 against V1.5.5, V1.6.1 and V1.6.2) puts the file in the root of
+the **DAP Sys** drive. DAP Sys is the player's internal system partition. It
+shows up next to the music card when the player is in USB Data Copy mode. The
+update runs at power-on when the file is present. The installer code that
+starts at power-on has not been traced in CE's analysis.
 
 ## Install (stock update path)
 
-1. Rename `DP3_V137_CE.img` (or `DP3_V137_CE_minimal.img`) to
-   `RKNANOFW.IMG` and copy it to the root of the storage the device updates
-   from.
-2. Run the update the way you would for an official Fosi update.
-3. After the device restarts, **delete `RKNANOFW.IMG`** from the card.
+1. Charge the player. Connect it to the computer and choose USB Data Copy.
+   Two drives appear: **DAP Sys** and the music card.
+2. Delete any `.IMG` file already in the root of DAP Sys.
+3. Rename `DP3_V137_CE.img` (or `DP3_V137_CE_minimal.img`) to
+   `RKNANOFW.IMG` and copy it to the root of **DAP Sys**, not the music card.
+4. Eject both drives safely and unplug the cable.
+5. Hold the orange side button until the player powers off. Hold it again
+   to power on. The player shows the automatic update screen and starts
+   normally when the update ends. Do not press anything while it runs.
+6. Connect the player again and **delete `RKNANOFW.IMG`** from DAP Sys.
    Leaving an update file in place can rerun the installer.
-4. Test, in this order: boot to the menu, play an MP3, then a FLAC file.
+7. Test, in this order: boot to the menu, play an MP3, then a FLAC file.
    Then try APE and DSD128 if you have them (the unmeasured clock gate), an
    Ogg Vorbis file, two same-format tracks in a row (the next must start promptly), a
    track skip within one format, and a

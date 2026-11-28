@@ -1,5 +1,5 @@
 // Install flow at the top of index.html: choose an image, then either
-// copy it to the player's storage as RKNANOFW.IMG (File System Access
+// copy it to the player's DAP Sys drive as RKNANOFW.IMG (File System Access
 // API, Chromium browsers) or download it.
 //
 // Nothing here writes to the player's flash. The browser only places the
@@ -202,9 +202,9 @@ async function download(asUpdateName) {
   save(name, bytes);
   setStatus("Saved " + name + " (" + fmt(bytes.length) + " bytes, SHA-256 " +
     image.sha256 + " verified). " + (asUpdateName
-      ? "Copy it to the top level of the player's storage, then do step 3."
+      ? "Copy it to the top level of the player's DAP Sys drive, then do step 3."
       : "Rename it to " + UPDATE_NAME + " (including the .IMG extension) and copy it to the " +
-        "top level of the player's storage, then do step 3."), "good");
+        "top level of the player's DAP Sys drive, then do step 3."), "good");
 }
 
 async function copyToPlayer() {
@@ -248,8 +248,8 @@ function init() {
   $("copy-to-player").hidden = !canCopy;
   $("copy-support").textContent = canCopy
     ? "Copy to player asks for the player's drive, downloads the image, checks its SHA-256, " +
-      "writes it as " + UPDATE_NAME + " and reads it back. Pick the top level of the drive, " +
-      "not a folder inside it."
+      "writes it as " + UPDATE_NAME + " and reads it back. Pick the top level of the DAP Sys " +
+      "drive, not the music card and not a folder inside it."
     : "This browser cannot write to a drive directly (Chrome and Edge on a computer can). " +
       "Download the image ready-named instead and copy it to the player yourself.";
   $("copy-to-player").addEventListener("click", () => run(copyToPlayer));

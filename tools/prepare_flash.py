@@ -11,10 +11,8 @@ from rknano_image import Image,rk_crc32
 from firmware_patch import bcd_date
 ROOT=Path(__file__).resolve().parents[1]
 BOOT_PATCH_DIR = ROOT / 'patches' / 'boot_recovery'
-OFFICIAL={
- 'fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cdfade5e9c6ea3bd71ac6deef':'V137',
- '4713a2eb4b523d49ad003ac2df159c1c596339aef1a9a060e6ea6bbbf18e1332':'V155',
-}
+from official_images import OFFICIAL as _OFFICIAL_IMAGES
+OFFICIAL={sha:version for sha,(version,_date) in _OFFICIAL_IMAGES.items()}
 
 POWER_RESTART_POLL = 0x03067CF4
 POWER_RESTART_STOCK = bytes.fromhex(
@@ -121,7 +119,7 @@ def apply_boot_patches(raw, names):
 
 def prepare(candidate,official,date=None,*,debounce_power_on=False,boot_patches=()):
     if digest(candidate) not in release_pins():raise ValueError('candidate is not one of the pinned CE release images')
-    if digest(official) not in OFFICIAL:raise ValueError('official recovery source is not a verified DP3 V137/V155 image')
+    if digest(official) not in OFFICIAL:raise ValueError('official recovery source is not a verified DP3 image (' + '/'.join(sorted(OFFICIAL.values())) + ')')
     c=audit(candidate);o=audit(official)
     latest=max(image_date(candidate),image_date(official))
     build=date or latest+dt.timedelta(days=1)

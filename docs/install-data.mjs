@@ -14,7 +14,7 @@ export const RELEASE_DIR = "release";
 
 // Visible FAT 8.3 filename: the stock installer compares the raw 11-byte
 // directory name RKNANOFWIMG (8-byte basename + 3-byte extension).
-// Copy to the root of the player's storage (release/README.md).
+// Copy to the root of the player's DAP Sys drive (release/README.md).
 export const UPDATE_NAME = "RKNANOFW.IMG";
 
 export const IMAGES = [

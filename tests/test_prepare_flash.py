@@ -43,15 +43,20 @@ class PrepareFlash(unittest.TestCase):
             r=subprocess.run([sys.executable,str(ROOT/'tools/prepare_flash.py'),'--official',str(ROOT/'DP3_V137.img'),'--output',str(out)],capture_output=True,text=True)
             self.assertNotEqual(r.returncode,0);self.assertEqual((out/'sentinel').read_text(),'keep')
             self.assertEqual([p.name for p in out.iterdir()],['sentinel'])
-    @unittest.skipUnless(os.environ.get('FOSI_V155_IMAGE'),'optional verified user-supplied V155 input')
-    def test_v155_matching_recovery(self):
-        official=Path(os.environ['FOSI_V155_IMAGE']).read_bytes()
-        ce,recovery,r=pf.prepare(self.ce,official,dt.date(2026,11,13))
-        self.assertEqual(r['source_official']['version'],'V155')
-        self.assertTrue(r['source_candidate_not_newer_than_official'])
-        im=pf.Image(official);mirror=im.u32(0x1f4)
-        self.assertEqual(recovery[4:mirror],official[4:mirror])
-        self.assertEqual(recovery[mirror+4:-4],official[mirror+4:-4])
+    def test_newer_official_matching_recovery(self):
+        versions=[v for v in ('V155','V161','V162') if os.environ.get(f'FOSI_{v}_IMAGE')]
+        if not versions:self.skipTest('optional verified FOSI_V155/V161/V162_IMAGE inputs')
+        for version in versions:
+            with self.subTest(version=version):
+                official=Path(os.environ[f'FOSI_{version}_IMAGE']).read_bytes()
+                ce,recovery,r=pf.prepare(self.ce,official)
+                self.assertEqual(r['source_official']['version'],version)
+                self.assertTrue(r['source_candidate_not_newer_than_official'])
+                self.assertGreater(pf.image_date(recovery),pf.image_date(ce))
+                self.assertGreater(pf.image_date(ce),pf.image_date(official))
+                im=pf.Image(official);mirror=im.u32(0x1f4)
+                self.assertEqual(recovery[4:mirror],official[4:mirror])
+                self.assertEqual(recovery[mirror+4:-4],official[mirror+4:-4])
 
 
 class PowerOnDebounce(unittest.TestCase):
