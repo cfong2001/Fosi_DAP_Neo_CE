@@ -224,3 +224,13 @@ patches/0262-focus-wheel-service-hook.patch
 ../player_ui/0281-scaler-channel-g.patch
 ../player_ui/0282-scaler-channel-b.patch
 ../player_ui/0283-scaler-channel-b-tail.patch
+../player_ui/0370-scaler-row-hook.patch
+../player_ui/0371-scaler-row-setup.patch
+../player_ui/0372-scaler-row-mantissa.patch
+../player_ui/0373-scaler-row-reciprocal.patch
+../player_ui/0374-scaler-row-store.patch
+../player_ui/0375-scaler-x-coord.patch
+../player_ui/0376-scaler-width-slot.patch
+../player_ui/0377-scaler-x-weight.patch
+../player_ui/0378-scaler-x-divide.patch
+../player_ui/0379-scaler-x-round.patch

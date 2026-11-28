@@ -1,7 +1,7 @@
 {
   "status": "REPAINT LOOP FIX IMPROVES HARDWARE RESPONSE; PROGRESS-GAP AND BURST-FILL ACCEPTANCE PENDING",
   "source_candidate": {
-    "sha256": "3a3f947194ce63c5165499f94b8987b048d117d2f2e061dd1197748ad1e69649",
+    "sha256": "eb2aed1f1dc303ce1c9b090bd29308233116ad2dbe5e4df74c81437e3e7f7995",
     "bytes": 13639684,
     "header_date": "2026-10-23",
     "mirror_offset": "0xc96000",

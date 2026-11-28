@@ -171,8 +171,47 @@ scaler's per-pixel soft arithmetic.
   with UMULL and each channel's int, double, float, int round trip with
   `v >> 16`, in place (patches 0279 to 0283).
 
-`test_cover_decode.py` checks the conversion for every `v` in 0..2^24 and
-the multiply on edge and random operands, then compares the settled
-framebuffer of six track-select cases with the previous image rebuilt in
-memory. It prints instruction counts per art request; they are emulator
-counts, not device timings.
+- The same generator replaces the per-pixel x divide (`fl(x / s)`, then
+  f2iz and a 16.16 ldexp, 236 instructions) with integer arithmetic
+  (patches 0370 to 0379). With `s = ms * 2^(e - 23)` and `G = 39 - e`, the
+  16.16 coordinate only depends on `x * 2^G / ms`. A row hook at
+  `0x03087530` stores `ms` over `s` at `[sp, #0x40]` and
+  `R = floor(2^G / ms)` at `[sp, #4]`. Per pixel, nothing else reads `s`,
+  and `[sp, #4]` duplicated the width at `[sp]`, so its two readers now read
+  `[sp]`. Per pixel, `x * rho = -(x * R * ms) mod 2^32` because `G >= 32`.
+  One UDIV gives `P0 = floor(x * 2^G / ms)`, and one compare rounds as the
+  float does. Below 2^23, `P0` rounds up when the gap to the next step is
+  at most half an ulp. Above, the remainder decides. Ties cannot occur:
+  with `ms = m * 2^t` and `m` odd, `x * 2^G / ms` is dyadic only when `m`
+  divides `x`, and then it is a multiple of `2^(G - t) >= 2^9`. The code lives in
+  the NOP runs 0280 to 0283 left, the dead routine at `0x03056442` and the
+  multiply helper's NOP tail.
+
+`test_cover_decode.py` checks the conversion for every `v` in 0..2^24, the
+multiply on edge and random operands, and the x coordinate for every
+column below 256 at every scale the painter reaches. For that check it runs
+the stock and new bytes at `0x03087552` and `0x0308770E`. It then compares
+the settled framebuffer of eight track-select cases with the image before
+the coordinate change and the image before the cover decode changes, both
+rebuilt in memory. It prints instruction counts per art request; they are
+emulator counts, not device timings.
+
+| Track select | Before cover decode changes | Before coordinates | After |
+|---|---|---|---|
+| 300 x 300, new ground | 76,774,648 | 39,864,933 | 33,664,677 |
+| 240 x 360, new ground | 58,929,398 | 32,274,600 | 27,747,624 |
+| 60 x 60, upscaled | 52,157,398 | 20,558,526 | 14,060,478 |
+| 300 x 300, focus | 130,680,116 | 65,362,280 | 54,409,038 |
+| 300 x 300, ground already set | 38,387,312 | 27,355,931 | 22,705,739 |
+| 1100 x 64, placeholder | 9,745,322 | 9,132,458 | 8,871,106 |
+| 280 x 280, coordinates past 256 | 86,875,544 | 46,082,833 | 39,763,921 |
+| 400 x 225, wide | 53,466,614 | 30,531,235 | 26,965,507 |
+
+Each request still extracts the Opus picture again: module 18
+`0x03083276` costs 0.25 to 4.5 million instructions here and rewrites the
+3 to 54 KB temp file. The second request could reuse the first one's file
+only with a record of which track wrote it. Module 18 is not reloaded
+between requests, but nothing in it or in CE state records that track,
+and the theater state is zeroed at every setup. Adding such a record is
+new persistent RAM with its own invalidation (track change, file change,
+card removal, USB), so it is not done.

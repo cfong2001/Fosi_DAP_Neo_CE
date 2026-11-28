@@ -1,4 +1,4 @@
-"""Cover decode work on track select, against the pre-change image.
+"""Cover decode work on track select, against the images before each change.
 
 Runs the real player art request (module 27 0x0307E8A4: open, picture
 extraction, module 18 setup, module 19 decode and scaler, CE row compositor
@@ -39,13 +39,27 @@ REPAINT_STUBS = (0x030632FA, 0x03052D5C, 0x03063700, 0x0306354A, 0x03063642)
 CS = Cs(CS_ARCH_ARM, CS_MODE_THUMB | CS_MODE_MCLASS)
 
 
+def at(im, module, address):
+    offset, _ = im.module_region(module, 'code')
+    return offset + address - im.modules[module]['code_exec']
+
+
+def previous(raw):
+    """The image before the integer column coordinates: the patches' expect bytes back."""
+    image, out = Image(raw), bytearray(raw)
+    for path in sorted(HERE.glob('037?-scaler-*.patch')):
+        fields = dict(l.split(': ', 1) for l in path.read_text().splitlines() if ': ' in l)
+        pos = at(image, int(fields['module']), int(fields['address'], 16))
+        new, old = bytes.fromhex(fields['replace']), bytes.fromhex(fields['expect'])
+        assert raw[pos:pos + len(new)] == new, 'candidate lacks ' + path.name
+        out[pos:pos + len(old)] = old
+    return bytes(out)
+
+
 def legacy(raw):
-    """The image before this change: stock scaler bytes and the old theater payload."""
+    """The image before the cover decode changes: stock scaler bytes and the old theater payload."""
     stock, image, out = (ROOT / 'DP3_V137.img').read_bytes(), Image(raw), bytearray(raw)
     original = Image(stock)
-    def at(im, module, address):
-        offset, _ = im.module_region(module, 'code')
-        return offset + address - im.modules[module]['code_exec']
     for module, address, code in payloads():
         pos = at(image, module, address)
         assert raw[pos:pos + len(code)] == code, 'candidate lacks scaler patch'
@@ -251,32 +265,98 @@ def multiply_equal(stock, raw, samples=20000):
     return len(pairs)
 
 
+def resident(image, modules=(0, 19)):
+    im = Image(image)
+    u = Uc(UC_ARCH_ARM, UC_MODE_THUMB)
+    u.mem_map(0x03000000, 0x100000)
+    for module in modules:
+        offset, size = im.module_region(module, 'code')
+        u.mem_write(im.modules[module]['code_exec'], image[offset:offset + size])
+    return u
+
+
+def run(u, begin, end, **regs):
+    for name, value in regs.items():
+        u.reg_write(getattr(sys.modules[__name__], 'UC_ARM_REG_' + name.upper()), value)
+    u.emu_start(begin | 1, end, count=10000)
+    assert u.reg_read(UC_ARM_REG_PC) == end
+    return u.reg_read(UC_ARM_REG_R0)
+
+
+PAINTER_BOXES = (144, 190)       # stock and focus art boxes, square
+
+
+def coordinates_exhaustive(stock, raw):
+    """Every column x < 256 of every scale the painter reaches gets the stock source coordinate.
+
+    The scale is min(fl(box / W), fl(box / H)) = fl(box / max(W, H)), so
+    box / n for n up to the 1000 px source limit covers every cover. The stock
+    side runs the original per-pixel instructions (0x03087552 and
+    0x0308770E: i2f, fdiv, f2iz, ldexp, f2uiz); the new side runs the row
+    hook at 0x03087530 once per scale, then the per-pixel bytes at the same
+    addresses. Both must give xi in r0 and the 16.16 coordinate A.
+    """
+    old, new, sp = resident(stock), resident(raw), 0x030F0000 - 0x80
+    yq = 0x3FC00000                       # 1.5: the row's y quotient
+    checked = 0
+    for box in PAINTER_BOXES:
+        for n in range(1, 1001):
+            a = run(old, 0x030552B6, 0x030EF000, r0=box, sp=sp, lr=0x030EF001)
+            b = run(old, 0x030552B6, 0x030EF000, r0=n, sp=sp, lr=0x030EF001)
+            scale = run(old, 0x03054FBE, 0x030EF000, r0=a, r1=b, sp=sp, lr=0x030EF001)
+            for u in (old, new):
+                u.mem_write(sp, struct.pack('<I', 999) * 0x18)
+                u.mem_write(sp + 0x40, struct.pack('<II', scale, yq))
+            assert run(new, 0x03087530, 0x03087534, r0=yq, sp=sp) == 1
+            assert struct.unpack('<I', new.mem_read(sp + 0x44, 4))[0] == yq
+            for x in range(256):
+                xi = run(old, 0x03087552, 0x03087562, r0=x, fp=x, sp=sp)
+                want = (xi, run(old, 0x0308770E, 0x0308771A, sp=sp))
+                xi = run(new, 0x03087552, 0x03087562, r0=x, fp=x, sp=sp)
+                got = (xi, run(new, 0x0308770E, 0x0308771A, sp=sp))
+                assert got == want, (box, n, x, want, got)
+                checked += 1
+    return checked
+
+
 CASES = (('square cover, new ground', dict(size=(300, 300), seed=1)),
          ('portrait cover, new ground', dict(size=(240, 360), seed=2)),
          ('small cover upscaled', dict(size=(60, 60), seed=3)),
          ('focus geometry', dict(size=(300, 300), seed=4, focus=True)),
          ('same cover, ground already derived', dict(size=(300, 300), seed=1, settled=True)),
-         ('cover over 1000 px, placeholder exit', dict(size=(1100, 64), seed=5)))
+         ('cover over 1000 px, placeholder exit', dict(size=(1100, 64), seed=5)),
+         ('square cover, coordinates past 256', dict(size=(280, 280), seed=6)),
+         ('wide cover', dict(size=(400, 225), seed=7)))
 
 
 def check(raw):
     stock = (ROOT / 'DP3_V137.img').read_bytes()
-    before = legacy(raw)
+    prior = previous(raw)
+    before = legacy(prior)
     report = dict(conversion_values_checked=conversion_exhaustive(stock),
-                  multiply_pairs_checked=multiply_equal(stock, raw), cases=[])
+                  multiply_pairs_checked=multiply_equal(stock, raw),
+                  columns_checked=coordinates_exhaustive(stock, raw), cases=[])
     for name, case in CASES:
         media = opus(*case['size'], case['seed'])
         kw = dict(focus=case.get('focus', False))
         if case.get('settled'):
             kw['ground'] = select(raw, media)['ground']
-        old, new = select(before, media, **kw), select(raw, media, **kw)
-        assert (old['screen'], old['ground'], old['rows']) == (new['screen'], new['ground'], new['rows']), name
-        assert len(new['work']) == len(old['work']) and sum(new['work']) < sum(old['work']), name
+        runs = [select(image, media, **kw) for image in (before, prior, raw)]
+        for other in runs[:2]:
+            assert (other['screen'], other['ground'], other['rows']) == \
+                (runs[2]['screen'], runs[2]['ground'], runs[2]['rows']), name
+        old, mid, new = runs
+        assert len(new['work']) == len(mid['work']) == len(old['work']), name
+        assert sum(new['work']) < sum(mid['work']) < sum(old['work']), name
         report['cases'].append(dict(case=name, repaints=len(new['work']) - 1,
                                     first_request_rows=(old['first_rows'], new['first_rows']),
-                                    before_instructions=old['work'], after_instructions=new['work'],
-                                    ratio=round(sum(new['work']) / sum(old['work']), 4)))
-    report['screen_parity'] = 'identical settled framebuffer, final rows and ground in every case'
+                                    original_instructions=old['work'], previous_instructions=mid['work'],
+                                    after_instructions=new['work'],
+                                    ratio_to_previous=round(sum(new['work']) / sum(mid['work']), 4),
+                                    ratio_to_original=round(sum(new['work']) / sum(old['work']), 4)))
+    report['screen_parity'] = ('identical settled framebuffer, final rows and ground in every case, '
+                               'against the image before the cover decode changes and the one before '
+                               'the integer column coordinates')
     return report
 
 

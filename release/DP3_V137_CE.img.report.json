@@ -3,7 +3,7 @@
  "input_file": "DP3_V137.img",
  "output_file": "DP3_V137_CE.img",
  "input_sha256": "fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cdfade5e9c6ea3bd71ac6deef",
- "output_sha256": "3a3f947194ce63c5165499f94b8987b048d117d2f2e061dd1197748ad1e69649",
+ "output_sha256": "eb2aed1f1dc303ce1c9b090bd29308233116ad2dbe5e4df74c81437e3e7f7995",
  "byte_length": 13639684,
  "header_date": "20261023",
  "patches_applied": [
@@ -2129,6 +2129,116 @@
    "file_offset": "0x9dd52",
    "old_hex": "cdf7a9fdcdf761fd",
    "new_hex": "00bf00bf00bf00bf"
+  },
+  {
+   "patch": "0370-scaler-row-hook",
+   "file": "0370-scaler-row-hook.patch",
+   "kind": "module",
+   "module": 19,
+   "region": "code",
+   "cpu_address": "0x3087530",
+   "file_offset": "0x9da16",
+   "old_hex": "cdf7e8fe8046401c0199",
+   "new_hex": "00f028f98046401c0099"
+  },
+  {
+   "patch": "0371-scaler-row-setup",
+   "file": "0371-scaler-row-setup.patch",
+   "kind": "module",
+   "module": 19,
+   "region": "code",
+   "cpu_address": "0x3087784",
+   "file_offset": "0x9dc6a",
+   "old_hex": "00bf00bf00bf00bf00bf00bf00bf00bf",
+   "new_hex": "1098c20dc2f1a602c0f3160101235fe0"
+  },
+  {
+   "patch": "0372-scaler-row-mantissa",
+   "file": "0372-scaler-row-mantissa.patch",
+   "kind": "module",
+   "module": 19,
+   "region": "code",
+   "cpu_address": "0x3087854",
+   "file_offset": "0x9dd3a",
+   "old_hex": "00bf00bf00bf00bf00bf",
+   "new_hex": "41f4000110910020c6e7"
+  },
+  {
+   "patch": "0373-scaler-row-reciprocal",
+   "file": "0373-scaler-row-reciprocal.patch",
+   "kind": "module",
+   "module": 19,
+   "region": "code",
+   "cpu_address": "0x30877ec",
+   "file_offset": "0x9dcd2",
+   "old_hex": "00bf00bf00bf00bf00bf00bf00bf00bf",
+   "new_hex": "5b008b4228bf5b1a4041013af8d137e0"
+  },
+  {
+   "patch": "0374-scaler-row-store",
+   "file": "0374-scaler-row-store.patch",
+   "kind": "module",
+   "module": 19,
+   "region": "code",
+   "cpu_address": "0x308786c",
+   "file_offset": "0x9dd52",
+   "old_hex": "00bf00bf00bf00bf",
+   "new_hex": "01901198cdf748bd"
+  },
+  {
+   "patch": "0375-scaler-x-coord",
+   "file": "0375-scaler-x-coord.patch",
+   "kind": "module",
+   "module": 19,
+   "region": "code",
+   "cpu_address": "0x3087552",
+   "file_offset": "0x9da38",
+   "old_hex": "cdf7b0fe1099cdf731fd0890cdf7d1fe",
+   "new_hex": "019b109a4343cef773ff0893180c00bf"
+  },
+  {
+   "patch": "0376-scaler-width-slot",
+   "file": "0376-scaler-width-slot.patch",
+   "kind": "module",
+   "module": 19,
+   "region": "code",
+   "cpu_address": "0x308757c",
+   "file_offset": "0x9da62",
+   "old_hex": "0198",
+   "new_hex": "0098"
+  },
+  {
+   "patch": "0377-scaler-x-weight",
+   "file": "0377-scaler-x-weight.patch",
+   "kind": "module",
+   "module": 19,
+   "region": "code",
+   "cpu_address": "0x308770e",
+   "file_offset": "0x9dbf4",
+   "old_hex": "10210898cdf794fccdf70efe",
+   "new_hex": "089803e000bf00bf00bf00bf"
+  },
+  {
+   "patch": "0378-scaler-x-divide",
+   "file": "0378-scaler-x-divide.patch",
+   "kind": "module",
+   "module": 0,
+   "region": "code",
+   "cpu_address": "0x3056442",
+   "file_offset": "0x2faee",
+   "old_hex": "2de9f05fdff85c920646904659f826205fea010a12bfb8f1000f4ff0ff30bde8f09f914f0846c3460025a8f10101",
+   "new_hex": "03fb02f14942b1fbf2f10b44b3fa83f0083807dd03fb0221c240b1eb520f98bf013370474042c340834017f035ba"
+  },
+  {
+   "patch": "0379-scaler-x-round",
+   "file": "0379-scaler-x-round.patch",
+   "kind": "module",
+   "module": 0,
+   "region": "code",
+   "cpu_address": "0x306d8da",
+   "file_offset": "0x46f86",
+   "old_hex": "00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf",
+   "new_hex": "03fb02f1824002eb4102d20f82401344704700bf"
   }
  ],
  "transplants_applied": [
@@ -15867,8 +15977,8 @@
   }
  ],
  "diff_vs_stock": {
-  "bytes_changed": 4959326,
-  "range_count": 424983,
+  "bytes_changed": 4959370,
+  "range_count": 424986,
   "note": "range list omitted; rebuild with patches/full/build/build_full.py for it"
  },
  "validation": "validate_grown() passed (structural checks, layout derived from the image)",

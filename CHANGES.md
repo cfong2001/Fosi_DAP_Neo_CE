@@ -1,5 +1,34 @@
 # Changelog
 
+## 2026-11-28: Integer column coordinates in the cover scaler
+
+- The module 19 cover scaler found each pixel's source column with a soft
+  float divide, `x / s`, then truncated it and scaled it to 16.16. That
+  chain cost 236 instructions per pixel. A row hook now stores the scale's
+  mantissa `ms` and `R = floor(2^G / ms)` once per row, in two stack slots
+  that only the divide and a duplicate of the source width used. Per pixel,
+  one multiply, one UDIV and one compare give the same integer and 16.16
+  coordinate, including the float's round-to-nearest (patches 0370 to 0379).
+  The code lives in the NOP runs patches 0279 to 0283 left, in a census
+  tier 1 dead routine at `0x03056442` (46 B), and in the multiply helper's
+  NOP tail. No new RAM.
+- `test_cover_decode.py` runs the stock and new per-pixel bytes for every
+  column below 256 at every scale the painter reaches (144 and 190 boxes,
+  covers up to the 1000 px limit): 512,000 columns, all equal. It then
+  compares eight track-select cases, two of them new, against the image
+  before this change and the image before the cover decode changes. The
+  settled framebuffer, rows and ground are identical. A 300 x 300 cover that
+  changes the ground drops from 39,864,933 to 33,664,677 emulated
+  instructions, and a 60 x 60 cover from 20,558,526 to 14,060,478. These
+  are instruction counts, not device timings.
+- The second cover request still repeats the Opus picture extraction
+  (0.25 to 4.5 million instructions and a 3 to 54 KB temp-file write on the
+  test covers). Skipping it safely needs a record of which track the temp
+  file holds, and no existing state carries one, so it is left as is.
+- Standard image SHA-256
+  `eb2aed1f1dc303ce1c9b090bd29308233116ad2dbe5e4df74c81437e3e7f7995`.
+  Minimal and recovery images are unchanged. Not yet verified on hardware.
+
 ## 2026-11-28: Faster cover decode on track select
 
 - Selecting a track with a new cover decoded the artwork twice. The theater

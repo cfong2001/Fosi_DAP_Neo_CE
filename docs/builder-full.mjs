@@ -1933,6 +1933,106 @@ export const FULL_PATCHES = [
   "expect": "cdf7a9fdcdf761fd",
   "replace": "00bf00bf00bf00bf",
   "index": 192
+ },
+ {
+  "file": "0370-scaler-row-hook.patch",
+  "name": "0370-scaler-row-hook",
+  "module": 19,
+  "region": "code",
+  "address": 50885936,
+  "expect": "cdf7e8fe8046401c0199",
+  "replace": "00f028f98046401c0099",
+  "index": 193
+ },
+ {
+  "file": "0371-scaler-row-setup.patch",
+  "name": "0371-scaler-row-setup",
+  "module": 19,
+  "region": "code",
+  "address": 50886532,
+  "expect": "00bf00bf00bf00bf00bf00bf00bf00bf",
+  "replace": "1098c20dc2f1a602c0f3160101235fe0",
+  "index": 194
+ },
+ {
+  "file": "0372-scaler-row-mantissa.patch",
+  "name": "0372-scaler-row-mantissa",
+  "module": 19,
+  "region": "code",
+  "address": 50886740,
+  "expect": "00bf00bf00bf00bf00bf",
+  "replace": "41f4000110910020c6e7",
+  "index": 195
+ },
+ {
+  "file": "0373-scaler-row-reciprocal.patch",
+  "name": "0373-scaler-row-reciprocal",
+  "module": 19,
+  "region": "code",
+  "address": 50886636,
+  "expect": "00bf00bf00bf00bf00bf00bf00bf00bf",
+  "replace": "5b008b4228bf5b1a4041013af8d137e0",
+  "index": 196
+ },
+ {
+  "file": "0374-scaler-row-store.patch",
+  "name": "0374-scaler-row-store",
+  "module": 19,
+  "region": "code",
+  "address": 50886764,
+  "expect": "00bf00bf00bf00bf",
+  "replace": "01901198cdf748bd",
+  "index": 197
+ },
+ {
+  "file": "0375-scaler-x-coord.patch",
+  "name": "0375-scaler-x-coord",
+  "module": 19,
+  "region": "code",
+  "address": 50885970,
+  "expect": "cdf7b0fe1099cdf731fd0890cdf7d1fe",
+  "replace": "019b109a4343cef773ff0893180c00bf",
+  "index": 198
+ },
+ {
+  "file": "0376-scaler-width-slot.patch",
+  "name": "0376-scaler-width-slot",
+  "module": 19,
+  "region": "code",
+  "address": 50886012,
+  "expect": "0198",
+  "replace": "0098",
+  "index": 199
+ },
+ {
+  "file": "0377-scaler-x-weight.patch",
+  "name": "0377-scaler-x-weight",
+  "module": 19,
+  "region": "code",
+  "address": 50886414,
+  "expect": "10210898cdf794fccdf70efe",
+  "replace": "089803e000bf00bf00bf00bf",
+  "index": 200
+ },
+ {
+  "file": "0378-scaler-x-divide.patch",
+  "name": "0378-scaler-x-divide",
+  "module": 0,
+  "region": "code",
+  "address": 50684994,
+  "expect": "2de9f05fdff85c920646904659f826205fea010a12bfb8f1000f4ff0ff30bde8f09f914f0846c3460025a8f10101",
+  "replace": "03fb02f14942b1fbf2f10b44b3fa83f0083807dd03fb0221c240b1eb520f98bf013370474042c340834017f035ba",
+  "index": 201
+ },
+ {
+  "file": "0379-scaler-x-round.patch",
+  "name": "0379-scaler-x-round",
+  "module": 0,
+  "region": "code",
+  "address": 50780378,
+  "expect": "00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf",
+  "replace": "03fb02f1824002eb4102d20f82401344704700bf",
+  "index": 202
  }
 ];
 export const FULL_TAIL = {
@@ -13347,4 +13447,4 @@ export const FULL_THEME_RUNS = [
   "replace": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
  }
 ];
-export const FULL_IMAGE_SHA256 = "3a3f947194ce63c5165499f94b8987b048d117d2f2e061dd1197748ad1e69649";
+export const FULL_IMAGE_SHA256 = "eb2aed1f1dc303ce1c9b090bd29308233116ad2dbe5e4df74c81437e3e7f7995";
