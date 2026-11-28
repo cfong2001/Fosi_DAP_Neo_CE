@@ -108,6 +108,9 @@ jobs:
       - name: System-disk read cache returns disk bytes and keeps the stock retry
         run: python -m unittest discover -s patches/sysdisk_cache -p test_sysdisk_cache.py -v
 
+      - name: Glyph width table equals the stock measurer
+        run: python patches/glyph_width/test_glyph_width.py "$RUNNER_TEMP/dist/DP3_V137_CE.img" -v
+
       - name: Simulator data matches the emulated painter
         run: |
           python tools/gen_sim_data.py
