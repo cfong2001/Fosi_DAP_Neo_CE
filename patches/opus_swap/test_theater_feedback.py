@@ -54,7 +54,9 @@ def check(raw):
            'rst_light:',*source['load']('r3',0x030235B4),'ldrh r2, [r3, #0]',
            'rst_store:',*source['load']('r3',0x03004400),'strh r2, [r3, #0]']
  reset[at:at]=previous
- tail=[line for line in source['TRAMP_TAIL_ASM'] if line not in
+ tail=list(source['TRAMP_TAIL_ASM']);at=tail.index('abort_decode:')
+ del tail[at:at+len(source['ABORT_ASM'])]
+ tail=[line for line in tail if line not in
        ('ldrh r1, [r0]','cmp r1, r5','beq color_unchanged','color_unchanged:')]
  base=0x0307C350
  body,_=source['assemble'](reset,base);body+=branch(base+len(body),0x030838A2)

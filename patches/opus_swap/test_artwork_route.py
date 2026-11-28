@@ -49,6 +49,17 @@ def stream(value, vorbis=False):
     return ogg([head, (b'\x03vorbis' if vorbis else b'OpusTags') + tags])
 
 
+def redecode(u, call, blits, files):
+    """After the first decode, run the second setup the posted repaint requests."""
+    first = list(blits)
+    assert struct.unpack('<I', u.mem_read(0x03023CFC, 4))[0] & (1 << 25), 'no repaint posted'
+    del blits[:]
+    assert call(0x0308389E, 7, 0) == 1
+    for _ in range(18):
+        call(0x03083B36)
+    return first, list(blits), struct.unpack('<H', u.mem_read(0x03004400, 2))[0]
+
+
 def check(raw):
     image = Image(raw)
     legacy = bytearray(raw)
@@ -77,19 +88,21 @@ def check(raw):
         assert extract(raw, stream(value))[0] == 0
     assert extract(raw, media[:80])[0] == 0
     decoded = 0
-    for encoded in (jpeg,):
-        rows, ground = extract(raw, stream(base64.b64encode(picture(encoded))), decode=True)
-        assert len(rows) == 18
-        assert ground == port_derived(rows[:6], False)[0] == 0x7000
-        decoded += len(rows)
+    covers = [jpeg]
     # White and green covers distinguish an unchanged black ground from a
     # legitimately dark image without depending on external music fixtures.
     for color in ('white', 'green'):
         out = io.BytesIO()
         PillowImage.new('RGB', (30, 18), color).save(out, 'JPEG', quality=95)
-        rows, ground = extract(raw, stream(base64.b64encode(picture(out.getvalue()))), decode=True)
-        assert len(rows) == 18
+        covers.append(out.getvalue())
+    for index, encoded in enumerate(covers):
+        first, rows, ground = extract(raw, stream(base64.b64encode(picture(encoded))), decode=True,
+                                      observe=redecode)
+        # A changed ground ends the first decode after the sampled third;
+        # the repaint's second request, in the same ground, draws every row.
+        assert first == rows[:6] and len(rows) == 18
         assert ground == port_derived(rows[:6], False)[0] and ground != 0
+        assert index or ground == 0x7000
         decoded += len(rows)
     return dict(extraction_bytes_matched=copied, extraction_fixtures=2,
                 malformed_or_missing_returns=5, native_decoded_rows=decoded,

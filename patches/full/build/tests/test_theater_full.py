@@ -262,9 +262,12 @@ def scenario_painter(raw, width, height, scaled_height, light):
     assert st['flags'] == 1 and st['sums'] == (0, 0, 0) \
         and st['seen'] == 0 and st['cached'] == 0, st
     returns = [p.call(0x03083B36) for _ in range(scaled_height)]
-    assert len(p.blits) == scaled_height, (returns, len(p.blits))
-    check_blits_from_trampoline(p)
     needed = (scaled_height + 2) // 3
+    # The changed ground posts a full repaint that requests the cover
+    # again, so the decode ends after the sampled third.
+    assert len(p.blits) == needed, (returns, len(p.blits))
+    assert returns == [1] * needed + [0] * (scaled_height - needed), returns
+    check_blits_from_trampoline(p)
     rows = [b['pixels'] for b in p.blits[:needed]]
     expected, avg, mixed = port_derived(rows, light)
     cell = p.r16(BGCELL)
@@ -320,11 +323,10 @@ def scenario_sync(raw):
         calls += 1
         if len(p.blits) == before and calls > 20:
             break
-    # The sync consumer blits the final row twice (rows 0..17 then
-    # 17 again, 19 blits): the duplicate is the case the row
-    # bitmask exists for, and the sums below prove it was rejected.
+    # Finalize changes the ground at row 5 and ends the decode there;
+    # later calls find the cursor at the end and blit nothing.
     ys = [b['args'][1] - 36 for b in p.blits]
-    assert ys == list(range(18)) + [17], ys
+    assert ys == list(range(6)), ys
     check_blits_from_trampoline(p)
     rows = [b['pixels'] for b in p.blits[:6]]
     expected, avg, mixed = port_derived(rows, light=False)

@@ -9,8 +9,8 @@ full-card device acceptance remains required for the latest revision.
 | | |
 |---|---|
 | Input | `DP3_V137.img`, 13,631,492 bytes, SHA-256 `fcc1cd3e…` |
-| Output | 13,639,684 bytes, SHA-256 `175d4aff14407d7ddab3733fe7a57e25801d2082ca34ce0335af5d813d5f2c87` |
-| Composition | 188 byte patches, 2 transplants, 3 growth insertions, one merged gap tail, one merged theme config |
+| Output | 13,639,684 bytes, SHA-256 `3a3f947194ce63c5165499f94b8987b048d117d2f2e061dd1197748ad1e69649` |
+| Composition | 193 byte patches, 2 transplants, 3 growth insertions, one merged gap tail, one merged theme config |
 | Default build | unchanged, still SHA-256 `92c44606…` (verify.py checks 1 to 13 pass; check 13 pins this build) |
 
 ## What changed at integration
@@ -97,12 +97,12 @@ lays out four occupants:
 | 0x000 | 0x0307BFB4 | 552 | Playlist staging (zeros), packed: header 16, shared context 42 + 2, 32 run clusters of 4, 32 run totals of 2, 150 entries of 2 |
 | 0x228 | 0x0307C1DC | 340 | Focus mode payload (`patches/focus_mode/build_focus.py`, assembled here), SHA-256 `479e1c49…` |
 | 0x37C | 0x0307C330 | 36 | Free (zeros) |
-| 0x3A0 | 0x0307C350 | 676 | Theater payload (reset stub at the base, blit trampoline at 0x0307C3A6), SHA-256 `17a558dd…` |
+| 0x39C | 0x0307C350 | 680 | Theater payload, 670 bytes of code then zeros (reset stub at the base, blit trampoline at 0x0307C37C), SHA-256 `3aea3b86…` |
 | 0x644 | 0x0307C5F8 | 436 | Bluetooth blob, SHA-256 `ce6ef701…` |
 | 0x7F8 | 0x0307C7AC | 4 | Spare zeros, not emitted |
 
 Total emitted: 2,040 of 2,044 bytes. Merged tail SHA-256
-`794659ecade723737fe5f09fab9efdf904b0b3c1e4336e055a65f08fcf20e0e4`.
+`863091103f09afa3c3cce50989ba2fae4b644085c5db36df5caf409d5901025a`.
 
 The playlist, no-art and transport hooks that used to sit at 0x0307C1DC
 now live in module 0, in stock routines nothing can reach

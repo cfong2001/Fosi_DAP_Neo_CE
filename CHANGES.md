@@ -1,5 +1,31 @@
 # Changelog
 
+## 2026-11-28: Faster cover decode on track select
+
+- Selecting a track with a new cover decoded the artwork twice. The theater
+  color is known after the top third of the first decode, and the repaint it
+  posts fills the whole screen and requests the cover again, so the other two
+  thirds of the first decode were drawn only to be erased. The theater
+  trampoline now ends that decode once it posts the repaint, the same state a
+  stock key-press exit leaves; each setup reloads module 19.
+- The module 19 cover scaler did 24 soft 16.16 multiplies and three
+  int, double, float, int round trips per pixel. The multiply helper
+  (`0x0306D8CE`, called only by the scaler) becomes UMULL, and each round
+  trip becomes `v >> 16`, which equals the stock chain for every channel
+  sum `v` from 0 to 2^24 (checked exhaustively; sums are at most
+  255 x 0x10000). Patches 0279 to 0283 rewrite code at its stock addresses;
+  no new code home or RAM.
+- `patches/player_ui/test_cover_decode.py` runs the real art request,
+  repaint and second request on generated Opus covers against the previous
+  image rebuilt in memory. The settled framebuffer, rows and ground are
+  identical in six cases. A 300 x 300 cover that changes the ground drops
+  from 76,781,850 to 39,872,032 emulated instructions, and the same cover
+  with its ground already set from 38,390,911 to 27,359,530. These are
+  instruction counts, not device timings.
+- Standard image SHA-256
+  `3a3f947194ce63c5165499f94b8987b048d117d2f2e061dd1197748ad1e69649`.
+  Minimal and recovery images are unchanged. Not yet verified on hardware.
+
 ## 2026-11-22: Power off stays off
 
 - Holding Power showed the power-off screen, then the player restarted or

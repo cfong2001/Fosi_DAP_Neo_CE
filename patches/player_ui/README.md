@@ -154,3 +154,25 @@ measured work is 28,854 instructions versus 466,651 for the prior row fill,
 with identical framebuffer bytes, context and preserved-register ABI. This
 is an instruction reduction, not a measured device speedup. The gap helper
 at 0x03052F40 uses reserved trailing space; neither adds persistent RAM.
+
+## Cover decode work
+
+A track select runs the player's art request (module 27 `0x0307E8A4`):
+extraction, module 18 setup and a synchronous module 19 decode of every
+row. The full fill above costs about 29 thousand instructions; one decode
+of a 144 x 144 cover costs about 30 million, almost all of it in the
+scaler's per-pixel soft arithmetic.
+
+- When the theater color changes, the posted repaint fills the screen and
+  requests the cover again. The trampoline now moves the row cursor to the
+  last row once it posts that repaint, so the first decode stops after the
+  sampled third instead of drawing rows the fill erases.
+- `build_artwork_scaler.py` replaces the scaler's 16.16 multiply helper
+  with UMULL and each channel's int, double, float, int round trip with
+  `v >> 16`, in place (patches 0279 to 0283).
+
+`test_cover_decode.py` checks the conversion for every `v` in 0..2^24 and
+the multiply on edge and random operands, then compares the settled
+framebuffer of six track-select cases with the previous image rebuilt in
+memory. It prints instruction counts per art request; they are emulator
+counts, not device timings.

@@ -219,3 +219,8 @@ patches/0262-focus-wheel-service-hook.patch
 ../player_ui/0276-progress-gap-restore.patch
 ../player_ui/0277-player-full-fill.patch
 ../player_ui/0278-player-full-fill-hook.patch
+../player_ui/0279-scaler-multiply.patch
+../player_ui/0280-scaler-channel-r.patch
+../player_ui/0281-scaler-channel-g.patch
+../player_ui/0282-scaler-channel-b.patch
+../player_ui/0283-scaler-channel-b-tail.patch
