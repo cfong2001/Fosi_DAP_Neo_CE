@@ -225,3 +225,6 @@ patches/0262-focus-wheel-service-hook.patch
 ../sysdisk_cache/0292-sysdisk-cache-read.patch
 ../sysdisk_cache/0293-sysdisk-cache-multi.patch
 ../sysdisk_cache/0294-sysdisk-cache-write.patch
+# Main-font glyph widths from a table in code (after the system-disk cache):
+../glyph_width/0295-glyph-width-table.patch
+../glyph_width/0296-glyph-width-hook.patch
