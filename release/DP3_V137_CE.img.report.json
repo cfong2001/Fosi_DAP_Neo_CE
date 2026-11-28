@@ -3,7 +3,7 @@
  "input_file": "DP3_V137.img",
  "output_file": "DP3_V137_CE.img",
  "input_sha256": "fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cdfade5e9c6ea3bd71ac6deef",
- "output_sha256": "175d4aff14407d7ddab3733fe7a57e25801d2082ca34ce0335af5d813d5f2c87",
+ "output_sha256": "a1248575842a84c4bf6aa5c1a3f584cc94260c474a0ef44342ffe1c415f2f7d1",
  "byte_length": 13639684,
  "header_date": "20261023",
  "patches_applied": [
@@ -2074,6 +2074,61 @@
    "file_offset": "0x898b2",
    "old_hex": "e4f79ff9",
    "new_hex": "d3f7d0fe"
+  },
+  {
+   "patch": "0350-idle-redraw-fingerprint",
+   "file": "0350-idle-redraw-fingerprint.patch",
+   "kind": "module",
+   "module": 0,
+   "region": "code",
+   "cpu_address": "0x3052f90",
+   "file_offset": "0x2c63c",
+   "old_hex": "10b5fff716fc002808bf10bdbde81040fff701bcfff7fcbb0120af4908707047ad49002008707047",
+   "new_hex": "064a1188064b1b8841ea0341054b704701b5fff7f5ff196101bd00bf243902034a310203e4470203"
+  },
+  {
+   "patch": "0351-idle-redraw-tick-gate",
+   "file": "0351-idle-redraw-tick-gate.patch",
+   "kind": "module",
+   "module": 0,
+   "region": "code",
+   "cpu_address": "0x3056442",
+   "file_offset": "0x2faee",
+   "old_hex": "2de9f05fdff85c920646904659f826205fea010a12bfb8f1000f4ff0ff30bde8f09f914f0846c3460025",
+   "new_hex": "10b5fcf7a4fd1c462069884208d1e188062905d0d2f8a010012901d006f0b6ba4d20bde8104010f0e8be"
+  },
+  {
+   "patch": "0352-idle-redraw-tick-gate-position",
+   "file": "0352-idle-redraw-tick-gate-position.patch",
+   "kind": "module",
+   "module": 0,
+   "region": "code",
+   "cpu_address": "0x305c9ce",
+   "file_offset": "0x3607a",
+   "old_hex": "70b5e6490546e64ed1f81b10891ca9429cbf304670bde3490978002908bf40f6f57104d001290cbf4ff6",
+   "new_hex": "09490968d1e900209321a0fb01010023f8f7d7f9e168884208bf10bd4d20bde810400af024bc78ad0403"
+  },
+  {
+   "patch": "0353-idle-redraw-tick-hook",
+   "file": "0353-idle-redraw-tick-hook.patch",
+   "kind": "module",
+   "module": 27,
+   "region": "code",
+   "cpu_address": "0x307f5bc",
+   "file_offset": "0x89eb6",
+   "old_hex": "e7f73efe",
+   "new_hex": "d6f741ff"
+  },
+  {
+   "patch": "0354-idle-redraw-store-hook",
+   "file": "0354-idle-redraw-store-hook.patch",
+   "kind": "module",
+   "module": 27,
+   "region": "code",
+   "cpu_address": "0x307f696",
+   "file_offset": "0x89f90",
+   "old_hex": "c9f81000",
+   "new_hex": "d3f783fc"
   }
  ],
  "transplants_applied": [
@@ -15812,8 +15867,8 @@
   }
  ],
  "diff_vs_stock": {
-  "bytes_changed": 4959269,
-  "range_count": 424981,
+  "bytes_changed": 4959392,
+  "range_count": 424984,
   "note": "range list omitted; rebuild with patches/full/build/build_full.py for it"
  },
  "validation": "validate_grown() passed (structural checks, layout derived from the image)",

@@ -1,0 +1,306 @@
+{
+ "parity": {
+  "idle short title": {
+   "ticks": 700,
+   "before": {
+    "instructions": 3000308,
+    "reads": 249,
+    "sectors": 416,
+    "lcd_rows": 1580
+   },
+   "after": {
+    "instructions": 2411075,
+    "reads": 225,
+    "sectors": 355,
+    "lcd_rows": 1345
+   }
+  },
+  "idle scrolling title": {
+   "ticks": 700,
+   "before": {
+    "instructions": 5208755,
+    "reads": 1401,
+    "sectors": 1655,
+    "lcd_rows": 1796
+   },
+   "after": {
+    "instructions": 4619522,
+    "reads": 1377,
+    "sectors": 1594,
+    "lcd_rows": 1561
+   }
+  },
+  "idle long track": {
+   "ticks": 400,
+   "before": {
+    "instructions": 2077419,
+    "reads": 117,
+    "sectors": 231,
+    "lcd_rows": 945
+   },
+   "after": {
+    "instructions": 296589,
+    "reads": 45,
+    "sectors": 48,
+    "lcd_rows": 240
+   }
+  },
+  "pause and resume": {
+   "ticks": 452,
+   "before": {
+    "instructions": 2539975,
+    "reads": 122,
+    "sectors": 268,
+    "lcd_rows": 1260
+   },
+   "after": {
+    "instructions": 2542897,
+    "reads": 122,
+    "sectors": 268,
+    "lcd_rows": 1260
+   }
+  },
+  "silent play state change": {
+   "ticks": 401,
+   "before": {
+    "instructions": 2077634,
+    "reads": 117,
+    "sectors": 231,
+    "lcd_rows": 945
+   },
+   "after": {
+    "instructions": 2080583,
+    "reads": 117,
+    "sectors": 231,
+    "lcd_rows": 945
+   }
+  },
+  "seek": {
+   "ticks": 321,
+   "before": {
+    "instructions": 2010219,
+    "reads": 102,
+    "sectors": 213,
+    "lcd_rows": 945
+   },
+   "after": {
+    "instructions": 822834,
+    "reads": 54,
+    "sectors": 91,
+    "lcd_rows": 475
+   }
+  },
+  "track change": {
+   "ticks": 371,
+   "before": {
+    "instructions": 2251933,
+    "reads": 227,
+    "sectors": 356,
+    "lcd_rows": 950
+   },
+   "after": {
+    "instructions": 1661103,
+    "reads": 203,
+    "sectors": 295,
+    "lcd_rows": 715
+   }
+  },
+  "battery level change": {
+   "ticks": 422,
+   "before": {
+    "instructions": 2723466,
+    "reads": 160,
+    "sectors": 314,
+    "lcd_rows": 1288
+   },
+   "after": {
+    "instructions": 2134233,
+    "reads": 136,
+    "sectors": 253,
+    "lcd_rows": 1053
+   }
+  },
+  "hold on and off": {
+   "ticks": 422,
+   "before": {
+    "instructions": 2722850,
+    "reads": 160,
+    "sectors": 315,
+    "lcd_rows": 1288
+   },
+   "after": {
+    "instructions": 2133617,
+    "reads": 136,
+    "sectors": 254,
+    "lcd_rows": 1053
+   }
+  },
+  "focus hide and wake": {
+   "ticks": 951,
+   "before": {
+    "instructions": 5812079,
+    "reads": 519,
+    "sectors": 855,
+    "lcd_rows": 2845
+   },
+   "after": {
+    "instructions": 4633551,
+    "reads": 471,
+    "sectors": 733,
+    "lcd_rows": 2375
+   }
+  },
+  "theater ground change": {
+   "ticks": 422,
+   "before": {
+    "instructions": 3713291,
+    "reads": 423,
+    "sectors": 653,
+    "lcd_rows": 1585
+   },
+   "after": {
+    "instructions": 2530412,
+    "reads": 375,
+    "sectors": 531,
+    "lcd_rows": 1115
+   }
+  },
+  "transport cursor": {
+   "ticks": 422,
+   "before": {
+    "instructions": 3851938,
+    "reads": 205,
+    "sectors": 438,
+    "lcd_rows": 1890
+   },
+   "after": {
+    "instructions": 3234093,
+    "reads": 180,
+    "sectors": 373,
+    "lcd_rows": 1655
+   }
+  },
+  "sub-track timebase": {
+   "ticks": 301,
+   "before": {
+    "instructions": 3259914,
+    "reads": 195,
+    "sectors": 380,
+    "lcd_rows": 1575
+   },
+   "after": {
+    "instructions": 3260079,
+    "reads": 195,
+    "sectors": 380,
+    "lcd_rows": 1575
+   }
+  },
+  "seek preview": {
+   "ticks": 421,
+   "before": {
+    "instructions": 2708903,
+    "reads": 156,
+    "sectors": 304,
+    "lcd_rows": 1260
+   },
+   "after": {
+    "instructions": 2709023,
+    "reads": 156,
+    "sectors": 304,
+    "lcd_rows": 1260
+   }
+  }
+ },
+ "per_idle_second": {
+  "controls shown, short title, 4:05 track": {
+   "instructions": [
+    674746,
+    438166
+   ],
+   "reads": [
+    39,
+    29
+   ],
+   "sectors": [
+    77,
+    52
+   ],
+   "lcd_rows": [
+    315,
+    221
+   ]
+  },
+  "controls shown, short title, 60:00 track": {
+   "instructions": [
+    674637,
+    100860
+   ],
+   "reads": [
+    39,
+    16
+   ],
+   "sectors": [
+    77,
+    18
+   ],
+   "lcd_rows": [
+    315,
+    88
+   ]
+  },
+  "controls shown, scrolling title, 4:05 track": {
+   "instructions": [
+    1049168,
+    812587
+   ],
+   "reads": [
+    226,
+    217
+   ],
+   "sectors": [
+    296,
+    272
+   ],
+   "lcd_rows": [
+    347,
+    253
+   ]
+  },
+  "controls hidden, short title": {
+   "instructions": [
+    48404,
+    48404
+   ],
+   "reads": [
+    0,
+    0
+   ],
+   "sectors": [
+    0,
+    0
+   ],
+   "lcd_rows": [
+    0,
+    0
+   ]
+  },
+  "controls hidden, scrolling title": {
+   "instructions": [
+    453607,
+    453607
+   ],
+   "reads": [
+    217,
+    217
+   ],
+   "sectors": [
+    242,
+    242
+   ],
+   "lcd_rows": [
+    176,
+    176
+   ]
+  }
+ }
+}

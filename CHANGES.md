@@ -1,5 +1,23 @@
 # Changelog
 
+## 2026-11-28: No repaint of an unchanged progress bar and transport row
+
+- While the Now Playing controls are shown, each new elapsed second redrew
+  the progress bar, and the bar then redrew the whole transport row and the
+  play-mode indicator, even when neither had changed. Patches 0350 to 0354
+  post that per-second bar repaint only when the bar position, the play
+  state or the transport selection changed. Seek preview and the sub-track
+  timebase keep the stock behaviour. Every other repaint is unchanged.
+- In emulation, an idle second with the controls shown costs 674,746
+  instructions, 39 block-reader calls, 77 sector reads and 315 panel rows
+  before, and 438,166, 29, 52 and 221 after on a 4:05 track (100,860, 16, 18
+  and 88 on a 60-minute track). These are counts, not milliseconds. The
+  framebuffer, the display context and the panel match the previous image
+  after every tick in 14 scenarios (`patches/idle_redraw/test_idle_redraw.py`).
+- Standard image SHA-256
+  `a1248575842a84c4bf6aa5c1a3f584cc94260c474a0ef44342ffe1c415f2f7d1`.
+  Minimal is unchanged. Not yet verified on hardware.
+
 ## 2026-11-22: Power off stays off
 
 - Holding Power showed the power-off screen, then the player restarted or
