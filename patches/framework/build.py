@@ -80,6 +80,7 @@ sys.path.insert(0, str(TOOLS))
 
 import fosi_paths                          # noqa: E402
 import firmware_patch as fp                # noqa: E402  (validate, bcd_date, STOCK_SHA256)
+import official_images                     # noqa: E402  (pinned official bases)
 from rknano_image import Image, rk_crc32   # noqa: E402
 
 sys.path.insert(0, str(HERE / 'tools'))
@@ -92,6 +93,18 @@ STOCK_DATE = '20261022'                    # BCD header date inside DP3_V137.img
 DEFAULT_BUILD_DATE = '20261023'            # stock + 1 day
 HEADER_LEN = 0x200
 MIRROR_OFF = 0xC94000
+
+# --base: a newer official image as the build input. Its patches are the
+# V137 manifest re-derived for it by tools/port_patches.py, which writes
+# patches/ported/<VERSION>/ (manifest, transplants, port_report.json).
+STOCK_BASE = 'V137'
+PORTED_DIR = REPO / 'patches' / 'ported'
+
+
+def base_build_date(base):
+    """The base image's own header date + 1 day (stock + 1, as for V137)."""
+    date = official_images.OFFICIAL[official_images.BY_VERSION[base]][1].replace('-', '')
+    return add_days(date, 1)
 
 
 def add_days(yyyymmdd, days):
@@ -820,8 +833,14 @@ def _edit_range(edit):
 
 
 def build_image(input_bytes, patches, date, transplants=(), ecpatch_dir=None,
-                tail_payload=None, growths=(), theme_config=None):
+                tail_payload=None, growths=(), theme_config=None, base_version=STOCK_BASE):
     """SHA-gated full build. Returns (output_bytes, report_dict).
+
+    base_version: the pinned official image the input must be (tools/
+    official_images.py). A base other than V137 takes only patches
+    ported to it (each carries its base_sha256) and is validated with the
+    layout-generalized validator, since later images move the header
+    mirror.
 
     growths: (module, segment, payload_bytes) insertions applied to the
     pristine stock image first (insert_rebuild.apply_insertions), so
@@ -852,12 +871,21 @@ def build_image(input_bytes, patches, date, transplants=(), ecpatch_dir=None,
                      if (p.get('module'), p.get('region'), p.get('address')) in title_targets]
     if title_present and (len(title_present) != 2 or set(title_present) != title_required):
         raise ValueError('player title copy and suffix patches must be used together')
+    stock = base_version == STOCK_BASE
+    base_sha = fp.STOCK_SHA256 if stock else official_images.BY_VERSION[base_version]
+    for p in patches:
+        if p.get('base_sha256', fp.STOCK_SHA256) != base_sha:
+            raise ValueError(f"patch {p['name']} ({p.get('file')}) is for another base image; "
+                             f'refusing to apply it to {base_version}')
     sha = hashlib.sha256(input_bytes).hexdigest()
-    if sha != fp.STOCK_SHA256:
+    if sha != base_sha:
         raise ValueError(
-            f'input SHA-256 {sha} does not match pinned stock '
-            f'{fp.STOCK_SHA256}; refusing to build')
-    fp.validate(input_bytes)
+            f'input SHA-256 {sha} does not match pinned '
+            f'{"stock" if stock else "official " + base_version} {base_sha}; refusing to build')
+    if stock:
+        fp.validate(input_bytes)
+    else:
+        validate_grown(input_bytes)
     growth_records = []
     base = input_bytes
     if growths:
@@ -880,7 +908,9 @@ def build_image(input_bytes, patches, date, transplants=(), ecpatch_dir=None,
     tail_record = None
     if tail_payload is not None:
         patched, tail_record = apply_tail(patched, tail_payload, claimed)
-    out = finalize(patched, date, grown=bool(growths))
+    # A non-V137 base has its own header-mirror offset, which the stock
+    # validator pins; it takes the layout-generalized one like a grown build.
+    out = finalize(patched, date, grown=bool(growths) or not stock)
     diff = diff_summary(input_bytes, out)
     diff.pop('_ranges_int')
     report = {'input_sha256': sha,
@@ -895,7 +925,7 @@ def build_image(input_bytes, patches, date, transplants=(), ecpatch_dir=None,
               'diff_vs_stock': diff,
               'validation': ('validate_grown() passed (structural checks, '
                              'layout derived from the image)'
-                             if growths else
+                             if growths or not stock else
                              'firmware_patch.validate() passed '
                              '(header mirror + trailer CRC + V137 layout)'),
               'scope': 'offline package integrity only; device acceptance '
@@ -910,14 +940,21 @@ def main():
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument('--input', type=Path, default=None,
                     help='stock image (default: FOSI_STOCK_IMAGE or '
-                         'discovery — see tools/fosi_paths.py)')
+                         'discovery — see tools/fosi_paths.py; required '
+                         'with a --base other than V137)')
+    ap.add_argument('--base', choices=sorted(official_images.BY_VERSION), default=STOCK_BASE,
+                    help='official image the input must be (default V137). Another '
+                         'base builds the patches tools/port_patches.py ported to it '
+                         '(patches/ported/<BASE>/), dates the output base + 1 day, and '
+                         'lists every patch that did not port in the report')
     ap.add_argument('--output', type=Path, required=True,
                     help='output image; must not exist; never the input path')
-    ap.add_argument('--manifest', type=Path, default=HERE / 'patches' / 'manifest.txt',
-                    help='patch manifest (ignored with --recovery)')
-    ap.add_argument('--transplants', type=Path,
-                    default=HERE / 'patches' / 'transplants.txt',
-                    help='transplant list (ignored with --recovery)')
+    ap.add_argument('--manifest', type=Path, default=None,
+                    help='patch manifest (default: patches/manifest.txt, or '
+                         'patches/ported/<BASE>/manifest.txt; ignored with --recovery)')
+    ap.add_argument('--transplants', type=Path, default=None,
+                    help='transplant list (default: patches/transplants.txt, or '
+                         'patches/ported/<BASE>/transplants.txt; ignored with --recovery)')
     ap.add_argument('--no-transplants', action='store_true',
                     help='framework-only build: byte patches, no transplants')
     ap.add_argument('--ecpatch-dir', type=Path, default=None,
@@ -967,7 +1004,22 @@ def main():
                     help='build report JSON (default: <output>.report.json)')
     a = ap.parse_args()
 
-    build_date = a.date or DEFAULT_BUILD_DATE
+    stock = a.base == STOCK_BASE
+    ported = PORTED_DIR / a.base
+    if not stock:
+        if a.input is None:
+            ap.error(f'--base {a.base} needs --input (the official {a.base} image)')
+        for flag, used in (('--tail', a.tail), ('--grow', a.grow),
+                           ('--eq-presets', a.eq_presets), ('--dac-filter', a.dac_filter),
+                           ('--bt-auto-off', a.bt_auto_off), ('--theme-config', a.theme_config)):
+            if used:
+                ap.error(f'{flag} carries V137 addresses and has not been ported to {a.base}')
+        if not (ported / 'port_report.json').exists():
+            ap.error(f'no ported patch set for {a.base}: run tools/port_patches.py first')
+    manifest = a.manifest or (HERE / 'patches' / 'manifest.txt' if stock else ported / 'manifest.txt')
+    transplants = a.transplants or (HERE / 'patches' / 'transplants.txt' if stock
+                                    else ported / 'transplants.txt')
+    build_date = a.date or (DEFAULT_BUILD_DATE if stock else base_build_date(a.base))
     input_path = a.input if a.input else fosi_paths.stock_image_path(REPO)
     theme_config = None
     if a.theme_config is not None:
@@ -1015,7 +1067,7 @@ def main():
         mode = 'recovery'
     else:
         date = build_date
-        patches = load_manifest(a.manifest)
+        patches = load_manifest(manifest)
         eq_report = None
         if a.eq_presets:
             sys.path.insert(0, str(REPO / 'patches' / 'eq_presets'))
@@ -1029,7 +1081,7 @@ def main():
         if a.bt_auto_off:
             patches = patches + [bt_auto_off_patch(a.bt_auto_off)]
         transplant_names = ([] if a.no_transplants
-                            else load_transplant_names(a.transplants))
+                            else load_transplant_names(transplants))
         ecpatch_dir = fosi_paths.ecpatch_dir(REPO, a.ecpatch_dir)
         if transplant_names and ecpatch_dir is None:
             ap.error('transplants requested but the .ecpatch inputs were '
@@ -1048,7 +1100,8 @@ def main():
                                   ecpatch_dir=ecpatch_dir,
                                   tail_payload=tail_payload,
                                   growths=growths,
-                                  theme_config=theme_config)
+                                  theme_config=theme_config,
+                                  base_version=a.base)
     except ValueError as e:
         print(f'BUILD REFUSED: {e}', file=sys.stderr)
         return 2
@@ -1058,6 +1111,16 @@ def main():
         f.write(out)
     report = {'mode': mode, 'input_file': str(input_path),
               'output_file': str(a.output), **report}
+    if not stock:
+        report['base'] = a.base
+    if not stock and not a.recovery:
+        port = json.loads((ported / 'port_report.json').read_text())
+        report['ported_by'] = f'patches/ported/{a.base}/port_report.json'
+        report['unported'] = (
+            [{'file': r['file'], 'status': r['status'], 'reason': r['reason']}
+             for r in port['patches'] if r['status'] != 'PORTED']
+            + [{'transplant': t['name'], 'status': t['status'], 'reason': t['reason']}
+               for t in port['transplants'] if t['status'] != 'PORTED'])
     if not a.recovery and eq_report is not None:
         report['eq_presets'] = {str(k): v for k, v in eq_report.items()}
     if a.dac_filter:
@@ -1067,7 +1130,9 @@ def main():
     report_path = a.report or a.output.with_suffix(a.output.suffix + '.report.json')
     report_path.write_text(json.dumps(report, indent=2) + '\n')
 
-    print(f"{mode} build OK -> {a.output}")
+    print(f"{mode} build OK -> {a.output}" + ('' if stock else f' (base {a.base})'))
+    for u in report.get('unported', ()):
+        print(f"    not applied: {u.get('file') or u.get('transplant')} ({u['status']})")
     print(f"  date {report['header_date']}  patches applied: "
           f"{len(report['patches_applied'])}")
     for e in report['patches_applied']:

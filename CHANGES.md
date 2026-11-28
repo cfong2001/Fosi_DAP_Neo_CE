@@ -1,5 +1,25 @@
 # Changelog
 
+## 2026-11-28: Official V161 and V162, DAP Sys install path, portable patches
+
+- Fosi has released V1.6.1 (12/24-hour time, gapless FLAC at one sample
+  rate, separate Bluetooth volume) and V1.6.2 (clock table rows 1, 3 and 30
+  only). `analysis/upstream_v155_v162.md` records the changes.
+- The install steps follow Fosi's published procedure: copy `RKNANOFW.IMG`
+  to the root of the internal DAP Sys drive, remove other `.IMG` files
+  there, and power-cycle with the orange side button.
+- `tools/official_images.py` pins V137, V155, V161 and V162.
+  `tools/prepare_flash.py` accepts all four as recovery sources.
+- `tools/port_patches.py` re-derives the minimal patch set for each newer
+  image from evidence in that image: masked site matching, relocated
+  branches and RAM constants, cave free-space proofs and unchanged-routine
+  checks. `patches/ported/<VERSION>/` holds the output. On V162, 10 patches
+  and the Vorbis transplant port; clock table v1 and the gapless fast path
+  conflict with Fosi's changes and are left out.
+- `build.py --base V162 --input DP3_V162.img` builds the ported set
+  (SHA-256 `27744c5f…5dc04c7f`, offline checks only). V137 builds are
+  unchanged: the minimal image is still `43476a08…700565`.
+
 ## 2026-11-22: Power off stays off
 
 - Holding Power showed the power-off screen, then the player restarted or

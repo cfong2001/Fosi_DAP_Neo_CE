@@ -3,7 +3,8 @@
 The build system every Fosi DAP Neo CE (Community Edition) patch plugs into. It
 takes the stock `DP3_V137.img` update package (SHA-256
 `fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cdfade5e9c6ea3bd71ac6deef`;
-any other input is refused), applies the patches listed in
+any other input is refused unless `--base` names another pinned
+official image, see below), applies the patches listed in
 `patches/manifest.txt` in order plus the transplants listed in
 `patches/transplants.txt`, stamps a new header date, and emits a
 validated image plus a JSON build report. Modelled on nanitecfw's
@@ -100,6 +101,36 @@ $PY build.py --eq-presets ../eq_presets/example.json --output out/DP3_V137_eq.im
 # the unified build combines its parts correctly
 $PY verify.py
 ```
+
+## Building on a newer official image
+
+`--base VERSION` builds on another official image pinned in
+`tools/official_images.py` (V155, V161 or V162). `--input` is required
+and must hash to that pin. The build applies
+`patches/ported/<VERSION>/manifest.txt` and `transplants.txt`, which
+`tools/port_patches.py` derives from this directory's manifest. It
+locates each V137 site in the new image by a masked signature,
+relocates every branch and address constant by evidence found in that
+image, proves each cave free, and refuses a feature whose stock code
+or data Fosi changed (on V155 and later: the gapless set, and clock
+table v1, whose table rows Fosi edited). The output is
+dated base + 1 day and validated with `validate_grown()`, because the
+newer images move the header mirror. Its report lists every patch that
+did not port. Options that carry V137 addresses (`--tail`, `--grow`,
+`--eq-presets`, `--dac-filter`, `--bt-auto-off`, `--theme-config`) are
+refused with a non-V137 base. `patches/ported/<VERSION>/README.md` has
+the per-patch table.
+
+```sh
+python3 ../../tools/port_patches.py --target DP3_V162.img    # regenerate patches/ported/V162/
+$PY build.py --base V162 --input DP3_V162.img --output out/DP3_V162_cfw.img
+```
+
+`tests/test_port_patches.py` checks the port: V137 onto itself
+reproduces every patch, each ported patch disassembles to the V137
+instructions apart from its recorded relocations, and, with
+`FOSI_OFFICIAL_IMAGES` set to a directory of the official images, the
+committed files regenerate and the V162 build validates.
 
 Outputs are written exclusive-create: an existing output path, or the
 input path itself, is refused. The input image is never modified.

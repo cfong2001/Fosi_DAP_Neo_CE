@@ -1,0 +1,22 @@
+# Ported by tools/port_patches.py from V137 0004-clock-v1-row-06.patch. Generated:
+# rerun the tool instead of editing. Evidence: port_report.json.
+name: clock-v1-row-06
+kind: module
+module: 0
+region: code
+address: 0x03079f14
+base_sha256: 96e9216a9877a4ff5d845f47319abeef0b57f11309877fa8af1628bd612724ed
+ported_from: V137 0004-clock-v1-row-06.patch address 0x030798d0
+gate: build refuses unless the input SHA-256 equals base_sha256 (V161) and
+  the bytes at the target equal `expect`; the finished image must pass the
+  build validator
+rationale: MP3 high: B core/bus -> 144 MHz solver target written directly
+  into the row; A fields zeroed so the solver's row-1 floor parks A outputs
+  at 96 MHz; PLL word carried over unchanged (v1 conservatism, clock_v1.md
+  flag 2). Data-only edit; reversible by rebuilding from stock without this
+  patch. Port to V161: site located by a 24-byte masked window [0x30798d0,
+  0x30798e8) -> 0x3079f14; routine clock solver FREQSetFreq m0 0x3066efc
+  masked body unchanged at 0x3067214; routine clock request table (36 rows;
+  row 1 is the floor) m0 0x3079824 masked body unchanged at 0x3079e68.
+expect: 00c2eb0b00e1f50500e1f505c068780400c2eb0b00c2eb0b
+replace: 00c2eb0b0000000000000000000000000044950800449508

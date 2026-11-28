@@ -1,0 +1,29 @@
+# Ported by tools/port_patches.py from V137 0019-i2c-reset-pulse.patch. Generated:
+# rerun the tool instead of editing. Evidence: port_report.json.
+name: i2c-reset-pulse
+kind: module
+module: 0
+region: code
+address: 0x030601d0
+base_sha256: 96e9216a9877a4ff5d845f47319abeef0b57f11309877fa8af1628bd612724ed
+ported_from: V137 0019-i2c-reset-pulse.patch address 0x03060338
+gate: build refuses unless the input SHA-256 equals base_sha256 (V161) and
+  the bytes at the target equal `expect`; the finished image must pass the
+  build validator
+rationale: The DAC register writer (0x03060c4c) brings the I2C controller up
+  for every write and takes it down after (0x0306021c init, transfer,
+  0x0306043a deinit). For buses 0-2 the init holds the controller's CRU soft
+  reset 0x1a for delay_ms(1) (0x03060338). A track start writes seven DAC
+  registers (mute, rate, volume, unmute) before the I2S DMA restarts, so
+  that hold alone is 7 ms of every track-change gap (measured in
+  patches/gapless/rig/). A soft-reset hold needs a few cycles of the block's
+  clock, which 0x0306032c ungates just before. This patch holds it for
+  delay_us(50) instead: `movs r0, #50` and the BL retargeted from delay_ms
+  0x03064944 to delay_us 0x03064920. Buses 3-8 keep the stock 1 ms hold.
+  Bytes: patches/gapless/tools/assemble_v2.py. Port to V161: site located by
+  a 22-byte masked window [0x3060330, 0x3060346) -> 0x30601d0; routine i2c
+  controller init m0 0x306021c masked body unchanged at 0x30600b4; routine
+  delay_us m0 0x3064920 masked body unchanged at 0x3064a28; bl at +0x2:
+  0x3064920 -> 0x3064a28 (located m0 0x3064920 -> 0x3064a28).
+expect: 012004f03bfc
+replace: 322004f029fc

@@ -14,6 +14,13 @@
     transparent keys, clipping edges and every supported rotation.
 - [ ] Port the features of official Fosi firmware V155 (1.5.5), in focused
   changes with validation against the supplied image.
+- [x] Make the minimal patch set portable to V155, V161 and V162
+  (`tools/port_patches.py`, `patches/ported/`, `build.py --base`).
+- [ ] Re-derive clock table v1 against V162's table and decide the gapless
+  fast path beside Fosi's V161 FLAC gapless; see
+  `analysis/upstream_v155_v162.md`.
+- [ ] Port the standard image's theme, code and string patches to V162.
+- [ ] Hardware-test a V162-based CE image before it ships.
 
 The USB audio screen also shows the descriptor-backed PCM transport format;
 see `patches/usb_screen/README.md` for host metadata limitations.

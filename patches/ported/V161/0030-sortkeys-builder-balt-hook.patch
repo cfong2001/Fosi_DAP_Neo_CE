@@ -1,0 +1,34 @@
+# Ported by tools/port_patches.py from V137 0030-sortkeys-builder-balt-hook.patch. Generated:
+# rerun the tool instead of editing. Evidence: port_report.json.
+name: sortkeys-builder-balt-hook
+kind: module
+module: 39
+region: code
+address: 0x0307e0be
+base_sha256: 96e9216a9877a4ff5d845f47319abeef0b57f11309877fa8af1628bd612724ed
+ported_from: V137 0030-sortkeys-builder-balt-hook.patch address 0x0307d9f2
+gate: build refuses unless the input SHA-256 equals base_sha256 (V161) and
+  the bytes at the target equal `expect`; the finished image must pass the
+  build validator
+rationale: Same replacement as patch 0028 for the alternate fold loop of key
+  builder B (function 0x0307d8c4, second scan path); the record pointer is
+  in r4 at this site and the stock loop exit is 0x0307da22. The builder
+  stored the full-string index at record+0xc before this loop, as in builder
+  A. See 0028 for the transform and the cache-invalidation discipline. All
+  three builder loops must be hooked: each is a live path that writes record
+  prefixes. Port to V161: site located by a 48-byte masked window
+  [0x307d9f2, 0x307da22) -> 0x307e0be; routine library comparator m39
+  0x307d620 masked body unchanged at 0x307dce4; routine sorted insert m39
+  0x307d6ea masked body unchanged at 0x307ddae; routine key builder A m39
+  0x307d80a masked body unchanged at 0x307dece; routine key builder B m39
+  0x307d8c4 at 0x307df88 differs (entry at 0x307df88; first difference at
+  +0x4a: V137 45d0, target 49d0); reviewed: Fosi added a record-count cap
+  after the main fold loop: +0xcc `cmp r0, #0; it ne; cmpne.w r5, #0x2000;
+  blo`, with r0 reloaded from the stack after the loop exit, so the hooks
+  clobbering r0-r3 do not feed it; both fold loops the hooks replace, their
+  record pointer (r4) and their exits are unchanged; routine string read m0
+  0x3067510 masked body unchanged at 0x3067828; bl at +0x2: 0x309f0b6 ->
+  0x309f782 (inside sortkeys-cave); b.w at +0x6: 0x307da22 -> 0x307e0ee
+  (located m39 0x307da22 -> 0x307e0ee).
+expect: 002004ab03eb400213f81010527801eb022189b204eb4002a1f1610c9180bcf1190f9cbf20399180401c80b20428e9d3
+replace: 204621f05ffb00f013b800bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf

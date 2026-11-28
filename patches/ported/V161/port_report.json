@@ -1,0 +1,1471 @@
+{
+  "tool": "tools/port_patches.py",
+  "source": {
+    "version": "V137",
+    "sha256": "fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cdfade5e9c6ea3bd71ac6deef"
+  },
+  "target": {
+    "version": "V161",
+    "sha256": "96e9216a9877a4ff5d845f47319abeef0b57f11309877fa8af1628bd612724ed",
+    "header_date": "2026-11-12"
+  },
+  "summary": {
+    "PORTED": 26,
+    "UNPORTED": 0,
+    "CONFLICT": 8
+  },
+  "patches": [
+    {
+      "file": "0000-noop-selftest.patch",
+      "name": "noop-selftest",
+      "feature": "selftest",
+      "role": "noop",
+      "status": "PORTED",
+      "module": 0,
+      "region": "code",
+      "v137_address": "0x3050000",
+      "length": 8,
+      "target_address": "0x3050000",
+      "evidence": [
+        "site located by a 264-byte masked window [0x3050000, 0x3050108) -> 0x3050000",
+        "no-op fixture: replace equals the target bytes"
+      ],
+      "relocations": [],
+      "code_offsets": []
+    },
+    {
+      "file": "0001-dac-fix-branch.patch",
+      "name": "dac-fix-1-branch",
+      "feature": "dac-fix",
+      "role": "code",
+      "status": "PORTED",
+      "module": 0,
+      "region": "code",
+      "v137_address": "0x3060d14",
+      "length": 2,
+      "target_address": "0x3060bac",
+      "evidence": [
+        "site located by a 18-byte masked window [0x3060d0c, 0x3060d1e) -> 0x3060bac",
+        "routine dac_write m0 0x3060c4c at 0x3060ae4 differs (entry at 0x3060ae4; first difference at +0xa: V137 9cf8e8c2, target 9cf806c3); reviewed: one change: ldrb.w ip, [ip, #0x2e8] became #0x306 at +0x0a, a config byte read before the transfer from the SAVEINFO block (which grew); the counter-block literal (0x0300411d in every version), the success branch at +0xc8 that the hook retargets and the shared tail the cave rejoins are unchanged"
+      ],
+      "relocations": [
+        {
+          "offset": 0,
+          "kind": "bcc",
+          "v137": "0x3060d90",
+          "target": "0x3060c28",
+          "evidence": "inside dac-fix-2-cave"
+        }
+      ],
+      "code_offsets": [
+        0
+      ]
+    },
+    {
+      "file": "0002-dac-fix-cave.patch",
+      "name": "dac-fix-2-cave",
+      "feature": "dac-fix",
+      "role": "cave",
+      "status": "PORTED",
+      "module": 0,
+      "region": "code",
+      "v137_address": "0x3060d90",
+      "length": 4,
+      "target_address": "0x3060c28",
+      "evidence": [
+        "site located by a 20-byte masked window [0x3060d88, 0x3060d9c) -> 0x3060c28",
+        "cave proof: 4 fill bytes inside module 0 code [0x3050000, 0x307a258), no reference into [0x3060c28, 0x3060c2c) from any co-resident module, no module mapped over it that V137 did not already have",
+        "routine dac_write m0 0x3060c4c at 0x3060ae4 differs (entry at 0x3060ae4; first difference at +0xa: V137 9cf8e8c2, target 9cf806c3); reviewed: one change: ldrb.w ip, [ip, #0x2e8] became #0x306 at +0x0a, a config byte read before the transfer from the SAVEINFO block (which grew); the counter-block literal (0x0300411d in every version), the success branch at +0xc8 that the hook retargets and the shared tail the cave rejoins are unchanged"
+      ],
+      "relocations": [
+        {
+          "offset": 2,
+          "kind": "b",
+          "v137": "0x3060d1c",
+          "target": "0x3060bb4",
+          "evidence": "located m0 0x3060d1c -> 0x3060bb4"
+        }
+      ],
+      "code_offsets": [
+        0,
+        2
+      ]
+    },
+    {
+      "file": "0003-clock-v1-row-05.patch",
+      "name": "clock-v1-row-05",
+      "feature": "clock-v1",
+      "role": "data",
+      "status": "PORTED",
+      "module": 0,
+      "region": "code",
+      "v137_address": "0x30798b4",
+      "length": 24,
+      "target_address": "0x3079ef8",
+      "evidence": [
+        "site located by a 24-byte masked window [0x30798b4, 0x30798cc) -> 0x3079ef8",
+        "routine clock solver FREQSetFreq m0 0x3066efc masked body unchanged at 0x3067214",
+        "routine clock request table (36 rows; row 1 is the floor) m0 0x3079824 masked body unchanged at 0x3079e68"
+      ],
+      "relocations": [],
+      "code_offsets": []
+    },
+    {
+      "file": "0004-clock-v1-row-06.patch",
+      "name": "clock-v1-row-06",
+      "feature": "clock-v1",
+      "role": "data",
+      "status": "PORTED",
+      "module": 0,
+      "region": "code",
+      "v137_address": "0x30798d0",
+      "length": 24,
+      "target_address": "0x3079f14",
+      "evidence": [
+        "site located by a 24-byte masked window [0x30798d0, 0x30798e8) -> 0x3079f14",
+        "routine clock solver FREQSetFreq m0 0x3066efc masked body unchanged at 0x3067214",
+        "routine clock request table (36 rows; row 1 is the floor) m0 0x3079824 masked body unchanged at 0x3079e68"
+      ],
+      "relocations": [],
+      "code_offsets": []
+    },
+    {
+      "file": "0005-clock-v1-row-07.patch",
+      "name": "clock-v1-row-07",
+      "feature": "clock-v1",
+      "role": "data",
+      "status": "PORTED",
+      "module": 0,
+      "region": "code",
+      "v137_address": "0x30798ec",
+      "length": 24,
+      "target_address": "0x3079f30",
+      "evidence": [
+        "site located by a 28-byte masked window [0x30798ec, 0x3079908) -> 0x3079f30",
+        "routine clock solver FREQSetFreq m0 0x3066efc masked body unchanged at 0x3067214",
+        "routine clock request table (36 rows; row 1 is the floor) m0 0x3079824 masked body unchanged at 0x3079e68"
+      ],
+      "relocations": [],
+      "code_offsets": []
+    },
+    {
+      "file": "0006-clock-v1-row-08.patch",
+      "name": "clock-v1-row-08",
+      "feature": "clock-v1",
+      "role": "data",
+      "status": "PORTED",
+      "module": 0,
+      "region": "code",
+      "v137_address": "0x3079908",
+      "length": 24,
+      "target_address": "0x3079f4c",
+      "evidence": [
+        "site located by a 28-byte masked window [0x3079908, 0x3079924) -> 0x3079f4c",
+        "routine clock solver FREQSetFreq m0 0x3066efc masked body unchanged at 0x3067214",
+        "routine clock request table (36 rows; row 1 is the floor) m0 0x3079824 masked body unchanged at 0x3079e68"
+      ],
+      "relocations": [],
+      "code_offsets": []
+    },
+    {
+      "file": "0007-clock-v1-row-09.patch",
+      "name": "clock-v1-row-09",
+      "feature": "clock-v1",
+      "role": "data",
+      "status": "PORTED",
+      "module": 0,
+      "region": "code",
+      "v137_address": "0x3079924",
+      "length": 24,
+      "target_address": "0x3079f68",
+      "evidence": [
+        "site located by a 24-byte masked window [0x3079924, 0x307993c) -> 0x3079f68",
+        "routine clock solver FREQSetFreq m0 0x3066efc masked body unchanged at 0x3067214",
+        "routine clock request table (36 rows; row 1 is the floor) m0 0x3079824 masked body unchanged at 0x3079e68"
+      ],
+      "relocations": [],
+      "code_offsets": []
+    },
+    {
+      "file": "0008-clock-v1-row-10.patch",
+      "name": "clock-v1-row-10",
+      "feature": "clock-v1",
+      "role": "data",
+      "status": "PORTED",
+      "module": 0,
+      "region": "code",
+      "v137_address": "0x3079940",
+      "length": 24,
+      "target_address": "0x3079f84",
+      "evidence": [
+        "site located by a 28-byte masked window [0x3079940, 0x307995c) -> 0x3079f84",
+        "routine clock solver FREQSetFreq m0 0x3066efc masked body unchanged at 0x3067214",
+        "routine clock request table (36 rows; row 1 is the floor) m0 0x3079824 masked body unchanged at 0x3079e68"
+      ],
+      "relocations": [],
+      "code_offsets": []
+    },
+    {
+      "file": "0009-clock-v1-row-11.patch",
+      "name": "clock-v1-row-11",
+      "feature": "clock-v1",
+      "role": "data",
+      "status": "PORTED",
+      "module": 0,
+      "region": "code",
+      "v137_address": "0x307995c",
+      "length": 24,
+      "target_address": "0x3079fa0",
+      "evidence": [
+        "site located by a 28-byte masked window [0x307995c, 0x3079978) -> 0x3079fa0",
+        "routine clock solver FREQSetFreq m0 0x3066efc masked body unchanged at 0x3067214",
+        "routine clock request table (36 rows; row 1 is the floor) m0 0x3079824 masked body unchanged at 0x3079e68"
+      ],
+      "relocations": [],
+      "code_offsets": []
+    },
+    {
+      "file": "0010-clock-v1-row-14.patch",
+      "name": "clock-v1-row-14",
+      "feature": "clock-v1",
+      "role": "data",
+      "status": "PORTED",
+      "module": 0,
+      "region": "code",
+      "v137_address": "0x30799b0",
+      "length": 24,
+      "target_address": "0x3079ff4",
+      "evidence": [
+        "site located by a 28-byte masked window [0x30799b0, 0x30799cc) -> 0x3079ff4",
+        "routine clock solver FREQSetFreq m0 0x3066efc masked body unchanged at 0x3067214",
+        "routine clock request table (36 rows; row 1 is the floor) m0 0x3079824 masked body unchanged at 0x3079e68"
+      ],
+      "relocations": [],
+      "code_offsets": []
+    },
+    {
+      "file": "0011-clock-v1-row-15.patch",
+      "name": "clock-v1-row-15",
+      "feature": "clock-v1",
+      "role": "data",
+      "status": "PORTED",
+      "module": 0,
+      "region": "code",
+      "v137_address": "0x30799cc",
+      "length": 24,
+      "target_address": "0x307a010",
+      "evidence": [
+        "site located by a 28-byte masked window [0x30799cc, 0x30799e8) -> 0x307a010",
+        "routine clock solver FREQSetFreq m0 0x3066efc masked body unchanged at 0x3067214",
+        "routine clock request table (36 rows; row 1 is the floor) m0 0x3079824 masked body unchanged at 0x3079e68"
+      ],
+      "relocations": [],
+      "code_offsets": []
+    },
+    {
+      "file": "0012-clock-v1-row-16.patch",
+      "name": "clock-v1-row-16",
+      "feature": "clock-v1",
+      "role": "data",
+      "status": "PORTED",
+      "module": 0,
+      "region": "code",
+      "v137_address": "0x30799e8",
+      "length": 24,
+      "target_address": "0x307a02c",
+      "evidence": [
+        "site located by a 28-byte masked window [0x30799e8, 0x3079a04) -> 0x307a02c",
+        "routine clock solver FREQSetFreq m0 0x3066efc masked body unchanged at 0x3067214",
+        "routine clock request table (36 rows; row 1 is the floor) m0 0x3079824 masked body unchanged at 0x3079e68"
+      ],
+      "relocations": [],
+      "code_offsets": []
+    },
+    {
+      "file": "0013-clock-v1-row-17.patch",
+      "name": "clock-v1-row-17",
+      "feature": "clock-v1",
+      "role": "data",
+      "status": "PORTED",
+      "module": 0,
+      "region": "code",
+      "v137_address": "0x3079a04",
+      "length": 24,
+      "target_address": "0x307a048",
+      "evidence": [
+        "site located by a 28-byte masked window [0x3079a04, 0x3079a20) -> 0x307a048",
+        "routine clock solver FREQSetFreq m0 0x3066efc masked body unchanged at 0x3067214",
+        "routine clock request table (36 rows; row 1 is the floor) m0 0x3079824 masked body unchanged at 0x3079e68"
+      ],
+      "relocations": [],
+      "code_offsets": []
+    },
+    {
+      "file": "0014-clock-v1-row-18.patch",
+      "name": "clock-v1-row-18",
+      "feature": "clock-v1",
+      "role": "data",
+      "status": "PORTED",
+      "module": 0,
+      "region": "code",
+      "v137_address": "0x3079a20",
+      "length": 24,
+      "target_address": "0x307a064",
+      "evidence": [
+        "site located by a 28-byte masked window [0x3079a20, 0x3079a3c) -> 0x307a064",
+        "routine clock solver FREQSetFreq m0 0x3066efc masked body unchanged at 0x3067214",
+        "routine clock request table (36 rows; row 1 is the floor) m0 0x3079824 masked body unchanged at 0x3079e68"
+      ],
+      "relocations": [],
+      "code_offsets": []
+    },
+    {
+      "file": "0015-clock-v1-row-19.patch",
+      "name": "clock-v1-row-19",
+      "feature": "clock-v1",
+      "role": "data",
+      "status": "PORTED",
+      "module": 0,
+      "region": "code",
+      "v137_address": "0x3079a3c",
+      "length": 24,
+      "target_address": "0x307a080",
+      "evidence": [
+        "site located by a 28-byte masked window [0x3079a3c, 0x3079a58) -> 0x307a080",
+        "routine clock solver FREQSetFreq m0 0x3066efc masked body unchanged at 0x3067214",
+        "routine clock request table (36 rows; row 1 is the floor) m0 0x3079824 masked body unchanged at 0x3079e68"
+      ],
+      "relocations": [],
+      "code_offsets": []
+    },
+    {
+      "file": "0016-clock-v1-row-20.patch",
+      "name": "clock-v1-row-20",
+      "feature": "clock-v1",
+      "role": "data",
+      "status": "PORTED",
+      "module": 0,
+      "region": "code",
+      "v137_address": "0x3079a58",
+      "length": 24,
+      "target_address": "0x307a09c",
+      "evidence": [
+        "site located by a 28-byte masked window [0x3079a58, 0x3079a74) -> 0x307a09c",
+        "routine clock solver FREQSetFreq m0 0x3066efc masked body unchanged at 0x3067214",
+        "routine clock request table (36 rows; row 1 is the floor) m0 0x3079824 masked body unchanged at 0x3079e68"
+      ],
+      "relocations": [],
+      "code_offsets": []
+    },
+    {
+      "file": "0017-clock-v1-row-21.patch",
+      "name": "clock-v1-row-21",
+      "feature": "clock-v1",
+      "role": "data",
+      "status": "PORTED",
+      "module": 0,
+      "region": "code",
+      "v137_address": "0x3079a74",
+      "length": 24,
+      "target_address": "0x307a0b8",
+      "evidence": [
+        "site located by a 28-byte masked window [0x3079a74, 0x3079a90) -> 0x307a0b8",
+        "routine clock solver FREQSetFreq m0 0x3066efc masked body unchanged at 0x3067214",
+        "routine clock request table (36 rows; row 1 is the floor) m0 0x3079824 masked body unchanged at 0x3079e68"
+      ],
+      "relocations": [],
+      "code_offsets": []
+    },
+    {
+      "file": "0018-clock-v1-row-22.patch",
+      "name": "clock-v1-row-22",
+      "feature": "clock-v1",
+      "role": "data",
+      "status": "PORTED",
+      "module": 0,
+      "region": "code",
+      "v137_address": "0x3079a90",
+      "length": 24,
+      "target_address": "0x307a0d4",
+      "evidence": [
+        "site located by a 28-byte masked window [0x3079a90, 0x3079aac) -> 0x307a0d4",
+        "routine clock solver FREQSetFreq m0 0x3066efc masked body unchanged at 0x3067214",
+        "routine clock request table (36 rows; row 1 is the floor) m0 0x3079824 masked body unchanged at 0x3079e68"
+      ],
+      "relocations": [],
+      "code_offsets": []
+    },
+    {
+      "file": "0019-i2c-reset-pulse.patch",
+      "name": "i2c-reset-pulse",
+      "feature": "i2c-reset-pulse",
+      "role": "code",
+      "status": "PORTED",
+      "module": 0,
+      "region": "code",
+      "v137_address": "0x3060338",
+      "length": 6,
+      "target_address": "0x30601d0",
+      "evidence": [
+        "site located by a 22-byte masked window [0x3060330, 0x3060346) -> 0x30601d0",
+        "routine i2c controller init m0 0x306021c masked body unchanged at 0x30600b4",
+        "routine delay_us m0 0x3064920 masked body unchanged at 0x3064a28"
+      ],
+      "relocations": [
+        {
+          "offset": 2,
+          "kind": "bl",
+          "v137": "0x3064920",
+          "target": "0x3064a28",
+          "evidence": "located m0 0x3064920 -> 0x3064a28"
+        }
+      ],
+      "code_offsets": [
+        0,
+        2
+      ]
+    },
+    {
+      "file": "0020-gapless-state-pair.patch",
+      "name": "gapless-0-state-pair",
+      "feature": "gapless",
+      "role": "cave",
+      "status": "CONFLICT",
+      "module": 0,
+      "region": "code",
+      "v137_address": "0x30515b0",
+      "length": 8,
+      "target_address": "0x30515b0",
+      "evidence": [
+        "site located by a 16-byte masked window [0x30515ac, 0x30515bc) -> 0x30515b0",
+        "cave proof: 8 fill bytes inside module 0 code [0x3050000, 0x307a258), no reference into [0x30515b0, 0x30515b8) from any co-resident module, no module mapped over it that V137 did not already have (on paper: [35])",
+        "routine core-1 decoder reset-and-start m0 0x306cb2c masked body unchanged at 0x306cebc",
+        "routine core-1 halt m0 0x306cb0c masked body unchanged at 0x306ce9c",
+        "routine per-codec dispatcher m33 0x3088824 masked body unchanged at 0x30899ec"
+      ],
+      "reason": "stock code or data differs: playback monitor (0x3064f7e, 458 bytes): entry not found: the piece at +0x42 locates to 0x30650fc but the code before it differs; decoder file close (0x308936e, 62 bytes): no 16-byte piece of the routine locates in the target; decoder shutdown (0x30893c4, 82 bytes): no 16-byte piece of the routine locates in the target; stop-and-advance helper (0x3089ad6, 398 bytes): entry not found: the piece at +0x28 locates to 0x308a27e but the code before it differs; decoder start (0x308bfbc, 712 bytes): entry at 0x308d680; first difference at +0x9e: V137 40f20b10, target 4ff48670"
+    },
+    {
+      "file": "0021-gapless-gate-hook.patch",
+      "name": "gapless-1-gate-hook",
+      "feature": "gapless",
+      "role": "code",
+      "status": "CONFLICT",
+      "module": 0,
+      "region": "code",
+      "v137_address": "0x306cb2c",
+      "length": 4,
+      "target_address": "0x306cebc",
+      "evidence": [
+        "site located by a 20-byte masked window [0x306cb24, 0x306cb38) -> 0x306cebc",
+        "routine core-1 decoder reset-and-start m0 0x306cb2c masked body unchanged at 0x306cebc",
+        "routine core-1 halt m0 0x306cb0c masked body unchanged at 0x306ce9c",
+        "routine per-codec dispatcher m33 0x3088824 masked body unchanged at 0x30899ec"
+      ],
+      "reason": "stock code or data differs: playback monitor (0x3064f7e, 458 bytes): entry not found: the piece at +0x42 locates to 0x30650fc but the code before it differs; decoder file close (0x308936e, 62 bytes): no 16-byte piece of the routine locates in the target; decoder shutdown (0x30893c4, 82 bytes): no 16-byte piece of the routine locates in the target; stop-and-advance helper (0x3089ad6, 398 bytes): entry not found: the piece at +0x28 locates to 0x308a27e but the code before it differs; decoder start (0x308bfbc, 712 bytes): entry at 0x308d680; first difference at +0x9e: V137 40f20b10, target 4ff48670"
+    },
+    {
+      "file": "0022-gapless-gate-cave.patch",
+      "name": "gapless-2-gate-cave",
+      "feature": "gapless",
+      "role": "cave",
+      "status": "CONFLICT",
+      "module": 0,
+      "region": "code",
+      "v137_address": "0x3051664",
+      "length": 32,
+      "target_address": "0x3051664",
+      "evidence": [
+        "site located by a 36-byte masked window [0x3051660, 0x3051684) -> 0x3051664",
+        "cave proof: 32 fill bytes inside module 0 code [0x3050000, 0x307a258), no reference into [0x3051664, 0x3051684) from any co-resident module, no module mapped over it that V137 did not already have (on paper: [35])",
+        "routine core-1 decoder reset-and-start m0 0x306cb2c masked body unchanged at 0x306cebc",
+        "routine core-1 halt m0 0x306cb0c masked body unchanged at 0x306ce9c",
+        "routine per-codec dispatcher m33 0x3088824 masked body unchanged at 0x30899ec"
+      ],
+      "reason": "stock code or data differs: playback monitor (0x3064f7e, 458 bytes): entry not found: the piece at +0x42 locates to 0x30650fc but the code before it differs; decoder file close (0x308936e, 62 bytes): no 16-byte piece of the routine locates in the target; decoder shutdown (0x30893c4, 82 bytes): no 16-byte piece of the routine locates in the target; stop-and-advance helper (0x3089ad6, 398 bytes): entry not found: the piece at +0x28 locates to 0x308a27e but the code before it differs; decoder start (0x308bfbc, 712 bytes): entry at 0x308d680; first difference at +0x9e: V137 40f20b10, target 4ff48670"
+    },
+    {
+      "file": "0023-gapless-flag-literal.patch",
+      "name": "gapless-3-flag-literal",
+      "feature": "gapless",
+      "role": "cave",
+      "status": "CONFLICT",
+      "module": 0,
+      "region": "code",
+      "v137_address": "0x3051500",
+      "length": 4,
+      "target_address": "0x3051500",
+      "evidence": [
+        "site located by a 20-byte masked window [0x30514f8, 0x305150c) -> 0x3051500",
+        "cave proof: 4 fill bytes inside module 0 code [0x3050000, 0x307a258), no reference into [0x3051500, 0x3051504) from any co-resident module, no module mapped over it that V137 did not already have (on paper: [35])",
+        "routine core-1 decoder reset-and-start m0 0x306cb2c masked body unchanged at 0x306cebc",
+        "routine core-1 halt m0 0x306cb0c masked body unchanged at 0x306ce9c",
+        "routine per-codec dispatcher m33 0x3088824 masked body unchanged at 0x30899ec"
+      ],
+      "reason": "stock code or data differs: playback monitor (0x3064f7e, 458 bytes): entry not found: the piece at +0x42 locates to 0x30650fc but the code before it differs; decoder file close (0x308936e, 62 bytes): no 16-byte piece of the routine locates in the target; decoder shutdown (0x30893c4, 82 bytes): no 16-byte piece of the routine locates in the target; stop-and-advance helper (0x3089ad6, 398 bytes): entry not found: the piece at +0x28 locates to 0x308a27e but the code before it differs; decoder start (0x308bfbc, 712 bytes): entry at 0x308d680; first difference at +0x9e: V137 40f20b10, target 4ff48670"
+    },
+    {
+      "file": "0024-gapless-keep-decoder.patch",
+      "name": "gapless-4-keep-decoder",
+      "feature": "gapless",
+      "role": "code",
+      "status": "CONFLICT",
+      "module": 33,
+      "region": "code",
+      "v137_address": "0x30893c4",
+      "length": 82,
+      "target_address": null,
+      "evidence": [
+        "routine core-1 decoder reset-and-start m0 0x306cb2c masked body unchanged at 0x306cebc",
+        "routine core-1 halt m0 0x306cb0c masked body unchanged at 0x306ce9c",
+        "routine per-codec dispatcher m33 0x3088824 masked body unchanged at 0x30899ec"
+      ],
+      "reason": "stock code or data differs: playback monitor (0x3064f7e, 458 bytes): entry not found: the piece at +0x42 locates to 0x30650fc but the code before it differs; decoder file close (0x308936e, 62 bytes): no 16-byte piece of the routine locates in the target; decoder shutdown (0x30893c4, 82 bytes): no 16-byte piece of the routine locates in the target; stop-and-advance helper (0x3089ad6, 398 bytes): entry not found: the piece at +0x28 locates to 0x308a27e but the code before it differs; decoder start (0x308bfbc, 712 bytes): entry at 0x308d680; first difference at +0x9e: V137 40f20b10, target 4ff48670 (and: site missing: no masked match)"
+    },
+    {
+      "file": "0025-gapless-gate-tail.patch",
+      "name": "gapless-5-gate-tail",
+      "feature": "gapless",
+      "role": "cave",
+      "status": "CONFLICT",
+      "module": 0,
+      "region": "code",
+      "v137_address": "0x3051684",
+      "length": 4,
+      "target_address": "0x3051684",
+      "evidence": [
+        "site located by a 20-byte masked window [0x305167c, 0x3051690) -> 0x3051684",
+        "cave proof: 4 fill bytes inside module 0 code [0x3050000, 0x307a258), no reference into [0x3051684, 0x3051688) from any co-resident module, no module mapped over it that V137 did not already have (on paper: [35])",
+        "routine core-1 decoder reset-and-start m0 0x306cb2c masked body unchanged at 0x306cebc",
+        "routine core-1 halt m0 0x306cb0c masked body unchanged at 0x306ce9c",
+        "routine per-codec dispatcher m33 0x3088824 masked body unchanged at 0x30899ec"
+      ],
+      "reason": "stock code or data differs: playback monitor (0x3064f7e, 458 bytes): entry not found: the piece at +0x42 locates to 0x30650fc but the code before it differs; decoder file close (0x308936e, 62 bytes): no 16-byte piece of the routine locates in the target; decoder shutdown (0x30893c4, 82 bytes): no 16-byte piece of the routine locates in the target; stop-and-advance helper (0x3089ad6, 398 bytes): entry not found: the piece at +0x28 locates to 0x308a27e but the code before it differs; decoder start (0x308bfbc, 712 bytes): entry at 0x308d680; first difference at +0x9e: V137 40f20b10, target 4ff48670"
+    },
+    {
+      "file": "0026-gapless-arm.patch",
+      "name": "gapless-6-arm",
+      "feature": "gapless",
+      "role": "stacked",
+      "status": "CONFLICT",
+      "module": 0,
+      "region": "code",
+      "v137_address": "0x3051676",
+      "length": 2,
+      "target_address": null,
+      "evidence": [
+        "routine core-1 decoder reset-and-start m0 0x306cb2c masked body unchanged at 0x306cebc",
+        "routine core-1 halt m0 0x306cb0c masked body unchanged at 0x306ce9c",
+        "routine per-codec dispatcher m33 0x3088824 masked body unchanged at 0x30899ec"
+      ],
+      "reason": "stock code or data differs: playback monitor (0x3064f7e, 458 bytes): entry not found: the piece at +0x42 locates to 0x30650fc but the code before it differs; decoder file close (0x308936e, 62 bytes): no 16-byte piece of the routine locates in the target; decoder shutdown (0x30893c4, 82 bytes): no 16-byte piece of the routine locates in the target; stop-and-advance helper (0x3089ad6, 398 bytes): entry not found: the piece at +0x28 locates to 0x308a27e but the code before it differs; decoder start (0x308bfbc, 712 bytes): entry at 0x308d680; first difference at +0x9e: V137 40f20b10, target 4ff48670"
+    },
+    {
+      "file": "0034-gapless-warm-start.patch",
+      "name": "gapless-warm-start",
+      "feature": "gapless",
+      "role": "cave",
+      "status": "CONFLICT",
+      "module": 0,
+      "region": "code",
+      "v137_address": "0x3051504",
+      "length": 16,
+      "target_address": "0x3051504",
+      "evidence": [
+        "site located by a 32-byte masked window [0x3051504, 0x3051524) -> 0x3051504",
+        "cave proof: 16 fill bytes inside module 0 code [0x3050000, 0x307a258), no reference into [0x3051504, 0x3051514) from any co-resident module, no module mapped over it that V137 did not already have (on paper: [35])",
+        "routine core-1 decoder reset-and-start m0 0x306cb2c masked body unchanged at 0x306cebc",
+        "routine core-1 halt m0 0x306cb0c masked body unchanged at 0x306ce9c",
+        "routine per-codec dispatcher m33 0x3088824 masked body unchanged at 0x30899ec"
+      ],
+      "reason": "stock code or data differs: playback monitor (0x3064f7e, 458 bytes): entry not found: the piece at +0x42 locates to 0x30650fc but the code before it differs; decoder file close (0x308936e, 62 bytes): no 16-byte piece of the routine locates in the target; decoder shutdown (0x30893c4, 82 bytes): no 16-byte piece of the routine locates in the target; stop-and-advance helper (0x3089ad6, 398 bytes): entry not found: the piece at +0x28 locates to 0x308a27e but the code before it differs; decoder start (0x308bfbc, 712 bytes): entry at 0x308d680; first difference at +0x9e: V137 40f20b10, target 4ff48670"
+    },
+    {
+      "file": "0027-sortkeys-comparator-hook.patch",
+      "name": "sortkeys-comparator-hook",
+      "feature": "sortkeys",
+      "role": "code",
+      "status": "PORTED",
+      "module": 39,
+      "region": "code",
+      "v137_address": "0x307d620",
+      "length": 4,
+      "target_address": "0x307dce4",
+      "evidence": [
+        "site located by a 20-byte masked window [0x307d618, 0x307d62c) -> 0x307dce4",
+        "routine library comparator m39 0x307d620 masked body unchanged at 0x307dce4",
+        "routine sorted insert m39 0x307d6ea masked body unchanged at 0x307ddae",
+        "routine key builder A m39 0x307d80a masked body unchanged at 0x307dece",
+        "routine key builder B m39 0x307d8c4 at 0x307df88 differs (entry at 0x307df88; first difference at +0x4a: V137 45d0, target 49d0); reviewed: Fosi added a record-count cap after the main fold loop: +0xcc `cmp r0, #0; it ne; cmpne.w r5, #0x2000; blo`, with r0 reloaded from the stack after the loop exit, so the hooks clobbering r0-r3 do not feed it; both fold loops the hooks replace, their record pointer (r4) and their exits are unchanged",
+        "routine string read m0 0x3067510 masked body unchanged at 0x3067828"
+      ],
+      "relocations": [
+        {
+          "offset": 0,
+          "kind": "b.w",
+          "v137": "0x309f000",
+          "target": "0x309f6cc",
+          "evidence": "inside sortkeys-cave"
+        }
+      ],
+      "code_offsets": [
+        0
+      ]
+    },
+    {
+      "file": "0028-sortkeys-builder-a-hook.patch",
+      "name": "sortkeys-builder-a-hook",
+      "feature": "sortkeys",
+      "role": "code",
+      "status": "PORTED",
+      "module": 39,
+      "region": "code",
+      "v137_address": "0x307d87e",
+      "length": 48,
+      "target_address": "0x307df42",
+      "evidence": [
+        "site located by a 48-byte masked window [0x307d87e, 0x307d8ae) -> 0x307df42",
+        "routine library comparator m39 0x307d620 masked body unchanged at 0x307dce4",
+        "routine sorted insert m39 0x307d6ea masked body unchanged at 0x307ddae",
+        "routine key builder A m39 0x307d80a masked body unchanged at 0x307dece",
+        "routine key builder B m39 0x307d8c4 at 0x307df88 differs (entry at 0x307df88; first difference at +0x4a: V137 45d0, target 49d0); reviewed: Fosi added a record-count cap after the main fold loop: +0xcc `cmp r0, #0; it ne; cmpne.w r5, #0x2000; blo`, with r0 reloaded from the stack after the loop exit, so the hooks clobbering r0-r3 do not feed it; both fold loops the hooks replace, their record pointer (r4) and their exits are unchanged",
+        "routine string read m0 0x3067510 masked body unchanged at 0x3067828"
+      ],
+      "relocations": [
+        {
+          "offset": 2,
+          "kind": "bl",
+          "v137": "0x309f0b6",
+          "target": "0x309f782",
+          "evidence": "inside sortkeys-cave"
+        },
+        {
+          "offset": 6,
+          "kind": "b.w",
+          "v137": "0x307d8ae",
+          "target": "0x307df72",
+          "evidence": "located m39 0x307d8ae -> 0x307df72"
+        }
+      ],
+      "code_offsets": [
+        0,
+        2,
+        6
+      ]
+    },
+    {
+      "file": "0029-sortkeys-builder-bmain-hook.patch",
+      "name": "sortkeys-builder-bmain-hook",
+      "feature": "sortkeys",
+      "role": "code",
+      "status": "PORTED",
+      "module": 39,
+      "region": "code",
+      "v137_address": "0x307d954",
+      "length": 48,
+      "target_address": "0x307e018",
+      "evidence": [
+        "site located by a 48-byte masked window [0x307d954, 0x307d984) -> 0x307e018",
+        "routine library comparator m39 0x307d620 masked body unchanged at 0x307dce4",
+        "routine sorted insert m39 0x307d6ea masked body unchanged at 0x307ddae",
+        "routine key builder A m39 0x307d80a masked body unchanged at 0x307dece",
+        "routine key builder B m39 0x307d8c4 at 0x307df88 differs (entry at 0x307df88; first difference at +0x4a: V137 45d0, target 49d0); reviewed: Fosi added a record-count cap after the main fold loop: +0xcc `cmp r0, #0; it ne; cmpne.w r5, #0x2000; blo`, with r0 reloaded from the stack after the loop exit, so the hooks clobbering r0-r3 do not feed it; both fold loops the hooks replace, their record pointer (r4) and their exits are unchanged",
+        "routine string read m0 0x3067510 masked body unchanged at 0x3067828"
+      ],
+      "relocations": [
+        {
+          "offset": 2,
+          "kind": "bl",
+          "v137": "0x309f0b6",
+          "target": "0x309f782",
+          "evidence": "inside sortkeys-cave"
+        },
+        {
+          "offset": 6,
+          "kind": "b.w",
+          "v137": "0x307d984",
+          "target": "0x307e048",
+          "evidence": "located m39 0x307d984 -> 0x307e048"
+        }
+      ],
+      "code_offsets": [
+        0,
+        2,
+        6
+      ]
+    },
+    {
+      "file": "0030-sortkeys-builder-balt-hook.patch",
+      "name": "sortkeys-builder-balt-hook",
+      "feature": "sortkeys",
+      "role": "code",
+      "status": "PORTED",
+      "module": 39,
+      "region": "code",
+      "v137_address": "0x307d9f2",
+      "length": 48,
+      "target_address": "0x307e0be",
+      "evidence": [
+        "site located by a 48-byte masked window [0x307d9f2, 0x307da22) -> 0x307e0be",
+        "routine library comparator m39 0x307d620 masked body unchanged at 0x307dce4",
+        "routine sorted insert m39 0x307d6ea masked body unchanged at 0x307ddae",
+        "routine key builder A m39 0x307d80a masked body unchanged at 0x307dece",
+        "routine key builder B m39 0x307d8c4 at 0x307df88 differs (entry at 0x307df88; first difference at +0x4a: V137 45d0, target 49d0); reviewed: Fosi added a record-count cap after the main fold loop: +0xcc `cmp r0, #0; it ne; cmpne.w r5, #0x2000; blo`, with r0 reloaded from the stack after the loop exit, so the hooks clobbering r0-r3 do not feed it; both fold loops the hooks replace, their record pointer (r4) and their exits are unchanged",
+        "routine string read m0 0x3067510 masked body unchanged at 0x3067828"
+      ],
+      "relocations": [
+        {
+          "offset": 2,
+          "kind": "bl",
+          "v137": "0x309f0b6",
+          "target": "0x309f782",
+          "evidence": "inside sortkeys-cave"
+        },
+        {
+          "offset": 6,
+          "kind": "b.w",
+          "v137": "0x307da22",
+          "target": "0x307e0ee",
+          "evidence": "located m39 0x307da22 -> 0x307e0ee"
+        }
+      ],
+      "code_offsets": [
+        0,
+        2,
+        6
+      ]
+    },
+    {
+      "file": "0031-sortkeys-cave.patch",
+      "name": "sortkeys-cave",
+      "feature": "sortkeys",
+      "role": "cave",
+      "status": "PORTED",
+      "module": 39,
+      "region": "code",
+      "v137_address": "0x309f000",
+      "length": 1052,
+      "target_address": "0x309f6cc",
+      "evidence": [
+        "site located by a 1196-byte masked window [0x309f000, 0x309f4ac) -> 0x309f6cc",
+        "cave proof: 1052 fill bytes inside module 39 code [0x307dcc0, 0x309fb78), no reference into [0x309f6cc, 0x309fae8) from any co-resident module, no module mapped over it that V137 did not already have; nearest reference below is 0xfb74 bytes away (V137: 0xfb74)",
+        "routine library comparator m39 0x307d620 masked body unchanged at 0x307dce4",
+        "routine sorted insert m39 0x307d6ea masked body unchanged at 0x307ddae",
+        "routine key builder A m39 0x307d80a masked body unchanged at 0x307dece",
+        "routine key builder B m39 0x307d8c4 at 0x307df88 differs (entry at 0x307df88; first difference at +0x4a: V137 45d0, target 49d0); reviewed: Fosi added a record-count cap after the main fold loop: +0xcc `cmp r0, #0; it ne; cmpne.w r5, #0x2000; blo`, with r0 reloaded from the stack after the loop exit, so the hooks clobbering r0-r3 do not feed it; both fold loops the hooks replace, their record pointer (r4) and their exits are unchanged",
+        "routine string read m0 0x3067510 masked body unchanged at 0x3067828"
+      ],
+      "relocations": [
+        {
+          "offset": 54,
+          "movt_offset": 58,
+          "kind": "movw/movt",
+          "v137": "0x307e1ec",
+          "target": "0x307e8b8",
+          "evidence": "2 matched stock reference(s) of the feature read 0x307e8b8 (literal of ldr at 0x307d66a (m39)); 2 of 2 other V137 references located and agree"
+        },
+        {
+          "offset": 84,
+          "movt_offset": 88,
+          "kind": "movw/movt",
+          "v137": "0x307f28c",
+          "target": "0x307f958",
+          "evidence": "3 matched stock reference(s) of the feature read 0x307f958 (literal of ldr at 0x307d684 (m39)); 1 of 1 other V137 references located and agree"
+        },
+        {
+          "offset": 92,
+          "kind": "bl",
+          "v137": "0x3067510",
+          "target": "0x3067828",
+          "evidence": "located m0 0x3067510 -> 0x3067828; agrees with 4 matched stock call(s)"
+        },
+        {
+          "offset": 122,
+          "movt_offset": 126,
+          "kind": "movw/movt",
+          "v137": "0x307f38c",
+          "target": "0x307fa58",
+          "evidence": "3 matched stock reference(s) of the feature read 0x307fa58 (literal of ldr at 0x307d6a4 (m39)); 1 of 1 other V137 references located and agree"
+        },
+        {
+          "offset": 130,
+          "kind": "bl",
+          "v137": "0x3067510",
+          "target": "0x3067828",
+          "evidence": "located m0 0x3067510 -> 0x3067828; agrees with 4 matched stock call(s)"
+        },
+        {
+          "offset": 138,
+          "movt_offset": 142,
+          "kind": "movw/movt",
+          "v137": "0x307f28c",
+          "target": "0x307f958",
+          "evidence": "3 matched stock reference(s) of the feature read 0x307f958 (literal of ldr at 0x307d684 (m39)); 1 of 1 other V137 references located and agree"
+        },
+        {
+          "offset": 146,
+          "movt_offset": 150,
+          "kind": "movw/movt",
+          "v137": "0x307f38c",
+          "target": "0x307fa58",
+          "evidence": "3 matched stock reference(s) of the feature read 0x307fa58 (literal of ldr at 0x307d6a4 (m39)); 1 of 1 other V137 references located and agree"
+        },
+        {
+          "offset": 208,
+          "movt_offset": 212,
+          "kind": "movw/movt",
+          "v137": "0x307f28c",
+          "target": "0x307f958",
+          "evidence": "3 matched stock reference(s) of the feature read 0x307f958 (literal of ldr at 0x307d684 (m39)); 1 of 1 other V137 references located and agree"
+        },
+        {
+          "offset": 216,
+          "kind": "bl",
+          "v137": "0x3067510",
+          "target": "0x3067828",
+          "evidence": "located m0 0x3067510 -> 0x3067828; agrees with 4 matched stock call(s)"
+        },
+        {
+          "offset": 220,
+          "movt_offset": 224,
+          "kind": "movw/movt",
+          "v137": "0x307e1ec",
+          "target": "0x307e8b8",
+          "evidence": "2 matched stock reference(s) of the feature read 0x307e8b8 (literal of ldr at 0x307d66a (m39)); 2 of 2 other V137 references located and agree"
+        },
+        {
+          "offset": 242,
+          "movt_offset": 246,
+          "kind": "movw/movt",
+          "v137": "0x307f28c",
+          "target": "0x307f958",
+          "evidence": "3 matched stock reference(s) of the feature read 0x307f958 (literal of ldr at 0x307d684 (m39)); 1 of 1 other V137 references located and agree"
+        },
+        {
+          "offset": 258,
+          "movt_offset": 262,
+          "kind": "movw/movt",
+          "v137": "0x302329c",
+          "target": "0x302216c",
+          "evidence": "2 matched stock reference(s) of the feature read 0x302216c (literal of ldr at 0x307d652 (m39)); 11 of 14 other V137 references located and agree, 1 read another value (0x30001 by pool m27 0x307df80 -> 0x307e5ec)"
+        },
+        {
+          "offset": 268,
+          "movt_offset": 272,
+          "kind": "movw/movt",
+          "v137": "0x30247ec",
+          "target": "0x30236ec",
+          "evidence": "2 matched stock reference(s) of the feature read 0x30236ec (literal of ldr at 0x307d654 (m39)); 4 of 4 other V137 references located and agree"
+        },
+        {
+          "offset": 878,
+          "movt_offset": 882,
+          "kind": "movw/movt",
+          "v137": "0x309f39c",
+          "target": "0x309fa68",
+          "evidence": "inside sortkeys-cave"
+        }
+      ],
+      "code_offsets": [
+        0,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14,
+        16,
+        18,
+        20,
+        22,
+        24,
+        26,
+        28,
+        30,
+        32,
+        34,
+        36,
+        38,
+        40,
+        44,
+        46,
+        48,
+        52,
+        54,
+        58,
+        62,
+        66,
+        68,
+        70,
+        72,
+        76,
+        80,
+        84,
+        88,
+        92,
+        96,
+        100,
+        104,
+        106,
+        108,
+        110,
+        114,
+        118,
+        122,
+        126,
+        130,
+        134,
+        138,
+        142,
+        146,
+        150,
+        154,
+        158,
+        160,
+        162,
+        164,
+        166,
+        170,
+        172,
+        176,
+        178,
+        182,
+        186,
+        188,
+        190,
+        194,
+        196,
+        200,
+        204,
+        208,
+        212,
+        216,
+        220,
+        224,
+        228,
+        232,
+        236,
+        240,
+        242,
+        246,
+        250,
+        254,
+        258,
+        262,
+        266,
+        268,
+        272,
+        276,
+        280,
+        282,
+        284,
+        286,
+        288,
+        292,
+        294,
+        296,
+        298,
+        300,
+        302,
+        304,
+        306,
+        308,
+        312,
+        314,
+        316,
+        320,
+        322,
+        326,
+        328,
+        330,
+        334,
+        338,
+        340,
+        342,
+        346,
+        348,
+        350,
+        352,
+        354,
+        356,
+        358,
+        360,
+        362,
+        366,
+        368,
+        372,
+        376,
+        378,
+        380,
+        382,
+        384,
+        386,
+        388,
+        392,
+        394,
+        396,
+        398,
+        402,
+        406,
+        408,
+        410,
+        412,
+        414,
+        416,
+        418,
+        420,
+        422,
+        424,
+        426,
+        430,
+        432,
+        436,
+        438,
+        440,
+        442,
+        444,
+        446,
+        450,
+        452,
+        454,
+        458,
+        462,
+        464,
+        466,
+        470,
+        472,
+        474,
+        478,
+        480,
+        482,
+        484,
+        486,
+        488,
+        490,
+        492,
+        494,
+        496,
+        500,
+        502,
+        504,
+        506,
+        508,
+        510,
+        512,
+        516,
+        520,
+        522,
+        524,
+        528,
+        532,
+        536,
+        538,
+        540,
+        544,
+        548,
+        552,
+        554,
+        556,
+        560,
+        564,
+        566,
+        568,
+        572,
+        576,
+        578,
+        580,
+        582,
+        586,
+        590,
+        592,
+        594,
+        598,
+        600,
+        602,
+        604,
+        606,
+        610,
+        612,
+        616,
+        618,
+        620,
+        624,
+        626,
+        628,
+        630,
+        632,
+        634,
+        638,
+        640,
+        642,
+        644,
+        648,
+        650,
+        652,
+        654,
+        656,
+        658,
+        660,
+        662,
+        664,
+        666,
+        668,
+        672,
+        674,
+        676,
+        678,
+        680,
+        682,
+        684,
+        686,
+        688,
+        690,
+        694,
+        696,
+        698,
+        702,
+        704,
+        706,
+        708,
+        710,
+        712,
+        714,
+        716,
+        720,
+        722,
+        724,
+        726,
+        730,
+        734,
+        738,
+        740,
+        742,
+        744,
+        746,
+        748,
+        750,
+        752,
+        754,
+        756,
+        760,
+        762,
+        766,
+        770,
+        772,
+        776,
+        778,
+        780,
+        782,
+        786,
+        788,
+        790,
+        792,
+        794,
+        796,
+        798,
+        800,
+        802,
+        804,
+        808,
+        810,
+        812,
+        816,
+        818,
+        822,
+        826,
+        828,
+        830,
+        832,
+        836,
+        840,
+        842,
+        844,
+        846,
+        850,
+        852,
+        854,
+        858,
+        860,
+        862,
+        864,
+        866,
+        868,
+        872,
+        876,
+        878,
+        882,
+        886,
+        890,
+        892,
+        894,
+        896,
+        898,
+        900,
+        902,
+        904,
+        906,
+        910,
+        912,
+        914,
+        918,
+        920,
+        922
+      ]
+    },
+    {
+      "file": "0050-power-wheel-period-1000us.patch",
+      "name": "power-wheel-period-1000us",
+      "feature": "wheel-period",
+      "role": "code",
+      "status": "PORTED",
+      "module": 1,
+      "region": "code",
+      "v137_address": "0x307d2d6",
+      "length": 4,
+      "target_address": "0x307d91a",
+      "evidence": [
+        "site located by a 20-byte masked window [0x307d2ce, 0x307d2e2) -> 0x307d91a",
+        "routine key init m1 0x307d1cc masked body unchanged at 0x307d810",
+        "routine TimerPeriodSet m0 0x30510a2 masked body unchanged at 0x30510a2"
+      ],
+      "relocations": [],
+      "code_offsets": [
+        0
+      ]
+    }
+  ],
+  "transplants": [
+    {
+      "name": "vorbis75",
+      "status": "PORTED",
+      "evidence": [
+        "module 75 code 0x1000000+0xf5d8 sha256 4ec93d972cbdd25e",
+        "module 75 data 0x1020000+0xd184 sha256 32db67e0e8fd7825",
+        "module 75 record, code and data byte-identical to V137; transplant.py resolves file offsets through the target module table"
+      ]
+    }
+  ],
+  "routines": {
+    "dac-fix": [
+      {
+        "module": 0,
+        "v137": [
+          "0x3060c4c",
+          "0x3060d28"
+        ],
+        "label": "dac_write",
+        "status": "reviewed",
+        "target": "0x3060ae4",
+        "masked_sha256": "c5be9d8dbe43423d63e0140637feb21a8e16280c64aa4e564fbe849374ebf3d8",
+        "reviewed": "one change: ldrb.w ip, [ip, #0x2e8] became #0x306 at +0x0a, a config byte read before the transfer from the SAVEINFO block (which grew); the counter-block literal (0x0300411d in every version), the success branch at +0xc8 that the hook retargets and the shared tail the cave rejoins are unchanged",
+        "difference": "entry at 0x3060ae4; first difference at +0xa: V137 9cf8e8c2, target 9cf806c3"
+      }
+    ],
+    "clock-v1": [
+      {
+        "module": 0,
+        "v137": [
+          "0x3066efc",
+          "0x3067064"
+        ],
+        "label": "clock solver FREQSetFreq",
+        "target": "0x3067214",
+        "status": "same"
+      },
+      {
+        "module": 0,
+        "v137": [
+          "0x3079824",
+          "0x3079c14"
+        ],
+        "label": "clock request table (36 rows; row 1 is the floor)",
+        "target": "0x3079e68",
+        "status": "same"
+      }
+    ],
+    "i2c-reset-pulse": [
+      {
+        "module": 0,
+        "v137": [
+          "0x306021c",
+          "0x306043a"
+        ],
+        "label": "i2c controller init",
+        "target": "0x30600b4",
+        "status": "same"
+      },
+      {
+        "module": 0,
+        "v137": [
+          "0x3064920",
+          "0x3064944"
+        ],
+        "label": "delay_us",
+        "target": "0x3064a28",
+        "status": "same"
+      }
+    ],
+    "gapless": [
+      {
+        "module": 0,
+        "v137": [
+          "0x306cb2c",
+          "0x306cb8e"
+        ],
+        "label": "core-1 decoder reset-and-start",
+        "target": "0x306cebc",
+        "status": "same"
+      },
+      {
+        "module": 0,
+        "v137": [
+          "0x306cb0c",
+          "0x306cb2c"
+        ],
+        "label": "core-1 halt",
+        "target": "0x306ce9c",
+        "status": "same"
+      },
+      {
+        "module": 0,
+        "v137": [
+          "0x3064f7e",
+          "0x3065148"
+        ],
+        "label": "playback monitor",
+        "status": "changed",
+        "difference": "entry not found: the piece at +0x42 locates to 0x30650fc but the code before it differs"
+      },
+      {
+        "module": 33,
+        "v137": [
+          "0x3088824",
+          "0x308886e"
+        ],
+        "label": "per-codec dispatcher",
+        "target": "0x30899ec",
+        "status": "same"
+      },
+      {
+        "module": 33,
+        "v137": [
+          "0x308936e",
+          "0x30893ac"
+        ],
+        "label": "decoder file close",
+        "status": "changed",
+        "difference": "no 16-byte piece of the routine locates in the target"
+      },
+      {
+        "module": 33,
+        "v137": [
+          "0x30893c4",
+          "0x3089416"
+        ],
+        "label": "decoder shutdown",
+        "status": "changed",
+        "difference": "no 16-byte piece of the routine locates in the target"
+      },
+      {
+        "module": 33,
+        "v137": [
+          "0x3089ad6",
+          "0x3089c64"
+        ],
+        "label": "stop-and-advance helper",
+        "status": "changed",
+        "difference": "entry not found: the piece at +0x28 locates to 0x308a27e but the code before it differs"
+      },
+      {
+        "module": 34,
+        "v137": [
+          "0x308bfbc",
+          "0x308c284"
+        ],
+        "label": "decoder start",
+        "status": "changed",
+        "target": "0x308d680",
+        "masked_sha256": "09fcbec6dea11e2fd5e402b5247df7abf692aa7c8ba92c3d533b890854b6c8ed",
+        "difference": "entry at 0x308d680; first difference at +0x9e: V137 40f20b10, target 4ff48670"
+      }
+    ],
+    "sortkeys": [
+      {
+        "module": 39,
+        "v137": [
+          "0x307d620",
+          "0x307d6ea"
+        ],
+        "label": "library comparator",
+        "target": "0x307dce4",
+        "status": "same"
+      },
+      {
+        "module": 39,
+        "v137": [
+          "0x307d6ea",
+          "0x307d75e"
+        ],
+        "label": "sorted insert",
+        "target": "0x307ddae",
+        "status": "same"
+      },
+      {
+        "module": 39,
+        "v137": [
+          "0x307d80a",
+          "0x307d8c4"
+        ],
+        "label": "key builder A",
+        "target": "0x307dece",
+        "status": "same"
+      },
+      {
+        "module": 39,
+        "v137": [
+          "0x307d8c4",
+          "0x307da38"
+        ],
+        "label": "key builder B",
+        "status": "reviewed",
+        "target": "0x307df88",
+        "masked_sha256": "568e65b2ac5d99eb56d0638c39de8ba0bb96b0dbbbac159111b584e9ca5be24d",
+        "reviewed": "Fosi added a record-count cap after the main fold loop: +0xcc `cmp r0, #0; it ne; cmpne.w r5, #0x2000; blo`, with r0 reloaded from the stack after the loop exit, so the hooks clobbering r0-r3 do not feed it; both fold loops the hooks replace, their record pointer (r4) and their exits are unchanged",
+        "difference": "entry at 0x307df88; first difference at +0x4a: V137 45d0, target 49d0"
+      },
+      {
+        "module": 0,
+        "v137": [
+          "0x3067510",
+          "0x30676d0"
+        ],
+        "label": "string read",
+        "target": "0x3067828",
+        "status": "same"
+      }
+    ],
+    "wheel-period": [
+      {
+        "module": 1,
+        "v137": [
+          "0x307d1cc",
+          "0x307d2e4"
+        ],
+        "label": "key init",
+        "target": "0x307d810",
+        "status": "same"
+      },
+      {
+        "module": 0,
+        "v137": [
+          "0x30510a2",
+          "0x30511cc"
+        ],
+        "label": "TimerPeriodSet",
+        "target": "0x30510a2",
+        "status": "same"
+      }
+    ]
+  },
+  "scope": "offline evidence only; no ported image has run on hardware"
+}

@@ -1,0 +1,25 @@
+# Ported by tools/port_patches.py from V137 0015-clock-v1-row-19.patch. Generated:
+# rerun the tool instead of editing. Evidence: port_report.json.
+name: clock-v1-row-19
+kind: module
+module: 0
+region: code
+address: 0x0307a080
+base_sha256: 96e9216a9877a4ff5d845f47319abeef0b57f11309877fa8af1628bd612724ed
+ported_from: V137 0015-clock-v1-row-19.patch address 0x03079a3c
+gate: build refuses unless the input SHA-256 equals base_sha256 (V161) and
+  the bytes at the target equal `expect`; the finished image must pass the
+  build validator
+rationale: FLAC (codec 6; the firmware classifier, run under emulation, maps
+  .FLA to 6 and the module 33 switch sends case 6 here): B core/bus -> 288
+  MHz solver target written directly into the row, above the SDK's 220 MHz
+  for high-rate FLAC (FREQ_HFLAC). A fields zeroed so the solver's row-1
+  floor parks A outputs at 96 MHz; PLL word carried over unchanged (v1
+  conservatism, clock_v1.md flag 2). Data-only edit; reversible by
+  rebuilding from stock without this patch. Port to V161: site located by a
+  28-byte masked window [0x3079a3c, 0x3079a58) -> 0x307a080; routine clock
+  solver FREQSetFreq m0 0x3066efc masked body unchanged at 0x3067214;
+  routine clock request table (36 rows; row 1 is the floor) m0 0x3079824
+  masked body unchanged at 0x3079e68.
+expect: 00389c1c00c2eb0b00c2eb0b00b4c40400389c1c00389c1c
+replace: 00389c1c00000000000000000000000000882a1100882a11

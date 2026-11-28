@@ -1,0 +1,38 @@
+# Ported by tools/port_patches.py from V137 0002-dac-fix-cave.patch. Generated:
+# rerun the tool instead of editing. Evidence: port_report.json.
+name: dac-fix-2-cave
+kind: module
+module: 0
+region: code
+address: 0x03060da4
+base_sha256: 4713a2eb4b523d49ad003ac2df159c1c596339aef1a9a060e6ea6bbbf18e1332
+ported_from: V137 0002-dac-fix-cave.patch address 0x03060d90
+gate: build refuses unless the input SHA-256 equals base_sha256 (V155) and
+  the bytes at the target equal `expect`; the finished image must pass the
+  build validator
+rationale: Reset trampoline in the alignment padding after dac_read.
+  0x03060d90 sits in a 14-byte run of `bx lr` filler. The first stub,
+  0x03060d8e, is NOT free: module 0 calls it as a no-op from the shutdown
+  routine (0x03067cd8) and the software reset (0x030536c4), so it stays `bx
+  lr`. A scan of all 82 modules (BL/B/B.W targets, literal words and data
+  pointers) shows zero references to 0x03060d90..0x03060d97. The pad's last
+  two stubs (0x03060d98 / 0x03060d9a) ARE referenced as no-op returns by
+  modules 11 and 61 and are deliberately left byte-identical. Entered only
+  from the patched success branch (part 1) with r0 == 0 (successful transfer
+  result) and r5 == 0x0300411d (dac_write's counter-block pointer), so `strb
+  r0, [r5, #1]` writes 0 to the error counter at 0x0300411e; the branch then
+  rejoins the stock tail at 0x03060d1c (movs r0, #0; bus release; return
+  transfer result). Port to V155: site located by a 20-byte masked window
+  [0x3060d88, 0x3060d9c) -> 0x3060da4; cave proof: 4 fill bytes inside
+  module 0 code [0x3050000, 0x30799a0), no reference into [0x3060da4,
+  0x3060da8) from any co-resident module, no module mapped over it that V137
+  did not already have; routine dac_write m0 0x3060c4c at 0x3060c60 differs
+  (entry at 0x3060c60; first difference at +0xa: V137 9cf8e8c2, target
+  9cf806c3); reviewed: one change: ldrb.w ip, [ip, #0x2e8] became #0x306 at
+  +0x0a, a config byte read before the transfer from the SAVEINFO block
+  (which grew); the counter-block literal (0x0300411d in every version), the
+  success branch at +0xc8 that the hook retargets and the shared tail the
+  cave rejoins are unchanged; b at +0x2: 0x3060d1c -> 0x3060d30 (located m0
+  0x3060d1c -> 0x3060d30).
+expect: 70477047
+replace: 6870c3e7

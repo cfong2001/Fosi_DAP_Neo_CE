@@ -1,0 +1,22 @@
+# Ported by tools/port_patches.py from V137 0000-noop-selftest.patch. Generated:
+# rerun the tool instead of editing. Evidence: port_report.json.
+name: noop-selftest
+kind: module
+module: 0
+region: code
+address: 0x03050000
+base_sha256: 96e9216a9877a4ff5d845f47319abeef0b57f11309877fa8af1628bd612724ed
+ported_from: V137 0000-noop-selftest.patch address 0x03050000
+gate: build refuses unless the input SHA-256 equals base_sha256 (V161) and
+  the bytes at the target equal `expect`; the finished image must pass the
+  build validator
+rationale: End-to-end proof of the apply path that changes no behaviour: the
+  replacement bytes are identical to the originals (module 0's Cortex-M
+  vector-table head: initial SP 0x03004000, reset 0x03061f8b). A build with
+  only this patch enabled must differ from stock only in the header date and
+  the mirror/CRC fields the date change implies. verify.py asserts exactly
+  that. Keep this patch enabled: it costs nothing and smoke-tests every
+  build. Port to V161: site located by a 264-byte masked window [0x3050000,
+  0x3050108) -> 0x3050000; no-op fixture: replace equals the target bytes.
+expect: 0040000341200603
+replace: 0040000341200603

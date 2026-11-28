@@ -1,0 +1,23 @@
+# Ported by tools/port_patches.py from V137 0050-power-wheel-period-1000us.patch. Generated:
+# rerun the tool instead of editing. Evidence: port_report.json.
+name: power-wheel-period-1000us
+kind: module
+module: 1
+region: code
+address: 0x0307d91a
+base_sha256: ff201296d01f485dc7379c2505b95c78451955d49a06e9e5418ce072fe877aa0
+ported_from: V137 0050-power-wheel-period-1000us.patch address 0x0307d2d6
+gate: build refuses unless the input SHA-256 equals base_sha256 (V162) and
+  the bytes at the target equal `expect`; the finished image must pass the
+  build validator
+rationale: TimerPeriodSet(0, usTick=400, nsTick) at module 1 exec
+  0x0307D2DE; the usTick low word is loaded by the mov.w at 0x0307D2D6 (r3 =
+  0 is the high word, set at 0x0307D2D4). Changing only the low word 400 ->
+  1000 raises the Timer0 period to 1000 us. Cuts wheel IRQ wakes from 2500/s
+  to 1000/s. Data-only edit (one immediate); reversible by rebuilding from
+  stock without this patch. Port to V162: site located by a 20-byte masked
+  window [0x307d2ce, 0x307d2e2) -> 0x307d91a; routine key init m1 0x307d1cc
+  masked body unchanged at 0x307d810; routine TimerPeriodSet m0 0x30510a2
+  masked body unchanged at 0x30510a2.
+expect: 4ff4c872
+replace: 4ff47a72
