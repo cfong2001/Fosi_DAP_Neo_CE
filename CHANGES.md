@@ -1,5 +1,22 @@
 # Changelog
 
+## 2026-11-28: Cached font and resource reads
+
+- Every glyph, glyph width and partial image row is a read of fewer than
+  512 bytes from the system disk. The stock block reader (`0x03067510`,
+  the SDK's `MDReadData`) read a whole eMMC sector for each one with
+  interrupts disabled, then discarded it. Only the data disk used the
+  reader's three 512-byte sector buffers. Patches 0290 to 0294 send
+  system-disk reads through the same buffers, tagged with bit 31 so a
+  system sector never matches a data sector. Every device write clears
+  the tags first. The stock single retry of a failed system read is kept.
+- In emulation, one browser wheel step makes 247 glyph reads, which cost
+  274 sector reads before and 141 after. These are sector-read counts,
+  not milliseconds.
+- Standard image SHA-256
+  `b91485f76ab11d12fd42305f37adf2cca02168f40c831d009ac13099cbca5830`.
+  Minimal is unchanged. Not yet verified on hardware.
+
 ## 2026-11-22: Power off stays off
 
 - Holding Power showed the power-off screen, then the player restarted or

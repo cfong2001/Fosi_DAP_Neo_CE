@@ -219,3 +219,9 @@ patches/0262-focus-wheel-service-hook.patch
 ../player_ui/0276-progress-gap-restore.patch
 ../player_ui/0277-player-full-fill.patch
 ../player_ui/0278-player-full-fill-hook.patch
+# System-disk sector cache in the block reader (fonts and image resources):
+../sysdisk_cache/0290-sysdisk-cache-code.patch
+../sysdisk_cache/0291-sysdisk-cache-route.patch
+../sysdisk_cache/0292-sysdisk-cache-read.patch
+../sysdisk_cache/0293-sysdisk-cache-multi.patch
+../sysdisk_cache/0294-sysdisk-cache-write.patch

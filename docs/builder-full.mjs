@@ -1883,6 +1883,56 @@ export const FULL_PATCHES = [
   "expect": "e4f79ff9",
   "replace": "d3f7d0fe",
   "index": 187
+ },
+ {
+  "file": "0290-sysdisk-cache-code.patch",
+  "name": "0290-sysdisk-cache-code",
+  "module": 0,
+  "region": "code",
+  "address": 50779216,
+  "expect": "10b54ff400610020fff764fe11210020fff744ff7820f7f76dfab6210020fff73dffb4210020fff730fff0210020fff72cffb1210020fff731ff02210020fff724ff35210020fff720ff36210020fff71cffb2210020fff721ff02210020fff714ff35210020fff710ff3621",
+  "replace": "03980649884206d0b0f5403f01d0faf7d1b844f00044faf780b800bf010003000cb524f000410698faf727fa60b10698b0f5403f08d1039824f00041091a9de80c000698faf719fa0cbd00bf24f00044750abd42704700bf03484ff0ff31016041608160f9f7a9b878580003",
+  "index": 188
+ },
+ {
+  "file": "0291-sysdisk-cache-route.patch",
+  "name": "0291-sysdisk-cache-route",
+  "module": 0,
+  "region": "code",
+  "address": 50754914,
+  "expect": "c8490398",
+  "replace": "05f075bf",
+  "index": 189
+ },
+ {
+  "file": "0292-sysdisk-cache-read.patch",
+  "name": "0292-sysdisk-cache-read",
+  "module": 0,
+  "region": "code",
+  "address": 50755040,
+  "expect": "2146039800f071f9",
+  "replace": "05f046ff00bf00bf",
+  "index": 190
+ },
+ {
+  "file": "0293-sysdisk-cache-multi.patch",
+  "name": "0293-sysdisk-cache-multi",
+  "module": 0,
+  "region": "code",
+  "address": 50755194,
+  "expect": "750abd42",
+  "replace": "05f00fff",
+  "index": 191
+ },
+ {
+  "file": "0294-sysdisk-cache-write.patch",
+  "name": "0294-sysdisk-cache-write",
+  "module": 0,
+  "region": "code",
+  "address": 50755886,
+  "expect": "fef76cfe",
+  "replace": "05f0bbfd",
+  "index": 192
  }
 ];
 export const FULL_TAIL = {
@@ -13297,4 +13347,4 @@ export const FULL_THEME_RUNS = [
   "replace": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
  }
 ];
-export const FULL_IMAGE_SHA256 = "175d4aff14407d7ddab3733fe7a57e25801d2082ca34ce0335af5d813d5f2c87";
+export const FULL_IMAGE_SHA256 = "b91485f76ab11d12fd42305f37adf2cca02168f40c831d009ac13099cbca5830";
