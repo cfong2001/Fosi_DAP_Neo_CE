@@ -34,8 +34,8 @@ from rknano_image import Image  # noqa: E402
 RAW = (ROOT / 'DP3_V137.img').read_bytes()
 assert hashlib.sha256(RAW).hexdigest() == \
     'fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cdfade5e9c6ea3bd71ac6deef'
-DEFAULT_SHA = '0dfd10e23749f9b6c65499266f1a7a2ec038160b089ba0fc2c' \
-              'a68dcf2b24c986'
+DEFAULT_SHA = '43476a08ace9e4fbf942bfcab2bbd5eea2e3554ac7a7c7cf60' \
+              'f9770d29700565'
 
 
 def load_build():

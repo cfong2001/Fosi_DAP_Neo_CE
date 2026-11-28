@@ -1,5 +1,26 @@
 # Changelog
 
+## 2026-11-22: Power off stays off
+
+- Holding Power showed the power-off screen, then the player restarted or
+  hung instead of switching off. The DAC error-counter fix (patches 0001 and
+  0002) had placed its 4-byte trampoline at `0x03060D8E`, the first `bx lr`
+  of the padding after `dac_read`. That stub is not free: module 0 calls it
+  as a no-op from the shutdown routine (`0x03067CD8`, before the power-hold
+  GPIO is released) and from the software reset (`0x030536C4`). Shutdown
+  therefore ran `dac_write`'s epilogue on its own frame and returned through
+  a stale stack word. The trampoline moves two bytes to `0x03060D90`
+  (unreferenced across all 82 modules) and `0x03060D8E` stays `bx lr`.
+  The DAC counter behaviour is unchanged.
+- `tests/test_shutdown_noop_stub.py` pins the stub and its two callers in
+  every release image and runs the shutdown tail under emulation through
+  the power-hold call; it fails on the previous images.
+- Standard image SHA-256
+  `175d4aff14407d7ddab3733fe7a57e25801d2082ca34ce0335af5d813d5f2c87`,
+  Minimal `43476a08ace9e4fbf942bfcab2bbd5eea2e3554ac7a7c7cf60f9770d29700565`.
+  Each differs from the preceding image in those 7 code bytes and the outer
+  CRC. Not yet verified on hardware.
+
 ## 2026-11-13: First device flash and outlined orange selector
 
 - Standard CE was written to both measured firmware slots on a physical DAP

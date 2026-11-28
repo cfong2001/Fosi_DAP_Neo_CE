@@ -3,7 +3,7 @@
   "input_file": "DP3_V137.img",
   "output_file": "DP3_V137_CE_minimal.img",
   "input_sha256": "fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cdfade5e9c6ea3bd71ac6deef",
-  "output_sha256": "0dfd10e23749f9b6c65499266f1a7a2ec038160b089ba0fc2ca68dcf2b24c986",
+  "output_sha256": "43476a08ace9e4fbf942bfcab2bbd5eea2e3554ac7a7c7cf60f9770d29700565",
   "byte_length": 13631492,
   "header_date": "20261023",
   "patches_applied": [
@@ -27,7 +27,7 @@
       "cpu_address": "0x3060d14",
       "file_offset": "0x3a3c0",
       "old_hex": "02d0",
-      "new_hex": "3bd0"
+      "new_hex": "3cd0"
     },
     {
       "patch": "dac-fix-2-cave",
@@ -35,10 +35,10 @@
       "kind": "module",
       "module": 0,
       "region": "code",
-      "cpu_address": "0x3060d8e",
-      "file_offset": "0x3a43a",
+      "cpu_address": "0x3060d90",
+      "file_offset": "0x3a43c",
       "old_hex": "70477047",
-      "new_hex": "6870c4e7"
+      "new_hex": "6870c3e7"
     },
     {
       "patch": "clock-v1-row-05",
@@ -443,8 +443,8 @@
         "0x3a3c0"
       ],
       [
-        "0x3a43a",
-        "0x3a43d"
+        "0x3a43c",
+        "0x3a43f"
       ],
       [
         "0x461d8",

@@ -118,16 +118,16 @@ evidence:
 
 **Construction (2 edits, 6 bytes of patch space, 5 bytes change):**
 
-1. `0x03060d14`: `beq 0x03060d1c` (`02 d0`) → `beq 0x03060d8e`
-   (`3b d0`). Same condition (Z set by the stock `movs r4, r0`),
+1. `0x03060d14`: `beq 0x03060d1c` (`02 d0`) → `beq 0x03060d90`
+   (`3c d0`). Same condition (Z set by the stock `movs r4, r0`),
    same fall-through; only the success target moves. (The second
    byte is unchanged, so the file diff here is 1 byte.)
-2. Trampoline at `0x03060d8e`, in the alignment padding after
+2. Trampoline at `0x03060d90`, in the alignment padding after
    `dac_read`:
 
    ```
-   03060d8e: strb     r0, [r5, #1]     ; r0 == 0 here -> counter = 0
-   03060d90: b        #0x3060d1c       ; rejoin stock tail
+   03060d90: strb     r0, [r5, #1]     ; r0 == 0 here -> counter = 0
+   03060d92: b        #0x3060d1c       ; rejoin stock tail
    ```
 
    Entry invariants come from stock itself: the branch is taken only
@@ -140,11 +140,19 @@ evidence:
    call, so the failure path, the gate path, and the return value
    (`r4`) are bit-for-bit stock behaviour.
 
-**Cave safety.** `0x03060d8e` lies in a 14-byte run of `bx lr`
-filler (`0x03060d8e..0x03060d9b`) between `dac_read`'s epilogue and
-the next function. An exhaustive reference scan of all 82 modules
-(every BL/B.W target and every literal word) shows **zero references
-to `0x03060d8e..0x03060d96`**, and no fall-through reaches it
+**Cave safety.** The trampoline sits at `0x03060d90`, inside a
+14-byte run of `bx lr` filler (`0x03060d8e..0x03060d9b`) between
+`dac_read`'s epilogue and the next function. The run's **first** stub,
+`0x03060d8e`, is not free: module 0 calls it as a no-op from the
+shutdown routine (`bl` at `0x03067cd8`, before the power-hold GPIO is
+released) and from the software reset (`bl` at `0x030536c4`). An
+earlier revision placed the trampoline there, so shutdown entered
+`dac_write`'s epilogue with the wrong frame and returned through a
+stale stack word instead of powering off (the player restarted or
+hung). That stub now stays `bx lr`. A reference scan of all 82
+modules (every BL/B/B.W target, every literal word and every data
+pointer) shows **zero references to `0x03060d90..0x03060d97`**, and
+no fall-through reaches it
 (`dac_read` ends in `pop {r4, r5, r6, pc}`). The run's last two
 stubs, `0x03060d98` and `0x03060d9a`, are referenced as no-op
 return targets by modules 11 and 61; they are left byte-identical
@@ -157,8 +165,8 @@ succeeds, its gate is re-armed by this patch.
 
 Encodings were hand-derived and independently reproduced by
 `rz-asm` assembled at the target addresses:
-`beq 0x03060d8e` @`0x03060d14` = `3bd0`;
-`strb r0, [r5, #1]` = `6870`; `b 0x03060d1c` @`0x03060d90` = `c4e7`.
+`beq 0x03060d90` @`0x03060d14` = `3cd0`;
+`strb r0, [r5, #1]` = `6870`; `b 0x03060d1c` @`0x03060d92` = `c3e7`.
 (Control check: `rz-asm` decodes the stock `02d0` at `0x03060d14`
 as `beq 0x3060d1c`, as expected.)
 
@@ -169,7 +177,7 @@ as `beq 0x3060d1c`, as expected.)
 ```
 03060d0e: fff788fc   bl       #0x3060622
 03060d12: 0400       movs     r4, r0
-03060d14: 3bd0       beq      #0x3060d8e     ; success -> trampoline
+03060d14: 3cd0       beq      #0x3060d90     ; success -> trampoline
 03060d16: 6878       ldrb     r0, [r5, #1]   ; failure path: unchanged
 03060d18: 401c       adds     r0, r0, #1
 03060d1a: 6870       strb     r0, [r5, #1]
@@ -186,10 +194,10 @@ Trampoline and its neighbourhood, patched:
 03060d88: 2878       ldrb     r0, [r5]       ; dac_read epilogue
 03060d8a: 04b0       add      sp, #0x10
 03060d8c: 70bd       pop      {r4, r5, r6, pc}
-03060d8e: 6870       strb     r0, [r5, #1]   ; NEW: counter = 0
-03060d90: c4e7       b        #0x3060d1c     ; NEW: rejoin tail
-03060d92: 7047       bx       lr             ; filler, unchanged
-03060d94: 7047       bx       lr
+03060d8e: 7047       bx       lr             ; live no-op (shutdown, reset), unchanged
+03060d90: 6870       strb     r0, [r5, #1]   ; NEW: counter = 0
+03060d92: c3e7       b        #0x3060d1c     ; NEW: rejoin tail
+03060d94: 7047       bx       lr             ; filler, unchanged
 03060d96: 7047       bx       lr
 03060d98: 7047       bx       lr             ; referenced stub, unchanged
 03060d9a: 7047       bx       lr             ; referenced stub, unchanged
@@ -200,19 +208,21 @@ Trampoline and its neighbourhood, patched:
 
 - Each edit applied **alone** through `firmware_patch.patch()` from
   pristine stock: expect precondition, module boundary check, and
-  `validate()` all pass (file offsets `0x3a3c0` and `0x3a43a`).
+  `validate()` all pass (file offsets `0x3a3c0` and `0x3a43c`).
 - Combined image (edit 1 via the patcher; edit 2 via the patcher's
   own offset resolution, then its mirror-sync + trailer-CRC
   finalization): passes `firmware_patch.validate()`.
 - Byte diff vs stock is exactly **9 bytes**: `0x3a3c0` (branch byte),
-  `0x3a43a..0x3a43d` (trampoline), `0xd00000..0xd00003` (trailer
+  `0x3a43c..0x3a43f` (trampoline), `0xd00000..0xd00003` (trailer
   CRC). The header-mirror region is untouched (no date change in
   this isolated build; the framework stamps stock+1 on integration).
-- Patched-copy disassembly asserts: branch target `0x03060d8e`;
-  trampoline decodes as designed; filler stubs `0x03060d92..`
-  `0x03060d9a` still `bx lr`.
+- Patched-copy disassembly asserts: branch target `0x03060d90`;
+  the live stub `0x03060d8e` and filler stubs `0x03060d94..`
+  `0x03060d9a` still `bx lr`; trampoline decodes as designed.
+  `tests/test_shutdown_noop_stub.py` checks both release images and
+  runs the shutdown tail under emulation through the power-hold call.
 - Patched copy: `DP3_V137_dacfix.img`, SHA-256
-  `6682961a51bd390fa1d1a4c2d24740bc2b84b55500ee41b586d819fd632e4af0`.
+  `089f0fbeed69dab07b01222a5347ef6a7920b07f9b570f07fd2d2bd8b22a8616`.
 
 ## 6. Risk note
 
@@ -224,7 +234,7 @@ Trampoline and its neighbourhood, patched:
   stock's own: the increment block at `0x03060d16` dereferences
   `r5` after the identical calls. If a bus callee violated the
   callee-saved convention, stock would already corrupt the counter.
-- **Hidden cave entry:** a computed jump into `0x03060d8e` from
+- **Hidden cave entry:** a computed jump into `0x03060d90` from
   outside the static scan's view would now execute a store through
   an arbitrary `r5`. The scan covered all branch targets and
   literals in all 82 modules; residual risk is the standard cave
