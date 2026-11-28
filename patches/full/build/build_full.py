@@ -97,6 +97,7 @@ def main():
         run([PY, str(REPO / 'patches' / 'opus_swap' / 'build_content_route.py')])
         run([PY, str(REPO / 'patches' / 'opus_swap' / 'build_artwork_route.py')])
         run([PY, str(REPO / 'patches' / 'player_ui' / 'build_player_repaint.py')])
+        run([PY, str(REPO / 'patches' / 'wheel_accel' / 'build_wheel_accel.py')])
         run([PY, str(HERE / 'build_theme.py')])
 
     output = a.output

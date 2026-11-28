@@ -9,8 +9,8 @@ full-card device acceptance remains required for the latest revision.
 | | |
 |---|---|
 | Input | `DP3_V137.img`, 13,631,492 bytes, SHA-256 `fcc1cd3e…` |
-| Output | 13,639,684 bytes, SHA-256 `175d4aff14407d7ddab3733fe7a57e25801d2082ca34ce0335af5d813d5f2c87` |
-| Composition | 188 byte patches, 2 transplants, 3 growth insertions, one merged gap tail, one merged theme config |
+| Output | 13,639,684 bytes, SHA-256 `9918c5c358d3b17cd07ec7cd7dd3f066b30ee978b3a256a0093efc236fae815f` |
+| Composition | 192 byte patches, 2 transplants, 3 growth insertions, one merged gap tail, one merged theme config |
 | Default build | unchanged, still SHA-256 `92c44606…` (verify.py checks 1 to 13 pass; check 13 pins this build) |
 
 ## What changed at integration

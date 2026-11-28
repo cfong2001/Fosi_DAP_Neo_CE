@@ -1883,6 +1883,46 @@ export const FULL_PATCHES = [
   "expect": "e4f79ff9",
   "replace": "d3f7d0fe",
   "index": 187
+ },
+ {
+  "file": "0330-wheel-accel-home-a.patch",
+  "name": "0330-wheel-accel-home-a",
+  "module": 0,
+  "region": "code",
+  "address": 50669352,
+  "expect": "032824bf00207047d44acb08490702eb8302090f48b101280cd0022818bf7047106cc84000f0030070471068c84000f003007047106ac84000f003007047c749002814bf4ff002104ff4003008667047c2490028086e14bf40f0011040f480300866704790fbf1f0bc49401e0a6e40f0fe60104308667047",
+  "replace": "012300e0002370b5184c19a2d4f8f01910681160081a11790a2807d281ea0300c00703d1182938bf023100e019461171c90801268e40013e11d0b4f8ee51b4f8cc1104eb4102382001fb00418989023905ddb2f8cec103b976420bf029bbbde870400bb12bf072be2bf013bea82802030000000000000000",
+  "index": 188
+ },
+ {
+  "file": "0331-wheel-accel-home-b.patch",
+  "name": "0331-wheel-accel-home-b",
+  "module": 0,
+  "region": "code",
+  "address": 50716120,
+  "expect": "10b50b4604464ff0000cfff790ff002804bf042010bd5a48072b50f8240008bf00690ad00b2b08bf406906d00c2b18bf4ff0040c03d0604610bd1060fbe7d1b200f067ff8446f6e7",
+  "replace": "a8190128b8bf01208842c8bf0846411b714001d5f4f7cbbca4f8ee01a0eb0c011bb1063905db063801e0002901dca2f8ce01f4f7befc40f2441009f034fa40f2431009f00ffa70bd",
+  "index": 189
+ },
+ {
+  "file": "0332-wheel-accel-down-hook.patch",
+  "name": "0332-wheel-accel-down-hook",
+  "module": 31,
+  "region": "code",
+  "address": 50849492,
+  "expect": "fff7cefe",
+  "replace": "d4f728f8",
+  "index": 190
+ },
+ {
+  "file": "0333-wheel-accel-up-hook.patch",
+  "name": "0333-wheel-accel-up-hook",
+  "module": 31,
+  "region": "code",
+  "address": 50849530,
+  "expect": "fff75efe",
+  "replace": "d4f717f8",
+  "index": 191
  }
 ];
 export const FULL_TAIL = {
@@ -13297,4 +13337,4 @@ export const FULL_THEME_RUNS = [
   "replace": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
  }
 ];
-export const FULL_IMAGE_SHA256 = "175d4aff14407d7ddab3733fe7a57e25801d2082ca34ce0335af5d813d5f2c87";
+export const FULL_IMAGE_SHA256 = "9918c5c358d3b17cd07ec7cd7dd3f066b30ee978b3a256a0093efc236fae815f";

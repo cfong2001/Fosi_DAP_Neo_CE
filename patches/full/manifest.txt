@@ -219,3 +219,7 @@ patches/0262-focus-wheel-service-hook.patch
 ../player_ui/0276-progress-gap-restore.patch
 ../player_ui/0277-player-full-fill.patch
 ../player_ui/0278-player-full-fill-hook.patch
+../wheel_accel/0330-wheel-accel-home-a.patch
+../wheel_accel/0331-wheel-accel-home-b.patch
+../wheel_accel/0332-wheel-accel-down-hook.patch
+../wheel_accel/0333-wheel-accel-up-hook.patch

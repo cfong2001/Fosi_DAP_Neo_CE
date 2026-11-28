@@ -1,5 +1,24 @@
 # Changelog
 
+## 2026-11-28: Wheel acceleration in the file browser
+
+- Spinning the wheel quickly in the file browser now moves the highlight
+  1, 2, 4, then 8 rows per step. Steps less than 100 ms apart in one
+  direction build the streak, four steps per level. A slower step or a
+  reversal moves one row again, and single steps are the stock step
+  unchanged. Ends clamp where stock stops; the list still does not wrap.
+  Crossing 500 entries takes about 70 fast steps instead of 499.
+- An accelerated step reloads the visible window once and uses the stock
+  full-list repaint. The music library lists (module 23) are unchanged.
+- Patches 0330 to 0333 (`patches/wheel_accel/`). The code fills two dead
+  module 0 functions at `0x03052728` and `0x0305DDD8`.
+  `patches/wheel_accel/test_wheel_accel.py` drives the real browser Key
+  callback and painter under emulation against the stock call sites.
+- Standard image SHA-256
+  `9918c5c358d3b17cd07ec7cd7dd3f066b30ee978b3a256a0093efc236fae815f`.
+  Minimal is unchanged. The thresholds are untuned and not yet verified on
+  hardware.
+
 ## 2026-11-22: Power off stays off
 
 - Holding Power showed the power-off screen, then the player restarted or
