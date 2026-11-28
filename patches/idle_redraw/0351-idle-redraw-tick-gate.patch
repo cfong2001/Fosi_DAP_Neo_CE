@@ -3,8 +3,8 @@ name: 0351-idle-redraw-tick-gate
 kind: module
 module: 0
 region: code
-address: 0x3056442
-expect: 2de9f05fdff85c920646904659f826205fea010a12bfb8f1000f4ff0ff30bde8f09f914f0846c3460025
-replace: 10b5fcf7a4fd1c462069884208d1e188062905d0d2f8a010012901d006f0b6ba4d20bde8104010f0e8be
+address: 0x30645b6
+expect: 4f4a1088032828bf7047002808bf7047401e0004000c08bf108000210123d36040f23f109180d0807047
+replace: 10b5eef7eafc1c462069884208d1e188062905d0d2f8a010012901d0f8f7fcb94d20bde8104002f02ebe
 gate: stock bytes; idle-tick framebuffer, display-context and panel parity against the unpatched image (test_idle_redraw.py)
 rationale: First half of the gate on the per-second 0x4D: post when the transport fingerprint changed, or in seek preview or the sub-track timebase. Skipped repaints would rewrite identical pixels. No new RAM.

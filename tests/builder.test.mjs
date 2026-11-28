@@ -53,7 +53,7 @@
 //       the merged theme runs), with the page's embedded Opus data
 //       (docs/builder-opus-data.mjs; DAP_NEO_OPUS_DATA overrides it):
 //         build_full.py (one build.py pass)
-//         a1248575842a84c4bf6aa5c1a3f584cc94260c474a0ef44342ffe1c415f2f7d1
+//         6751ee88fc55ee674ab49a8a21f13a3da8c17784f798ef4d29fe6b1358dd86ab
 //   standalone lock screen (the embedded 406-byte reference-toolchain
 //   routine in a module 31 extension, plus patch 0033):
 //         build.py --no-transplants --manifest <framework manifest plus
@@ -153,7 +153,7 @@ assert.deepEqual(FULL_GROWTHS.map(g => [g.module, g.length, g.sha256]), [
 ]);
 assert.equal(FULL_THEME_RUNS.length, 2277);
 assert.equal(FULL_IMAGE_SHA256,
-  "a1248575842a84c4bf6aa5c1a3f584cc94260c474a0ef44342ffe1c415f2f7d1");
+  "6751ee88fc55ee674ab49a8a21f13a3da8c17784f798ef4d29fe6b1358dd86ab");
 for (const g of FULL_GROWTHS)
   assert.equal(await sha256Hex(hexToBytes(g.hex)), g.sha256);
 assert.equal(await sha256Hex(hexToBytes(FULL_TAIL.hex)), FULL_TAIL.sha256);

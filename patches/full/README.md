@@ -9,7 +9,7 @@ full-card device acceptance remains required for the latest revision.
 | | |
 |---|---|
 | Input | `DP3_V137.img`, 13,631,492 bytes, SHA-256 `fcc1cd3e…` |
-| Output | 13,639,684 bytes, SHA-256 `a1248575842a84c4bf6aa5c1a3f584cc94260c474a0ef44342ffe1c415f2f7d1` |
+| Output | 13,639,684 bytes, SHA-256 `6751ee88fc55ee674ab49a8a21f13a3da8c17784f798ef4d29fe6b1358dd86ab` |
 | Composition | 193 byte patches, 2 transplants, 3 growth insertions, one merged gap tail, one merged theme config |
 | Default build | unchanged, still SHA-256 `92c44606…` (verify.py checks 1 to 13 pass; check 13 pins this build) |
 
@@ -85,7 +85,7 @@ pin.
 | Lock screen | The 406-byte routine in the module 31 payload at 0x03080644, reached by local patch 0033 |
 | Navigation disarm stubs | Folder and file stubs in the module 31 payload at 0x030807DC, the tag stub as the module 24 growth, local patches 0060 to 0062 |
 | Power profiles | Local patches 0140 to 0146 (three module 0 pockets and four hook sites, from `patches/power/profiles/build_profiles.py`) and 64 runs in the merged theme config: the settings tree edits in each language and the new records' table after the image resources |
-| Idle repaint gate | Patches 0350 to 0354 from `patches/idle_redraw/`: the fingerprint and store hook in the unreached stock code at 0x03052F90..0x03052FB7 (after patch 0276's rectangle table), the tick gate in the heads of two unreached stock functions (0x03056442..0x0305646B and 0x0305C9CE..0x0305C9F7), and two module 27 call sites (0x0307F5BC, 0x0307F696). The word 0x030247F4, stored by the 0x4D segment and read nowhere else, holds the fingerprint |
+| Idle repaint gate | Patches 0350 to 0354 from `patches/idle_redraw/`: the fingerprint and store hook in the unreached stock code at 0x03052F90..0x03052FB7 (after patch 0276's rectangle table), the tick gate in two unreached stock functions (0x030645B6..0x030645DF, and the head of 0x0305C9CE..0x0305C9F7), and two module 27 call sites (0x0307F5BC, 0x0307F696). The word 0x030247F4, stored by the 0x4D segment and read nowhere else, holds the fingerprint |
 
 ## The merged tail
 

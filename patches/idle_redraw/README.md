@@ -12,7 +12,7 @@ of the 675,000 instructions in an idle second.
 | Patch | Site | Change |
 |---|---|---|
 | 0350 | `0x03052F90` (40 B, unreached stock code after 0276's table) | `fingerprint`: play state halfword, transport state A and B; `fp_store` |
-| 0351 | `0x03056442` (42 of 46 B, head of an unreached stock function) | `tick_gate`: fingerprint and mode checks |
+| 0351 | `0x030645B6` (42 of 42 B, an unreached stock function) | `tick_gate`: fingerprint and mode checks |
 | 0352 | `0x0305C9CE` (42 of 46 B, head of an unreached stock function) | `tick_gate`: bar position |
 | 0353 | `0x0307F5BC` | The 0x40 segment's per-second post of 0x4D calls `tick_gate` |
 | 0354 | `0x0307F696` | The 0x4D segment's second position store calls `fp_store` |

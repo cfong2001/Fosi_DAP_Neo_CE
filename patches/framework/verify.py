@@ -679,7 +679,7 @@ def main():
     # differ only at the theme runs, the mirrored header and
     # the trailer CRC once the growth shift is accounted for.
     FULL_DIR = HERE.parent / 'full'
-    FULL_SHA = 'a1248575842a84c4bf6aa5c1a3f584cc94260c474a0ef44342ffe1c415f2f7d1'
+    FULL_SHA = '6751ee88fc55ee674ab49a8a21f13a3da8c17784f798ef4d29fe6b1358dd86ab'
     PAYLOAD_GROWTH = 7694       # module 31 + module 24 + module 39 payloads
     GROWTH_TOTAL = 8192         # sector-aligned mirror
     if ecp is None:

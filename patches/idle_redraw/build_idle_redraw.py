@@ -35,9 +35,10 @@ from build_tail import branch  # noqa: E402
 STOCK_SHA = 'fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cdfade5e9c6ea3bd71ac6deef'
 # Unreached stock code (patches/space/census_dead.py). 0x03052F66..0x03052F8F
 # holds patch 0276's rectangle table, so the first pocket starts after it.
-# The other two are the heads of unreached stock functions (census tier 1).
+# The other two are unreached stock functions: 0x030645B6 (census tier 2, a
+# whole 42-byte function) and the head of 0x0305C9CE (tier 1).
 FP, FP_END = 0x03052F90, 0x03052FB8
-HEAD, HEAD_END = 0x03056442, 0x03056470
+HEAD, HEAD_END = 0x030645B6, 0x030645E0
 TAIL, TAIL_END = 0x0305C9CE, 0x0305C9FC
 TICK_SITE, STORE_SITE = 0x0307F5BC, 0x0307F696
 EVENT_SET, UDIV64 = 0x0306723C, 0x03054D90

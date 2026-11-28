@@ -3,7 +3,7 @@
  "input_file": "DP3_V137.img",
  "output_file": "DP3_V137_CE.img",
  "input_sha256": "fcc1cd3e35b46f1f8dbcb8da39fcc5eb3f1d469cdfade5e9c6ea3bd71ac6deef",
- "output_sha256": "a1248575842a84c4bf6aa5c1a3f584cc94260c474a0ef44342ffe1c415f2f7d1",
+ "output_sha256": "6751ee88fc55ee674ab49a8a21f13a3da8c17784f798ef4d29fe6b1358dd86ab",
  "byte_length": 13639684,
  "header_date": "20261023",
  "patches_applied": [
@@ -2092,10 +2092,10 @@
    "kind": "module",
    "module": 0,
    "region": "code",
-   "cpu_address": "0x3056442",
-   "file_offset": "0x2faee",
-   "old_hex": "2de9f05fdff85c920646904659f826205fea010a12bfb8f1000f4ff0ff30bde8f09f914f0846c3460025",
-   "new_hex": "10b5fcf7a4fd1c462069884208d1e188062905d0d2f8a010012901d006f0b6ba4d20bde8104010f0e8be"
+   "cpu_address": "0x30645b6",
+   "file_offset": "0x3dc62",
+   "old_hex": "4f4a1088032828bf7047002808bf7047401e0004000c08bf108000210123d36040f23f109180d0807047",
+   "new_hex": "10b5eef7eafc1c462069884208d1e188062905d0d2f8a010012901d0f8f7fcb94d20bde8104002f02ebe"
   },
   {
    "patch": "0352-idle-redraw-tick-gate-position",
@@ -2117,7 +2117,7 @@
    "cpu_address": "0x307f5bc",
    "file_offset": "0x89eb6",
    "old_hex": "e7f73efe",
-   "new_hex": "d6f741ff"
+   "new_hex": "e4f7fbff"
   },
   {
    "patch": "0354-idle-redraw-store-hook",
@@ -15867,8 +15867,8 @@
   }
  ],
  "diff_vs_stock": {
-  "bytes_changed": 4959392,
-  "range_count": 424984,
+  "bytes_changed": 4959391,
+  "range_count": 424985,
   "note": "range list omitted; rebuild with patches/full/build/build_full.py for it"
  },
  "validation": "validate_grown() passed (structural checks, layout derived from the image)",

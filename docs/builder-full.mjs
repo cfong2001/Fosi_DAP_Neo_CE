@@ -1899,9 +1899,9 @@ export const FULL_PATCHES = [
   "name": "0351-idle-redraw-tick-gate",
   "module": 0,
   "region": "code",
-  "address": 50684994,
-  "expect": "2de9f05fdff85c920646904659f826205fea010a12bfb8f1000f4ff0ff30bde8f09f914f0846c3460025",
-  "replace": "10b5fcf7a4fd1c462069884208d1e188062905d0d2f8a010012901d006f0b6ba4d20bde8104010f0e8be",
+  "address": 50742710,
+  "expect": "4f4a1088032828bf7047002808bf7047401e0004000c08bf108000210123d36040f23f109180d0807047",
+  "replace": "10b5eef7eafc1c462069884208d1e188062905d0d2f8a010012901d0f8f7fcb94d20bde8104002f02ebe",
   "index": 189
  },
  {
@@ -1921,7 +1921,7 @@ export const FULL_PATCHES = [
   "region": "code",
   "address": 50853308,
   "expect": "e7f73efe",
-  "replace": "d6f741ff",
+  "replace": "e4f7fbff",
   "index": 191
  },
  {
@@ -13347,4 +13347,4 @@ export const FULL_THEME_RUNS = [
   "replace": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
  }
 ];
-export const FULL_IMAGE_SHA256 = "a1248575842a84c4bf6aa5c1a3f584cc94260c474a0ef44342ffe1c415f2f7d1";
+export const FULL_IMAGE_SHA256 = "6751ee88fc55ee674ab49a8a21f13a3da8c17784f798ef4d29fe6b1358dd86ab";

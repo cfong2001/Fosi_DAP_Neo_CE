@@ -15,7 +15,7 @@
   framebuffer, the display context and the panel match the previous image
   after every tick in 14 scenarios (`patches/idle_redraw/test_idle_redraw.py`).
 - Standard image SHA-256
-  `a1248575842a84c4bf6aa5c1a3f584cc94260c474a0ef44342ffe1c415f2f7d1`.
+  `6751ee88fc55ee674ab49a8a21f13a3da8c17784f798ef4d29fe6b1358dd86ab`.
   Minimal is unchanged. Not yet verified on hardware.
 
 ## 2026-11-22: Power off stays off

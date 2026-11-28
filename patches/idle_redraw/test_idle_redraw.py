@@ -35,7 +35,7 @@ SETUP = 0x03063F10          # sets the store window (context +0x18..+0x23) for e
 # differs when a draw is skipped. Run.tick checks that no pixel is stored in
 # a tick before SETUP has run in that tick, so the old window is never used.
 WINDOW = slice(0x18, 0x24)
-OWN = ((0x03052F90, 0x03052FB8), (0x03056442, 0x03056470), (0x0305C9CE, 0x0305C9FC))
+OWN = ((0x03052F90, 0x03052FB8), (0x030645B6, 0x030645E0), (0x0305C9CE, 0x0305C9FC))
 LONG = 'A Much Longer Title That Will Need To Scroll Across The Screen'
 
 
